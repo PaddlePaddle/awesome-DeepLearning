@@ -1,6 +1,6 @@
 # Deep Learning tutorials with PaddlePaddle 
 
-This is a tutorials of DeepLearning using paddle for beginners. 
+This is a tutorials of DeepLearning using PaddlePaddle for beginners. 
 
 1. [hands on deep learning](https://aistudio.baidu.com/aistudio/education/group/info/888)
 2. [step to deep learning](https://aistudio.baidu.com/aistudio/education/group/info/888)
@@ -10,12 +10,12 @@ This is a tutorials of DeepLearning using paddle for beginners.
 
 This book you are reading is interactive. 
 There are two way to running the tutorial.
-1. run on jupyter notebook ([install paddle](https://www.paddlepaddle.org.cn/documentation/docs/zh/beginners_guide/install/index_cn.html) firstly)
-2. run on Baidu AIstudio (paddle installed)
+1. run on jupyter notebook ([install PaddlePaddle](https://www.paddlepaddle.org.cn/documentation/docs/zh/beginners_guide/install/index_cn.html) firstly)
+2. run on Baidu AI Studio (PaddlePaddle installed)
 
 ## Preparation for Run Tutorial
 - Python3
-- Paddle 1.6.0
+- PaddlePaddle 1.6.0
 - numpy
 - matplotlib
 

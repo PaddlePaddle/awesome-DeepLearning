@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-The implementation of neural network using Paddle.
+The implementation of neural network using PaddlePaddle.
 """
 # -*- coding: utf-8 -*-
 import paddle

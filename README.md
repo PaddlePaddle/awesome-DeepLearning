@@ -10,13 +10,13 @@
 ## 运行教程
 
 该教程是交互式的教程，有两种方式运行教程中的文件：
-1. clone到本地，在jupyter notebook中运行，首先需要安装paddle
-2. 在百度的Aistudio平台上运行，运行环境已配置完成
+1. clone到本地，在jupyter notebook中运行，首先需要安装PaddlePaddle
+2. 在百度的AI Studio平台上运行，运行环境已配置完成
 
 
 ## 教程运行准备环境
 - Python3
-- Paddle 1.6.0
+- PaddlePaddle 1.6.0
 - numpy
 - ...
 
