@@ -147,7 +147,7 @@ def load_one_example(data_dir):
     return data, label
 
 
-def valid():
+def validation():
     # 开启动态图工作环境
     with dygraph.guard():
         # 声明定义好的线性回归模型
@@ -172,4 +172,4 @@ def valid():
 
 if __name__ == '__main__':
     train()
-    valid()
+    validation()
