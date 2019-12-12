@@ -1,28 +1,30 @@
-# Deep Learning tutorials with PaddlePaddle
+# 飞桨深度学习教程 [[English](https://github.com/PaddlePaddle/tutorials/README.md)]
 
-This is a tutorials of DeepLearning using paddle for beginners. 
 
-1. [hands on deep learning](https://aistudio.baidu.com/aistudio/education/group/info/888)
-2. [step to deep learning](https://aistudio.baidu.com/aistudio/education/group/info/888)
-3. coming soon...
+该教程是针对飞桨或深度学习初学者准备的入门教程。
+1. [零基础入门深度学习]((https://aistudio.baidu.com/aistudio/education/group/info/888))
+2. [一个案例带你吃透深度学习]((https://aistudio.baidu.com/aistudio/education/group/info/888))
+3. 敬请期待...
 
-## Running the Tutorial
 
-This book you are reading is interactive. 
-There are two way to running the tutorial.
-1. run on jupyter notebook ([install paddle](https://www.paddlepaddle.org.cn/documentation/docs/zh/beginners_guide/install/index_cn.html) firstly)
-2. run on Baidu AIstudio (paddle installed)
+## 运行教程
 
-## Preparation for Run Tutorial
+该教程是交互式的教程，有两种方式运行教程中的文件：
+1. clone到本地，在jupyter notebook中运行，首先需要安装paddle
+2. 在百度的Aistudio平台上运行，运行环境已配置完成
+
+
+## 教程运行准备环境
 - Python3
 - Paddle 1.6.0
 - numpy
-- matplotlib
+- ...
 
-## Contribute
 
-Your contribution is welcome!  Please feel free to file Pull Requests to add your chapter as a directory under `/pending`. Once it is going stable, the community would like to move it to `/`.
+## 贡献内容
 
-This tutorial is contributed by <a xmlns:cc="http://creativecommons.org/ns#" href="http://book.paddlepaddle.org" property="cc:attributionName" rel="cc:attributionURL">PaddlePaddle</a>. 
+您要是能贡献新的章节那就太好了！请发Pull Requests把您写的章节加入到/pending下面的一个子目录里。审核通过后，我们一起把您的改动更新到根目录文档，欢迎参与飞桨教程制作。
 
-note: If you have any question or advice, please leave your question or advice in issue.
+本教程</span> 由 <a xmlns:cc="http://creativecommons.org/ns#" href="http://book.paddlepaddle.org" property="cc:attributionName" rel="cc:attributionURL">PaddlePaddle</a> 创作
+
+> 注意：如果您对教程有任何建议或问题，请务必在issue中留下您的建议.

@@ -1,9 +1,25 @@
+# -*- coding: utf-8 -*-
+# Copyright (c) 2019 PaddlePaddle Authors. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 """
 The implementation of neural network using numpy.
 """
-# -*- coding: utf-8 -*-
+
 import numpy as np
 import json
+import matplotlib
+#matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
@@ -104,7 +120,7 @@ def train():
     plt.plot(plot_x, plot_y)
     plt.show()
 
-def plot_3D_neural_work_weiight():
+def plot_3D_neural_work_weight():
     # 获取数据
     training_data, test_data = load_data()
     x = training_data[:, :-1]
@@ -135,9 +151,11 @@ def plot_3D_neural_work_weiight():
     ax.plot_surface(w5, w9, losses, rstride=1, cstride=1, cmap='rainbow')
     plt.show()
 
+    plt.savefig("./work/3Dweights.png")
+
 
 if __name__ == '__main__':
 
-    plot_3D_neural_work_weiight()
+    plot_3D_neural_work_weight()
 
     train()
