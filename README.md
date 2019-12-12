@@ -2,8 +2,11 @@
 
 
 该教程是针对飞桨或深度学习初学者准备的入门教程。
-1. [零基础入门深度学习]((https://aistudio.baidu.com/aistudio/education/group/info/888))
-2. [一个案例带你吃透深度学习]((https://aistudio.baidu.com/aistudio/education/group/info/888))
+
+教程目录如下：
+
+1. [零基础入门深度学习](https://aistudio.baidu.com/aistudio/education/group/info/888)
+2. [一个案例带你吃透深度学习](https://aistudio.baidu.com/aistudio/education/group/info/888)
 3. 敬请期待...
 
 
