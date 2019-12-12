@@ -1,4 +1,4 @@
-# 飞桨深度学习教程 [[English](https://github.com/PaddlePaddle/tutorials/README.md)]
+# 飞桨深度学习教程 [[English](./README_en.md)]
 
 
 该教程是针对飞桨或深度学习初学者准备的入门教程。
