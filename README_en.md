@@ -1,10 +1,12 @@
 # Deep Learning tutorials with PaddlePaddle 
 
-This is a tutorials of DeepLearning using PaddlePaddle for beginners. 
+This is a tutorials of DeepLearning using PaddlePaddle for beginners. [Video Tutorial Link](https://aistudio.baidu.com/aistudio/education/group/info/888).
 
-1. [hands on deep learning](https://aistudio.baidu.com/aistudio/education/group/info/888)
-2. [step to deep learning](https://aistudio.baidu.com/aistudio/education/group/info/888)
-3. coming soon...
+1. Hands on deep learning
+2. Step to deep learning
+3. Computer Vision
+4. Natural language processing
+5. Coming soon...
 
 ## Running the Tutorial
 
