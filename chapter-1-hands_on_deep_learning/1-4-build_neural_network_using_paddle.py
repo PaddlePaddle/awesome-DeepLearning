@@ -19,7 +19,7 @@ The implementation of neural network using PaddlePaddle.
 import paddle
 import paddle.fluid as fluid
 import paddle.fluid.dygraph as dygraph
-from paddle.fluid.dygraph import FC
+from paddle.fluid.dygraph import Linear
 import numpy as np
 
 
@@ -73,7 +73,7 @@ class Regressor(fluid.dygraph.Layer):
         super(Regressor, self).__init__(name_scope)
         name_scope = self.full_name()
         # 定义一层全连接层，输出维度是1，激活函数为None，即不使用激活函数
-        self.fc = FC(name_scope, size=1, act=None)
+        self.fc = Linear(input_dim=13, output_dim=1, act=None)
 
     # 网络的前向计算函数
     def forward(self, inputs):
@@ -92,7 +92,7 @@ def train():
         training_data, test_data = load_data()
         # 定义优化算法，这里使用随机梯度下降-SGD
         # 学习率设置为0.01
-        opt = fluid.optimizer.SGD(learning_rate=0.01)
+        opt = fluid.optimizer.SGD(learning_rate=0.01, parameter_list=model.parameters())
 
         EPOCH_NUM = 10  # 设置外层循环次数
         BATCH_SIZE = 10  # 设置batch大小
