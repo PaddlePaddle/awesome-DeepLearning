@@ -18,6 +18,7 @@
 1. clone到本地，在jupyter notebook中运行，首先需要安装PaddlePaddle
 2. 在百度的AI Studio平台上运行，运行环境已配置完成
 
+> 注意：master分支下的文档的运行环境为Paddle1.6，release/1.7分支下的文档为稳定版本，需要Paddle1.7的环境。
 
 ## 教程运行准备环境
 - Python3
