@@ -173,5 +173,3 @@ def validation():
 if __name__ == '__main__':
     train()
     validation()
-    import torchvision
-    vgg = torchvision.models.vgg16()
