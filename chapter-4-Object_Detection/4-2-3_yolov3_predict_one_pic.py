@@ -1,3 +1,18 @@
+# Copyright (c) 2020 PaddlePaddle Authors. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
 import paddle
 import cv2
 import numpy as np
@@ -210,18 +225,18 @@ if __name__ == '__main__':
 
         outputs = model.forward(img)
         bboxes, scores = model.get_pred(outputs,
-                                 im_shape=img_scale,
-                                 anchors=ANCHORS,
-                                 anchor_masks=ANCHOR_MASKS,
-                                 valid_thresh = VALID_THRESH)
+                                        im_shape=img_scale,
+                                        anchors=ANCHORS,
+                                        anchor_masks=ANCHOR_MASKS,
+                                        valid_thresh=VALID_THRESH)
 
         bboxes_data = bboxes.numpy()
         scores_data = scores.numpy()
         results = multiclass_nms(bboxes_data, scores_data,
-                      score_thresh=VALID_THRESH, 
-                      nms_thresh=NMS_THRESH, 
-                      pre_nms_topk=NMS_TOPK, 
-                      pos_nms_topk=NMS_POSK)
+                                 score_thresh=VALID_THRESH,
+                                 nms_thresh=NMS_THRESH,
+                                 pre_nms_topk=NMS_TOPK,
+                                 pos_nms_topk=NMS_POSK)
 
 result = results[0]
 draw_results(result, image_name, draw_thresh=0.5)

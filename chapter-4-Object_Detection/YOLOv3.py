@@ -1,6 +1,21 @@
+# copyright (c) 2021 PaddlePaddle Authors. All Rights Reserve.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import paddle
 from paddle.nn import Conv2D
 import paddle.nn.functional as F
+
 
 class ConvBNLayer(paddle.nn.Layer):
     def __init__(self, ch_in, ch_out,
@@ -249,7 +264,7 @@ class Upsample(paddle.nn.Layer):
 # 定义YOLOv3模型
 class YOLOv3(paddle.nn.Layer):
     def __init__(self, num_classes=7):
-        super(YOLOv3,self).__init__()
+        super(YOLOv3, self).__init__()
 
         self.num_classes = num_classes
         # 提取图像特征的骨干代码
@@ -263,8 +278,8 @@ class YOLOv3(paddle.nn.Layer):
             yolo_block = self.add_sublayer(
                 "yolo_detecton_block_%d" % (i),
                 YoloDetectionBlock(
-                                   ch_in=512//(2**i)*2 if i==0 else 512//(2**i)*2 + 512//(2**i),
-                                   ch_out = 512//(2**i)))
+                    ch_in=512 // (2 ** i) * 2 if i == 0 else 512 // (2 ** i) * 2 + 512 // (2 ** i),
+                    ch_out=512 // (2 ** i)))
             self.yolo_blocks.append(yolo_block)
 
             num_filters = 3 * (self.num_classes + 5)
@@ -272,28 +287,29 @@ class YOLOv3(paddle.nn.Layer):
             # 添加从ti生成pi的模块，这是一个Conv2D操作，输出通道数为3 * (num_classes + 5)
             block_out = self.add_sublayer(
                 "block_out_%d" % (i),
-                paddle.nn.Conv2D(in_channels=512//(2**i)*2,
-                       out_channels=num_filters,
-                       kernel_size=1,
-                       stride=1,
-                       padding=0,
-                       weight_attr=paddle.ParamAttr(
-                           initializer=paddle.nn.initializer.Normal(0., 0.02)),
-                       bias_attr=paddle.ParamAttr(
-                           initializer=paddle.nn.initializer.Constant(0.0),
-                           regularizer=paddle.regularizer.L2Decay(0.))))
+                paddle.nn.Conv2D(in_channels=512 // (2 ** i) * 2,
+                                 out_channels=num_filters,
+                                 kernel_size=1,
+                                 stride=1,
+                                 padding=0,
+                                 weight_attr=paddle.ParamAttr(
+                                     initializer=paddle.nn.initializer.Normal(0., 0.02)),
+                                 bias_attr=paddle.ParamAttr(
+                                     initializer=paddle.nn.initializer.Constant(0.0),
+                                     regularizer=paddle.regularizer.L2Decay(0.))))
             self.block_outputs.append(block_out)
             if i < 2:
                 # 对ri进行卷积
-                route = self.add_sublayer("route2_%d"%i,
-                                          ConvBNLayer(ch_in=512//(2**i),
-                                                      ch_out=256//(2**i),
+                route = self.add_sublayer("route2_%d" % i,
+                                          ConvBNLayer(ch_in=512 // (2 ** i),
+                                                      ch_out=256 // (2 ** i),
                                                       kernel_size=1,
                                                       stride=1,
                                                       padding=0))
                 self.route_blocks_2.append(route)
             # 将ri放大以便跟c_{i+1}保持同样的尺寸
             self.upsample = Upsample()
+
     def forward(self, inputs):
         outputs = []
         blocks = self.block(inputs)
@@ -317,8 +333,8 @@ class YOLOv3(paddle.nn.Layer):
         return outputs
 
     def get_loss(self, outputs, gtbox, gtlabel, gtscore=None,
-                 anchors = [10, 13, 16, 30, 33, 23, 30, 61, 62, 45, 59, 119, 116, 90, 156, 198, 373, 326],
-                 anchor_masks = [[6, 7, 8], [3, 4, 5], [0, 1, 2]],
+                 anchors=[10, 13, 16, 30, 33, 23, 30, 61, 62, 45, 59, 119, 116, 90, 156, 198, 373, 326],
+                 anchor_masks=[[6, 7, 8], [3, 4, 5], [0, 1, 2]],
                  ignore_thresh=0.7,
                  use_label_smooth=False):
         """
@@ -326,29 +342,29 @@ class YOLOv3(paddle.nn.Layer):
         """
         self.losses = []
         downsample = 32
-        for i, out in enumerate(outputs): # 对三个层级分别求损失函数
+        for i, out in enumerate(outputs):  # 对三个层级分别求损失函数
             anchor_mask_i = anchor_masks[i]
             loss = paddle.vision.ops.yolo_loss(
-                    x=out,  # out是P0, P1, P2中的一个
-                    gt_box=gtbox,  # 真实框坐标
-                    gt_label=gtlabel,  # 真实框类别
-                    gt_score=gtscore,  # 真实框得分，使用mixup训练技巧时需要，不使用该技巧时直接设置为1，形状与gtlabel相同
-                    anchors=anchors,   # 锚框尺寸，包含[w0, h0, w1, h1, ..., w8, h8]共9个锚框的尺寸
-                    anchor_mask=anchor_mask_i, # 筛选锚框的mask，例如anchor_mask_i=[3, 4, 5]，将anchors中第3、4、5个锚框挑选出来给该层级使用
-                    class_num=self.num_classes, # 分类类别数
-                    ignore_thresh=ignore_thresh, # 当预测框与真实框IoU > ignore_thresh，标注objectness = -1
-                    downsample_ratio=downsample, # 特征图相对于原图缩小的倍数，例如P0是32， P1是16，P2是8
-                    use_label_smooth=False)      # 使用label_smooth训练技巧时会用到，这里没用此技巧，直接设置为False
-            self.losses.append(paddle.mean(loss))  #mean对每张图片求和
-            downsample = downsample // 2 # 下一级特征图的缩放倍数会减半
-        return sum(self.losses) # 对每个层级求和
+                x=out,  # out是P0, P1, P2中的一个
+                gt_box=gtbox,  # 真实框坐标
+                gt_label=gtlabel,  # 真实框类别
+                gt_score=gtscore,  # 真实框得分，使用mixup训练技巧时需要，不使用该技巧时直接设置为1，形状与gtlabel相同
+                anchors=anchors,  # 锚框尺寸，包含[w0, h0, w1, h1, ..., w8, h8]共9个锚框的尺寸
+                anchor_mask=anchor_mask_i,  # 筛选锚框的mask，例如anchor_mask_i=[3, 4, 5]，将anchors中第3、4、5个锚框挑选出来给该层级使用
+                class_num=self.num_classes,  # 分类类别数
+                ignore_thresh=ignore_thresh,  # 当预测框与真实框IoU > ignore_thresh，标注objectness = -1
+                downsample_ratio=downsample,  # 特征图相对于原图缩小的倍数，例如P0是32， P1是16，P2是8
+                use_label_smooth=False)  # 使用label_smooth训练技巧时会用到，这里没用此技巧，直接设置为False
+            self.losses.append(paddle.mean(loss))  # mean对每张图片求和
+            downsample = downsample // 2  # 下一级特征图的缩放倍数会减半
+        return sum(self.losses)  # 对每个层级求和
 
     def get_pred(self,
                  outputs,
                  im_shape=None,
-                 anchors = [10, 13, 16, 30, 33, 23, 30, 61, 62, 45, 59, 119, 116, 90, 156, 198, 373, 326],
-                 anchor_masks = [[6, 7, 8], [3, 4, 5], [0, 1, 2]],
-                 valid_thresh = 0.01):
+                 anchors=[10, 13, 16, 30, 33, 23, 30, 61, 62, 45, 59, 119, 116, 90, 156, 198, 373, 326],
+                 anchor_masks=[[6, 7, 8], [3, 4, 5], [0, 1, 2]],
+                 valid_thresh=0.01):
         downsample = 32
         total_boxes = []
         total_scores = []
@@ -360,17 +376,17 @@ class YOLOv3(paddle.nn.Layer):
                 anchors_this_level.append(anchors[2 * m + 1])
 
             boxes, scores = paddle.vision.ops.yolo_box(
-                   x=out,
-                   img_size=im_shape,
-                   anchors=anchors_this_level,
-                   class_num=self.num_classes,
-                   conf_thresh=valid_thresh,
-                   downsample_ratio=downsample,
-                   name="yolo_box" + str(i))
+                x=out,
+                img_size=im_shape,
+                anchors=anchors_this_level,
+                class_num=self.num_classes,
+                conf_thresh=valid_thresh,
+                downsample_ratio=downsample,
+                name="yolo_box" + str(i))
             total_boxes.append(boxes)
             total_scores.append(
-                        paddle.transpose(
-                        scores, perm=[0, 2, 1]))
+                paddle.transpose(
+                    scores, perm=[0, 2, 1]))
             downsample = downsample // 2
 
         yolo_boxes = paddle.concat(total_boxes, axis=1)

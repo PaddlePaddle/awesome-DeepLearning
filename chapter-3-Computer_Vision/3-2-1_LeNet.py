@@ -1,5 +1,16 @@
-#!/usr/bin/env python
-# coding: utf-8
+# Copyright (c) 2020 PaddlePaddle Authors. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 '''
  LeNet在手写数字识别上的应用
@@ -10,6 +21,7 @@ import paddle
 import numpy as np
 from paddle.nn import Conv2D, MaxPool2D, Linear
 import paddle.nn.functional as F
+
 
 # 定义 LeNet 网络结构
 class LeNet(paddle.nn.Layer):
@@ -29,6 +41,7 @@ class LeNet(paddle.nn.Layer):
         self.fc1 = Linear(in_features=120, out_features=64)
         # 创建全连接层，第一个全连接层的输出神经元个数为64， 第二个全连接层输出神经元个数为分类标签的类别数
         self.fc2 = Linear(in_features=64, out_features=num_classes)
+
     # 网络的前向计算过程
     def forward(self, x):
         x = self.conv1(x)
@@ -50,7 +63,7 @@ class LeNet(paddle.nn.Layer):
 # 飞桨会根据实际图像数据的尺寸和卷积核参数自动推断中间层数据的W和H等，只需要用户表达通道数即可。下面的程序使用随机数作为输入，查看经过LeNet-5的每一层作用之后，输出数据的形状。
 # 输入数据形状是 [N, 1, H, W]
 # 这里用np.random创建一个随机数组作为输入数据
-x = np.random.randn(*[3,1,28,28])
+x = np.random.randn(*[3, 1, 28, 28])
 x = x.astype('float32')
 
 # 创建LeNet类的实例，指定模型名称和分类的类别数目
@@ -67,7 +80,7 @@ for item in m.sublayers():
     except:
         x = paddle.reshape(x, [x.shape[0], -1])
         x = item(x)
-    if len(item.parameters())==2:
+    if len(item.parameters()) == 2:
         # 查看卷积和全连接层的数据和参数的形状，
         # 其中item.parameters()[0]是权重参数w，item.parameters()[1]是偏置参数b
         print(item.full_name(), x.shape, item.parameters()[0].shape, item.parameters()[1].shape)

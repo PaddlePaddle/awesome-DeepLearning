@@ -1,5 +1,16 @@
-#!/usr/bin/env python
-# coding: utf-8
+# Copyright (c) 2020 PaddlePaddle Authors. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 '''
 # ## LeNet在手写数字识别上的应用
@@ -14,6 +25,7 @@ from paddle.nn import Conv2D, MaxPool2D, Linear
 import os
 import random
 import paddle.nn.functional as F
+
 
 # 定义 LeNet 网络结构
 class LeNet(paddle.nn.Layer):
@@ -33,6 +45,7 @@ class LeNet(paddle.nn.Layer):
         self.fc1 = Linear(in_features=120, out_features=64)
         # 创建全连接层，第一个全连接层的输出神经元个数为64， 第二个全连接层输出神经元个数为分类标签的类别数
         self.fc2 = Linear(in_features=64, out_features=num_classes)
+
     # 网络的前向计算过程
     def forward(self, x):
         x = self.conv1(x)
@@ -50,9 +63,9 @@ class LeNet(paddle.nn.Layer):
         x = self.fc2(x)
         return x
 
+
 # 定义训练过程
 def train(model):
-
     # 开启0号GPU训练
     use_gpu = True
     paddle.set_device('gpu:0') if use_gpu else paddle.set_device('cpu')
@@ -107,6 +120,8 @@ def train(model):
 
     # 保存模型参数
     paddle.save(model.state_dict(), 'mnist.pdparams')
+
+
 # 创建模型
 model = LeNet(num_classes=10)
 # 启动训练过程

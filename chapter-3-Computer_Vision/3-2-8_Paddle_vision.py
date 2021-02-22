@@ -1,5 +1,16 @@
-#!/usr/bin/env python
-# coding: utf-8
+# Copyright (c) 2020 PaddlePaddle Authors. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 '''
 # ## 使用飞桨高层API直接调用网络
@@ -24,7 +35,6 @@ out = model(x)
 # 打印输出的形状，由于resnet50默认的是1000分类
 # 所以输出shape是[1x1000]
 print(out.shape)
-
 
 '''
 # 使用paddle.vision中的模型可以简单快速的构建一个深度学习任务，如下示例，仅14行代码即可实现resnet在Cifar10数据集上的训练。

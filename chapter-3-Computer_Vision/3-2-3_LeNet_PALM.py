@@ -1,5 +1,16 @@
-#!/usr/bin/env python
-# coding: utf-8
+# Copyright (c) 2020 PaddlePaddle Authors. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 '''
 # LeNet 识别眼疾图片
@@ -17,23 +28,26 @@ import cv2
 import matplotlib.pyplot as plt
 from PIL import Image
 
+
 # 对读入的图像数据进行预处理
 def transform_img(img):
     # 将图片尺寸缩放道 224x224
     img = cv2.resize(img, (224, 224))
     # 读入的图像数据格式是[H, W, C]
     # 使用转置操作将其变成[C, H, W]
-    img = np.transpose(img, (2,0,1))
+    img = np.transpose(img, (2, 0, 1))
     img = img.astype('float32')
     # 将数据范围调整到[-1.0, 1.0]之间
     img = img / 255.
     img = img * 2.0 - 1.0
     return img
 
+
 # 定义训练集数据读取器
-def data_loader(datadir, batch_size=10, mode = 'train'):
+def data_loader(datadir, batch_size=10, mode='train'):
     # 将datadir目录下的文件列出来，每条文件都要读入
     filenames = os.listdir(datadir)
+
     def reader():
         if mode == 'train':
             # 训练时随机打乱数据顺序
@@ -52,7 +66,7 @@ def data_loader(datadir, batch_size=10, mode = 'train'):
                 # P开头的是病理性近视，属于正样本，标签为1
                 label = 1
             else:
-                raise('Not excepted file name')
+                raise ('Not excepted file name')
             # 每读取一个样本的数据，就将其放入数据列表中
             batch_imgs.append(img)
             batch_labels.append(label)
@@ -73,6 +87,7 @@ def data_loader(datadir, batch_size=10, mode = 'train'):
 
     return reader
 
+
 # 定义验证集数据读取器
 def valid_data_loader(datadir, csvfile, batch_size=10, mode='valid'):
     # 训练集读取时通过文件名来确定样本标签，验证集则通过csvfile来读取每个图片对应的标签
@@ -85,6 +100,7 @@ def valid_data_loader(datadir, csvfile, batch_size=10, mode='valid'):
     # 2,V0002.jpg,1,1285.82,1080.47
     # 打开包含验证集标签的csvfile，并读入其中的内容
     filelists = open(csvfile).readlines()
+
     def reader():
         batch_imgs = []
         batch_labels = []
@@ -116,6 +132,7 @@ def valid_data_loader(datadir, csvfile, batch_size=10, mode='valid'):
 
     return reader
 
+
 '''
  启动训练
 '''
@@ -123,6 +140,7 @@ def valid_data_loader(datadir, csvfile, batch_size=10, mode='valid'):
 DATADIR = '/home/aistudio/work/palm/PALM-Training400/PALM-Training400'
 DATADIR2 = '/home/aistudio/work/palm/PALM-Validation400'
 CSVFILE = '/home/aistudio/labels.csv'
+
 
 # 定义训练过程
 def train_pm(model, optimizer):
@@ -183,20 +201,19 @@ def train_pm(model, optimizer):
 
 # 定义评估过程
 def evaluation(model, params_file_path):
-
     # 开启0号GPU预估
     use_gpu = True
     paddle.set_device('gpu:0') if use_gpu else paddle.set_device('cpu')
 
     print('start evaluation .......')
 
-    #加载模型参数
+    # 加载模型参数
     model_state_dict = paddle.load(params_file_path)
     model.load_dict(model_state_dict)
 
     model.eval()
-    eval_loader = data_loader(DATADIR, 
-                        batch_size=10, mode='eval')
+    eval_loader = data_loader(DATADIR,
+                              batch_size=10, mode='eval')
 
     acc_set = []
     avg_loss_set = []
@@ -218,6 +235,7 @@ def evaluation(model, params_file_path):
     avg_loss_val_mean = np.array(avg_loss_set).mean()
 
     print('loss={}, acc={}'.format(avg_loss_val_mean, acc_val_mean))
+
 
 # 定义 LeNet 网络结构
 class LeNet(paddle.nn.Layer):
@@ -255,6 +273,7 @@ class LeNet(paddle.nn.Layer):
             return x, acc
         else:
             return x
+
 
 # 创建模型
 model = LeNet(num_classes=1)

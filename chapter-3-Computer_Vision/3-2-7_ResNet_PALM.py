@@ -1,5 +1,16 @@
-#!/usr/bin/env python
-# coding: utf-8
+# Copyright (c) 2020 PaddlePaddle Authors. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 '''
 # ResNet 识别眼疾图片
@@ -18,23 +29,26 @@ import matplotlib.pyplot as plt
 from PIL import Image
 import paddle.nn as nn
 
+
 # 对读入的图像数据进行预处理
 def transform_img(img):
     # 将图片尺寸缩放道 224x224
     img = cv2.resize(img, (224, 224))
     # 读入的图像数据格式是[H, W, C]
     # 使用转置操作将其变成[C, H, W]
-    img = np.transpose(img, (2,0,1))
+    img = np.transpose(img, (2, 0, 1))
     img = img.astype('float32')
     # 将数据范围调整到[-1.0, 1.0]之间
     img = img / 255.
     img = img * 2.0 - 1.0
     return img
 
+
 # 定义训练集数据读取器
-def data_loader(datadir, batch_size=10, mode = 'train'):
+def data_loader(datadir, batch_size=10, mode='train'):
     # 将datadir目录下的文件列出来，每条文件都要读入
     filenames = os.listdir(datadir)
+
     def reader():
         if mode == 'train':
             # 训练时随机打乱数据顺序
@@ -53,7 +67,7 @@ def data_loader(datadir, batch_size=10, mode = 'train'):
                 # P开头的是病理性近视，属于正样本，标签为1
                 label = 1
             else:
-                raise('Not excepted file name')
+                raise ('Not excepted file name')
             # 每读取一个样本的数据，就将其放入数据列表中
             batch_imgs.append(img)
             batch_labels.append(label)
@@ -74,6 +88,7 @@ def data_loader(datadir, batch_size=10, mode = 'train'):
 
     return reader
 
+
 # 定义验证集数据读取器
 def valid_data_loader(datadir, csvfile, batch_size=10, mode='valid'):
     # 训练集读取时通过文件名来确定样本标签，验证集则通过csvfile来读取每个图片对应的标签
@@ -86,6 +101,7 @@ def valid_data_loader(datadir, csvfile, batch_size=10, mode='valid'):
     # 2,V0002.jpg,1,1285.82,1080.47
     # 打开包含验证集标签的csvfile，并读入其中的内容
     filelists = open(csvfile).readlines()
+
     def reader():
         batch_imgs = []
         batch_labels = []
@@ -117,6 +133,7 @@ def valid_data_loader(datadir, csvfile, batch_size=10, mode='valid'):
 
     return reader
 
+
 '''
  启动训练
 '''
@@ -124,6 +141,7 @@ def valid_data_loader(datadir, csvfile, batch_size=10, mode='valid'):
 DATADIR = '/home/aistudio/work/palm/PALM-Training400/PALM-Training400'
 DATADIR2 = '/home/aistudio/work/palm/PALM-Validation400'
 CSVFILE = '/home/aistudio/labels.csv'
+
 
 # 定义训练过程
 def train_pm(model, optimizer):
@@ -184,20 +202,19 @@ def train_pm(model, optimizer):
 
 # 定义评估过程
 def evaluation(model, params_file_path):
-
     # 开启0号GPU预估
     use_gpu = True
     paddle.set_device('gpu:0') if use_gpu else paddle.set_device('cpu')
 
     print('start evaluation .......')
 
-    #加载模型参数
+    # 加载模型参数
     model_state_dict = paddle.load(params_file_path)
     model.load_dict(model_state_dict)
 
     model.eval()
-    eval_loader = data_loader(DATADIR, 
-                        batch_size=10, mode='eval')
+    eval_loader = data_loader(DATADIR,
+                              batch_size=10, mode='eval')
 
     acc_set = []
     avg_loss_set = []
@@ -220,6 +237,7 @@ def evaluation(model, params_file_path):
 
     print('loss={}, acc={}'.format(avg_loss_val_mean, acc_val_mean))
 
+
 # ResNet中使用了BatchNorm层，在卷积层的后面加上BatchNorm以提升数值稳定性
 # 定义卷积批归一化块
 class ConvBNLayer(paddle.nn.Layer):
@@ -230,7 +248,7 @@ class ConvBNLayer(paddle.nn.Layer):
                  stride=1,
                  groups=1,
                  act=None):
-       
+
         """
         num_channels, 卷积层的输入通道数
         num_filters, 卷积层的输出通道数
@@ -251,7 +269,7 @@ class ConvBNLayer(paddle.nn.Layer):
 
         # 创建BatchNorm层
         self._batch_norm = paddle.nn.BatchNorm2D(num_filters)
-        
+
         self.act = act
 
     def forward(self, inputs):
@@ -262,6 +280,7 @@ class ConvBNLayer(paddle.nn.Layer):
         elif self.act == 'relu':
             y = F.relu(x=y)
         return y
+
 
 # 定义残差块
 # 每个残差块会对输入图片做三次卷积，然后跟输入图片进行短接
@@ -322,6 +341,7 @@ class BottleneckBlock(paddle.nn.Layer):
         y = F.relu(y)
         return y
 
+
 # 定义ResNet模型
 class ResNet(paddle.nn.Layer):
     def __init__(self, layers=50, class_dim=1):
@@ -333,18 +353,19 @@ class ResNet(paddle.nn.Layer):
         super(ResNet, self).__init__()
         self.layers = layers
         supported_layers = [50, 101, 152]
-        assert layers in supported_layers,             "supported layers are {} but input layer is {}".format(supported_layers, layers)
+        assert layers in supported_layers, "supported layers are {} but input layer is {}".format(supported_layers,
+                                                                                                  layers)
 
         if layers == 50:
-            #ResNet50包含多个模块，其中第2到第5个模块分别包含3、4、6、3个残差块
+            # ResNet50包含多个模块，其中第2到第5个模块分别包含3、4、6、3个残差块
             depth = [3, 4, 6, 3]
         elif layers == 101:
-            #ResNet101包含多个模块，其中第2到第5个模块分别包含3、4、23、3个残差块
+            # ResNet101包含多个模块，其中第2到第5个模块分别包含3、4、23、3个残差块
             depth = [3, 4, 23, 3]
         elif layers == 152:
-            #ResNet152包含多个模块，其中第2到第5个模块分别包含3、8、36、3个残差块
+            # ResNet152包含多个模块，其中第2到第5个模块分别包含3、8、36、3个残差块
             depth = [3, 8, 36, 3]
-        
+
         # 残差块中使用到的卷积的输出通道数
         num_filters = [64, 128, 256, 512]
 
@@ -371,7 +392,7 @@ class ResNet(paddle.nn.Layer):
                     BottleneckBlock(
                         num_channels=num_channels,
                         num_filters=num_filters[block],
-                        stride=2 if i == 0 and block != 0 else 1, # c3、c4、c5将会在第一个残差块使用stride=2；其余所有残差块stride=1
+                        stride=2 if i == 0 and block != 0 else 1,  # c3、c4、c5将会在第一个残差块使用stride=2；其余所有残差块stride=1
                         shortcut=shortcut))
                 num_channels = bottleneck_block._num_channels_out
                 self.bottleneck_block_list.append(bottleneck_block)
@@ -383,12 +404,12 @@ class ResNet(paddle.nn.Layer):
         # stdv用来作为全连接层随机初始化参数的方差
         import math
         stdv = 1.0 / math.sqrt(2048 * 1.0)
-        
+
         # 创建全连接层，输出大小为类别数目，经过残差网络的卷积和全局池化后，
         # 卷积特征的维度是[B,2048,1,1]，故最后一层全连接的输入维度是2048
         self.out = nn.Linear(in_features=2048, out_features=class_dim,
-                      weight_attr=paddle.ParamAttr(
-                          initializer=paddle.nn.initializer.Uniform(-stdv, stdv)))
+                             weight_attr=paddle.ParamAttr(
+                                 initializer=paddle.nn.initializer.Uniform(-stdv, stdv)))
 
     def forward(self, inputs):
         y = self.conv(inputs)
@@ -399,6 +420,7 @@ class ResNet(paddle.nn.Layer):
         y = paddle.reshape(y, [y.shape[0], -1])
         y = self.out(y)
         return y
+
 
 # 创建模型
 model = ResNet()

@@ -1,3 +1,18 @@
+# Copyright (c) 2020 PaddlePaddle Authors. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
 import json
 import numpy as np
 import paddle
@@ -5,6 +20,7 @@ import paddle.nn.functional as F
 import cv2
 import os
 from YOLOv3 import YOLOv3
+
 
 # 将 list形式的batch数据 转化成多个array构成的tuple
 def make_test_array(batch_data):
@@ -86,7 +102,7 @@ def nms(bboxes, scores, score_thresh, nms_thresh, pre_nms_topk, i=0, c=0):
     inds = np.argsort(scores)
     inds = inds[::-1]
     keep_inds = []
-    while(len(inds) > 0):
+    while (len(inds) > 0):
         cur_ind = inds[0]
         cur_score = scores[cur_ind]
         # if score of the box is less than score_thresh, just drop it
@@ -169,7 +185,7 @@ if __name__ == '__main__':
     model.eval()
 
     total_results = []
-    test_loader = test_data_loader(TESTDIR, batch_size= 1, mode='test')
+    test_loader = test_data_loader(TESTDIR, batch_size=1, mode='test')
     for i, data in enumerate(test_loader()):
         img_name, img_data, img_scale_data = data
         img = paddle.to_tensor(img_data)
@@ -177,18 +193,18 @@ if __name__ == '__main__':
 
         outputs = model.forward(img)
         bboxes, scores = model.get_pred(outputs,
-                                 im_shape=img_scale,
-                                 anchors=ANCHORS,
-                                 anchor_masks=ANCHOR_MASKS,
-                                 valid_thresh = VALID_THRESH)
+                                        im_shape=img_scale,
+                                        anchors=ANCHORS,
+                                        anchor_masks=ANCHOR_MASKS,
+                                        valid_thresh=VALID_THRESH)
 
         bboxes_data = bboxes.numpy()
         scores_data = scores.numpy()
         result = multiclass_nms(bboxes_data, scores_data,
-                      score_thresh=VALID_THRESH, 
-                      nms_thresh=NMS_THRESH, 
-                      pre_nms_topk=NMS_TOPK, 
-                      pos_nms_topk=NMS_POSK)
+                                score_thresh=VALID_THRESH,
+                                nms_thresh=NMS_THRESH,
+                                pre_nms_topk=NMS_TOPK,
+                                pos_nms_topk=NMS_POSK)
         for j in range(len(result)):
             result_j = result[j]
             img_name_j = img_name[j]

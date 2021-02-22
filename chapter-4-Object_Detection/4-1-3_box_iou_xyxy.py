@@ -1,5 +1,16 @@
-#!/usr/bin/env python
-# coding: utf-8
+# Copyright (c) 2020 PaddlePaddle Authors. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 import numpy as np
 import math
@@ -7,6 +18,7 @@ import math
 '''
 # 交并比计算程序如下：
 '''
+
 
 # 计算IoU，矩形框的坐标形式为xyxy，这个函数会被保存在box_utils.py文件中
 def box_iou_xyxy(box1, box2):
@@ -18,7 +30,7 @@ def box_iou_xyxy(box1, box2):
     x2min, y2min, x2max, y2max = box2[0], box2[1], box2[2], box2[3]
     # 计算box2的面积
     s2 = (y2max - y2min + 1.) * (x2max - x2min + 1.)
-    
+
     # 计算相交矩形框的坐标
     xmin = np.maximum(x1min, x2min)
     ymin = np.maximum(y1min, y2min)
@@ -38,4 +50,4 @@ def box_iou_xyxy(box1, box2):
 bbox1 = [100., 100., 200., 200.]
 bbox2 = [120., 120., 220., 220.]
 iou = box_iou_xyxy(bbox1, bbox2)
-print('IoU is {}'.format(iou))  
+print('IoU is {}'.format(iou))
