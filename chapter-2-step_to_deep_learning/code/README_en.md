@@ -9,7 +9,7 @@
 * numpy
 * random
 * time
-* paddle==2.0.0
+* paddlepaddle==2.0.0
 
 ## Structure
 ```
