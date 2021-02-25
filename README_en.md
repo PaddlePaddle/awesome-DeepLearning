@@ -17,7 +17,7 @@ There are two way to running the tutorial.
 
 ## Preparation for Run Tutorial
 - Python3
-- PaddlePaddle 2.x
+- PaddlePaddle 2.0.0
 - numpy
 - matplotlib
 

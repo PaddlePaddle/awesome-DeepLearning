@@ -8,7 +8,4 @@
 ## 案例结构
 本章案例介绍以 notebook 和 code 的形式呈现：
 * notebook 给大家提供本章的学习教程，有完整的文字说明内容；为了有更好的阅读方式大家也可以访问 AIStudio 平台上的 [notebook](https://aistudio.baidu.com/aistudio/projectdetail/1536598) 文档。
-* code 部分给大家提供了本章内容的完整学习代码，具体使用教程参考 code 部分的 README。
-
-## 说明
-如果觉得本章代码对您的学习有帮助，欢迎 star 。
+* code 部分给大家提供了本章内容的完整学习代码，具体使用教程参考 code 部分的 [README](./code/README.md)。

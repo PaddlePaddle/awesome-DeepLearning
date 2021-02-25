@@ -9,7 +9,7 @@
 * numpy
 * random
 * time
-* paddle=2.x
+* paddle==2.0.0
 
 ## Structure
 ```
@@ -24,13 +24,12 @@
 ## Results
 |structure  |active   |Regularization     |optimizer|epoch  |lr    |bs    |acc   |
 |:--:       |:--:     |:--:     |:--:     |:--:   |:--:  |:--:  |:--:  |
-|single     |sigmoid  | N       |SGD      |10     |0.1   |32    |85.03%|
-|single     |sigmoid  | N       |SGD      |10     |1     |32    |95.87%|
-|single     |relu     | N       |SGD      |10     |0.1   |32    |96.18%|
-|multi      |relu     | N       |SGD      |10     |0.1   |32    |97.10%|
-|multi      |relu     | Y       |SGD      |10     |0.1   |32    |97.18%|
+|single layer feedforward neural network     |sigmoid  | N       |SGD      |10     |0.1   |32    |85.03%|
+|single layer feedforward neural network     |sigmoid  | N       |SGD      |10     |1     |32    |95.87%|
+|single layer feedforward neural network     |relu     | N       |SGD      |10     |0.1   |32    |96.18%|
+|multi layer feedforward neural network     |relu     | N       |SGD      |10     |0.1   |32    |97.10%|
+|multi layer feedforward neural network      |relu     | Y       |SGD      |10     |0.1   |32    |97.18%|
 
-> The experimental results are taken from AIStudio.
 
 ## Train
 Start the training directly using the train.py script.

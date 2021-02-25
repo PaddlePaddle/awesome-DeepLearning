@@ -21,7 +21,7 @@
 
 ## 教程运行准备环境
 - Python3
-- PaddlePaddle 2.x
+- PaddlePaddle 2.0.0
 - numpy
 - ...
 
