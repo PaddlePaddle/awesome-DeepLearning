@@ -1,11 +1,17 @@
-# 使用word2vec训练词向量
-## 依赖模块
-- requests==2.22.0  
-- paddle==2.0.0
+# 情感分析  [[English](./README_en.md)]
 
-如未安装paddle，请点击
-  [飞桨官网->快速安装](https://www.paddlepaddle.org.cn/install/quick?docurl=/documentation/docs/zh/2.0/install/pip/windows-pip.html) 查看安装方式。
-    
+## 依赖模块
+- re
+- os
+- numpy
+- paddle
+- random
+- tarfile
+- requests
+
+其中paddle请安装2.0版本，具体安装方式请参考
+  [飞桨官网->快速安装](https://www.paddlepaddle.org.cn/install/quick?docurl=/documentation/docs/zh/2.0/install/pip/windows-pip.html) 。
+
 ## 目录结构
 ```buildoutcfg
 |-data: 存放数据集或模型
