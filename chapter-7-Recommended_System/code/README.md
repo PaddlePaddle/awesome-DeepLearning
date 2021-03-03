@@ -12,13 +12,13 @@
 - json
 
 ## 项目介绍
-'''
+```
 |-data: 存放movielens识虫数据集
 |-net: 存放网络定义脚本
     |-DSSM.py: 该脚本中定义了movielens的网络结构
 |-train.py: 启动训练和验证的脚本
 
-'''
+```
 
 ## 数据集准备
 1. 下载[movielens数据集](https://aistudio.baidu.com/aistudio/datasetdetail/3233)到data目录下
