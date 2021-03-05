@@ -8,5 +8,4 @@
    :caption: Contents:
 
    导数 <derivative>
-   拉格朗日 <Lagrangian>
 
