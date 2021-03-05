@@ -1,8 +1,12 @@
 高等数学
 =================================
 
+.. math::
+
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Contents:
 
-   导数
+   导数 <derivative>
+   拉格朗日 <Lagrangian>
+

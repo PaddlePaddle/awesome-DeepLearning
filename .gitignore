@@ -2,4 +2,5 @@ docs/_build/
 docs/build/
 docs/_static/
 docs/_templates/
-
+.DS_Store
+docs/.DS_Store

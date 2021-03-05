@@ -17,12 +17,9 @@
 
 # -- Project information -----------------------------------------------------
 
-project = '机器学习知识点'
-copyright = '2021, PaddleEdu'
-author = 'PaddleEdu'
-
-# The full version, including alpha/beta/rc tags
-release = 'v0.1'
+project = 'PaddleEdu'
+copyright = '2021, nlpers'
+author = 'nlpers'
 
 
 # -- General configuration ---------------------------------------------------
@@ -31,7 +28,7 @@ release = 'v0.1'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-	'recommonmark',
+    'recommonmark'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -47,17 +44,35 @@ language = 'zh_CN'
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+exclude_patterns = []
 
+
+from recommonmark.parser import CommonMarkParser
+source_parsers = {
+    '.md': CommonMarkParser,
+}
+source_suffix = ['.rst', '.md']
 
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-# html_theme = 'alabaster'
-html_theme = 'sphinx_rtd_theme'
+#html_theme = 'alabaster'
+
+import sphinx_rtd_theme
+html_theme = "sphinx_rtd_theme"
+html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+
+html_theme_options = {
+    'collapse_navigation': False,
+    'display_version': False,
+    'navigation_depth': 3,
+}
+
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+html_logo = 'images/paddle.png'
+
