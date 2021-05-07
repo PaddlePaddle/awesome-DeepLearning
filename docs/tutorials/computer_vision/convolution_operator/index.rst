@@ -4,4 +4,3 @@
 .. toctree::
    :maxdepth: 2
 
-   测试 <test>
