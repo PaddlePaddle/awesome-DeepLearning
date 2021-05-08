@@ -13,9 +13,11 @@
 ## 激活函数的种类
 ### identity
 函数定义：
+
 $$f(x)=x$$
 
 导数：
+
 $${ f }^{ ' }(x)=1$$
 
 函数图形如图 1 所示：
@@ -31,9 +33,11 @@ $${ f }^{ ' }(x)=1$$
 
 ### step
 函数定义：
+
 $$ { f }(x)=\begin{cases} \begin{matrix} 0 & x<0 \end{matrix} \\ \begin{matrix} 1 & x\ge 0 \end{matrix} \end{cases}$$
 
 导数：
+
 $$ { f }^{ ' }(x)=\begin{cases} \begin{matrix} 0 & x\neq 0 \end{matrix} \\ \begin{matrix} ? & x=0 \end{matrix} \end{cases}$$
 
 函数图形如图 2 所示：
@@ -49,9 +53,11 @@ $$ { f }^{ ' }(x)=\begin{cases} \begin{matrix} 0 & x\neq 0 \end{matrix} \\ \begi
 
 ### sigmoid
 函数定义：
+
 $${ f }(x)=\sigma (x)=\frac { 1 }{ 1+{ e }^{ -x } } $$
 
 导数：
+
 $${ f }^{ ' }(x)=f(x)(1-f(x))$$
 
 函数图形如图 3 所示：
@@ -70,9 +76,11 @@ $${ f }^{ ' }(x)=f(x)(1-f(x))$$
 
 ### tanh
 函数定义：
+
 $${ f }(x)=tanh(x)=\frac { { e }^{ x }-{ e }^{ -x } }{ { e }^{ x }+{ e }^{ -x } }$$
 
 导数：
+
 $${ f }^{ ' }(x)=1-f(x)^{ 2 }$$
 
 函数图形如图 4 所示：
@@ -90,9 +98,11 @@ $${ f }^{ ' }(x)=1-f(x)^{ 2 }$$
 
 ### relu
 函数定义：
+
 $$f(x)=\begin{cases} \begin{matrix} 0 & x<0 \end{matrix} \\ \begin{matrix} x & x\ge 0 \end{matrix} \end{cases}$$
 
 导数：
+
 $${ { f }(x) }^{ ' }=\begin{cases} \begin{matrix} 0 & x<0 \end{matrix} \\ \begin{matrix} 1 & x\ge 0 \end{matrix} \end{cases}$$
 
 函数图形如图 5 所示：
@@ -112,9 +122,11 @@ $${ { f }(x) }^{ ' }=\begin{cases} \begin{matrix} 0 & x<0 \end{matrix} \\ \begin
 
 ### lrelu
 函数定义：
+
 $$ f(x)=\begin{cases} \begin{matrix} \alpha x & x<0 \end{matrix} \\ \begin{matrix} x & x\ge 0 \end{matrix} \end{cases}$$
 
 导数：
+
 $${ { f }(x) }^{ ' }=\begin{cases} \begin{matrix} \alpha & x<0 \end{matrix} \\ \begin{matrix} 1 & x\ge 0 \end{matrix} \end{cases}$$
 
 其中，$\alpha$ 常设置为0.01。函数图形如图 6 所示：
@@ -131,9 +143,11 @@ $${ { f }(x) }^{ ' }=\begin{cases} \begin{matrix} \alpha & x<0 \end{matrix} \\ \
 
 ### prelu
 函数定义：
+
 $$f(\alpha ,x)=\begin{cases} \begin{matrix} \alpha x  & x<0 \end{matrix} \\ \begin{matrix} x & x\ge 0 \end{matrix} \end{cases}$$
 
 导数：
+
 $${ { f }(\alpha ,x) }^{ ' }=\begin{cases} \begin{matrix} \alpha  & x<0 \end{matrix} \\ \begin{matrix} 1 & x\ge 0 \end{matrix} \end{cases}$$
 
 函数图形如图 7 所示：
@@ -147,9 +161,11 @@ $${ { f }(\alpha ,x) }^{ ' }=\begin{cases} \begin{matrix} \alpha  & x<0 \end{mat
 
 ### rrelu
 函数定义：
+
 $$f(\alpha ,x)=\begin{cases} \begin{matrix} \alpha  & x<0 \end{matrix} \\ \begin{matrix} x & x\ge 0 \end{matrix} \end{cases}$$
 
 导数：
+
 $${ { f }(\alpha ,x) }^{ ' }=\begin{cases} \begin{matrix} \alpha  & x<0 \end{matrix} \\ \begin{matrix} 1 & x\ge 0 \end{matrix} \end{cases}$$
 
 函数图形如图 8 所示：
@@ -161,9 +177,11 @@ $${ { f }(\alpha ,x) }^{ ' }=\begin{cases} \begin{matrix} \alpha  & x<0 \end{mat
 
 ### elu
 函数定义：
+
 $$ f(\alpha ,x)=\begin{cases} \begin{matrix} \alpha \left( { e }^{ x }-1 \right)  & x<0 \end{matrix} \\ \begin{matrix} x & x\ge 0 \end{matrix} \end{cases}$$
 
 导数：
+
 $${ { f }(\alpha ,x) }^{ ' }=\begin{cases} \begin{matrix} f(\alpha ,x)+\alpha  & x<0 \end{matrix} \\ \begin{matrix} 1 & x\ge 0 \end{matrix} \end{cases}$$
 
 函数图形如图 9 所示：
@@ -181,9 +199,11 @@ $${ { f }(\alpha ,x) }^{ ' }=\begin{cases} \begin{matrix} f(\alpha ,x)+\alpha  &
 
 ### selu
 函数定义：
+
 $$f(\alpha ,x)=\lambda \begin{cases} \begin{matrix} \alpha \left( { e }^{ x }-1 \right)  & x<0 \end{matrix} \\ \begin{matrix} x & x\ge 0 \end{matrix} \end{cases}$$
 
 导数：
+
 $${ { f }(\alpha ,x) }^{ ' }=\lambda \begin{cases} \begin{matrix} \alpha \left( { e }^{ x } \right)  & x<0 \end{matrix} \\ \begin{matrix} 1 & x\ge 0 \end{matrix} \end{cases}$$
 
 函数图形如图 10 所示：
@@ -197,9 +217,11 @@ $${ { f }(\alpha ,x) }^{ ' }=\lambda \begin{cases} \begin{matrix} \alpha \left( 
 
 ### softsign
 函数定义：
+
 $$f(x)=\frac { x }{ \left| x \right| +1 }$$
 
 导数：
+
 $${ f }^{ ' }(x)=\frac { 1 }{ { (1+\left| x \right| ) }^{ 2 } } $$
 
 函数图形如图 11 所示：
@@ -216,9 +238,11 @@ $${ f }^{ ' }(x)=\frac { 1 }{ { (1+\left| x \right| ) }^{ 2 } } $$
 
 ### softplus
 函数定义：
+
 $$f(x)=\ln { (1+{ e }^{ x }) }$$
 
 导数：
+
 $${ f }^{ ' }(x)=\frac { 1 }{ 1+{ e }^{ -x } }$$
 
 函数图形如图 12 所示：
@@ -251,6 +275,7 @@ $$
 
 ### swish
 函数定义：
+
 $$f\left( x \right) =x\cdot \sigma \left( x \right) $$
 
 其中，$\sigma$ 是 $sigmoid$ 函数。
@@ -260,6 +285,7 @@ $swish$ 激活函数的图形如图 14 所示：
 <center><br>图14：swish 激活函数</br></center>
 
 $swish$ 激活函数的一阶导数如下：
+
 $$\begin{array}{c}
 	f^{'}\left( x \right) =\sigma \left( x \right) +x\cdot \sigma \left( x \right) \left( 1-\sigma \left( x \right) \right)\\
 	=\sigma \left( x \right) +x\cdot \sigma \left( x \right) -x\cdot \sigma \left( x \right) ^2\\
@@ -272,6 +298,7 @@ $swish$ 激活函数的一阶和二阶导数的图形如图 15 所示：
 <center><br>图15：swish 导数</br></center>
 
 超参数版 $swish$ 激活函数：
+
 $$f\left( x \right) =x\cdot \sigma \left( \beta x \right)$$
 
 其中，$\beta$ 是超参数。超参数版 $swish$ 激活函数的图形如图 16 所示：
@@ -289,6 +316,7 @@ $$f\left( x \right) =x\cdot \sigma \left( \beta x \right)$$
 
 ### hswish
 函数定义：
+
 $$f\left( x \right) =x\frac{\text{Re}LU6\left( x+3 \right)}{6}$$
 
 $hard \ swish$ 和 $swish$ 激活函数对比如图 17 所示：

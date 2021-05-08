@@ -12,6 +12,7 @@ $$IoU = \frac{A\cap B}{A \cup B}$$
 <center><br>图1：交并比</br></center>
 
 假设两个矩形框A和B的位置分别为：
+
 $$A:  [x_{a1}, y_{a1}, x_{a2}, y_{a2}]$$
 
 $$B:  [x_{b1}, y_{b1}, x_{b2}, y_{b2}]$$
@@ -22,23 +23,30 @@ $$B:  [x_{b1}, y_{b1}, x_{b2}, y_{b2}]$$
 <center><br>图2：计算交并比</br></center>
 
 如果二者有相交部分，则相交部分左上角坐标为：
+
 $$x_1 = max(x_{a1}, x_{b1}), \ \ \ \ \ y_1 = max(y_{a1}, y_{b1})$$
 
 相交部分右下角坐标为：
+
 $$x_2 = min(x_{a2}, x_{b2}), \ \ \ \ \ y_2 = min(y_{a2}, y_{b2})$$
 
 计算先交部分面积：
+
 $$intersection = max(x_2 - x_1 + 1.0, 0) \cdot max(y_2 - y_1 + 1.0, 0)$$
 
 矩形框A和B的面积分别是：
+
 $$S_A = (x_{a2} - x_{a1} + 1.0) \cdot (y_{a2} - y_{a1} + 1.0)$$
 
 $$S_B = (x_{b2} - x_{b1} + 1.0) \cdot (y_{b2} - y_{b1} + 1.0)$$
 
 计算相并部分面积：
+
 $$union = S_A + S_B - intersection$$
 
 计算交并比：
+
+
 
 $$IoU = \frac{intersection}{union}$$
 

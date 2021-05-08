@@ -46,12 +46,12 @@ A为图像上的某个像素点，B为A右下方另外一个像素点，A、B两
 
 科学家们开始思考，是否可以应用传统图像算法先产生候选区域，然后再用卷积神经网络对这些区域进行分类？
 
-* 2013年，Ross Girshick等人于首次将CNN的方法应用在目标检测任务上，他们使用传统图像算法Selective Search产生候选区域，取得了极大的成功，这就是对目标检测领域影响深远的区域卷积神经网络(R-CNN^[1]^)模型。
-* 2015年，Ross Girshick对此方法进行了改进，提出了Fast R-CNN^[2]^模型。通过将不同区域的物体共用卷积层的计算，大大缩减了计算量，提高了处理速度，而且还引入了调整目标物体位置的回归方法，进一步提高了位置预测的准确性。
-* 2015年，Shaoqing Ren等人提出了Faster R-CNN^[3]^模型，提出了RPN的方法来产生物体的候选区域，这一方法不再需要使用传统的图像处理算法来产生候选区域，进一步提升了处理速度。
-* 2017年，Kaiming He等人提出了Mask R-CNN^[4]^模型，只需要在Faster R-CNN模型上添加比较少的计算量，就可以同时实现目标检测和物体实例分割两个任务。
+* 2013年，Ross Girshick等人于首次将CNN的方法应用在目标检测任务上，他们使用传统图像算法Selective Search产生候选区域，取得了极大的成功，这就是对目标检测领域影响深远的区域卷积神经网络(R-CNN<sup>[1]</sup>)模型。
+* 2015年，Ross Girshick对此方法进行了改进，提出了Fast R-CNN<sup>[2]</sup>模型。通过将不同区域的物体共用卷积层的计算，大大缩减了计算量，提高了处理速度，而且还引入了调整目标物体位置的回归方法，进一步提高了位置预测的准确性。
+* 2015年，Shaoqing Ren等人提出了Faster R-CNN<sup>[3]</sup>模型，提出了RPN的方法来产生物体的候选区域，这一方法不再需要使用传统的图像处理算法来产生候选区域，进一步提升了处理速度。
+* 2017年，Kaiming He等人提出了Mask R-CNN<sup>[4]</sup>模型，只需要在Faster R-CNN模型上添加比较少的计算量，就可以同时实现目标检测和物体实例分割两个任务。
 
-以上都是基于R-CNN系列的著名模型，对目标检测方向的发展有着较大的影响力。此外，还有一些其他模型，比如SSD^[5]^、YOLO^[6,7,8]^、R-FCN^[9]^等也都是目标检测领域流行的模型结构。**图5** 为目标检测综述文章：Object Detection in 20 Years: A Survey^[10]^中的一幅图，梳理了近些年目标检测算法的发展流程。
+以上都是基于R-CNN系列的著名模型，对目标检测方向的发展有着较大的影响力。此外，还有一些其他模型，比如SSD<sup>[5]</sup>、YOLO<sup>[6,7,8]</sup>、R-FCN<sup>[9]</sup>等也都是目标检测领域流行的模型结构。**图5** 为目标检测综述文章：Object Detection in 20 Years: A Survey<sup>[10]</sup>中的一幅图，梳理了近些年目标检测算法的发展流程。
 
 <center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/Detection/img/Development_Path.png" width = "800"></center>
 <center><br>图5：目标检测算法发展流程</br></center>
@@ -67,7 +67,7 @@ A为图像上的某个像素点，B为A右下方另外一个像素点，A、B两
 - Anchor这种密集框，数量多，训练时如何选择正负样本？
 - Anchor设置也导致超参数较多，实际业务扩展中，相对来说，就有点麻烦。
 
-由于上述缺点的存在，近些年研究者们还提出了另外一类效果优异的算法，这些算法不再使用anchor回归预测框，因此也称作Anchor-free的算法，例如：CornerNet^[11]^和CenterNet^[12]^等。**图6** 为大家简单罗列了经典的Anchor-base和Anchor-free的算法。
+由于上述缺点的存在，近些年研究者们还提出了另外一类效果优异的算法，这些算法不再使用anchor回归预测框，因此也称作Anchor-free的算法，例如：CornerNet<sup>[11]</sup>和CenterNet<sup>[12]</sup>等。**图6** 为大家简单罗列了经典的Anchor-base和Anchor-free的算法。
 
 <center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/Detection/img/Development_Path_2.png" width = "800"></center>
 <center><br>图6：基于深度学习的目标检测算法发展流程</br></center>

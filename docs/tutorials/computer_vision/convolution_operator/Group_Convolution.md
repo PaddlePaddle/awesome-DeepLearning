@@ -2,7 +2,7 @@
 
 ## 一、分组卷积提出背景
 
-分组卷积（Group Convolution）最早出现在AlexNet^[1]^中。受限于当时的硬件资源，在AlexNet网络训练时，难以把整个网络全部放在一个GPU中进行训练，因此，作者将卷积运算分给多个GPU分别进行计算，最终把多个GPU的结果进行融合。
+分组卷积（Group Convolution）最早出现在AlexNet<sup>[1]</sup>中。受限于当时的硬件资源，在AlexNet网络训练时，难以把整个网络全部放在一个GPU中进行训练，因此，作者将卷积运算分给多个GPU分别进行计算，最终把多个GPU的结果进行融合。
 
 ## 二、分组卷积与标准卷积的区别
 
@@ -19,10 +19,14 @@
 <center><br>图2：分组卷积示意图</br></center>
 
 由于我们将整个标准卷积过程拆分成了 $g$ 个规模更小的子运算来并行进行，所以最终降低了对运行设备的要求。同时，通过分组卷积的方式，参数量也可以得到降低。在上述的标准卷积中，参数量为：
+
+
 $$
 h_1 \times w_1 \times C_1 \times C_2
 $$
 而使用分组卷积后，参数量则变为：
+
+
 $$
 h_1 \times w_1 \times \frac{C_1}{g} \times \frac{C_2}{g} \times g = h_1 \times w_1 \times C_1 \times C_2 \times \frac{1}{g}
 $$

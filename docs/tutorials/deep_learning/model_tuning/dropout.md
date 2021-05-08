@@ -150,6 +150,8 @@ print('x2 {}, \n droped_train22 \n {}, \n droped_eval22 \n {}'.format(data2, dro
 在程序中，我们将随机失活比率设为0.5，分别使用两种不同的策略进行dropout，并且分别打印训练和评估模式下的网络层输出。其中，数据 $x_1$ 模拟的是卷积层的输出数据， 数据 $x_2$ 模拟的是全连接层的输入数据。由于通常情况下，我们会把dropout添加到全连接层后，所以这里针对前一层的输出为 $x_2$ 的情况为大家进行分析，前一层的输出为 $x_1$ 的情况也基本类似。
 
  $x_2$ 定义如下：
+
+
 $$
 x_2=\left[\begin{array}{ccc}
 1 & 2 & 3 \\
@@ -159,10 +161,14 @@ x_2=\left[\begin{array}{ccc}
 \end{array}\right]
 $$
 将 paddle.nn.Dropout API 中 mode 设置为 'downscale_in_infer' 时，可以观察到在训练模式下，部分元素变为0，其他元素的值并没有发生改变，此时 $x_{2\_train}$ 为：
+
+
 $$
 x_2=\left[\begin{array}{ccc}1 & 2 & 3 \\4 & 5 & 6 \\0 & 0 & 9 \\0 & 11 & 0\end{array}\right]
 $$
 而在验证模式下，所有的元素都被保留，但是所有元素的值都进行了缩放，缩放的系数为$(1 - r)$ ，即$(1 - 0.5)=0.5$ ，此时 $x_{2\_eval}$ 为：
+
+
 $$
 x_2=\left[\begin{array}{ccc}
 0.5 & 1 & 1.5 \\
@@ -171,11 +177,15 @@ x_2=\left[\begin{array}{ccc}
 5 & 5.5 & 6
 \end{array}\right]
 $$
-而将 paddle.nn.Dropout API 中 mode 设置为 'upscale_in_train' 时，可以观察到在训练模式下，部分元素变为0，其他元素的值进行了缩放，缩放的系数为$$\frac{1}{1-r}$$，即$\frac{1}{1-0.5}=2$ ，，此时 $x_{2\_train}$ 为：
+而将 paddle.nn.Dropout API 中 mode 设置为 'upscale_in_train' 时，可以观察到在训练模式下，部分元素变为0，其他元素的值进行了缩放，缩放的系数为$\frac{1}{1-r}$，即$\frac{1}{1-0.5}=2$ ，，此时 $x_{2\_train}$ 为：
+
+
 $$
 x_2=\left[\begin{array}{ccc}2 & 0 & 6 \\0 & 10 & 0 \\14 & 16 & 18 \\0 & 22 & 24\end{array}\right]
 $$
 而在验证模式下，所有的元素都被保留，且所有元素的值并没有发生改变，此时 $x_{2\_eval}$ 为：
+
+
 $$
 x_2=\left[\begin{array}{ccc}
 1 & 2 & 3 \\

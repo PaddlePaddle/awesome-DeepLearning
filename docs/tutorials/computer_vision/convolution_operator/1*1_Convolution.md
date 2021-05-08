@@ -1,6 +1,6 @@
 #  $1\times{1}$ 卷积（$1\times{1}$ Convolution）
 
-## 一、$1\times{1}$ 卷积
+## 一、1*1 卷积
 
 $1\times{1}$ 卷积，与标准卷积完全一样，唯一的特殊点在于卷积核的尺寸是$1\times{1}$ ，也就是不去考虑输入数据局部信息之间的关系，而把关注点放在不同通道间。当输入矩阵的尺寸为$3\times{3}$ ，通道数也为3时，使用4个$1\times{1}$卷积核进行卷积计算，最终就会得到与输入矩阵尺寸相同，通道数为4的输出矩阵，如 **图1** 所示。
 
@@ -15,7 +15,7 @@ $1\times{1}$ 卷积，与标准卷积完全一样，唯一的特殊点在于卷�
 
 ## 二、应用示例
 
-- **$1\times{1}$ 卷积在GoogLeNet^[1]^中的应用**
+- **$1\times{1}$ 卷积在GoogLeNet<sup>[1]</sup>中的应用**
 
 GoogLeNet是2014年ImageNet比赛的冠军，它的主要特点是网络不仅有深度，还在横向上具有“宽度”。由于图像信息在空间尺寸上的巨大差异，如何选择合适的卷积核来提取特征就显得比较困难了。空间分布范围更广的图像信息适合用较大的卷积核来提取其特征；而空间分布范围较小的图像信息则适合用较小的卷积核来提取其特征。为了解决这个问题，GoogLeNet提出了一种被称为Inception模块的方案。如 **图2** 所示：
 
@@ -35,12 +35,19 @@ Inception模块采用多通路(multi-path)的设计形式，每个支路使用�
 我们这里可以简单计算一下Inception模块中使用$1\times{1}$ 卷积前后参数量的变化，这里以GoogleNet中的Inception3
 
 a模块为例，输入通道数 $C_{in}=192$，$1\times{1}$ 卷积的输出通道数$C_{out1}=64$，$3\times{3}$ 卷积的输出通道数$C_{out2}=128$，$5\times{5}$ 卷积的输出通道数$C_{out3}=32$，则图2(a)中的结构所需的参数量为：
+
+
 $$
 1\times1\times192\times64+3\times3\times192\times128+5\times5\times192\times32=387072
 $$
 图2(b)中在$3\times{3}$ 卷积前增加了通道数$C_{out4}=96$ 的 $1\times{1}$ 卷积，在$5\times{5}$ 卷积前增加了通道数$C_{out5}=16$ 的 $1\times{1}$ 卷积，同时在maxpooling后增加了通道数$C_{out6}=32$ 的 $1\times{1}$ 卷积，参数量变为：
+
+
 $$
-1\times1\times192\times64+1\times1\times192\times96+1\times1\times192\times16+3\times3\times96\times128+5\times5\times16\times32+1\times1\times192\times32=163328
+\begin{eqnarray}\small{
+1\times1\times192\times64+1\times1\times192\times96+1\times1\times192\times16+3\times3\times96\times128+5\times5\times16\times32 \\
++1\times1\times192\times32 =163328}
+\end{eqnarray}
 $$
 可见，$1\times{1}$ 卷积可以在不改变模型表达能力的前提下，大大减少所使用的参数量。
 
@@ -91,17 +98,21 @@ class Inception(paddle.nn.Layer):
         return paddle.concat([p1, p2, p3, p4], axis=1)
 ```
 
--  **$1\times{1}$ 卷积在ResNet^[2]^中的应用**
+-  **$1\times{1}$ 卷积在ResNet<sup>[2]</sup>中的应用**
 
 随着深度学习的不断发展，模型的层数越来越多，网络结构也越来越复杂。但是增加网络的层数之后，训练误差往往不降反升。由此，Kaiming He等人提出了残差网络ResNet来解决上述问题。ResNet是2015年ImageNet比赛的冠军，将识别错误率降低到了3.6%，这个结果甚至超出了正常人眼识别的精度。在ResNet中，提出了一个非常经典的结构—残差块（Residual block）。
 
 残差块是ResNet的基础，具体设计方案如 **图3** 所示。不同规模的残差网络中使用的残差块也并不相同，对于小规模的网络，残差块如图3(a)所示，但是对于稍大的模型，使用图3(a)的结构会导致参数量非常大，因此从ResNet50以后，都是使用图3(b)的结构。图3(b)中的这种设计方案也常称作瓶颈结构（BottleNeck）。1\*1的卷积核可以非常方便的调整中间层的通道数，在进入3\*3的卷积层之前减少通道数（256->64），经过该卷积层后再恢复通道数(64->256)，可以显著减少网络的参数量。这个结构（256->64->256）像一个中间细，两头粗的瓶颈，所以被称为“BottleNeck”。
 
 我们这里可以简单计算一下残差块中使用$1\times{1}$ 卷积前后参数量的变化，为了保持统一，我们令图3中的两个结构的输入输出通道数均为256，则图3(a)中的结构所需的参数量为：
+
+
 $$
 3\times3\times256\times256\times2=1179648
 $$
 而图3(b)中采用了$1\times{1}$ 卷积后，参数量为：
+
+
 $$
 1\times1\times256\times64+3\times3\times64\times64+1\times1\times64\times256=69632
 $$
