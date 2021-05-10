@@ -15,6 +15,7 @@
    深度学习 <tutorials/deep_learning/index>
    计算机视觉 <tutorials/computer_vision/index>
    自然语言处理 <tutorials/natural_language_processing/index>
+   预训练模型 <tutorials/pretrain_model/index>
    推荐系统 <tutorials/recommendation_system/index>
    对抗神经网络 <tutorials/generative_adversarial_network/index>
    强化学习 <tutorials/reinforcement_learning/index>
