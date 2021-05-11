@@ -41,7 +41,7 @@
 
   
 
-  - **《零基础实践深度学习》书籍**：由清华出版社2010年底发行，京东/当当等电商均有销售。
+  - **《零基础实践深度学习》书籍**：由清华出版社2020年底发行，京东/当当等电商均有销售。
 
     <center><img src="https://github.com/ZhangHandi/images-for-paddledocs/blob/main/images/readme/book.png?raw=true"/></center><br></br>
     
