@@ -24,7 +24,7 @@
 
 2021年5月14日-5月20日，B站《零基础实践深度学习》7日打卡课，扫描下方二维码快速入群，了解最新的课程信息。
 
-![image-20210510190606912](C:\Users\wulei13\AppData\Roaming\Typora\typora-user-images\image-20210510190606912.png)
+<center><img src="https://github.com/ZhangHandi/images-for-paddledocs/blob/main/images/readme/qr_code.png?raw=true"/></center><br></br>
 
 
 
@@ -35,17 +35,17 @@
   - **[AI Studio在线课程：《零基础实践深度学习》](https://aistudio.baidu.com/aistudio/course/introduce/1297：
     )**：理论和代码结合、实践与平台结合，包含20小时视频课程，由百度杰出架构师、飞桨产品负责人和资深研发人员共同打造。
 
-    
+    <center><img src="https://github.com/ZhangHandi/images-for-paddledocs/blob/main/images/readme/aistudio.png?raw=true"/></center><br></br>
 
-  ![image-20210510191004212](C:\Users\wulei13\AppData\Roaming\Typora\typora-user-images\image-20210510191004212.png)
+  
 
   
 
   - **《零基础实践深度学习》书籍**：由清华出版社2010年底发行，京东/当当等电商均有销售。
 
-    ![image-20210510191153562](C:\Users\wulei13\AppData\Roaming\Typora\typora-user-images\image-20210510191153562.png)
-
-
+    <center><img src="https://github.com/ZhangHandi/images-for-paddledocs/blob/main/images/readme/book.png?raw=true"/></center><br></br>
+    
+    
 
 * ### 深度学习100问
 
@@ -59,15 +59,17 @@
 
 ## 技术交流
 
-非常感谢您使用本项目。您在使用过程中有任何建议或意见，可以在**[Issue](https://github.com/PaddlePaddle/PaddleDetection/issues)**上反馈给我们，也可以通过扫描下方的二维码联系我们，飞桨的开发人员非常高兴能够帮助到您，并与您进行更深入的交流和技术探讨。
+非常感谢您使用本项目。您在使用过程中有任何建议或意见，可以在 **[Issue](https://github.com/PaddlePaddle/tutorials/issues)** 上反馈给我们，也可以通过扫描下方的二维码联系我们，飞桨的开发人员非常高兴能够帮助到您，并与您进行更深入的交流和技术探讨。
 
 信息。
 
-![image-20210510190606912](C:\Users\wulei13\AppData\Roaming\Typora\typora-user-images\image-20210510190606912.png)
+<center><img src="https://github.com/ZhangHandi/images-for-paddledocs/blob/main/images/readme/qr_code.png?raw=true"/></center><br></br>
+
+
 
 ## 许可证书
 
-本项目的发布受[Apache 2.0 license](LICENSE)许可认证。
+本项目的发布受[Apache 2.0 license](https://www.apache.org/licenses/LICENSE-2.0.txt)许可认证。
 
 
 
