@@ -6,6 +6,7 @@
    :caption: 目录结构
 
    预训练模型是什么 <pretrain_model_description>
+   BERT <bert>
    ERINE <erine>
 
 
