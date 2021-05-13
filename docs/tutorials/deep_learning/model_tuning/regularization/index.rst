@@ -4,7 +4,11 @@
 .. toctree::
    :maxdepth: 2
 
-   L1 正则化 <l1>
-   L2 正则化 <l2>
+   正则化介绍 <regularization>
+   数据增强 <data_argumentation>
+   L1 L2正则化 <l1l2>
+   Dropout <dropout>
+   DropConnect <dropconnect>
+   早停法 <early_stop>
 
 
