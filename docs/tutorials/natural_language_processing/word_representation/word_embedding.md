@@ -1,4 +1,4 @@
-# 2. Word Embedding: 一种分布式单词表示方式
+# Word Embedding: 一种分布式单词表示方式
 
 前边我们谈到了one-hot编码的缺陷，这一节我们来聊另一种分布式的表示方式：Word Embedding，看他是怎么解决这些问题的。
 

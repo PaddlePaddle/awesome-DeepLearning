@@ -37,43 +37,45 @@
     
     
 
-## 2. 深度学习100问
+## 2. [深度学习100问](https://paddlepedia.readthedocs.io/en/latest/index.html)
 
-* 深度学习
-  * 优化器解读
-  * 激活函数
-  * 常用损失函数
-  * 模型调优组件
-* 计算机视觉
-  * 卷积算子
-  * 图像增广
-  * 卷积神经网络
-  * 图像分类
-  * 目标检测
-* 自然语言处理
-  * 词表示
-  * 序列模型
-  * 命名实体识别
-* 预训练模型
-  * 预训练模型是什么
-  * Transformer
-  * BERT
-  * ERNIE
-* 推荐系统
-  * 推荐系统基础
-  * DSSM模型
-* 对抗神经网络
-  * encoder-decoder
-  * GAN基本概念
-  * GAN评价指标
-  * GAN应用
-* 强化学习
-  * 强化学习基础知识点
-  * 马尔可夫决策过程
-  * 策略梯度定理
-  * 蒙特卡洛策略梯度定理
-  * REINFORCE算法
-  * DQN
+* [深度学习](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/index.html#)
+  * [优化策略](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/optimizers/index.html)
+  * [激活函数](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/loss_functions/index.html)
+  * [常用损失函数](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/loss_functions/index.html)
+  * [模型调优](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/index.html#)
+* [计算机视觉](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/index.html)
+  * [卷积算子](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/convolution_operator/index.html)
+  * [图像增广](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/image_augmentation/index.html)
+  * [卷积神经网络](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/convolution_network/index.html)
+  * [图像分类](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/classification/index.html)
+  * [目标检测](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/object_detection/index.html)
+* [自然语言处理](https://paddlepedia.readthedocs.io/en/latest/tutorials/natural_language_processing/index.html)
+  * [词表示](https://paddlepedia.readthedocs.io/en/latest/tutorials/natural_language_processing/word_representation/index.html)
+  * [序列模型](https://paddlepedia.readthedocs.io/en/latest/tutorials/natural_language_processing/sequence_model/index.html)
+  * [命名实体识别](https://paddlepedia.readthedocs.io/en/latest/tutorials/natural_language_processing/ner/index.html)
+* [预训练模型](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/index.html)
+  * [预训练模型是什么](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/pretrain_model_description.html)
+  * [Transformer](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/transformer.html)
+  * [BERT](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/bert.html)
+  * [ERNIE](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/erine.html)
+* [推荐系统](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/index.html)
+  * [推荐系统基础](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/recommender_system.html)
+  * [DSSM模型](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/dssm.html)
+* [对抗神经网络](https://paddlepedia.readthedocs.io/en/latest/tutorials/generative_adversarial_network/index.html)
+  * [encoder-decoder](https://paddlepedia.readthedocs.io/en/latest/tutorials/generative_adversarial_network/encoder_decoder/index.html)
+  * [GAN基本概念](https://paddlepedia.readthedocs.io/en/latest/tutorials/generative_adversarial_network/basic_concept/index.html)
+  * [GAN评价指标](https://paddlepedia.readthedocs.io/en/latest/tutorials/generative_adversarial_network/gan_metric/index.html)
+  * [GAN应用](https://paddlepedia.readthedocs.io/en/latest/tutorials/generative_adversarial_network/gan_applications/index.html)
+* [强化学习](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/index.html)
+  * [强化学习基础知识点](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/basic_information.html)
+  * [马尔可夫决策过程](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/markov_decision_process.html)
+  * [策略梯度定理](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/policy_gradient.html)
+  * [蒙特卡洛策略梯度定理](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/policy_gradient.html)
+  * [REINFORCE算法](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/policy_gradient.html#reinforce)
+  * [SARSA](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/Sarsa.html)
+  * [Q-Learning](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/Q-learning.html)
+  * [DQN](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/DQN.html#)
   
 详细信息请参阅[Paddle知识点文档平台](https://paddlepedia.readthedocs.io/en/latest/index.html)
 
