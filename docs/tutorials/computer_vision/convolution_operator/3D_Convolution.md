@@ -31,4 +31,5 @@
 
 ## 参考文献
 
-[1] [3D Convolutional Neural Networks for Human Action Recognition]()
+[1] [3D Convolutional Neural Networks for Human Action Recognition](http://users.eecs.northwestern.edu/~mya671/mypapers/ICML10_Ji_Xu_Yang_Yu.pdf)
+
