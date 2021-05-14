@@ -25,7 +25,7 @@
 
 ## 1. 零基础实践深度学习
 
-  - **[AI Studio在线课程：《零基础实践深度学习》](https://aistudio.baidu.com/aistudio/course/introduce/1297：
+  - **[AI Studio在线课程：《零基础实践深度学习》](https://aistudio.baidu.com/aistudio/course/introduce/1297
     )**：理论和代码结合、实践与平台结合，包含20小时视频课程，由百度杰出架构师、飞桨产品负责人和资深研发人员共同打造。
 
     <center><img src="https://github.com/ZhangHandi/images-for-paddledocs/blob/main/images/readme/aistudio.png?raw=true"/></center><br></br>
