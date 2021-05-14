@@ -98,7 +98,7 @@ Y = CX
 $$
 经过推导，我们可以得到这个稀疏矩阵$C$，它的尺寸为$4\times{16}$：
 
- 
+
 $$
 \scriptsize{
 C=\left[\begin{array}{ccc}
