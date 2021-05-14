@@ -4,17 +4,7 @@
 .. toctree::
    :maxdepth: 2
 	
-   编码器 <Encoder>
-   解码器 <Decoder>
-   博弈论 <Game theory>
-   纳什均衡 <Nash equilibrium>
-   输入噪声 <Input noise>
-   生成器 <Generator> 
-   判别器 <Discriminator>
-   损失函数 <GAN loss>
-   模型训练 <GAN train>
-   模型训练不稳定 <Unstable training>
-   模式崩溃 <Collapse>
-   评价指标 <Evaluation index>
-   应用 <GAN application>
-   
+   基本概念 <basic_concept/index>
+   编码器和解码器 <encoder_decoder/index>
+   GAN评价指标 <gan_metric/index>
+   GAN应用 <gan_applications/index>   
