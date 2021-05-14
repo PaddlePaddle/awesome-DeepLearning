@@ -9,4 +9,4 @@
    VGG <VGG>
    GoogLeNet <GoogLeNet>
    DarkNet <DarkNet>
-
+   ResNet <ResNet>
