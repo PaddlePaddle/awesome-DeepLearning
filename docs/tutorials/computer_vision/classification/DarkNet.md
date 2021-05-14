@@ -1,8 +1,12 @@
 # DarkNet
 
+## 模型介绍
+
 在目标检测领域的YOLO系列算法中，作者为了达到更好的分类效果，自己设置并训练了DarkNet网络作为骨干网络。其中，YOLOv2<sup>[1]</sup>首次提出DarkNet网络，由于其具有19个卷积层，所以也称之为DarkNet19。后来在YOLOv3<sup>[2]</sup>中，作者继续吸收了当前优秀算法的思想，如残差网络和特征融合等，提出了具有53个卷积层的骨干网络DarkNet53。作者在ImageNet上进行了实验，发现相较于ResNet-152和ResNet-101，DarkNet53在分类精度差不多的前提下，计算速度取得了领先。
 
-## DarkNet19
+## 模型结构
+
+### DarkNet19
 
 DarkNet19中，借鉴了许多优秀算法的经验，比如：借鉴了VGG的思想，使用了较多的$3\times 3$卷积，在每一次池化操作后，将通道数翻倍；借鉴了network in network的思想，使用全局平均池化（global average pooling）做预测，并把$1\times 1$的卷积核置于$3\times 3$的卷积核之间，用来压缩特征；同时，使用了批归一化层稳定模型训练，加速收敛，并且起到正则化作用。DarkNet19的网络结构如 **图1** 所示。
 
@@ -15,9 +19,9 @@ DarkNet19中，借鉴了许多优秀算法的经验，比如：借鉴了VGG的�
 
 DarkNet19精度与VGG网络相当，但浮点运算量只有其 $\frac{1}{5}$ 左右，因此运算速度极快。
 
-## DarkNet53
+### DarkNet53
 
-DarkNet53在之前的基础上，借鉴了ResNet的思想，在网络中大量使用了残差连接，因此网络结构可以设计的很深，并且缓解了训练中梯度消失的问题，是的模型更容易收敛。同时，使用步长为2的卷积层代替池化层实现降采样。DarkNet53的网络结构如 **图2** 所示。
+DarkNet53在之前的基础上，借鉴了ResNet的思想，在网络中大量使用了残差连接，因此网络结构可以设计的很深，并且缓解了训练中梯度消失的问题，使得模型更容易收敛。同时，使用步长为2的卷积层代替池化层实现降采样。DarkNet53的网络结构如 **图2** 所示。
 
 <br></br>
 
@@ -26,7 +30,9 @@ DarkNet53在之前的基础上，借鉴了ResNet的思想，在网络中大量�
 
 <br></br>
 
-## DarkNet53网络实现
+考虑到当前 Darknet19 网络使用频率较低，接下来主要针对Darknet53网络进行实现与讲解。
+
+## 模型实现
 
 基于Paddle框架，DarkNet53的具体实现的代码如下所示：
 
@@ -200,6 +206,24 @@ class DarkNet53(nn.Layer):
         return x
 
 ```
+
+## 模型特点
+
+DarkNet53中：
+
+- 模型使用了大量的残差连接，缓解了训练中梯度消失的问题，使得模型更容易收敛。
+- 模型使用步长为2的卷积层代替池化层实现降采样。
+
+## 模型指标
+
+在 YOLOv3 论文中，作者在 ImageNet 数据集上对比了 DarkNet 网络与ResNet 网络的精度及速度，如图3所示。可以看到DarkNet53的top-5准确率可以达到93.8%，同时速度也明显超过了ResNet101和ResNet152.
+
+<br></br>
+
+<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Classical_model/DarkNet53_Acc.png" width = "500"></center>
+<center><br>图3：DarkNet模型指标</br></center>
+
+<br></br>
 
 ## 参考文献
 

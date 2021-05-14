@@ -1,6 +1,12 @@
 # LeNet
 
-LeNet是最早的卷积神经网络之一<sup>[1]</sup>。1998年，Yann LeCun第一次将LeNet卷积神经网络应用到图像分类上，在手写数字识别任务中取得了巨大成功。LeNet通过连续使用卷积和池化层的组合提取图像特征，其架构如 **图1** 所示，这里展示的是用于MNIST手写体数字识别任务中的LeNet-5模型：
+## 模型介绍
+
+LeNet是最早的卷积神经网络之一<sup>[1]</sup>，其被提出用于识别手写数字和机器印刷字符。1998年，Yann LeCun第一次将LeNet卷积神经网络应用到图像分类上，在手写数字识别任务中取得了巨大成功。算法中阐述了图像中像素特征之间的相关性能够由参数共享的卷积操作所提取，同时使用卷积、下采样（池化）和非线性映射这样的组合结构，是当前流行的大多数深度图像识别网络的基础。
+
+## 模型结构
+
+LeNet通过连续使用卷积和池化层的组合提取图像特征，其架构如 **图1** 所示，这里展示的是用于MNIST手写体数字识别任务中的LeNet-5模型：
 <br></br>
 
 <center><img src="https://ai-studio-static-online.cdn.bcebos.com/82e4124e2e6a4231bcde17e086bc86ba732d3e81dcd7415f86fb4ef050aa7772" width = "800"></center>
@@ -29,7 +35,7 @@ LeNet是最早的卷积神经网络之一<sup>[1]</sup>。1998年，Yann LeCun�
 
 ------
 
-## LeNet在手写数字识别上的应用
+## 模型实现
 
 LeNet网络的实现代码如下：
 
@@ -80,6 +86,26 @@ class LeNet(paddle.nn.Layer):
         return x
 ```
 
+## 模型特点
+
+- 卷积网络使用一个3层的序列组合：卷积、下采样（池化）、非线性映射（LeNet-5最重要的特性，奠定了目前深层卷积网络的基础）
+- 使用卷积提取空间特征
+- 使用映射的空间均值进行下采样
+- 使用$tanh$或$sigmoid$进行非线性映射
+- 多层神经网络（MLP）作为最终的分类器
+- 层间的稀疏连接矩阵以避免巨大的计算开销
+
+## 模型指标
+
+LeNet-5在MNIST手写数字识别任务上进行了模型训练与测试，论文中提供的模型指标如 图2 所示。使用 distortions 方法处理后，error rate能够达到0.8%。
+
+<br></br>
+
+<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Classical_model/LeNet_Error_Rate.png" width = "800"></center>
+<center><br>图2：LeNet模型指标</br></center>
+
+<br></br>
+
 ## 参考文献
 
-[1] Yann LeCun, Léon Bottou, Yoshua Bengio, and Patrick Haffner. Gradient-based learn- ing applied to document recognition. Proc. of the IEEE, 86(11):2278–2324, 1998 
+[1] [Gradient-based learn- ing applied to document recognition.](http://vision.stanford.edu/cs598_spring07/papers/Lecun98.pdf)
