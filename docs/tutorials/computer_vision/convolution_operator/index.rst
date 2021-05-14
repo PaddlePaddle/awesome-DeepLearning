@@ -10,3 +10,4 @@
     转置卷积 <Transpose_Convolution>
     空洞卷积 <Dilated_Convolution>
     分组卷积 <Group_Convolution>
+    可分离卷积 <Separable_Convolution>
