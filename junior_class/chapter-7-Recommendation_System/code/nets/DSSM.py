@@ -100,9 +100,11 @@ class Model(paddle.nn.Layer):
                 weight_attr=paddle.ParamAttr(
                     initializer=paddle.nn.initializer.Normal(
                         std=1.0 / math.sqrt(user_sizes[i]))))
+            self.add_sublayer('linear_user_%d' % i, linear)
             self._user_layers.append(linear)
             if acts[i] == 'relu':
                 act = paddle.nn.ReLU()
+                self.add_sublayer('user_act_%d' % i, act)
                 self._user_layers.append(act)
 
         #电影特征和用户特征使用了不同的全连接层，不共享参数
@@ -116,9 +118,11 @@ class Model(paddle.nn.Layer):
                 weight_attr=paddle.ParamAttr(
                     initializer=paddle.nn.initializer.Normal(
                         std=1.0 / math.sqrt(movie_sizes[i]))))
+            self.add_sublayer('linear_movie_%d' % i, linear)
             self._movie_layers.append(linear)
             if acts[i] == 'relu':
                 act = paddle.nn.ReLU()
+                self.add_sublayer('movie_act_%d' % i, act)
                 self._movie_layers.append(act)
         
     # 定义计算用户特征的前向运算过程
