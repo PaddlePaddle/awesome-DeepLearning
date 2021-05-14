@@ -41,6 +41,8 @@
 * 指数衰减（Exponential Decay）
 
   学习率随训练轮数成指数衰减，每次将当前学习率乘以给定的衰减率得到下一个学习率。指数衰减的公式可表示为：
+
+  
   $$
   new\_learning\_rate = last\_learning\_rate * gamma
   $$
@@ -51,6 +53,8 @@
 * 自然指数衰减 （Natural Exponential Decay）
 
   每次将当前学习率乘以给定的衰减率的自然指数得到下一个学习率。其公式表达为：
+
+  
   $$
   new\_learning\_rate = learning\_rate * e^{-gamma*epoch}
   $$
@@ -63,6 +67,8 @@
   通过多项式衰减函数，学习率从初始值逐渐衰减至最低学习率。其中，参数 $cycle$ 代表学习率下降后是否重新上升。若 $cycle=True$，则学习率衰减至最低后会重新上升到一定值，再降低至最低学习率并进行循环。若 $cycle = False$，则学习率从初始值单调递减至最低值。
 
   若 $cycle=True$，其计算公式为：
+
+  
   $$
   \begin{align}
   decay\_steps &= decay\_steps * math.ceil(\frac{epoch}{decay\_steps}) \\
@@ -70,6 +76,8 @@
   \end{align}
   $$
   若 $cycle=False$，其计算公式为：
+
+  
   $$
   \begin{align}
   epoch &= min(epoch, decay\_steps) \\
@@ -116,6 +124,8 @@
 * 逆时间衰减（Inverse Time Decay）
 
   学习率大小与当前衰减次数成反比。其计算公式如下：
+
+  
   $$
   new\_learning\_rate = \frac{learning\_rate}{1 + gamma * epoch}
   $$
@@ -140,6 +150,8 @@
 * 余弦衰减（Cosine Annealing Decay）
 
   使用 `cosine annealing` 的策略来动态调整学习率，学习率随step数变化成余弦函数周期变化。该方法为论文 [SGDR：Stochastic Gradient Descent with Warm Restarts](https://arxiv.org/abs/1608.03983) 中`cosine annealing`动态学习率。学习率调整公式为：
+
+  
   $$
   \begin{align}
   \eta_t = \eta_{min} + \frac{1}{2}(\eta_{max} - \eta_{min})(1 + cos(\frac{T_{cur}}{T_{max}}\pi)), \quad T_{cur} \neq (2k+1)T_{max} \\
@@ -153,6 +165,8 @@
 * 诺姆衰减（Noam Decay）
 
   诺姆衰减的计算方式如下：
+
+  
   $$
   new\_learning\_rate = learning\_rate * d_{mode}^{-0.5}*min(epoch^{-0.5}, epoch*warmup\_steps^{-1.5})
   $$
@@ -171,10 +185,14 @@
   线性学习率热身是一种学习率优化策略，在正常调整学习率前，先逐步增大学习率。
 
   当训练步数小于热身步数（warmup_steps）时，学习率 $lr$ 按如下方式更新：
+  
+  
   $$
   lr = start\_lr + (end\_lr - start\_lr) * \frac{epoch}{warmup\_steps}
   $$
   当训练步数大于等于热身步数（warmup_steps）时，学习率 $lr$ 为：
+  
+  
   $$
   lr = learning\_rate
   $$
