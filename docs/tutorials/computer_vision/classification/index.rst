@@ -7,6 +7,6 @@
    LeNet <LeNet>
    AlexNet <AlexNet>
    VGG <VGG>
-   GooLeNet <GooLeNet>
+   GoogLeNet <GoogLeNet>
    DarkNet <DarkNet>
 
