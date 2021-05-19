@@ -16,7 +16,7 @@ AlexNet与此前的LeNet相比，具有更深的网络结构，包含5层卷积�
 
 <br></br>
 
-1）第一模块：对于$224\times 224$的彩色图像，先用96个$11\times 11\times 3$的卷积核对其进行卷积，提取图像中包含的特征模式（步长为4，填充为2，得到96个$54\times 54$的卷积结果（特征图）；然后以$2\times 2$大小进行池化，得到了96个$27\times 27$大小的特征图；
+1）第一模块：对于$224\times 224$的彩色图像，先用96个$11\times 11\times 3$的卷积核对其进行卷积（步长为4，填充为2)，提取图像中包含的特征模式，得到96个$54\times 54$的卷积结果（特征图）；然后以$2\times 2$大小进行池化，得到了96个$27\times 27$大小的特征图；
 
 2）第二模块：包含256个$5\times 5$的卷积和$2\times 2$池化，卷积操作后图像尺寸不变，经过池化后，图像尺寸变成$13\times 13$；
 
@@ -49,21 +49,29 @@ class AlexNet(paddle.nn.Layer):
         super(AlexNet, self).__init__()
         # AlexNet与LeNet一样也会同时使用卷积和池化层提取图像特征
         # 与LeNet不同的是激活函数换成了‘relu’
+        
+        # 第一模块
         self.conv1 = Conv2D(in_channels=3, out_channels=96, kernel_size=11, stride=4, padding=5)
         self.max_pool1 = MaxPool2D(kernel_size=2, stride=2)
+        # 第二模块
         self.conv2 = Conv2D(in_channels=96, out_channels=256, kernel_size=5, stride=1, padding=2)
         self.max_pool2 = MaxPool2D(kernel_size=2, stride=2)
+        # 第三模块
         self.conv3 = Conv2D(in_channels=256, out_channels=384, kernel_size=3, stride=1, padding=1)
+        # 第四模块
         self.conv4 = Conv2D(in_channels=384, out_channels=384, kernel_size=3, stride=1, padding=1)
+        # 第五模块
         self.conv5 = Conv2D(in_channels=384, out_channels=256, kernel_size=3, stride=1, padding=1)
         self.max_pool5 = MaxPool2D(kernel_size=2, stride=2)
-
+        # 全连接层1
         self.fc1 = Linear(in_features=12544, out_features=4096)
         self.drop_ratio1 = 0.5
         self.drop1 = Dropout(self.drop_ratio1)
+        # 全连接层2
         self.fc2 = Linear(in_features=4096, out_features=4096)
         self.drop_ratio2 = 0.5
         self.drop2 = Dropout(self.drop_ratio2)
+        # 全连接层3
         self.fc3 = Linear(in_features=4096, out_features=num_classes)
     
     def forward(self, x):
@@ -96,11 +104,11 @@ class AlexNet(paddle.nn.Layer):
 
 ## 模型特点
 
-AlexNet中包含了几个比较新的技术点，也首次在CNN中成功应用了ReLU、Dropout和LRN等Trick。同时AlexNet也使用了GPU进行运算加速。
+AlexNet中包含了几个比较新的技术点，也首次在CNN中成功应用了ReLU、Dropout和LRN（局部响应归一化层）等Trick。同时AlexNet也使用了GPU进行运算加速。
 
 AlexNet将LeNet的思想发扬光大，把CNN的基本原理应用到了很深很宽的网络中。AlexNet主要使用到的新技术点如下：
 
-- 成功使用ReLU作为CNN的激活函数，并验证其效果在较深的网络超过了Sigmoid，成功解决了Sigmoid在网络较深时的梯度弥散问题。虽然ReLU激活函数在很久之前就被提出了，但是直到AlexNet的出现才将其发扬光大。
+- 成功使用ReLU作为CNN的激活函数，并验证其效果在较深的网络超过了Sigmoid，成功解决了Sigmoid在网络较深时产生的梯度弥散问题。虽然ReLU激活函数在很久之前就被提出了，但是直到AlexNet的出现才将其发扬光大。
 - 训练时使用Dropout随机忽略一部分神经元，以避免模型过拟合。Dropout虽有单独的论文论述，但是AlexNet将其实用化，通过实践证实了它的效果。在AlexNet中主要是最后几个全连接层使用了Dropout。
 - 在CNN中使用重叠的最大池化。此前CNN中普遍使用平均池化，AlexNet全部使用最大池化，避免平均池化的模糊化效果。并且AlexNet中提出让步长比池化核的尺寸小的观点，这样池化层的输出之间会有重叠和覆盖，提升了特征的丰富性。
 - 提出了LRN局部响应归一化层，对局部神经元的活动创建竞争机制，使得其中响应比较大的值变得相对更大，并抑制其他反馈较小的神经元，增强了模型的泛化能力。
