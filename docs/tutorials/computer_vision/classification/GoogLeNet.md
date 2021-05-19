@@ -2,7 +2,7 @@
 
 ## 模型介绍
 
-GoogLeNet是2014年ImageNet比赛的冠军，它的主要特点是网络不仅有深度，还在横向上具有“宽度”。从名字GoogLeNet可以知道这是来自谷歌工程师所设计的网络结构，而名字中GoogLeNet更是致敬了LeNet。GoogLeNet中最核心的部分是其内部子网络结构Inception，该结构灵感来源于NIN。
+GoogLeNet是2014年ImageNet比赛的冠军，它的主要特点是网络不仅有深度，还在横向上具有“宽度”。从名字GoogLeNet可以知道这是来自谷歌工程师所设计的网络结构，而名字中GoogLeNet更是致敬了LeNet。GoogLeNet中最核心的部分是其内部子网络结构Inception，该结构灵感来源于NIN(Network In Network)。
 
 ## 模型结构
 
@@ -82,7 +82,7 @@ class Inception(paddle.nn.Layer):
         return paddle.concat([p1, p2, p3, p4], axis=1)
 ```
 
-GoogLeNet的架构如 **图2** 所示，在主体卷积部分中使用5个模块（block），每个模块之间使用步幅为2的3 ×3最大池化层来减小输出高宽。
+GoogLeNet的架构如 **图2** 所示，在主体卷积部分中使用5个模块（block），每个模块之间使用步幅为2的3 × 3最大池化层来减小输出高宽。
 
 * 第一模块使用一个64通道的7 × 7卷积层。
 * 第二模块使用2个卷积层:首先是64通道的1 × 1卷积层，然后是将通道增大3倍的3 × 3卷积层。
