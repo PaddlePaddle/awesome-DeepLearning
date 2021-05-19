@@ -216,7 +216,7 @@ DarkNet53中：
 
 ## 模型指标
 
-在 YOLOv3 论文中，作者在 ImageNet 数据集上对比了 DarkNet 网络与ResNet 网络的精度及速度，如图3所示。可以看到DarkNet53的top-5准确率可以达到93.8%，同时速度也明显超过了ResNet101和ResNet152.
+在 YOLOv3 论文中，作者在 ImageNet 数据集上对比了 DarkNet 网络与ResNet 网络的精度及速度，如 **图3** 所示。可以看到DarkNet53的top-5准确率可以达到93.8%，同时速度也明显超过了ResNet101和ResNet152.
 
 <br></br>
 
