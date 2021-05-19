@@ -10,7 +10,7 @@ LeNet通过连续使用卷积和池化层的组合提取图像特征，其架构
 <br></br>
 
 <center><img src="https://ai-studio-static-online.cdn.bcebos.com/82e4124e2e6a4231bcde17e086bc86ba732d3e81dcd7415f86fb4ef050aa7772" width = "800"></center>
-<center><br>图1：LeNet模型网络结构示意图</br></center>
+<center><br>图1：LeNet-5模型网络结构示意图</br></center>
 
 <br></br>
 
