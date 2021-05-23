@@ -2,16 +2,16 @@
 
 ## 一、1*1 卷积
 
-$1\times{1}$ 卷积，与标准卷积完全一样，唯一的特殊点在于卷积核的尺寸是$1\times{1}$ ，也就是不去考虑输入数据局部信息之间的关系，而把关注点放在不同通道间。当输入矩阵的尺寸为$3\times{3}$ ，通道数也为3时，使用4个$1\times{1}$卷积核进行卷积计算，最终就会得到与输入矩阵尺寸相同，通道数为4的输出矩阵，如 **图1** 所示。
+$1\times{1}$ 卷积，与标准卷积并无不同，唯一的特殊点在于卷积核的尺寸是$1\times{1}$ ，也就是不去考虑输入数据局部信息之间的关系，而把关注点放在不同通道间。当输入矩阵的尺寸为$3\times{3}$ ，通道数也为3时，使用4个$1\times{1}$卷积核进行卷积计算，最终就会得到与输入矩阵尺寸相同，通道数为4的输出矩阵，如 **图1** 所示。
 
 <center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/1*1_Convolution/img/1*1_Convolution.png" width = "1000"></center>
-<center><br>图1：1*1 卷积结构示意图</br></center>
+<center><br>图1 1*1 卷积结构示意图</br></center>
 
 - **$1\times{1}$ 卷积的作用**
 
 1. 实现信息的跨通道交互与整合。考虑到卷积运算的输入输出都是3个维度（宽、高、多通道），所以$1\times{1}$ 卷积实际上就是对每个像素点，在不同的通道上进行线性组合，从而整合不同通道的信息。
 2. 对卷积核通道数进行降维和升维，减少参数量。经过$1\times{1}$ 卷积后的输出保留了输入数据的原有平面结构，通过调控通道数，从而完成升维或降维的作用。
-3. 利用$1\times{1}$ 卷积后的非线性激活函数，在保持特征图尺寸不变的前提下，大幅增加非线性
+3. 利用$1\times{1}$ 卷积后的非线性激活函数，在保持特征图尺寸不变的前提下，大幅增加非线性。
 
 ## 二、应用示例
 
@@ -22,7 +22,7 @@ GoogLeNet是2014年ImageNet比赛的冠军，它的主要特点是网络不仅�
 <br></br>
 
 <center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/1*1_Convolution/img/Inception_module.jpg" width = "1000"></center>
-<center><br>图2：Inception模块结构示意图</br></center>
+<center><br>图2 Inception模块结构示意图</br></center>
 
 <br></br>
 
@@ -119,7 +119,7 @@ $$
 可见，$1\times{1}$ 卷积可以在不改变模型表达能力的前提下，大大减少所使用的参数量。
 
 <center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/1*1_Convolution/img/BottleNeck.png" width = "500"></center>
-<center><br>图3：残差块结构示意图</br></center>
+<center><br>图3 残差块结构示意图</br></center>
 
 <br></br>
 
