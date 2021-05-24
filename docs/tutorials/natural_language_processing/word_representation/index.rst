@@ -6,10 +6,10 @@
 一般情况下，当我们拿到文本数据的时候，会先对文本进行分词，然后将每个单词映射为相应的词向量，最后基于这些词向量进行计算，达到预设任务的效果，下边我们分如下几节展开介绍词向量相关的知识。 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: 内容组织如下：
 
-   1. One-Hot编码: 一种简单的单词表示方式 <one-hot>
-   2. Word Embedding: 一种分布式单词表示方式 <word_embedding>
-   3. Word2Vec: 一种词向量的训练方法 <word2vec>
-   4. 关于词向量的一些有趣应用 <emb_applications>
+   One-Hot编码: 一种简单的单词表示方式 <one-hot>
+   Word Embedding: 一种分布式单词表示方式 <word_embedding>
+   Word2Vec: 一种词向量的训练方法 <word2vec>
+   关于词向量的一些有趣应用 <emb_applications>
