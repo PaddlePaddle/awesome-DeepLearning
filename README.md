@@ -37,7 +37,7 @@
     
     
 
-## 2. [深度学习1000问](https://paddlepedia.readthedocs.io/en/latest/index.html)
+## 2. [深度学习百科及面试资源](https://paddlepedia.readthedocs.io/en/latest/index.html)
 
 * [深度学习](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/index.html#)
   * [优化策略](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/optimizers/index.html)(包括什么是优化器,GD，SGD，BGD,鞍点,Momentum,NAG,Adagrad,AdaDelta,RMSProp,Adam,AdaMax,Nadam,AMSGrad,AdaBound,AdamW,RAdam,Lookahead等18个知识点)
