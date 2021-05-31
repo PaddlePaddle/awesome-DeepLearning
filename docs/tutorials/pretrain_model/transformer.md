@@ -204,7 +204,5 @@ Embedding层可以说是通过onehot去取到对应的embedding向量，FC层可
 
 通过这样的权重共享可以减少参数的数量，加快收敛。
 
-但开始我有一个困惑是：Embedding层参数维度是：(v,d)，FC层参数维度是：(d,v)，可以直接共享嘛，还是要转置？其中v是词表大小，d是embedding维度。
-
 
 
