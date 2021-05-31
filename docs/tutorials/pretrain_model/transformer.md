@@ -60,6 +60,20 @@ decoder也包含encoder提到的两层网络，但是在这两层中间还有一
 
 这种通过 query 和 key 的相似性程度来确定 value 的权重分布的方法被称为scaled dot-product attention。
 
+### Self-Attention 的时间复杂度的计算
+
+Self-Attention时间复杂度：$O(n^2 \cdot d)$ ，这里，n是序列的长度，d是embedding的维度。
+
+Self-Attention包括三个步骤：相似度计算，softmax和加权平均，它们分别的时间复杂度是：
+
+相似度计算可以看作大小为(n,d)和(d,n)的两个矩阵相乘： $(n,d) *(d,n) =(n^2 \cdot d)$，得到一个(n,n)的矩阵
+
+softmax就是直接计算了，时间复杂度为: $O(n^2)$
+
+加权平均可以看作大小为(n,n)和(n,d)的两个矩阵相乘：  $(n,d) *(d,n) =(n^2 \cdot d)$，得到一个(n,d)的矩阵
+
+因此，Self-Attention的时间复杂度是: $O(n^2 \cdot d)$
+
 ## Multi-head Attention
 
 不仅仅只初始化一组Q、K、V的矩阵，而是初始化多组，tranformer是使用了8组，所以最后得到的结果是8个矩阵。
@@ -72,6 +86,20 @@ multi-head注意力的全过程如下，首先输入句子，“Thinking Machine
 <center><img src="https://ai-studio-static-online.cdn.bcebos.com/4d634e35dea1472d9d6946b75c14f121fd274ec19e474f86bc4a903620d87f65"  width="600px" /></center> 
 <center><br> multi-head attention总体结构 </br></center>
 <br></br>
+
+###  Multi-Head Attention的时间复杂度计算
+
+多头的实现不是循环的计算每个头，而是通过 transposes and reshapes，用矩阵乘法来完成的。
+
+Transformer/BERT中把 d ，也就是hidden_size/embedding_size这个维度做了reshape拆分。并将 num_attention_heads 维度transpose到前面，使得Q和K的维度都是(m,n,a)，这里不考虑batch维度。
+
+这样点积可以看作大小为(m,n,a)和(m,a,n)的两个张量相乘，得到一个(m,n,n)的矩阵，其实就相当于(n,a)和(a,n)的两个矩阵相乘，做了m次，时间复杂度是：
+
+$$O(n^2 \cdot m \cdot a)=O(n^2 \cdot d)$$
+
+因此Multi-Head Attention时间复杂度也是$O(n^2 \cdot d)$，复杂度相较单头并没有变化，主要还是transposes and reshapes 的操作，相当于把一个大矩阵相乘变成了多个小矩阵的相乘。
+
+
 
 ## Position Encoding
 
@@ -153,4 +181,30 @@ Mask 非常简单，首先生成一个下三角全 0，上三角全为负无穷�
 <center><img src="https://ai-studio-static-online.cdn.bcebos.com/eeb0db3260814772afdc9c1566a4afaa7133168766f34670bdecb26875edcd3f"  width="600px" /></center> 
 <center><br> Masked Encoder-Decoder Attention </br></center>
 <br></br>
+
+## Transformer的权重共享
+
+Transformer在两个地方进行了权重共享：
+
++ （1）Encoder和Decoder间的Embedding层权重共享；
+
+《Attention is all you need》中Transformer被应用在机器翻译任务中，源语言和目标语言是不一样的，但它们可以共用一张大词表，对于两种语言中共同出现的词（比如：数字，标点等等）可以得到更好的表示，而且对于Encoder和Decoder，嵌入时都只有对应语言的embedding会被激活，因此是可以共用一张词表做权重共享的。
+
+论文中，Transformer词表用了bpe来处理，所以最小的单元是subword。英语和德语同属日耳曼语族，有很多相同的subword，可以共享类似的语义。而像中英这样相差较大的语系，语义共享作用可能不会很大。
+
+但是，共用词表会使得词表数量增大，增加softmax的计算时间，因此实际使用中是否共享可能要根据情况权衡。
+
++ （2）Decoder中Embedding层和FC层权重共享；
+
+Embedding层可以说是通过onehot去取到对应的embedding向量，FC层可以说是相反的，通过向量（定义为 x）去得到它可能是某个词的softmax概率，取概率最大（贪婪情况下）的作为预测值。
+
+那哪一个会是概率最大的呢？在FC层的每一行量级相同的前提下，理论上和 x 相同的那一行对应的点积和softmax概率会是最大的（可类比本文问题1）。
+
+因此，Embedding层和FC层权重共享，Embedding层中和向量 x 最接近的那一行对应的词，会获得更大的预测概率。实际上，Decoder中的Embedding层和FC层有点像互为逆过程。
+
+通过这样的权重共享可以减少参数的数量，加快收敛。
+
+但开始我有一个困惑是：Embedding层参数维度是：(v,d)，FC层参数维度是：(d,v)，可以直接共享嘛，还是要转置？其中v是词表大小，d是embedding维度。
+
+
 
