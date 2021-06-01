@@ -48,6 +48,7 @@
      * [学习率](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/learning_rate.html)（包括什么是学习率、学习率对网络的影响以及不同的学习率率衰减方法，如：分段常数衰减等12个学习率衰减方法）
      * [归一化](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/normalization/index.html)（包括什么是归一化、为什么要归一化、为什么归一化能提高求解最优解速度、归一化有哪些类型、不同归一化的使用条件、归一化和标准化的联系与区别等6个知识点）
      * [正则化](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/regularization/index.html)(包括什么是正则化？正则化如何帮助减少过度拟合？数据增强，L1 L2正则化介绍，L1和L2的贝叶斯推断分析法，Dropout，DropConnect,早停法等8个知识点) 	
+     * [注意力机制]() (包括自注意力，多头注意力，经典注意力计算方式等10个知识点)
      * [Batch size](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/batch_size.html)（包括什么是batch size、batch size对网络的影响、batch size的选择3个知识点）
      * [参数初始化](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/weight_initializer.html)（包括为什么不能全零初始化、常见的初始化方法等5个知识点）
 * [计算机视觉](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/index.html)
@@ -57,15 +58,15 @@
   * [图像分类](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/classification/index.html)（包括LeNet、AlexNet、VGG、GoogleNet、DarkNet、ResNet等6个知识点）
   * [目标检测](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/object_detection/index.html)（包括目标检测综述、边界框、锚框、交并比、NMS、IOU等6个知识点）
 * [自然语言处理](https://paddlepedia.readthedocs.io/en/latest/tutorials/natural_language_processing/index.html)
-  * [词表示](https://paddlepedia.readthedocs.io/en/latest/tutorials/natural_language_processing/word_representation/index.html)
+  * [词表示](https://paddlepedia.readthedocs.io/en/latest/tutorials/natural_language_processing/word_representation/index.html) (包括one-hot编码，word-embedding,word2vec等9个知识点)
   * [序列模型](https://paddlepedia.readthedocs.io/en/latest/tutorials/natural_language_processing/sequence_model/index.html)（包括GRU，LSTM，RNN等3个知识点）
-  * [命名实体识别](https://paddlepedia.readthedocs.io/en/latest/tutorials/natural_language_processing/ner/index.html)
-* [预训练模型](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/index.html)
-  * [预训练模型是什么](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/pretrain_model_description.html)
+  * [命名实体识别](https://paddlepedia.readthedocs.io/en/latest/tutorials/natural_language_processing/ner/index.html) (包括bilstm+crf架构剖析，crf原理等8个知识点)
+* [预训练模型](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/index.html) 
+  * [预训练模型是什么](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/pretrain_model_description.html) (包括预训练，微调等2个知识点)
   * [预训练分词Subword](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/subword.html)(包括BPE，WordPiece，ULM等3个知识点)
   * [Transformer](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/transformer.html)（包括self-attention,multi-head Attention,Position Encoding, Transformer Encoder, Transformer Decoder等5个知识点）
   * [BERT](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/bert.html)（包括BERT预训练任务，BERT微调等2个知识点）
-  * [ERNIE](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/erine.html)
+  * [ERNIE](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/erine.html)(包括ERNIE介绍，Knowledge Masking等2个知识点)
 * [推荐系统](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/index.html)
   * [推荐系统基础](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/recommender_system.html)(包括协同过滤推荐，内容过滤推荐，组合推荐，用户画像，召回，排序等6个知识点)
   * [DSSM模型](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/dssm.html)（包括DSSM模型等1个知识点）
