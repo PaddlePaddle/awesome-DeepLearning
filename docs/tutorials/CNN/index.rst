@@ -1,4 +1,4 @@
-卷积神经网络
+卷积模型
 ========================
 
 .. toctree::
@@ -7,3 +7,4 @@
 
     CNN综述 <CV_CNN>
     池化 <Pooling>
+    卷积算子<convolution_operator/index>

@@ -1,9 +1,9 @@
-.. 机器学习知识点 documentation master file, created by
+.. 深度学习百科及面试资源 documentation master file, created by
    sphinx-quickstart on Thu Mar  4 22:01:13 2021.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-机器学习知识点
+深度学习百科及面试资源
 ==========================================
 
 .. toctree::
@@ -11,7 +11,7 @@
    :caption: 深度学习基础篇
 
    深度学习 <tutorials/deep_learning/index>
-   卷积模型 <tutorials/convolution_model/index>
+   卷积模型 <tutorials/CNN/index>
    序列模型 <tutorials/sequence_model/index>
 
 .. toctree::
