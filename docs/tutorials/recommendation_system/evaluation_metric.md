@@ -357,12 +357,4 @@ Interleaving 方法的优缺点
 
 
 
-## 参考文献
-[最全面的推荐系统评估方法介绍](https://mp.weixin.qq.com/s/pMiFrU6UX1uny_7t-ywiOw)
-
-[浅谈推荐系统的评估指标](https://zhuanlan.zhihu.com/p/126339518)
-
-
-
-
 
