@@ -11,7 +11,7 @@
    :caption: 深度学习基础篇
 
    深度学习 <tutorials/deep_learning/index>
-   卷积模型 <tutorials/convolution_model/index>
+   卷积模型 <tutorials/CNN/index>
    序列模型 <tutorials/sequence_model/index>
 
 .. toctree::

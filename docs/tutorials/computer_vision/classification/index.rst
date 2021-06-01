@@ -10,3 +10,4 @@
    GoogLeNet <GoogLeNet>
    DarkNet <DarkNet>
    ResNet <ResNet>
+   ViT<ViT>
