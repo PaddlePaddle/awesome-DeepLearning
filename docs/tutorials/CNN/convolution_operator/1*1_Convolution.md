@@ -5,7 +5,7 @@
 $1\times{1}$ 卷积，与标准卷积完全一样，唯一的特殊点在于卷积核的尺寸是$1\times{1}$ ，也就是不去考虑输入数据局部信息之间的关系，而把关注点放在不同通道间。当输入矩阵的尺寸为$3\times{3}$ ，通道数也为3时，使用4个$1\times{1}$卷积核进行卷积计算，最终就会得到与输入矩阵尺寸相同，通道数为4的输出矩阵，如 **图1** 所示。
 
 <center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/1*1_Convolution/img/1*1_Convolution.png" width = "1000"></center>
-<center><br>图1：1*1 卷积结构示意图</br></center>
+<center><br>图1 1*1 卷积结构示意图</br></center>
 
 - **$1\times{1}$ 卷积的作用**
 
@@ -19,12 +19,8 @@ $1\times{1}$ 卷积，与标准卷积完全一样，唯一的特殊点在于卷�
 
 GoogLeNet是2014年ImageNet比赛的冠军，它的主要特点是网络不仅有深度，还在横向上具有“宽度”。由于图像信息在空间尺寸上的巨大差异，如何选择合适的卷积核来提取特征就显得比较困难了。空间分布范围更广的图像信息适合用较大的卷积核来提取其特征；而空间分布范围较小的图像信息则适合用较小的卷积核来提取其特征。为了解决这个问题，GoogLeNet提出了一种被称为Inception模块的方案。如 **图2** 所示：
 
-<br></br>
-
 <center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/1*1_Convolution/img/Inception_module.jpg" width = "1000"></center>
-<center><br>图2：Inception模块结构示意图</br></center>
-
-<br></br>
+<center><br>图2 Inception模块结构示意图</br></center>
 
 图2(a)是Inception模块的设计思想，使用3个不同大小的卷积核对输入图片进行卷积操作，并附加最大池化，将这4个操作的输出沿着通道这一维度进行拼接，构成的输出特征图将会包含经过不同大小的卷积核提取出来的特征，从而达到捕捉不同尺度信息的效果。
 
@@ -32,9 +28,7 @@ Inception模块采用多通路(multi-path)的设计形式，每个支路使用�
 
 为了减小参数量，Inception模块使用了图2(b)中的设计方式，在每个$3\times{3}$ 和$5\times{5}$ 的卷积层之前，增加$1\times{1}$ 的卷积层来控制输出通道数；在最大池化层后面增加$1\times{1}$ 卷积层减小输出通道数。基于这一设计思想，形成了上图2(b)中所示的结构。下面这段程序是Inception块的具体实现方式，可以对照图2(b)和代码一起阅读。
 
-我们这里可以简单计算一下Inception模块中使用$1\times{1}$ 卷积前后参数量的变化，这里以GoogleNet中的Inception3
-
-a模块为例，输入通道数 $C_{in}=192$，$1\times{1}$ 卷积的输出通道数$C_{out1}=64$，$3\times{3}$ 卷积的输出通道数$C_{out2}=128$，$5\times{5}$ 卷积的输出通道数$C_{out3}=32$，则图2(a)中的结构所需的参数量为：
+我们这里可以简单计算一下Inception模块中使用$1\times{1}$ 卷积前后参数量的变化，这里以GoogleNet中的Inception3a模块为例，输入通道数 $C_{in}=192$，$1\times{1}$ 卷积的输出通道数$C_{out1}=64$，$3\times{3}$ 卷积的输出通道数$C_{out2}=128$，$5\times{5}$ 卷积的输出通道数$C_{out3}=32$，则图2(a)中的结构所需的参数量为：
 
 
 $$
@@ -119,7 +113,7 @@ $$
 可见，$1\times{1}$ 卷积可以在不改变模型表达能力的前提下，大大减少所使用的参数量。
 
 <center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/1*1_Convolution/img/BottleNeck.png" width = "500"></center>
-<center><br>图3：残差块结构示意图</br></center>
+<center><br>图3 残差块结构示意图</br></center>
 
 <br></br>
 
