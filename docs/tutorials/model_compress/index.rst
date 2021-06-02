@@ -4,5 +4,5 @@
 .. toctree::
    :maxdepth: 2
 
-   图像蒸馏 <model_distill/index>
+   模型蒸馏 <model_distill/index>
 
