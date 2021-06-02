@@ -29,7 +29,7 @@
 
 在**医疗图像领域**中，医学数据通常是3D的，比如我们要分割出的肿瘤就是3D的。如果用2D的图像处理模型去处理3D物体也是可以的，但是需要将生物医学影像图片的每一个切片成组的（包含训练数据和标注好的数据）的喂给模型进行训练，在这种情况下会存在一个效率问题，因此我们使用的模型即将U-Net中2D卷积改为3D的形式，即3D U-Net^[2]^，如 **图4** 所示。
 
-<center><img src='https://img-blog.csdnimg.cn/img_convert/1ebe07f2663a5efc46ee43cf415f8904.png' width=700></center>
+<center><img src='https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/3D_Convolution/img/3D-UNet.jpg' width=700></center>
 <center><br>图4 3D U-Net网络结构</br></center>
 
 该模型的网络结构跟2D结构的U-Net基本一样，唯一不同就是将2D卷积操作换成了3D卷积，因此，不需要单独输入每个切片进行训练，而是可以采取输入整张图片到模型中。
