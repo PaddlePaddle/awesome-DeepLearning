@@ -141,7 +141,7 @@ MobileNetv1^[1]^中使用的深度可分离卷积如 **图7** 右侧所示。相
 <center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Separable_Convolution/img/MobileNetv1_Separable_Convolution.png" width = "700"></center>
 <center><br>图7 MobileNetv1中的可分离卷积</br></center>
 
-
+### 参考文献
 
 [1] [MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications](https://arxiv.org/pdf/1704.04861.pdf)
 

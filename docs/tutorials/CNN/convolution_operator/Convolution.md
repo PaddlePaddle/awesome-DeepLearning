@@ -4,7 +4,8 @@
 
 在全连接网络^[1]^中，一张图片上的所有像素点会被展开成一个1维向量输入网络，如 **图1** 所示，28 x 28的输入数据被展开成为784 x 1 的数据作为输入。
 
-<center><img src ='/Users/xutongtong/Library/Application Support/typora-user-images/image-20210602110748335.png' width 900></center>
+<center><img src="https://github.com/tngt/img/blob/master/fc.png" width = "700"></center>
+<center><br>图1 全连接网络输入</br></center>
 
 这样往往会存在如下两个问题：
 
