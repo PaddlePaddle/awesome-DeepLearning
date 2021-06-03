@@ -4,4 +4,4 @@
 .. toctree::
    :maxdepth: 2
    
-   面试宝典 <interview_questions>
+   宝典内容 <interview_questions>
