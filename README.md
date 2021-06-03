@@ -101,7 +101,7 @@
     * [DQN](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/DQN.html#)（包括DQN网络概述及其创新点和算法流程2个知识点
 
 * **面试宝典**
-  * [面试宝典](http://localhost:8000/tutorials/interview_questions/interview_questions.html)
+  * [宝典内容](https://paddlepedia.readthedocs.io/en/latest/tutorials/interview_questions/interview_questions.html)
 
 详细信息请参阅[Paddle知识点文档平台](https://paddlepedia.readthedocs.io/en/latest/index.html)
 
