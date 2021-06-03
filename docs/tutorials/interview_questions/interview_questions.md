@@ -1,4 +1,4 @@
-# 面试宝典
+# 宝典内容
 
 * [为什么归一化能够提高求解最优解的速度？](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/normalization/basic_normalization.html#id4)
 * [为什么要归一化？](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/normalization/basic_normalization.html)

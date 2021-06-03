@@ -39,70 +39,73 @@
 
 ## 2. [深度学习百科及面试资源](https://paddlepedia.readthedocs.io/en/latest/index.html)
 
-* **深度学习基础篇**
-  * [深度学习](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/index.html#)
-    * [基础知识](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/basic_concepts/index.html)（包括神经元，单层感知机，多层感知机等5个知识点）
-    * [优化策略](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/optimizers/index.html)（包括什么是优化器,GD，SGD，BGD,鞍点,Momentum,NAG,Adagrad,AdaDelta,RMSProp,Adam,AdaMax,Nadam,AMSGrad,AdaBound,AdamW,RAdam,Lookahead等18个知识点）
-    * [激活函数](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/activation_functions/index.html)(包括什么是激活函数、激活函数的作用、identity、step、sigmoid、tanh、relu、lrelu、prelu、rrelu、elu、selu、softsign、softplus、softmax、swish、hswish、激活函数的选择等21个知识点)
-    * [常用损失函数](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/loss_functions/index.html)（包括交叉熵损失、MSE损失以及CTC损失等3个知识点）
-    * [评估指标](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/metrics/index.html)（包括Precision、Recall、mAP、IS、FID等5个知识点）
-    * [模型调优](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/index.html#)
-      * [学习率](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/learning_rate.html)（包括什么是学习率、学习率对网络的影响以及不同的学习率率衰减方法，如：分段常数衰减等12个学习率衰减方法）
-      * [归一化](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/normalization/index.html)（包括什么是归一化、为什么要归一化、为什么归一化能提高求解最优解速度、归一化有哪些类型、不同归一化的使用条件、归一化和标准化的联系与区别等6个知识点）
-      * [正则化](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/regularization/index.html)(包括什么是正则化？正则化如何帮助减少过度拟合？数据增强，L1 L2正则化介绍，L1和L2的贝叶斯推断分析法，Dropout，DropConnect,早停法等8个知识点) 	
-      * [注意力机制](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/attention/index.html) (包括自注意力，多头注意力，经典注意力计算方式等10个知识点)
-      * [Batch size](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/batch_size.html)（包括什么是batch size、batch size对网络的影响、batch size的选择3个知识点）
-      * [参数初始化](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/weight_initializer.html)（包括为什么不能全零初始化、常见的初始化方法等5个知识点）
+**一、深度学习基础篇**  
+  1. [深度学习](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/index.html#)  
+     1. [基础知识](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/basic_concepts/index.html)（包括神经元，单层感知机，多层感知机等5个知识点）
+     2. [优化策略](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/optimizers/index.html)（包括什么是优化器,GD，SGD，BGD,鞍点,Momentum,NAG,Adagrad,AdaDelta,RMSProp,Adam,AdaMax,Nadam,AMSGrad,AdaBound,AdamW,RAdam,Lookahead等18个知识点）  
+     3. [激活函数](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/activation_functions/index.html)(包括什么是激活函数、激活函数的作用、identity、step、sigmoid、tanh、relu、lrelu、prelu、rrelu、elu、selu、softsign、softplus、softmax、swish、hswish、激活函数的选择等21个知识点)  
+     4. [常用损失函数](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/loss_functions/index.html)（包括交叉熵损失、MSE损失以及CTC损失等3个知识点）  
+     5. [评估指标](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/metrics/index.html)（包括Precision、Recall、mAP、IS、FID等5个知识点）  
+     6. [模型调优](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/index.html#)  
+        - [学习率](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/learning_rate.html)（包括什么是学习率、学习率对网络的影响以及不同的学习率率衰减方法，如：分段常数衰减等12个学习率衰减方法）  
+        - [归一化](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/normalization/index.html)（包括什么是归一化、为什么要归一化、为什么归一化能提高求解最优解速度、归一化有哪些类型、不同归一化的使用条件、归一化和标准化的联系与区别等6个知识点）  
+        - [正则化](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/regularization/index.html)(包括什么是正则化？正则化如何帮助减少过度拟合？数据增强，L1 L2正则化介绍，L1和L2的贝叶斯推断分析法，Dropout，DropConnect,早停法等8个知识点)   
+        - [注意力机制](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/attention/index.html) (包括自注意力，多头注意力，经典注意力计算方式等10个知识点)  
+        - [Batch size](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/batch_size.html)（包括什么是batch size、batch size对网络的影响、batch size的选择3个知识点）  
+        - [参数初始化](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/weight_initializer.html)（包括为什么不能全零初始化、常见的初始化方法等5个知识点）  
     
-  * [卷积神经网络](https://paddlepedia.readthedocs.io/en/latest/tutorials/CNN/index.html)
-    * [CNN综述](https://paddlepedia.readthedocs.io/en/latest/tutorials/CNN/CV_CNN.html)
-    * [卷积算子](https://paddlepedia.readthedocs.io/en/latest/tutorials/CNN/convolution_operator/index.html)（包括标准卷积、1*1卷积、3D卷积、转置卷积、空洞卷积、分组卷积、可分离卷积等7个知识点）
-    * [池化](https://paddlepedia.readthedocs.io/en/latest/tutorials/CNN/Pooling.html)
+  2. [卷积神经网络](https://paddlepedia.readthedocs.io/en/latest/tutorials/CNN/index.html)  
+     1. [CNN综述](https://paddlepedia.readthedocs.io/en/latest/tutorials/CNN/CV_CNN.html)  
+     2. [卷积算子](https://paddlepedia.readthedocs.io/en/latest/tutorials/CNN/convolution_operator/index.html)（包括标准卷积、1*1卷积、3D卷积、转置卷积、空洞卷积、分组卷积、可分离卷积等7个知识点）  
+     3. [池化](https://paddlepedia.readthedocs.io/en/latest/tutorials/CNN/Pooling.html)  
     
-  * [序列模型](https://paddlepedia.readthedocs.io/en/latest/tutorials/sequence_model/index.html)
-    * [词表示](https://paddlepedia.readthedocs.io/en/latest/tutorials/sequence_model/word_representation/index.html) (包括one-hot编码，word-embedding,word2vec等9个知识点)
-    * [循环神经网络RNN](https://paddlepedia.readthedocs.io/en/latest/tutorials/sequence_model/rnn.html)
-    * [长短时记忆网络LSTM](https://paddlepedia.readthedocs.io/en/latest/tutorials/sequence_model/lstm.html)
-    * [门控循环单元GRU](https://paddlepedia.readthedocs.io/en/latest/tutorials/sequence_model/gru.html) 
+  3. [序列模型](https://paddlepedia.readthedocs.io/en/latest/tutorials/sequence_model/index.html)  
+     1. [词表示](https://paddlepedia.readthedocs.io/en/latest/tutorials/sequence_model/word_representation/index.html) (包括one-hot编码，word-embedding,word2vec等9个知识点)   
+     2. [循环神经网络RNN](https://paddlepedia.readthedocs.io/en/latest/tutorials/sequence_model/rnn.html)  
+     3. [长短时记忆网络LSTM](https://paddlepedia.readthedocs.io/en/latest/tutorials/sequence_model/lstm.html)  
+     4. [门控循环单元GRU](https://paddlepedia.readthedocs.io/en/latest/tutorials/sequence_model/gru.html)   
   
-* **深度学习进阶篇**
-  * [预训练模型](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/index.html)
-    * [预训练模型是什么](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/pretrain_model_description.html) (包括预训练，微调等2个知识点)
-    * [预训练分词Subword](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/subword.html)(包括BPE，WordPiece，ULM等3个知识点)
-    * [Transformer](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/transformer.html)（包括self-attention,multi-head Attention,Position Encoding, Transformer Encoder, Transformer Decoder等5个知识点）
-    * [BERT](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/bert.html)（包括BERT预训练任务，BERT微调等2个知识点）
-    * [ERNIE](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/erine.html)(包括ERNIE介绍，Knowledge Masking等2个知识点)
-  * [对抗神经网络](https://paddlepedia.readthedocs.io/en/latest/tutorials/generative_adversarial_network/index.html)
-    * [encoder-decoder](https://paddlepedia.readthedocs.io/en/latest/tutorials/generative_adversarial_network/encoder_decoder/index.html)(包括encoder、decoder等2个知识点)
-    * [GAN基本概念](https://paddlepedia.readthedocs.io/en/latest/tutorials/generative_adversarial_network/basic_concept/index.html)(包括博弈论，纳什均衡，输入随机噪声，生成器，判别器，损失函数，训练不稳定，模式崩溃等8个知识点)
-    * [GAN应用](https://paddlepedia.readthedocs.io/en/latest/tutorials/generative_adversarial_network/gan_applications/index.html)(包括GAN在图像生成、超分辨率、图片上色等方面的应用)
+**二、深度学习进阶篇**  
+  1. [预训练模型](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/index.html)
+     1. [预训练模型是什么](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/pretrain_model_description.html) (包括预训练，微调等2个知识点)  
+     2. [预训练分词Subword](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/subword.html)(包括BPE，WordPiece，ULM等3个知识点)  
+     3. [Transformer](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/transformer.html)（包括self-attention,multi-head Attention,Position Encoding, Transformer Encoder, Transformer Decoder等5个知识点）   
+     4. [BERT](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/bert.html)（包括BERT预训练任务，BERT微调等2个知识点）  
+     5. [ERNIE](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/erine.html)(包括ERNIE介绍，Knowledge Masking等2个知识点)  
+  2. [对抗神经网络](https://paddlepedia.readthedocs.io/en/latest/tutorials/generative_adversarial_network/index.html)  
+     1. [encoder-decoder](https://paddlepedia.readthedocs.io/en/latest/tutorials/generative_adversarial_network/encoder_decoder/index.html)(包括encoder、decoder等2个知识点)  
+     2. [GAN基本概念](https://paddlepedia.readthedocs.io/en/latest/tutorials/generative_adversarial_network/basic_concept/index.html)(包括博弈论，纳什均衡，输入随机噪声，生成器，判别器，损失函数，训练不稳定，模式崩溃等8个知识点)  
+     3. [GAN应用](https://paddlepedia.readthedocs.io/en/latest/tutorials/generative_adversarial_network/gan_applications/index.html)(包括GAN在图像生成、超分辨率、图片上色等方面的应用)  
 
-* **深度学习应用篇**
-  * [计算机视觉](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/index.html)
-    * [图像增广](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/image_augmentation/index.html)（包括什么是数据增广、常用数据增广方法、图像变换类增广方法、图像裁剪类增广方法、图像混叠类增广方法、不同方法对比实验等11个知
-    识点）
-    * [图像分类](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/classification/index.html)（包括LeNet、AlexNet、VGG、GoogleNet、DarkNet、ResNet、ViT等7个知识点）
-    * [目标检测](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/object_detection/index.html)（包括目标检测综述、边界框、锚框、交并比、NMS等5个知识点）
-  * [自然语言处理](https://paddlepedia.readthedocs.io/en/latest/tutorials/natural_language_processing/index.html)
-    * [命名实体识别](https://paddlepedia.readthedocs.io/en/latest/tutorials/natural_language_processing/ner/index.html) (包括bilstm+crf架构剖析，crf原理等8个知识点)
-  * [推荐系统](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/index.html)
-    * [推荐系统基础](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/recommender_system.html)(包括协同过滤推荐，内容过滤推荐，组合推荐，用户画像，召回，排序等6个知识点)
-    * [DSSM模型](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/dssm.html)（包括DSSM模型等1个知识点）
+**三、深度学习应用篇**  
+  1. [计算机视觉](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/index.html)  
+     1. [图像增广](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/image_augmentation/index.html)（包括什么是数据增广、常用数据增广方法、图像变换类增广方法、图像裁剪类增广方法、图像混叠类增广方法、不同方法对比实验等11个知识点）   
+     2. [图像分类](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/classification/index.html)（包括LeNet、AlexNet、VGG、GoogleNet、DarkNet、ResNet、ViT等7个知识点）  
+     3. [目标检测](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/object_detection/index.html)（包括目标检测综述、边界框、锚框、交并比、NMS等5个知识点）   
+  2. [自然语言处理](https://paddlepedia.readthedocs.io/en/latest/tutorials/natural_language_processing/index.html)  
+     1. [命名实体识别](https://paddlepedia.readthedocs.io/en/latest/tutorials/natural_language_processing/ner/index.html) (包括bilstm+crf架构剖析，crf原理等8个知识点)  
+  3. [推荐系统](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/index.html)  
+     1. [推荐系统基础](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/recommender_system.html)(包括协同过滤推荐，内容过滤推荐，组合推荐，用户画像，召回，排序等6个知识点)   
+     2. [DSSM模型](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/dssm.html)（包括DSSM模型等1个知识点）    
 
-* **强化学习篇**
-  * [强化学习](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/index.html)
-    * [强化学习基础知识点](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/basic_information.html)（包括智能体、环境、状态、动作、策略和奖励的定义）
-    * [马尔可夫决策过程](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/markov_decision_process.html) （包括马尔可夫决策过程，Model-based，Model-free三个知识点）
-    * [策略梯度定理](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/policy_gradient.html) （包括策略梯度定理一个知识点）
-    * [蒙特卡洛策略梯度定理](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/policy_gradient.html)（包括蒙特卡洛策略梯度定理一个知识点）
-    * [REINFORCE算法](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/policy_gradient.html#reinforce) （包括REINFORCE算法简介和流程两个知识点）
-    * [SARSA](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/Sarsa.html)（包括SARSA的公式，优缺点等2个知识点）
-    * [Q-Learning](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/Q-learning.html)（包括Q-Learning的公式，优缺点等2个知识点）
-    * [DQN](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/DQN.html#)（包括DQN网络概述及其创新点和算法流程2个知识点
+**四、产业实践篇**  
+  1. [模型压缩](https://paddlepedia.readthedocs.io/en/latest/tutorials/model_compress/index.html)  
+  2. [模型部署](https://paddlepedia.readthedocs.io/en/latest/tutorials/model_deployment/index.html)  
 
-* **面试宝典**
-  * [面试宝典](http://localhost:8000/tutorials/interview_questions/interview_questions.html)
+**五、强化学习篇**  
+  1. [强化学习](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/index.html)  
+     1. [强化学习基础知识点](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/basic_information.html)（包括智能体、环境、状态、动作、策略和奖励的定义）  
+     2. [马尔可夫决策过程](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/markov_decision_process.html) （包括马尔可夫决策过程，Model-based，Model-free三个知识点）  
+     3. [策略梯度定理](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/policy_gradient.html) （包括策略梯度定理一个知识点）  
+     4. [蒙特卡洛策略梯度定理](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/policy_gradient.html)（包括蒙特卡洛策略梯度定理一个知识点）  
+     5. [REINFORCE算法](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/policy_gradient.html#reinforce) （包括REINFORCE算法简介和流程两个知识点）  
+     6. [SARSA](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/Sarsa.html)（包括SARSA的公式，优缺点等2个知识点）  
+     7. [Q-Learning](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/Q-learning.html)（包括Q-Learning的公式，优缺点等2个知识点）  
+     8. [DQN](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/DQN.html#)（包括DQN网络概述及其创新点和算法流程2个知识点）  
 
+**六、面试宝典**  
+  1. [宝典内容](https://paddlepedia.readthedocs.io/en/latest/tutorials/interview_questions/interview_questions.html)
+    
 详细信息请参阅[Paddle知识点文档平台](https://paddlepedia.readthedocs.io/en/latest/index.html)
 
 
