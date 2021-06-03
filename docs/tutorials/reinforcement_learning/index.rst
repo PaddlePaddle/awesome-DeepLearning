@@ -9,4 +9,5 @@
    策略梯度定理 <policy_gradient>
    SARSA <Sarsa>
    Q-Learning <Q-learning>
-   DQN <DQN>   
+   DQN <DQN>
+   Actor-Critic <Actor-Critic>   
