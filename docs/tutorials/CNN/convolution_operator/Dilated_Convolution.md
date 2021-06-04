@@ -20,15 +20,15 @@
 
 对于一个尺寸为 $3\times{3}$ 的标准卷积，卷积核大小为  $3\times{3}$ ，卷积核上共包含9个参数，在卷积计算时，卷积核中的元素会与输入矩阵上对应位置的元素进行逐像素的乘积并求和。而空洞卷积与标准卷积相比，多了扩张率这一个参数，扩张率控制了卷积核中相邻元素间的距离，扩张率的改变可以控制卷积核感受野的大小。尺寸为 $3\times{3}$ ，扩张率分别为 $1,2,4$ 时的空洞卷积分别如 **图1**，**图2**，**图3**所示。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Dilated_Convolution/img/Dilated_Convolution_r1.png" width = "700"></center>
+<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Dilated_Convolution/img/Dilated_Convolution_r1.png" width = "500"></center>
 <center><br>图1 扩张率为1时的3*3空洞卷积</br></center>
 
 扩张率为1时，空洞卷积与标准卷积计算方式一样。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Dilated_Convolution/img/Dilated_Convolution_r2.png" width = "700"></center>
+<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Dilated_Convolution/img/Dilated_Convolution_r2.png" width = "500"></center>
 <center><br>图2 扩张率为2时的3*3空洞卷积</br></center>
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Dilated_Convolution/img/Dilated_Convolution_r4.png" width = "700"></center>
+<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Dilated_Convolution/img/Dilated_Convolution_r4.png" width = "500"></center>
 <center><br>图3 扩张率为4时的3*3空洞卷积</br></center>
 
 扩张率大于1时，在标准卷积的基础上，会注入空洞，空洞中的数值全部填0。
