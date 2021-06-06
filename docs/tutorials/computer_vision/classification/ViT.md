@@ -1,7 +1,8 @@
-# ViT
+# ViT( Vision Transformer)
 
 ## 模型介绍
-之前的算法大都是保持CNN整体结构不变，在CNN中增加attention模块或者使用attention模块替换CNN中的某些部分。ViT算法中，作者提出没有必要总是依赖于CNN，仅仅使用Transformer结构也能够在图像分类任务中表现很好。
+
+之前的算法大都是保持CNN整体结构不变，在CNN中增加attention模块或者使用attention模块替换CNN中的某些部分。ViT^[1]^算法中，作者提出没有必要总是依赖于CNN，仅仅使用Transformer结构也能够在图像分类任务中表现很好。
 
 受到NLP领域中Transformer成功应用的启发，ViT算法中尝试将标准的Tranformer结构直接应用于图像，并对整个图像分类流程进行最少的修改。具体来讲，ViT算法中，会将整幅图像拆分成小图像块，然后把这些小图像块的线性嵌入序列作为Tranformer的输入送入网络，然后使用监督学习的方式进行图像分类的训练。
 
@@ -14,13 +15,11 @@
 ViT算法的整体结构如 **图1** 所示。
 
 <center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Classical_model/ViT/ViT.png" width = "800"></center>
-<center><br>图1：ViT算法结构示意图</br></center>
-
-<br></br>
+<center><br>图1 ViT算法结构示意图</br></center>
 
 ### 1. 图像分块嵌入
 
-考虑到在Transformer结构中，输入需要是一个二维的矩阵，矩阵的形状可以表示为 $(N,D)$，其中 $N$ 是sequence的长度，而 $D$ 是sequence中每个向量的维度。因此，在ViT算法中，首先需要设法将 $H \times W \times C$ 的三维图像转化为 $(N,D)$ 的二位输入。
+考虑到在Transformer结构中，输入需要是一个二维的矩阵，矩阵的形状可以表示为 $(N,D)$，其中 $N$ 是sequence的长度，而 $D$ 是sequence中每个向量的维度。因此，在ViT算法中，首先需要设法将 $H \times W \times C$ 的三维图像转化为 $(N,D)$ 的二维输入。
 
 ViT中的具体实现方式为：将 $H \times W \times C$ 的图像，变为一个 $N \times (P^2 * C)$ 的序列。这个序列可以看作是一系列展平的图像块，也就是将图像切分成小块后，再将其展平。该序列中一共包含了 $N=HW/P^2$ 个图像块，每个图像块的维度则是 $(P^2*C)$。其中  $P$ 是图像块的大小，$C$ 是通道数量。经过如上变换，就可以将 $N$ 视为sequence的长度了。
 
@@ -29,9 +28,7 @@ ViT中的具体实现方式为：将 $H \times W \times C$ 的图像，变为一
 上述对图像进行分块以及 Embedding 的具体方式如 **图2** 所示。
 
 <center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Classical_model/ViT/PatchEmbed.jpg" width = "800"></center>
-<center><br>图2：图像分块嵌入示意图</br></center>
-
-<br></br>
+<center><br>图2 图像分块嵌入示意图</br></center>
 
 具体代码实现如下所示。其中，使用了大小为 $P$ 的卷积来代替对每个大小为 $P$ 图像块展平后使用全连接进行运算的过程。
 
@@ -66,18 +63,16 @@ class PatchEmbed(nn.Layer):
         return x
 ```
 
-### 2. Multi-head Attention
+### 2. 多头注意力
 
 将图像转化为 $N \times (P^2 * C)$ 的序列后，就可以将其输入到 Tranformer 结构中进行特征提取了。Tranformer 结构中最重要的结构就是 Multi-head Attention，即多头注意力结构。
 
 具有2个head的 Multi-head Attention 结构如 **图3** 所示。输入 $a^i$ 经过转移矩阵，并切分生成 $q^{(i,1)}$、$q^{(i,2)}$、$k^{(i,1)}$、$k^{(i,2)}$、$v^{(i,1)}$、$v^{(i,2)}$，然后 $q^{(i,1)}$ 与 $k^{(i,1)}$ 做 attention，得到权重向量 $\alpha$，将 $\alpha$ 与 $v^{(i,1)}$ 进行加权求和，得到最终的 $b^{(i,1)}(i=1,2,…,N)$，同理可以得到 $b^{(i,2)}(i=1,2,…,N)$。接着将它们拼接起来，通过一个线性层进行处理，得到最终的结果。
 
 <center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Classical_model/ViT/Multi-head_Attention.jpg" width = "800"></center>
-<center><br>图3：Multi-head Attention</br></center>
+<center><br>图3 多头注意力</br></center>
 
-<br></br>
-
-其中，使用 $q^{(i,j)}$、$k^{(i,j)}$ 与 $v^{(i,j)}$ 计算 $b^{(i,j)}(i=1,2,…,N)$ 的方法是 Scaled Dot-Product Attention。 结构如 **图4** 所示。首先使用每个 $q^{(i,j)}$ 去与 $k^{(i,j)}$ 做 attention，这里说的 attention 就是匹配这两个向量有多接近，具体的方式就是计算向量的加权内积，得到 $\alpha_{(i,j)}$。这里的加权内积计算方式如下所示：
+其中，使用 $q^{(i,j)}$、$k^{(i,j)}$ 与 $v^{(i,j)}$ 计算 $b^{(i,j)}(i=1,2,…,N)$ 的方法是缩放点积注意力 (Scaled Dot-Product Attention)。 结构如 **图4** 所示。首先使用每个 $q^{(i,j)}$ 去与 $k^{(i,j)}$ 做 attention，这里说的 attention 就是匹配这两个向量有多接近，具体的方式就是计算向量的加权内积，得到 $\alpha_{(i,j)}$。这里的加权内积计算方式如下所示：
 
 $$ \alpha_{(1,i)} =  q^1 * k^i / \sqrt{d} $$
 
@@ -86,9 +81,7 @@ $$ \alpha_{(1,i)} =  q^1 * k^i / \sqrt{d} $$
 接下来，把计算得到的 $\alpha_{(i,j)}$ 取 softmax 操作，再将其与 $v^{(i,j)}$ 相乘。
 
 <center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Classical_model/ViT/attention.png" width = "400"></center>
-<center><br>图4：Scaled Dot-Product Attention</br></center>
-
-<br></br>
+<center><br>图4 缩放点积注意力</br></center>
 
 具体代码实现如下所示。
 
@@ -137,12 +130,12 @@ class Attention(nn.Layer):
 
 ### 3. 多层感知机（MLP）
 
- Tranformer 结构中还有一个重要的结构就是 MLP，即多层感知机。多层感知机由输入层、输出层和至少一层的隐藏层构成。网络中各个隐藏层中神经元可接收相邻前序隐藏层中所有神经元传递而来的信息，经过加工处理后将信息输出给相邻后续隐藏层中所有神经元。在多层感知机中，相邻层所包含的神经元之间通常使用“全连接”方式进行连接。多层感知机可以模拟复杂非线性函数功能，所模拟函数的复杂性取决于网络隐藏层数目和各层中神经元数目。多层感知机的结构如 **图5** 所示。
+ Tranformer 结构中还有一个重要的结构就是 MLP，即多层感知机。
+
+多层感知机由输入层、输出层和至少一层的隐藏层构成。网络中各个隐藏层中神经元可接收相邻前序隐藏层中所有神经元传递而来的信息，经过加工处理后将信息输出给相邻后续隐藏层中所有神经元。在多层感知机中，相邻层所包含的神经元之间通常使用“全连接”方式进行连接。多层感知机可以模拟复杂非线性函数功能，所模拟函数的复杂性取决于网络隐藏层数目和各层中神经元数目。多层感知机的结构如 **图5** 所示。
 
 <center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Classical_model/ViT/MLP.png" width = "400"></center>
-<center><br>图5：多层感知机</br></center>
-
-<br></br>
+<center><br>图5 多层感知机</br></center>
 
 具体代码实现如下所示。
 
@@ -177,9 +170,7 @@ class Mlp(nn.Layer):
         return x
 ```
 
-### 4. 基础模块
-
-基于上面实现的 Attention、MLP 和 DropPath 模块就可以组合出 Vision Transformer 模型的一个基础模块。
+### 4. DropPath
 
 这里使用了DropPath（Stochastic Depth）来代替传统的Dropout结构，DropPath可以理解为一种特殊的 Dropout。其作用是在训练过程中随机丢弃子图层（randomly drop a subset of layers），而在预测时正常使用完整的 Graph。
 
@@ -205,6 +196,10 @@ class DropPath(nn.Layer):
     def forward(self, x):
         return drop_path(x, self.drop_prob, self.training)
 ```
+
+### 5. 基础模块
+
+基于上面实现的 Attention、MLP 和 DropPath 模块就可以组合出 Vision Transformer 模型的一个基础模块。
 
 基础模块的具体实现如下：
 
@@ -250,18 +245,16 @@ class Block(nn.Layer):
         return x
 ```
 
-### 5. 定义ViT网络
+### 6. 定义ViT网络
 
 基础模块构建好后，就可以构建完整的ViT网络了。ViT的完整结构如 **图6** 所示。
 
 <center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Classical_model/ViT/ViT_Model.jpg" width = "600"></center>
-<center><br>图6：ViT网络结构</br></center>
-
-<br></br>
+<center><br>图6 ViT网络结构</br></center>
 
 在构建完整网络结构之前，还需要给大家介绍几个模块：
 
-1. Class Token
+* Class Token
 
 可以看到，假设我们将原始图像切分成 $3 \times 3$ 共9个小图像块，最终的输入序列长度却是10，也就是说我们这里人为的增加了一个向量进行输入，我们通常将人为增加的这个向量称为 Class Token。那么这个 Class Token 有什么作用呢？
 
@@ -271,7 +264,7 @@ class Block(nn.Layer):
 
 其实这里也可以理解为：ViT 其实只用到了 Transformer 中的 Encoder，而并没有用到 Decoder，而 Class Token 的作用就是寻找其他9个输入向量对应的类别。
 
-2. Positional Encoding
+* Positional Encoding
 
 按照 Transformer 结构中的位置编码习惯，这个工作也使用了位置编码。不同的是，ViT 中的位置编码没有采用原版 Transformer 中的 $sincos$ 编码，而是直接设置为可学习的 Positional Encoding。对训练好的 Positional Encoding 进行可视化，如 **图7** 所示。我们可以看到，位置越接近，往往具有更相似的位置编码。此外，出现了行列结构，同一行/列中的 patch 具有相似的位置编码。
 
@@ -280,7 +273,7 @@ class Block(nn.Layer):
 
 <br></br>
 
-3. MLP Head
+* MLP Head
 
 得到输出后，ViT中使用了 MLP Head对输出进行分类处理，这里的 MLP Head 由 LayerNorm 和两层全连接层组成，并且采用了 GELU 激活函数。
 
@@ -418,9 +411,7 @@ class VisionTransformer(nn.Layer):
 ViT模型在常用数据集上进行迁移学习，最终指标如 **图8** 所示。可以看到，在ImageNet上，ViT达到的最高指标为88.55%；在ImageNet ReaL上，ViT达到的最高指标为90.72%；在CIFAR100上，ViT达到的最高指标为94.55%；在VTAB(19 tasks)上，ViT达到的最高指标为88.55%。
 
 <center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Classical_model/ViT/ViT_ACC.png" width = "600"></center>
-<center><br>图8：ViT网络指标</br></center>
-
-<br></br>
+<center><br>图8 ViT网络指标</br></center>
 
 ## 模型特点
 

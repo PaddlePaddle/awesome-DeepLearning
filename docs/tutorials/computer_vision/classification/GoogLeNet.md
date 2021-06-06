@@ -2,7 +2,7 @@
 
 ## 模型介绍
 
-GoogLeNet是2014年ImageNet比赛的冠军，它的主要特点是网络不仅有深度，还在横向上具有“宽度”。从名字GoogLeNet可以知道这是来自谷歌工程师所设计的网络结构，而名字中GoogLeNet更是致敬了LeNet。GoogLeNet中最核心的部分是其内部子网络结构Inception，该结构灵感来源于NIN。
+GoogLeNet^[1]^是2014年ImageNet比赛的冠军，它的主要特点是网络不仅有深度，还在横向上具有“宽度”。从名字GoogLeNet可以知道这是来自谷歌工程师所设计的网络结构，而名字中GoogLeNet更是致敬了LeNet。GoogLeNet中最核心的部分是其内部子网络结构Inception，该结构灵感来源于NIN(Network In Network)。
 
 ## 模型结构
 
@@ -15,16 +15,12 @@ GoogLeNet是2014年ImageNet比赛的冠军，它的主要特点是网络不仅�
 - Google的研究人员为了向LeNet致敬，特地将模型命名为GoogLeNet。
 - Inception一词来源于电影《盗梦空间》（Inception）。
 
-------
-
-<br></br>
-
 <center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Classical_model/Inception_Module.jpg" width = "1000"></center>
-<center><br>图1：Inception模块结构示意图</br></center>
+<center><br>图1 Inception模块结构示意图</br></center>
 
-<br></br>
+图1(a)是Inception模块的设计思想，使用3个不同大小的卷积核对输入图片进行卷积操作，并附加最大池化，将这4个操作的输出沿着通道这一维度进行拼接，构成的输出特征图将会包含经过不同大小的卷积核提取出来的特征，从而达到捕捉不同尺度信息的效果。Inception模块采用多通路(multi-path)的设计形式，每个支路使用不同大小的卷积核，最终输出特征图的通道数是每个支路输出通道数的总和，这将会导致输出通道数变得很大，尤其是使用多个Inception模块串联操作的时候，模型参数量会变得非常大。
 
-图1(a)是Inception模块的设计思想，使用3个不同大小的卷积核对输入图片进行卷积操作，并附加最大池化，将这4个操作的输出沿着通道这一维度进行拼接，构成的输出特征图将会包含经过不同大小的卷积核提取出来的特征，从而达到捕捉不同尺度信息的效果。Inception模块采用多通路(multi-path)的设计形式，每个支路使用不同大小的卷积核，最终输出特征图的通道数是每个支路输出通道数的总和，这将会导致输出通道数变得很大，尤其是使用多个Inception模块串联操作的时候，模型参数量会变得非常大。为了减小参数量，Inception模块使用了图(b)中的设计方式，在每个3x3和5x5的卷积层之前，增加1x1的卷积层来控制输出通道数；在最大池化层后面增加1x1卷积层减小输出通道数。基于这一设计思想，形成了上图(b)中所示的结构。下面这段程序是Inception块的具体实现方式，可以对照图(b)和代码一起阅读。
+为了减小参数量，Inception模块使用了图(b)中的设计方式，在每个3x3和5x5的卷积层之前，增加1x1的卷积层来控制输出通道数；在最大池化层后面增加1x1卷积层减小输出通道数。基于这一设计思想，形成了上图(b)中所示的结构。下面这段程序是Inception块的具体实现方式，可以对照图(b)和代码一起阅读。
 
 ------
 
@@ -93,17 +89,11 @@ GoogLeNet的架构如 **图2** 所示，在主体卷积部分中使用5个模块
 
 -----
 
-说明：
+**说明：**
 在原作者的论文中添加了图中所示的softmax1和softmax2两个辅助分类器，如下图所示，训练时将三个分类器的损失函数进行加权求和，以缓解梯度消失现象。
 
------
-
-<br></br>
-
 <center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Classical_model/GoogLeNet.png" width = "800"></center>
-<center><br>图2：GoogLeNet模型网络结构示意图</br></center>
-
-<br></br>
+<center><br>图2 GoogLeNet模型网络结构示意图</br></center>
 
 ## 模型实现
 
@@ -307,20 +297,16 @@ class GoogLeNet(nn.Layer):
 
 ## 模型特色
 
-- 采用不同大小的卷积核意味着不同大小的感受野，最后拼接意味着不同尺度特征的融合；
+- 采用不同大小的卷积核意味着不同大小的感受野，最后通过拼接实现不同尺度特征的融合；
 - 之所以卷积核大小采用1、3和5，主要是为了方便对齐。设定卷积步长stride=1之后，只要分别设定pad=0、1、2，那么卷积之后便可以得到相同维度的特征，然后这些特征就可以直接拼接在一起了；
-- 网络越到后面，特征越抽象，而且每个特征所涉及的感受野也更大了，因此随着层数的增加，3x3和5x5卷积的比例也要增加。但是，使用5x5的卷积核仍然会带来巨大的计算量。 为此，文章借鉴NIN2，采用1x1卷积核来进行降维。
+- 网络越到后面，特征越抽象，而且每个特征所涉及的感受野也更大了，因此随着层数的增加，3x3和5x5卷积的比例也要增加。但是，使用5x5的卷积核仍然会带来巨大的计算量。 为此，文章采用1x1卷积核来进行降维。
 
 ## 模型指标
 
 GoogLeNet 在 2014 年的 ImageNet 比赛上取得了冠军的好成绩，具体指标如 **图3** 所示。在测试集上Error rate 达到了6.67%。
 
-<br></br>
-
 <center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Classical_model/GoogLeNet_Error_Rate.png" width = "800"></center>
-<center><br>图3：GoogLeNet模型指标</br></center>
-
-<br></br>
+<center><br>图3 GoogLeNet模型指标</br></center>
 
 ## 参考文献
 

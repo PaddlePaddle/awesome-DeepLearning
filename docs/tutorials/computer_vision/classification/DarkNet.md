@@ -10,12 +10,8 @@
 
 DarkNet19中，借鉴了许多优秀算法的经验，比如：借鉴了VGG的思想，使用了较多的$3\times 3$卷积，在每一次池化操作后，将通道数翻倍；借鉴了network in network的思想，使用全局平均池化（global average pooling）做预测，并把$1\times 1$的卷积核置于$3\times 3$的卷积核之间，用来压缩特征；同时，使用了批归一化层稳定模型训练，加速收敛，并且起到正则化作用。DarkNet19的网络结构如 **图1** 所示。
 
-<br></br>
-
 <center><img src="https://github.com/lvjian0706/Deep-Learning-Img/blob/master/CNN/Classical_model/DarkNet19.png?raw=true" width = "500"></center>
-<center><br>图1：DarkNet19模型网络结构示意图</br></center>
-
-<br></br>
+<center><br>图1 DarkNet19模型网络结构示意图</br></center>
 
 DarkNet19精度与VGG网络相当，但浮点运算量只有其 $\frac{1}{5}$ 左右，因此运算速度极快。
 
@@ -23,12 +19,8 @@ DarkNet19精度与VGG网络相当，但浮点运算量只有其 $\frac{1}{5}$ �
 
 DarkNet53在之前的基础上，借鉴了ResNet的思想，在网络中大量使用了残差连接，因此网络结构可以设计的很深，并且缓解了训练中梯度消失的问题，使得模型更容易收敛。同时，使用步长为2的卷积层代替池化层实现降采样。DarkNet53的网络结构如 **图2** 所示。
 
-<br></br>
-
 <center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Classical_model/DarkNet53.png" width = "500"></center>
-<center><br>图2：DarkNet53模型网络结构示意图</br></center>
-
-<br></br>
+<center><br>图2 DarkNet53模型网络结构示意图</br></center>
 
 考虑到当前 Darknet19 网络使用频率较低，接下来主要针对Darknet53网络进行实现与讲解。
 
@@ -209,21 +201,15 @@ class DarkNet53(nn.Layer):
 
 ## 模型特点
 
-DarkNet53中：
-
-- 模型使用了大量的残差连接，缓解了训练中梯度消失的问题，使得模型更容易收敛。
-- 模型使用步长为2的卷积层代替池化层实现降采样。
+- DarkNet53模型使用了大量的残差连接，缓解了训练中梯度消失的问题，使得模型更容易收敛。
+- DarkNet53模型使用步长为2的卷积层代替池化层实现降采样。
 
 ## 模型指标
 
-在 YOLOv3 论文中，作者在 ImageNet 数据集上对比了 DarkNet 网络与ResNet 网络的精度及速度，如图3所示。可以看到DarkNet53的top-5准确率可以达到93.8%，同时速度也明显超过了ResNet101和ResNet152.
-
-<br></br>
+在 YOLOv3 论文中，作者在 ImageNet 数据集上对比了 DarkNet 网络与ResNet 网络的精度及速度，如图3所示。可以看到DarkNet53的top-5准确率可以达到93.8%，同时速度也明显超过了ResNet101和ResNet152。
 
 <center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Classical_model/DarkNet53_Acc.png" width = "500"></center>
-<center><br>图3：DarkNet模型指标</br></center>
-
-<br></br>
+<center><br>图3 DarkNet模型指标</br></center>
 
 ## 参考文献
 
