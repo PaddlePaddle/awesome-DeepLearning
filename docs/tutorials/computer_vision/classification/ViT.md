@@ -269,9 +269,7 @@ class Block(nn.Layer):
 按照 Transformer 结构中的位置编码习惯，这个工作也使用了位置编码。不同的是，ViT 中的位置编码没有采用原版 Transformer 中的 $sincos$ 编码，而是直接设置为可学习的 Positional Encoding。对训练好的 Positional Encoding 进行可视化，如 **图7** 所示。我们可以看到，位置越接近，往往具有更相似的位置编码。此外，出现了行列结构，同一行/列中的 patch 具有相似的位置编码。
 
 <center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Classical_model/ViT/Positional_Encoding.png" width = "600"></center>
-<center><br>图7：Positional Encoding </br></center>
-
-<br></br>
+<center><br>图7 Positional Encoding </br></center>
 
 * MLP Head
 
