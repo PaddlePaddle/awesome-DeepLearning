@@ -46,8 +46,8 @@
 
 图像变换类指的是对 `RandCrop` 后的224 的图像进行一些变换，主要包括：
 
-+ AutoAugment^[1]^
-+ RandAugment^[2]^
++ AutoAugment<sup>[1]</sup>
++ RandAugment<sup>[2]</sup>
 
 ## 3.1 AutoAugment
 
@@ -81,10 +81,10 @@
 
 图像裁剪类主要是对`Transpose` 后的 224 的图像进行一些裁剪，并将裁剪区域的像素值置为特定的常数（默认为0），主要包括：
 
-+ CutOut^[3]^
-+ RandErasing^[4]^
-+ HideAndSeek^[5]^
-+ GridMask^[6]^
++ CutOut<sup>[3]</sup>
++ RandErasing<sup>[4]</sup>
++ HideAndSeek<sup>[5]</sup>
++ GridMask<sup>[6]</sup>
 
 图像裁剪的这些增广并非一定要放在归一化之后，也有不少实现是放在归一化之前的，也就是直接对 uint8 的图像进行操作，两种方式的差别是：如果直接对 uint8 的图像进行操作，那么再经过归一化之后被裁剪的区域将不再是纯黑或纯白（减均值除方差之后像素值不为0）。而对归一后之后的数据进行操作，裁剪的区域会是纯黑或纯白。
 
@@ -168,8 +168,8 @@ Cutout 可以理解为 Dropout 的一种扩展操作，不同的是 Dropout 是�
 
 图像混叠主要对 `Batch` 后的数据进行混合，包括：
 
-+ Mixup^[7]^
-+ Cutmix^[8]^
++ Mixup<sup>[7]</sup>
++ Cutmix<sup>[8]</sup>
 
 前文所述的图像变换与图像裁剪都是针对单幅图像进行的操作，而图像混叠是对两幅图像进行融合，生成一幅图像，两种方法的主要区别为混叠的方式不太一样。
 
