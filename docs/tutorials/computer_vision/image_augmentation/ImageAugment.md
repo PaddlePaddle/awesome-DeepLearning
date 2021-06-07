@@ -1,14 +1,17 @@
 # 一、数据增广
 
-在图像分类任务中，图像数据的增广是一种常用的正则化方法，常用于数据量不足或者模型参数较多的场景。除了 ImageNet 分类任务标准数据增广方法外，还有8种数据增广方式非常常用，这里对其进行简单的介绍和对比，大家也可以将这些增广方法应用到自己的任务中，以获得模型精度的提升。这8种数据增广方式在ImageNet上的精度指标如下所示。
+在图像分类任务中，图像数据的增广是一种常用的正则化方法，主要用于增加训练数据集，让数据集尽可能的多样化，使得训练的模型具有更强的泛化能力，常用于数据量不足或者模型参数较多的场景。除了 ImageNet 分类任务标准数据增广方法外，还有8种数据增广方式非常常用，这里对其进行简单的介绍和对比，大家也可以将这些增广方法应用到自己的任务中，以获得模型精度的提升。这8种数据增广方式在ImageNet上的精度指标如 **图1** 所示。
 
-![main_image_aug](https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Image_Aug/img/main_image_aug.png)
+<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Image_Aug/img/main_image_aug.png" width = "800"></center>
+<center><br>图1 8种数据增广方法</br></center>
+
+
 
 # 二、常用数据增广方法
 
-如果没有特殊说明，本章节中所有示例为 ImageNet 分类，并且假设最终输入网络的数据维度为：`[batch-size, 3, 224, 224]`
+> 注：如果没有特殊说明，本章节中所有示例为 ImageNet 分类，并且假设最终输入网络的数据维为：[batch-size, 3, 224, 224]
 
-其中 ImageNet 分类任务中，训练阶段的标准数据增广方法为以下几步：
+在ImageNet 分类任务中，训练阶段的标准数据增广方法为以下几步：
 
 1. 图像解码：简写为 `ImageDecode`
 2. 随机裁剪到长宽均为 224 的图像：简写为 `RandCrop`
@@ -19,26 +22,32 @@
 
 相比于上述标准的图像增广方法，研究者也提出了很多改进的图像增广策略，这些策略均是在标准增广方法的不同阶段插入一定的操作，基于这些策略操作所处的不同阶段，我们将其分为了三类：
 
-1. 对 `RandCrop` 后的 224 的图像进行一些变换: AutoAugment，RandAugment
-2. 对`Transpose` 后的 224 的图像进行一些裁剪: CutOut，RandErasing，HideAndSeek，GridMask
-3. 对 `Batch` 后的数据进行混合: Mixup，Cutmix
+1. 对 `RandCrop` (上述的阶段2)后的 224 的图像进行一些变换: AutoAugment，RandAugment
+2. 对`Transpose` (上述的阶段5)后的 224 的图像进行一些裁剪: CutOut，RandErasing，HideAndSeek，GridMask
+3. 对 `Batch`(上述的阶段6) 后的数据进行混合: Mixup，Cutmix
 
-增广后的可视化效果如下所示。
+增广后的可视化效果如 **图2** 所示。
 
-![image_aug_samples_s](https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Image_Aug/img/image_aug_samples_s.jpg)
+<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Image_Aug/img/image_aug_samples_s.jpg" width = "800"></center>
+<center><br>图2 数据增广后可视化</br></center>
 
 
 
-下文将介绍这些策略的原理与使用方法，其中，每种数据增广策略的参考论文与参考开源代码均在下面的介绍中列出。以下图为例，对变换后的效果进行可视化。此外，为了更直观地对比变换前后的图像，本章节中将 `RandCrop` 替换为 `Resize`。
+下文将介绍这些策略的原理与使用方法，其中，每种数据增广策略的参考论文与参考开源代码均在下面的介绍中列出。
 
-![test_baseline](https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Image_Aug/img/test_baseline.jpeg)
+以 **图3** 为测试图像，第三节将基于测试图像进行变换，并将变换后的效果进行可视化。
+
+> 由于`RandCrop`是随机裁剪，变换前后的图像内容可能会有一定的差别，无法直观地对比变换前后的图像。因此，本节将 `RandCrop` 替换为 `Resize`。
+
+<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Image_Aug/img/test_baseline.jpeg" width = "1000"></center>
+<center><br>图3 测试图像</br></center>
 
 # 三、图像变换类
 
-图像变换类指的是对 `RandCrop` 后的 224 的图像进行一些变换，主要包括
+图像变换类指的是对 `RandCrop` 后的224 的图像进行一些变换，主要包括：
 
-+ AutoAugment
-+ RandAugment
++ AutoAugment^[1]^
++ RandAugment^[2]^
 
 ## 3.1 AutoAugment
 
@@ -48,9 +57,10 @@
 
 不同于常规的人工设计图像增广方式，AutoAugment 是在一系列图像增广子策略的搜索空间中通过搜索算法找到的适合特定数据集的图像增广方案。针对 ImageNet 数据集，最终搜索出来的数据增广方案包含 25 个子策略组合，每个子策略中都包含两种变换，针对每幅图像都随机的挑选一个子策略组合，然后以一定的概率来决定是否执行子策略中的每种变换。
 
-结果如下图所示。
+结果如 **图4** 所示。
 
-![test_autoaugment](https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Image_Aug/img/test_autoaugment.jpeg)
+<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Image_Aug/img/test_autoaugment.jpeg" width = "1000"></center>
+<center><br>图4 AutoAugment后图像可视化</br></center>
 
 ## 3.2 RandAugment
 
@@ -58,24 +68,23 @@
 
 开源代码github地址：[https://github.com/heartInsert/randaugment](https://github.com/heartInsert/randaugment)
 
-
 `AutoAugment` 的搜索方法比较暴力，直接在数据集上搜索针对该数据集的最优策略，其计算量很大。在 `RandAugment` 文章中作者发现，一方面，针对越大的模型，越大的数据集，使用 `AutoAugment` 方式搜索到的增广方式产生的收益也就越小；另一方面，这种搜索出的最优策略是针对该数据集的，其迁移能力较差，并不太适合迁移到其他数据集上。
 
 在 `RandAugment` 中，作者提出了一种随机增广的方式，不再像 `AutoAugment` 中那样使用特定的概率确定是否使用某种子策略，而是所有的子策略都会以同样的概率被选择到，论文中的实验也表明这种数据增广方式即使在大模型的训练中也具有很好的效果。
 
-结果如下图所示。
+结果如 **图5** 所示。
 
-![test_randaugment](https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Image_Aug/img/test_randaugment.jpeg)
-
+<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Image_Aug/img/test_randaugment.jpeg" width = "1000"></center>
+<center><br>图5 RandAugment后图像可视化</br></center>
 
 # 四、图像裁剪类
 
 图像裁剪类主要是对`Transpose` 后的 224 的图像进行一些裁剪，并将裁剪区域的像素值置为特定的常数（默认为0），主要包括：
 
-+ CutOut
-+ RandErasing
-+ HideAndSeek
-+ GridMask
++ CutOut^[3]^
++ RandErasing^[4]^
++ HideAndSeek^[5]^
++ GridMask^[6]^
 
 图像裁剪的这些增广并非一定要放在归一化之后，也有不少实现是放在归一化之前的，也就是直接对 uint8 的图像进行操作，两种方式的差别是：如果直接对 uint8 的图像进行操作，那么再经过归一化之后被裁剪的区域将不再是纯黑或纯白（减均值除方差之后像素值不为0）。而对归一后之后的数据进行操作，裁剪的区域会是纯黑或纯白。
 
@@ -87,11 +96,12 @@
 
 开源代码github地址：[https://github.com/uoguelph-mlrg/Cutout](https://github.com/uoguelph-mlrg/Cutout)
 
-Cutout 可以理解为 Dropout 的一种扩展操作，不同的是 Dropout 是对图像经过网络后生成的特征进行遮挡，而 Cutout 是直接对输入的图像进行遮挡，相对于Dropout对噪声的鲁棒性更好。作者在论文中也进行了说明，这样做法有以下两点优势：(1) 通过 Cutout 可以模拟真实场景中主体被部分遮挡时的分类场景；(2) 可以促进模型充分利用图像中更多的内容来进行分类，防止网络只关注显著性的图像区域，从而发生过拟合。
+Cutout 可以理解为 Dropout 的一种扩展操作，不同的是 Dropout 是对图像经过网络后生成的特征进行遮挡，而 Cutout 是直接对输入的图像进行遮挡，相对于Dropout，Cutout 对噪声的鲁棒性更好。作者在论文中也进行了说明，这样做法有以下两点优势：(1) 通过 Cutout 可以模拟真实场景中主体被部分遮挡时的分类场景；(2) 可以促进模型充分利用图像中更多的内容来进行分类，防止网络只关注显著性的图像区域，从而发生过拟合。
 
-结果如下图所示。
+结果如 **图6** 所示。
 
-![test_cutout](https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Image_Aug/img/test_cutout.jpeg)
+<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Image_Aug/img/test_cutout.jpeg" width = "1000"></center>
+<center><br>图6 Cutout后图像可视化</br></center>
 
 ## 4.2 RandomErasing
 
@@ -101,10 +111,10 @@ Cutout 可以理解为 Dropout 的一种扩展操作，不同的是 Dropout 是�
 
 `RandomErasing` 与 `Cutout` 方法类似，同样是为了解决训练出的模型在有遮挡数据上泛化能力较差的问题，作者在论文中也指出，随机裁剪的方式与随机水平翻转具有一定的互补性。作者也在行人再识别（REID）上验证了该方法的有效性。与`Cutout`不同的是，在`RandomErasing`中，图片以一定的概率接受该种预处理方法，生成掩码的尺寸大小与长宽比也是根据预设的超参数随机生成。
 
-结果如下图所示。
+结果如 **图7** 所示。
 
-![test_randomerassing](https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Image_Aug/img/test_randomerassing.jpeg)
-
+<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Image_Aug/img/test_randomerassing.jpeg" width = "1000"></center>
+<center><br>图7 RandomErasing后图像可视化</br></center>
 
 ## 4.3 HideAndSeek
 
@@ -112,13 +122,15 @@ Cutout 可以理解为 Dropout 的一种扩展操作，不同的是 Dropout 是�
 
 开源代码github地址：[https://github.com/kkanshul/Hide-and-Seek](https://github.com/kkanshul/Hide-and-Seek)
 
-`HideAndSeek`论文将图像分为若干块区域(patch)，对于每块区域，都以一定的概率生成掩码，不同区域的掩码含义如下图所示。
+`HideAndSeek`论文将图像分为若干块区域(patch)，对于每块区域，都以一定的概率生成掩码，不同区域的掩码含义如 **图8** 所示。
 
-![hide-and-seek-visual](https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Image_Aug/img/hide-and-seek-visual.png)
+<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Image_Aug/img/hide-and-seek-visual.png" width = "700"></center>
+<center><br>图8 HideAndSeek分块掩码图</br></center>
 
-结果如下图所示。
+结果如 **图9** 所示。
 
-![test_hideandseek](https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Image_Aug/img/test_hideandseek.jpeg)
+<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Image_Aug/img/test_hideandseek.jpeg" width = "1000"></center>
+<center><br>图9 HideAndSeek后图像可视化</br></center>
 
 
 ## 4.4 GridMask
@@ -127,15 +139,15 @@ Cutout 可以理解为 Dropout 的一种扩展操作，不同的是 Dropout 是�
 开源代码github地址：[https://github.com/akuxcw/GridMask](https://github.com/akuxcw/GridMask)
 
 
-作者在论文中指出，此前存在的基于对图像 crop 的方法存在两个问题，如下图所示：
+作者在论文中指出，此前存在的基于对图像 crop 的方法存在两个问题，如 **图10** 所示：
 
 1. 过度删除区域可能造成目标主体大部分甚至全部被删除，或者导致上下文信息的丢失，导致增广后的数据成为噪声数据；
 2. 保留过多的区域，对目标主体及上下文基本产生不了什么影响，失去增广的意义。
 
-![gridmask-0](https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Image_Aug/img/gridmask-0.png)
+<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Image_Aug/img/gridmask-0.png" width = "1000"></center>
+<center><br>图10 增广后的噪声数据</br></center>
 
 因此如果避免过度删除或过度保留成为需要解决的核心问题。
-
 
 `GridMask`是通过生成一个与原图分辨率相同的掩码，并将掩码进行随机翻转，与原图相乘，从而得到增广后的图像，通过超参数控制生成的掩码网格的大小。
 
@@ -146,17 +158,18 @@ Cutout 可以理解为 Dropout 的一种扩展操作，不同的是 Dropout 是�
 
 论文中验证上述第二种方法的训练效果更好一些。
 
-结果如下图所示。
+结果如 **图11** 所示。
 
-![test_gridmask](https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Image_Aug/img/test_gridmask.jpeg)
+<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Image_Aug/img/test_gridmask.jpeg" width = "1000"></center>
+<center><br>图11 GridMask后图像可视化</br></center>
 
 
 # 五、图像混叠
 
 图像混叠主要对 `Batch` 后的数据进行混合，包括：
 
-+ Mixup
-+ Cutmix
++ Mixup^[7]^
++ Cutmix^[8]^
 
 前文所述的图像变换与图像裁剪都是针对单幅图像进行的操作，而图像混叠是对两幅图像进行融合，生成一幅图像，两种方法的主要区别为混叠的方式不太一样。
 
@@ -170,9 +183,10 @@ Mixup 是最先提出的图像混叠增广方案，其原理简单、方便实�
 
 如下是 `imaug` 中的实现，需要指出的是，下述实现会出现对同一幅进行相加的情况，也就是最终得到的图和原图一样，随着 `batch-size` 的增加这种情况出现的概率也会逐渐减小。
 
-结果如下图所示。
+结果如 **图12** 所示。
 
-![test_mixup](https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Image_Aug/img/test_mixup.png)
+<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Image_Aug/img/test_mixup.png" width = "1000"></center>
+<center><br>图12 Mixup后图像可视化</br></center>
 
 ## 5.2 Cutmix
 
@@ -182,9 +196,10 @@ Mixup 是最先提出的图像混叠增广方案，其原理简单、方便实�
 
 与  `Mixup` 直接对两幅图进行相加不一样，`Cutmix` 是从一幅图中随机裁剪出一个 `ROI`，然后覆盖当前图像中对应的区域。
 
-结果如下图所示。
+结果如 **图13** 所示。
 
-![test_cutmix](https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Image_Aug/img/test_cutmix.png)
+<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Image_Aug/img/test_cutmix.png" width = "1000"></center>
+<center><br>图13 Cutmix后图像可视化</br></center>
 
 # 六、实验
 
@@ -213,19 +228,18 @@ Mixup 是最先提出的图像混叠增广方案，其原理简单、方便实�
 
 # 参考文献
 
-[1] Cubuk E D, Zoph B, Mane D, et al. Autoaugment: Learning augmentation strategies from data[C]//Proceedings of the IEEE conference on computer vision and pattern recognition. 2019: 113-123.
+[1] [Autoaugment: Learning augmentation strategies from data](https://arxiv.org/abs/1805.09501v1)
 
+[2] [Randaugment: Practical automated data augmentation with a reduced search space](https://arxiv.org/pdf/1909.13719.pdf)
 
-[2] Cubuk E D, Zoph B, Shlens J, et al. Randaugment: Practical automated data augmentation with a reduced search space[J]. arXiv preprint arXiv:1909.13719, 2019.
+[3] [Improved regularization of convolutional neural networks with cutout](https://arxiv.org/abs/1708.04552)
 
-[3] DeVries T, Taylor G W. Improved regularization of convolutional neural networks with cutout[J]. arXiv preprint arXiv:1708.04552, 2017.
+[4] [Random erasing data augmentation](https://arxiv.org/pdf/1708.04896.pdf)
 
-[4] Zhong Z, Zheng L, Kang G, et al. Random erasing data augmentation[J]. arXiv preprint arXiv:1708.04896, 2017.
+[5] [Hide-and-seek: Forcing a network to be meticulous for weakly-supervised object and action localization](https://arxiv.org/pdf/1811.02545.pdf)
 
-[5] Singh K K, Lee Y J. Hide-and-seek: Forcing a network to be meticulous for weakly-supervised object and action localization[C]//2017 IEEE international conference on computer vision (ICCV). IEEE, 2017: 3544-3553.
+[6] [GridMask Data Augmentation](https://arxiv.org/abs/2001.04086)
 
-[6] Chen P. GridMask Data Augmentation[J]. arXiv preprint arXiv:2001.04086, 2020.
+[7] [mixup: Beyond empirical risk minimization](https://arxiv.org/pdf/1710.09412.pdf)
 
-[7] Zhang H, Cisse M, Dauphin Y N, et al. mixup: Beyond empirical risk minimization[J]. arXiv preprint arXiv:1710.09412, 2017.
-
-[8] Yun S, Han D, Oh S J, et al. Cutmix: Regularization strategy to train strong classifiers with localizable features[C]//Proceedings of the IEEE International Conference on Computer Vision. 2019: 6023-6032.
+[8] [Cutmix: Regularization strategy to train strong classifiers with localizable features](https://arxiv.org/pdf/1905.04899v2.pdf))
