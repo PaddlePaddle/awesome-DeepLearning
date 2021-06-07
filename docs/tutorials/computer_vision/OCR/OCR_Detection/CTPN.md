@@ -2,24 +2,22 @@
 
 ## 模型介绍
 
-CTPN^[1]^是目标检测算法[Faster R-CNN](https://arxiv.org/abs/1506.01497) 的改进算法，用于文字检测。CTPN根据文本区域的特点做了专门的优化：
+CTPN(Connectionist Text Proposal Network)<sup>[1]</sup>是目标检测算法[Faster R-CNN](https://arxiv.org/abs/1506.01497) 的改进算法，用于文字检测。CTPN根据文本区域的特点做了专门的优化：
 
 * 使用更加符合自然场景文字检测特点的anchor（相比于物体，文字尺寸小）；
 * 引入RNN用于处理场景文字检测中存在的序列特征；
 * 引入Side-refinement(边界优化)提升文本框边界预测精度。
 
-
-
 ## 模型结构
 
-CTPN采用的方法是将文本行分割成一个个小块（长度是固定的），然后去检测这类小块，最后使用一种文本行构造法将所有块连起来，如 **图1** 所示。
+CTPN采用的方法是将文本行分割成一个个小块（长度是固定的），然后去检测这些小块，最后使用一种文本行构造法将所有块连起来，如 **图1** 所示。
 
-<center><img src="https://github.com/an1018/pics/raw/main/CTPN_1.png" width = "600"></center>
-<center><br>图1 CTPN Sequential features</br></center>
+<center><img src="https://github.com/an1018/pics/raw/main/CTPN_1.png" width = "700"></center>
+<center><br>图1 CTPN 序列特征</br></center>
 
-CTPN网络结构图如下：
+CTPN网络结构如 **图2** 所示：
 
-<center><img src="https://github.com/an1018/pics/raw/main/CTPN_2.png" width = "600"></center>
+<center><img src="https://github.com/an1018/pics/raw/main/CTPN_2.png" width = "700"></center>
 <center><br>图2 CTPN网络结构示意图</br></center>
 
 整个检测分为5步：
@@ -34,7 +32,7 @@ CTPN网络结构图如下：
 
 5）将第三步得到的特征输入到FC全连接层，并将FC层特征输入两个分类或者回归层中。
 
-CTPN任务1的输出是 $$ 2k $$  ，用于预测候选区域box的起始$$y$$坐标和高度$$h$$ ；任务2是用来对前景和背景两个任务的分类评分；任务3是  $$k$$个输出的side-refinement的偏移（offset)预测。
+CTPN任务1的输出是 $$ 2k $$  ，用于预测候选区域box的起始$$y$$坐标和高度$$h$$ ；任务2是用来对前景和背景两个任务的分类评分；任务3是  $$k$$个输出的side-refinement的偏移(offset)预测。
 
 ## 模型loss
 
