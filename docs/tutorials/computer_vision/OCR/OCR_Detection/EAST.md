@@ -2,16 +2,21 @@
 
 ## 模型介绍
 
-CTPN在水平文本的检测方面效果比较好，但是对于竖直方向的文本，或者多方向的文本，CTPN检测就很差。因此，之后很多学者也提出了各种改进方法，其中，比较经典一篇的就是旷世科技在2017年提出来的EAST<sup>[1]</sup>模型。
+CTPN在水平文本的检测方面效果比较好，但是对于竖直方向的文本，或者多方向的文本，CTPN检测就很差。然而，在实际场景中，我们会遇到多种存在竖直方向文本的情况，例如很多书本封面的文本，如 **图1** 所示。
+
+<center><img src="https://github.com/tngt/img/blob/master/EASTfic1.png" width = "300"></center>
+<center><br>图1 竖直方向文本示例</br></center>
+
+因此，很多学者也提出了各种改进方法，其中，比较经典一篇的就是旷世科技在2017年提出来的EAST<sup>[1]</sup>模型。
 
 ## 模型结构
 
-  EAST的网络结构总共包含三个部分：Feature extractor stem（特征提取分支）, Feature-merging branch（特征合并分支） 以及 Output layer（输出层），网络结构如 **图1** 所示：
+  EAST的网络结构总共包含三个部分：Feature extractor stem（特征提取分支）, Feature-merging branch（特征合并分支） 以及 Output layer（输出层），网络结构如 **图2** 所示：
 
 <center><img src="https://github.com/an1018/pics/raw/main/EAST_1.png" width = "500"></center>
-<center><br>图1 EAST网络结构示意图</br></center>
+<center><br>图2 EAST网络结构示意图</br></center>
 
-接下来分析每一部分网络结构
+每一部分网络结构：
 
 1）Feature extractor stem
 
@@ -28,11 +33,11 @@ CTPN在水平文本的检测方面效果比较好，但是对于竖直方向的�
 
 3）Output layer
 
-网络层的输出包含文本得分和文本形状，根据不同的文本形状又分为RBOX和QUAD：
+网络层最终的输出，按照不同的文本形状分为RBOX和QUAD两种情况，每一种情况均包含文本得分和文本形状：
 
-* RBOX：包含文本得分和文本形状(AABB boundingbox 和rotate angle)，也就是一共有６个输出，这里AABB分别表示相对于top，right，bottom，left的偏移；
+* RBOX：包含文本得分和文本形状(AABB boundingbox 和rotate angle)，一共有６个输出，这里AABB分别表示相对于top，right，bottom，left的偏移；
 
-* QUAD：包含文本得分和文本形状(８个相对于corner vertices的偏移)，也就是一共有９个输出，其中QUAD有８个，分别为 $$(x_{i},y_{i}),i\in[1,2,3,4]$$。
+* QUAD：包含文本得分和文本形状(８个相对于corner vertices的偏移)，一共有９个输出，其中QUAD有８个，分别为 $$(x_{i},y_{i}),i\in[1,2,3,4]$$。
 
 ## 模型loss
 
