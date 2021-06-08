@@ -31,7 +31,7 @@
 
 我们再来看下每个时刻LSTM单元的输入和输出，显然在每个时刻LSTM会接收3种数据，同时输出2种数据。在时刻$t$LSTM单元的输入是：单词$x_t$ (词向量)，上一个时刻的状态向量$c_{t-1}$ (上边的横线) 和 上一个时刻的隐状态向量$h_{t-1}$ (下边的横线)；LSTM单元的输出是: 当前时刻的状态向量$c_{t}$和 当前时刻的隐状态向量$h_{t}$ 。
 
-![image-20210511201636399](https://raw.githubusercontent.com/1649759610/images_for_blog/master/image-20210511201636399.png)
+![image-20210511201636399](https://raw.githubusercontent.com/1649759610/images_for_blog/master/image-20210511201636310.png)
 
 <center>图2 LSTM数据处理样例</center>
 
