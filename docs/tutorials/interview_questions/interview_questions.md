@@ -29,7 +29,21 @@
 
 ## 对抗神经网络
 
+* [GAN是怎么训练的？](https://paddlepedia.readthedocs.io/en/latest/tutorials/generative_adversarial_network/basic_concept/GAN%20train.html)
 
+* [GAN生成器输入为什么是随机噪声](https://paddlepedia.readthedocs.io/en/latest/tutorials/generative_adversarial_network/basic_concept/Input%20noise.html#gan)
+
+* [GAN生成器最后一层激活函数为什么通常使用tanh()？](https://paddlepedia.readthedocs.io/en/latest/tutorials/generative_adversarial_network/basic_concept/Generator.html#generator)
+
+* [GAN使用的损失函数是什么？](https://paddlepedia.readthedocs.io/en/latest/tutorials/generative_adversarial_network/basic_concept/GAN%20loss.html)
+
+* [GAN中模式坍塌(model callapse指什么？)](https://paddlepedia.readthedocs.io/en/latest/tutorials/generative_adversarial_network/basic_concept/Collapse.html)
+
+* [GAN模式坍塌解决办法](https://paddlepedia.readthedocs.io/en/latest/tutorials/generative_adversarial_network/basic_concept/Collapse.html)
+
+* [GAN模型训练不稳定的原因](https://paddlepedia.readthedocs.io/en/latest/tutorials/generative_adversarial_network/basic_concept/Unstable%20training.html#)
+
+* [GAN模式训练不稳定解决办法 or 训练GAN的经验/技巧](https://paddlepedia.readthedocs.io/en/latest/tutorials/generative_adversarial_network/basic_concept/Unstable%20training.html#)
 
 ## 计算机视觉
 
@@ -38,6 +52,16 @@
 * [GoogLeNet使用了怎样的方式进行了网络创新？](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/classification/GoogLeNet.html)
 * [ViT算法中是如何将Transformer结构应用到图像分类领域的？](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/classification/ViT.html)
 * [NMS的原理以及具体实现？](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/object_detection/NMS.html)
+* [OCR常用检测方法有哪几种、各有什么优缺点](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/OCR/OCR.html#id2)
+
+* [介绍一下DBNet算法原理](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/OCR/OCR_Detection/DBNet.html#id3)
+* [DBNet 输出是什么？](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/OCR/OCR_Detection/DBNet.html#id2)
+* [DBNet loss](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/OCR/OCR_Detection/DBNet.html#loss)
+* [介绍以下CRNN算法原理](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/OCR/OCR_Recognition/CRNN.html#crnn)
+* [介绍一下CTC原理](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/loss_functions/CTC.html)
+* [OCR常用的评估指标](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/OCR/OCR.html#id7)
+
+* [OCR目前还存在哪些挑战/难点？](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/OCR/OCR.html#id9)
 
 ## 自然语言处理
 
