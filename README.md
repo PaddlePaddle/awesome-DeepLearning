@@ -94,7 +94,7 @@
 
 * **产业实践篇**  
 
-  1. [模型压缩](https://paddlepedia.readthedocs.io/en/latest/tutorials/model_compress/index.html)  
+  1. [模型压缩](https://paddlepedia.readthedocs.io/en/latest/tutorials/model_compress/index.html)（包括为什需要模型压缩、模型压缩基本方法、PKD、DistilBERT、TinyBERT、DynaBERT等6个知识点）
   2. [模型部署](https://paddlepedia.readthedocs.io/en/latest/tutorials/model_deployment/index.html)  
 
 * **强化学习篇**  

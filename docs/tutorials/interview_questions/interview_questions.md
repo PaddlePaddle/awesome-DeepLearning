@@ -4,6 +4,10 @@
 
 * [为什么归一化能够提高求解最优解的速度？](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/normalization/basic_normalization.html#id4)
 * [为什么要归一化？](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/normalization/basic_normalization.html)
+* [归一化与标准化有什么联系和区别？](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/normalization/basic_normalization.html#id7)
+* [归一化有哪些类型？](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/normalization/basic_normalization.html#id5)
+* [Min-max归一化一般在什么情况下使用？](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/normalization/basic_normalization.html#id6)
+* [Z-score归一化在什么情况下使用？](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/normalization/basic_normalization.html#id6)
 * [学习率过大或过小对网络会有什么影响？](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/learning_rate.html)
 * [batch size的大小对网络有什么影响？](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/batch_size.html)
 * [在参数初始化时，为什么不能全零初始化？](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/weight_initializer.html)
@@ -70,6 +74,18 @@
 ## 推荐系统
 
 
+
+## 模型压缩
+
+* [为什么需要进行模型压缩？](https://paddlepedia.readthedocs.io/en/latest/tutorials/model_compress/model_compress.html)
+
+* [模型压缩的基本方法有哪些？](https://paddlepedia.readthedocs.io/en/latest/tutorials/model_compress/model_compress.html#id3)
+
+* [DynaBERT模型的创新点是什么？](https://paddlepedia.readthedocs.io/en/latest/tutorials/model_compress/model_distill/DynaBERT.html)
+
+* [TinyBERT是如何对BERT进行蒸馏的？](https://paddlepedia.readthedocs.io/en/latest/tutorials/model_compress/model_distill/TinyBERT.html)
+
+  
 
 ## 强化学习
 
