@@ -14,7 +14,7 @@
 
 ViT算法的整体结构如 **图1** 所示。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Classical_model/ViT/ViT.png" width = "800"></center>
+<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Classical_model/ViT/ViT.png" width = "700"></center>
 <center><br>图1 ViT算法结构示意图</br></center>
 
 ### 1. 图像分块嵌入
@@ -135,7 +135,7 @@ class Attention(nn.Layer):
 
  Transformer 结构中还有一个重要的结构就是 MLP，即多层感知机，如 **图6** 所示。
 
-<center><img src="https://github.com/tngt/img/blob/master/VIT_pic6.png" width = "400"></center>
+<center><img src="https://github.com/tngt/img/blob/master/VIT_pic6.png" width = "700"></center>
 <center><br>图6 MLP多层感知机的结构</br></center>
 
 多层感知机由输入层、输出层和至少一层的隐藏层构成。网络中各个隐藏层中神经元可接收相邻前序隐藏层中所有神经元传递而来的信息，经过加工处理后将信息输出给相邻后续隐藏层中所有神经元。在多层感知机中，相邻层所包含的神经元之间通常使用“全连接”方式进行连接。多层感知机可以模拟复杂非线性函数功能，所模拟函数的复杂性取决于网络隐藏层数目和各层中神经元数目。多层感知机的结构如 **图7** 所示。
@@ -207,7 +207,7 @@ class DropPath(nn.Layer):
 
 基于上面实现的 Attention、MLP、DropPath模块就可以组合出 Vision Transformer 模型的一个基础模块，如 **图8** 所示。
 
-<center><img src="https://github.com/tngt/img" width = "400"></center>
+<center><img src="https://github.com/tngt/img" width = "700"></center>
 <center><br>图8 基础模块示意图</br></center>
 
 基础模块的具体实现如下：
