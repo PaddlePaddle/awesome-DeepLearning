@@ -12,7 +12,7 @@
 
 如果学习率 $\eta$ 较小，网络可能不会错过最优点，但是网络学习速度会变慢。同时，如果学习率过小，则很可能会陷入局部最优点（如图1b所示）。
 
-因此，只有找到合适的学习率，才能保证代价函数以较快的速度达到最小值，同时保证该最小值是全局最优解。
+因此，只有找到合适的学习率，才能保证代价函数以较快的速度逼近全局最优解。
 
 <center><img src="https://github.com/ZhangHandi/images-for-paddledocs/blob/main/images/deep%20learning/learning%20rate.png?raw=true" alt="学习率" style="zoom:50%;" /></center>
 
