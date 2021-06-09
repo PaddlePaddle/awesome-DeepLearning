@@ -207,7 +207,7 @@ class DropPath(nn.Layer):
 
 基于上面实现的 Attention、MLP、DropPath模块就可以组合出 Vision Transformer 模型的一个基础模块，如 **图8** 所示。
 
-<center><img src="https://github.com/tngt/img" width = "700"></center>
+<center><img src="https://github.com/tngt/img/blob/master/VIT_pic8.png" width = "700"></center>
 <center><br>图8 基础模块示意图</br></center>
 
 基础模块的具体实现如下：
