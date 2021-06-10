@@ -2,7 +2,7 @@
 
 ## 一、卷积提出背景
 
-在全连接网络^[1]^中，一张图片上的所有像素点会被展开成一个1维向量输入网络，如 **图1** 所示，28 x 28的输入数据被展开成为784 x 1 的数据作为输入。
+在全连接网络<sup>[1]</sup>中，一张图片上的所有像素点会被展开成一个1维向量输入网络，如 **图1** 所示，28 x 28的输入数据被展开成为784 x 1 的数据作为输入。
 
 <center><img src="https://github.com/tngt/img/blob/master/fc.png" width = "700"></center>
 <center><br>图1 全连接网络图</br></center>
@@ -423,5 +423,5 @@ plt.show()
 
 ## 参考文献
 
-[1] **[Visualizing and Understanding Convolutional Networks](https://arxiv.org/pdf/1311.2901.pdf)**
+[1] [Visualizing and Understanding Convolutional Networks](https://arxiv.org/pdf/1311.2901.pdf)
 
