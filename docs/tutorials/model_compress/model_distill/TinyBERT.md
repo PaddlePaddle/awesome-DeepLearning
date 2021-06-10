@@ -2,6 +2,9 @@
 
 ## 1. TinyBERT 简介
 
+论文地址：[TinyBERT: Distilling BERT for Natural Language Understanding
+](https://arxiv.org/pdf/1909.10351.pdf)
+
 预训练模型的提出，比如BERT，显著的提升了很多自然语言处理任务的表现，它的强大是毫无疑问的。但是他们普遍存在参数过多、模型庞大、推理时间过长、计算昂贵等问题，因此很难落地到实际的产业应用中。TinyBERT是由华中科技大学和华为诺亚方舟实验室联合提出的一种针对transformer-based模型的知识蒸馏方法，以BERT为例对大型预训练模型进行研究。四层结构的 $TinyBERT_{4}$ 在 GLUE benchmark 上可以达到 $BERT_{base}$ 96.8%及以上的性能表现，同时模型缩小7.5倍，推理速度提升9.4倍。六层结构的 $TinyBERT_{6}$ 可以达到和 $BERT_{base}$ 同样的性能表现。
 
 <center><img src="https://github.com/ZhangHandi/images-for-paddledocs/blob/main/images/slim/TinyBERT/TinyBERT%20learning.png?raw=true" alt="TinyBERT learning" style="zoom:70%;" /><br>图1: TinyBERT learning</br></center><br></br>
