@@ -1,11 +1,13 @@
 # 非极大值抑制
 
-在实际的目标检测过程中，不管是用什么方式获取候选区域，都会存在一个通用的问题，那就是网络对同一个目标可能会进行多次检测。这也就导致对于同一个物体，预测会产生多个预测框，因此需要消除重叠较大的冗余预测框。具体的处理方法就是非极大值抑制（NMS）。
+在实际的目标检测过程中，不管是用什么方式获取候选区域，都会存在一个通用的问题，那就是网络对同一个目标可能会进行多次检测。这也就导致对于同一个物体，会产生多个预测框。因此需要消除重叠较大的冗余预测框。具体的处理方法就是非极大值抑制（NMS）。
 
 假设使用模型对图片进行预测，一共输出了11个预测框及其得分，在图上画出预测框如 **图1** 所示。在每个人像周围，都出现了多个预测框，需要消除冗余的预测框以得到最终的预测结果。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/Detection/NMS/img/Predicted_Box.png" width = "800"></center>
-<center><br>图1：预测框示意图</br></center>
+<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/Detection/NMS/img/Predicted_Box.png" width = "600"></center>
+<center><br>图1 预测框示意图</br></center>
+
+输出11个预测框及其得分的代码实现如下：
 
 
 ```python
@@ -62,13 +64,13 @@ for box in boxes:
     draw_rectangle(currentAxis, box)
 ```
 
-这里使用非极大值抑制（non-maximum suppression, nms）来消除冗余框。基本思想是，如果有多个预测框都对应同一个物体，则只选出得分最高的那个预测框，剩下的预测框被丢弃掉。
+这里使用非极大值抑制（Non-Maximum Suppression, NMS）来消除冗余框。基本思想是，如果有多个预测框都对应同一个物体，则只选出得分最高的那个预测框，剩下的预测框被丢弃掉。
 
-如何判断两个预测框对应的是同一个物体呢，标准该怎么设置？
+**如何判断两个预测框对应的是同一个物体呢，标准该怎么设置？**
 
 如果两个预测框的类别一样，而且他们的位置重合度比较大，则可以认为他们是在预测同一个目标。非极大值抑制的做法是，选出某个类别得分最高的预测框，然后看哪些预测框跟它的IoU大于阈值，就把这些预测框给丢弃掉。这里IoU的阈值是超参数，需要提前设置，这里我们参考YOLOv3算法，里面设置的是0.5。
 
-比如在上面的程序中，boxes里面一共对应11个预测框，scores给出了它们预测"人"这一类别的得分。
+比如在上面的程序中，boxes里面一共对应11个预测框，scores给出了它们预测"人"这一类别的得分，NMS的具体做法如下。
 
 - Step0：创建选中列表，keep_list = []
 - Step1：对得分进行排序，remain_list = [ 3,  5, 10,  2,  9,  0,  1,  6,  4,  7,  8]， 
@@ -115,8 +117,10 @@ def nms(bboxes, scores, score_thresh, nms_thresh):
 
 最终得到keep_list=[3, 5, 10]，也就是预测框3、5、10被最终挑选出来了，如 **图2** 所示。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/Detection/NMS/img/NMS.png" width = "800"></center>
-<center><br>图2：NMS结果示意图</br></center>
+<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/Detection/NMS/img/NMS.png" width = "600"></center>
+<center><br>图2 NMS结果示意图</br></center>
+
+整个过程的实现代码如下：
 
 
 ```python
@@ -196,6 +200,7 @@ def multiclass_nms(bboxes, scores, score_thresh=0.01, nms_thresh=0.45, pre_nms_t
         bboxes_i = bboxes[i]
         scores_i = scores[i]
         ret = []
+        # 对每个类别都进行NMS操作
         for c in range(class_num):
             scores_i_c = scores_i[c]
             keep_inds = nms(bboxes_i, scores_i_c, score_thresh, nms_thresh)
