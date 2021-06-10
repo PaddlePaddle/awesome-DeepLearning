@@ -19,6 +19,7 @@
 * [怎么计算mAP？](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/metrics/mAP.html)
 * [交叉熵为什么可以作为分类任务的损失函数？](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/loss_functions/CE_Loss.html)
 * [CTC方法主要使用了什么方式来解决了什么问题？](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/loss_functions/CTC.html#)
+* [机器学习指标精确率，召回率，f1指标是怎样计算的？](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/metrics/evaluation_metric.html)
 
 ## 卷积模型
 
@@ -28,8 +29,17 @@
 - [深度可分离卷积的计算方式以及意义是什么？](https://paddlepedia.readthedocs.io/en/latest/tutorials/CNN/convolution_operator/Separable_Convolution.html#id4)
 
 ## 预训练模型
-
-
+* [BPE生成词汇表的算法步骤是什么？](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/subword.html#byte-pair-encoding-bpe)
+* [Multi-Head Attention的时间复杂度是多少？](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/transformer.html#multi-head-attention)
+* [Transformer的权重共享在哪个地方？](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/transformer.html#id6)
+* [Transformer的self-attention的计算过程是什么？](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/transformer.html#self-attention)
+* [讲一下BERT的基本原理](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/bert.html#id1)
+* [讲一下BERT的三个Embedding是做什么的？](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/bert.html#embedding)
+* [BERT的预训练做了些什么？](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/bert.html#id11)
+* [BERT,GPT,ELMO的区别](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/bert.html#id11)
+* [请列举一下BERT的优缺点](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/bert.html#id13)
+* [ALBERT相对于BERT做了哪些改进？](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/ALBERT.html#id2)
+* [NSP和SOP的区别是什么？](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/ALBERT.html#sentence-order-prediction)
 
 ## 对抗神经网络
 
@@ -73,7 +83,11 @@
 
 ## 推荐系统
 
-
+* [DSSM模型的原理是什么？](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/dssm.html)
+* [DSSM怎样解决OOV问题的？](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/dssm.html#id2)
+* [推荐系统的PV和UV代表什么？](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/evaluation_metric.html#id2)
+* [协同过滤推荐和基于内容的推荐的区别是什么？](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/evaluation_metric.html#id2)
+* [说一说推荐系统的交叉验证的方法？](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/evaluation_metric.html#id2)
 
 ## 模型压缩
 
@@ -92,6 +106,8 @@
 * [DQN网络的创新点是什么？](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/DQN.html#id1)
 
 * [什么是马尔可夫决策过程？](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/basic_information.html)
+* [什么是SARSA？](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/Sarsa.html#id1)
+* [什么是Q-Learning？](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/Q-learning.html#id1)
 
   
 
