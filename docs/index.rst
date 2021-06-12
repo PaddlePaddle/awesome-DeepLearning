@@ -46,4 +46,4 @@
    :maxdepth: 2
    :caption: 面试宝典
 
-   面试宝典 <tutorials/interview_questions/index>
+   面试问题 <tutorials/interview_questions/index>
