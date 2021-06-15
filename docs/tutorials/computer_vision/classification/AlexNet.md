@@ -2,7 +2,7 @@
 
 ## 模型介绍
 
-AlexNet是2012年ImageNet竞赛的冠军模型，其作者是神经网络领域三巨头之一的Hinton和他的学生Alex Krizhevsky。
+AlexNet<sup>[1]</sup>是2012年ImageNet竞赛的冠军模型，其作者是神经网络领域三巨头之一的Hinton和他的学生Alex Krizhevsky。
 
 AlexNet以极大的优势领先2012年ImageNet竞赛的第二名，也因此给当时的学术界和工业界带来了很大的冲击。此后，更多更深的神经网络相继被提出，比如优秀的VGG，GoogLeNet，ResNet等。 
 

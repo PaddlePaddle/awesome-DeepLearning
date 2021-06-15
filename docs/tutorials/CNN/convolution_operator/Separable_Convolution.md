@@ -136,7 +136,7 @@ $$
 
 ### 应用示例
 
-MobileNetv1^[1]^中使用的深度可分离卷积如 **图7** 右侧所示。相较于左侧的标准卷积，其进行了拆分，同时使用了BN层以及RELU激活函数穿插在深度卷积运算和逐点卷积运算中。
+MobileNetv1<sup>[1]</sup>中使用的深度可分离卷积如 **图7** 右侧所示。相较于左侧的标准卷积，其进行了拆分，同时使用了BN层以及RELU激活函数穿插在深度卷积运算和逐点卷积运算中。
 
 <center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Separable_Convolution/img/MobileNetv1_Separable_Convolution.png" width = "700"></center>
 <center><br>图7 MobileNetv1中的可分离卷积</br></center>
