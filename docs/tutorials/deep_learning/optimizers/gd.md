@@ -70,6 +70,7 @@ BGD 对于凸误差曲面（convex error surface）保证收敛到全局最优�
 
 ### 随机梯度下降
 随机梯度下降（ stotastic gradient descent, SGD ）则是每次使用一个训练样本$x^{i}$和标签$y^{i}$进行一次参数更新。
+
 $$\theta=\theta -\eta \cdot \nabla_{\theta}J(\theta;x^i;y^i)$$
 
 其中$\theta$是模型的参数，$\eta$是学习率，$\nabla_{\theta}J(\theta)$为损失函数对参数$\theta$的导数。BGD 对于大数据集来说执行了很多冗余的计算，因为在每一次参数更新前都要计算很多相似样本的梯度。SGD 通过一次执行一次更新解决了这种冗余。因此通常 SGD 的速度会非常快而且可以被用于在线学习。SGD以高方差的特点进行连续参数更新，导致目标函数严重震荡
