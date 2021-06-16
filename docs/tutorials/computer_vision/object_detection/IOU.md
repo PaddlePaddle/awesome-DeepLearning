@@ -19,7 +19,7 @@ $$B:  [x_{b1}, y_{b1}, x_{b2}, y_{b2}]$$
 
 假如位置关系如 **图2** 所示：
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/Detection/IOU/img/Calculate_IOU.png" width = "400"></center>
+<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/Detection/IOU/img/Calculate_IOU.png" width = "300"></center>
 <center><br>图2 计算交并比</br></center>
 
 如果二者有相交部分，则相交部分左上角坐标为：
@@ -46,11 +46,13 @@ $$union = S_A + S_B - intersection$$
 
 计算交并比：
 
+
+
 $$IoU = \frac{intersection}{union}$$
 
 交并比实现代码如下：
 
-* 当矩形框的坐标形式为xyxy时
+- 当矩形框的坐标形式为xyxy时
 
 
 ```python
@@ -86,12 +88,12 @@ def box_iou_xyxy(box1, box2):
 bbox1 = [100., 100., 200., 200.]
 bbox2 = [120., 120., 220., 220.]
 iou = box_iou_xyxy(bbox1, bbox2)
-print('IoU is {}'.format(iou))
+print('IoU is {}'.format(iou))  
 ```
 
-* 当矩形框的坐标形式为xywh时
+- 当矩形框的坐标形式为xywh时
 
-```python
+```Python
 import numpy as np
 
 # 计算IoU，矩形框的坐标形式为xywh
@@ -139,6 +141,4 @@ print('IoU is {}'.format(iou))
 1. 什么情况下两个矩形框的IoU等于0？
 
    答案：两个矩形框完全不相交。
-
----
 
