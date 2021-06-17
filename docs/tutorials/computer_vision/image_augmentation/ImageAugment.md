@@ -31,8 +31,6 @@
 <center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Image_Aug/img/image_aug_samples_s.jpg" width = "800"></center>
 <center><br>图2 数据增广后可视化</br></center>
 
-
-
 下文将介绍这些策略的原理与使用方法，其中，每种数据增广策略的参考论文与参考开源代码均在下面的介绍中列出。
 
 以 **图3** 为测试图像，第三节将基于测试图像进行变换，并将变换后的效果进行可视化。
