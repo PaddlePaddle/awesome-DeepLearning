@@ -9,7 +9,7 @@ $$IoU = \frac{A\cap B}{A \cup B}$$
 我们将用这个概念来描述两个框之间的重合度。两个框可以看成是两个像素的集合，它们的交并比等于两个框重合部分的面积除以它们合并起来的面积。下图“交集”中青色区域是两个框的重合面积，下图“并集”中蓝色区域是两个框的相并面积。用这两个面积相除即可得到它们之间的交并比，如 **图1** 所示。
 
 <center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/Detection/IOU/img/IOU.png" width = "500"></center>
-<center><br>图1：交并比</br></center>
+<center><br>图1 交并比</br></center>
 
 假设两个矩形框A和B的位置分别为：
 
@@ -20,7 +20,7 @@ $$B:  [x_{b1}, y_{b1}, x_{b2}, y_{b2}]$$
 假如位置关系如 **图2** 所示：
 
 <center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/Detection/IOU/img/Calculate_IOU.png" width = "300"></center>
-<center><br>图2：计算交并比</br></center>
+<center><br>图2 计算交并比</br></center>
 
 如果二者有相交部分，则相交部分左上角坐标为：
 
@@ -50,7 +50,9 @@ $$union = S_A + S_B - intersection$$
 
 $$IoU = \frac{intersection}{union}$$
 
-交并比计算程序如下：
+交并比实现代码如下：
+
+- 当矩形框的坐标形式为xyxy时
 
 
 ```python
@@ -89,7 +91,9 @@ iou = box_iou_xyxy(bbox1, bbox2)
 print('IoU is {}'.format(iou))  
 ```
 
-```python
+- 当矩形框的坐标形式为xywh时
+
+```Python
 import numpy as np
 
 # 计算IoU，矩形框的坐标形式为xywh
@@ -124,7 +128,7 @@ print('IoU is {}'.format(iou))
 为了直观的展示交并比的大小跟重合程度之间的关系，**图3** 示意了不同交并比下两个框之间的相对位置关系，从 IoU = 0.95 到 IoU = 0。
 
 <center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/Detection/IOU/img/Different_IOU.png" width = "500"></center>
-<center><br>图3：不同交并比下两个框之间相对位置示意图</br></center>
+<center><br>图3 不同交并比下两个框之间相对位置示意图</br></center>
 
 ------
 
