@@ -82,8 +82,6 @@
    * [5.11 残差网络（ResNet）](chapter05_CNN/5.11_resnet.md)
    * [5.12 稠密连接网络（DenseNet）]()
 
-   
-
 * 8\. 循环神经网络
 
    * [8.1 序列模型](chapter06_RNN/6.1_lang-model.md)
@@ -105,8 +103,6 @@
    * [9.7 序列到序列学习（seq2seq）](https://zh-v2.d2l.ai/chapter_recurrent-modern/seq2seq.html)
    * [9.8 束搜索](https://zh-v2.d2l.ai/chapter_recurrent-modern/beam-search.html)
 
-   
-
 * 12\. 计算性能
    
    * [12.1 编译器和解释器](https://zh-v2.d2l.ai/chapter_computational-performance/hybridize.html)
@@ -126,10 +122,11 @@
    * [13.4 锚框](chapter09_computer-vision/9.4_anchor.md)
    * [13.5 多尺度目标检测](chapter09_computer-vision/9.5_multiscale-object-detection.md)
    * [13.6 目标检测数据集](chapter09_computer-vision/9.6_object-detection-dataset.md)
-   - [ ] 13.7 单发多框检测（SSD）
+   * [13.7 单发多框检测（SSD）]()
+
    * [13.8 区域卷积神经网络（R-CNN）系列](chapter09_computer-vision/9.8_rcnn.md)
    * [13.9 实战 Kaggle 比赛：图像分类 (CIFAR-10)](https://zh-v2.d2l.ai/chapter_computer-vision/kaggle-cifar10.html)
-   * 13.10 实战Kaggle比赛：狗的品种识别（ImageNet Dogs）
+   * [13.10 实战Kaggle比赛：狗的品种识别（ImageNet Dogs）]()
 
 持续更新中......
 
