@@ -2,16 +2,18 @@
 
 ## 什么是激活函数
 
-* 激活函数是人工神经网络的一个极其重要的特征。
-* 激活函数决定一个神经元是否应该被激活，激活代表神经元接收的信息与给定的信息有关。
+* 激活函数是人工神经网络的一个极其重要的特征；
+* 激活函数决定一个神经元是否应该被激活，**激活**代表神经元接收的信息与给定的信息有关；
 * 激活函数对输入信息进行非线性变换，然后将变换后的输出信息作为输入信息传给下一层神经元。
 
 ## 激活函数的作用
-如果不用激活函数，每一层输出都是上层输入的线性函数，无论神经网络有多少层，输出都是输入的线性组合。
+
+如果不用激活函数，每一层输出都是上层输入的线性函数，无论神经网络有多少层，最终的输出都是输入的线性组合。
 激活函数给神经元引入了非线性因素，使得神经网络可以任意逼近任何非线性函数。
 
 ## 激活函数的种类
 ### identity
+
 函数定义：
 
 $$f(x)=x$$
@@ -20,17 +22,14 @@ $$f(x)=x$$
 
 $${ f }^{ ' }(x)=1$$
 
-函数图形如图 1 所示：
+函数图形如 **图1** 所示：
 
 <center><img src="https://github.com/lvjian0706/Deep-Learning-Img/blob/master/Base/Activation_Function/img/identity.jpg?raw=true" width="400" hegiht="" ></center>
-<center><br>图1：identity</br></center>
+<center><br>图1 identity</br></center>
 
-优点：
-1. 适合于潜在行为是线性（与线性回归相似）的任务。
+优点：适合于潜在行为是线性（与线性回归相似）的任务。
 
-缺点：
-1. 无法提供非线性映射，当多层网络使用identity激活函数时，整个网络就相当于一个单层模型。
-
+缺点：无法提供非线性映射，当多层网络使用identity激活函数时，整个网络就相当于一个单层模型。
 ### step
 函数定义：
 
@@ -40,17 +39,14 @@ $$ { f }(x)=\begin{cases} \begin{matrix} 0 & x<0 \end{matrix} \\ \begin{matrix} 
 
 $$ { f }^{ ' }(x)=\begin{cases} \begin{matrix} 0 & x\neq 0 \end{matrix} \\ \begin{matrix} ? & x=0 \end{matrix} \end{cases}$$
 
-函数图形如图 2 所示：
+函数图形如 **图2** 所示：
 
 <center><img src="https://github.com/lvjian0706/Deep-Learning-Img/blob/master/Base/Activation_Function/img/step.jpg?raw=true" width="400" hegiht="" ></center>
-<center><br>图2：step</br></center>
+<center><br>图2 step</br></center>
 
-优点：
-1. 激活函数 $Step$ 更倾向于理论而不是实际，它模仿了生物神经元要么全有要么全无的属性。
+优点：激活函数 $Step$ 更倾向于理论而不是实际，它模仿了生物神经元要么全有要么全无的属性。
 
-缺点：
-1. 它无法应用于神经网络因为其导数是 $0$（除了零点导数无定义以外），这意味着基于梯度的优化方法并不可行。
-
+缺点：它无法应用于神经网络因为其导数是 $0$（除了零点导数无定义以外），这意味着基于梯度的优化方法并不可行。
 ### sigmoid
 函数定义：
 
@@ -60,10 +56,10 @@ $${ f }(x)=\sigma (x)=\frac { 1 }{ 1+{ e }^{ -x } } $$
 
 $${ f }^{ ' }(x)=f(x)(1-f(x))$$
 
-函数图形如图 3 所示：
+函数图形如 **图3** 所示：
 
 <center><img src="https://github.com/lvjian0706/Deep-Learning-Img/blob/master/Base/Activation_Function/img/sigmoid.jpg?raw=true" width="400" hegiht="" ></center>
-<center><br>图3：sigmoid</br></center>
+<center><br>图3 sigmoid</br></center>
 
 优点：
 1. $sigmoid$ 函数的输出映射在 $(0,1)$ 之间，单调连续，输出范围有限，优化稳定，可以用作输出层；
@@ -83,10 +79,10 @@ $${ f }(x)=tanh(x)=\frac { { e }^{ x }-{ e }^{ -x } }{ { e }^{ x }+{ e }^{ -x } 
 
 $${ f }^{ ' }(x)=1-f(x)^{ 2 }$$
 
-函数图形如图 4 所示：
+函数图形如 **图4** 所示：
 
 <center><img src="https://github.com/lvjian0706/Deep-Learning-Img/blob/master/Base/Activation_Function/img/tanh.jpg?raw=true" width="400" hegiht="" ></center>
-<center><br>图4：tanh</br></center>
+<center><br>图4 tanh</br></center>
 
 优点：
 1. $tanh$ 比 $sigmoid$ 函数收敛速度更快；
@@ -96,7 +92,8 @@ $${ f }^{ ' }(x)=1-f(x)^{ 2 }$$
 1. 与 $sigmoid$ 函数相同，由于饱和性容易产生的梯度消失；
 2. 与 $sigmoid$ 函数相同，由于具有幂运算，计算复杂度较高，运算速度较慢。
 
-### relu
+### ReLU
+
 函数定义：
 
 $$f(x)=\begin{cases} \begin{matrix} 0 & x<0 \end{matrix} \\ \begin{matrix} x & x\ge 0 \end{matrix} \end{cases}$$
@@ -105,22 +102,23 @@ $$f(x)=\begin{cases} \begin{matrix} 0 & x<0 \end{matrix} \\ \begin{matrix} x & x
 
 $${ { f }(x) }^{ ' }=\begin{cases} \begin{matrix} 0 & x<0 \end{matrix} \\ \begin{matrix} 1 & x\ge 0 \end{matrix} \end{cases}$$
 
-函数图形如图 5 所示：
+函数图如 **图5** 所示：
 <center><img src="https://github.com/lvjian0706/Deep-Learning-Img/blob/master/Base/Activation_Function/img/relu.jpg?raw=true" width="400" hegiht="" ></center>
-<center><br>图5：relu</br></center>
+<center><br>图5 ReLU</br></center>
 
 优点：
 1. 收敛速度快；
-2. 相较于 $sigmoid$ 和 $tanh$ 中涉及了幂运算，导致计算复杂度高， $relu$ 可以更加简单的实现；
-3. 当输入 $x>=0$ 时，$relu$ 的导数为常数，这样可有效缓解梯度消失问题；
-4. 当 $x<0$ 时，$relu$ 的梯度总是 $0$，提供了神经网络的稀疏表达能力；
+2. 相较于 $sigmoid$ 和 $tanh$ 中涉及了幂运算，导致计算复杂度高， ReLU​可以更加简单的实现；
+3. 当输入 $x>=0$ 时，ReLU​ 的导数为常数，这样可有效缓解梯度消失问题；
+4. 当 $x<0$ 时，ReLU​ 的梯度总是 $0$，提供了神经网络的稀疏表达能力；
 
 缺点：
-1. $relu$ 的输出不是以 $0$ 为中心的；
+1. ReLU​ 的输出不是以 $0$ 为中心的；
 2. 神经元坏死现象，某些神经元可能永远不会被激活，导致相应参数永远不会被更新；
 3. 不能避免梯度爆炸问题；
 
-### lrelu
+### ReLU
+
 函数定义：
 
 $$ f(x)=\begin{cases} \begin{matrix} \alpha x & x<0 \end{matrix} \\ \begin{matrix} x & x\ge 0 \end{matrix} \end{cases}$$
@@ -129,19 +127,20 @@ $$ f(x)=\begin{cases} \begin{matrix} \alpha x & x<0 \end{matrix} \\ \begin{matri
 
 $${ { f }(x) }^{ ' }=\begin{cases} \begin{matrix} \alpha & x<0 \end{matrix} \\ \begin{matrix} 1 & x\ge 0 \end{matrix} \end{cases}$$
 
-其中，$\alpha$ 常设置为0.01。函数图形如图 6 所示：
+其中，$\alpha$ 常设置为0.01。函数图如 **图6** 所示：
 <center><img src="https://github.com/lvjian0706/Deep-Learning-Img/blob/master/Base/Activation_Function/img/lrelu.jpg?raw=true" width="400" hegiht="" ></center>
-<center><br>图6：lrelu</br></center>
+<center><br>图6 LReLU</br></center>
 
 优点：
 1. 避免梯度消失；
 2. 由于导数总是不为零，因此可减少死神经元的出现；
 
 缺点：
-1. $lrelu$ 表现并不一定比 $relu$ 好；
+1. LReLU​ 表现并不一定比 ReLU​ 好；
 2. 无法避免梯度爆炸问题；
 
-### prelu
+### PReLU
+
 函数定义：
 
 $$f(\alpha ,x)=\begin{cases} \begin{matrix} \alpha x  & x<0 \end{matrix} \\ \begin{matrix} x & x\ge 0 \end{matrix} \end{cases}$$
@@ -150,16 +149,17 @@ $$f(\alpha ,x)=\begin{cases} \begin{matrix} \alpha x  & x<0 \end{matrix} \\ \beg
 
 $${ { f }(\alpha ,x) }^{ ' }=\begin{cases} \begin{matrix} \alpha  & x<0 \end{matrix} \\ \begin{matrix} 1 & x\ge 0 \end{matrix} \end{cases}$$
 
-函数图形如图 7 所示：
+函数图如 **图7** 所示：
 <center><img src="https://github.com/lvjian0706/Deep-Learning-Img/blob/master/Base/Activation_Function/img/prelu.jpg?raw=true" width="400" hegiht="" ></center>
-<center><br>图7：prelu</br></center>
+<center><br>图7 PReLU</br></center>
 
 优点：
-1. $prelu$ 是 $lrelu$ 的改进，可以自适应地从数据中学习参数；
+1. PReLU​ 是 LReLU 的改进，可以自适应地从数据中学习参数；
 2. 收敛速度快、错误率低；
-3. $prelu$ 可以用于反向传播的训练，可以与其他层同时优化；
+3. PReLU 可以用于反向传播的训练，可以与其他层同时优化；
 
-### rrelu
+### RReLU
+
 函数定义：
 
 $$f(\alpha ,x)=\begin{cases} \begin{matrix} \alpha  & x<0 \end{matrix} \\ \begin{matrix} x & x\ge 0 \end{matrix} \end{cases}$$
@@ -168,14 +168,13 @@ $$f(\alpha ,x)=\begin{cases} \begin{matrix} \alpha  & x<0 \end{matrix} \\ \begin
 
 $${ { f }(\alpha ,x) }^{ ' }=\begin{cases} \begin{matrix} \alpha  & x<0 \end{matrix} \\ \begin{matrix} 1 & x\ge 0 \end{matrix} \end{cases}$$
 
-函数图形如图 8 所示：
+函数图形如 **图8** 所示：
 <center><img src="https://github.com/lvjian0706/Deep-Learning-Img/blob/master/Base/Activation_Function/img/rrelu.jpg?raw=true" width="400" hegiht="" ></center>
-<center><br>图8：rrelu</br></center>
+<center><br>图8 RReLU</br></center>
 
-优点：
-1. 为负值输入添加了一个线性项，这个线性项的斜率在每一个节点上都是随机分配的（通常服从均匀分布）
+优点：为负值输入添加了一个线性项，这个线性项的斜率在每一个节点上都是随机分配的（通常服从均匀分布）。
+### ELU
 
-### elu
 函数定义：
 
 $$ f(\alpha ,x)=\begin{cases} \begin{matrix} \alpha \left( { e }^{ x }-1 \right)  & x<0 \end{matrix} \\ \begin{matrix} x & x\ge 0 \end{matrix} \end{cases}$$
@@ -184,20 +183,21 @@ $$ f(\alpha ,x)=\begin{cases} \begin{matrix} \alpha \left( { e }^{ x }-1 \right)
 
 $${ { f }(\alpha ,x) }^{ ' }=\begin{cases} \begin{matrix} f(\alpha ,x)+\alpha  & x<0 \end{matrix} \\ \begin{matrix} 1 & x\ge 0 \end{matrix} \end{cases}$$
 
-函数图形如图 9 所示：
+函数图形如 **图9** 所示：
 <center><img src="https://github.com/lvjian0706/Deep-Learning-Img/blob/master/Base/Activation_Function/img/elu.jpg?raw=true" width="400" hegiht="" ></center>
-<center><br>图9：elu</br></center>
+<center><br>图9 ELU</br></center>
 
 优点：
 1. 导数收敛为零，从而提高学习效率；
 2. 能得到负值输出，这能帮助网络向正确的方向推动权重和偏置变化；
-3. 防止死神经元出现；
+3. 防止死神经元出现。
 
 缺点：
-1. 计算量大，其表现并不一定比 $relu$ 好；
+1. 计算量大，其表现并不一定比 ReLU 好；
 2. 无法避免梯度爆炸问题；
 
-### selu
+### SELU
+
 函数定义：
 
 $$f(\alpha ,x)=\lambda \begin{cases} \begin{matrix} \alpha \left( { e }^{ x }-1 \right)  & x<0 \end{matrix} \\ \begin{matrix} x & x\ge 0 \end{matrix} \end{cases}$$
@@ -206,12 +206,12 @@ $$f(\alpha ,x)=\lambda \begin{cases} \begin{matrix} \alpha \left( { e }^{ x }-1 
 
 $${ { f }(\alpha ,x) }^{ ' }=\lambda \begin{cases} \begin{matrix} \alpha \left( { e }^{ x } \right)  & x<0 \end{matrix} \\ \begin{matrix} 1 & x\ge 0 \end{matrix} \end{cases}$$
 
-函数图形如图 10 所示：
+函数图形 **如图10**  所示：
 <center><img src="https://github.com/lvjian0706/Deep-Learning-Img/blob/master/Base/Activation_Function/img/selu.jpg?raw=true" width="400" hegiht="" ></center>
-<center><br>图10：selu</br></center>
+<center><br>图10 SELU</br></center>
 
 优点：
-1. $selu $是 $elu$ 的一个变种。其中 λ 和 α 是固定数值（分别为 $1.0507$ 和 $1.6726$）;
+1. SELU 是 ELU 的一个变种。其中 λ 和 α 是固定数值（分别为 $1.0507$ 和 $1.6726$）;
 2. 经过该激活函数后使得样本分布自动归一化到 $0$ 均值和单位方差;
 3. 不会出现梯度消失或爆炸问题;
 
@@ -224,9 +224,9 @@ $$f(x)=\frac { x }{ \left| x \right| +1 }$$
 
 $${ f }^{ ' }(x)=\frac { 1 }{ { (1+\left| x \right| ) }^{ 2 } } $$
 
-函数图形如图 11 所示：
+函数图形如 **图 11** 所示：
 <center><img src="https://github.com/lvjian0706/Deep-Learning-Img/blob/master/Base/Activation_Function/img/softsign.jpg?raw=true" width="400" hegiht="" ></center>
-<center><br>图11：softsign</br></center>
+<center><br>图11 softsign</br></center>
 
 优点：
 1. $softsign$ 是 $tanh$ 激活函数的另一个替代选择；
@@ -234,9 +234,10 @@ $${ f }^{ ' }(x)=\frac { 1 }{ { (1+\left| x \right| ) }^{ 2 } } $$
 3. $softsign$ 更平坦的曲线与更慢的下降导数表明它可以更高效地学习；
 
 缺点：
-1. 导数的计算比$Tanh$更麻烦；
+1. 导数的计算比$tanh$ 更麻烦；
 
 ### softplus
+
 函数定义：
 
 $$f(x)=\ln { (1+{ e }^{ x }) }$$
@@ -245,9 +246,9 @@ $$f(x)=\ln { (1+{ e }^{ x }) }$$
 
 $${ f }^{ ' }(x)=\frac { 1 }{ 1+{ e }^{ -x } }$$
 
-函数图形如图 12 所示：
+函数图形如 **图12** 所示：
 <center><img src="https://github.com/lvjian0706/Deep-Learning-Img/blob/master/Base/Activation_Function/img/softplus.jpg?raw=true" width="400" hegiht="" ></center>
-<center><br>图12：softplus</br></center>
+<center><br>图12 softplus</br></center>
 
 优点：
 1. 作为 $relu$ 的一个不错的替代选择，$softplus$ 能够返回任何大于 $0$ 的值。
@@ -264,10 +265,10 @@ $$
 y_i=soft\max \left( x_i \right) =\frac{e^{x_i}}{\sum_{j=1}^k{e^{x_j}}}
 $$
 
-显然，$0<y_i<1$。图 13 给出了三类分类问题的  softmax 输出示意图。在图中，对于取值为 4、1和-4 的 $x_1$、$x_2$ 和 $x_3$，通过 softmax 变换后，将其映射到 (0,1) 之间的概率值。
+显然，$0<y_i<1$。**图13** 给出了三类分类问题的  softmax 输出示意图。在图中，对于取值为 4、1和-4 的 $x_1$、$x_2$ 和 $x_3$，通过 softmax 变换后，将其映射到 (0,1) 之间的概率值。
 
 <center><img src="https://github.com/lvjian0706/Deep-Learning-Img/blob/master/Base/Activation_Function/img/softmax.png?raw=true" width="400" hegiht="" ></center>
-<center><br>图13：三类分类问题的softmax输出示意图</br></center>
+<center><br>图13 三类分类问题的softmax输出示意图</br></center>
 
 由于 softmax 输出结果的值累加起来为 1，因此可将输出概率最大的作为分类目标（图 1 中被分类为第一类）。
 
@@ -280,9 +281,9 @@ $$f\left( x \right) =x\cdot \sigma \left( x \right) $$
 
 其中，$\sigma$ 是 $sigmoid$ 函数。
 
-$swish$ 激活函数的图形如图 14 所示：
+$swish$ 激活函数的图形如 **图14** 所示：
 <center><img src="https://github.com/lvjian0706/Deep-Learning-Img/blob/master/Base/Activation_Function/img/swish.jpg?raw=true" width="400" hegiht="" ></center>
-<center><br>图14：swish 激活函数</br></center>
+<center><br>图14 swish 激活函数</br></center>
 
 $swish$ 激活函数的一阶导数如下：
 
@@ -293,20 +294,20 @@ $$\begin{array}{c}
 	=f\left( x \right) +\sigma \left( x \right) \left( 1-f\left( x \right) \right)\\
 \end{array}$$
 
-$swish$ 激活函数的一阶和二阶导数的图形如图 15 所示：
+$swish$ 激活函数的一阶和二阶导数的图形如 **图15** 所示：
 <center><img src="https://github.com/lvjian0706/Deep-Learning-Img/blob/master/Base/Activation_Function/img/swish_derivatives.jpg?raw=true" width="400" hegiht="" ></center>
-<center><br>图15：swish 导数</br></center>
+<center><br>图15 swish 导数</br></center>
 
 超参数版 $swish$ 激活函数：
 
 $$f\left( x \right) =x\cdot \sigma \left( \beta x \right)$$
 
-其中，$\beta$ 是超参数。超参数版 $swish$ 激活函数的图形如图 16 所示：
+其中，$\beta$ 是超参数。超参数版 $swish$ 激活函数的图形如 **图16** 所示：
 <center><img src="https://github.com/lvjian0706/Deep-Learning-Img/blob/master/Base/Activation_Function/img/swish2.jpg?raw=true" width="400" hegiht="" ></center>
-<center><br>图16：swish 超参数</br></center>
+<center><br>图16 swish 超参数</br></center>
 
 优点：
-1. 当 $x>0$ 时，不存在梯度消失的情况；当 $x<0$ 时，神经元也不会像 $relu$ 一样出现死亡的情况；
+1. 当 $x>0$ 时，不存在梯度消失的情况；当 $x<0$ 时，神经元也不会像 ReLU 一样出现死亡的情况；
 2. $swish$ 处处可导，连续光滑；
 3. $swish$ 并非一个单调的函数；
 4. 提升了模型的性能；
@@ -319,10 +320,10 @@ $$f\left( x \right) =x\cdot \sigma \left( \beta x \right)$$
 
 $$f\left( x \right) =x\frac{\text{Re}LU6\left( x+3 \right)}{6}$$
 
-$hard \ swish$ 和 $swish$ 激活函数对比如图 17 所示：
+$hard \ swish$ 和 $swish$ 激活函数对比如 **图17** 所示：
 
 <center><img src="https://github.com/lvjian0706/Deep-Learning-Img/blob/master/Base/Activation_Function/img/hard_swish.jpg?raw=true" width="400" hegiht="" ></center>
-<center><br>图17：Hard Swish</br></center>
+<center><br>图17 Hard Swish</br></center>
 
 优点：
 与 $swish$ 相比 $hard \ swish$ 减少了计算量，具有和 $swish$ 同样的性质。
@@ -351,7 +352,7 @@ $$s^{'}\left( x \right) =s\left( x \right) \left( 1-s\left( x \right) \right) \i
 
 由上面两个公式可知 $tanh$ 引起的梯度消失问题没有 $sigmoid$ 严重，所以 $tanh$ 收敛速度比 $sigmoid$ 快。
 
-> sigmoid 和 softmax 对比
+> sigmoid 和 softmax 有什么区别？
 
 1. 二分类问题时 $sigmoid$ 和 $softmax$ 是一样的，都是求 $cross \ entropy \ loss$ ，而 $softmax$ 可以用于多分类问题。
 2. $softmax$ 是 $sigmoid$ 的扩展，因为，当类别数 $k=2$ 时，$softmax$ 回归退化为 $logistic$ 回归。
