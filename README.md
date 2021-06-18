@@ -19,9 +19,8 @@
 <center><img src="https://github.com/ZhangHandi/images-for-paddledocs/blob/main/images/readme/qr_code.png?raw=true"/></center>
 
 
-# 二、内容概览
 
-## 1. 零基础实践深度学习入门课
+# 二、 零基础实践深度学习入门课
 
   - **AI Studio在线课程：[《零基础实践深度学习》](https://aistudio.baidu.com/aistudio/course/introduce/1297
     )**：理论和代码结合、实践与平台结合，包含20小时视频课程，由百度杰出架构师、飞桨产品负责人和资深研发人员共同打造。
@@ -35,7 +34,7 @@
     
     
 
-## 2. 深度学习百科
+# 三、 深度学习百科
 
 深度学习百科包含深度学习基础篇、深度学习进阶篇、深度学习应用篇、强化学习篇以及面试宝典，详细信息请参阅[Paddle知识点文档平台](https://paddlepedia.readthedocs.io/en/latest/index.html)。
 
@@ -199,13 +198,16 @@
     * [推荐系统的PV和UV代表什么？](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/evaluation_metric.html#id2)
     * [协同过滤推荐和基于内容的推荐的区别是什么？](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/evaluation_metric.html#id2)
 
-## 3. 产业实践深度学习（开发中）
+# 四、 Transformer系列特色课（开发中）
 
-飞桨工程师筹备中，计划7月陆续上线，敬请期待！
+飞桨工程师筹备中，计划2021年8月份发布，敬请期待！
 
-## 4. Transformer系列特色课（开发中）
+# 五、 经典深度学习案例集（开发中）
 
-飞桨工程师筹备中，计划8月份陆续上线，敬请期待！
+# 六、 产业实践深度学习案例集（开发中）
+
+
+
 
 # 三、技术交流
 
