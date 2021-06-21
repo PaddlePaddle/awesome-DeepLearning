@@ -45,6 +45,7 @@ P-R曲线又叫做：PRC
 $$F1=\frac{2 * P * R}{P + R}$$
 
 ## TPR
+
 真正例率，与召回率相同
 
 $$TPR=\frac{TP}{TP+FN}$$
@@ -65,8 +66,8 @@ $$FPR=\frac{FP}{TN+FP}$$
 
 Area Under ROC Curve，ROC曲线下的面积：
 
-
-![](https://raw.githubusercontent.com/w5688414/paddleImage/main/metrics_img/AUC.png)
+<center><img src="https://raw.githubusercontent.com/w5688414/paddleImage/main/metrics_img/AUC.png" width="500" hegiht="" ></center>
+<center><br>图3 ROC曲线图</br></center>
 
 ## 敏感性
 
