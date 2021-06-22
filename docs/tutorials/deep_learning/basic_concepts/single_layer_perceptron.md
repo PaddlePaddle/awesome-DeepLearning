@@ -2,10 +2,10 @@
 
 ## 1. 单层感知机模型
 
-1957年 Frank Rosenblatt 提出了一种简单的人工神经网络，被称之为感知机。早期的感知机结构和 MCP 模型相似，由一个输入层和一个输出层构成，因此也被称为“单层感知机”。感知机的输入层负责接收实数值的输入向量，输出层则为1或-1两个值。单层感知机可作为一种二分类线性分类模型（结构如图 1 所示）。
+1957年 Frank Rosenblatt 提出了一种简单的人工神经网络，被称之为感知机。早期的感知机结构和 MCP 模型相似，由一个输入层和一个输出层构成，因此也被称为“单层感知机”。感知机的输入层负责接收实数值的输入向量，输出层则为1或-1两个值。单层感知机可作为一种二分类线性分类模型，结构如 **图1** 所示。
 
 <center><img src="https://github.com/lovejing0306/Images/blob/master/DeepLearning/BasicKnowledge/single_perceptron.png?raw=true" width="500" hegiht="" ></center>
-<center><br>图1: 感知机模型 </br></center>
+<center><br>图1 感知机模型 </br></center>
 
 单层感知机的模型可以简单表示为：
 
@@ -55,6 +55,6 @@ $$
 ## 3. 单层感知机存在的问题
 
 <center><img src="https://github.com/lovejing0306/Images/blob/master/DeepLearning/BasicKnowledge/xor.png?raw=true" width="500" hegiht="" ></center>
-<center>图2: 单层感知机模拟不同逻辑函数功能的示意图</center><br></br>
+<center>图2 单层感知机模拟不同逻辑函数功能的示意图</center><br></br>
 
-单层感知机可被用来区分线性可分数据。在图 2 中，逻辑与(AND)、逻辑与非(NAND)和逻辑或(OR)为线性可分函数，所以可利用单层感知机来模拟这些逻辑函数。但是，由于逻辑异或（XOR）是非线性可分的逻辑函数，因此单层感知机无法模拟逻辑异或函数的功能。
+单层感知机可被用来区分线性可分数据。在 **图2** 中，逻辑与(AND)、逻辑与非(NAND)和逻辑或(OR)为线性可分函数，所以可利用单层感知机来模拟这些逻辑函数。但是，由于逻辑异或（XOR）是非线性可分的逻辑函数，因此**单层感知机无法模拟逻辑异或函数的功能**。

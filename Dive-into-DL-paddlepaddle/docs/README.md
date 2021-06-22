@@ -1,3 +1,8 @@
+<div align=center>
+<img width="500" src="./img/cover.jpg">
+</div>
+
+
 [本项目](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Dive-into-DL-paddlepaddle)将[《动手学深度学习》](http://zh.d2l.ai/) 原书中MXNet代码实现改为PaddlePaddle实现。原书作者：阿斯顿·张、李沐、扎卡里 C. 立顿、亚历山大 J. 斯莫拉以及其他社区贡献者，GitHub地址：https://github.com/d2l-ai/d2l-zh
 
 
@@ -22,7 +27,7 @@
 * [1. 前言](chapter01_DL-intro/deep-learning-intro.md)
 
 * 2\. 预备知识
-   
+  
    * [2.1 数据操作](chapter02_prerequisite/2.1_install.md)
    * [2.2 数据预处理](chapter02_prerequisite/2.2_tensor.md)
    * [2.3 线性代数](chapter02_prerequisite/2.3_autograd.md)
@@ -42,7 +47,7 @@
    * [3.7 softmax回归的简洁实现](chapter03_DL-basics/3.7_softmax-regression-pytorch.md)
 
 * 4\. 多层感知机
-   
+  
    * [4.1 多层感知机](chapter03_DL-basics/3.8_mlp.md)
    * [4.2 多层感知机的从零开始实现](chapter03_DL-basics/3.9_mlp-scratch.md)
    * [4.3 多层感知机的简洁实现](chapter03_DL-basics/3.10_mlp-pytorch.md)
@@ -55,7 +60,7 @@
    * [4.10 实战Kaggle比赛：预测房价](chapter03_DL-basics/3.16_kaggle-house-price.md)
    
 * 5\. 深度学习计算
-   
+  
    * [5.1 层和块](chapter05_CNN/5.1_conv-layer.md)
    * [5.2 参数管理](chapter05_CNN/5.2_padding-and-strides.md)
    * [5.3 延后初始化](chapter05_CNN/5.3_channels.md)
@@ -64,7 +69,7 @@
    * [5.6 GPU](chapter04_DL_computation/4.6_use-gpu.md)
    
 * 6\. 卷积神经网络
-   
+  
    * [6.1 从全连接层到卷积](chapter05_CNN/5.5_lenet.md)
    * [6.2 图像卷积]()
    * [6.3 填充和步幅](https://zh-v2.d2l.ai/chapter_convolutional-neural-networks/padding-and-strides.html)
@@ -104,7 +109,7 @@
    * [9.8 束搜索](https://zh-v2.d2l.ai/chapter_recurrent-modern/beam-search.html)
 
 * 12\. 计算性能
-   
+  
    * [12.1 编译器和解释器](https://zh-v2.d2l.ai/chapter_computational-performance/hybridize.html)
    
    * [12.2 异步计算](https://zh-v2.d2l.ai/chapter_computational-performance/async-computation.html)

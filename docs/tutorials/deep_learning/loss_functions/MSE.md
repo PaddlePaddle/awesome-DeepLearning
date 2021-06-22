@@ -1,4 +1,4 @@
-# 均方差损失（MSE Mean Square Error）
+# 均方差损失（Mean Square Error，MSE）
 
 均方误差损失又称为二次损失、L2损失，常用于回归预测任务中。均方误差函数通过计算预测值和实际值之间距离（即误差）的平方来衡量模型优劣。即预测值和真实值越接近，两者的均方差就越小。
 
@@ -13,7 +13,4 @@ $$
 假设真实目标值为100，预测值在-10000到10000之间，我们绘制MSE函数曲线如 **图1** 所示。可以看到，当预测值越接近100时，MSE损失值越小。MSE损失的范围为0到$\infty$ 。
 
 <center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/Base/Loss/MSE/MSE.jpg" width = "1000"></center>
-<center><br>图1：MSE损失示意图</br></center>
-
-​						
-
+<center><br>图1 MSE损失示意图</br></center>
