@@ -2,8 +2,9 @@
 
 在图像分类任务中，图像数据的增广是一种常用的正则化方法，主要用于增加训练数据集，让数据集尽可能的多样化，使得训练的模型具有更强的泛化能力，常用于数据量不足或者模型参数较多的场景。除了 ImageNet 分类任务标准数据增广方法外，还有8种数据增广方式非常常用，这里对其进行简单的介绍和对比，大家也可以将这些增广方法应用到自己的任务中，以获得模型精度的提升。这8种数据增广方式在ImageNet上的精度指标如 **图1** 所示。
 
-<center><img src="../../../images/computer_vision/image_augmentation/main_image_aug.png" width = "800"></center>
-<center><br>图1 8种数据增广方法</br></center>
+![图1 8种数据增广方法](../../../images/computer_vision/image_augmentation/main_image_aug.png)
+
+图1 8种数据增广方法
 
 
 
@@ -28,8 +29,9 @@
 
 增广后的可视化效果如 **图2** 所示。
 
-<center><img src="../../../images/computer_vision/image_augmentation/image_aug_samples_s.jpg" width = "800"></center>
-<center><br>图2 数据增广后可视化</br></center>
+![图2 数据增广后可视化](../../../images/computer_vision/image_augmentation/image_aug_samples_s.jpg)
+
+图2 数据增广后可视化
 
 下文将介绍这些策略的原理与使用方法，其中，每种数据增广策略的参考论文与参考开源代码均在下面的介绍中列出。
 
@@ -37,8 +39,9 @@
 
 > 由于`RandCrop`是随机裁剪，变换前后的图像内容可能会有一定的差别，无法直观地对比变换前后的图像。因此，本节将 `RandCrop` 替换为 `Resize`。
 
-<center><img src="../../../images/computer_vision/image_augmentation/test_baseline.jpeg" width = "1000"></center>
-<center><br>图3 测试图像</br></center>
+![图3 测试图像](../../../images/computer_vision/image_augmentation/test_baseline.jpeg)
+
+图3 测试图像
 
 # 三、图像变换类
 
@@ -57,8 +60,9 @@
 
 结果如 **图4** 所示。
 
-<center><img src="../../../images/computer_vision/image_augmentation/test_autoaugment.jpeg" width = "1000"></center>
-<center><br>图4 AutoAugment后图像可视化</br></center>
+![图4 AutoAugment后图像可视化](../../../images/computer_vision/image_augmentation/test_autoaugment.jpeg)
+
+图4 AutoAugment后图像可视化
 
 ## 3.2 RandAugment
 
@@ -72,8 +76,9 @@
 
 结果如 **图5** 所示。
 
-<center><img src="../../../images/computer_vision/image_augmentation/test_randaugment.jpeg" width = "1000"></center>
-<center><br>图5 RandAugment后图像可视化</br></center>
+![图5 RandAugment后图像可视化](../../../images/computer_vision/image_augmentation/test_randaugment.jpeg)
+
+图5 RandAugment后图像可视化
 
 # 四、图像裁剪类
 
@@ -98,8 +103,9 @@ Cutout 可以理解为 Dropout 的一种扩展操作，不同的是 Dropout 是�
 
 结果如 **图6** 所示。
 
-<center><img src="../../../images/computer_vision/image_augmentation/test_cutout.jpeg" width = "1000"></center>
-<center><br>图6 Cutout后图像可视化</br></center>
+![图6 Cutout后图像可视化](../../../images/computer_vision/image_augmentation/test_cutout.jpeg)
+
+图6 Cutout后图像可视化
 
 ## 4.2 RandomErasing
 
@@ -111,8 +117,9 @@ Cutout 可以理解为 Dropout 的一种扩展操作，不同的是 Dropout 是�
 
 结果如 **图7** 所示。
 
-<center><img src="../../../images/computer_vision/image_augmentation/test_randomerassing.jpeg" width = "1000"></center>
-<center><br>图7 RandomErasing后图像可视化</br></center>
+![图7 RandomErasing后图像可视化](../../../images/computer_vision/image_augmentation/test_randomerassing.jpeg)
+
+图7 RandomErasing后图像可视化
 
 ## 4.3 HideAndSeek
 
@@ -122,13 +129,15 @@ Cutout 可以理解为 Dropout 的一种扩展操作，不同的是 Dropout 是�
 
 `HideAndSeek`论文将图像分为若干块区域(patch)，对于每块区域，都以一定的概率生成掩码，不同区域的掩码含义如 **图8** 所示。
 
-<center><img src="../../../images/computer_vision/image_augmentation/hide-and-seek-visual.png" width = "700"></center>
-<center><br>图8 HideAndSeek分块掩码图</br></center>
+![图8 HideAndSeek分块掩码图](../../../images/computer_vision/image_augmentation/hide-and-seek-visual.png)
+
+图8 HideAndSeek分块掩码图
 
 结果如 **图9** 所示。
 
-<center><img src="../../../images/computer_vision/image_augmentation/test_hideandseek.jpeg" width = "1000"></center>
-<center><br>图9 HideAndSeek后图像可视化</br></center>
+![图9 HideAndSeek后图像可视化](../../../images/computer_vision/image_augmentation/test_hideandseek.jpeg)
+
+图9 HideAndSeek后图像可视化
 
 
 ## 4.4 GridMask
@@ -140,10 +149,12 @@ Cutout 可以理解为 Dropout 的一种扩展操作，不同的是 Dropout 是�
 作者在论文中指出，此前存在的基于对图像 crop 的方法存在两个问题，如 **图10** 所示：
 
 1. 过度删除区域可能造成目标主体大部分甚至全部被删除，或者导致上下文信息的丢失，导致增广后的数据成为噪声数据；
+
 2. 保留过多的区域，对目标主体及上下文基本产生不了什么影响，失去增广的意义。
 
-<center><img src="../../../images/computer_vision/image_augmentation/gridmask-0.png" width = "1000"></center>
-<center><br>图10 增广后的噪声数据</br></center>
+   ![图10 增广后的噪声数据](../../../images/computer_vision/image_augmentation/gridmask-0.png)
+
+图10 增广后的噪声数据
 
 因此如果避免过度删除或过度保留成为需要解决的核心问题。
 
@@ -158,8 +169,9 @@ Cutout 可以理解为 Dropout 的一种扩展操作，不同的是 Dropout 是�
 
 结果如 **图11** 所示。
 
-<center><img src="../../../images/computer_vision/image_augmentation/test_gridmask.jpeg" width = "1000"></center>
-<center><br>图11 GridMask后图像可视化</br></center>
+![图11 GridMask后图像可视化](../../../images/computer_vision/image_augmentation/test_gridmask.jpeg)
+
+图11 GridMask后图像可视化
 
 
 # 五、图像混叠
@@ -183,8 +195,9 @@ Mixup 是最先提出的图像混叠增广方案，其原理简单、方便实�
 
 结果如 **图12** 所示。
 
-<center><img src="../../../images/computer_vision/image_augmentation/test_mixup.png" width = "1000"></center>
-<center><br>图12 Mixup后图像可视化</br></center>
+![图12 Mixup后图像可视化](../../../images/computer_vision/image_augmentation/test_mixup.png)
+
+图12 Mixup后图像可视化
 
 ## 5.2 Cutmix
 
@@ -196,8 +209,9 @@ Mixup 是最先提出的图像混叠增广方案，其原理简单、方便实�
 
 结果如 **图13** 所示。
 
-<center><img src="../../../images/computer_vision/image_augmentation/test_cutmix.png" width = "1000"></center>
-<center><br>图13 Cutmix后图像可视化</br></center>
+![图13 Cutmix后图像可视化](../../../images/computer_vision/image_augmentation/test_cutmix.png)
+
+图13 Cutmix后图像可视化
 
 # 六、实验
 

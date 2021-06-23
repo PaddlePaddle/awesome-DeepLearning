@@ -20,16 +20,19 @@
 
 对于一个尺寸为 $3\times{3}$ 的标准卷积，卷积核大小为  $3\times{3}$ ，卷积核上共包含9个参数，在卷积计算时，卷积核中的元素会与输入矩阵上对应位置的元素进行逐像素的乘积并求和。而空洞卷积与标准卷积相比，多了扩张率这一个参数，扩张率控制了卷积核中相邻元素间的距离，扩张率的改变可以控制卷积核感受野的大小。尺寸为 $3\times{3}$ ，扩张率分别为 $1,2,4$ 时的空洞卷积分别如 **图1**，**图2**，**图3**所示。
 
-<center><img src="../../../images/CNN/convolution_operator/Dilated_Convolution_r1.png" width = "500"></center>
-<center><br>图1 扩张率为1时的3*3空洞卷积</br></center>
+![图1 扩张率为1时的3*3空洞卷积](../../../images/CNN/convolution_operator/Dilated_Convolution_r1.png)
+
+图1 扩张率为1时的3*3空洞卷积
 
 扩张率为1时，空洞卷积与标准卷积计算方式一样。
 
-<center><img src="../../../images/CNN/convolution_operator/Dilated_Convolution_r2.png" width = "500"></center>
-<center><br>图2 扩张率为2时的3*3空洞卷积</br></center>
+![图2 扩张率为2时的3*3空洞卷积](../../../images/CNN/convolution_operator/Dilated_Convolution_r2.png)
 
-<center><img src="../../../images/CNN/convolution_operator/Dilated_Convolution_r4.png" width = "500"></center>
-<center><br>图3 扩张率为4时的3*3空洞卷积</br></center>
+图2 扩张率为2时的3*3空洞卷积
+
+![图3 扩张率为4时的3*3空洞卷积](../../../images/CNN/convolution_operator/Dilated_Convolution_r4.png)
+
+图3 扩张率为4时的3*3空洞卷积
 
 扩张率大于1时，在标准卷积的基础上，会注入空洞，空洞中的数值全部填0。
 
@@ -37,8 +40,9 @@
 
 对于标准卷积而言，当标准卷积核尺寸为 $3\times{3}$ 时，我们在输入矩阵上连续进行两次标准卷积计算，得到两个特征图。我们可以观察不同层数的卷积核感受野大小，如 **图4** 所示。
 
-<center><img src="../../../images/CNN/convolution_operator/Receptive_Field_5*5.png" width = "700"></center>
-<center><br>图4 标准卷积的感受野示例</br></center>
+![图4 标准卷积的感受野示例](../../../images/CNN/convolution_operator/Receptive_Field_5*5.png)
+
+图4 标准卷积的感受野示例
 
 其中，$3\times3$卷积对应的感受野大小就是$3\times3$，而通过两层$3\times3$的卷积之后，感受野的大小将会增加到$5\times5$。
 
@@ -48,8 +52,9 @@ $$F = k + (k-1)(r-1)$$
 
 卷积核大小 $k=3$ ，扩张率 $r=2$ 时，计算方式如 **图5** 所示。
 
-<center><img src="../../../images/CNN/convolution_operator/Dilated_Convolution_Receptive_Field.png" width = "700"></center>
-<center><br>图5 空洞卷积的感受野示例</br></center>
+![图5 空洞卷积的感受野示例](../../../images/CNN/convolution_operator/Dilated_Convolution_Receptive_Field.png)
+
+图5 空洞卷积的感受野示例
 
 其中，通过一层空洞卷积后，感受野大小为$5\times5$，而通过两层空洞卷积后，感受野的大小将会增加到$9\times9$。
 

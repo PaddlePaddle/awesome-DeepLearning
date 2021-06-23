@@ -2,8 +2,9 @@
 
 对计算机而言，能够“看到”的是图像被编码之后的数字，它很难理解高层语义概念，比如图像或者视频帧中出现的目标是人还是物体，更无法定位目标出现在图像中哪个区域。目标检测的主要目的是让计算机可以自动识别图片或者视频帧中所有目标的类别，并在该目标周围绘制边界框，标示出每个目标的位置，如 **图1** 所示。
 
-<center><img src="../../../images/computer_vision/object_detection/Classification_Detection.png" width = "800"></center>
-<center><br>图1 图像分类和目标检测示意图</br></center>
+![图1 图像分类和目标检测示意图](../../../images/computer_vision/object_detection/Classification_Detection.png)
+
+图1 图像分类和目标检测示意图
 
 * 图1(a)是图像分类任务，只需对这张图片进行类别识别。 
 * 图1(b)是目标检测任务，不仅要识别出这一张图片中的类别为斑马，还要标出图中斑马的位置。
@@ -13,19 +14,24 @@
 如 **图2** 所示，如今的目标检测不论在日常生活中还是工业生产中都有着非常多的应用场景。
 
 - 消费娱乐：智能手机的人脸解锁以及支付APP中的人脸支付；自动售货机使用的商品检测；视频网站中图片、视频审核等；
+
 - 智慧交通：自动驾驶中的行人检测、车辆检测、红绿灯检测等；
+
 - 工业生产：工业生产中的零件计数、缺陷检测；设备巡检场景下的设备状态监控；厂区中的烟火检测、安全帽检测等；
+
 - 智慧医疗：眼底、肺部等器官病变检测；新冠疫情中的口罩检测等。
 
-<center><img src="../../../images/computer_vision/object_detection/Application.jpg" width = "800"></center>
-<center><br>图2 目标检测应用场景</br></center>
+  ![图2 目标检测应用场景](../../../images/computer_vision/object_detection/Application.jpg)
+
+图2 目标检测应用场景
 
 ## 目标检测发展历程
 
 在图像分类任务中，我们会先使用卷积神经网络提取图像特征，然后再用这些特征预测分类概率，根据训练样本标签建立起分类损失函数，开启端到端的训练，如 **图3** 所示。
 
-<center><img src="../../../images/computer_vision/object_detection/Classification.png" width = "800"></center>
-<center><br>图3 图像分类流程示意图</br></center>
+![图3 图像分类流程示意图](../../../images/computer_vision/object_detection/Classification.png)
+
+图3 图像分类流程示意图
 
 但对于目标检测问题，按照 **图3** 的流程则行不通。因为在对整张图提取特征的过程中无法体现出不同目标之间的区别，最终也就没法分别标示出每个物体所在的位置。
 
@@ -33,8 +39,9 @@
 
 那么，现在问题的关键就是如何产生候选区域？比如我们可以使用穷举法来产生候选区域，如 **图4** 所示。
 
-<center><img src="../../../images/computer_vision/object_detection/Region_Proposal.png" width = "800"></center>
-<center><br>图4 候选区域</br></center>
+![图4 候选区域](../../../images/computer_vision/object_detection/Region_Proposal.png)
+
+图4 候选区域
 
 A为图像上的某个像素点，B为A右下方另外一个像素点，A、B两点可以确定一个矩形框，记作AB。
 
@@ -54,8 +61,9 @@ A为图像上的某个像素点，B为A右下方另外一个像素点，A、B两
 
 以上都是基于R-CNN系列的著名模型，对目标检测方向的发展有着较大的影响力。此外，还有一些其他模型，比如SSD<sup>[5]</sup>、YOLO<sup>[6,7,8]</sup>、R-FCN<sup>[9]</sup>等也都是目标检测领域流行的模型结构。**图5** 为目标检测综述文章<sup>[10]</sup>中的一幅图，梳理了近些年目标检测算法的发展流程。
 
-<center><img src="../../../images/computer_vision/object_detection/Development_Path.png" width = "800"></center>
-<center><br>图5 目标检测算法发展流程</br></center>
+![图5 目标检测算法发展流程](../../../images/computer_vision/object_detection/Development_Path.png)
+
+图5 目标检测算法发展流程
 
 其中，由于上文所述的R-CNN的系列算法将目标检测任务分成两个阶段，先在图像上产生候选区域，再对候选区域进行分类并预测目标物体位置，所以它们通常被叫做**两阶段检测算法**。而SSD和YOLO系列算法则是使用一个网络同时产生候选区域并预测出物体的类别和位置，所以它们通常被叫做**单阶段检测算法**。
 
@@ -70,8 +78,9 @@ A为图像上的某个像素点，B为A右下方另外一个像素点，A、B两
 
 由于上述缺点的存在，近些年研究者们还提出了另外一类效果优异的算法，这些算法不再使用anchor回归预测框，因此也称作Anchor-free的算法，例如：CornerNet<sup>[11]</sup>和CenterNet<sup>[12]</sup>等。**图6** 为大家简单罗列了经典的Anchor-base和Anchor-free的算法。
 
-<center><img src="../../../images/computer_vision/object_detection/Development_Path_2.png" width = "800"></center>
-<center><br>图6 基于深度学习的目标检测算法发展流程</br></center>
+![图6 基于深度学习的目标检测算法发展流程](../../../images/computer_vision/object_detection/Development_Path_2.png)
+
+图6 基于深度学习的目标检测算法发展流程
 
 
 Anchor-base和Anchor-free的算法也各具优势，下表为大家简单对比了几类算法各自的优缺点。

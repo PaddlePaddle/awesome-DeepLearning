@@ -2,8 +2,9 @@
 
 在生物学中，神经元细胞有兴奋与抑制两种状态。大多数神经元细胞在正常情况下处于抑制状态，一旦某个神经元受到刺激并且电位超过一定的阈值后，这个神经元细胞就被激活，处于兴奋状态，并向其他神经元传递信息。基于神经元细胞的结构特性与传递信息方式，神经科学家 Warren McCulloch 和逻辑学家 Walter Pitts 合作提出了“McCulloch–Pitts (MCP) neuron”模型。在人工神经网络中，MCP模型成为人工神经网络中的最基本结构。MCP模型结构如 **图1** 所示。
 
-<center><img src="../../../images/deep_learning/basic_concepts/neurons.png" width="500" hegiht="" ></center>
-<center><br>图1 MCP 模型结构</br></center>
+![图1 MCP 模型结构](../../../images/deep_learning/basic_concepts/neurons.png)
+
+图1 MCP 模型结构
 
 从 **图1** 可见，给定 n 个二值化（0或1）的输入数据 $x_i$ ($1\le i\le n$)与连接参数 $w_i$ ($1\le i\le n$)，MCP 神经元模型对输入数据线性加权求和，然后使用函数 $\varPhi \left(  \right)$ 将加权累加结果映射为 0 或 1 ，以完成两类分类的任务：
 

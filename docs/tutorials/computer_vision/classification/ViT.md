@@ -14,8 +14,9 @@
 
 ViT算法的整体结构如 **图1** 所示。
 
-<center><img src="../../../images/computer_vision/classification/ViT.png" width = "700"></center>
-<center><br>图1 ViT算法结构示意图</br></center>
+![图1 ViT算法结构示意图](../../../images/computer_vision/classification/ViT.png)
+
+图1 ViT算法结构示意图
 
 ### 1. 图像分块嵌入
 
@@ -27,8 +28,9 @@ ViT中的具体实现方式为：将 $H \times W \times C$ 的图像，变为一
 
 上述对图像进行分块以及 Embedding 的具体方式如 **图2** 所示。
 
-<center><img src="../../../images/computer_vision/classification/VIT_pic2.png" width = "700"></center>
-<center><br>图2 图像分块嵌入示意图</br></center>
+![图2 图像分块嵌入示意图](../../../images/computer_vision/classification/VIT_pic2.png)
+
+图2 图像分块嵌入示意图
 
 具体代码实现如下所示。本文中将每个大小为 $P$ 的图像块经过大小为 $P$ 的卷积核来代替原文中将大小为 $P$ 的图像块展平后接全连接运算的操作。
 
@@ -67,13 +69,15 @@ class PatchEmbed(nn.Layer):
 
 将图像转化为 $N \times (P^2 * C)$ 的序列后，就可以将其输入到 Transformer 结构中进行特征提取了，如 **图3** 所示。
 
-<center><img src="../../../images/computer_vision/classification/VIT_pic3.png" width = "700"></center>
-<center><br>图3 多头注意力示意图</br></center>
+![图3 多头注意力示意图](../../../images/computer_vision/classification/VIT_pic3.png)
+
+图3 多头注意力示意图
 
 Transformer 结构中最重要的结构就是 Multi-head Attention，即多头注意力结构。具有2个head的 Multi-head Attention 结构如 **图4** 所示。输入 $a^i$ 经过转移矩阵，并切分生成 $q^{(i,1)}$、$q^{(i,2)}$、$k^{(i,1)}$、$k^{(i,2)}$、$v^{(i,1)}$、$v^{(i,2)}$，然后 $q^{(i,1)}$ 与 $k^{(i,1)}$ 做 attention，得到权重向量 $\alpha$，将 $\alpha$ 与 $v^{(i,1)}$ 进行加权求和，得到最终的 $b^{(i,1)}(i=1,2,…,N)$，同理可以得到 $b^{(i,2)}(i=1,2,…,N)$。接着将它们拼接起来，通过一个线性层进行处理，得到最终的结果。
 
-<center><img src="../../../images/computer_vision/classification/Multi-head_Attention.jpg" width = "600"></center>
-<center><br>图4 多头注意力</br></center>
+![图4 多头注意力](../../../images/computer_vision/classification/Multi-head_Attention.jpg)
+
+图4 多头注意力
 
 其中，使用 $q^{(i,j)}$、$k^{(i,j)}$ 与 $v^{(i,j)}$ 计算 $b^{(i,j)}(i=1,2,…,N)$ 的方法是缩放点积注意力 (Scaled Dot-Product Attention)。 结构如 **图5** 所示。首先使用每个 $q^{(i,j)}$ 去与 $k^{(i,j)}$ 做 attention，这里说的 attention 就是匹配这两个向量有多接近，具体的方式就是计算向量的加权内积，得到 $\alpha_{(i,j)}$。这里的加权内积计算方式如下所示：
 
@@ -83,8 +87,9 @@ $$ \alpha_{(1,i)} =  q^1 * k^i / \sqrt{d} $$
 
 接下来，把计算得到的 $\alpha_{(i,j)}$ 取 softmax 操作，再将其与 $v^{(i,j)}$ 相乘。
 
-<center><img src="../../../images/computer_vision/classification/attention.png" width = "400"></center>
-<center><br>图5 缩放点积注意力</br></center>
+![图5 缩放点积注意力](../../../images/computer_vision/classification/attention.png)
+
+图5 缩放点积注意力
 
 具体代码实现如下所示。
 
@@ -135,13 +140,15 @@ class Attention(nn.Layer):
 
  Transformer 结构中还有一个重要的结构就是 MLP，即多层感知机，如 **图6** 所示。
 
-<center><img src="../../../images/computer_vision/classification/VIT_pic6.png" width = "700"></center>
-<center><br>图6 MLP多层感知机的结构</br></center>
+![图6 MLP多层感知机的结构](../../../images/computer_vision/classification/VIT_pic6.png)
+
+图6 MLP多层感知机的结构
 
 多层感知机由输入层、输出层和至少一层的隐藏层构成。网络中各个隐藏层中神经元可接收相邻前序隐藏层中所有神经元传递而来的信息，经过加工处理后将信息输出给相邻后续隐藏层中所有神经元。在多层感知机中，相邻层所包含的神经元之间通常使用“全连接”方式进行连接。多层感知机可以模拟复杂非线性函数功能，所模拟函数的复杂性取决于网络隐藏层数目和各层中神经元数目。多层感知机的结构如 **图7** 所示。
 
-<center><img src="../../../images/computer_vision/classification/MLP.png" width = "400"></center>
-<center><br>图7 多层感知机</br></center>
+![图7 多层感知机](../../../images/computer_vision/classification/MLP.png)
+
+图7 多层感知机
 
 具体代码实现如下所示。
 
@@ -207,8 +214,9 @@ class DropPath(nn.Layer):
 
 基于上面实现的 Attention、MLP、DropPath模块就可以组合出 Vision Transformer 模型的一个基础模块，如 **图8** 所示。
 
-<center><img src="../../../images/computer_vision/classification/VIT_pic8.png" width = "700"></center>
-<center><br>图8 基础模块示意图</br></center>
+![图8 基础模块示意图](../../../images/computer_vision/classification/VIT_pic8.png)
+
+图8 基础模块示意图
 
 基础模块的具体实现如下：
 
@@ -270,8 +278,9 @@ class Block(nn.Layer):
 
 按照 Transformer 结构中的位置编码习惯，这个工作也使用了位置编码。不同的是，ViT 中的位置编码没有采用原版 Transformer 中的 $sincos$ 编码，而是直接设置为可学习的 Positional Encoding。对训练好的 Positional Encoding 进行可视化，如 **图9** 所示。我们可以看到，位置越接近，往往具有更相似的位置编码。此外，出现了行列结构，同一行/列中的 patch 具有相似的位置编码。
 
-<center><img src="../../../images/computer_vision/classification/Positional_Encoding.png" width = "500"></center>
-<center><br>图9 Positional Encoding </br></center>
+![图9 Positional Encoding](../../../images/computer_vision/classification/Positional_Encoding.png)
+
+图9 Positional Encoding
 
 * MLP Head
 
@@ -410,8 +419,9 @@ class VisionTransformer(nn.Layer):
 
 ViT模型在常用数据集上进行迁移学习，最终指标如 **图10** 所示。可以看到，在ImageNet上，ViT达到的最高指标为88.55%；在ImageNet ReaL上，ViT达到的最高指标为90.72%；在CIFAR100上，ViT达到的最高指标为94.55%；在VTAB(19 tasks)上，ViT达到的最高指标为88.55%。
 
-<center><img src="../../../images/computer_vision/classification/ViT_ACC.png" width = "600"></center>
-<center><br>图10 ViT网络指标</br></center>
+![图10 ViT网络指标](../../../images/computer_vision/classification/ViT_ACC.png)
+
+图10 ViT网络指标
 
 ## 模型特点
 

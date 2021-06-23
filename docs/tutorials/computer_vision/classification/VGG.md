@@ -12,8 +12,9 @@ VGG中还有一个显著特点：每次经过池化层（maxpooling）后特征�
 
 在VGG中每层卷积将使用ReLU作为激活函数，在全连接层之后添加dropout来抑制过拟合。使用小的卷积核能够有效地减少参数的个数，使得训练和测试变得更加有效。比如使用两层$3\times 3$ 卷积层，可以得到感受野为5的特征图，而比使用$5 \times 5$的卷积层需要更少的参数。由于卷积核比较小，可以堆叠更多的卷积层，加深网络的深度，这对于图像分类任务来说是有利的。VGG模型的成功证明了增加网络的深度，可以更好的学习图像中的特征模式。
 
-<center><img src="../../../images/computer_vision/classification/VGG.png" width = "1000"></center>
-<center><br>图1 VGG模型网络结构示意图</br></center>
+![图1 VGG模型网络结构示意图](../../../images/computer_vision/classification/VGG.png)
+
+图1 VGG模型网络结构示意图
 
 ## 模型实现
 
@@ -112,8 +113,9 @@ class VGG(paddle.nn.Layer):
 
 VGG 在 2014 年的 ImageNet 比赛上取得了亚军的好成绩，具体指标如 **图2** 所示。**图2** 第一行为在 ImageNet 比赛中的指标，测试集的Error rate达到了7.3%，在论文中，作者对算法又进行了一定的优化，最终可以达到 6.8% 的Error rate。
 
-<center><img src="../../../images/computer_vision/classification/VGG_Error_Rate.png" width = "1000"></center>
-<center><br>图2 VGG模型指标</br></center>
+![图2 VGG模型指标](../../../images/computer_vision/classification/VGG_Error_Rate.png)
+
+图2 VGG模型指标
 
 
 
