@@ -4,13 +4,15 @@
 
 CTC 算法主要用来解决神经网络中标签和预测值无法对齐的情况，通常用于文字识别以及语音等序列学习领域。举例来说，在语音识别任务中，我们希望语音片段可以与对应的文本内容一一对应，这样才能方便我们后续的模型训练。但是对齐音频与文本是一件很困难的事，如 **图1** 所示，每个人的语速都不同，有人说话快，有人说话慢，我们很难按照时序信息将语音序列切分成一个个的字符片段。而手动对齐音频与字符又是一件非常耗时耗力的任务。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/Base/Loss/CTC/img/speech_recognition.jpg" width = "400"></center>
-<center><br>图1 语音识别任务中音频与文本无法对齐</br></center>
+![图1 语音识别任务中音频与文本无法对齐](../../../images/deep_learning/loss_functions/speech_recognition.jpg)
+
+图1 语音识别任务中音频与文本无法对齐
 
 在文本识别领域，由于字符间隔、图像变形等问题，相同的字符也会得到不同的预测结果，所以同样会会遇到标签和预测值无法对齐的情况。如 **图2** 所示。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/Base/Loss/CTC/img/Align_Characters.png" width = "600"></center>
-<center><br>图2 不同表现形式的相同字符示意图</br></center>
+![图2 不同表现形式的相同字符示意图](../../../images/deep_learning/loss_functions/Align_Characters.png)
+
+图2 不同表现形式的相同字符示意图
 
 总结来说，假设我们有个输入（如字幅图片或音频信号）$X$ ，对应的输出是 $Y$ ，在序列学习领域，通常会碰到如下难点：
 
@@ -22,8 +24,9 @@ CTC 算法主要用来解决神经网络中标签和预测值无法对齐的情�
 
 引入CTC主要就是要解决上述问题。这里以文本识别算法CRNN为例，分析CTC的计算方式及作用。CRNN中，整体流程如 **图3** 所示。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/Base/Loss/CTC/img/CRNN.png" width = "600"></center>
-<center><br>图3 CRNN整体流程</br></center>
+![图3 CRNN整体流程](../../../images/deep_learning/loss_functions/CRNN.png)
+
+图3 CRNN整体流程
 
 CRNN中，首先使用CNN提取图片特征，特征图的维度为$m\times T$ ，特征图 $x$ 可以定义为：
 
@@ -59,8 +62,9 @@ L' = L \cup \{-\}
 $$
  此时，就回到了我们上文提到的问题上了，由于字符间隔、图像变形等问题，相同的字符可能会得到不同的预测结果。在CTC算法中，定义了 $B$ 变换来解决这个问题。  $B$ 变换简单来说就是将模型的预测结果去掉分割符以及重复字符（如果同个字符连续出现，则表示只有1个字符，如果中间有分割符，则表示该字符出现多次），使得不同表现形式的相同字符得到统一的结果。如 **图4** 所示。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/Base/Loss/CTC/img/CTC.png" width = "600"></center>
-<center><br>图4 CTC示意图</br></center>
+![图4 CTC示意图](../../../images/deep_learning/loss_functions/CTC.png)
+
+图4 CTC示意图
 
 这里举几个简单的例子便于理解，这里令T为10:
 

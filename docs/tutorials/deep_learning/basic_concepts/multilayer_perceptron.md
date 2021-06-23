@@ -4,8 +4,9 @@
 
 如 **图1** 所示，多层感知机由输入层、输出层和至少一层的隐藏层构成。网络中各个隐藏层中神经元可接收相邻前序隐藏层中所有神经元传递而来的信息，经过加工处理后将信息输出给相邻后续隐藏层中所有神经元。
 
-<center><img src="https://github.com/lovejing0306/Images/blob/master/DeepLearning/BasicKnowledge/multi_perceptron.png?raw=true" width="500" hegiht="" ></center>
-<center>图1 多层感知机模型</center><br></br>
+![图1 多层感知机模型](../../../images/deep_learning/basic_concepts/multi_perceptron.png)
+
+图1 多层感知机模型
 
 
 在多层感知机中，相邻层所包含的神经元之间通常使用“全连接”方式进行连接。所谓“全连接”是指两个相邻层之间的神经元相互成对连接，但同一层内神经元之间没有连接。多层感知机可以模拟复杂非线性函数功能，所模拟函数的复杂性取决于网络隐藏层数目和各层中神经元数目。

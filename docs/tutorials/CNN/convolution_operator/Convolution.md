@@ -4,15 +4,17 @@
 
 在全连接网络<sup>[1]</sup>中，一张图片上的所有像素点会被展开成一个1维向量输入网络，如 **图1** 所示，28 x 28的输入数据被展开成为784 x 1 的数据作为输入。
 
-<center><img src="https://github.com/tngt/img/blob/master/fc.png" width = "700"></center>
-<center><br>图1 全连接网络图</br></center>
+![图1 全连接网络图](../../../images/CNN/convolution_operator/fc.png)
+
+图1 全连接网络图
 
 这样往往会存在如下两个问题：
 
 **1. 输入数据的空间信息被丢失。** 空间上相邻的像素点往往具有相似的RGB值，RGB的各个通道之间的数据通常密切相关，但是转化成1维向量时，这些信息被丢失。如 **图2** 所示，空间位置相邻的两个点A和B，转化成1维向量后并没有体现出他们之间的空间关联性。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Convolution/img/Fully_Connected.png" width = "600"></center>
-<center><br>图2 图片转换为1维向量</br></center>
+![图2 图片转换为1维向量](../../../images/CNN/convolution_operator/Fully_Connected.png)
+
+图2 图片转换为1维向量
 
 **2. 模型参数过多，容易发生过拟合。** 由于每个像素点都要跟所有输出的神经元相连接。当图片尺寸变大时，输入神经元的个数会按图片尺寸的平方增大，导致模型参数过多，容易发生过拟合。例如：对于一幅$1000\times 1000$ 的输入图像而言，如果下一个隐含层的神经元数目为$10^6$ 个，那么将会有$1000\times 1000\times 10^6=10^{12}$ 个权重参数，可以想象，如此大规模的参数量使得网络很难训练。
 
@@ -32,8 +34,9 @@
 
 在卷积神经网络中，卷积层的实现方式实际上是数学中定义的互相关 （cross-correlation）运算，具体的计算过程如 **图3** 所示，每张图的左图表示输入数据是一个维度为3 x 3的二维数组；中间的图表示卷积核是一个维度为2 x 2的二维数组。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Convolution/img/convolution.png" width = "700"></center>
-<center><br>图3 卷积计算过程</br></center>
+![图3 卷积计算过程](../../../images/CNN/convolution_operator/convolution.png)
+
+图3 卷积计算过程
 
 
 - 如图3（a）所示：左边的图大小是$3\times3$，表示输入数据是一个维度为$3\times3$的二维数组；中间的图大小是$2\times2$，表示一个维度为$2\times2$的二维数组，我们将这个二维数组称为卷积核。先将卷积核的左上角与输入数据的左上角（即：输入数据的(0, 0)位置）对齐，把卷积核的每个元素跟其位置对应的输入数据中的元素相乘，再把所有乘积相加，得到卷积输出的第一个结果：
@@ -97,8 +100,9 @@ $$W_{out} = W - k_w + 1$$
 
 如果输入尺寸为4，卷积核大小为3时，输出尺寸为$4-3+1=2$。读者可以自行检查当输入图片和卷积核为其他尺寸时，上述计算式是否成立。当卷积核尺寸大于1时，输出特征图的尺寸会小于输入图片尺寸。如果经过多次卷积，输出图片尺寸会不断减小。为了避免卷积之后图片尺寸变小，通常会在图片的外围进行填充(padding)，如 **图4** 所示。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Convolution/img/padding.png" width = "700"></center>
-<center><br>图4 图形填充 </br></center>
+![图4 图形填充](../../../images/CNN/convolution_operator/padding.png)
+
+图4 图形填充
 
 - 如图4（a）所示：填充的大小为1，填充值为0。填充之后，输入图片尺寸从$4\times4$变成了$6\times6$，使用$3\times3$的卷积核，输出图片尺寸为$4\times4$。
 
@@ -125,8 +129,9 @@ $$W_{out} = W + 2p_w - k_w + 1$$
 
 **图3** 中卷积核每次滑动一个像素点，这是步长为1的情况。**图5** 是步长为2的卷积过程，卷积核在图片上移动时，每次移动大小为2个像素点。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Convolution/img/stride.png" width = "600"></center>
-<center><br>图5 步幅为2的卷积过程 </br></center>
+![图5 步幅为2的卷积过程](../../../images/CNN/convolution_operator/stride.png)
+
+图5 步幅为2的卷积过程
 
 当高和宽方向的步幅分别为$s_h$和$s_w$时，输出特征图尺寸的计算公式是：
 
@@ -154,13 +159,15 @@ $$W_{out} = \frac{100 + 2 - 3}{2} + 1 = 50$$
 
 比如$3\times3$卷积对应的感受野大小就是$3\times3$，如 **图6** 所示。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Convolution/img/Receptive_Field_3*3.png" width = "800"></center>
-<center><br>图6 感受野为3×3的卷积 </br></center>
+![图6 感受野为3×3的卷积](../../../images/CNN/convolution_operator/Receptive_Field_3*3.png)
+
+图6 感受野为3×3的卷积
 
 而当通过两层$3\times3$的卷积之后，感受野的大小将会增加到$5\times5$，如 **图7** 所示。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Convolution/img/Receptive_Field_5*5.png" width = "800"></center>
-<center><br>图7 感受野为5×5的卷积 </br></center>
+![图7 感受野为5×5的卷积](../../../images/CNN/convolution_operator/Receptive_Field_5*5.png)
+
+图7 感受野为5×5的卷积
 
 因此，当增加卷积网络深度的同时，感受野将会增大，输出特征图中的一个像素点将会包含更多的图像语义信息。
 
@@ -181,15 +188,15 @@ $$W_{out} = \frac{100 + 2 - 3}{2} + 1 = 50$$
 上面的例子中，卷积层的数据是一个2维数组，但实际上一张图片往往含有RGB三个通道，要计算卷积的输出结果，卷积核的形式也会发生变化。假设输入图片的通道数为$3$，输入数据的形状是$3\times{H_{in}}\times{W_{in}}$，计算过程如 **图8** 所示。
 
 1. 对每个通道分别设计一个2维数组作为卷积核，卷积核数组的形状是$3\times{k_h}\times{k_w}$。
-
 1. 对任一通道$c_{in} \in [0, 3)$，分别用大小为$k_h\times{k_w}$的卷积核在大小为$H_{in}\times{W_{in}}$的二维数组上做卷积。
-
 1. 将这$3$个通道的计算结果相加，得到的是一个形状为$H_{out}\times{W_{out}}$的二维数组。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Convolution/img/multi_in_channel.png" width = "800"></center>
-<center><br>图8 多输入通道计算过程 </br></center>
+![图8 多输入通道计算过程](../../../images/CNN/convolution_operator/multi_in_channel.png)
+
+图8 多输入通道计算过程
 
 ### 多输出通道场景
+
 如果我们希望检测多种类型的特征，实际上我们可以使用多个卷积核进行计算。所以一般来说，卷积操作的输出特征图也会具有多个通道$C_{out}$，这时我们需要设计$C_{out}$个维度为$C_{in}\times{k_h}\times{k_w}$的卷积核，卷积核数组的维度是$C_{out}\times C_{in}\times{k_h}\times{k_w}$。
 
 1. 对任一输出通道$c_{out} \in [0, C_{out})$，分别使用上面描述的形状为$C_{in}\times{k_h}\times{k_w}$的卷积核对输入图片做卷积。
@@ -203,18 +210,22 @@ $$W_{out} = \frac{100 + 2 - 3}{2} + 1 = 50$$
 
 1. 将这$2$个形状为$H_{out}\times{W_{out}}$的二维数组拼接在一起，形成维度为$2\times{H_{out}}\times{W_{out}}$的三维数组。
 
-   <center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Convolution/img/multi_out_channel.png" width = "800"></center>
-   <center><br>图9 多输出通道计算过程 </br></center>
+
+![图9 多输出通道计算过程](../../../images/CNN/convolution_operator/multi_out_channel.png)
+
+图9 多输出通道计算过程
 
 ### 批量操作
+
 在卷积神经网络的计算中，通常将多个样本放在一起形成一个mini-batch进行批量操作，即输入数据的维度是$N\times{C_{in}}\times{H_{in}}\times{W_{in}}$。由于会对每张图片使用同样的卷积核进行卷积操作，卷积核的维度是$C_{out}\times C_{in}\times{k_h}\times{k_w}$，那么，输出特征图的维度就是$N\times{C_{out}}\times{H_{out}}\times{W_{out}}$。
 
 ### 应用示例
 
 假设我们输入数据的维度是$2\times{3}\times{H_{in}}\times{W_{in}}$，卷积核的维度与上面多输出通道的情况一样，仍然是$2\times 3\times{k_h}\times{k_w}$，输出特征图的维度是$2\times{2}\times{H_{out}}\times{W_{out}}$。如 **图10** 所示。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Convolution/img/mini_batch.jpg" width = "800"></center>
-<center><br>图10 批量操作 </br></center>
+![图10 批量操作](../../../images/CNN/convolution_operator/mini_batch.jpg)
+
+图10 批量操作
 
 ## 七、卷积优势
 
@@ -226,8 +237,9 @@ $$W_{out} = \frac{100 + 2 - 3}{2} + 1 = 50$$
 
 在上文中，我们介绍了感受野的概念，可以想像，在卷积操作中，每个神经元只与局部的一块区域进行连接。对于二维图像，局部像素关联性较强，这种局部连接保证了训练后的滤波器能够对局部特征有最强的响应，使神经网络可以提取数据的局部特征。全连接与局部连接的对比如 **图11** 所示。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Convolution/img/Local_Connection.png" width = "800"></center>
-<center><br>图11 全连接与局部连接 </br></center>
+![图11 全连接与局部连接](../../../images/CNN/convolution_operator/Local_Connection.png)
+
+图11 全连接与局部连接
 
 同时，由于使用了局部连接，隐含层的每个神经元仅与部分图像相连，考虑本文开篇提到的例子，对于一幅$1000\times 1000$ 的输入图像而言，下一个隐含层的神经元数目同样为$10^6$ 个，假设每个神经元只与大小为$10\times 10$ 的局部区域相连，那么此时的权重参数量仅为$10\times 10\times 10^6=10^{8}$ ，相交密集链接的全连接层少了4个数量级。
 
@@ -235,15 +247,17 @@ $$W_{out} = \frac{100 + 2 - 3}{2} + 1 = 50$$
 
 卷积计算实际上是使用一组卷积核在图片上进行滑动，计算乘加和。因此，对于同一个卷积核的计算过程而言，在与图像计算的过程中，它的权重是共享的。这其实就大大降低了网络的训练难度， **图12** 为权重共享的示意图。这里还使用上边的例子，对于一幅$1000\times 1000$ 的输入图像，下一个隐含层的神经元数目为$10^6$ 个，隐含层中的每个神经元与大小为$10\times 10$ 的局部区域相连，因此有$10\times 10$ 个权重参数。将这$10\times 10$ 个权重参数共享给其他位置对应的神经元，也就是$10^6$ 个神经元的权重参数保持一致，那么最终需要训练的参数就只有这$10\times 10$个权重参数了。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Convolution/img/Weight_Shared.png" width = "800"></center>
-<center><br>图12 权重共享示意图 </br></center>
+![图12 权重共享示意图](../../../images/CNN/convolution_operator/Weight_Shared.png)
+
+图12 权重共享示意图
 
 - **不同层级卷积提取不同特征**
 
 在CNN网络中，通常使用多层卷积进行堆叠，从而达到提取不同类型特征的作用。比如:浅层卷积提取的是图像中的边缘等信息；中层卷积提取的是图像中的局部信息；深层卷积提取的则是图像中的全局信息。这样，通过加深网络层数，CNN就可以有效地学习到图像从细节到全局的所有特征了。对一个简单的5层CNN进行特征图可视化后的结果如 **图13**所示 ^[1]^。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Convolution/img/Visualize_CNN.png" width = "800"></center>
-<center><br>图13 特征图可视化示意图 </br></center>
+![图13 特征图可视化示意图](../../../images/CNN/convolution_operator/Visualize_CNN.png)
+
+图13 特征图可视化示意图
 
 通过上图可以看到，Layer1和Layer2种，网络学到的基本上是边缘、颜色等底层特征；Layer3开始变的稍微复杂，学习到的是纹理特征；Layer4中，学习到了更高维的特征，比如：狗头、鸡脚等；Layer5则学习到了更加具有辨识性的全局特征。
 
@@ -255,11 +269,13 @@ $$W_{out} = \frac{100 + 2 - 3}{2} + 1 = 50$$
 
 设置宽度方向的卷积核为$[1, 0, -1]$，如 **图15** 所示。此卷积核会将宽度方向间隔为1的两个像素点的数值相减。当卷积核在图片上滑动时，如果它所覆盖的像素点位于亮度相同的区域，则左右间隔为1的两个像素点数值的差为0。只有当卷积核覆盖的像素点有的处于光亮区域，有的处在黑暗区域时，左右间隔为1的两个点像素值的差才不为0。将此卷积核作用到图片上，输出特征图上只有对应黑白分界线的地方像素值才不为0。具体代码如下所示，输出图像如 **图16** 所示。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Convolution/img/examp1_ori.png" width = "200"></center>
-<center><br>图14 输入图像 </br></center>
+![图14 输入图像](../../../images/CNN/convolution_operator/examp1_ori.png)
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Convolution/img/examp1_conv.png" width = "200"></center>
-<center><br>图15 卷积核 </br></center>
+图14 输入图像
+
+![图15 卷积核](../../../images/CNN/convolution_operator/examp1_conv.png)
+
+图15 卷积核
 
 
 ```python
@@ -314,18 +330,23 @@ print(conv.weight)
 print(conv.bias)
 ```
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Convolution/img/examp1_result.png" width = "200"></center>
-<center><br>图16 输出图像 </br></center>
+![图16 输出图像](../../../images/CNN/convolution_operator/examp1_result.png)
+
+图16 输出图像
 
 ### 案例2：图像中物体边缘检测
 
 上面展示的是一个人为构造出来的简单图片，使用卷积网络检测图片明暗分界处的示例。对于真实的图片，如 **图17** 所示，也可以使用合适的卷积核，如 **图18** 所示。(3 x 3卷积核的中间值是8，周围一圈的值是8个-1)对其进行操作，用来检测物体的外形轮廓，观察输出特征图跟原图之间的对应关系，如下代码所示，输出图像如 **图19** 所示。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Convolution/img/examp2_ori.png" width = "200"></center>
-<center><br>图17 输入图像 </br></center>
+![图17 输入图像](../../../images/CNN/convolution_operator/examp2_ori.png)
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Convolution/img/examp2_conv.png" width = "200"></center>
-<center><br>图18 卷积核 </br></center>
+图17 输入图像
+
+
+
+![图18 卷积核](../../../images/CNN/convolution_operator/examp2_conv.png)
+
+图18 卷积核
 
 
 ```python
@@ -368,18 +389,21 @@ plt.imshow(out.squeeze(), cmap='gray')
 plt.show()
 ```
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Convolution/img/examp2_result.png" width = "200"></center>
-<center><br>图19 输出图像 </br></center>
+![图19 输出图像](../../../images/CNN/convolution_operator/examp2_result.png)
+
+图19 输出图像
 
 ### 案例3：图像均值模糊
 
 对一张输入图像如 **图20** 所示，另外一种比较常见的卷积核，如 **图21** 所示。（5\*5的卷积核中每个值均为1）是用当前像素跟它邻域内的像素取平均，这样可以使图像上噪声比较大的点变得更平滑，如下代码所示，输出图像如 **图22** 所示。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Convolution/img/examp3_ori.png" width = "200"></center>
-<center><br>图20 输入图像 </br></center>
+![图20 输入图像](../../../images/CNN/convolution_operator/examp3_ori.png)
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Convolution/img/examp3_conv.png" width = "200"></center>
-<center><br>图21 卷积核 </br></center>
+图20 输入图像
+
+![图21 卷积核](../../../images/CNN/convolution_operator/examp3_conv.png)
+
+图21 卷积核
 
 
 ```python
@@ -418,8 +442,9 @@ plt.imshow(out, cmap='gray')
 plt.show()
 ```
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Convolution/img/examp3_result.png" width = "200"></center>
-<center><br>图22 输出图像 </br></center>
+![图22 输出图像](../../../images/CNN/convolution_operator/examp3_result.png)
+
+图22 输出图像
 
 ## 参考文献
 

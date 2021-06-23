@@ -25,8 +25,9 @@ $${ f }^{ ' }(x)=1$$
 
 函数图形如 **图1** 所示：
 
-<center><img src="https://github.com/lvjian0706/Deep-Learning-Img/blob/master/Base/Activation_Function/img/identity.jpg?raw=true" width="400" hegiht="" ></center>
-<center><br>图1 identity</br></center>
+![图1 identity](../../../images/deep_learning/activation_functions/identity.jpg)
+
+图1 identity
 
 优点：适合于潜在行为是线性（与线性回归相似）的任务。
 
@@ -42,8 +43,9 @@ $$ { f }^{ ' }(x)=\begin{cases} \begin{matrix} 0 & x\neq 0 \end{matrix} \\ \begi
 
 函数图形如 **图2** 所示：
 
-<center><img src="https://github.com/lvjian0706/Deep-Learning-Img/blob/master/Base/Activation_Function/img/step.jpg?raw=true" width="400" hegiht="" ></center>
-<center><br>图2 step</br></center>
+![图2 step](../../../images/deep_learning/activation_functions/step.jpg)
+
+图2 step
 
 优点：激活函数 $Step$ 更倾向于理论而不是实际，它模仿了生物神经元要么全有要么全无的属性。
 
@@ -59,8 +61,9 @@ $${ f }^{ ' }(x)=f(x)(1-f(x))$$
 
 函数图形如 **图3** 所示：
 
-<center><img src="https://github.com/lvjian0706/Deep-Learning-Img/blob/master/Base/Activation_Function/img/sigmoid.jpg?raw=true" width="400" hegiht="" ></center>
-<center><br>图3 sigmoid</br></center>
+![图3 sigmoid](../../../images/deep_learning/activation_functions/sigmoid.jpg)
+
+图3 sigmoid
 
 优点：
 1. $sigmoid$ 函数的输出映射在 $(0,1)$ 之间，单调连续，输出范围有限，优化稳定，可以用作输出层；
@@ -82,8 +85,9 @@ $${ f }^{ ' }(x)=1-f(x)^{ 2 }$$
 
 函数图形如 **图4** 所示：
 
-<center><img src="https://github.com/lvjian0706/Deep-Learning-Img/blob/master/Base/Activation_Function/img/tanh.jpg?raw=true" width="400" hegiht="" ></center>
-<center><br>图4 tanh</br></center>
+![图4 tanh](../../../images/deep_learning/activation_functions/tanh.jpg)
+
+图4 tanh
 
 优点：
 1. $tanh$ 比 $sigmoid$ 函数收敛速度更快；
@@ -104,8 +108,10 @@ $$f(x)=\begin{cases} \begin{matrix} 0 & x<0 \end{matrix} \\ \begin{matrix} x & x
 $${ { f }(x) }^{ ' }=\begin{cases} \begin{matrix} 0 & x<0 \end{matrix} \\ \begin{matrix} 1 & x\ge 0 \end{matrix} \end{cases}$$
 
 函数图如 **图5** 所示：
-<center><img src="https://github.com/lvjian0706/Deep-Learning-Img/blob/master/Base/Activation_Function/img/relu.jpg?raw=true" width="400" hegiht="" ></center>
-<center><br>图5 ReLU</br></center>
+
+![图5 ReLU](../../../images/deep_learning/activation_functions/relu.jpg)
+
+图5 ReLU
 
 优点：
 1. 收敛速度快；
@@ -118,7 +124,7 @@ $${ { f }(x) }^{ ' }=\begin{cases} \begin{matrix} 0 & x<0 \end{matrix} \\ \begin
 2. 神经元坏死现象，某些神经元可能永远不会被激活，导致相应参数永远不会被更新；
 3. 不能避免梯度爆炸问题；
 
-### ReLU
+### LReLU
 
 函数定义：
 
@@ -129,8 +135,10 @@ $$ f(x)=\begin{cases} \begin{matrix} \alpha x & x<0 \end{matrix} \\ \begin{matri
 $${ { f }(x) }^{ ' }=\begin{cases} \begin{matrix} \alpha & x<0 \end{matrix} \\ \begin{matrix} 1 & x\ge 0 \end{matrix} \end{cases}$$
 
 其中，$\alpha$ 常设置为0.01。函数图如 **图6** 所示：
-<center><img src="https://github.com/lvjian0706/Deep-Learning-Img/blob/master/Base/Activation_Function/img/lrelu.jpg?raw=true" width="400" hegiht="" ></center>
-<center><br>图6 LReLU</br></center>
+
+![图6 LReLU](../../../images/deep_learning/activation_functions/lrelu.jpg)
+
+图6 LReLU
 
 优点：
 1. 避免梯度消失；
@@ -151,8 +159,10 @@ $$f(\alpha ,x)=\begin{cases} \begin{matrix} \alpha x  & x<0 \end{matrix} \\ \beg
 $${ { f }(\alpha ,x) }^{ ' }=\begin{cases} \begin{matrix} \alpha  & x<0 \end{matrix} \\ \begin{matrix} 1 & x\ge 0 \end{matrix} \end{cases}$$
 
 函数图如 **图7** 所示：
-<center><img src="https://github.com/lvjian0706/Deep-Learning-Img/blob/master/Base/Activation_Function/img/prelu.jpg?raw=true" width="400" hegiht="" ></center>
-<center><br>图7 PReLU</br></center>
+
+![图7 PReLU](../../../images/deep_learning/activation_functions/prelu.jpg)
+
+图7 PReLU
 
 优点：
 1. PReLU​ 是 LReLU 的改进，可以自适应地从数据中学习参数；
@@ -170,8 +180,10 @@ $$f(\alpha ,x)=\begin{cases} \begin{matrix} \alpha  & x<0 \end{matrix} \\ \begin
 $${ { f }(\alpha ,x) }^{ ' }=\begin{cases} \begin{matrix} \alpha  & x<0 \end{matrix} \\ \begin{matrix} 1 & x\ge 0 \end{matrix} \end{cases}$$
 
 函数图形如 **图8** 所示：
-<center><img src="https://github.com/lvjian0706/Deep-Learning-Img/blob/master/Base/Activation_Function/img/rrelu.jpg?raw=true" width="400" hegiht="" ></center>
-<center><br>图8 RReLU</br></center>
+
+![图8 RReLU](../../../images/deep_learning/activation_functions/rrelu.jpg)
+
+图8 RReLU
 
 优点：为负值输入添加了一个线性项，这个线性项的斜率在每一个节点上都是随机分配的（通常服从均匀分布）。
 ### ELU
@@ -185,8 +197,10 @@ $$ f(\alpha ,x)=\begin{cases} \begin{matrix} \alpha \left( { e }^{ x }-1 \right)
 $${ { f }(\alpha ,x) }^{ ' }=\begin{cases} \begin{matrix} f(\alpha ,x)+\alpha  & x<0 \end{matrix} \\ \begin{matrix} 1 & x\ge 0 \end{matrix} \end{cases}$$
 
 函数图形如 **图9** 所示：
-<center><img src="https://github.com/lvjian0706/Deep-Learning-Img/blob/master/Base/Activation_Function/img/elu.jpg?raw=true" width="400" hegiht="" ></center>
-<center><br>图9 ELU</br></center>
+
+![图9 ELU](../../../images/deep_learning/activation_functions/elu.jpg)
+
+图9 ELU
 
 优点：
 1. 导数收敛为零，从而提高学习效率；
@@ -208,8 +222,10 @@ $$f(\alpha ,x)=\lambda \begin{cases} \begin{matrix} \alpha \left( { e }^{ x }-1 
 $${ { f }(\alpha ,x) }^{ ' }=\lambda \begin{cases} \begin{matrix} \alpha \left( { e }^{ x } \right)  & x<0 \end{matrix} \\ \begin{matrix} 1 & x\ge 0 \end{matrix} \end{cases}$$
 
 函数图形 **如图10**  所示：
-<center><img src="https://github.com/lvjian0706/Deep-Learning-Img/blob/master/Base/Activation_Function/img/selu.jpg?raw=true" width="400" hegiht="" ></center>
-<center><br>图10 SELU</br></center>
+
+![图10 SELU](../../../images/deep_learning/activation_functions/selu.jpg)
+
+图10 SELU
 
 优点：
 1. SELU 是 ELU 的一个变种。其中 λ 和 α 是固定数值（分别为 $1.0507$ 和 $1.6726$）;
@@ -226,8 +242,10 @@ $$f(x)=\frac { x }{ \left| x \right| +1 }$$
 $${ f }^{ ' }(x)=\frac { 1 }{ { (1+\left| x \right| ) }^{ 2 } } $$
 
 函数图形如 **图 11** 所示：
-<center><img src="https://github.com/lvjian0706/Deep-Learning-Img/blob/master/Base/Activation_Function/img/softsign.jpg?raw=true" width="400" hegiht="" ></center>
-<center><br>图11 softsign</br></center>
+
+![图11 softsign](../../../images/deep_learning/activation_functions/softsign.jpg)
+
+图11 softsign
 
 优点：
 1. $softsign$ 是 $tanh$ 激活函数的另一个替代选择；
@@ -248,8 +266,10 @@ $$f(x)=\ln { (1+{ e }^{ x }) }$$
 $${ f }^{ ' }(x)=\frac { 1 }{ 1+{ e }^{ -x } }$$
 
 函数图形如 **图12** 所示：
-<center><img src="https://github.com/lvjian0706/Deep-Learning-Img/blob/master/Base/Activation_Function/img/softplus.jpg?raw=true" width="400" hegiht="" ></center>
-<center><br>图12 softplus</br></center>
+
+![图12 softplus](../../../images/deep_learning/activation_functions/softplus.jpg)
+
+图12 softplus
 
 优点：
 1. 作为 $relu$ 的一个不错的替代选择，$softplus$ 能够返回任何大于 $0$ 的值。
@@ -268,8 +288,9 @@ $$
 
 显然，$0<y_i<1$。**图13** 给出了三类分类问题的  softmax 输出示意图。在图中，对于取值为 4、1和-4 的 $x_1$、$x_2$ 和 $x_3$，通过 softmax 变换后，将其映射到 (0,1) 之间的概率值。
 
-<center><img src="https://github.com/lvjian0706/Deep-Learning-Img/blob/master/Base/Activation_Function/img/softmax.png?raw=true" width="400" hegiht="" ></center>
-<center><br>图13 三类分类问题的softmax输出示意图</br></center>
+![图13 三类分类问题的softmax输出示意图](../../../images/deep_learning/activation_functions/softmax.png)
+
+图13 三类分类问题的softmax输出示意图
 
 由于 softmax 输出结果的值累加起来为 1，因此可将输出概率最大的作为分类目标（图 1 中被分类为第一类）。
 
@@ -283,8 +304,10 @@ $$f\left( x \right) =x\cdot \sigma \left( x \right) $$
 其中，$\sigma$ 是 $sigmoid$ 函数。
 
 $swish$ 激活函数的图形如 **图14** 所示：
-<center><img src="https://github.com/lvjian0706/Deep-Learning-Img/blob/master/Base/Activation_Function/img/swish.jpg?raw=true" width="400" hegiht="" ></center>
-<center><br>图14 swish 激活函数</br></center>
+
+![图14 swish 激活函数](../../../images/deep_learning/activation_functions/swish.jpg)
+
+图14 swish 激活函数
 
 $swish$ 激活函数的一阶导数如下：
 
@@ -296,16 +319,20 @@ $$\begin{array}{c}
 \end{array}$$
 
 $swish$ 激活函数的一阶和二阶导数的图形如 **图15** 所示：
-<center><img src="https://github.com/lvjian0706/Deep-Learning-Img/blob/master/Base/Activation_Function/img/swish_derivatives.jpg?raw=true" width="400" hegiht="" ></center>
-<center><br>图15 swish 导数</br></center>
+
+![图15 swish 导数](../../../images/deep_learning/activation_functions/swish_derivatives.jpg)
+
+图15 swish 导数
 
 超参数版 $swish$ 激活函数：
 
 $$f\left( x \right) =x\cdot \sigma \left( \beta x \right)$$
 
 其中，$\beta$ 是超参数。超参数版 $swish$ 激活函数的图形如 **图16** 所示：
-<center><img src="https://github.com/lvjian0706/Deep-Learning-Img/blob/master/Base/Activation_Function/img/swish2.jpg?raw=true" width="400" hegiht="" ></center>
-<center><br>图16 swish 超参数</br></center>
+
+![图16 swish 超参数](../../../images/deep_learning/activation_functions/swish2.jpg)
+
+图16 swish 超参数
 
 优点：
 1. 当 $x>0$ 时，不存在梯度消失的情况；当 $x<0$ 时，神经元也不会像 ReLU 一样出现死亡的情况；
@@ -323,8 +350,9 @@ $$f\left( x \right) =x\frac{\text{Re}LU6\left( x+3 \right)}{6}$$
 
 $hard \ swish$ 和 $swish$ 激活函数对比如 **图17** 所示：
 
-<center><img src="https://github.com/lvjian0706/Deep-Learning-Img/blob/master/Base/Activation_Function/img/hard_swish.jpg?raw=true" width="400" hegiht="" ></center>
-<center><br>图17 Hard Swish</br></center>
+![图17 Hard Swish](../../../images/deep_learning/activation_functions/hard_swish.jpg)
+
+图17 Hard Swish
 
 优点：
 与 $swish$ 相比 $hard \ swish$ 减少了计算量，具有和 $swish$ 同样的性质。

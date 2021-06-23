@@ -8,15 +8,17 @@
 
 池化的几种常见方法包括：平均池化、最大池化、K-max池化。其中平均池化和最大池化如 **图1** 所示，K-max池化如 **图2** 所示。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Pooling/img/avgpooling_maxpooling.png" width = "600"></center>
-<center><br>图1 平均池化和最大池化 </br></center>
+![图1 平均池化和最大池化](../../images/CNN/avgpooling_maxpooling.png)
+
+图1 平均池化和最大池化
 
 - **平均池化：** 计算区域子块所包含所有像素点的均值，将均值作为平均池化结果。如 **图1(a)**，这里使用大小为$2\times2$的池化窗口，每次移动的步幅为2，对池化窗口覆盖区域内的像素取平均值，得到相应的输出特征图的像素值。池化窗口的大小也称为池化大小，用$k_h \times k_w$表示。在卷积神经网络中用的比较多的是窗口大小为$2 \times 2$，步幅为2的池化。
 
 - **最大池化：** 从输入特征图的某个区域子块中选择值最大的像素点作为最大池化结果。如 **图1(b)**，对池化窗口覆盖区域内的像素取最大值，得到输出特征图的像素值。当池化窗口在图片上滑动时，会得到整张输出特征图。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Pooling/img/k-max_pooling.png" width = "300"></center>
-<center><br>图2 K-max池化 </br></center>
+  ![图2 K-max池化](../../images/CNN/k-max_pooling.png)
+
+图2 K-max池化
 
 - **K-max池化：** 对输入特征图的区域子块中像素点取前K个最大值，常用于自然语言处理中的文本特征提取。如图2，从包含了4个取值的每一列中选取前2个最大值就得到了K最大池化结果。
 
@@ -24,8 +26,9 @@
 
 1. 当输入数据做出少量平移时，经过池化后的大多数输出还能保持不变，因此，池化**对微小的位置变化具有鲁棒性**。例如 **图3** 中，输入矩阵向右平移一个像素值，使用最大池化后，结果与平移前依旧能保持不变。
 
-   <center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Pooling/img/example.png" width = "500"></center>
-   <center><br>图3 微小位置变化时的最大池化结果 </br></center>
+   ![图3 微小位置变化时的最大池化结果](../../images/CNN/example.png)
+
+   图3 微小位置变化时的最大池化结果
 
 2. 由于池化之后特征图会变小，如果后面连接的是全连接层，能有效的**减小神经元的个数，节省存储空间并提高计算效率**。
 

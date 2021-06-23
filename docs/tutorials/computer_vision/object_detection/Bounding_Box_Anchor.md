@@ -2,8 +2,9 @@
 
 在检测任务中，我们需要同时预测物体的类别和位置，因此需要引入一些跟位置相关的概念。通常使用边界框（bounding box，bbox）来表示物体的位置，边界框是正好能包含物体的矩形框，如 **图1** 所示，图中3个人分别对应3个边界框。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/Detection/Bounding_Box_Anchor/img/Bounding_Box.png" width = "400"  div align=center"></center>
-<center><br>图1 边界框</br></center>
+![图1 边界框](../../../images/computer_vision/object_detection/Bounding_Box.png)
+
+图1 边界框
 
 通常表示边界框的位置有两种方式：
 
@@ -50,8 +51,9 @@
 
 在下图中，以像素点[300, 500]为中心可以使用下面的程序生成3个框，如 **图2** 中蓝色框所示，其中锚框A1跟人像区域非常接近。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/Detection/Bounding_Box_Anchor/img/Anchor.png" width = "400"  div align=center"></center>
-<center><br>图2 锚框</br></center>
+![图2 锚框](../../../images/computer_vision/object_detection/Anchor.png)
+
+图2 锚框
 
 
 ```python

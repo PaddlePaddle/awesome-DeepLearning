@@ -6,8 +6,9 @@
 
 通常情况下，对图像进行卷积运算时，经过多层的卷积运算后，输出图像的尺寸会变得很小，即图像被约减。而对于某些特定的任务（比如：图像分割、GAN），我们需要将图像恢复到原来的尺寸再进行进一步的计算。这个恢复图像尺寸，实现图像由小分辨率到大分辨率映射的操作，叫做上采样（Upsample），如 **图1** 所示。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Transpose_Convolution/img/Upsample.png" width = "700"></center>
-<center><br>图1 上采样示例</br></center>
+![图1 上采样示例](../../../images/CNN/convolution_operator/Upsample.png)
+
+图1 上采样示例
 
 上采样有多种方式，常见的包括：最近邻插值（Nearest neighbor interpolation）、双线性插值（Bi-Linear interpolation）等，但是这些上采样方法都是基于人们的先验经验来设计的，对于很多场景效果并不理想。因此，我们希望让神经网络自己学习如何更好地进行插值，这也就是接下来要介绍的转置卷积（Transpose Convolution）的方法。
 
@@ -25,8 +26,9 @@
 
 这里举一个简单的例子演示一下具体的操作过程。假设输入是一个$4\times{4}$的矩阵，使用$3\times{3}$的标准卷积进行计算，同时不使用填充，步长设置为1。最终输出的结果应该是一个$2\times{2}$的矩阵，如 **图2** 所示。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Transpose_Convolution/img/Standard_Convolution_Example.png" width = "500"></center>
-<center><br>图2 标准卷积运算示例</br></center>
+![图2 标准卷积运算示例](../../../images/CNN/convolution_operator/Standard_Convolution_Example.png)
+
+图2 标准卷积运算示例
 
 在上边的例子中，输入矩阵右上角$3\times{3}$的值会影响输出矩阵中右上角的值，这其实也就对应了标准卷积中感受野的概念。所以，我们可以说$3\times{3}$的标准卷积核建立了输入矩阵中9个值与输出矩阵中1个值的对应关系。
 
@@ -34,8 +36,9 @@
 
 对于转置卷积而言，我们实际上是想建立一个逆向操作，也就是建立一个一对多的关系。对于上边的例子，我们想要建立的其实是输出卷积中的1个值与输入卷积中的9个值的关系，如 **图3** 所示。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Transpose_Convolution/img/Inverse_Convolution_Example.png" width = "500"></center>
-<center><br>图3 卷积逆向运算示例</br></center>
+![图3 卷积逆向运算示例](../../../images/CNN/convolution_operator/Inverse_Convolution_Example.png)
+
+图3 卷积逆向运算示例
 
 当然，从信息论的角度，卷积操作是不可逆的，**所以转置卷积并不是使用输出矩阵和卷积核计算原始的输入矩阵，而是计算得到保持了相对位置关系的矩阵**。
 
@@ -113,8 +116,9 @@ w_{0,0} & w_{0,1} & w_{0,2} & 0 & w_{1,0} & w_{1,1} & w_{1,2} & 0 & w_{2,0} & w_
 $$
 这里，我们用 **图4** 为大家直观的展示一下上边的矩阵运算过程。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Transpose_Convolution/img/Standard_Convolution_Matrix.png" width = "700"></center>
-<center><br>图4 标准卷积矩阵运算示例</br></center>
+![图4 标准卷积矩阵运算示例](../../../images/CNN/convolution_operator/Standard_Convolution_Matrix.png)
+
+图4 标准卷积矩阵运算示例
 
 而转置卷积其实就是要对这个过程进行逆运算，即通过 $C$ 和 $Y$ 得到 $X$ ：
 
@@ -124,8 +128,9 @@ X = C^TY
 $$
 此时，新的稀疏矩阵就变成了尺寸为$16\times{4}$ 的$C^T$，这里我们通过 **图5** 为大家直观展示一下转置后的卷积矩阵运算示例。这里，用来进行转置卷积的权重矩阵不一定来自于原卷积矩阵. 只是权重矩阵的形状和转置后的卷积矩阵相同。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Transpose_Convolution/img/Inverse_Convolution_Matrix.png" width = "500"></center>
-<center><br>图5 转置后卷积矩阵运算示例</br></center>
+![图5 转置后卷积矩阵运算示例](../../../images/CNN/convolution_operator/Inverse_Convolution_Matrix.png)
+
+图5 转置后卷积矩阵运算示例
 
 我们再将$16\times{1}$ 的输出结果进行重新排序，这样就可以通过尺寸为$2\times{2}$ 的输入矩阵得到尺寸为$4\times{4}$ 的输出矩阵了。
 
@@ -192,8 +197,9 @@ w_{0,2} & w_{0,1} & w_{0,0}
 $$
 之后的标准卷积的结果，运算过程如 **图6** 所示。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Transpose_Convolution/img/Transpose_Convolution_s1.gif" width = "500"></center>
-<center><br>图6 s=1时，转置卷积运算示例</br></center>
+![图6 s=1时，转置卷积运算示例](../../../images/CNN/convolution_operator/Transpose_Convolution_s1.gif)
+
+图6 s=1时，转置卷积运算示例
 
 对于卷积核尺寸为 $k$，步长 $stride=1$，填充 $padding=0$ 的标准卷积，等价的转置卷积在尺寸为 $ i'$ 的输入矩阵上进行运算，输出特征图的尺寸 $ o'$ 为：
 
@@ -227,8 +233,9 @@ w_{2,0}y_2 & w_{2,1}y_2 & w_{2,2}y_2+w_{2,0}y_3 & w_{2,1}y_3 & w_{2,2}y_3\\
 $$
 此时，等价于输入矩阵添加了空洞，同时也添加了填充，标准卷积核进行转置之后的运算结果。运算过程如 **图7** 所示。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Transpose_Convolution/img/Transpose_Convolution_s2.gif" width = "500"></center>
-<center><br>图7 s>1时，转置卷积运算示例</br></center>
+![图7 s>1时，转置卷积运算示例](../../../images/CNN/convolution_operator/Transpose_Convolution_s2.gif)
+
+图7 s>1时，转置卷积运算示例
 
 对于卷积核尺寸为 $k$，步长 $stride>1$，填充 $padding=0$ 的标准卷积，等价的转置卷积在尺寸为 $ i'$ 的输入矩阵上进行运算，输出特征图的尺寸 $ o'$ 为：
 

@@ -9,8 +9,9 @@
 
 具体计算方式如 **图1** 所示。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/Detection/mAP/img/Precision_Recall.png" width = "700"></center>
-<center><br>图1 准确率和召回率计算方式 </br></center>
+![图1 准确率和召回率计算方式](../../../images/deep_learning/metrics/Precision_Recall.png)
+
+图1 准确率和召回率计算方式
 
 其中，上图还存在以下几个概念：
 
@@ -33,15 +34,18 @@
 假设我们使用目标检测算法获取了如下的24个目标框，各自的置信度（即网络预测得到的类别得分）按照从上到下进行排序后如 **图2** 所示。我们通过设置置信度阈值可以控制最终的输出结果。可以预想到的是：
 
 1. 如果把阈值设高，则最终输出结果中大部分都会是比较准确的，但也会导致输出结果较少，样本中的正例只有部分被找出，准确率会比较高而召回率会比较低。
+
 2. 如果把阈值设低，则最终输出结果会比较多，但是输出的结果中包含了大量负样本，召回率会比较高而准确率率会比较低。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/Detection/mAP/img/Precision_Recall_list.png" width = "700"></center>
-<center><br>图2 准确率和召回率列表 </br></center>
+   ![图2 准确率和召回率列表](../../../images/deep_learning/metrics/Precision_Recall_list.png)
+
+图2 准确率和召回率列表
 
 这里，我们从上往下每次多包含一个点，就可以得到最右边的两列，分别是累加的recall和累加的precision。以recall为自变量、precision为因变量可以得到一系列的坐标点（Recall，Precision）。将这些坐标点进行连线可以得到 **图3** 。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/Detection/mAP/img/Precision_Recall_curve.png" width = "700"></center>
-<center><br>图3 PR曲线 </br></center>
+![图3 PR曲线](../../../images/deep_learning/metrics/Precision_Recall_curve.png)
+
+图3 PR曲线
 
 而最终mAP的计算方式其实可以分成如下两步：
 

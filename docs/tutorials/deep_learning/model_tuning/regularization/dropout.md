@@ -6,8 +6,9 @@ Dropout指在训练神经网络过程中随机丢掉一部分神经元来减少�
 
 **图1** 是Dropout示意图，左边是完整的神经网络，右边是应用了Dropout之后的网络结构。应用Dropout之后，会将标了$\times$的神经元从网络中删除，让它们不向后面的层传递信号。在学习过程中，丢弃哪些神经元是随机决定，因此模型不会过度依赖某些神经元，能一定程度上抑制过拟合。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Dropout/img/Dropout.png" width = "700"></center>
-<center><br>图1 Dropout示意图 </br></center>
+![图1 Dropout示意图](../../../../images/deep_learning/model_tuning/regularization/Dropout.png)
+
+图1 Dropout示意图
 
 ## 应用示例
 
