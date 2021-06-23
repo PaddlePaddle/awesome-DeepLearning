@@ -76,7 +76,7 @@ $$P(u)=softmax(h_{n}W_{e}^T)$$
 
 预训练之后，我们还需要针对特定任务进行 Fine-Tuning。假设监督数据集合$C$的输入$X$是一个序列$x^1,x^2,...,x^m$，输出是一个分类y的标签 ，比如情感分类任务
 
-我们把$x^1,..,x^m$输入 Transformer 模型，得到最上层最后一个时刻的输出$h_{l}^m$，将其通过我们新增的一个 Softmax 层（参数为$W_{y}$）进行分类，最后用 CrossEntropyLoss 计算损失，从而根据标准数据调整 Transformer 的参数以及 Softmax 的参数 $W_{y}$。这等价于最大似然估计：
+我们把$x^1,..,x^m$输入 Transformer 模型，得到最上层最后一个时刻的输出$h_{l}^m$，将其通过我们新增的一个 Softmax 层（参数为$W_{y}$）进行分类，最后用交叉熵计算损失，从而根据标准数据调整 Transformer 的参数以及 Softmax 的参数 $W_{y}$。这等价于最大似然估计：
 
 
 $$P(y|x^1,...,x^m)=softmax(h_{l}^mW_{y})$$
@@ -110,9 +110,8 @@ $$L_{3}(C)=L_{2}(C)+\lambda \times L_{1}(C) $$
 + 方便的两阶段式模型，先预训练一个通用的模型，然后在各个子任务上进行微调，减少了传统方法需要针对各个任务定制设计模型的麻烦。
 
 ### 缺点
-+ GPT 最大的问题就是传统的语言模型是单向的 —— 我们根据之前的历史来预测当前词。但是我们不能利用后面的信息。比如句子 The animal didn’t cross the street because it was too tired。我们在编码 it 的语义的时候需要同时利用前后的信息，因为在这个句子中，it 可能指代 animal 也可能指代 street。根据 tired，我们推断它指代的是 animal。但是如果把 tired 改成 wide，那么 it 就是指代 street 了。
++ GPT 最大的问题就是传统的语言模型是单向的；我们根据之前的历史来预测当前词。但是我们不能利用后面的信息。比如句子 The animal didn’t cross the street because it was too tired。我们在编码 it 的语义的时候需要同时利用前后的信息，因为在这个句子中，it 可能指代 animal 也可能指代 street。根据 tired，我们推断它指代的是 animal。但是如果把 tired 改成 wide，那么 it 就是指代 street 了。Transformer 的 Self-Attention 理论上是可以同时关注到这两个词的，但是根据前面的介绍，为了使用 Transformer 学习语言模型，必须用 Mask 来让它看不到未来的信息，所以它也不能解决这个问题。
 
-+ Transformer 的 Self-Attention 理论上是可以同时关注到这两个词的，但是根据前面的介绍，为了使用 Transformer 学习语言模型，必须用 Mask 来让它看不到未来的信息，所以它也不能解决这个问题的
 
 ## 5. GPT 与 ELMo的区别
 
