@@ -4,7 +4,7 @@
 
 如 **图1** 所示，多层感知机由输入层、输出层和至少一层的隐藏层构成。网络中各个隐藏层中神经元可接收相邻前序隐藏层中所有神经元传递而来的信息，经过加工处理后将信息输出给相邻后续隐藏层中所有神经元。
 
-<center><img src="https://github.com/lovejing0306/Images/blob/master/DeepLearning/BasicKnowledge/multi_perceptron.png?raw=true" width="500" hegiht="" ></center>
+<center><img src="../../../images/deep_learning/basic_concepts/multi_perceptron.png" width="500" hegiht="" ></center>
 <center>图1 多层感知机模型</center><br></br>
 
 

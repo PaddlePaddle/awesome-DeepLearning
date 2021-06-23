@@ -4,7 +4,7 @@
 
 假设使用模型对图片进行预测，一共输出了11个预测框及其得分，在图上画出预测框如 **图1** 所示。在每个人像周围，都出现了多个预测框，需要消除冗余的预测框以得到最终的预测结果。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/Detection/NMS/img/Predicted_Box.png" width = "600"></center>
+<center><img src="../../../images/computer_vision/object_detection/Predicted_Box.png" width = "600"></center>
 <center><br>图1 预测框示意图</br></center>
 
 输出11个预测框及其得分的代码实现如下：
@@ -117,7 +117,7 @@ def nms(bboxes, scores, score_thresh, nms_thresh):
 
 最终得到keep_list=[3, 5, 10]，也就是预测框3、5、10被最终挑选出来了，如 **图2** 所示。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/Detection/NMS/img/NMS.png" width = "600"></center>
+<center><img src="../../../images/computer_vision/object_detection/NMS.png" width = "600"></center>
 <center><br>图2 NMS结果示意图</br></center>
 
 整个过程的实现代码如下：

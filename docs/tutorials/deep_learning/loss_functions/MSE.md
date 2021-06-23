@@ -12,5 +12,5 @@ MSE=\frac{1}{n}\sum_{i=1}^n{\left( y_i-\hat{y}_i \right) ^2}
 $$
 假设真实目标值为100，预测值在-10000到10000之间，我们绘制MSE函数曲线如 **图1** 所示。可以看到，当预测值越接近100时，MSE损失值越小。MSE损失的范围为0到$\infty$ 。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/Base/Loss/MSE/MSE.jpg" width = "1000"></center>
+<center><img src="../../../images/deep_learning/loss_functions/MSE.jpg" width = "1000"></center>
 <center><br>图1 MSE损失示意图</br></center>

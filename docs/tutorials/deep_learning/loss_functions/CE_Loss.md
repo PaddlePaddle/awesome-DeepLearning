@@ -21,7 +21,7 @@ $$
 
 很显然，一个良好的神经网络要尽量保证对于每一个输入数据，神经网络所预测类别分布概率与实际类别分布概率之间的差距越小越好，即交叉熵越小越好。于是，可将交叉熵作为损失函数来训练神经网络。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/Base/Loss/CE/img/CrossEntropy.png" width="500" hegiht="" ></center>
+<center><img src="../../../images/deep_learning/loss_functions/CrossEntropy.png" width="500" hegiht="" ></center>
 <center><br>图1 三类分类问题中输入x的交叉熵损失示意图（x 属于第一类）</br></center>
 
 **图1** 给出了一个三个类别分类的例子。由于输入数据 $x$ 属于类别 $1$，因此其实际类别概率分布值为 $y=(y_1,y_2,y_3)=(1,0,0)$。经过神经网络的变换，得到了输入数据 $x$ 相对于三个类别的预测中间值 $(z1,z2,z3)$。然后，经过 $Softmax$ 函数映射，得到神经网络所预测的输入数据 $x$ 的类别分布概率 $\hat{y}=\left( \hat{y}_1,\hat{y}_2,\hat{y}_3 \right)$。根据前面的介绍，$\hat{y}_1$、$\hat{y}_2$ 和 $\hat{y}_3$ 为 $(0,1)$ 范围之间的一个概率值。由于样本 $x$ 属于第一个类别，因此希望神经网络所预测得到的 $\hat{y}_1$取值要远远大于 $\hat{y}_2$ 和 $\hat{y}_3$ 的取值。为了得到这样的神经网络，在训练中可利用如下交叉熵损失函数来对模型参数进行优化：

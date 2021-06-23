@@ -33,7 +33,7 @@ $$
 
 此时，对于一副输入图像而言，我们就可以先用$3\times1$的kernel做一次卷积，再用$1\times3$的kernel做一次卷积，从而得到最终结果。具体操作如 **图1** 所示。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Separable_Convolution/img/Spatial_Separable_Convolutions.png" width = "700"></center>
+<center><img src="../../../images/CNN/convolution_operator/Spatial_Separable_Convolutions.png" width = "700"></center>
 <center><br>图1 空间可分离卷积</br></center>
 
 这样，我们将原始的卷积进行拆分，本来需要9次乘法操作的一个卷积运算，就变为了两个需要3次乘法操作的卷积运算，并且最终效果是不变的。可想而知，乘法操作减少，计算复杂性就降低了，网络运行速度也就更快了。
@@ -73,12 +73,12 @@ $$
 
 假设我们有一个 $12\times 12\times 3$ 的输入图像，即图像尺寸为 $12\times 12$，通道数为3，对图像进行 $5\times 5$ 卷积，没有填充（padding）且步长为1。如果我们只考虑图像的宽度和高度，使用 $5\times 5$ 卷积来处理 $12\times 12$ 大小的输入图像，最终可以得到一个 $8\times 8$ 的输出特征图。然而，由于图像有3个通道，我们的卷积核也需要有3个通道。 这就意味着，卷积核在每个位置进行计算时，实际上会执行 $5\times 5\times 3=75$ 次乘法。如 **图2** 所示，我们使用一个 $5\times 5\times 3$ 的卷积核进行卷积运算，最终可以得到 $8\times 8\times 1$ 的输出特征图。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Separable_Convolution/img/Standard_Convolution_out_1.png" width = "700"></center>
+<center><img src="../../../images/CNN/convolution_operator/Standard_Convolution_out_1.png" width = "700"></center>
 <center><br>图2 输出通道为1的标准卷积</br></center>
 
 如果我们想增加输出的 channel 数量让网络学习更多种特征呢？这时我们可以创建多个卷积核，比如256个卷积核来学习256个不同类别的特征。此时，256个卷积核会分别进行运算，得到256个 $8\times 8\times 1$ 的输出特征图，将其堆叠在一起，最终可以得到 $8\times 8\times 256$ 的输出特征图。如 **图3** 所示。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Separable_Convolution/img/Standard_Convolution_out_256.png" width = "700"></center>
+<center><img src="../../../images/CNN/convolution_operator/Standard_Convolution_out_256.png" width = "700"></center>
 <center><br>图3 输出通道为256的标准卷积</br></center>
 
 接下来，再来看一下如何通过深度可分离卷积得到 $8\times 8\times 256$ 的输出特征图。
@@ -87,7 +87,7 @@ $$
 
 首先，我们对输入图像进行深度卷积运算，这里的深度卷积运算其实就是逐通道进行卷积运算。对于一幅 $12\times 12\times 3$ 的输入图像而言，我们使用大小为 $5\times 5$ 的卷积核进行逐通道运算，计算方式如 **图4** 所示。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Separable_Convolution/img/Depthwise_Convolution.png" width = "700"></center>
+<center><img src="../../../images/CNN/convolution_operator/Depthwise_Convolution.png" width = "700"></center>
 <center><br>图4 深度卷积运算</br></center>
 
 这里其实就是使用3个 $5\times 5\times 1$ 的卷积核分别提取输入图像中3个 channel 的特征，每个卷积核计算完成后，会得到3个 $8\times 8\times 1$ 的输出特征图，将这些特征图堆叠在一起就可以得到大小为 $8\times 8\times 3$ 的最终输出特征图。这里我们可以发现深度卷积运算的一个缺点，深度卷积运算缺少通道间的特征融合 ，并且运算前后通道数无法改变。
@@ -102,12 +102,12 @@ $$
 
 我们使用一个3通道的 $1\times 1$ 卷积对上文中得到的 $8\times 8\times 3$ 的特征图进行运算，可以得到一个 $8\times 8\times 1$ 的输出特征图。如 **图5** 所示。此时，我们就使用逐点卷积实现了融合3个通道间特征的功能。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Separable_Convolution/img/Pointwise_Convolution_1.png" width = "700"></center>
+<center><img src="../../../images/CNN/convolution_operator/Pointwise_Convolution_1.png" width = "700"></center>
 <center><br>图5 输出通道为1的逐点卷积</br></center>
 
 此外，我们可以创建256个3通道的 $1\times 1$ 卷积对上文中得到的 $8\times 8\times 3$ 的特征图进行运算，这样，就可以实现得到与标准卷积运算一致的 $8\times 8\times 256$ 的特征图的功能。如 **图6** 所示。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Separable_Convolution/img/Pointwise_Convolution_256.png" width = "700"></center>
+<center><img src="../../../images/CNN/convolution_operator/Pointwise_Convolution_256.png" width = "700"></center>
 <center><br>图6 输出通道为256的逐点卷积</br></center>
 
 ### 深度可分离卷积的意义
@@ -138,7 +138,7 @@ $$
 
 MobileNetv1<sup>[1]</sup>中使用的深度可分离卷积如 **图7** 右侧所示。相较于左侧的标准卷积，其进行了拆分，同时使用了BN层以及RELU激活函数穿插在深度卷积运算和逐点卷积运算中。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Convolution/Separable_Convolution/img/MobileNetv1_Separable_Convolution.png" width = "700"></center>
+<center><img src="../../../images/CNN/convolution_operator/MobileNetv1_Separable_Convolution.png" width = "700"></center>
 <center><br>图7 MobileNetv1中的可分离卷积</br></center>
 
 ### 参考文献

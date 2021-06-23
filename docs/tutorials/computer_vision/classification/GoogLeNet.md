@@ -15,7 +15,7 @@ GoogLeNet<sup>[1]</sup>是2014年ImageNet比赛的冠军，它的主要特点是
 - Google的研究人员为了向LeNet致敬，特地将模型命名为GoogLeNet。
 - Inception一词来源于电影《盗梦空间》（Inception）。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Classical_model/Inception_Module.jpg" width = "1000"></center>
+<center><img src="../../../images/computer_vision/classification/Inception_Module.jpg" width = "1000"></center>
 <center><br>图1 Inception模块结构示意图</br></center>
 
 图1(a)是Inception模块的设计思想，使用3个不同大小的卷积核对输入图片进行卷积操作，并附加最大池化，将这4个操作的输出沿着通道这一维度进行拼接，构成的输出特征图将会包含经过不同大小的卷积核提取出来的特征，从而达到捕捉不同尺度信息的效果。Inception模块采用多通路(multi-path)的设计形式，每个支路使用不同大小的卷积核，最终输出特征图的通道数是每个支路输出通道数的总和，这将会导致输出通道数变得很大，尤其是使用多个Inception模块串联操作的时候，模型参数量会变得非常大。
@@ -92,7 +92,7 @@ GoogLeNet的架构如 **图2** 所示，在主体卷积部分中使用5个模块
 **说明：**
 在原作者的论文中添加了图中所示的softmax1和softmax2两个辅助分类器，如下图所示，训练时将三个分类器的损失函数进行加权求和，以缓解梯度消失现象。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Classical_model/GoogLeNet.png" width = "800"></center>
+<center><img src="../../../images/computer_vision/classification/GoogLeNet.png" width = "800"></center>
 <center><br>图2 GoogLeNet模型网络结构示意图</br></center>
 
 ## 模型实现
@@ -305,7 +305,7 @@ class GoogLeNet(nn.Layer):
 
 GoogLeNet 在 2014 年的 ImageNet 比赛上取得了冠军的好成绩，具体指标如 **图3** 所示。在测试集上Error rate 达到了6.67%。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Classical_model/GoogLeNet_Error_Rate.png" width = "800"></center>
+<center><img src="../../../images/computer_vision/classification/GoogLeNet_Error_Rate.png" width = "800"></center>
 <center><br>图3 GoogLeNet模型指标</br></center>
 
 ## 参考文献

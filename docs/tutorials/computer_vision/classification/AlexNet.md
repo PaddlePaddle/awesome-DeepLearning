@@ -8,10 +8,9 @@ AlexNet以极大的优势领先2012年ImageNet竞赛的第二名，也因此给�
 
 ## 模型结构
 
-
 AlexNet与此前的LeNet相比，具有更深的网络结构，包含5层卷积和3层全连接，具体结构如 **图1** 所示。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Classical_model/AlexNet.png" width = "1000"></center>
+<center><img src="../../../images/computer_vision/classification/AlexNet.png" width = "1000"></center>
 <center><br>图1 AlexNet模型网络结构示意图</br></center>
 
 1）第一模块：对于$224\times 224$的彩色图像，先用96个$11\times 11\times 3$的卷积核对其进行卷积，提取图像中包含的特征模式（步长为4，填充为2，得到96个$54\times 54$的卷积结果（特征图）；然后以$2\times 2$大小进行池化，得到了96个$27\times 27$大小的特征图；
@@ -109,7 +108,7 @@ AlexNet将LeNet的思想发扬光大，把CNN的基本原理应用到了很深�
 
 AlexNet 作为 ImageNet 2012比赛的冠军算法，在 ImageNet 测试集上达到了 15.3% 的 top-5 error rate，远远超过第二名（SIFT+FVs）的 26.2% 。如 **图2** 所示。
 
-<center><img src="https://raw.githubusercontent.com/lvjian0706/Deep-Learning-Img/master/CNN/Classical_model/AlexNet_Error_Rate.png" width = "1000"></center>
+<center><img src="../../../images/computer_vision/classification/AlexNet_Error_Rate.png" width = "1000"></center>
 <center><br>图2 AlexNet模型指标</br></center>
 
 ## 参考文献
