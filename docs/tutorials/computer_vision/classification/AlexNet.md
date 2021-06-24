@@ -12,7 +12,7 @@ AlexNet与此前的LeNet相比，具有更深的网络结构，包含5层卷积�
 
 ![图1 AlexNet模型网络结构示意图](../../../images/computer_vision/classification/AlexNet.png)
 
-图1 AlexNet模型网络结构示意图
+<center>图1 AlexNet模型网络结构示意图</center><br></br>
 
 1）第一模块：对于$224\times 224$的彩色图像，先用96个$11\times 11\times 3$的卷积核对其进行卷积，提取图像中包含的特征模式（步长为4，填充为2，得到96个$54\times 54$的卷积结果（特征图）；然后以$2\times 2$大小进行池化，得到了96个$27\times 27$大小的特征图；
 
@@ -111,7 +111,7 @@ AlexNet 作为 ImageNet 2012比赛的冠军算法，在 ImageNet 测试集上达
 
 ![图2 AlexNet模型指标](../../../images/computer_vision/classification/AlexNet_Error_Rate.png)
 
-图2 AlexNet模型指标
+<center>图2 AlexNet模型指标</center><br></br>
 
 ## 参考文献
 

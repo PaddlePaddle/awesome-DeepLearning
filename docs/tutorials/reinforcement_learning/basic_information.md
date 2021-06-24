@@ -12,7 +12,7 @@
 
 奖励（reward）：奖励是智能体贯式采取一系列动作后从环境获得的收益。注意奖励概念是现实中奖励和惩罚的统合，一般用正值来代表奖励，用负值代表实际惩罚。
 
-<center><img src="https://github.com/ZhangHandi/images-for-paddledocs/blob/main/images/reinforcement_learning/flappy%20bird.png?raw=true" /></center><br></br>
+![flappy_bird](../../images/reinforcement_learning/flappy_bird.png)
 
 在flappy bird游戏中，小鸟即为智能体，除小鸟以外的整个游戏环境可统称为环境，状态可以理解为在当前时间点的游戏图像。在本游戏中，智能体可以执行的动作为向上飞，或什么都不做靠重力下降。策略则指小鸟依据什么来判断是要执行向上飞的动作还是什么都不做，这个策略可能是根据值函数大小判断，也可能是依据在当前状态下执行不同动作的概率或是其他的判断方法。奖励分为奖励和惩罚两种，每当小鸟安全的飞过一个柱子都会获得一分的奖励，而如果小鸟掉到地上或者撞到柱子则或获得惩罚。
 

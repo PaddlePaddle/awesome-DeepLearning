@@ -10,7 +10,9 @@
 
 DynaBERT的训练阶段包括两部分，首先通过知识蒸馏的方法将teacher BERT的知识迁移到有自适应宽度的子网络student $DynaBERT_W$中，然后再对 $DynaBERT_W$ 进行知识蒸馏得到同时支持深度自适应和宽度自适应的子网络 DynaBERT。训练过程流程图如图1所示。
 
-<center><img src="https://github.com/ZhangHandi/images-for-paddledocs/blob/main/images/slim/DynaBERT/DynaBERT.png?raw=true" alt="DynaBERT" style="zoom:70%;" /><br>图1： DynaBERT的训练过程</br></center><br></br>
+![parameter counts](../../../images/model_compress/model_distill/DynaBERT/DynaBERT.png)
+
+<center>图1： DynaBERT的训练过程</center><br></br>
 
 **宽度自适应 Adaptive Width**
 
@@ -18,7 +20,9 @@ DynaBERT的训练阶段包括两部分，首先通过知识蒸馏的方法将tea
 
 为了充分利用网络的容量，更重要的头部或神经元应该在更多的子网络中共享。因此，在训练宽度自适应网络前，作者在 fine-tuned BERT网络中根据注意力头和神经元的重要性对它们进行了排序，然后在宽度方向上以降序进行排列。这种选取机制被称为 **Network Rewiring**。
 
-<center><img src="https://github.com/ZhangHandi/images-for-paddledocs/blob/main/images/slim/DynaBERT/Network%20Rewiring.png?raw=true" alt="Network Rewiring" style="zoom:70%;" /><br>图2: Network Rewiring </br></center><br></br>
+![parameter counts](../../../images/model_compress/model_distill/DynaBERT/Network_Rewiring.png)
+
+<center>图2: Network Rewiring</center><br></br>
 
 那么，要如何界定注意力头和神经元的重要性呢？作者参考 [P. Molchanov et al., 2017](https://arxiv.org/pdf/1611.06440.pdf) 和 [E. Voita et al., 2019](https://arxiv.org/pdf/1804.07461.pdf) 两篇论文提出，去掉某个注意力头或神经元前后的loss变化，就是该注意力头或神经元的重要程度，变化越大则越重要。
 
@@ -63,9 +67,13 @@ $$
 
 根据不同的宽度和深度剪裁系数，作者最终得到12个大小不同的DyneBERT模型，其在GLUE上的效果如下：
 
-<center><img src="https://github.com/ZhangHandi/images-for-paddledocs/blob/main/images/slim/DynaBERT/result%20on%20glue.png?raw=true" alt="result on glue" style="zoom:60%;" /><br>图3: results on GLUE benchmark</br></center><br></br>
+![result_on_glue](../../../images/model_compress/model_distill/DynaBERT/result_on_glue.png)
 
-<center><img src="https://github.com/ZhangHandi/images-for-paddledocs/blob/main/images/slim/DynaBERT/comparasion.png?raw=true" alt="comparasion" style="zoom:70%;" /><br>图4:Comparison of #parameters, FLOPs, latency on GPU and CPU between DynaBERT and DynaRoBERTa and other methods.</br></center><br></br>
+<center>图3: results on GLUE benchmark</center><br></br>
+
+![comparasion](../../../images/model_compress/model_distill/DynaBERT/comparasion.png)
+
+<center>图4:Comparison of #parameters, FLOPs, latency on GPU and CPU between DynaBERT and DynaRoBERTa and other methods.</center><br></br>
 
  可以看到论文中提出的DynaBERT和DynaRoBERTa可以达到和 $BERT_{BASE}$ 及 $DynaRoBERTa$ 相当的精度，但是通常包含更少的参数，FLOPs或更低的延迟。在相同效率的约束下，从DynaBERT中提取的子网性能优于DistilBERT和TinyBERT。
 

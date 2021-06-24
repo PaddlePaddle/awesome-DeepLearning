@@ -6,11 +6,9 @@
 
 以一个三层网络为例，假设其具体的网络示意图如图1所示。
 
-<center><img src="https://github.com/ZhangHandi/images-for-paddledocs/blob/main/images/deep%20learning/net_for_params_init.png?raw=true" alt="网络结构" style="zoom:50%;" /></center>
+![net_for_params_init](../../../images/deep_learning/model_tuning/net_for_params_init.png)
 
-<center>
-  图1: 三层网络示意图
-</center><br></br>
+<center>图1: 三层网络示意图</center><br></br>
 
 
 

@@ -14,11 +14,9 @@
 
 因此，只有找到合适的学习率，才能保证代价函数以较快的速度逼近全局最优解。
 
-<center><img src="https://github.com/ZhangHandi/images-for-paddledocs/blob/main/images/deep%20learning/learning%20rate.png?raw=true" alt="学习率" style="zoom:50%;" /></center>
+![learning_rate](../../../images/deep_learning/model_tuning/learning_rate.png)
 
-<center><br>图1: 不同学习率下的梯度更新 </br></center>
-
-
+<center>图1: 不同学习率下的梯度更新</center><br></br>
 
 ## 3. 学习率的设置
 

@@ -6,11 +6,10 @@
 
 从理论上来讲，加深深度学习网络可以提升性能。深度网络以端到端的多层方式集成了低/中/高层特征和分类器，且特征的层次可通过加深网络层次的方式来丰富。举一个例子，当深度学习网络只有一层时，要学习的特征会非常复杂，但如果有多层，就可以分层进行学习，如 **图1** 所示，网络的第一层学习到了边缘和颜色，第二层学习到了纹理，第三层学习到了局部的形状，而第五层已逐渐学习到全局特征。网络的加深，理论上可以提供更好的表达能力，使每一层可以学习到更细化的特征。
 
-<center><img src="https://github.com/ZhangHandi/images-for-paddledocs/blob/main/images/deep%20learning/ResNet/feature_map_visualization.png?raw=true" alt="feature_map_visualization" style="zoom:80%;" /></center>
-<center>
-  图1 特征可视化
-  <br></br>
-</center>
+![feature_map_visualization](../../../images/computer_vision/classification/feature_map_visualization.png)
+
+<center>图1 特征可视化</center><br></br>
+
 
 ## 2. 为什么深度网络不仅仅是层数的堆叠？
 
@@ -27,12 +26,10 @@ $$
 
 其中，$\sigma(\cdot)$ 为sigmoid函数。
 
-<center><img src="https://github.com/ZhangHandi/images-for-paddledocs/blob/main/images/deep%20learning/ResNet/single_neuronal_network.png?raw=true" style="zoom:80%;" /></center>
+![single_neuronal_network](../../../images/computer_vision/classification/single_neuronal_network.png)
 
-<center>
-  图2 单个神经元的神经网络
-  <br></br>
-</center>
+<center>图2 单个神经元的神经网络</center><br></br>
+
 
 根据链式求导和反向传播，我们可以得到：
 
@@ -43,12 +40,10 @@ $$
 $$
 Sigmoid 函数的导数 $\sigma^{'}(x)$ 如 **图3** 所示：
 
-<center><img src="https://github.com/ZhangHandi/images-for-paddledocs/blob/main/images/deep%20learning/ResNet/sigmoid_derivation.png?raw=true" alt="sigmoid_derivation" /></center>
+![sigmoid_derivation](../../../images/computer_vision/classification/sigmoid_derivation.png)
 
-<center>
-  图3 sigmoid函数的导数
-  <br></br>
-</center>
+<center>图3 sigmoid函数的导数</center><br></br>
+
 
 我们可以看到sigmoid的导数最大值为0.25，那么随着网络层数的增加，小于1的小数不断相乘导致 $\frac{\partial y}{\partial a_1}$ 逐渐趋近于零，从而产生梯度消失。
 
@@ -60,13 +55,9 @@ Sigmoid 函数的导数 $\sigma^{'}(x)$ 如 **图3** 所示：
 
 我们来看看ResNet论文中提到的例子（见 **图4**），很明显，56层的深层网络，在训练集和测试集上的表现都远不如20层的浅层网络，这种随着网络层数加深，accuracy逐渐饱和，然后出现急剧下降，具体表现为深层网络的训练效果反而不如浅层网络好的现象，被称为网络退化（degradation）。
 
-<center><img src="https://github.com/ZhangHandi/images-for-paddledocs/blob/main/images/deep%20learning/ResNet/error_in_CIFAR10.png?raw=true" alt="error_in_CIFAR10" /></center>
+![error_in_CIFAR10](../../../images/computer_vision/classification/error_in_CIFAR10.png)
 
-<center>
-  图4 CIFAR-10上20层和56层网络的训练误差和测试误差
-  <br></br>
-</center>
-
+<center>图4 CIFAR-10上20层和56层网络的训练误差和测试误差</center><br></br>
 
 为什么会引起网络退化呢？按照理论上的想法，当浅层网络效果不错的时候，网络层数的增加即使不会引起精度上的提升也不该使模型效果变差。但事实上非线性的激活函数的存在，会造成很多不可逆的信息损失，网络加深到一定程度，过多的信息损失就会造成网络的退化。
 
@@ -78,12 +69,10 @@ Sigmoid 函数的导数 $\sigma^{'}(x)$ 如 **图3** 所示：
 
 恒等映射即为 $H(x) = x$，已有的神经网络结构很难做到这一点，但是如果我们将网络设计成 $H(x) = F(x) + x$，即 $F(x) = H(x) - x$，那么只需要使残差函数 $F(x) = 0$，就构成了恒等映射 $H(x) = F(x)$。
 
-<center><img src="https://github.com/ZhangHandi/images-for-paddledocs/blob/main/images/deep%20learning/ResNet/residual_block.png?raw=true" alt="residual_block" /></center>
+![residual_block](../../../images/computer_vision/classification/residual_block.png)
 
-<center>
-  图5 恒等映射
-  <br></br>
-</center>
+<center>图5 恒等映射</center><br></br>
+
 
 残差结构的目的是，随着网络的加深，使 $F(x)$ 逼近于0，使得深度网络的精度在最优浅层网络的基础上不会下降。看到这里你或许会有疑问，既然如此为什么不直接选取最优的浅层网络呢？这是因为最优的浅层网络结构并不易找寻，而ResNet可以通过增加深度，找到最优的浅层网络并保证深层网络不会因为层数的叠加而发生网络退化。
 

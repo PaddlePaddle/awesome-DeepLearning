@@ -8,14 +8,16 @@
 * 其次是存储，比如电网周边环境监测这个应用场景中，要图像目标检测模型部署在可用内存只有200M的监控设备上，且当监控程序运行后，剩余内存会小于30M。
 * 最后是耗能，离线翻译这种移动设备内置AI模型的能耗直接决定了它的续航能力。 
 
-<center><img src="https://ai-studio-static-online.cdn.bcebos.com/bda328d8a2614ff19e60a8e59ff543f94137751d16164e948c2781a9375599de" alt="model compress" style="zoom:60%;" /></center><br></br>
+![model compress](../../images/model_compress/model_compress.png)
+<br></br>
 
 
 以上三点诉求都需要我们根据终端环境对现有模型进行小型化处理，在不损失精度的情况下，让模型的体积更小、速度更快，能耗更低。
 
 但如何能产出小模型呢？常见的方式包括设计更高效的网络结构、将模型的参数量变少、将模型的计算量减少，同时提高模型的精度。 可能有人会提出疑问，为什么不直接设计一个小模型？ 要知道，实际业务子垂类众多，任务复杂度不同，在这种情况下，人工设计有效小模型难度非常大，需要非常强的领域知识。而模型压缩可以在经典小模型的基础上，稍作处理就可以快速拔高模型的各项性能，达到“多快好省”的目的。
 
-<center><img src="https://ai-studio-static-online.cdn.bcebos.com/4b092bbdeae441feab4c148b7fb6a0d646b3c61fb1864e9d9d5f6ab0cc92ba73" alt="example" style="zoom:60%;" /></center><br></br>
+![performance](../../images/model_compress/performance.png)
+<br></br>
 
 
 上图是分类模型使用了蒸馏和量化的效果图，横轴是推理耗时，纵轴是模型准确率。 图中最上边红色的星星对应的是在MobileNetV3_large model基础上，使用蒸馏后的效果，相比它正下方的蓝色星星，精度有明显的提升。 图中所标浅蓝色的星星，对应的是在MobileNetV3_large model基础上，使用了蒸馏和量化的结果，相比原始模型，精度和推理速度都有明显的提升。 可以看出，在人工设计的经典小模型基础上，经过蒸馏和量化可以进一步提升模型的精度和推理速度。
@@ -24,7 +26,7 @@
 
 模型压缩可以通过以下几种方法实现：
 
-<center><img src="https://ai-studio-static-online.cdn.bcebos.com/96e8651438464263b763cb804854999e143b804cd16b4b67848083164afe3269" alt="different model compress method" style="zoom:60%;" /></center><br></br>
+![model_compress_method](../../images/model_compress/model_compress_method.png)<br></br>
 
 
 - 剪裁：类似“化学结构式的减肥”，将模型结构中对预测结果不重要的网络结构剪裁掉，使网络结构变得更加 ”瘦身“。比如，在每层网络，有些神经元节点的权重非常小，对模型加载信息的影响微乎其微。如果将这些权重较小的神经元删除，则既能保证模型精度不受大影响，又能减小模型大小。
