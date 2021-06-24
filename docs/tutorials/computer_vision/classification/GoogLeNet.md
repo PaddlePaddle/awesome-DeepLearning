@@ -18,7 +18,7 @@ GoogLeNet<sup>[1]</sup>是2014年ImageNet比赛的冠军，它的主要特点是
 
   ![图1 Inception模块结构示意图](../../../images/computer_vision/classification/Inception_Module.jpg)
 
-图1 Inception模块结构示意图
+<center>图1 Inception模块结构示意图</center><br></br>
 
 图1(a)是Inception模块的设计思想，使用3个不同大小的卷积核对输入图片进行卷积操作，并附加最大池化，将这4个操作的输出沿着通道这一维度进行拼接，构成的输出特征图将会包含经过不同大小的卷积核提取出来的特征，从而达到捕捉不同尺度信息的效果。Inception模块采用多通路(multi-path)的设计形式，每个支路使用不同大小的卷积核，最终输出特征图的通道数是每个支路输出通道数的总和，这将会导致输出通道数变得很大，尤其是使用多个Inception模块串联操作的时候，模型参数量会变得非常大。
 
@@ -96,7 +96,7 @@ GoogLeNet的架构如 **图2** 所示，在主体卷积部分中使用5个模块
 
 ![图2 GoogLeNet模型网络结构示意图](../../../images/computer_vision/classification/GoogLeNet.png)
 
-图2 GoogLeNet模型网络结构示意图
+<center>图2 GoogLeNet模型网络结构示意图</center><br></br>
 
 ## 模型实现
 
@@ -310,7 +310,7 @@ GoogLeNet 在 2014 年的 ImageNet 比赛上取得了冠军的好成绩，具体
 
 ![图3 GoogLeNet模型指标](../../../images/computer_vision/classification/GoogLeNet_Error_Rate.png)
 
-图3 GoogLeNet模型指标
+<center>图3 GoogLeNet模型指标</center><br></br>
 
 ## 参考文献
 

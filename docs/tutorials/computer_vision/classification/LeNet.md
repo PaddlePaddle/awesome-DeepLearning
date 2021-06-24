@@ -10,7 +10,7 @@ LeNet通过连续使用卷积和池化层的组合提取图像特征，其架构
 
 ![图1 LeNet模型网络结构示意图](../../../images/computer_vision/classification/LeNet.png)
 
-图1 LeNet模型网络结构示意图
+<center>图1 LeNet模型网络结构示意图</center><br></br>
 
 
 * 第一模块：包含5×5的6通道卷积和2×2的池化。卷积提取图像中包含的特征模式（激活函数使用Sigmoid），图像尺寸从28减小到24。经过池化层可以降低输出特征图对空间位置的敏感性，图像尺寸减到12。
@@ -99,7 +99,7 @@ LeNet-5在MNIST手写数字识别任务上进行了模型训练与测试，论�
 
 ![图2 LeNet模型指标](../../../images/computer_vision/classification/LeNet_Error_Rate.png)
 
-图2 LeNet模型指标
+<center>图2 LeNet模型指标</center><br></br>
 
 ## 参考文献
 

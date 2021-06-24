@@ -12,7 +12,7 @@ DarkNet19中，借鉴了许多优秀算法的经验，比如：借鉴了VGG的�
 
 ![图1 DarkNet19模型网络结构示意图](../../../images/computer_vision/classification/DarkNet19.png)
 
-图1 DarkNet19模型网络结构示意图
+<center>图1 DarkNet19模型网络结构示意图</center><br></br>
 
 DarkNet19精度与VGG网络相当，但浮点运算量只有其 $\frac{1}{5}$ 左右，因此运算速度极快。
 
@@ -22,7 +22,7 @@ DarkNet53在之前的基础上，借鉴了ResNet的思想，在网络中大量�
 
 ![图2 DarkNet53模型网络结构示意图](../../../images/computer_vision/classification/DarkNet53.png)
 
-图2 DarkNet53模型网络结构示意图
+<center>图2 DarkNet53模型网络结构示意图</center><br></br>
 
 考虑到当前 Darknet19 网络使用频率较低，接下来主要针对Darknet53网络进行实现与讲解。
 
@@ -212,7 +212,7 @@ class DarkNet53(nn.Layer):
 
 ![图3 DarkNet模型指标](../../../images/computer_vision/classification/DarkNet53_Acc.png)
 
-图3 DarkNet模型指标
+<center>图3 DarkNet模型指标</center><br></br>
 
 ## 参考文献
 

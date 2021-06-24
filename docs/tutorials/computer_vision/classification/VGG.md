@@ -14,7 +14,7 @@ VGG中还有一个显著特点：每次经过池化层（maxpooling）后特征�
 
 ![图1 VGG模型网络结构示意图](../../../images/computer_vision/classification/VGG.png)
 
-图1 VGG模型网络结构示意图
+<center>图1 VGG模型网络结构示意图</center><br></br>
 
 ## 模型实现
 
@@ -115,10 +115,9 @@ VGG 在 2014 年的 ImageNet 比赛上取得了亚军的好成绩，具体指标
 
 ![图2 VGG模型指标](../../../images/computer_vision/classification/VGG_Error_Rate.png)
 
-图2 VGG模型指标
-
-
+<center>图2 VGG模型指标</center><br></br>
 
 ## 参考文献
 
 [1] [Very deep convolutional networks for large-scale image recognition.](https://arxiv.org/pdf/1409.1556.pdf)
+

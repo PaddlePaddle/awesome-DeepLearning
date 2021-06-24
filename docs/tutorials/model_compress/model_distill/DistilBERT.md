@@ -4,7 +4,9 @@
 
 论文地址：[DistilBERT, a distilled version of BERT: smaller, faster, cheaper and lighter](https://arxiv.org/pdf/1910.01108.pdf)
 
-<center><img src="https://raw.githubusercontent.com/ZhangHandi/images-for-paddledocs/main/images/slim/DistilBERT/parameter%20counts.png" alt="parameters count" style="zoom:50%;"/><br>图1: 几个预训练模型的参数量统计</br></center><br></br>
+![parameter counts](../../../images/model_compress/model_distill/DistilBERT/parameter_counts.png)
+
+<center>图1: 几个预训练模型的参数量统计</center><br></br>
 
 近年来，大规模预训练语言模型成为NLP任务的基本工具，虽然这些模型带来了显著的改进，但它们通常拥有数亿个参数（如图1所示），而这会引起两个问题。首先，大型预训练模型需要的计算成本很高。其次，预训练模型不断增长的计算和内存需求可能会阻碍语言处理应用的广泛落地。因此，作者提出DistilBERT，它表明小模型可以通过知识蒸馏从大模型中学习，并可以在许多下游任务中达到与大模型相似的性能，从而使其在推理时更轻、更快。
 
@@ -39,6 +41,8 @@ $$
 
 ## 3. 实验结果
 
-<center><img src="https://raw.githubusercontent.com/ZhangHandi/images-for-paddledocs/main/images/slim/DistilBERT/result.png" alt="results on GLUE" style="zoom:70%;"/><br>图2：在GLUE数据集上的测试结果、下游任务测试和参数量对比</br></center><br></br>
+![results](../../../images/model_compress/model_distill/DistilBERT/result.png)
+
+<center>图2：在GLUE数据集上的测试结果、下游任务测试和参数量对比<</center><br></br>
 
 根据上图我们可以看到，DistilBERT与BERT相比减少了40%的参数，同时保留了BERT 97%的性能，但提高了60%的速度。

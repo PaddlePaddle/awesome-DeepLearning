@@ -7,7 +7,9 @@
 
 预训练模型的提出，比如BERT，显著的提升了很多自然语言处理任务的表现，它的强大是毫无疑问的。但是他们普遍存在参数过多、模型庞大、推理时间过长、计算昂贵等问题，因此很难落地到实际的产业应用中。TinyBERT是由华中科技大学和华为诺亚方舟实验室联合提出的一种针对transformer-based模型的知识蒸馏方法，以BERT为例对大型预训练模型进行研究。四层结构的 $TinyBERT_{4}$ 在 GLUE benchmark 上可以达到 $BERT_{base}$ 96.8%及以上的性能表现，同时模型缩小7.5倍，推理速度提升9.4倍。六层结构的 $TinyBERT_{6}$ 可以达到和 $BERT_{base}$ 同样的性能表现。
 
-<center><img src="https://github.com/ZhangHandi/images-for-paddledocs/blob/main/images/slim/TinyBERT/TinyBERT%20learning.png?raw=true" alt="TinyBERT learning" style="zoom:70%;" /><br>图1: TinyBERT learning</br></center><br></br>
+![parameter counts](../../../images/model_compress/model_distill/TinyBERT/TinyBERT_learning.png)
+
+<center>图1: TinyBERT learning</center><br></br>
 
 TinyBERT主要做了以下两点创新：
 
@@ -46,7 +48,9 @@ TinyBERT的蒸馏分为以下三个部分：transformer-layer distillation、emb
 
 Transformer-layer的蒸馏由attention based蒸馏和hidden states based蒸馏两部分组成。
 
-<center><img src="https://github.com/ZhangHandi/images-for-paddledocs/blob/main/images/slim/TinyBERT/Transformer-layer%20distillation.png?raw=true" alt="Transformer-layer distillation" style="zoom:50%;" /><br>图2: Transformer-layer distillation<br/></center><br></br>
+![parameter counts](../../../images/model_compress/model_distill/TinyBERT/Transformer-layer_distillation.png)
+
+<center>图2: Transformer-layer distillation</center><br></br>
 
 其中，attention based蒸馏是受到论文[Clack et al., 2019](https://arxiv.org/pdf/1906.04341.pdf)的启发，这篇论文中提到，BERT学习的注意力权重可以捕获丰富的语言知识，这些语言知识包括对自然语言理解非常重要的语法和共指信息。因此，TinyBERT提出attention based蒸馏，其目的是使学生网络很好地从教师网络处学习到这些语言知识。具体到模型中，就是让TinyBERT网络学习拟合BERT网络中的多头注意力矩阵，目标函数定义如下：
 
@@ -107,6 +111,9 @@ $$
 
 ## 3. 实验结果
 
-<center><img src="https://github.com/ZhangHandi/images-for-paddledocs/blob/main/images/slim/TinyBERT/result%20on%20GLUE.png?raw=true" alt="result on GLUE" /><br>图3: Results evaluated on GLUE benchmark</br></center><br></br>
+![parameter counts](../../../images/model_compress/model_distill/TinyBERT/result_on_GLUE.png)
+
+<center>图3: Results evaluated on GLUE benchmark</center><br></br>
 
 作者在GLUE基准上评估了TinyBERT的性能，模型大小、推理时间速度和准确率如图3所示。实验结果表明，TinyBERT在所有GLUE任务上都优于 $BERT_{TINY}$，并在平均性能上获得6.8%的提升。这表明论文中提出的知识整理学习框架可以有效的提升小模型在下游任务中的性能。同时，$TinyBERT_4$ 以~4%的幅度显著的提升了KD SOTA基准线（比如，BERT-PKD和DistilBERT），参数缩小至~28%，推理速度提升3.1倍。与teacher $BERT_{base}$ 相比，TinyBERT在保持良好性能的同时，模型缩小7.5倍，速度提升9.4倍。
+

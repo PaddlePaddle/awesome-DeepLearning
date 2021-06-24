@@ -4,10 +4,9 @@
 
 ![图1 MCP 模型结构](../../../images/deep_learning/basic_concepts/neurons.png)
 
-图1 MCP 模型结构
+<center>图1 MCP 模型结构</center><br></br>
 
 从 **图1** 可见，给定 n 个二值化（0或1）的输入数据 $x_i$ ($1\le i\le n$)与连接参数 $w_i$ ($1\le i\le n$)，MCP 神经元模型对输入数据线性加权求和，然后使用函数 $\varPhi \left(  \right)$ 将加权累加结果映射为 0 或 1 ，以完成两类分类的任务：
-
 $$
 y=\varPhi \left( \sum_{i=1}^n{w_ix_i} \right)
 $$
