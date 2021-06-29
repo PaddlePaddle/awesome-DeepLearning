@@ -20,5 +20,5 @@
    KBERT <KBERT>
    ALBERT <ALBERT>  
    ELECTRA <ELECTRA>
-   ELECTRA <Performer>
+   Performer <Performer>
 
