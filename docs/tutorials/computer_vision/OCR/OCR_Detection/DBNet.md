@@ -18,7 +18,7 @@ DB网络中，网络的输出为3个部分：概率图、阈值图和近似二�
 
 在构造损失函数时，我们需要获取对应的真实标签。阈值图的标签$$G_{d}$$，概率图标签$$G_{s}$$。DB网络中，标签的获取方式参考了PSENet(Progressive Scale Expansion Network,渐进式尺度扩展网络)中的方法，使用扩张和收缩的方式分别获取上述两个真实标签。标签的构造过程如 **图1** 所示：
 
-<center><img src="https://ai-studio-static-online.cdn.bcebos.com/98d40b2e62c94667b49214f266c74889280bf78997a7485f85df755cc602efbd" width = "600"></center>
+<center><img src="../../../../images/computer_vision/OCR/DB_1.png" width = "600"></center>
 <center><br>图1 DB标签构造示意图</br></center>
 
 在该方法中，对于一幅文字图像，文本区域的每个多边形使用一组线段$G=\{S_k\}^n_{k=1}$来进行描述，n为线段个数。如 **图1** 所示，$n=14$。
@@ -35,7 +35,7 @@ $$
 
 DB文本检测模型使用了标准的FPN结构，网络结构如 **图2** 所示。
 
-<center><img src="https://ai-studio-static-online.cdn.bcebos.com/6e1f293e9a1f4c90b6c26919f16b95a4a85dcf7be73f4cc99c9dc5477bb956e6" width = "600"></center>
+<center><img src="../../../../images/computer_vision/OCR/DB_2.png" width = "600"></center>
 <center><br>图2 DB模型网络结构示意图</br></center>
 
 1. 第一模块：使用CNN网络，对输入图像提取特征，得到特征图，本实验使用的骨干网络是轻量化网络MobileNetv3，同时使用了FPN结构，获取多尺度的特征，在本实验中，我们提取4个不同尺度下的特征图做拼接。
@@ -73,7 +73,7 @@ $$\frac{\delta{l_+}}{\delta{x}} = -kf(x)e^{-kx}$$
 $$\frac{\delta{l_-}}{\delta{x}} = -kf(x)$$
 此时，由于有了增强因子k，错误预测对梯度的影响也就被放大了，从而可以促进模型的优化过程并产生更为清晰的预测结果。**图3(b)** 中，$x<0$ 的部分为正样本预测为负样本的情况，可以看到，增益因子k将梯度进行了放大；而 **图3(c)** 中$x>0$ 的部分为负样本预测为正样本的情况，梯度同样也被放大了。
 
-<center><img src="https://ai-studio-static-online.cdn.bcebos.com/29255d870bd74403af37c8f88cb10ebca0c3117282614774a3d607efc8be8c84" width = "600"></center>
+<center><img src="../../../../images/computer_vision/OCR/DB_3.png" width = "600"></center>
 <center><br>图3 DB算法示意图</br></center>
 
 在训练阶段，使用3个预测图与真实标签共同完成损失函数的计算以及模型训练；在预测阶段，只需要使用概率图，通过一系列的后处理方式即可获得最终的预测结果。
