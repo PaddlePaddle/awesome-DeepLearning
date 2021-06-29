@@ -222,7 +222,7 @@
 | **智慧医疗** | 眼疾识别                   | https://www.paddlepaddle.org.cn/tutorials/projectdetail/1630501 |
 | **其他**     | 人摔倒检测                 |                                                              |
 | **其他**     | 足球比赛动作定位           | https://github.com/PaddlePaddle/PaddleVideo/tree/application/FootballAction |
-| **其他**     | 基于强化学习的飞行器仿真   |                                                              |
+| **其他**     | 基于强化学习的飞行器仿真   |  https://github.com/PaddlePaddle/PARL/tree/develop/examples/tutorials/homework/lesson5/ddpg_quadrotor |
 
 
 # 七、技术交流
