@@ -1,7 +1,7 @@
 # Transformer
 Transformer改进了RNN被人诟病的训练慢的特点，利用self-attention可以实现快速并行。
 
-## transformer直观认识
+## Transformer直观认识
 Transformer主要由encoder和decoder两部分组成。在Transformer的论文中，encoder和decoder均由6个encoder layer和decoder layer组成，通常我们称之为encoder block。
 
 <center><img src="https://ai-studio-static-online.cdn.bcebos.com/739aa8a15ec043f8920843fa142754276c10b5b082d64b39a7d0f795241ace82"  width="600px" /></center> 
@@ -28,7 +28,7 @@ decoder也包含encoder提到的两层网络，但是在这两层中间还有一
 <br></br>
 
 
-## self-attention
+## Self-attention
 - 首先，self-attention会计算出三个新的向量，在论文中，向量的维度是512维，我们把这三个向量分别称为Query、Key、Value，这三个向量是用embedding向量与一个矩阵相乘得到的结果，这个矩阵是随机初始化的，维度为（64，512）注意第二个维度需要和embedding的维度一样，其值在反向传播的过程中会一直进行更新，得到的这三个向量的维度是64低于embedding维度的。
 
 <center><img src="https://ai-studio-static-online.cdn.bcebos.com/8f322d81d9c3491d9b714e39986e482926755e9c86dd4266805cceb4add145c7"  width="600px" /></center> 
@@ -38,7 +38,7 @@ decoder也包含encoder提到的两层网络，但是在这两层中间还有一
 2、计算self-attention的分数值，该分数值决定了当我们在某个位置encode一个词时，对输入句子的其他部分的关注程度。这个分数值的计算方法是Query与Key做点乘，以下图为例，首先我们需要针对Thinking这个词，计算出其他词对于该词的一个分数值，首先是针对于自己本身即q1·k1，然后是针对于第二个词即q1·k2
 
 <center><img src="https://ai-studio-static-online.cdn.bcebos.com/04a8c9a33598465c80e63736e54c70b2c480a4feec9141dcb3487cf5a1f90f7a"  width="600px" /></center> 
-<center><br>Query Key Value </br></center>
+<center><br>Query Key Value</br></center>
 <br></br>
 
 3、接下来，把点乘的结果除以一个常数，这里我们除以8，这个值一般是采用上文提到的矩阵的第一个维度的开方即64的开方8，当然也可以选择其他的值，然后把得到的结果做一个softmax的计算。得到的结果即是每个词对于当前位置的词的相关性大小，当然，当前位置的词相关性肯定会会很大
@@ -103,7 +103,7 @@ $$O(n^2 \cdot m \cdot a)=O(n^2 \cdot d)$$
 
 ## Position Encoding
 
-transformer模型中还缺少一种解释输入序列中单词顺序的方法。为了处理这个问题，transformer给encoder层和decoder层的输入添加了一个额外的向量Positional Encoding，维度和embedding的维度一样，这个向量采用了一种很独特的方法来让模型学习到这个值，这个向量能决定当前词的位置，或者说在一个句子中不同的词之间的距离。这个位置向量的具体计算方法有很多种，论文中的计算方法如下
+Transformer模型中还缺少一种解释输入序列中单词顺序的方法。为了处理这个问题，transformer给encoder层和decoder层的输入添加了一个额外的向量Positional Encoding，维度和embedding的维度一样，这个向量采用了一种很独特的方法来让模型学习到这个值，这个向量能决定当前词的位置，或者说在一个句子中不同的词之间的距离。这个位置向量的具体计算方法有很多种，论文中的计算方法如下
 
 $$PE(pos,2i)=sin(pos/10000^{2i}/d_{model})$$
 $$PE(pos,2i+1)=cos(pos/10000^{2i}/d_{model})$$
