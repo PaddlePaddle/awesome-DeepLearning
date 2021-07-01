@@ -7,7 +7,9 @@
 ## 模型结构
 
 CRNN的主要结构包括基于CNN的图像特征提取模块以及基于多层双向LSTM的文字序列特征提取模块。CRNN的网络结构如 **图1** 所示：
-<center><img src="../../../../images/computer_vision/OCR/CRNN_1.png" width = "800"></center>
+
+![](../../../../images/computer_vision/OCR/CRNN_1.png)
+
 <center>图1 CRNN模型网络结构示意图</center>
 
 1）第一模块：使用CNN网络，对输入图像进行特征提取，从而得到特征图。本实验使用的CNN网络同样是轻量化网络MobileNetv3，其中输入图像的高度统一设置为32，宽度可以为任意长度，经过CNN网络后，特征图的高度缩放为1；

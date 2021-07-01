@@ -6,9 +6,8 @@ typora-root-url: ../encoder-decoder
 
 Decoder目标是利用Encoder输出的embedding，来解码关于图的结构信息。
 
-<div align='center'>
-  <img src='../../../images/generative_adversarial_network/encoder_decoder/decoder-2.png' width='500px'/>
-</div>
+![](../../../images/generative_adversarial_network/encoder_decoder/decoder-2.png)
+
 
 
 输入是Node Pair的embeddings，输出是一个实数，衡量了这两个Node在中的相似性，映射关系如下：
@@ -19,7 +18,5 @@ Decoder对缩小后的特征图像向量进行上采样，然后对上采样后�
 
 以人脸编码、解码为例，Encoder对人脸进行编码之后，再用解码器Decoder学习人脸的特性，即由短向量恢复到人脸图像，如下图所示：
 
-<div align='center'>
-  <img src='../../../images/generative_adversarial_network/encoder_decoder/face-decoder.png' width='500px'/>
-</div>
+![](../../../images/generative_adversarial_network/encoder_decoder/face-decoder.png)
 

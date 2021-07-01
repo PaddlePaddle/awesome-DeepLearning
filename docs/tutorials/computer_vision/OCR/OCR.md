@@ -5,29 +5,20 @@
 OCR(Optical Character Recognition,光学字符识别)是指对图像进行分析识别处理，获取文字和版面信息的过程，是典型的计算机视觉任务，通常由文本检测和文本识别两个子任务构成。
 
 * 文字检测：将图片中的文字区域位置检测出来（如图1(b)所示）；
-
 * 文字识别：对文字区域中的文字进行识别（如图1(c)所示）。
 
-<div align='center'>
-  <img src='../../../images/computer_vision/OCR/1.png' width='700px'/>
-</div>
+![](../../../images/computer_vision/OCR/1.png)
 
 ### OCR发展历程
 
 早在60、70年代，人们就开始对OCR进行研究。在研究的初期，主要以文字识别方法研究为主，而且识别的文字仅为0-9的数字。数字识别主要应用在识别邮件上的邮政编码。
 
-<div align='center'>
-  <img src='../../../images/computer_vision/OCR/ocr_email.png' width='700px'/>
-</div>
-
+![](../../../images/computer_vision/OCR/ocr_email.png)
 
 
 在深度学习出现之前，传统算法(如积分投影、腐蚀膨胀、旋转等)在OCR领域占据主导地位。其标准的处理流程包括：图像预处理、文本行检测、单字符分割、单字符识别、后处理。
 
-<div align='center'>
-  <img src='../../../images/computer_vision/OCR/ocr_trans.png' width='700px'/>
-</div>
-
+![](../../../images/computer_vision/OCR/ocr_trans.png)
 
 
 其中：
@@ -42,10 +33,7 @@ OCR(Optical Character Recognition,光学字符识别)是指对图像进行分析
 
 自2012年AlexNet在ImageNet竞赛夺冠以来，深度学习方法开始在图像视频领域大幅超越传统算法，OCR领域也引入了深度学习，包括基于卷积神经网络（Convolutional Neural Network, CNN）来取代传统算法提取特征。深度学习OCR主要分为2步，首先是检测出图像中的文本行、接着进行文本识别。
 
-<div align='center'>
-  <img src='../../../images/computer_vision/OCR/ocr_dl.png' width='500px'/>
-</div>
-
+![](../../../images/computer_vision/OCR/ocr_dl.png)
 
 ## OCR 常用检测方法
 
@@ -108,9 +96,7 @@ OCR文字检测就是将图片中的文字区域检测出来。
 
 对应到OCR技术实现问题上，则一般面临仿射变换、尺度问题、光照不足、拍摄模糊等技术难点； 另外OCR应用常对接海量数据，因此要求数据能够得到实时处理；并且OCR应用常部署在移动端或嵌入式硬件，而端侧的存储空间和计算能力有限，因此对OCR模型的大小和预测速度有很高的要求。
 
-<div align='center'>
-  <img src='../../../images/computer_vision/OCR/ocr_diffi.png' width='700px'/>
-</div>
+![](../../../images/computer_vision/OCR/ocr_diffi.png)
 
 
 

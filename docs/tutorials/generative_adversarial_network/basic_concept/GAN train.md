@@ -2,9 +2,8 @@
 
 GAN包含生成器G和判别器D两个网络，那么我们如何训练两个网络？
 
-<div align='center'>
-  <img src='../../../images/generative_adversarial_network/basic_concept/7.png' width='700px'/>
-</div>
+![](../../../images/generative_adversarial_network/basic_concept/7.png)
+
 
 **训练时先训练鉴别器D：**将真实图片打上真标签1和生成器G生成的假图片打上假标签0，一同组成batch送入判别器D，对判别器进行训练。计算loss时使判别器对真实图像输入的判别趋近于真，对生成的假图片的判别趋近于假。此过程中只更新判别器的参数，不更新生成器的参数。
 

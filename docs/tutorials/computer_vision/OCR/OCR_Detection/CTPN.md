@@ -12,12 +12,14 @@ CTPN(Connectionist Text Proposal Network)<sup>[1]</sup>是目标检测算法[Fas
 
 CTPN采用的方法是将文本行分割成一个个小块（长度是固定的），然后去检测这些小块，最后使用一种文本行构造法将所有块连起来，如 **图1** 所示。
 
-<center><img src="../../../../images/computer_vision/OCR/CTPN_1.png" width = "700"></center>
+![](../../../../images/computer_vision/OCR/CTPN_1.png)
+
 <center><br>图1 CTPN 序列特征</br></center>
 
 CTPN网络结构如 **图2** 所示：
 
-<center><img src="../../../../images/computer_vision/OCR/CTPN_2.png" width = "700"></center>
+![](../../../../images/computer_vision/OCR/CTPN_2.png)
+
 <center><br>图2 CTPN网络结构示意图</br></center>
 
 整个检测分为5步：
