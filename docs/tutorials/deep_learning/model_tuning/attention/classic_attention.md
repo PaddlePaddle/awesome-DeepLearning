@@ -4,13 +4,13 @@
 
 单独地去讲**Attention机制**会有些抽象，也有些枯燥，所以我们不妨以**机器翻译**任务为例，通过讲解**Attention机制**在机器翻译任务中的应用方式，来了解**Attention机制**的使用。
 
-如果你对机器翻译任务还不是很熟悉，那也没关系，因为现在我会告诉你机器翻译是什么样的任务。以**中译英**为例，机器翻译是将一串中文语句翻译为对应的英文语句，如**图1**所示。
+什么是机器翻译任务？以**中译英**为例，机器翻译是将一串中文语句翻译为对应的英文语句，如**图1**所示。
 
 ![image (1)](https://raw.githubusercontent.com/1649759610/images_for_blog/master/image%20(1).png)
 
 <center>图1 机器翻译示例图</center>
 
-**图1**展示了一种经典的机器翻译结构**Seq-to-Seq**，并且向其中添加了**Attention计算**。**Seq-to-Seq**结构包含两个部分：Encoder和Decoder。其中Encoder用于将中文语句进行编码，这些编码后续将提供给Decoder进行使用；Decoder将根据Decoder的数据进行解码。我们还是以图1为例详细解释一下Decoder的解码过程。
+**图1**展示了一种经典的机器翻译结构**Seq-to-Seq**，并且向其中添加了**Attention计算**。**Seq-to-Seq**结构包含两个部分：Encoder和Decoder。其中Encoder用于将中文语句进行编码，这些编码后续将提供给Decoder进行使用；Decoder将根据Encoder的数据进行解码。我们还是以图1为例详细解释一下Decoder的解码过程。
 
 更明确的讲，**图1**展示的是生成单词"machine"时的计算方式。首先将前一个时刻的输出状态 $q_2$ 和Encoder的输出 $h=[h_1,h_2,h_3,h_4]$ 进行Attention计算，得到一个当前时刻的 $context$ ，用公式可以这样组织：
 
