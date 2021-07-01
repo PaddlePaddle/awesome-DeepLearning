@@ -4,8 +4,9 @@
 
 CTPN在水平文本的检测方面效果比较好，但是对于竖直方向的文本，或者多方向的文本，CTPN检测就很差。然而，在实际场景中，我们会遇到多种存在竖直方向文本的情况，例如很多书本封面的文本，如 **图1** 所示。
 
-<center><img src="../../../../images/computer_vision/OCR/EAST_1.png" width = "300"></center>
-<center><br>图1 竖直方向文本示例</br></center>
+![](../../../../images/computer_vision/OCR/EAST_1.png)
+
+<center>图1 多方案文本示意图</center>>
 
 因此，很多学者也提出了各种改进方法，其中，比较经典一篇的就是旷世科技在2017年提出来的EAST<sup>[1]</sup>模型。
 
@@ -13,8 +14,9 @@ CTPN在水平文本的检测方面效果比较好，但是对于竖直方向的�
 
   EAST的网络结构总共包含三个部分：Feature extractor stem（特征提取分支）, Feature-merging branch（特征合并分支） 以及 Output layer（输出层），网络结构如 **图2** 所示：
 
-<center><img src="../../../../images/computer_vision/OCR/EAST_2.png" width = "600"></center>
-<center><br>图2 EAST网络结构示意图</br></center>
+![EAST网络结构示意图](../../../../images/computer_vision/OCR/EAST_2.png)
+
+<center>图2 EAST网络结构示意图</center>
 
 每一部分网络结构：
 

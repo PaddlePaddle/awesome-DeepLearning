@@ -2,9 +2,8 @@
 
 生成器G是一个生成图片的网络，可以采用多层感知机、卷积网络、自编码器等。它接收一个随机的噪声z，通过这个噪声生成图片，记做G(z)。通过下图模型结构讲解生成器如何一步步将噪声生成一张图片：
 
-<div align='center'>
-  <img src='../../../images/generative_adversarial_network/basic_concept/5.png' width='700px'/>
-</div>
+![](../../../images/generative_adversarial_network/basic_concept/5.png)
+
 
 
 1）输入：100维的向量；

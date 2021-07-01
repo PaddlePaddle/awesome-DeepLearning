@@ -4,9 +4,8 @@
 
 **表现：**生成器开始退化，总是生成同样的样本点，无法继续学习，这种情况称为模式崩溃。例如，在MNIST数据集上训练GAN之后，我们的生成器可能无法生成与数字4不同的数字。
 
-<div align='center'>
-  <img src='../../../images/generative_adversarial_network/basic_concept/9.png' width='200px'/>
-</div>
+![](../../../images/generative_adversarial_network/basic_concept/9.png)
+
 
 **可以尝试以下解决办法：**
 

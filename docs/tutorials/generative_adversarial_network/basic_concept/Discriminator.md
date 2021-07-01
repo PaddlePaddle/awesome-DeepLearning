@@ -5,9 +5,8 @@
 * 输入：单通道图像，尺寸为28*28像素(非固定值，根据实际情况修改即可)。
 * 输出：二分类，样本是真或假。
 
-<div align='center'>
-  <img src='../../../images/generative_adversarial_network/basic_concept/6.png' width='700px'/>
-</div>
+![](../../../images/generative_adversarial_network/basic_concept/6.png)
+
 1）输入：28\*28*1像素的图像；
 
 2）经过第一个卷积conv1，得到64个26\*26的特征图，然后进行最大池化pool1，得到64个13*13的特征图；
