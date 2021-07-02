@@ -10,17 +10,9 @@
 
 * **前沿分享** ：定期分享顶会最新论文解读和代码复现，开发者可以实时掌握最新的深度学习算法。
 
-
-
-## 最新动态
-
-2021年5月14日-5月20日，B站《零基础实践深度学习》7日打卡课，扫描下方二维码快速入群，了解课程信息。
-
-<center><img src="https://github.com/ZhangHandi/images-for-paddledocs/blob/main/images/readme/qr_code.png?raw=true"/></center>
-
-
-
 # 二、 零基础实践深度学习入门课
+
+
 
   - **AI Studio在线课程：[《零基础实践深度学习》](https://aistudio.baidu.com/aistudio/course/introduce/1297
     )**：理论和代码结合、实践与平台结合，包含20小时视频课程，由百度杰出架构师、飞桨产品负责人和资深研发人员共同打造。
@@ -31,8 +23,110 @@
   - **《零基础实践深度学习》书籍**：本课程配套书籍，由清华出版社2020年底发行，京东/当当等电商均有销售。
 
     <center><img src="https://github.com/ZhangHandi/images-for-paddledocs/blob/main/images/readme/book.png?raw=true"/></center><br></br>
-    
-    
+
+    ## [学习地图](https://aistudio.baidu.com/aistudio/projectdetail/2056805)：
+
+    1.零基础实践深度学习七日课 开营介绍
+
+    | 资料 | 链接                                                         |
+    | ---- | ------------------------------------------------------------ |
+    | 视频 | https://aistudio.baidu.com/aistudio/education/lessonvideo/1366742 |
+    | 课件 | https://aistudio.baidu.com/aistudio/education/preview/1447519 |
+
+    2.比赛赛题讲解
+
+    | 资料 | 链接                                                         |
+    | ---- | ------------------------------------------------------------ |
+    | 视频 | https://aistudio.baidu.com/aistudio/education/lessonvideo/1372844 |
+    | 项目 | https://aistudio.baidu.com/aistudio/projectdetail/1938271    |
+
+    3.DAY1-AI职业发展与课程介绍
+
+    | 资料 | 链接                                                         |
+    | ---- | ------------------------------------------------------------ |
+    | 视频 | https://aistudio.baidu.com/aistudio/education/lessonvideo/1383195 |
+    | 课件 | https://aistudio.baidu.com/aistudio/education/preview/1403278 |
+
+    4.DAY2-手写数字识别案例入门深度学习
+
+    | 资料       | 链接                                                         |
+    | ---------- | ------------------------------------------------------------ |
+    | 视频（上） | https://aistudio.baidu.com/aistudio/education/lessonvideo/1382975 |
+    | 视频（下） | https://aistudio.baidu.com/aistudio/education/lessonvideo/1383003 |
+    | 课件       | https://aistudio.baidu.com/aistudio/education/preview/1382783 |
+
+    附：手写数字识别案例入门深度学习项目
+
+    | 项目                                 | 链接                                                         |
+    | ------------------------------------ | ------------------------------------------------------------ |
+    | 使用飞桨完成手写数字识别模型         | [https://aistudio.baidu.com/aistudio/projectdetail/2057038](https://aistudio.baidu.com/aistudio/projectdetail/2057038) |
+    | 通过极简方案快速构建手写数字识别模型 | [https://aistudio.baidu.com/aistudio/projectdetail/2056976](https://aistudio.baidu.com/aistudio/projectdetail/2056976) |
+    | 手写数字识别之数据处理               | [https://aistudio.baidu.com/aistudio/projectdetail/2056979](https://aistudio.baidu.com/aistudio/projectdetail/2056979) |
+    | 手写数字识别之网络结构               | [https://aistudio.baidu.com/aistudio/projectdetail/2057051](https://aistudio.baidu.com/aistudio/projectdetail/2057051) |
+    | 手写数字识别之损失函数               | [https://aistudio.baidu.com/aistudio/projectdetail/1910072](https://aistudio.baidu.com/aistudio/projectdetail/1910072) |
+    | 手写数字识别之优化算法               | [https://aistudio.baidu.com/aistudio/projectdetail/2057060](https://aistudio.baidu.com/aistudio/projectdetail/2057060) |
+    | 手写数字识别之资源配置               | [https://aistudio.baidu.com/aistudio/projectdetail/2057061](https://aistudio.baidu.com/aistudio/projectdetail/2057061) |
+    | 手写数字识别之训练调试与优化         | [https://aistudio.baidu.com/aistudio/projectdetail/2057066](https://aistudio.baidu.com/aistudio/projectdetail/2057066) |
+    | 手写数字识别之恢复训练               | [https://aistudio.baidu.com/aistudio/projectdetail/2057069](https://aistudio.baidu.com/aistudio/projectdetail/2057069) |
+    | 手写数字识别之动转静部署             | [https://aistudio.baidu.com/aistudio/projectdetail/2057074](https://aistudio.baidu.com/aistudio/projectdetail/2057074) |
+
+    5.DAY3-眼疾识别案例实践计算机视觉
+
+    | 资料       | 链接                                                         |
+    | ---------- | ------------------------------------------------------------ |
+    | 视频（上） | https://aistudio.baidu.com/aistudio/education/lessonvideo/1382809 |
+    | 视频（下） | https://aistudio.baidu.com/aistudio/education/lessonvideo/1382861 |
+    | 课件       | https://aistudio.baidu.com/aistudio/education/preview/1382803 |
+
+    附：眼疾识别案例项目
+
+    | 项目             | 链接                                                         |
+    | ---------------- | ------------------------------------------------------------ |
+    | 卷积神经网络基础 | [https://aistudio.baidu.com/aistudio/projectdetail/2057136](https://aistudio.baidu.com/aistudio/projectdetail/2057136) |
+    | 图像分类         | [https://aistudio.baidu.com/aistudio/projectdetail/2057141](https://aistudio.baidu.com/aistudio/projectdetail/2057141) |
+
+    6.DAY4-词向量训练和情感分析任务
+
+    | 资料       | 链接                                                         |
+    | ---------- | ------------------------------------------------------------ |
+    | 视频（上） | https://aistudio.baidu.com/aistudio/education/lessonvideo/1392063 |
+    | 视频（下） | https://aistudio.baidu.com/aistudio/education/lessonvideo/1392070 |
+    | 课件       | https://aistudio.baidu.com/aistudio/education/preview/1388585 |
+
+    附：词向量训练和情感分析任务项目
+
+    | 项目                 | 链接                                                         |
+    | -------------------- | ------------------------------------------------------------ |
+    | 自然语言处理综述     | [https://aistudio.baidu.com/aistudio/projectdetail/2057099](https://aistudio.baidu.com/aistudio/projectdetail/2057099) |
+    | 词向量Word Embedding | [https://aistudio.baidu.com/aistudio/projectdetail/2057101](https://aistudio.baidu.com/aistudio/projectdetail/2057101) |
+    | 文本情感倾向性分析   | [https://aistudio.baidu.com/aistudio/projectdetail/2057105](https://aistudio.baidu.com/aistudio/projectdetail/2057105) |
+
+    7.DAY5-基于DSSM的电影推荐案例
+
+    | 资料       | 链接                                                         |
+    | ---------- | ------------------------------------------------------------ |
+    | 视频（上） | https://aistudio.baidu.com/aistudio/education/lessonvideo/1406745 |
+    | 视频（下） | https://aistudio.baidu.com/aistudio/education/lessonvideo/1406747 |
+    | 课件       | https://aistudio.baidu.com/aistudio/education/preview/1392088 |
+    |            |                                                              |
+
+    附：DSSM的电影推荐案例项目
+
+    | 项目               | 链接                                                         |
+    | ------------------ | ------------------------------------------------------------ |
+    | 推荐系统介绍       | [https://aistudio.baidu.com/aistudio/projectdetail/2057116](https://aistudio.baidu.com/aistudio/projectdetail/2057116) |
+    | 数据处理与读取     | [https://aistudio.baidu.com/aistudio/projectdetail/2057118](https://aistudio.baidu.com/aistudio/projectdetail/2057118) |
+    | 电影推荐模型设计   | [https://aistudio.baidu.com/aistudio/projectdetail/2057121](https://aistudio.baidu.com/aistudio/projectdetail/2057121) |
+    | 模型训练与特征保存 | [https://aistudio.baidu.com/aistudio/projectdetail/2057122](https://aistudio.baidu.com/aistudio/projectdetail/2057122) |
+    | 电影推荐           | [https://aistudio.baidu.com/aistudio/projectdetail/2057128](https://aistudio.baidu.com/aistudio/projectdetail/2057128) |
+
+    8.DAY6-模型优化经验与飞桨深入解读
+
+    | 资料       | 链接                                                         |
+    | ---------- | ------------------------------------------------------------ |
+    | 视频（上） | https://aistudio.baidu.com/aistudio/education/lessonvideo/1428668 |
+    | 视频（下） | https://aistudio.baidu.com/aistudio/education/lessonvideo/1428674 |
+    | 课件       | https://aistudio.baidu.com/aistudio/education/preview/1447773 |
 
 # 三、 深度学习百科
 
@@ -200,7 +294,7 @@
 
 # 四、 Transformer系列特色课（开发中）
 
-飞桨工程师筹备中，计划2021年8月份发布，敬请期待！
+课程链接:[https://aistudio.baidu.com/aistudio/education/group/info/24322/content](https://aistudio.baidu.com/aistudio/education/group/info/24322/content)
 
 # 五、 经典深度学习案例集（开发中）
 
