@@ -91,7 +91,7 @@
     | ---------- | ------------------------------------------------------------ |
     | 视频（上） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1392063](https://aistudio.baidu.com/aistudio/education/lessonvideo/1392063) |
     | 视频（下） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1392070](https://aistudio.baidu.com/aistudio/education/lessonvideo/1392070) |
-    | 课件       | [https://aistudio.baidu.com/aistudio/education/preview/1388585]() |
+    | 课件       | [https://aistudio.baidu.com/aistudio/education/preview/1388585](https://aistudio.baidu.com/aistudio/education/preview/1388585) |
 
     附：词向量训练和情感分析任务项目
 
