@@ -48,12 +48,6 @@ DeiT(Data-efficient Image Transformers) series models were proposed by Facebook 
 
 ## Model preparation
 
-- Enter insatallation dir
-
-  ```
-  cd path_to_Transformer-classification
-  ```
-
 - Download the model weight files of ViT and DeiT to the `model_file` directory
 
   ```

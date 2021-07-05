@@ -50,12 +50,6 @@ DeiT（Data-efficient Image Transformers）系列模型是由FaceBook在2020年�
 
 ## 模型准备
 
-- 进入 repo 目录
-
-  ```
-  cd path_to_Transformer-classification
-  ```
-
 - 下载ViT和DeiT的模型权重文件到`model_file`目录下
 
   ```
