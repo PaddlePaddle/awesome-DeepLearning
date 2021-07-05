@@ -10,6 +10,7 @@
 ## 项目介绍
 ```
 |-data: 存放ImageNet验证集
+|-model_file:存放模型权重文件
 |-transform.py: 数据预处理脚本
 |-dataset.py: 读取数据脚本
 |-model.py: 该脚本中定义了ViT以及DeiT的网络结构
@@ -31,7 +32,13 @@ DeiT（Data-efficient Image Transformers）系列模型是由FaceBook在2020年�
   cd path_to_Transformer-classification
   ```
 
-- 下载[ImageNet验证集](https://aistudio.baidu.com/aistudio/datasetdetail/93561)到`data`目录下
+- 下载[ImageNet验证集](https://aistudio.baidu.com/aistudio/datasetdetail/93561)并解压到`data`目录下
+
+  ```
+  mkdir data && cd data
+  tar -xvf ILSVRC2012_val.tar
+  cd ../
+  ```
 
 - 解压数据集
 
@@ -54,7 +61,7 @@ DeiT（Data-efficient Image Transformers）系列模型是由FaceBook在2020年�
 - 下载ViT和DeiT的模型权重文件到`model_file`目录下
 
   ```
-  cd model_file
+  mkdir model_file && cd model_file
   wget https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/ViT_base_patch16_384_pretrained.pdparams
   wget https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/DeiT_base_distilled_patch16_384_pretrained.pdparams
   cd ../
