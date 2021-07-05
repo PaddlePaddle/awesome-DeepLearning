@@ -293,11 +293,11 @@
 
 # 四、 Transformer系列特色课（开发中）
 
-| 章节名称                      | AiStudio课程链接                                             | 代码路径                                                     |
-| ----------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| transformer在图像分类中的应用 | [课程链接](https://aistudio.baidu.com/aistudio/projectdetail/2154618) | [代码路径](./transformer_courses/Application_of_transformer_in_image_classification) |
-|                               |                                                              |                                                              |
-|                               |                                                              |                                                              |
+| 章节名称                      | notebook链接                                                 | Python实现                                                   | 课程简介                                                     |
+| ----------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| transformer在图像分类中的应用 | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2154618) | [Python实现](./transformer_courses/Application_of_transformer_in_image_classification) | 本章节将为大家详细介绍 Transformer 在 CV 领域中的两个经典算法：ViT 以及 DeiT。带领大家一起学习Transformer 结构在图像分类领域的具体应用。 |
+|                               |                                                              |                                                              |                                                              |
+|                               |                                                              |                                                              |                                                              |
 
 # 五、 经典深度学习案例集（开发中）
 
