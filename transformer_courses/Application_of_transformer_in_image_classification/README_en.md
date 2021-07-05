@@ -51,7 +51,7 @@ DeiT(Data-efficient Image Transformers) series models were proposed by Facebook 
 - Download the model weight files of ViT and DeiT to the `model_file` directory
 
   ```
-  cd model_file
+  mkdir model_file && cd model_file
   wget https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/ViT_base_patch16_384_pretrained.pdparams
   wget https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/DeiT_base_distilled_patch16_384_pretrained.pdparams
   cd ../
