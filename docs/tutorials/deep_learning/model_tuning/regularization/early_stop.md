@@ -4,6 +4,6 @@
 
 提前停止是一种交叉验证的策略，即把一部分训练集保留作为验证集。当看到验证集上的性能变差时，就立即停止模型的训练。
 
-![early_stop](https://raw.githubusercontent.com/w5688414/paddleImage/main/regularization_img/early_stop.png)
+![early_stop](../../../../images/deep_learning/model_tuning/regularization/early_stop.png)
 
 在上图中，我们在虚线处停止模型的训练，因为在此处之后模型会开始在训练数据上过拟合。
