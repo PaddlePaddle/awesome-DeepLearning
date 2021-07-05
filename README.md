@@ -296,7 +296,7 @@
 | 章节名称                      | notebook链接                                                 | Python实现                                                   | 课程简介                                                     |
 | ----------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | transformer在图像分类中的应用 | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2154618) | [Python实现](./transformer_courses/Application_of_transformer_in_image_classification) | 本章节将为大家详细介绍 Transformer 在 CV 领域中的两个经典算法：ViT 以及 DeiT。带领大家一起学习Transformer 结构在图像分类领域的具体应用。 |
-|                               |                                                              |                                                              |                                                              |
+|经典的预训练语言模型   |  [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2110336)  |[Python实现](./transformer_courses/Transformer_Machine_Translation)|本章节将为大家详细介绍NLP领域 Transformer。Transformer的前世今生，包括ELMo，GPT，Transformer，BERT等经典模型，还会介绍Transformer在机器翻译里面的应用                                                              |
 |                               |                                                              |                                                              |                                                              |
 
 # 五、 经典深度学习案例集（开发中）
