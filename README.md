@@ -293,7 +293,11 @@
 
 # 四、 Transformer系列特色课（开发中）
 
-课程链接:[https://aistudio.baidu.com/aistudio/education/group/info/24322/content](https://aistudio.baidu.com/aistudio/education/group/info/24322/content)
+| 章节名称                      | AiStudio课程链接                                             | 代码路径                                                     |
+| ----------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| transformer在图像分类中的应用 | [课程链接](https://aistudio.baidu.com/aistudio/projectdetail/2154618) | [代码路径](./transformer_courses/Application_of_transformer_in_image_classification) |
+|                               |                                                              |                                                              |
+|                               |                                                              |                                                              |
 
 # 五、 经典深度学习案例集（开发中）
 
