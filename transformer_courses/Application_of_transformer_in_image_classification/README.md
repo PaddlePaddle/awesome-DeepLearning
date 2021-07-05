@@ -40,9 +40,7 @@ DeiT（Data-efficient Image Transformers）系列模型是由FaceBook在2020年�
   cd ../
   ```
 
-- 解压数据集
-
-  请按照如下格式组织数据集
+- 请按照如下格式组织数据集
 
   ```
   data/ILSVRC2012_val

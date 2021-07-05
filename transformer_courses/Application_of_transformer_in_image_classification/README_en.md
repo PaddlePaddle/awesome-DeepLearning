@@ -30,9 +30,15 @@ DeiT(Data-efficient Image Transformers) series models were proposed by Facebook 
   cd path_to_Transformer-classification
   ```
 
-- Download [ImageNet Verification Set](https://aistudio.baidu.com/aistudio/datasetdetail/93561) to the `data` directory.
+- Download [ImageNet Verification Set](https://aistudio.baidu.com/aistudio/datasetdetail/93561) and unzip it to the `data` directory
 
-  Please organize data dir as below
+  ```
+  mkdir data && cd data
+  tar -xvf ILSVRC2012_val.tar
+  cd ../
+  ```
+  
+- Please organize data dir as below
 
   ```
   data/ILSVRC2012_val
