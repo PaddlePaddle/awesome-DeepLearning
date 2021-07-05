@@ -30,9 +30,15 @@ DeiT(Data-efficient Image Transformers) series models were proposed by Facebook 
   cd path_to_Transformer-classification
   ```
 
-- Download [ImageNet Verification Set](https://aistudio.baidu.com/aistudio/datasetdetail/93561) to the `data` directory.
+- Download [ImageNet Verification Set](https://aistudio.baidu.com/aistudio/datasetdetail/93561) and unzip it to the `data` directory
 
-  Please organize data dir as below
+  ```
+  mkdir data && cd data
+  tar -xvf ILSVRC2012_val.tar
+  cd ../
+  ```
+  
+- Please organize data dir as below
 
   ```
   data/ILSVRC2012_val
@@ -42,16 +48,10 @@ DeiT(Data-efficient Image Transformers) series models were proposed by Facebook 
 
 ## Model preparation
 
-- Enter insatallation dir
-
-  ```
-  cd path_to_Transformer-classification
-  ```
-
 - Download the model weight files of ViT and DeiT to the `model_file` directory
 
   ```
-  cd model_file
+  mkdir model_file && cd model_file
   wget https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/ViT_base_patch16_384_pretrained.pdparams
   wget https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/DeiT_base_distilled_patch16_384_pretrained.pdparams
   cd ../
