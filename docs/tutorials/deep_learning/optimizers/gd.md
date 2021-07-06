@@ -74,7 +74,8 @@ BGD 对于凸误差曲面（convex error surface）保证收敛到全局最优�
 $$\theta=\theta -\eta \cdot \nabla_{\theta}J(\theta;x^i;y^i)$$
 
 其中$\theta$是模型的参数，$\eta$是学习率，$\nabla_{\theta}J(\theta)$为损失函数对参数$\theta$的导数。BGD 对于大数据集来说执行了很多冗余的计算，因为在每一次参数更新前都要计算很多相似样本的梯度。SGD 通过一次执行一次更新解决了这种冗余。因此通常 SGD 的速度会非常快而且可以被用于在线学习。SGD以高方差的特点进行连续参数更新，导致目标函数严重震荡
-![sgd震荡](https://raw.githubusercontent.com/w5688414/paddleImage/main/img/sgd.png)
+
+![sgd震荡](../../../images/deep_learning/optimizers/sgd.png)
 
 BGD 能够收敛到（局部）最优点，然而 SGD 的震荡特点导致其可以跳到新的潜在的可能更好的局部最优点。已经有研究显示当我们慢慢的降低学习率时，SGD 拥有和 BGD 一样的收敛性能，对于非凸和凸曲面几乎同样能够达到局部或者全局最优点。
 ### Mini-batch梯度下降
@@ -99,7 +100,7 @@ MBGD 是训练神经网络时的常用方法，而且通常即使实际上使用
 
 选择一个好的学习率是非常困难的。太小的学习率导致收敛非常缓慢，而太大的学习率则会阻碍收敛，导致损失函数在最优点附近震荡甚至发散。相同的学习率被应用到所有参数更新中。如果我们的数据比较稀疏，特征有非常多不同的频率，那么此时我们可能并不想要以相同的程度更新他们，反而是对更少出现的特征给予更大的更新。为了能在学习期间自动调节学习率，根据先前定义好的一个规则来减小学习率，或者两次迭代之间目标函数的改变低于一个阈值的时候。然而这些规则和阈值也是需要在训练前定义好的，所以也不能做到自适应数据的特点
 
-![learning_rate](https://raw.githubusercontent.com/w5688414/paddleImage/main/img/learning_rate.png)
+![learning_rate](../../../images/deep_learning/optimizers/learning_rate.png)
 
 上图中，学习率设置过大，导致目标函数值沿着 “山谷” 周围大幅震荡，可能永远都到达不了最小值。
 
@@ -107,6 +108,6 @@ MBGD 是训练神经网络时的常用方法，而且通常即使实际上使用
 
 对于神经网络来说，另一个最小化高度非凸误差函数的关键挑战是避免陷入他们大量的次局部最优点（suboptimal）。事实上困难来自于鞍点而不是局部最优点，即损失函数在该点的一个维度上是上坡（slopes up），而在另一个维度上是下坡（slopes down）。这些鞍点通常被一个具有相同误差的平面所包围，这使得对于 SGD 来说非常难于逃脱，因为在各个维度上梯度都趋近于 0 。
 
-![鞍点](https://raw.githubusercontent.com/w5688414/paddleImage/main/img/saddle_point.png)
+![鞍点](../../../images/deep_learning/optimizers/saddle_point.png)
 
 如图，鞍点得名于它的形状类似于马鞍。尽管它在 x 方向上是一个最小值点，但是它在另一个方向上是局部最大值点，并且，如果它沿着 x 方向变得更平坦的话，梯度下降会在 x 轴振荡并且不能继续根据 y 轴下降，这就会给我们一种已经收敛到最小值点的错觉。
