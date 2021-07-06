@@ -1,0 +1,222 @@
+
+# Copyright (c) 2020 PaddlePaddle Authors. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+'''
+构建dataset，模型超参数配置，加载dataset，构建dataloader，加载预训练模型，设置AdamW优化器，cross entropy损失函数以及评估方式
+'''
+
+class TEDTalk(DatasetBuilder):
+
+    SPLITS = {
+        'train': 'train.tsv',
+        'dev':'dev.tsv',
+        'test': 'test.tsv'
+    }
+
+    def _get_data(self, mode, **kwargs):
+        default_root='.'
+        self.mode=mode
+        filename = self.SPLITS[mode]
+        fullname = os.path.join(default_root, filename)
+
+        return fullname
+
+    def _read(self, filename, *args):
+        df=pd.read_csv(filename,sep='\t')
+        for idx,row in df.iterrows():
+            text=row['text_a']
+            if(type(text)==float):
+                print(text)
+                continue
+            tokens=row['text_a'].split()
+            tags=row['label'].split()
+            # if(self.mode=='train'):
+            #     tags=row['label'].split()
+            # else:
+            #     tags = []
+            yield {"tokens": tokens, "labels": tags}
+
+    def get_labels(self):
+
+        return ["0", "1", "2", "3"]
+ 
+def load_dataset(path_or_read_func,
+                 name=None,
+                 data_files=None,
+                 splits=None,
+                 lazy=None,
+                 **kwargs):
+    
+    reader_cls = TEDTalk
+    print(reader_cls)
+    if not name:
+        reader_instance = reader_cls(lazy=lazy, **kwargs)
+    else:
+        reader_instance = reader_cls(lazy=lazy, name=name, **kwargs)
+
+    datasets = reader_instance.read_datasets(data_files=data_files, splits=splits)
+    return datasets
+ 
+def tokenize_and_align_labels(example, tokenizer, no_entity_id,
+                              max_seq_len=512):
+    labels = example['labels']
+    example = example['tokens']
+    # print(labels)
+    tokenized_input = tokenizer(
+        example,
+        return_length=True,
+        is_split_into_words=True,
+        max_seq_len=max_seq_len)
+
+    # -2 for [CLS] and [SEP]
+    if len(tokenized_input['input_ids']) - 2 < len(labels):
+        labels = labels[:len(tokenized_input['input_ids']) - 2]
+    tokenized_input['labels'] = [no_entity_id] + labels + [no_entity_id]
+    tokenized_input['labels'] += [no_entity_id] * (
+        len(tokenized_input['input_ids']) - len(tokenized_input['labels']))
+    # print(tokenized_input)
+    return tokenized_input
+
+
+# 模型超参数配置
+ 
+batch_size=128
+device='gpu'
+num_train_epochs=3
+warmup_steps=0
+logging_steps=1
+max_seq_length=128
+model_name_or_path='electra-base'
+max_steps=-1
+learning_rate=5e-5
+adam_epsilon=1e-8
+weight_decay=0.0
+ 
+paddle.set_device(device)
+
+# 加载dataset
+ 
+# Create dataset, tokenizer and dataloader.
+train_ds, test_ds = load_dataset('TEDTalk', splits=('train', 'test'), lazy=False)
+
+label_list = train_ds.label_list
+label_num = len(label_list)
+# no_entity_id = label_num - 1
+no_entity_id=0
+ 
+print(label_list)
+
+# 构建dataloader
+
+trans_func = partial(
+        tokenize_and_align_labels,
+        tokenizer=tokenizer,
+        no_entity_id=no_entity_id,
+        max_seq_len=max_seq_length)
+train_ds = train_ds.map(trans_func)
+ 
+ignore_label = -100
+
+batchify_fn = lambda samples, fn=Dict({
+        'input_ids': Pad(axis=0, pad_val=tokenizer.pad_token_id, dtype='int32'),  # input
+        'token_type_ids': Pad(axis=0, pad_val=tokenizer.pad_token_type_id, dtype='int32'),  # segment
+        'seq_len': Stack(dtype='int64'),  # seq_len
+        'labels': Pad(axis=0, pad_val=ignore_label, dtype='int64')  # label
+    }): fn(samples)
+ 
+train_batch_sampler = paddle.io.DistributedBatchSampler(
+        train_ds, batch_size=batch_size, shuffle=True, drop_last=True)
+ 
+train_data_loader = DataLoader(
+        dataset=train_ds,
+        collate_fn=batchify_fn,
+        num_workers=0,
+        batch_sampler=train_batch_sampler,
+        return_list=True) 
+
+test_ds = test_ds.map(trans_func)
+
+test_data_loader = DataLoader(
+        dataset=test_ds,
+        collate_fn=batchify_fn,
+        num_workers=0,
+        batch_size=batch_size,
+        return_list=True)
+ 
+for index,data in enumerate(train_data_loader):
+    # print(len(data))
+    print(index)
+    print(data)
+    break
+
+# 加载预训练模型 
+
+# Define the model netword and its loss
+model = ElectraForTokenClassification.from_pretrained(model_name_or_path, num_classes=label_num)
+
+# 设置AdamW优化器
+
+num_training_steps = max_steps if max_steps > 0 else len(
+        train_data_loader) * num_train_epochs
+lr_scheduler = LinearDecayWithWarmup(learning_rate, num_training_steps,
+                                         warmup_steps)
+
+# Generate parameter names needed to perform weight decay.
+# All bias and LayerNorm parameters are excluded.
+decay_params = [
+        p.name for n, p in model.named_parameters()
+        if not any(nd in n for nd in ["bias", "norm"])
+    ]
+
+optimizer = paddle.optimizer.AdamW(
+        learning_rate=lr_scheduler,
+        epsilon=adam_epsilon,
+        parameters=model.parameters(),
+        weight_decay=weight_decay,
+        apply_decay_param_fun=lambda x: x in decay_params)     
+
+# 设置CrossEntropy损失函数 
+
+loss_fct = paddle.nn.loss.CrossEntropyLoss(ignore_index=ignore_label)
+
+# 设置评估方式
+ 
+metric = paddle.metric.Accuracy()
+ 
+def compute_metrics(labels, decodes, lens):
+    decodes = [x for batch in decodes for x in batch]
+    lens = [x for batch in lens for x in batch]
+    labels=[x for batch in labels for x in batch]
+    outputs = []
+    nb_correct=0
+    nb_true=0
+    val_f1s=[]
+    label_vals=[0,1,2,3]
+    y_trues=[]
+    y_preds=[]
+    for idx, end in enumerate(lens):
+        y_true = labels[idx][:end].tolist()
+        y_pred = [x for x in decodes[idx][:end]]
+        nb_correct += sum(y_t == y_p for y_t, y_p in zip(y_true, y_pred))
+        nb_true+=len(y_true)
+        y_trues.extend(y_true)
+        y_preds.extend(y_pred)
+
+    score = nb_correct / nb_true
+    # val_f1 = metrics.f1_score(y_trues, y_preds, average='micro', labels=label_vals)
+
+    result=classification_report(y_trues, y_preds)
+    # print(val_f1)   
+    return score,result

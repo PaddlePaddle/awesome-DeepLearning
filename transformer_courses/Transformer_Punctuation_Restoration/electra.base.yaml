@@ -1,0 +1,21 @@
+# 模型超参数  
+batch_size: 128
+device: 'gpu'
+num_train_epochs: 3
+warmup_steps: 0
+logging_steps: 1
+max_seq_length: 128
+model_name_or_path: 'electra-base'
+max_steps: -1
+learning_rate: 5e-5
+adam_epsilon: 1e-8
+weight_decay: 0.0
+
+# 训练参数
+global_step :  0
+logging_steps: 200 # 日志的保存周期
+last_step :  num_train_epochs * len(train_data_loader)
+tic_train : time.time()
+save_steps: 200 # 模型保存周期
+output_dir: 'checkpoints/' # 模型保存目录
+
