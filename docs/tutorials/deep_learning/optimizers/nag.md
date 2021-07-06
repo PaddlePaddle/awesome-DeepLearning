@@ -11,7 +11,7 @@ $$\theta=\theta-v_{t}$$
 
 然后用下一个点的梯度方向，与历史累积动量相结合，计算当前时刻的累积动量。
 
-![momentum](https://raw.githubusercontent.com/w5688414/paddleImage/main/img/momentum.png)
+![momentum](../../../images/deep_learning/optimizers/momentum.png)
 
 如上图，动量法首先计算当前梯度（图中的小蓝色向量）,然后在更新累积梯度（updated accumulated gradient）方向上大幅度的跳跃（图中的大蓝色向量）。与此不同的是，NAG 首先在先前的累积梯度（previous accumulated gradient）方向上进行大幅度的跳跃（图中的棕色向量），评估这个梯度并做一下修正（图中的红色向量），这就构成一次完整的 NAG 更新（图中的绿色向量）。这种预期更新防止我们进行的太快，也带来了更高的相应速度，这在一些任务中非常有效的提升了 RNN 的性能。
 

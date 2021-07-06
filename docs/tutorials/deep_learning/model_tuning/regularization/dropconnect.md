@@ -8,7 +8,7 @@ $$r=a((M*W)v)$$
 
 ## dropout与dropconncet
 
-![dropconnect](https://raw.githubusercontent.com/w5688414/paddleImage/main/regularization_img/dropconnect.png)
+![dropconnect](../../../../images/deep_learning/model_tuning/regularization/dropconnect.png)
 
 + Dropout是随机将隐含层节点的输出清0，针对的是输出。
 + DropConnect是将节点中的每个与其相连的输入权值以1-p的概率清0；针对的是输入。
@@ -16,7 +16,7 @@ $$r=a((M*W)v)$$
 ## DropConnect的训练
 使用DropConnect时，需要对每个example, 每个echo都随机sample一个M矩阵（元素值都是0或1, 俗称mask矩阵）。training部分的算法流程如下：
 
-![](https://raw.githubusercontent.com/w5688414/paddleImage/main/regularization_img/dropconnect_training.png)
+![](../../../../images/deep_learning/model_tuning/regularization/dropconnect_training.png)
 
 + DropConnect只能用于全连接的网络层（和dropout一样），如果网络中用到了卷积，则用patch卷积时的隐层节点是不使用DropConnect的，因此上面的流程里有一个Extract feature步骤，该步骤就是网络前面那些非全连接层的传播过程，比如卷积+pooling.
 
@@ -27,7 +27,7 @@ $$r=a((M*W)v)$$
 $$ u~N(pWv,p(1-p)(W*W)(v*v)) $$
 推理过程如下：
 
-![inference](https://raw.githubusercontent.com/w5688414/paddleImage/main/regularization_img/dropconnect_inference.png)
+![inference](../../../../images/deep_learning/model_tuning/regularization/dropconnect_inference.png)
 
 由上面的过程可知，在进行inference时，需要对每个权重都进行sample，所以DropConnect速度会慢些。
 

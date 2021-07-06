@@ -10,11 +10,11 @@ $$\theta=\theta-v_{t}$$
 一阶动量是各个时刻梯度方向的指数移动平均值，也就是说，t时刻的下降方向，不仅由当前点的梯度方向决定，而且由此前累积的下降方向决定。$\gamma$的经验值为0.9，这就意味着下降方向主要是此前累积的下降方向，并略微偏向当前时刻的下降方向。想象高速公路上汽车转弯，在高速向前的同时略微偏向，急转弯可是要出事的。
 SGD 震荡且缓慢的沿着沟壑的下坡方向朝着局部最优点前进，如下图：
 
-![no_momentum](https://raw.githubusercontent.com/w5688414/paddleImage/main/img/sgd_no_momentum.png)
+![no_momentum](../../../images/deep_learning/optimizers/sgd_no_momentum.png)
 
 momentum能够加速SGD方法，并且能够减少震荡，如下图：
 
-![momentum](https://raw.githubusercontent.com/w5688414/paddleImage/main/img/sgd_momentum.png)
+![momentum](../../../images/deep_learning/optimizers/sgd_momentum.png)
 
 **特点**
 
