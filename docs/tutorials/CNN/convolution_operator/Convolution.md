@@ -159,13 +159,13 @@ $$W_{out} = \frac{100 + 2 - 3}{2} + 1 = 50$$
 
 比如$3\times3$卷积对应的感受野大小就是$3\times3$，如 **图6** 所示。
 
-![图6 感受野为3×3的卷积](../../../images/CNN/convolution_operator/Receptive_Field_3*3.png)
+![图6 感受野为3×3的卷积](../../../images/CNN/convolution_operator/Receptive_Field_3x3.png)
 
 图6 感受野为3×3的卷积
 
 而当通过两层$3\times3$的卷积之后，感受野的大小将会增加到$5\times5$，如 **图7** 所示。
 
-![图7 感受野为5×5的卷积](../../../images/CNN/convolution_operator/Receptive_Field_5*5.png)
+![图7 感受野为5×5的卷积](../../../images/CNN/convolution_operator/Receptive_Field_5x5.png)
 
 图7 感受野为5×5的卷积
 
