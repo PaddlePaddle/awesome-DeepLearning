@@ -13,6 +13,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import yaml 
+import argparse 
+from pprint import pprint
+from attrdict import AttrDict
+
+import os
+import paddle
+from paddlenlp.transformers import ElectraForTokenClassification, ElectraTokenizer
+from dataloader import create_dataloader,load_dataset
+
 def parse_decodes(input_words, id2label, decodes, lens):
     decodes = [x for batch in decodes for x in batch]
     lens = [x for batch in lens for x in batch]
@@ -35,11 +45,24 @@ def parse_decodes(input_words, id2label, decodes, lens):
     return outputs
 
 if __name__ == '__main__':
-     
-    # 加载训练好的模型
-    best_model = 'model_13257.pdparams'
-    init_checkpoint_path=os.path.join(output_dir,'model_13257.pdparams')
+    # 读入参数
+    yaml_file = './electra.base.yaml'
+    with open(yaml_file, 'rt') as f:
+        args = AttrDict(yaml.safe_load(f))
+        # pprint(args)
+
+    best_model = args.best_model
+    init_checkpoint_path=os.path.join(args.output_dir,'model_13257.pdparams')
     model_dict = paddle.load(init_checkpoint_path)
+
+    # 加载dataset
+    # Create dataset, tokenizer and dataloader.
+    train_ds, test_ds = load_dataset('TEDTalk', splits=('train', 'test'), lazy=False)
+    label_list = train_ds.label_list
+    label_num = len(label_list)
+
+    # Define the model netword and its loss
+    model = ElectraForTokenClassification.from_pretrained(args.model_name_or_path, num_classes=label_num)    
     model.set_dict(model_dict)
      
     punctuation_dec = {
@@ -55,6 +78,9 @@ if __name__ == '__main__':
     model.eval()
     pred_list = []
     len_list = []
+
+    _ , test_data_loader  = create_dataloader(args)
+
     for step, batch in enumerate(test_data_loader):
         input_ids, token_type_ids, length, labels = batch
         logits = model(input_ids, token_type_ids)

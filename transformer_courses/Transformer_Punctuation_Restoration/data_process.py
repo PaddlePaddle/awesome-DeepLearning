@@ -15,16 +15,21 @@
 '''
 预处理数据，并且构建数据集
 '''
-# 数据读取
-with open(data_path + 'train_texts.txt', 'r', encoding='utf-8') as f:
-    train_text = f.readlines()
-with open(data_path + 'dev_texts.txt', 'r', encoding='utf-8') as f:
-    valid_text = f.readlines()
-with open(data_path + 'test_texts_2012.txt', 'r', encoding='utf-8') as f:
-    test_text = f.readlines()
- 
-datasets = train_text, valid_text, test_text
- 
+import yaml 
+import argparse 
+from pprint import pprint
+from attrdict import AttrDict
+
+from tqdm import tqdm 
+import ujson
+import codecs
+import os
+import re
+import pandas as pd 
+
+from paddlenlp.transformers import ElectraForTokenClassification, ElectraTokenizer
+from paddlenlp.data import Stack, Tuple, Pad, Dict
+
 def clean_text(text):
     '''
     将符号替换为
@@ -61,39 +66,6 @@ def clean_text(text):
     text = re.sub(r'\s+\.', '.', text)
     
     return text.strip().lower()
- 
-datasets = [[clean_text(text) for text in ds] for ds in datasets]
-
-# 利用electra的分词工具进行分词，然后构造数据集
-
-model_name_or_path='electra-base'
-tokenizer = ElectraTokenizer.from_pretrained(model_name_or_path)
-
-punctuation_enc = {
-        'O': '0',
-        ',': '1',
-        '.': '2',
-        '?': '3',
-    }
- 
-# 以一个文本序列为例，引入 format_data 函数的构建
-text=tokenizer.tokenize("all the projections [ say that ] this one [ billion ] will [ only ] grow with one to two or three percent")
-print(text)
-label=[]
-cur_text=[]
-for item in text:
-    if(item in punctuation_enc):
-        print(item)
-        label.pop()
-        label.append(punctuation_enc[item])
-    else:
-        cur_text.append(item)
-        label.append(punctuation_enc['O'])
-# label=[item for item in text]
-print(label)
-print(cur_text)
-print(len(label))
-print(len(cur_text))
 
 def format_data(train_text):
     '''
@@ -131,53 +103,105 @@ def format_data(train_text):
             texts.append(cur_text)
     return texts,labels
 
-# 构建训练集
-texts,labels=format_data(train_text)
 
-print(len(texts))
-print(texts[0])
-print(labels[0])
+if __name__ == '__main__': 
+    # 读入参数
+    yaml_file = './electra.base.yaml'
+    with open(yaml_file, 'rt') as f:
+        args = AttrDict(yaml.safe_load(f))
+        # pprint(args)
 
-def output_to_tsv(texts,labels,file_name):
-    data=[]
-    for text,label in zip(texts,labels):
-        if(len(text)!=len(label)):
-            print(text)
-            print(label)
-            continue
-        data.append([' '.join(text),' '.join(label)])
-    df=pd.DataFrame(data,columns=['text_a','label'])
-    df.to_csv(file_name,index=False,sep='\t')
+    # 数据读取
+    with open(args.data_path + args.output_train_path, 'r', encoding='utf-8') as f:
+        train_text = f.readlines()
+    with open(args.data_path + args.output_dev_path, 'r', encoding='utf-8') as f:
+        valid_text = f.readlines()
+    with open(args.data_path + args.output_test_path, 'r', encoding='utf-8') as f:
+        test_text = f.readlines()
+    
+    datasets = train_text, valid_text, test_text
+    
+    datasets = [[clean_text(text) for text in ds] for ds in datasets]
+
+    # 利用electra的分词工具进行分词，然后构造数据集
+
+    model_name_or_path=args.model_name_or_path
+    tokenizer = ElectraTokenizer.from_pretrained(model_name_or_path)
+
+    punctuation_enc = {
+            'O': '0',
+            ',': '1',
+            '.': '2',
+            '?': '3',
+        }
+    
+    # 以一个文本序列为例，引入 format_data 函数的构建
+    text=tokenizer.tokenize("all the projections [ say that ] this one [ billion ] will [ only ] grow with one to two or three percent")
+    print(text)
+    label=[]
+    cur_text=[]
+    for item in text:
+        if(item in punctuation_enc):
+            print(item)
+            label.pop()
+            label.append(punctuation_enc[item])
+        else:
+            cur_text.append(item)
+            label.append(punctuation_enc['O'])
+    # label=[item for item in text]
+    print(label)
+    print(cur_text)
+    print(len(label))
+    print(len(cur_text))
+
  
-def output_to_train_tsv(texts,labels,file_name):
-    data=[]
-    for text,label in zip(texts,labels):
-        if(len(text)!=len(label)):
-            print(text)
-            print(label)
-            continue
-        if(len(text)==0):
-            continue
-        data.append([' '.join(text),' '.join(label)])
-    # data=data[65000:70000]
-    df=pd.DataFrame(data,columns=['text_a','label'])
-    df.to_csv(file_name,index=False,sep='\t')
+    # 构建训练集
+    texts,labels=format_data(train_text)
 
-output_to_train_tsv(texts,labels,'train.tsv')
+    print(len(texts))
+    print(texts[0])
+    print(labels[0])
 
-texts,labels=format_data(test_text)
-output_to_tsv(texts,labels,'test.tsv')
-texts,labels=format_data(dev_texts)
-output_to_tsv(texts,labels,'dev.tsv')
+    def output_to_tsv(texts,labels,file_name):
+        data=[]
+        for text,label in zip(texts,labels):
+            if(len(text)!=len(label)):
+                print(text)
+                print(label)
+                continue
+            data.append([' '.join(text),' '.join(label)])
+        df=pd.DataFrame(data,columns=['text_a','label'])
+        df.to_csv(file_name,index=False,sep='\t')
+    
+    def output_to_train_tsv(texts,labels,file_name):
+        data=[]
+        for text,label in zip(texts,labels):
+            if(len(text)!=len(label)):
+                print(text)
+                print(label)
+                continue
+            if(len(text)==0):
+                continue
+            data.append([' '.join(text),' '.join(label)])
+        # data=data[65000:70000]
+        df=pd.DataFrame(data,columns=['text_a','label'])
+        df.to_csv(file_name,index=False,sep='\t')
 
-raw_path='.'
-train_file = os.path.join(raw_path, "train.tsv")
-dev_file = os.path.join(raw_path, "dev.tsv")
- 
-train_data=pd.read_csv(train_file,sep='\t')
-train_data.head()
+    output_to_train_tsv(texts,labels, args.output_train_tsv)
 
-def write_json(filename, dataset):
-    print('write to'+filename)
-    with codecs.open(filename, mode="w", encoding="utf-8") as f:
-        ujson.dump(dataset, f)
+    texts,labels=format_data(test_text)
+    output_to_tsv(texts,labels, args.output_test_tsv)
+    texts,labels=format_data(valid_text)
+    output_to_tsv(texts,labels, args.output_dev_tsv)
+
+    raw_path='.'
+    train_file = os.path.join(raw_path, args.output_train_tsv)
+    dev_file = os.path.join(raw_path, args.output_dev_tsv)
+    
+    train_data=pd.read_csv(train_file,sep='\t')
+    train_data.head()
+
+    def write_json(filename, dataset):
+        print('write to'+filename)
+        with codecs.open(filename, mode="w", encoding="utf-8") as f:
+            ujson.dump(dataset, f)

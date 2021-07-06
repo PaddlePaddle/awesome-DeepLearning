@@ -9,8 +9,8 @@
 ```
 |-data_transfer.py: 将测试集和训练集数据从xml格式提取成txt形式
 |-data_process.py: 数据集预处理，并且分别构建训练和测试数据集 
-|-dataloader.py: dataloader迭代器脚本：加载dataset，构建dataloader，加载预训练模型，设置AdamW优化器，cross entropy损失函数以及评估方式
-|-train.py: 该脚本中定义了ELECTRA的训练
+|-dataloader.py: 包含构建dataloader的方法
+|-train.py: 构建dataloader，加载预训练模型，设置AdamW优化器，cross entropy损失函数以及评估方式该脚本中，并且定义了ELECTRA的训练
 |-predict.py: 启动模型预测的脚本，并且储存预测结构于txt文件
 ```
 
@@ -48,7 +48,7 @@ ELECTRA 是由 Kevin Clark 等人（Standfold 和 Google 团队）在 ICLR 2020 
 - 请按照如下格式组织数据集
 
   ```
-  data/IWSLT12
+  data 
   |_ IWSLT12.TED.MT.tst2011.en-fr.en.xml
   |_ IWSLT12.TED.SLT.tst2011.en-fr.en.system0.comma.xml
   |_ IWSLT12.TALK.dev2010.en-fr.en.xml
@@ -61,18 +61,7 @@ ELECTRA 是由 Kevin Clark 等人（Standfold 和 Google 团队）在 ICLR 2020 
   ```bash
   python data_transfer.py  
   python data_process.py  
-  ```
-## 模型准备
-
-- 进入 repo 目录
-
-  ```bash
-  cd Transformer_Punctuation_Restoration
-  ```
-
-  ```bash
-  python dataloader.py
-  ```
+  ``` 
 
 ## 模型训练
 

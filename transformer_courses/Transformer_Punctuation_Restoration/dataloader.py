@@ -1,4 +1,6 @@
 
+# -*- coding: UTF-8 -*-
+
 # Copyright (c) 2020 PaddlePaddle Authors. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +17,30 @@
 
 '''
 构建dataset，模型超参数配置，加载dataset，构建dataloader，加载预训练模型，设置AdamW优化器，cross entropy损失函数以及评估方式
+
 '''
+
+import yaml 
+import argparse 
+from pprint import pprint
+from attrdict import AttrDict
+
+import paddle
+from paddle.io import DataLoader  
+
+import paddle
+from paddlenlp.transformers import LinearDecayWithWarmup
+from paddlenlp.transformers import TransformerModel, InferTransformerModel, CrossEntropyCriterion, position_encoding_init
+from paddlenlp.utils.log import logger
+from paddlenlp.datasets import DatasetBuilder
+from paddlenlp.transformers import ElectraForTokenClassification, ElectraTokenizer
+from paddlenlp.data import Stack, Tuple, Pad, Dict
+
+import os
+import pandas as pd
+from sklearn.metrics import classification_report
+from functools import partial
+
 
 class TEDTalk(DatasetBuilder):
 
@@ -89,112 +114,6 @@ def tokenize_and_align_labels(example, tokenizer, no_entity_id,
     # print(tokenized_input)
     return tokenized_input
 
-
-# 模型超参数配置
- 
-batch_size=128
-device='gpu'
-num_train_epochs=3
-warmup_steps=0
-logging_steps=1
-max_seq_length=128
-model_name_or_path='electra-base'
-max_steps=-1
-learning_rate=5e-5
-adam_epsilon=1e-8
-weight_decay=0.0
- 
-paddle.set_device(device)
-
-# 加载dataset
- 
-# Create dataset, tokenizer and dataloader.
-train_ds, test_ds = load_dataset('TEDTalk', splits=('train', 'test'), lazy=False)
-
-label_list = train_ds.label_list
-label_num = len(label_list)
-# no_entity_id = label_num - 1
-no_entity_id=0
- 
-print(label_list)
-
-# 构建dataloader
-
-trans_func = partial(
-        tokenize_and_align_labels,
-        tokenizer=tokenizer,
-        no_entity_id=no_entity_id,
-        max_seq_len=max_seq_length)
-train_ds = train_ds.map(trans_func)
- 
-ignore_label = -100
-
-batchify_fn = lambda samples, fn=Dict({
-        'input_ids': Pad(axis=0, pad_val=tokenizer.pad_token_id, dtype='int32'),  # input
-        'token_type_ids': Pad(axis=0, pad_val=tokenizer.pad_token_type_id, dtype='int32'),  # segment
-        'seq_len': Stack(dtype='int64'),  # seq_len
-        'labels': Pad(axis=0, pad_val=ignore_label, dtype='int64')  # label
-    }): fn(samples)
- 
-train_batch_sampler = paddle.io.DistributedBatchSampler(
-        train_ds, batch_size=batch_size, shuffle=True, drop_last=True)
- 
-train_data_loader = DataLoader(
-        dataset=train_ds,
-        collate_fn=batchify_fn,
-        num_workers=0,
-        batch_sampler=train_batch_sampler,
-        return_list=True) 
-
-test_ds = test_ds.map(trans_func)
-
-test_data_loader = DataLoader(
-        dataset=test_ds,
-        collate_fn=batchify_fn,
-        num_workers=0,
-        batch_size=batch_size,
-        return_list=True)
- 
-for index,data in enumerate(train_data_loader):
-    # print(len(data))
-    print(index)
-    print(data)
-    break
-
-# 加载预训练模型 
-
-# Define the model netword and its loss
-model = ElectraForTokenClassification.from_pretrained(model_name_or_path, num_classes=label_num)
-
-# 设置AdamW优化器
-
-num_training_steps = max_steps if max_steps > 0 else len(
-        train_data_loader) * num_train_epochs
-lr_scheduler = LinearDecayWithWarmup(learning_rate, num_training_steps,
-                                         warmup_steps)
-
-# Generate parameter names needed to perform weight decay.
-# All bias and LayerNorm parameters are excluded.
-decay_params = [
-        p.name for n, p in model.named_parameters()
-        if not any(nd in n for nd in ["bias", "norm"])
-    ]
-
-optimizer = paddle.optimizer.AdamW(
-        learning_rate=lr_scheduler,
-        epsilon=adam_epsilon,
-        parameters=model.parameters(),
-        weight_decay=weight_decay,
-        apply_decay_param_fun=lambda x: x in decay_params)     
-
-# 设置CrossEntropy损失函数 
-
-loss_fct = paddle.nn.loss.CrossEntropyLoss(ignore_index=ignore_label)
-
-# 设置评估方式
- 
-metric = paddle.metric.Accuracy()
- 
 def compute_metrics(labels, decodes, lens):
     decodes = [x for batch in decodes for x in batch]
     lens = [x for batch in lens for x in batch]
@@ -220,3 +139,80 @@ def compute_metrics(labels, decodes, lens):
     result=classification_report(y_trues, y_preds)
     # print(val_f1)   
     return score,result
+
+def create_dataloader(args):
+    '''
+    构建dataset，模型超参数配置，加载dataset，构建dataloader，加载预训练模型，设置AdamW优化器，cross entropy损失函数以及评估方式
+    return:
+        train_data_loader
+        test_data_loader
+        model: 预训练模型
+    '''
+
+    # 加载dataset
+    # Create dataset, tokenizer and dataloader.
+    train_ds, test_ds = load_dataset('TEDTalk', splits=('train', 'test'), lazy=False)
+
+    label_list = train_ds.label_list
+    label_num = len(label_list)
+    # no_entity_id = label_num - 1
+    no_entity_id=0
+    
+    print(label_list)
+
+    # 构建dataloader
+    model_name_or_path='electra-base'
+    tokenizer = ElectraTokenizer.from_pretrained(model_name_or_path)
+
+    trans_func = partial(
+            tokenize_and_align_labels,
+            tokenizer=tokenizer,
+            no_entity_id=no_entity_id,
+            max_seq_len=args.max_seq_length)
+    train_ds = train_ds.map(trans_func)
+ 
+    batchify_fn = lambda samples, fn=Dict({
+            'input_ids': Pad(axis=0, pad_val=tokenizer.pad_token_id, dtype='int32'),  # input
+            'token_type_ids': Pad(axis=0, pad_val=tokenizer.pad_token_type_id, dtype='int32'),  # segment
+            'seq_len': Stack(dtype='int64'),  # seq_len
+            'labels': Pad(axis=0, pad_val=args.ignore_label, dtype='int64')  # label
+        }): fn(samples)
+    
+    train_batch_sampler = paddle.io.DistributedBatchSampler(
+            train_ds, batch_size=args.batch_size, shuffle=True, drop_last=True)
+    
+    train_data_loader = DataLoader(
+            dataset=train_ds,
+            collate_fn=batchify_fn,
+            num_workers=0,
+            batch_sampler=train_batch_sampler,
+            return_list=True) 
+
+    test_ds = test_ds.map(trans_func)
+
+    test_data_loader = DataLoader(
+            dataset=test_ds,
+            collate_fn=batchify_fn,
+            num_workers=0,
+            batch_size=args.batch_size,
+            return_list=True)
+    
+    for index,data in enumerate(train_data_loader):
+        # print(len(data))
+        print(index)
+        print(data)
+        break
+
+    return train_data_loader, test_data_loader  
+
+
+# if __name__ == '__main__': 
+#     # # 读入参数
+#     # yaml_file = './electra.base.yaml'
+#     # with open(yaml_file, 'rt') as f:
+#     #     args = AttrDict(yaml.safe_load(f))
+#     #     # pprint(args)
+ 
+#     # paddle.set_device(device) # 使用gpu
+
+      

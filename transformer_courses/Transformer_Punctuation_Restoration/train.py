@@ -15,20 +15,39 @@
 
 import os
 import time
-import yaml
- 
-import numpy as np
+
+import yaml 
+import argparse 
 from pprint import pprint
 from attrdict import AttrDict
 
 import paddle
+from paddlenlp.transformers import LinearDecayWithWarmup
 from paddlenlp.transformers import TransformerModel, InferTransformerModel, CrossEntropyCriterion, position_encoding_init
 from paddlenlp.utils.log import logger
-from dataloader import create_data_loader
-import paddle.distributed as dist
+from paddlenlp.datasets import DatasetBuilder
+from paddlenlp.transformers import ElectraForTokenClassification, ElectraTokenizer
+from paddlenlp.data import Stack, Tuple, Pad, Dict
 
-# 模型训练
-  
+from dataloader import create_dataloader,load_dataset
+ 
+
+import paddle.distributed as dist
+ 
+import yaml 
+import argparse 
+from pprint import pprint
+from attrdict import AttrDict
+
+import paddle
+from paddle.io import DataLoader  
+
+import os
+import pandas as pd
+from sklearn.metrics import classification_report
+from functools import partial
+
+ 
 def evaluate(model, loss_fct, data_loader, label_num):
     model.eval()
     pred_list = []
@@ -50,36 +69,72 @@ def evaluate(model, loss_fct, data_loader, label_num):
  
 # evaluate(model, loss_fct, metric, test_data_loader,label_num)
  
-
+# 模型训练
 if __name__ == '__main__':
+ 
     # 读入参数
-    global_step = 0
-    logging_steps=200 # 日志的保存周期
-    last_step = num_train_epochs * len(train_data_loader)
-    tic_train = time.time()
-    save_steps=200 # 模型保存周期
-    output_dir='checkpoints/' # 模型保存目录
+    yaml_file = './electra.base.yaml'
+    with open(yaml_file, 'rt') as f:
+        args = AttrDict(yaml.safe_load(f))
+        # pprint(args)
+ 
+    train_data_loader, _  = create_dataloader(args)
 
-    for epoch in range(num_train_epochs):
+    # 加载dataset
+    # Create dataset, tokenizer and dataloader.
+    train_ds, test_ds = load_dataset('TEDTalk', splits=('train', 'test'), lazy=False)
+    label_list = train_ds.label_list
+    label_num = len(label_list)
+
+    # 加载预训练模型  
+    # Define the model netword and its loss
+    model = ElectraForTokenClassification.from_pretrained(args.model_name_or_path, num_classes= label_num)
+
+    # 设置AdamW优化器
+    num_training_steps = args.max_steps if args.max_steps > 0 else len(
+            train_data_loader) * args.num_train_epochs
+    lr_scheduler = LinearDecayWithWarmup(float(args.learning_rate), num_training_steps, args.warmup_steps)
+
+    # Generate parameter names needed to perform weight decay.
+    # All bias and LayerNorm parameters are excluded.
+    decay_params = [
+            p.name for n, p in model.named_parameters()
+            if not any(nd in n for nd in ["bias", "norm"])
+        ]
+
+    optimizer = paddle.optimizer.AdamW(
+            learning_rate=lr_scheduler,
+            epsilon=float(args.adam_epsilon),
+            parameters=model.parameters(),
+            weight_decay=args.weight_decay,
+            apply_decay_param_fun=lambda x: x in decay_params)     
+
+    # 设置CrossEntropy损失函数 
+    loss_fct = paddle.nn.loss.CrossEntropyLoss(ignore_index=args.ignore_label)
+
+    # 设置评估方式
+    metric = paddle.metric.Accuracy()
+
+    for epoch in range(args.num_train_epochs):
         for step, batch in enumerate(train_data_loader):
-            global_step += 1
+            args.global_step += 1
             input_ids, token_type_ids, _, labels = batch
             logits = model(input_ids, token_type_ids)
             loss = loss_fct(logits, labels)
-            avg_loss = paddle.mean(loss)
-            if global_step % logging_steps == 0:
+            avg_loss = paddle.mean(loss) 
+            if args.global_step % args.logging_steps == 0:
                 print("global step %d, epoch: %d, batch: %d, loss: %f, speed: %.2f step/s"
-                        % (global_step, epoch, step, avg_loss,
-                        logging_steps / (time.time() - tic_train)))
+                        % (args.global_step, epoch, step, avg_loss,
+                        args.logging_steps / (time.time() - tic_train)))
                 tic_train = time.time()
             avg_loss.backward()
             optimizer.step()
             lr_scheduler.step()
             optimizer.clear_grad()
-            if global_step % save_steps == 0 or global_step == last_step:
+            if args.global_step % args.save_steps == 0 or args.global_step == args.last_step:
                 if paddle.distributed.get_rank() == 0:
                         evaluate(model, loss_fct, test_data_loader,
-                                    label_num)
-                        paddle.save(model.state_dict(),os.path.join(output_dir,
-                                                    "model_%d.pdparams" % global_step))
+                                    args.label_num)
+                        paddle.save(model.state_dict(),os.path.join(args.output_dir,
+                                                    "model_%d.pdparams" % args.global_step))
 

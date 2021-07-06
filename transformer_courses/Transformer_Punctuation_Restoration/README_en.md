@@ -13,8 +13,8 @@
 ```
 |-data_transfer.py: Extract the test set and training set data from xml format into txt format
 |-data_process.py: Data set preprocessing, and build training and test data sets separately
-|-dataloader.py: dataloader iterator script: load dataset, build dataloader, load pre-training model, set AdamW optimizer, cross entropy loss function and evaluation method
-|-train.py: The ELECTRA training is defined in the script
+|-dataloader.py: Contains methods to build dataloader
+|-train.py: Build dataloader, load pre-training model, set AdamW optimizer, cross entropy loss function and evaluation method in this script, and define ELECTRA training
 |-predict.py: Start the model prediction script and store the prediction structure in a txt file
 ```
 
@@ -39,7 +39,7 @@ This experiment uses Discriminator to do the punctuation restoration task. Punct
   pip install -r requirements.txt
   ```
 
-## data preparation
+## Data Preparation
 
 - Download [IWSLT12.zip data set](https://aistudio.baidu.com/aistudio/datasetdetail/98318) and unzip it to the `data` directory
 
@@ -63,17 +63,6 @@ This experiment uses Discriminator to do the punctuation restoration task. Punct
   ```bash
   python data_transfer.py  
   python data_process.py  
-  ```
-## Model Preparation
-
-- Enter into repo  
-
-  ```bash
-  cd Transformer_Punctuation_Restoration
-  ```
-
-  ```bash
-  python dataloader.py
   ```
 
 ## Model Training
