@@ -69,7 +69,7 @@ if __name__ == '__main__':
         # pprint(args)
 
     best_model = args.best_model
-    init_checkpoint_path=os.path.join(args.output_dir,'model_13257.pdparams')
+    init_checkpoint_path=os.path.join(args.output_dir, best_model)
     model_dict = paddle.load(init_checkpoint_path)
 
     # 加载dataset
