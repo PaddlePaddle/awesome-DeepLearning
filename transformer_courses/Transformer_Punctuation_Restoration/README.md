@@ -41,7 +41,7 @@ ELECTRA 是由 Kevin Clark 等人（Standfold 和 Google 团队）在 ICLR 2020 
 
   ```
   mkdir data && cd data
-  tar -xvf IWSLT12.zip
+  unzip IWSLT12.zip
   cd ../
   ```
 
