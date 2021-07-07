@@ -48,6 +48,32 @@ from sklearn.metrics import classification_report
 from functools import partial
 
 
+def compute_metrics(labels, decodes, lens):
+    decodes = [x for batch in decodes for x in batch]
+    lens = [x for batch in lens for x in batch]
+    labels=[x for batch in labels for x in batch]
+    outputs = []
+    nb_correct=0
+    nb_true=0
+    val_f1s=[]
+    label_vals=[0,1,2,3]
+    y_trues=[]
+    y_preds=[]
+    for idx, end in enumerate(lens):
+        y_true = labels[idx][:end].tolist()
+        y_pred = [x for x in decodes[idx][:end]]
+        nb_correct += sum(y_t == y_p for y_t, y_p in zip(y_true, y_pred))
+        nb_true+=len(y_true)
+        y_trues.extend(y_true)
+        y_preds.extend(y_pred)
+
+    score = nb_correct / nb_true
+    # val_f1 = metrics.f1_score(y_trues, y_preds, average='micro', labels=label_vals)
+
+    result=classification_report(y_trues, y_preds)
+    # print(val_f1)   
+    return score,result
+    
 def evaluate(model, loss_fct, data_loader, label_num):
     model.eval()
     pred_list = []
@@ -81,6 +107,7 @@ def do_train(args):
             logits = model(input_ids, token_type_ids)
             loss = loss_fct(logits, labels)
             avg_loss = paddle.mean(loss) 
+
             if args.global_step % args.logging_steps == 0:
                 print("global step %d, epoch: %d, batch: %d, loss: %f, speed: %.2f step/s"
                         % (args.global_step, epoch, step, avg_loss,
@@ -90,7 +117,7 @@ def do_train(args):
             optimizer.step()
             lr_scheduler.step()
             optimizer.clear_grad()
-            print('*************one batch updated' )
+
             if args.global_step % args.save_steps == 0 or args.global_step == last_step:
                 if paddle.distributed.get_rank() == 0:
                         evaluate(model, loss_fct, test_data_loader, label_num)

@@ -114,32 +114,6 @@ def tokenize_and_align_labels(example, tokenizer, no_entity_id,
     # print(tokenized_input)
     return tokenized_input
 
-def compute_metrics(labels, decodes, lens):
-    decodes = [x for batch in decodes for x in batch]
-    lens = [x for batch in lens for x in batch]
-    labels=[x for batch in labels for x in batch]
-    outputs = []
-    nb_correct=0
-    nb_true=0
-    val_f1s=[]
-    label_vals=[0,1,2,3]
-    y_trues=[]
-    y_preds=[]
-    for idx, end in enumerate(lens):
-        y_true = labels[idx][:end].tolist()
-        y_pred = [x for x in decodes[idx][:end]]
-        nb_correct += sum(y_t == y_p for y_t, y_p in zip(y_true, y_pred))
-        nb_true+=len(y_true)
-        y_trues.extend(y_true)
-        y_preds.extend(y_pred)
-
-    score = nb_correct / nb_true
-    # val_f1 = metrics.f1_score(y_trues, y_preds, average='micro', labels=label_vals)
-
-    result=classification_report(y_trues, y_preds)
-    # print(val_f1)   
-    return score,result
-
 def create_dataloader(args):
     '''
     构建dataset，模型超参数配置，加载dataset，构建dataloader，加载预训练模型，设置AdamW优化器，cross entropy损失函数以及评估方式
