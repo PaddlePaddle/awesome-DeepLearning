@@ -91,7 +91,7 @@ def do_train(args):
             lr_scheduler.step()
             optimizer.clear_grad()
             print('*************one batch updated' )
-            if args.global_step % args.save_steps == 0 or args.global_step == args.last_step:
+            if args.global_step % args.save_steps == 0 or args.global_step == last_step:
                 if paddle.distributed.get_rank() == 0:
                         evaluate(model, loss_fct, test_data_loader,
                                     args.label_num)
