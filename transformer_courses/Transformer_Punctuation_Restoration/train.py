@@ -73,6 +73,7 @@ def do_train(args):
     for epoch in range(args.num_train_epochs):
         for step, batch in enumerate(train_data_loader):
             args.global_step += 1
+            print('~~~~~~~~~~~~~~~~~~~~~args.global_step',args.global_step)
             input_ids, token_type_ids, _, labels = batch
             logits = model(input_ids, token_type_ids)
             loss = loss_fct(logits, labels)
@@ -86,6 +87,7 @@ def do_train(args):
             optimizer.step()
             lr_scheduler.step()
             optimizer.clear_grad()
+            print('*************one batch updated' )
             if args.global_step % args.save_steps == 0 or args.global_step == args.last_step:
                 if paddle.distributed.get_rank() == 0:
                         evaluate(model, loss_fct, test_data_loader,
@@ -102,8 +104,8 @@ if __name__ == '__main__':
         args = AttrDict(yaml.safe_load(f))
         # pprint(args)
     
-    # paddle.set_device(args.device) # 使用gpu
-
+    paddle.set_device(args.device) # 使用gpu，相应地，安装paddlepaddle-gpu
+    
     train_data_loader, _  = create_dataloader(args)
 
     # 加载dataset
