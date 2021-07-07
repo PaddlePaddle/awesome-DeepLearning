@@ -52,6 +52,7 @@ def do_predict(test_data_loader):
         pred_list.append(pred.numpy())
         len_list.append(length.numpy())
     preds = parse_decodes(raw_data, id2label, pred_list, len_list)
+    return preds
 
 def write2txt(args, preds):
     file_path = args.output_pred_path
@@ -99,7 +100,7 @@ if __name__ == '__main__':
     _ , test_data_loader  = create_dataloader(args)
 
     # 开始预测测试数据
-    do_predict(test_data_loader)
+    preds = do_predict(test_data_loader)
 
     # 写入到文件
     write2txt(args, preds)
