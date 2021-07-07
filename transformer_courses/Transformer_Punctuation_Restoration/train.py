@@ -93,8 +93,7 @@ def do_train(args):
             print('*************one batch updated' )
             if args.global_step % args.save_steps == 0 or args.global_step == last_step:
                 if paddle.distributed.get_rank() == 0:
-                        evaluate(model, loss_fct, test_data_loader,
-                                    args.label_num)
+                        evaluate(model, loss_fct, test_data_loader, label_num)
                         paddle.save(model.state_dict(),os.path.join(args.output_dir,
                                                     "model_%d.pdparams" % args.global_step))
 
