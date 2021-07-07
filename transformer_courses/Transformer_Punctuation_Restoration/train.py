@@ -70,6 +70,9 @@ def evaluate(model, loss_fct, data_loader, label_num):
 # evaluate(model, loss_fct, metric, test_data_loader,label_num)
  
 def do_train(args):
+    last_step =  args.num_train_epochs * len(train_data_loader)
+    tic_train = time.time()
+
     for epoch in range(args.num_train_epochs):
         for step, batch in enumerate(train_data_loader):
             args.global_step += 1

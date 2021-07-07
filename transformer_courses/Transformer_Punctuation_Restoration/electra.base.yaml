@@ -32,8 +32,7 @@ weight_decay: 0.0
 # 训练参数
 global_step :  0
 logging_steps: 200 # 日志的保存周期
-last_step :  num_train_epochs * len(train_data_loader)
-tic_train : time.time()
+ 
 save_steps: 200 # 模型保存周期
 output_dir: 'checkpoints/' # 模型保存目录
 ignore_label: -100
