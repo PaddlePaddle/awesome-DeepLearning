@@ -16,7 +16,7 @@ output_train_tsv: 'train.tsv'
 output_test_tsv: 'test.tsv'
 output_dev_tsv: dev.tsv'
 
-# 模型超参数  
+# model hyper-parameters
 batch_size: 128
 device: 'gpu'
 num_train_epochs: 1 
@@ -29,7 +29,7 @@ learning_rate: 5e-5
 adam_epsilon: 1e-8
 weight_decay: 0.0
 
-# 训练参数
+# training parameters
 global_step :  0
 logging_steps: 200 # 日志的保存周期
  
@@ -38,5 +38,5 @@ output_dir: 'checkpoints/' # 模型保存目录
 ignore_label: -100
 
 # args for predict.py
-best_model: 'model_13257.pdparams' # 加载训练好的模型
+best_model: 'model_1000.pdparams' # 加载训练好的模型
 output_pred_path: "results.txt"

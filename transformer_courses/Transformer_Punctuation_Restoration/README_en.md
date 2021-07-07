@@ -3,9 +3,13 @@
 ## Dependent packages
 
 - python3
-- subword_nmt==0.3.7
+- paddlenlp==2.0.0rc22 
+- paddlepaddle==2.1.1
+- pandas
 - attrdict==2.0.1
-- paddlenlp==2.0.0rc22
+- ujson
+- tqdm
+- paddlepaddle-gpu 
 
 
 ## Project Introduction
@@ -51,7 +55,7 @@ This experiment uses Discriminator to do the punctuation restoration task. Punct
 - Please organize the data set in the following format 
 
   ```
-  data/IWSLT12
+  data
   |_ IWSLT12.TED.MT.tst2011.en-fr.en.xml
   |_ IWSLT12.TED.SLT.tst2011.en-fr.en.system0.comma.xml
   |_ IWSLT12.TALK.dev2010.en-fr.en.xml
@@ -65,8 +69,8 @@ This experiment uses Discriminator to do the punctuation restoration task. Punct
   python data_process.py  
   ```
 
-## Model Training
-
+## Model Training & Evaluation
+- After using `electra.base.yaml` to configure the training hyperparameters, enter the model training. Evaluate the model after training
 - Enter into repo  
 
   ```bash
@@ -77,9 +81,9 @@ This experiment uses Discriminator to do the punctuation restoration task. Punct
   python train.py
   ```
 
-## Model Evaluation
+## Model Prediction
 
-- The model evaluation process can be started by
+- Select the model parameters in `checkpoint` and configure them in `electra.base.yaml`, we can start the model's prediction on the test set in the following way. The final prediction result can be output to a txt file.
 
   ```bash
   python predict.py

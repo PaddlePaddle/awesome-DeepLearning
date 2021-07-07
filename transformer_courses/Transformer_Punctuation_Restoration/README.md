@@ -1,11 +1,18 @@
 # 基于 ELECTRA 的标点符号预测 [[English](./README_en.md)]
 
 ## 依赖模块
-- python3
-- paddlenlp==2.0.0rc22
 
+- python3
+- paddlenlp==2.0.0rc22 
+- paddlepaddle==2.1.1
+- pandas
+- attrdict==2.0.1
+- ujson
+- tqdm
+- paddlepaddle-gpu 
 
 ## 项目介绍
+
 ```
 |-data_transfer.py: 将测试集和训练集数据从xml格式提取成txt形式
 |-data_process.py: 数据集预处理，并且分别构建训练和测试数据集 
@@ -63,9 +70,9 @@ ELECTRA 是由 Kevin Clark 等人（Standfold 和 Google 团队）在 ICLR 2020 
   python data_process.py  
   ``` 
 
-## 模型训练
+## 模型训练与评估
 
-- 使用`electra.base.yaml`配置训练超参数
+- 使用`electra.base.yaml`配置训练超参数后，进入模型训练。训练完成后对模型进行评估
 - 进入 repo 目录
 
   ```bash
@@ -76,9 +83,9 @@ ELECTRA 是由 Kevin Clark 等人（Standfold 和 Google 团队）在 ICLR 2020 
   python train.py
   ```
 
-## 模型评估
+## 模型预测
 
-- 可以通过以下方式开始模型评估过程
+- 选择`checkpoint`中的模型参数，在`electra.base.yaml`中配置，我们便可以通过以下方式开始模型对测试集的预测。最终预测出结果可以输出到txt文件中。
 
   ```bash
   python predict.py
