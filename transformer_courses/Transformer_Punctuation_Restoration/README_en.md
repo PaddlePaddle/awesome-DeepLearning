@@ -45,7 +45,7 @@ This experiment uses Discriminator to do the punctuation restoration task. Punct
 
   ``` 
   mkdir data && cd data
-  tar -xvf IWSLT12.zip
+  unzip IWSLT12.zip
   cd ../
   ```
 - Please organize the data set in the following format 

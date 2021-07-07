@@ -65,6 +65,7 @@ ELECTRA 是由 Kevin Clark 等人（Standfold 和 Google 团队）在 ICLR 2020 
 
 ## 模型训练
 
+- 使用`electra.base.yaml`配置训练超参数
 - 进入 repo 目录
 
   ```bash
