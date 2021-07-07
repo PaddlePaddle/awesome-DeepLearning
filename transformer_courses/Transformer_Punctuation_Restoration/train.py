@@ -109,7 +109,7 @@ if __name__ == '__main__':
     
     paddle.set_device(args.device) # 使用gpu，相应地，安装paddlepaddle-gpu
     
-    train_data_loader, _  = create_dataloader(args)
+    train_data_loader, test_data_loader  = create_dataloader(args)
 
     # 加载dataset
     # Create dataset, tokenizer and dataloader.
