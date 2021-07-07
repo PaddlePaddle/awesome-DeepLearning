@@ -204,15 +204,6 @@ def create_dataloader(args):
         break
 
     return train_data_loader, test_data_loader  
-
-
-# if __name__ == '__main__': 
-#     # # 读入参数
-#     # yaml_file = './electra.base.yaml'
-#     # with open(yaml_file, 'rt') as f:
-#     #     args = AttrDict(yaml.safe_load(f))
-#     #     # pprint(args)
  
-#     # paddle.set_device(device) # 使用gpu
 
       

@@ -47,7 +47,7 @@ import pandas as pd
 from sklearn.metrics import classification_report
 from functools import partial
 
- 
+
 def evaluate(model, loss_fct, data_loader, label_num):
     model.eval()
     pred_list = []
@@ -69,6 +69,30 @@ def evaluate(model, loss_fct, data_loader, label_num):
  
 # evaluate(model, loss_fct, metric, test_data_loader,label_num)
  
+def do_train(args):
+    for epoch in range(args.num_train_epochs):
+        for step, batch in enumerate(train_data_loader):
+            args.global_step += 1
+            input_ids, token_type_ids, _, labels = batch
+            logits = model(input_ids, token_type_ids)
+            loss = loss_fct(logits, labels)
+            avg_loss = paddle.mean(loss) 
+            if args.global_step % args.logging_steps == 0:
+                print("global step %d, epoch: %d, batch: %d, loss: %f, speed: %.2f step/s"
+                        % (args.global_step, epoch, step, avg_loss,
+                        args.logging_steps / (time.time() - tic_train)))
+                tic_train = time.time()
+            avg_loss.backward()
+            optimizer.step()
+            lr_scheduler.step()
+            optimizer.clear_grad()
+            if args.global_step % args.save_steps == 0 or args.global_step == args.last_step:
+                if paddle.distributed.get_rank() == 0:
+                        evaluate(model, loss_fct, test_data_loader,
+                                    args.label_num)
+                        paddle.save(model.state_dict(),os.path.join(args.output_dir,
+                                                    "model_%d.pdparams" % args.global_step))
+
 # 模型训练
 if __name__ == '__main__':
  
@@ -77,7 +101,9 @@ if __name__ == '__main__':
     with open(yaml_file, 'rt') as f:
         args = AttrDict(yaml.safe_load(f))
         # pprint(args)
- 
+    
+    # paddle.set_device(args.device) # 使用gpu
+
     train_data_loader, _  = create_dataloader(args)
 
     # 加载dataset
@@ -115,26 +141,5 @@ if __name__ == '__main__':
     # 设置评估方式
     metric = paddle.metric.Accuracy()
 
-    for epoch in range(args.num_train_epochs):
-        for step, batch in enumerate(train_data_loader):
-            args.global_step += 1
-            input_ids, token_type_ids, _, labels = batch
-            logits = model(input_ids, token_type_ids)
-            loss = loss_fct(logits, labels)
-            avg_loss = paddle.mean(loss) 
-            if args.global_step % args.logging_steps == 0:
-                print("global step %d, epoch: %d, batch: %d, loss: %f, speed: %.2f step/s"
-                        % (args.global_step, epoch, step, avg_loss,
-                        args.logging_steps / (time.time() - tic_train)))
-                tic_train = time.time()
-            avg_loss.backward()
-            optimizer.step()
-            lr_scheduler.step()
-            optimizer.clear_grad()
-            if args.global_step % args.save_steps == 0 or args.global_step == args.last_step:
-                if paddle.distributed.get_rank() == 0:
-                        evaluate(model, loss_fct, test_data_loader,
-                                    args.label_num)
-                        paddle.save(model.state_dict(),os.path.join(args.output_dir,
-                                                    "model_%d.pdparams" % args.global_step))
-
+    # 开始训练
+    do_train(args)

@@ -40,4 +40,4 @@ ignore_label: -100
 
 # args for predict.py
 best_model: 'model_13257.pdparams' # 加载训练好的模型
-
+output_pred_path: "results.txt"

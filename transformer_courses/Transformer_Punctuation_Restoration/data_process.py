@@ -103,6 +103,10 @@ def format_data(train_text):
             texts.append(cur_text)
     return texts,labels
 
+def write_json(filename, dataset):
+    print('write to'+filename)
+    with codecs.open(filename, mode="w", encoding="utf-8") as f:
+        ujson.dump(dataset, f)
 
 if __name__ == '__main__': 
     # 读入参数
@@ -200,8 +204,3 @@ if __name__ == '__main__':
     
     train_data=pd.read_csv(train_file,sep='\t')
     train_data.head()
-
-    def write_json(filename, dataset):
-        print('write to'+filename)
-        with codecs.open(filename, mode="w", encoding="utf-8") as f:
-            ujson.dump(dataset, f)

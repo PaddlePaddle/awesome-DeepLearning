@@ -44,6 +44,23 @@ def parse_decodes(input_words, id2label, decodes, lens):
         outputs.append(sent)
     return outputs
 
+def do_predict(test_data_loader):
+    for step, batch in enumerate(test_data_loader):
+        input_ids, token_type_ids, length, labels = batch
+        logits = model(input_ids, token_type_ids)
+        pred = paddle.argmax(logits, axis=-1)
+        pred_list.append(pred.numpy())
+        len_list.append(length.numpy())
+    preds = parse_decodes(raw_data, id2label, pred_list, len_list)
+
+def write2txt(args, preds):
+    file_path = args.output_pred_path
+    with open(file_path, "w", encoding="utf8") as fout:
+        fout.write("\n".join(preds))
+        # Print some examples
+    print("The results have been saved in the file: %s, some examples are shown below: " % file_path)
+    print("\n".join(preds[:5]))   
+
 if __name__ == '__main__':
     # 读入参数
     yaml_file = './electra.base.yaml'
@@ -81,18 +98,8 @@ if __name__ == '__main__':
 
     _ , test_data_loader  = create_dataloader(args)
 
-    for step, batch in enumerate(test_data_loader):
-        input_ids, token_type_ids, length, labels = batch
-        logits = model(input_ids, token_type_ids)
-        pred = paddle.argmax(logits, axis=-1)
-        pred_list.append(pred.numpy())
-        len_list.append(length.numpy())
-    preds = parse_decodes(raw_data, id2label, pred_list, len_list)
+    # 开始预测测试数据
+    do_predict(test_data_loader)
 
     # 写入到文件
-    file_path = "results.txt"
-    with open(file_path, "w", encoding="utf8") as fout:
-        fout.write("\n".join(preds))
-        # Print some examples
-    print("The results have been saved in the file: %s, some examples are shown below: " % file_path)
-    print("\n".join(preds[:5]))
+    write2txt(args, preds)
