@@ -107,14 +107,12 @@ class Regressor(paddle.nn.Layer):
 
          # 定义两层全连接层
          self.fc1 = nn.Linear(in_features=13, out_features=10)   # 输入维度是13，输出维度是10
-         self.fc2 = nn.Linear(in_features=10, out_features=10)   # 输入维度是10，输出维度是10
-         self.fc3 = nn.Linear(in_features=10, out_features=1)    # 输入维度是10，输出维度是1
+         self.fc2 = nn.Linear(in_features=10, out_features=1)    # 输入维度是10，输出维度是1
 
      # 网络的前向计算
      def forward(self, inputs):
          x = F.sigmoid(self.fc1(inputs))
-         x = F.sigmoid(self.fc2(x))
-         x = self.fc3(x)
+         x = self.fc2(x)
          return x
 
 
