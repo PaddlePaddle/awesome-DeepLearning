@@ -106,7 +106,7 @@
 
     ![pr1](../docs/images/pr_procedure/pr1.png)
 
-    ![截屏2021-07-08 上午10.20.43](/Users/zhanghandi/Library/Application Support/typora-user-images/截屏2021-07-08 上午10.20.43.png)
+    ![pr2](../docs/images/pr_procedure/pr2.png)
 
 
 
