@@ -18,7 +18,7 @@
 |-data_process.py: 数据集预处理，并且分别构建训练和测试数据集 
 |-dataloader.py: 包含构建dataloader的方法
 |-train.py: 构建dataloader，加载预训练模型，设置AdamW优化器，cross entropy损失函数以及评估方式该脚本中，并且定义了ELECTRA的训练
-|-predict.py: 启动模型预测的脚本，并且储存预测结构于txt文件
+|-predict.py: 启动模型预测的脚本，并且储存预测结果于txt文件
 ```
 
 **模型介绍**
@@ -72,7 +72,7 @@ ELECTRA 是由 Kevin Clark 等人（Standfold 和 Google 团队）在 ICLR 2020 
 
 ## 模型训练与评估
 
-- 使用`electra.base.yaml`配置训练超参数后，进入模型训练。训练完成后对模型进行评估
+- 使用`electra.base.yaml`配置训练超参数后，进入模型训练。训练完成后对模型进行评估。
 - 进入 repo 目录
 
   ```bash

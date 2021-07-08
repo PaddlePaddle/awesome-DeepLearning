@@ -19,7 +19,7 @@
 |-data_process.py: Data set preprocessing, and build training and test data sets separately
 |-dataloader.py: Contains methods to build dataloader
 |-train.py: Build dataloader, load pre-training model, set AdamW optimizer, cross entropy loss function and evaluation method in this script, and define ELECTRA training
-|-predict.py: Start the model prediction script and store the prediction structure in a txt file
+|-predict.py: Start the model prediction script and store the prediction result in a txt file
 ```
 
 **Model Introduction**
@@ -70,7 +70,7 @@ This experiment uses Discriminator to do the punctuation restoration task. Punct
   ```
 
 ## Model Training & Evaluation
-- After using `electra.base.yaml` to configure the training hyperparameters, enter the model training. Evaluate the model after training
+- After using `electra.base.yaml` to configure the training hyperparameters, enter the model training. Evaluate the model after training.
 - Enter into repo  
 
   ```bash
