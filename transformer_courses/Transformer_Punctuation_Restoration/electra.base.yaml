@@ -1,0 +1,42 @@
+# args for data_transfer.py
+data_path: "data/"
+dev_path: "IWSLT12.TALK.dev2010.en-fr.en.xml" 
+output_dev_path: 'dev_texts.txt'
+
+train_path: "train.tags.en-fr.en.xml"
+output_train_path: 'train_texts.txt'
+
+test_path: "IWSLT12.TED.MT.tst2012.en-fr.en.xml"
+output_test_path: 'test_texts_2012.txt'
+
+# args for data_preprocess.py
+data_path: "data/"
+model_name_or_path: 'electra-base'
+output_train_tsv: 'train.tsv'
+output_test_tsv: 'test.tsv'
+output_dev_tsv: dev.tsv'
+
+# model hyper-parameters
+batch_size: 128
+device: 'gpu'
+num_train_epochs: 1 
+warmup_steps: 0
+logging_steps: 1
+max_seq_length: 128
+model_name_or_path: 'electra-base'
+max_steps: -1
+learning_rate: 5e-5
+adam_epsilon: 1e-8
+weight_decay: 0.0
+
+# training parameters
+global_step :  0
+logging_steps: 200 # 日志的保存周期
+ 
+save_steps: 200 # 模型保存周期
+output_dir: 'checkpoints/' # 模型保存目录
+ignore_label: -100
+
+# args for predict.py
+best_model: 'model_1000.pdparams' # 加载训练好的模型
+output_pred_path: "results.txt"
