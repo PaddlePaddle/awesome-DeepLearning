@@ -1,6 +1,8 @@
 # 一、项目简介
 
-本项目是深度学习材料获取一站式平台，内容涵盖[**深度学习入门课**](https://aistudio.baidu.com/aistudio/course/introduce/1297)、[**深度学习百科**](https://paddlepedia.readthedocs.io/en/latest/index.html)、**产业实践案例(开发中)**以及**系列特色课程（开发中）**等等，后续会分享**深度学习实践Tricks**和**前沿论文复现**等。从理论到实践，从科研到产业应用，各类学习材料一应俱全，旨在帮助开发者高效地学习和掌握深度学习知识，快速成为AI跨界人才。
+本项目是一站式深度学习在线百科，内容涵盖[**零基础入门深度学习**](https://aistudio.baidu.com/aistudio/course/introduce/1297)、**产业实践深度学习**、**特色课程（开发中）**；[**深度学习百问**](https://paddlepedia.readthedocs.io/en/latest/index.html)、**产业实践(开发中)**等等。从理论到实践，从科研到产业应用，各类学习材料一应俱全，旨在帮助开发者高效地学习和掌握深度学习知识，快速成为AI跨界人才。
+
+<center><img src="./docs/images/cover/repo.png" width=70%></center><br></br>
 
 * **内容全面**：无论您是深度学习初学者，还是资深用户，都可以在本项目中快速获取到需要的学习材料。
 
@@ -10,7 +12,7 @@
 
 * **前沿分享** ：定期分享顶会最新论文解读和代码复现，开发者可以实时掌握最新的深度学习算法。
 
-# 二、 零基础实践深度学习入门课
+# 二、 零基础实践深度学习
 
 
 
@@ -26,28 +28,28 @@
 
     ## [学习地图](https://aistudio.baidu.com/aistudio/projectdetail/2056805)：
 
-    1.零基础实践深度学习七日课 开营介绍
+    **1.零基础实践深度学习七日课 开营介绍**
 
     | 资料 | 链接                                                         |
     | ---- | ------------------------------------------------------------ |
     | 视频 | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1366742](https://aistudio.baidu.com/aistudio/education/lessonvideo/1366742) |
     | 课件 | [https://aistudio.baidu.com/aistudio/education/preview/1447519](https://aistudio.baidu.com/aistudio/education/preview/1447519) |
 
-    2.比赛赛题讲解
+    **2.比赛赛题讲解**
 
     | 资料 | 链接                                                         |
     | ---- | ------------------------------------------------------------ |
     | 视频 | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1372844](https://aistudio.baidu.com/aistudio/education/lessonvideo/1372844) |
     | 项目 | [https://aistudio.baidu.com/aistudio/projectdetail/1938271](https://aistudio.baidu.com/aistudio/projectdetail/1938271) |
 
-    3.DAY1-AI职业发展与课程介绍
+    **3.DAY1-AI职业发展与课程介绍**
 
     | 资料 | 链接                                                         |
     | ---- | ------------------------------------------------------------ |
     | 视频 | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1383195](https://aistudio.baidu.com/aistudio/education/lessonvideo/1383195) |
     | 课件 | [https://aistudio.baidu.com/aistudio/education/preview/1403278](https://aistudio.baidu.com/aistudio/education/preview/1403278) |
 
-    4.DAY2-手写数字识别案例入门深度学习
+    **4.DAY2-手写数字识别案例入门深度学习**
 
     | 资料       | 链接                                                         |
     | ---------- | ------------------------------------------------------------ |
@@ -70,7 +72,7 @@
     | 手写数字识别之恢复训练               | [https://aistudio.baidu.com/aistudio/projectdetail/2057069](https://aistudio.baidu.com/aistudio/projectdetail/2057069) |
     | 手写数字识别之动转静部署             | [https://aistudio.baidu.com/aistudio/projectdetail/2057074](https://aistudio.baidu.com/aistudio/projectdetail/2057074) |
 
-    5.DAY3-眼疾识别案例实践计算机视觉
+    **5.DAY3-眼疾识别案例实践计算机视觉**
 
     | 资料       | 链接                                                         |
     | ---------- | ------------------------------------------------------------ |
@@ -85,7 +87,7 @@
     | 卷积神经网络基础 | [https://aistudio.baidu.com/aistudio/projectdetail/2057136](https://aistudio.baidu.com/aistudio/projectdetail/2057136) |
     | 图像分类         | [https://aistudio.baidu.com/aistudio/projectdetail/2057141](https://aistudio.baidu.com/aistudio/projectdetail/2057141) |
 
-    6.DAY4-词向量训练和情感分析任务
+    **6.DAY4-词向量训练和情感分析任务**
 
     | 资料       | 链接                                                         |
     | ---------- | ------------------------------------------------------------ |
@@ -101,7 +103,7 @@
     | 词向量Word Embedding | [https://aistudio.baidu.com/aistudio/projectdetail/2057101](https://aistudio.baidu.com/aistudio/projectdetail/2057101) |
     | 文本情感倾向性分析   | [https://aistudio.baidu.com/aistudio/projectdetail/2057105](https://aistudio.baidu.com/aistudio/projectdetail/2057105) |
 
-    7.DAY5-基于DSSM的电影推荐案例
+    **7.DAY5-基于DSSM的电影推荐案例**
 
     | 资料       | 链接                                                         |
     | ---------- | ------------------------------------------------------------ |
@@ -119,7 +121,7 @@
     | 模型训练与特征保存 | [https://aistudio.baidu.com/aistudio/projectdetail/2057122](https://aistudio.baidu.com/aistudio/projectdetail/2057122) |
     | 电影推荐           | [https://aistudio.baidu.com/aistudio/projectdetail/2057128](https://aistudio.baidu.com/aistudio/projectdetail/2057128) |
 
-    8.DAY6-模型优化经验与飞桨深入解读
+    **8.DAY6-模型优化经验与飞桨深入解读**
 
     | 资料       | 链接                                                         |
     | ---------- | ------------------------------------------------------------ |
@@ -127,9 +129,9 @@
     | 视频（下） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1428674](https://aistudio.baidu.com/aistudio/education/lessonvideo/1428674) |
     | 课件       | [https://aistudio.baidu.com/aistudio/education/preview/1447773](https://aistudio.baidu.com/aistudio/education/preview/1447773) |
 
-# 三、 深度学习百科
+# 三、 深度学习百问
 
-深度学习百科包含深度学习基础篇、深度学习进阶篇、深度学习应用篇、强化学习篇以及面试宝典，详细信息请参阅[Paddle知识点文档平台](https://paddlepedia.readthedocs.io/en/latest/index.html)。
+深度学习百问包含深度学习基础篇、深度学习进阶篇、深度学习应用篇、强化学习篇以及面试宝典，详细信息请参阅[Paddle知识点文档平台](https://paddlepedia.readthedocs.io/en/latest/index.html)。
 
 * **深度学习基础篇**  
 
@@ -291,7 +293,7 @@
     * [推荐系统的PV和UV代表什么？](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/evaluation_metric.html#id2)
     * [协同过滤推荐和基于内容的推荐的区别是什么？](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/evaluation_metric.html#id2)
 
-# 四、 Transformer系列特色课（开发中）
+# 四、特色课- Transformer系列（开发中）
 
 | 章节名称                      | notebook链接                                                 | Python实现                                                   | 课程简介                                                     |
 | ----------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -329,13 +331,9 @@
 
 <center><img src="https://github.com/ZhangHandi/images-for-paddledocs/blob/main/images/readme/qr_code.png?raw=true"/></center><br></br>
 
-
-
 # 八、许可证书
 
 本项目的发布受[Apache 2.0 license](https://www.apache.org/licenses/LICENSE-2.0.txt)许可认证。
-
-
 
 # 九、贡献内容
 
