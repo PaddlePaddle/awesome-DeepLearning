@@ -142,28 +142,28 @@
      6. [模型调优](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/index.html#)  
         - [学习率](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/learning_rate.html)（包括什么是学习率、学习率对网络的影响以及不同的学习率率衰减方法，如：分段常数衰减等12个学习率衰减方法）  
         - [归一化](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/normalization/index.html)（包括什么是归一化、为什么要归一化、为什么归一化能提高求解最优解速度、归一化有哪些类型、不同归一化的使用条件、归一化和标准化的联系与区别等6个知识点）  
-        - [正则化](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/regularization/index.html)(包括什么是正则化？正则化如何帮助减少过度拟合？数据增强、L1 L2正则化介绍、L1和L2的贝叶斯推断分析法、Dropout、DropConnect、早停法等8个知识点)   
+        - [正则化](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/regularization/index.html)(包括什么是正则化？正则化如何帮助减少过度拟合？数据增强、L1 L2正则化介绍、L1和L2的贝叶斯推断分析法、Dropout、DropConnect、早停法等8个知识点)  
         - [注意力机制](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/attention/index.html) (包括自注意力、多头注意力、经典注意力计算方式等10个知识点)  
         - [Batch size](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/batch_size.html)（包括什么是batch size、batch size对网络的影响、batch size的选择3个知识点）  
         - [参数初始化](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/weight_initializer.html)（包括为什么不能全零初始化、常见的初始化方法等5个知识点）  
-    
+
   2. [卷积神经网络](https://paddlepedia.readthedocs.io/en/latest/tutorials/CNN/index.html)  
      1. [CNN综述](https://paddlepedia.readthedocs.io/en/latest/tutorials/CNN/CV_CNN.html)  （包括计算机视觉综述、计算机视觉发展历程、卷积神经网络结构等3个知识点）
      2. [卷积算子](https://paddlepedia.readthedocs.io/en/latest/tutorials/CNN/convolution_operator/index.html)（包括标准卷积、1*1卷积、3D卷积、转置卷积、空洞卷积、分组卷积、可分离卷积等7个知识点）  
      3. [池化](https://paddlepedia.readthedocs.io/en/latest/tutorials/CNN/Pooling.html)  （包括池化的基本概念、池化特点等2个知识点）
-    
+
   3. [序列模型](https://paddlepedia.readthedocs.io/en/latest/tutorials/sequence_model/index.html)  
-     1. [词表示](https://paddlepedia.readthedocs.io/en/latest/tutorials/sequence_model/word_representation/index.html) (包括one-hot编码、word-embedding以及word2vec等9个知识点)   
+     1. [词表示](https://paddlepedia.readthedocs.io/en/latest/tutorials/sequence_model/word_representation/index.html) (包括one-hot编码、word-embedding以及word2vec等9个知识点)  
      2. [循环神经网络RNN](https://paddlepedia.readthedocs.io/en/latest/tutorials/sequence_model/rnn.html)  
      3. [长短时记忆网络LSTM](https://paddlepedia.readthedocs.io/en/latest/tutorials/sequence_model/lstm.html)  
-     4. [门控循环单元GRU](https://paddlepedia.readthedocs.io/en/latest/tutorials/sequence_model/gru.html)   
+     4. [门控循环单元GRU](https://paddlepedia.readthedocs.io/en/latest/tutorials/sequence_model/gru.html)  
 
 * **深度学习进阶篇**  
 
   1. [预训练模型](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/index.html)
      1. [预训练模型是什么](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/pretrain_model_description.html) (包括预训练、微调等2个知识点)  
      2. [预训练分词Subword](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/subword.html)(包括BPE、WordPiece、ULM等3个知识点)  
-     3. [Transformer](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/transformer.html)（包括self-attention、multi-head Attention、Position Encoding、Transformer Encoder、Transformer Decoder等5个知识点）   
+     3. [Transformer](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/transformer.html)（包括self-attention、multi-head Attention、Position Encoding、Transformer Encoder、Transformer Decoder等5个知识点）  
      4. [BERT](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/bert.html)（包括BERT预训练任务、BERT微调等2个知识点）  
      5. [ERNIE](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/erine.html)(包括ERNIE介绍、Knowledge Masking等2个知识点)  
   2. [对抗神经网络](https://paddlepedia.readthedocs.io/en/latest/tutorials/generative_adversarial_network/index.html)  
@@ -174,15 +174,15 @@
 * **深度学习应用篇**  
 
   1. [计算机视觉](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/index.html)  
-     1. [图像增广](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/image_augmentation/index.html)（包括什么是数据增广、常用数据增广方法、图像变换类增广方法、图像裁剪类增广方法、图像混叠类增广方法、不同方法对比实验等11个知识点）   
+     1. [图像增广](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/image_augmentation/index.html)（包括什么是数据增广、常用数据增广方法、图像变换类增广方法、图像裁剪类增广方法、图像混叠类增广方法、不同方法对比实验等11个知识点）  
      2. [图像分类](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/classification/index.html)（包括LeNet、AlexNet、VGG、GoogleNet、DarkNet、ResNet、ViT等7个知识点）  
-     3. [目标检测](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/object_detection/index.html)（包括目标检测综述、边界框、锚框、交并比、NMS等5个知识点）   
+     3. [目标检测](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/object_detection/index.html)（包括目标检测综述、边界框、锚框、交并比、NMS等5个知识点）  
      4. [OCR](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/OCR/index.html)（包括OCR综述、OCR常用检测方法(CTPN、EAST、DBNet)、OCR常用识别方法(CRNN)等5个知识点）
   2. [自然语言处理](https://paddlepedia.readthedocs.io/en/latest/tutorials/natural_language_processing/index.html)  
      1. [命名实体识别](https://paddlepedia.readthedocs.io/en/latest/tutorials/natural_language_processing/ner/index.html) (包括bilstm+CRF架构剖析、CRF原理等8个知识点)  
   3. [推荐系统](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/index.html)  
-     1. [推荐系统基础](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/recommender_system.html)(包括协同过滤推荐、内容过滤推荐、组合推荐、用户画像、召回、排序等6个知识点)   
-     2. [DSSM模型](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/dssm.html)（包括DSSM模型等1个知识点）    
+     1. [推荐系统基础](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/recommender_system.html)(包括协同过滤推荐、内容过滤推荐、组合推荐、用户画像、召回、排序等6个知识点)  
+     2. [DSSM模型](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/dssm.html)（包括DSSM模型等1个知识点）  
 
 * **产业实践篇**  
 
@@ -250,7 +250,7 @@
     * [GAN模式坍塌解决办法](https://paddlepedia.readthedocs.io/en/latest/tutorials/generative_adversarial_network/basic_concept/Collapse.html)
     * [GAN模型训练不稳定的原因](https://paddlepedia.readthedocs.io/en/latest/tutorials/generative_adversarial_network/basic_concept/Unstable%20training.html#)
     * [GAN模式训练不稳定解决办法 or 训练GAN的经验/技巧](https://paddlepedia.readthedocs.io/en/latest/tutorials/generative_adversarial_network/basic_concept/Unstable%20training.html#)
-  
+
   5. 计算机视觉
     * [ResNet中Residual block解决了什么问题？](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/classification/ResNet.html)
     * [使用Cutout进行数据增广有什么样的优势？](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/image_augmentation/ImageAugment.html#cutout)
@@ -265,7 +265,7 @@
     * [介绍一下CTC原理](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/loss_functions/CTC.html)
     * [OCR常用的评估指标](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/OCR/OCR.html#id7)
     * [OCR目前还存在哪些挑战/难点？](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/OCR/OCR.html#id9)
-  
+
   6. 自然语言处理
     * [RNN一般有哪几种常用建模方式?](https://paddlepedia.readthedocs.io/en/latest/tutorials/sequence_model/rnn.html#span-id-4-rnn-span)
     * [LSTM是如何改进RNN，保持长期依赖的?](https://paddlepedia.readthedocs.io/en/latest/tutorials/sequence_model/lstm.html#span-id-1-lstm-span)
@@ -284,7 +284,7 @@
     * [BERT的结构和原理是什么?](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/bert.html#id1)
     * [BERT使用了什么预训练任务?](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/bert.html#id11)
     * [说一下self-attention的原理?](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/transformer.html#self-attention)
-  
+
   7. 推荐系统
     * [DSSM模型的原理是什么？](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/dssm.html)
     * [DSSM怎样解决OOV问题的？](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/dssm.html#id2)
@@ -340,3 +340,12 @@
 
 本项目的不断成熟离不开各位开发者的贡献，如果您对深度学习知识分享感兴趣，非常欢迎您能贡献给我们，让更多的开发者受益。
 
+本项目欢迎任何贡献和建议，大多数贡献都需要你同意参与者许可协议（CLA），来声明你有权，并实际上授予我们有权使用你的贡献。
+
+### 代码贡献规范
+
+> pip install pre-commit
+>
+> pre-commit install
+
+添加修改的代码后，对修改的文件进行代码规范，pre-commit 会自动调整代码格式，执行一次即可，后续commit不需要再执行。提交pr流程，详见：[awesome-DeepLearning 提交 pull request 流程](./examples/awesome-DeepLearning_pr_procedure.md)
