@@ -2,7 +2,7 @@
 
 对于代码实现部分，本次使用了两种方法：使用numpy从底层实现以及使用paddle框架对房价进行预测，得到两份代码，使用notebook编写，同时也导出了相应的python文件，对于使用paddle框架的方法，迭代过程的损失变化图如下图所示：
 
-![损失图1](D:\桌面\awesome-DeepLearning\examples\损失图1.png)
+![损失图1](D:\桌面\awesome-DeepLearning\examples\chapter1\损失图1.png)
 
 
 
@@ -10,7 +10,7 @@
 
 
 
-![损失图2](D:\桌面\awesome-DeepLearning\examples\损失图2.png)
+![损失图2](D:\桌面\awesome-DeepLearning\examples\chapter1\损失图2.png)
 
 
 
