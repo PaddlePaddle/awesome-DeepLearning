@@ -32,7 +32,7 @@
 
     | 资料 | 链接                                                         |
     | ---- | ------------------------------------------------------------ |
-    | 视频 | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1366742](https://aistudio.baidu.com/aistudio/education/lessonvideo/1366742) |
+    | 视频 | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1452173](https://aistudio.baidu.com/aistudio/education/lessonvideo/1452173) |
     | 课件 | [https://aistudio.baidu.com/aistudio/education/preview/1447519](https://aistudio.baidu.com/aistudio/education/preview/1447519) |
 
     **2.比赛赛题讲解**
@@ -46,15 +46,15 @@
 
     | 资料 | 链接                                                         |
     | ---- | ------------------------------------------------------------ |
-    | 视频 | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1383195](https://aistudio.baidu.com/aistudio/education/lessonvideo/1383195) |
-    | 课件 | [https://aistudio.baidu.com/aistudio/education/preview/1403278](https://aistudio.baidu.com/aistudio/education/preview/1403278) |
+    | 视频 | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1452185](https://aistudio.baidu.com/aistudio/education/lessonvideo/1452185) |
+    | 课件 | [https://aistudio.baidu.com/aistudio/education/preview/1452186](https://aistudio.baidu.com/aistudio/education/preview/1452186) |
 
     **4.DAY2-手写数字识别案例入门深度学习**
 
     | 资料       | 链接                                                         |
     | ---------- | ------------------------------------------------------------ |
-    | 视频（上） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1382975](https://aistudio.baidu.com/aistudio/education/lessonvideo/1382975) |
-    | 视频（下） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1383003](https://aistudio.baidu.com/aistudio/education/lessonvideo/1383003) |
+    | 视频（上） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1452194](https://aistudio.baidu.com/aistudio/education/lessonvideo/1452194) |
+    | 视频（下） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1452196](https://aistudio.baidu.com/aistudio/education/lessonvideo/1452196) |
     | 课件       | [https://aistudio.baidu.com/aistudio/education/preview/1382783](https://aistudio.baidu.com/aistudio/education/preview/1382783) |
 
     附：手写数字识别案例入门深度学习项目
@@ -76,9 +76,9 @@
 
     | 资料       | 链接                                                         |
     | ---------- | ------------------------------------------------------------ |
-    | 视频（上） | https://aistudio.baidu.com/aistudio/education/lessonvideo/1382809 |
-    | 视频（下） | https://aistudio.baidu.com/aistudio/education/lessonvideo/1382861 |
-    | 课件       | https://aistudio.baidu.com/aistudio/education/preview/1382803 |
+    | 视频（上） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1452200](https://aistudio.baidu.com/aistudio/education/lessonvideo/1452200) |
+    | 视频（下） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1452203](https://aistudio.baidu.com/aistudio/education/lessonvideo/1452203) |
+    | 课件       | [https://aistudio.baidu.com/aistudio/education/preview/1452198](https://aistudio.baidu.com/aistudio/education/preview/1452198) |
 
     附：眼疾识别案例项目
 
@@ -91,9 +91,9 @@
 
     | 资料       | 链接                                                         |
     | ---------- | ------------------------------------------------------------ |
-    | 视频（上） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1392063](https://aistudio.baidu.com/aistudio/education/lessonvideo/1392063) |
-    | 视频（下） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1392070](https://aistudio.baidu.com/aistudio/education/lessonvideo/1392070) |
-    | 课件       | [https://aistudio.baidu.com/aistudio/education/preview/1388585](https://aistudio.baidu.com/aistudio/education/preview/1388585) |
+    | 视频（上） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1452210](https://aistudio.baidu.com/aistudio/education/lessonvideo/1452210) |
+    | 视频（下） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1452213](https://aistudio.baidu.com/aistudio/education/lessonvideo/1452213) |
+    | 课件       | [https://aistudio.baidu.com/aistudio/education/preview/1452208](https://aistudio.baidu.com/aistudio/education/preview/1452208) |
 
     附：词向量训练和情感分析任务项目
 
@@ -107,9 +107,9 @@
 
     | 资料       | 链接                                                         |
     | ---------- | ------------------------------------------------------------ |
-    | 视频（上） | https://aistudio.baidu.com/aistudio/education/lessonvideo/1406745 |
-    | 视频（下） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1406747](https://aistudio.baidu.com/aistudio/education/lessonvideo/1406747) |
-    | 课件       | [https://aistudio.baidu.com/aistudio/education/preview/1392088](https://aistudio.baidu.com/aistudio/education/preview/1392088) |
+    | 视频（上） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1452219](https://aistudio.baidu.com/aistudio/education/lessonvideo/1452219) |
+    | 视频（下） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1452220](https://aistudio.baidu.com/aistudio/education/lessonvideo/1452220) |
+    | 课件       | [https://aistudio.baidu.com/aistudio/education/preview/1452217](https://aistudio.baidu.com/aistudio/education/preview/1452217) |
 
     附：DSSM的电影推荐案例项目
 
@@ -125,9 +125,9 @@
 
     | 资料       | 链接                                                         |
     | ---------- | ------------------------------------------------------------ |
-    | 视频（上） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1428668](https://aistudio.baidu.com/aistudio/education/lessonvideo/1428668) |
-    | 视频（下） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1428674](https://aistudio.baidu.com/aistudio/education/lessonvideo/1428674) |
-    | 课件       | [https://aistudio.baidu.com/aistudio/education/preview/1447773](https://aistudio.baidu.com/aistudio/education/preview/1447773) |
+    | 视频（上） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1452226](https://aistudio.baidu.com/aistudio/education/lessonvideo/1452226) |
+    | 视频（下） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1452227](https://aistudio.baidu.com/aistudio/education/lessonvideo/1452227) |
+    | 课件       | [https://aistudio.baidu.com/aistudio/education/preview/1452224](https://aistudio.baidu.com/aistudio/education/preview/1452224) |
 
 # 三、 深度学习百问
 
