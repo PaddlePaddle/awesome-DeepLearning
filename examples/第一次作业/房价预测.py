@@ -3,103 +3,128 @@
 
 # ## 使用python+numpy实现房价预测
 
-# In[13]:
+# In[12]:
 
 
-## 预先导入一些第三方库
+#导入需要用到的包
 import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
-from sklearn.model_selection import train_test_split
-plt.rcParams['font.sans-serif'] = ['SimHei']  # 用来正常显示中文标签
-plt.rcParams['axes.unicode_minus'] = False  # 用来正常显示负号
-get_ipython().run_line_magic('matplotlib', 'inline')
 
+#数据导入以及处理
+def deal_data():
+    #读取文件数据，此时数据形状是(7084,)，即所有数据在一行中
+    housingdata = np.fromfile('/home/aistudio/data/data64/housing.data',sep=' ')
 
-# **在创建环境的时候选择导入`波士顿房价预测`数据集，数据集位于`/home/data/data7802/boston_house_price.csv`，数据集部分展示如下：**
-# 
-# ![](https://ai-studio-static-online.cdn.bcebos.com/d004d7ac78d440738da592d8695bb1e5c4efb9310d7e4ae483a502bf0cb53155)
-# 
+    #修改数据格式，将每一条房屋数据放在一行中。
+    housingdata = np.array(housingdata).reshape((-1,14))#此时数据形状为(506,14)
 
-# In[14]:
+    #对数据的前13个属性进行归一化操作，有助于提高模型精准度，这里使用max-min归一化方式。公式为(x-min)/(max-min)
+    for i in range(13):
+        Max =  np.max(housingdata[:,i])
+        Min = np.min(housingdata[:,i])
+        housingdata[:,i]=(housingdata[:,i]-Min)/(Max-Min)
 
+    #依据2-8原则，80%的数据作为训练数据，20%数据作为测试数据；此时训练数据是405条，测试数据是101条
+    Splitdata = round(len(housingdata)*0.8)
+    Train = housingdata[:Splitdata]#训练数据集
+    Test = housingdata[Splitdata:]#测试数据集
+    return Train,Test
 
-## 读取数据集并展示一部分数据
-house_price_data = pd.read_csv("data/data7802/boston_house_prices.csv", header=1)
-print(house_price_data.head())
+#模型设计以及配置
+#首先确定有13个权值参数w，并随机初始化
+class Model_Config(object):
+    def __init__(self,firstnetnum,secondnetnum):
+        np.random.seed(1)
+        self.w0 = np.random.randn(firstnetnum*secondnetnum,1).reshape(firstnetnum,secondnetnum)
+        self.w1 = np.random.randn(secondnetnum,1)
+        self.b0 = np.random.randn(firstnetnum,1).reshape(1,firstnetnum)
+        self.b1 = np.random.randn(1,1)
+     #计算预测值
+    def forward(self,x):
+        hidden1 = np.dot(x,self.w0)+self.b0
+        y = np.dot(hidden1,self.w1)+self.b1
+        return hidden1,y
+    #设置损失函数,这里使用差平方损失函数计算方式
+    def loss(self,z,y):
+        error = z-y
+        cost = error*error
+        avg_cost = np.mean(cost)
+        return avg_cost
+    #计算梯度
+    def back(self,x,y):
+        hidden1,z = self.forward(x)
+        #hidden层的梯度
+        gradient_w1 = (z-y)*hidden1
+        gradient_w1 = np.mean(gradient_w1,axis=0)#这里注意，axis=0必须写上，否则默认将这个数组变成一维的求平均
+        gradient_w1 = gradient_w1[:,np.newaxis]#
+        gradient_b1 = (z-y)
+        gradient_b1 = np.mean(gradient_b1)
+        gradient_w0 = np.zeros(shape=(13,13))
+        for i in range(len(x)):
+            data = x[i,:]
+            data = data[:,np.newaxis]
+            # print("data.shape",data.shape)
+            w1 = self.w1.reshape(1,13)
+            # print("self.w1.shape",w1.shape)
+            gradient_w01 = (z-y)[i]*np.dot(data,w1)
+            # print("gradient_w01.shape:",gradient_w01.shape)
+            gradient_w0+=gradient_w01
+        gradient_w0 = gradient_w0/len(x)
+        w2 = self.w1.reshape(1,13)
+        gradient_b0 =np.mean((z-y)*w2,axis=0)
 
+        return gradient_w1,gradient_b1,gradient_w0,gradient_b0
+        #输入层的梯度
+        #(z-y)x*self.w1
+        # gradient_w0 = np.zeros(shape=(13,13))
+        # gradient_w01 = gradient_w1.reshape(1,13)
+        # for i in range(13):
+        #     data = x[:,i]
+        #     data = data[:,np.newaxis]
+        #     gradient = data*gradient_w01
+        #     gradient = np.mean(gradient,axis=0)
+        #     gradient_w0[i,:] = gradient
+        # gradient_b0 = gradient_b1*self.b0
+        # return gradient_w1,gradient_b1,gradient_w0,gradient_b0
 
-# **其中前13项都是可能影响房价的一些因素，最后一列`MEDV`表示的就是房价**
+    #使用梯度更新权值参数w
+    def update(self,gradient_w1,gradient_b1,gradient_w0,gradient_b0,learning_rate):
+        self.w1 = self.w1-learning_rate*gradient_w1
+        self.b1 = self.b1-learning_rate*gradient_b1
+        self.w0 = self.w0-learning_rate*gradient_w0
+        self.b0 = self.b0-learning_rate*gradient_b0
 
-# In[15]:
+    #开始训练
+    def train(self,epoch_num,x,y,learning_rate):
+        #循环迭代
+        losses=[]
+        for i in range(epoch_num):
+            _,z = self.forward(x)
+            avg_loss = self.loss(z,y)
+            gradient_w1,gradient_b1,gradient_w0,gradient_b0 = self.back(x,y)
+            self.update(gradient_w1,gradient_b1,gradient_w0,gradient_b0,learning_rate)
+            losses.append(avg_loss)
+            #每进行20此迭代，显示一下当前的损失值
+            if(i%20==0):
+                print("iter:{},loss:{}".format(i,avg_loss))
 
-
-## 创建一个神经网络模型
-class GD(object):
-    def __init__(self, x, y):
-        # 数据集
-        self.x = x
-        self.y = y.reshape(-1, 1)
-        # 默认学习率
-        self.lr = 1e-3
-        # 训练次数
-        self.times = 500
-        # 随机初始化参数，包括w和b
-        self.theta = np.random.randn(self.x.shape[1] + 1, 1)
-        # 在self.x后边加上一列值全为1的向量
-        self.X = np.column_stack((self.x, np.ones([self.x.shape[0], 1])))
-        # 保存误差
-        self.losslist = []
-
-    # 计算梯度
-    def CalculateGradient(self):
-        """
-        计算当前梯度，并且返回
-        X^T*(X*theta - y)
-        """
-        return np.matmul(self.X.T, np.matmul(self.X, self.theta) - self.y)
-
-    def CalculateLoss(self):
-        """
-        计算每次迭代过程中的误差值,并且附加到self.losslist中
-        :return: None
-        """
-        loss = 0.5 * np.sum(np.power(np.matmul(self.X, self.theta) - self.y, 2))
-        self.losslist.append(loss)
-
-    def GradientDeecent(self):
-        """
-        梯度下降，更新参数,并且返回参数
-        :return: self.theta, self.b
-        """
-        for i in range(self.times):
-            # 保存当前梯度信息
-            g = self.CalculateGradient()
-            # 计算误差
-            self.CalculateLoss()
-            # 更新参数
-            self.theta = self.theta - self.lr * g
-            print("训练轮次：{}，当前轮次误差：{}".format(i + 1, self.losslist[i]))
-
-
-# In[17]:
-
-
-## 读取数据并训练
-x = house_price_data.iloc[:, 0:13]
-y = house_price_data.iloc[:, 13]
-x_norm = ((x - x.min()) / (x.max() - x.min())).values
-y_norm = ((y - y.min()) / (y.max() - y.min())).values
-# 实例化
-gd = GD(x_norm, y_norm)
-gd.GradientDeecent()
-y_pred = np.matmul(gd.X, gd.theta)
-print(gd.theta)
-plt.figure("Loss")
-plt.xlabel("epoch")
-plt.ylabel("Loss")
-plt.plot([i + 1 for i in range(gd.times)], gd.losslist)
-plt.show()
+        return losses
+def showpeocess(loss,epoch_num):
+    plt.title("The Process Of Train")
+    plt.plot([i for i in range(epoch_num)],loss)
+    plt.xlabel("epoch_num")
+    plt.ylabel("loss")
+    plt.show()
+if __name__ == '__main__':
+    Train,Test = deal_data()
+    np.random.shuffle(Train)
+    #只获取前13个属性的数据
+    x = Train[:,:-1]
+    y = Train[:,-1:]
+    epoch_num = 1000#设置迭代次数
+    Model = Model_Config(13,13)
+    losses = Model.train(epoch_num=epoch_num,x=x,y=y,learning_rate=0.001)
+    showpeocess(loss=losses,epoch_num=epoch_num)
 
 
 # ## 使用飞桨框架进行房价预测
@@ -140,7 +165,6 @@ test_reader = paddle.batch(
 # In[21]:
 
 
-
 #用于打印，查看uci_housing数据
 train_data=paddle.dataset.uci_housing.train();
 sampledata=next(train_data())
@@ -165,7 +189,6 @@ y_predict=fluid.layers.fc(input=x,size=1,act=None)
 # In[24]:
 
 
-
 cost = fluid.layers.square_error_cost(input=y_predict, label=y) #求一个batch的损失值
 avg_cost = fluid.layers.mean(cost)                              #对损失值求平均值
 
@@ -173,13 +196,11 @@ avg_cost = fluid.layers.mean(cost)                              #对损失值求
 # In[25]:
 
 
-
 optimizer = fluid.optimizer.SGDOptimizer(learning_rate=0.001)
 opts = optimizer.minimize(avg_cost)
 
 
 # In[26]:
-
 
 
 test_program = fluid.default_main_program().clone(for_test=True)
@@ -202,7 +223,6 @@ feeder = fluid.DataFeeder(place=place, feed_list=[x, y])#feed_list:向模型输�
 
 
 # In[29]:
-
 
 
 iter=0;
