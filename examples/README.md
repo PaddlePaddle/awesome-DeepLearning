@@ -8,4 +8,4 @@ DL_knowledge1和boston开头的代码。
 
 DL_knowledge2和mnist开头的代码。
 
-数据集不包含在文件中，需放在work文件夹下。
+数据集不包含在文件中，需要放在work文件夹下。
