@@ -70,5 +70,5 @@ Transformer is a classic work of NLP proposed by Google team in June 17. It was 
 The model prediction process can be started as follows
 
   ```bash
-  python predict.py
+  python predict_py.py
   ```

@@ -37,6 +37,6 @@ save_steps: 200 # 模型保存周期
 output_dir: 'checkpoints/' # 模型保存目录
 ignore_label: -100
 
-# args for predict.py
+# args for predict_py.py
 best_model: 'model_1000.pdparams' # 加载训练好的模型
 output_pred_path: "results.txt"

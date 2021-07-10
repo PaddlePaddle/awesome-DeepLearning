@@ -86,5 +86,5 @@ This experiment uses Discriminator to do the punctuation restoration task. Punct
 - Select the model parameters in `checkpoint` and configure them in `electra.base.yaml`, we can start the model's prediction on the test set in the following way. The final prediction result can be output to a txt file.
 
   ```bash
-  python predict.py
+  python predict_py.py
   ```
