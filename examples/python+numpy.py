@@ -1,4 +1,4 @@
-# 导入需要用到的packages
+# 导入需要用到的package
 import numpy as np
 import json
 import matplotlib.pyplot as plt
