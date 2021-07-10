@@ -1,93 +1,173 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[2]:
+# In[13]:
 
 
-import paddle.fluid as fluid
 import paddle
-from paddle.dataset import uci_housing
+from paddle.nn import Linear
+import paddle.nn.functional as F
 import numpy as np
+import os
+import random
 
 
-# In[4]:
+# In[14]:
 
 
-paddle.enable_static()
-x = fluid.layers.data(name='x', shape=[13], dtype='float32')
-y = fluid.layers.data(name='y', shape=[1], dtype='float32')
-hidden = fluid.layers.fc(input=x, size=100, act='relu')
-y_predict = fluid.layers.fc(input=hidden, size=1, act=None)
+def load_data():
+    # 从文件导入数据
+    datafile = './work/housing.data'
+    data = np.fromfile(datafile, sep=' ', dtype=np.float32)
 
-cost = fluid.layers.square_error_cost(input=y_predict, label=y)
-avg_cost = fluid.layers.mean(cost)
+    # 每条数据包括14项，其中前面13项是影响因素，第14项是相应的房屋价格中位数
+    feature_names = [ 'CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE',                       'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT', 'MEDV' ]
+    feature_num = len(feature_names)
 
-optimizer = fluid.optimizer.SGDOptimizer(learning_rate=0.001)
-opts = optimizer.minimize(avg_cost)
+    # 将原始数据进行Reshape，变成[N, 14]这样的形状
+    data = data.reshape([data.shape[0] // feature_num, feature_num])
 
-place = fluid.CPUPlace()
-exe = fluid.Executor(place)
-exe.run(fluid.default_startup_program())
+    # 将原数据集拆分成训练集和测试集
+    # 这里使用80%的数据做训练，20%的数据做测试
+    # 测试集和训练集必须是没有交集的
+    ratio = 0.8
+    offset = int(data.shape[0] * ratio)
+    training_data = data[:offset]
 
-train_reader = fluid.io.batch(reader=uci_housing.train(),batch_size=128)
-
-feeder = fluid.DataFeeder(place=place, feed_list=[x, y])
-
-
-# In[5]:
-
-
-for pass_id in range(1000):
-    train_cost = 0
-    for data in train_reader():
-        train_cost = exe.run(program = fluid.default_main_program(),
-                            feed = feeder.feed(data),
-                            fetch_list = [avg_cost])
-    if pass_id % 100 == 0:
-        print("Pass:%d, Cost:%0.5f" % (pass_id, train_cost[0][0],))
-
-params_dirname = "result"
-fluid.io.save_inference_model(params_dirname, ['x'], [y_predict], exe)
-
-
-# In[7]:
-
-
-
-infer_exe = fluid.Executor(place)
-inference_scope = fluid.core.Scope()
-
-with fluid.scope_guard(inference_scope):
-    [inference_program, feed_target_names, fetch_targets
-        ] = fluid.io.load_inference_model(params_dirname, infer_exe)
-    batch_size = 10
-
-    infer_reader = paddle.batch(
-            paddle.dataset.uci_housing.test(), batch_size=batch_size)
-
-    infer_data = next(infer_reader())
-    infer_feat = np.array(
-            [data[0] for data in infer_data]).astype("float32")
+    # 计算train数据集的最大值，最小值，平均值
+    maximums, minimums, avgs = training_data.max(axis=0), training_data.min(axis=0),                                  training_data.sum(axis=0) / training_data.shape[0]
     
-    infer_label = np.array(
-            [data[1] for data in infer_data]).astype("float32")
+    # 记录数据的归一化参数，在预测时对数据做归一化
+    global max_values
+    global min_values
+    global avg_values
+    max_values = maximums
+    min_values = minimums
+    avg_values = avgs
 
-    
-    assert feed_target_names[0] == 'x'
-    
-    results = infer_exe.run(
-            inference_program,
-            feed={feed_target_names[0]: np.array(infer_feat)},
-            fetch_list=fetch_targets)
+    # 对数据进行归一化处理
+    for i in range(feature_num):
+        data[:, i] = (data[:, i] - avgs[i]) / (maximums[i] - minimums[i])
 
-    
-    print("infer results: (House Price)")
-    
-    for idx, val in enumerate(results[0]):
-        print("%d: %.2f" % (idx, val))
+    # 训练集和测试集的划分比例
+    training_data = data[:offset]
+    test_data = data[offset:]
+    return training_data, test_data
 
-    print("\nground truth:")
-    
-    for idx, val in enumerate(infer_label):
-        print("%d: %.2f" % (idx, val))
+
+# In[15]:
+
+
+class Regressor(paddle.nn.Layer):
+
+    # self代表类的实例自身
+    def __init__(self):
+        # 初始化父类中的一些参数
+        super(Regressor, self).__init__()
+        
+        # 定义两层全连接层，输入维度是13，输出维度是1
+        self.fc1=Linear(in_features=13, out_features=20)
+        self.fc2=Linear(in_features=20, out_features=1)
+
+    # 网络的前向计算
+    def forward(self, inputs):
+        outputs1 = self.fc1(inputs)
+        outputs2 = F.relu(outputs1)
+        x = self.fc2(outputs2)
+        return x
+
+
+# In[16]:
+
+
+
+# 声明定义好的线性回归模型
+model = Regressor()
+# 开启模型训练模式
+model.train()
+# 加载数据
+training_data, test_data = load_data()
+# 定义优化算法，使用随机梯度下降SGD
+# 学习率设置为0.01
+opt = paddle.optimizer.SGD(learning_rate=0.01, parameters=model.parameters())
+
+
+# In[17]:
+
+
+EPOCH_NUM = 10   # 设置外层循环次数
+BATCH_SIZE = 10  # 设置batch大小
+
+# 定义外层循环
+for epoch_id in range(EPOCH_NUM):
+    # 在每轮迭代开始之前，将训练数据的顺序随机的打乱
+    np.random.shuffle(training_data)
+    # 将训练数据进行拆分，每个batch包含10条数据
+    mini_batches = [training_data[k:k+BATCH_SIZE] for k in range(0, len(training_data), BATCH_SIZE)]
+    # 定义内层循环
+    for iter_id, mini_batch in enumerate(mini_batches):
+        x = np.array(mini_batch[:, :-1]) # 获得当前批次训练数据
+        y = np.array(mini_batch[:, -1:]) # 获得当前批次训练标签（真实房价）
+        # 将numpy数据转为飞桨动态图tensor形式
+        house_features = paddle.to_tensor(x)
+        prices = paddle.to_tensor(y)
+        
+        # 前向计算
+        predicts = model(house_features)
+        
+        # 计算损失
+        loss = F.square_error_cost(predicts, label=prices)
+        avg_loss = paddle.mean(loss)
+        if iter_id%20==0:
+            print("epoch: {}, iter: {}, loss is: {}".format(epoch_id, iter_id, avg_loss.numpy()))
+        
+        # 反向传播
+        avg_loss.backward()
+        # 最小化loss,更新参数
+        opt.step()
+        # 清除梯度
+        opt.clear_grad()
+
+
+# In[18]:
+
+
+# 保存模型参数，文件名为LR_model.pdparams
+paddle.save(model.state_dict(), 'LR_model.pdparams')
+print("模型保存成功，模型参数保存在LR_model.pdparams中")
+
+
+# In[19]:
+
+
+def load_one_example():
+    # 从上边已加载的测试集中，随机选择一条作为测试数据
+    idx = np.random.randint(0, test_data.shape[0])
+    idx = -10 #测试倒数第10个数据
+    one_data, label = test_data[idx, :-1], test_data[idx, -1]
+    # 修改该条数据shape为[1,13]
+    one_data =  one_data.reshape([1,-1])
+    return one_data, label
+
+
+# In[20]:
+
+
+# 参数为保存模型参数的文件地址
+model_dict = paddle.load('LR_model.pdparams')
+model.load_dict(model_dict)
+model.eval()
+
+# 参数为数据集的文件地址
+one_data, label = load_one_example()
+# 将数据转为动态图的variable格式 
+one_data = paddle.to_tensor(one_data)
+predict = model(one_data)
+
+# 对结果做反归一化处理
+predict = predict * (max_values[-1] - min_values[-1]) + avg_values[-1]
+# 对label数据做反归一化处理
+label = label * (max_values[-1] - min_values[-1]) + avg_values[-1]
+
+print("Inference result is {}, the corresponding label is {}".format(predict.numpy(), label))
 
