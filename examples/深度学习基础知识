@@ -39,13 +39,13 @@
  4. 轴突：当细胞体内的刺激信号超过一定阈值之后，神经元的轴突会对外发送信号。
  5. 突触：该神经元发送的信号（若有）将由突触向其他神经元或人体内的其他组织（对神经信号做出反应的组织）传递。
  - 需要注意的是，神经元通常有多个突触，但它们传递的信号都是一样的。
-  (https://github.com/Eric-Zhang-Composing/awesome-DeepLearning/blob/7c1be8f43cd24f8b96b269826d6c0efc9942b3f9/examples/1.jpg)
+ ![] (https://github.com/Eric-Zhang-Composing/awesome-DeepLearning/blob/7c1be8f43cd24f8b96b269826d6c0efc9942b3f9/examples/1.jpg)
 >模仿神经元模型，我们提出了神经元模型。这个模型中可以有n个输入*xn*，，经过一个求和函数算出的值再经过激活函数，最终将激活函数的函数值作为输出。
 
 - 单层感知机
 单层感知器可以用来区分线性可分的数据，并且一定可以在有限的迭代次数中收敛。单层感知机与神经元模型不同。单层感知器能够用来模拟逻辑函数，例如逻辑非NOT、逻辑或非XOR、逻辑或OR、逻辑与AND和逻辑与非NAND等，但是不能用来模拟逻辑异或XOR（对于这个函数，必须用两层神经元）。
 除了输入之外，偏置（bias）也经常被用于每个神经元，它在通过转换函数之前被加到输入的加权和上。权值也经常被应用于偏置上。偏置决定了多少输入激活（输入的加权和）才能激发神经元进入兴奋状态。偏置往往被设定为1，而偏置的权值可以通过学习算法加以调整。 
-(https://github.com/Eric-Zhang-Composing/awesome-DeepLearning/blob/91a86619fd55ec13448dd70fd5dd1062817a11a0/examples/2.jpg)
+![](https://github.com/Eric-Zhang-Composing/awesome-DeepLearning/blob/91a86619fd55ec13448dd70fd5dd1062817a11a0/examples/2.jpg)
  
 
 
@@ -54,16 +54,16 @@
 该多层感知器有4个输入单元，4个隐层单元和3个输出单元。偏置作为输入单元和隐层单元来处理，但偏置具有常数值1（虽然可以通过调整权值来改变偏置的影响）。 
 程序的执行流程如下：首先，计算隐层单元的输出（利用输入单元和隐层单元到输入层单元的权值）；然后，继续计算下一层（这里指输出层）单元的输出。通常这个过程被称为前向传送数据，或简单的称之为前馈（feed forward）。 
 可以把神经网络看成并行计算系统。每个神经元是一个处理元件，该处理元件接受一个或多个输入并产生一个输出。输入和输出均可以看成信息。在多层感知器架构中，输出可以被送往多个其他处理单元，做进一步的处理。神经网络并行性的特性来自于同一层多个神经元之间的并行性。所有的神经元能够同时处理它们各自的输入，使得在多处理器系统中同一层次上具有大量神经元的神经网络的运行速度更快。
-(https://github.com/Eric-Zhang-Composing/awesome-DeepLearning/blob/91a86619fd55ec13448dd70fd5dd1062817a11a0/examples/3.jpg)
+![](https://github.com/Eric-Zhang-Composing/awesome-DeepLearning/blob/91a86619fd55ec13448dd70fd5dd1062817a11a0/examples/3.jpg)
  
 
 ## 前向传播
 - 假设上一层结点i,j,k,…等一些结点与本层的结点w有连接，那么结点w的值怎么算呢？就是通过上一层的i,j,k等结点以及对应的连接权值进行加权和运算，最终结果再加上一个偏置项（图中为了简单省略了），最后在通过一个非线性函数（即激活函数），如ReLu，sigmoid等函数，最后得到的结果就是本层结点w的输出。最终不断的通过这种方法一层层的运算，得到输出层结果。对于前向传播来说，不管维度多高，其过程都可以用如下公式表示：a2=σ(z2)=σ(a1*W2+b2)其中，上标代表层数，星号表示卷积，b表示偏置项bias，σ表示激活函数。
-(https://github.com/Eric-Zhang-Composing/awesome-DeepLearning/blob/91a86619fd55ec13448dd70fd5dd1062817a11a0/examples/4.jpg)	 
+![](https://github.com/Eric-Zhang-Composing/awesome-DeepLearning/blob/91a86619fd55ec13448dd70fd5dd1062817a11a0/examples/4.jpg)	 
 
 ## 反向传播
 - BackPropagation算法是多层神经网络的训练中举足轻重的算法。简单的理解，它的确就是复合函数的链式法则，但其在实际运算中的意义比链式法则要大的多。要回答题主这个问题“如何直观的解释back propagation算法？” 需要先直观理解多层神经网络的训练。
 机器学习可以看做是数理统计的一个应用，在数理统计中一个常见的任务就是拟合，也就是给定一些样本点，用合适的曲线揭示这些样本点随着自变量的变化关系.
 深度学习同样也是为了这个目的，只不过此时，样本点不再限定为(x, y)点对，而可以是由向量、矩阵等等组成的广义点对(X,Y)。而此时，(X,Y)之间的关系也变得十分复杂，不太可能用一个简单函数表示。然而，人们发现可以用多层神经网络来表示这样的关系，而多层神经网络的本质就是一个多层复合的函数。
-(https://github.com/Eric-Zhang-Composing/awesome-DeepLearning/blob/91a86619fd55ec13448dd70fd5dd1062817a11a0/examples/5.jpg)
+![](https://github.com/Eric-Zhang-Composing/awesome-DeepLearning/blob/91a86619fd55ec13448dd70fd5dd1062817a11a0/examples/5.jpg)
 
