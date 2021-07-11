@@ -81,9 +81,9 @@
 
 将上一层的输出作为下一层的输入，并计算下一层的输出，一直到运算到输出层为止。
 
-![img](https://github.com/827184100/awesome-DeepLearning/blob/work2/examples/3)
+![img](https://github.com/827184100/awesome-DeepLearning/blob/work2/examples/3.png)
 
-（图片来源于知乎@123哈哈789呵呵456）
+（图片来源于网上）
 
 ## （5）什么是反向传播
 
