@@ -44,7 +44,7 @@
 
 ## （2）人工智能、机器学习、深度学习有什么区别和联系？
 
-![1](1.png)
+![1](https://github.com/827184100/awesome-DeepLearning/blob/work2/examples/1.png)
 
 （图来源于网上）
 
