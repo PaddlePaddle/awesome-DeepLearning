@@ -7,7 +7,7 @@ import random
 
 def load_data():
 
-    datafile = 'E:/VSCODE/baidu/awesome-DeepLearning-master/junior_class/chapter-1-hands_on_deep_learning/code/data/housing.data'
+    datafile = './data/housing.data'
     data = np.fromfile(datafile, sep=' ', dtype=np.float32)
 
     feature_names = [ 'CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT', 'MEDV' ]
@@ -53,9 +53,15 @@ class Regressor(paddle.nn.Layer):
         self.fc1 = Linear(in_features=13, out_features=5)
         self.fc2 = Linear(in_features=5, out_features=1)
     
+
+    def Relu(self,x):
+        return np.where(x < 0,0,x)
+
+
     # 网络的前向计算
     def forward(self, inputs):
         x = self.fc1(inputs)
+        x = self.Relu(x)
         x = self.fc2(x)
         return x
 

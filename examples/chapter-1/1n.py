@@ -4,7 +4,7 @@ from mpl_toolkits.mplot3d import Axes3D
 from numpy.lib.function_base import gradient
 
 def load_data():
-    datafile = 'E:/VSCODE/baidu/awesome-DeepLearning-master/junior_class/chapter-1-hands_on_deep_learning/code/data/housing.data'
+    datafile = './data/housing.data'
     data = np.fromfile(datafile, sep=' ')
 
     feature_names = [ 'CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT', 'MEDV' ]
