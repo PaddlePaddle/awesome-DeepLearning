@@ -10,13 +10,13 @@
 
 训练过程的损失变化如下图所示：
 
-![loss](D:\桌面\awesome-DeepLearning\examples\chapter2\images\loss.png)
+![loss](.\images\loss.png)
 
 经过15次迭代，可以看到，损失在初期迅速下降，并在经过一段时间后下降到较小的值，最终趋于平稳。
 
 训练过程的训练集准确率变化如下图所示：
 
-![acc](D:\桌面\awesome-DeepLearning\examples\chapter2\images\acc.png)
+![acc](.\images\acc.png)
 
 由图中可以看出，训练集准确率随着迭代次数增加也在不断提高，最终稳定在了1，这说明模型在测试集效果已经达到了很好，但是这时候仍不能得出模型就一定好，因为并没有在测试集上进行测试，可能会出现过拟合，仅仅在训练集上效果较好，因此这里对模型在测试集上进行检验。
 
