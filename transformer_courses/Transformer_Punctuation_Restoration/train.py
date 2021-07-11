@@ -29,7 +29,7 @@ from paddlenlp.datasets import DatasetBuilder
 from paddlenlp.transformers import ElectraForTokenClassification, ElectraTokenizer
 from paddlenlp.data import Stack, Tuple, Pad, Dict
 
-from dataloader import create_dataloader,load_dataset
+from dataloader import create_train_dataloader,load_dataset
  
 
 import paddle.distributed as dist

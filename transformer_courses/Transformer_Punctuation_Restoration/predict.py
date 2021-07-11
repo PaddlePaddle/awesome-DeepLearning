@@ -21,7 +21,7 @@ from attrdict import AttrDict
 import os
 import paddle
 from paddlenlp.transformers import ElectraForTokenClassification, ElectraTokenizer
-from dataloader import create_dataloader,load_dataset
+from dataloader import create_test_dataloader,load_dataset
 
 def parse_decodes(input_words, id2label, decodes, lens):
     decodes = [x for batch in decodes for x in batch]
