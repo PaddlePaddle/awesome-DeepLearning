@@ -29,8 +29,8 @@ from paddlenlp.datasets import DatasetBuilder
 from paddlenlp.transformers import ElectraForTokenClassification, ElectraTokenizer
 from paddlenlp.data import Stack, Tuple, Pad, Dict
 
-from dataloader import create_train_dataloader,load_dataset
- 
+from dataloader import create_train_dataloader, load_dataset
+from utils import compute_metrics, evaluate
 
 import paddle.distributed as dist
  
@@ -46,57 +46,6 @@ import os
 import pandas as pd
 from sklearn.metrics import classification_report
 from functools import partial
-
-
-def compute_metrics(labels, decodes, lens):
-    decodes = [x for batch in decodes for x in batch]
-    lens = [x for batch in lens for x in batch]
-    labels=[x for batch in labels for x in batch]
-    outputs = []
-    nb_correct=0
-    nb_true=0
-    val_f1s=[]
-    label_vals=[0,1,2,3]
-    y_trues=[]
-    y_preds=[]
-    for idx, end in enumerate(lens):
-        y_true = labels[idx][:end].tolist()
-        y_pred = [x for x in decodes[idx][:end]]
-        nb_correct += sum(y_t == y_p for y_t, y_p in zip(y_true, y_pred))
-        nb_true+=len(y_true)
-        y_trues.extend(y_true)
-        y_preds.extend(y_pred)
-
-    score = nb_correct / nb_true
-    # val_f1 = metrics.f1_score(y_trues, y_preds, average='micro', labels=label_vals)
-
-    result=classification_report(y_trues, y_preds)
-    # print(val_f1)   
-    return score,result
-    
-def evaluate(model, loss_fct, data_loader, label_num):
-    '''
-    模型评估
-    '''
-    model.eval()
-    pred_list = []
-    len_list = []
-    labels_list=[]
-    for batch in data_loader:
-        input_ids, token_type_ids, length, labels = batch
-        logits = model(input_ids, token_type_ids)
-        loss = loss_fct(logits, labels)
-        avg_loss = paddle.mean(loss)
-        pred = paddle.argmax(logits, axis=-1)
-        pred_list.append(pred.numpy())
-        len_list.append(length.numpy())
-        labels_list.append(labels.numpy())
-    accuracy, result=compute_metrics(labels_list, pred_list, len_list)
-    print("eval loss: %f, accuracy: %f" % (avg_loss, accuracy))
-    print(result)
-    model.train()
- 
-# evaluate(model, loss_fct, metric, valid_data_loader,label_num)
  
 def do_train(args):
     last_step =  args.num_train_epochs * len(train_data_loader)

@@ -21,7 +21,9 @@ from attrdict import AttrDict
 import os
 import paddle
 from paddlenlp.transformers import ElectraForTokenClassification, ElectraTokenizer
+
 from dataloader import create_test_dataloader,load_dataset
+from utils import evaluate, write2txt
 
 def parse_decodes(input_words, id2label, decodes, lens):
     decodes = [x for batch in decodes for x in batch]
@@ -53,14 +55,6 @@ def do_predict(test_data_loader):
         len_list.append(length.numpy())
     preds = parse_decodes(raw_data, id2label, pred_list, len_list)
     return preds
-
-def write2txt(args, preds):
-    file_path = args.output_pred_path
-    with open(file_path, "w", encoding="utf8") as fout:
-        fout.write("\n".join(preds))
-        # Print some examples
-    print("The results have been saved in the file: %s, some examples are shown below: " % file_path)
-    print("\n".join(preds[:5]))   
 
 if __name__ == '__main__':
     # 读入参数
@@ -101,6 +95,12 @@ if __name__ == '__main__':
 
     # 加载测试集data loader
     test_data_loader  = create_test_dataloader(args)
+
+    # 设置损失函数 - Cross Entropy  
+    loss_fct = paddle.nn.loss.CrossEntropyLoss(ignore_index=args.ignore_label)
+
+    # 对测试集评估
+    evaluate(model, loss_fct, test_data_loader, label_num)
 
     # 开始预测测试数据
     preds = do_predict(test_data_loader)
