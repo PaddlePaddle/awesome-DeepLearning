@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import paddle
+from sklearn.metrics import classification_report
 
 def compute_metrics(labels, decodes, lens):
     decodes = [x for batch in decodes for x in batch]
@@ -61,11 +63,13 @@ def evaluate(model, loss_fct, data_loader, label_num):
     print(result)
     model.train()
 
-
 def write2txt(args, preds):
+    '''
+    将预测结果导入到txt文件
+    '''
     file_path = args.output_pred_path
     with open(file_path, "w", encoding="utf8") as fout:
         fout.write("\n".join(preds))
         # Print some examples
-    print("The results have been saved in the file: %s, some examples are shown below: " % file_path)
+    print("The results have been saved in the file: %s, 5 examples are shown below: " % file_path)
     print("\n".join(preds[:5]))   

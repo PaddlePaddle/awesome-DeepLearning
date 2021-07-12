@@ -193,6 +193,7 @@ def create_test_dataloader(args):
     return: 
         test_data_loader 
     '''
+    no_entity_id=0
     
     # 加载dataset    
     test_ds = load_dataset('TEDTalk', splits=('test'), lazy=False)
