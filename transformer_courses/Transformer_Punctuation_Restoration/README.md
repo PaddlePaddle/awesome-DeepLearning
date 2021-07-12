@@ -15,9 +15,9 @@
 
 ```
 |-data_transfer.py: 将测试集和训练集数据从xml格式提取成txt形式
-|-data_process.py: 数据集预处理，并且分别构建训练和测试数据集 
+|-data_process.py: 数据集预处理，并且分别构建训练，验证以及测试数据集 
 |-dataloader.py: 包含构建dataloader的方法
-|-train.py: 构建dataloader，加载预训练模型，设置AdamW优化器，cross entropy损失函数以及评估方式该脚本中，并且定义了ELECTRA的训练
+|-train.py: 构建dataloader，加载预训练模型，设置AdamW优化器，cross entropy损失函数以及评估方式，并且开始ELECTRA的训练，并且在验证集上评估
 |-predict.py: 启动模型预测的脚本，并且储存预测结果于txt文件
 ```
 

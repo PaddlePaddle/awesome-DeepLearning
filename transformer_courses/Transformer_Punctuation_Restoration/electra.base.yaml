@@ -11,17 +11,15 @@ output_test_path: 'test_texts_2012.txt'
 
 # args for data_preprocess.py
 data_path: "data/"
-model_name_or_path: 'electra-base'
 output_train_tsv: 'train.tsv'
 output_test_tsv: 'test.tsv'
-output_dev_tsv: dev.tsv'
+output_dev_tsv: 'dev.tsv'
 
 # model hyper-parameters
 batch_size: 128
 device: 'gpu'
 num_train_epochs: 1 
 warmup_steps: 0
-logging_steps: 1
 max_seq_length: 128
 model_name_or_path: 'electra-base'
 max_steps: -1
@@ -32,7 +30,6 @@ weight_decay: 0.0
 # training parameters
 global_step :  0
 logging_steps: 200 # 日志的保存周期
- 
 save_steps: 200 # 模型保存周期
 output_dir: 'checkpoints/' # 模型保存目录
 ignore_label: -100
@@ -40,3 +37,4 @@ ignore_label: -100
 # args for predict.py
 best_model: 'model_1000.pdparams' # 加载训练好的模型
 output_pred_path: "results.txt"
+isSavingPreds: 1 # 1: True
