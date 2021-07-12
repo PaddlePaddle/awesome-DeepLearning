@@ -1,0 +1,1 @@
+{"do_lower_case": true, "vocab_file": "./demo/ofa/bert/qqp_pretrained_model/vocab.txt", "init_class": "BertTokenizer"}
