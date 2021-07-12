@@ -1,0 +1,7 @@
+paddlenlp==2.0.0rc22
+paddlepaddle==2.1.1
+pandas
+attrdict==2.0.1
+ujson
+tqdm
+paddlepaddle-gpu 
