@@ -1,0 +1,1124 @@
+You know, cadaver dissection is the traditional way of learning human anatomy.
+For students, it's quite an experience, but for a school, it could be very difficult or expensive to maintain.
+So we learned the majority of anatomic classes taught, they do not have a cadaver dissection lab.
+Maybe those reasons, or depending on where you are, cadavers may not be easily available.
+So to address this, we developed with a Dr. Brown in Stanford: virtual dissection table.
+So we call this Anatomage Table.
+So with this Anatomage Table, students can experience the dissection without a human cadaver.
+And the table form is important, and since it's touch-interactive, just like the way they do dissections in the lab, or furthermore just the way a surgeon operates on a patient you can literally interact with your table.
+Our digital body is one-to-one life size, so this is exactly the way students will see the real anatomy.
+I'm going to do some demonstrations.
+As you can see, I use my finger to interact with my digital body.
+I'm going to do some cuts.
+I can cut any way I want to, so I cut right here.
+Then it's going to show inside.
+And I can change my cut to see different parts.
+Maybe I can cut there, see the brain, and I can change my cut.
+You can see some internal organs.
+So we call this the slicer mode.
+OK, I'm going to do another cut.
+Right there.
+This shows a lot of internal structures.
+So if I want to see the back side, I can flip and see from behind.
+Like this.
+So if these images are uncomfortable to you or disturbing to you, that means we did the right job.
+So our doctors said these are eye candies.
+So instead of just butchering the body, I'd like to do more clinically meaningful dissections.
+What I'm going to do is I'm going to peel off all the skin, muscles and bones, just to see a few internal organs.
+Right here.
+Let's say I'm going to cut the liver right here.
+OK.
+Let's say I'm interested in looking at the heart.
+I'm going to do some surgery here.
+I'm going to cut some veins, arteries. Oops! ...
+You don't want to hear "oops" in real surgery.
+But fortunately, our digital man has "undo."
+OK.
+All right then.
+Let me zoom in.
+I'm going to make a cut right there.
+And then you can see the inside of the heart.
+You can see the atrium and the ventricles, how blood flows to our arteries and veins.
+Just like this, students can isolate anybody and dissect any way you want to.
+It doesn't have to be always dissection.
+Since it's digital, we can do reverse dissection.
+So let me show you, I'm going to start with the skeletal structure, and I can add a few internal organs.
+Yep.
+Maybe I can add quickly this way.
+And I can build muscles gradually, just like that.
+We can see tendons and muscles.
+Wish I could build my muscle this fast.
+And this is another way to learn anatomy.
+Another thing I can show you is, more often than not, doctors get to meet patients in X-ray form.
+So, Anatomage Table shows exactly how the anatomy will appear in X-ray.
+You can also interact with your X-ray, and also if you want, you can compare with how anatomy would appear in X-ray, too.
+So when you are done, just bring back the body and then it's ready for another session.
+It looks like our table also can transform gender, too.
+It's a female now.
+So this is Anatomage Table. Thank you.
+Hi, my name is Frank, and I collect secrets.
+It all started with a crazy idea in November of 2004.
+I printed up 3,000 self-addressed postcards, just like this.
+They were blank on one side, and on the other side I listed some simple instructions.
+I asked people to anonymously share an artful secret they'd never told anyone before.
+And I handed out these postcards randomly on the streets of Washington, D.C., not knowing what to expect.
+But soon the idea began spreading virally.
+People began to buy their own postcards and make their own postcards.
+I started receiving secrets in my home mailbox, not just with postmarks from Washington, D.C., but from Texas, California, Vancouver, New Zealand, Iraq.
+Soon my crazy idea didn't seem so crazy.
+PostSecret.com is the most visited advertisement-free blog in the world.
+And this is my postcard collection today.
+You can see my wife struggling to stack a brick of postcards on a pyramid of over a half-million secrets.
+What I'd like to do now is share with you a very special handful of secrets from that collection, starting with this one.
+"I found these stamps as a child, and I have been waiting all my life to have someone to send them to.
+I never did have someone." Secrets can take many forms.
+They can be shocking or silly or soulful.
+They can connect us to our deepest humanity or with people we'll never meet.
+Maybe one of you sent this one in.
+I don't know.
+This one does a great job of demonstrating the creativity that people have when they make and mail me a postcard.
+This one obviously was made out of half a Starbucks cup with a stamp and my home address written on the other side.
+"Dear Birthmother, I have great parents.
+I've found love. I'm happy." Secrets can remind us of the countless human dramas, of frailty and heroism, playing out silently in the lives of people all around us even now.
+"Everyone who knew me before 9/11 believes I'm dead." "I used to work with a bunch of uptight religious people, so sometimes I didn't wear panties, and just had a big smile and chuckled to myself." This next one takes a little explanation before I share it with you.
+I love to speak on college campuses and share secrets and the stories with students.
+And sometimes afterwards I'll stick around and sign books and take photos with students.
+And this next postcard was made out of one of those photos.
+And I should also mention that, just like today, at that PostSecret event, I was using a wireless microphone.
+"Your mic wasn't off during sound check.
+We all heard you pee." This was really embarrassing when it happened, until I realized it could have been worse.
+Right. You know what I'm saying.
+"Inside this envelope is the ripped up remains of a suicide note I didn't use.
+I feel like the happiest person on Earth " "One of these men is the father of my son.
+He pays me a lot to keep it a secret." "That Saturday when you wondered where I was, well, I was getting your ring.
+It's in my pocket right now." I had this postcard posted on the PostSecret blog two years ago on Valentine's Day.
+It was the very bottom, the last secret in the long column.
+And it hadn't been up for more than a couple hours before I received this exuberant email from the guy who mailed me this postcard.
+And he said, "Frank, I've got to share with you this story that just played out in my life." He said, "My knees are still shaking."
+He said, "For three years, my girlfriend and I, we've made it this Sunday morning ritual to visit the PostSecret blog together and read the secrets out loud.
+I read some to her, she reads some to me."
+He says, "It's really brought us closer together through the years.
+And so when I discovered that you had posted my surprise proposal to my girlfriend at the very bottom, I was beside myself.
+And I tried to act calm, not to give anything away.
+And just like every Sunday, we started reading the secrets out loud to each other."
+He said, "But this time it seemed like it was taking her forever to get through each one." But she finally did.
+She got to that bottom secret, his proposal to her.
+And he said, "She read it once and then she read it again."
+And she turned to him and said, "Is that our cat?" And when she saw him, he was down on one knee, he had the ring out.
+He popped the question, she said yes. It was a very happy ending.
+So I emailed him back and I said, "Please share with me an image, something, that I can share with the whole PostSecret community and let everyone know your fairy tale ending."
+And he emailed me this picture.
+"I found your camera at Lollapalooza this summer.
+I finally got the pictures developed and I'd love to give them to you." This picture never got returned back to the people who lost it, but this secret has impacted many lives, starting with a student up in Canada named Matty.
+Matty was inspired by that secret to start his own website, a website called IFoundYourCamera. Matty invites people to mail him digital cameras that they've found, memory sticks that have been lost with orphan photos.
+And Matty takes the pictures off these cameras and posts them on his website every week.
+And people come to visit to see if they can identify a picture they've lost or help somebody else get the photos back to them that they might be desperately searching for.
+This one's my favorite.
+Matty has found this ingenious way to leverage the kindness of strangers.
+And it might seem like a simple idea, and it is, but the impact it can have on people's lives can be huge.
+Matty shared with me an emotional email he received from the mother in that picture.
+"That's me, my husband and son.
+The other pictures are of my very ill grandmother.
+Thank you for making your site.
+These pictures mean more to me than you know.
+My son's birth is on this camera.
+He turns four tomorrow." Every picture that you see there and thousands of others have been returned back to the person who lost it -- sometimes crossing oceans, sometimes going through language barriers.
+This is the last postcard I have to share with you today.
+"When people I love leave voicemails on my phone I always save them in case they die tomorrow and I have no other way of hearing their voice ever again." When I posted this secret, dozens of people sent voicemail messages from their phones, sometimes ones they'd been keeping for years, messages from family or friends who had died.
+They said that by preserving those voices and sharing them, it helped them keep the spirit of their loved ones alive.
+One young girl posted the last message she ever heard from her grandmother.
+Secrets can take many forms.
+They can be shocking or silly or soulful.
+They can connect us with our deepest humanity or with people we'll never meet again.
+First saved voice message.
+It's somebody's birthday today Somebody's birthday today The candles are lighted on somebody's cake And we're all invited for somebody's sake You're 21 years old today.
+Have a real happy birthday, and I love you.
+I'll say bye for now.
+Thank you.
+I call myself a body architect.
+I trained in classical ballet and have a background in architecture and fashion.
+As a body architect, I fascinate with the human body and explore how I can transform it.
+I worked at Philips Electronics in the far-future design research lab, looking 20 years into the future.
+I explored the human skin, and how technology can transform the body.
+I worked on concepts like an electronic tattoo, which is augmented by touch, or dresses that blushed and shivered with light.
+I started my own experiments.
+These were the low-tech approaches to the high-tech conversations I was having.
+These are Q-tips stuck to my roommate with wig glue.
+I started a collaboration with a friend of mine, Bart Hess -- he doesn't normally look like this -- and we used ourselves as models.
+We transformed our apartments into our laboratories, and worked in a very spontaneous and immediate way.
+We were creating visual imagery provoking human evolution.
+Whilst I was at Philips, we discussed this idea of a maybe technology, something that wasn't either switched on or off, but in between.
+A maybe that could take the form of a gas or a liquid.
+And I became obsessed with this idea of blurring the perimeter of the body, so you couldn't see where the skin ended and the near environment started.
+I set up my studio in the red-light district and obsessively wrapped myself in plumbing tubing, and found a way to redefine the skin and create this dynamic textile.
+I was introduced to Robyn, the Swedish pop star, and she was also exploring how technology coexists with raw human emotion.
+And she talked about how technology with these new feathers, this new face paint, this punk, the way that we identify with the world, and we made this music video.
+I'm fascinated with the idea of what happens when you merge biology with technology, and I remember reading about this idea of being able to reprogram biology, in the future, away from disease and aging.
+And I thought about this concept of,
+imagine if we could reprogram our own body odor, modify and biologically enhance it, and how would that change the way that we communicate with each other?
+Or the way that we attract sexual partners?
+And would we revert back to being more like animals, more primal modes of communication?
+I worked with a synthetic biologist, and I created a swallowable perfume, which is a cosmetic pill that you eat and the fragrance comes out through the skin's surface when you perspire.
+It completely blows apart the way that perfume is, and provides a whole new format.
+It's perfume coming from the inside out.
+It redefines the role of skin, and our bodies become an atomizer.
+I've learned that there's no boundaries, and if I look at the evolution of my work i can see threads and connections that make sense.
+But when I look towards the future, the next project is completely unknown and wide open.
+I feel like I have all these ideas existing embedded inside of me, and it's these conversations and these experiences that connect these ideas, and they kind of instinctively come out.
+As a body architect, I've created this limitless and boundless platform for me to discover whatever I want.
+And I feel like I've just got started.
+So here's to another day at the office.
+Last January, my company, Fark.com, was sued along with Yahoo, MSN, Reddit, AOL, TechCrunch and others by a company called Gooseberry Natural Resources.
+Gooseberry owned a patent for the creation and distribution of news releases via email.
+Now it may seem kind of strange that such a thing can actually be patented, but it does happen all the time.
+Take something already being done and patent it for an emerging technology -- like phone calls on the internet or video listings for TV shows or radio but for cellphones, and so on.
+The problem with these patents is that the mechanisms are obscure and the patent system is dysfunctional, and as a result, most of these lawsuits end in settlements.
+And because these settlements are under a non-disclosure agreement, no one knows what the terms were.
+And as a result, the patent troll can claim that they won the case.
+In the case of Gooseberry Natural Resources, this patent on emailing news releases had sort of a fatal flaw as it pertained to myself, and that was that in the mainstream media world there is only one definition for news release, and it turns out that is press release -- as in P.R.
+Now my company, Fark, deals with news, ostensibly, and as a result we were not in violation of this patent.
+So case closed, right?
+Wrong.
+One of the major problems with patent law is that, in the case that when you are sued by a patent troll, the burden of proof that you did not infringe on the patent is actually on the defendant, which means you have to prove that you do not infringe on the patent they're suing you on.
+And this can take quite a while.
+You need to know that the average patent troll defense costs two million dollars and takes 18 months when you win.
+That is your best case outcome when you get sued by a patent troll.
+Now I had hoped to team up with some of these larger companies in order to defend against this lawsuit, but one-by-one they settled out of the case, even though -- and this is important -- none of these companies infringed on this patent -- not a one of them.
+And they started settling out.
+The reason they settled out is because it's cheaper to settle than to fight the lawsuit -- clearly, two million dollars cheaper in some cases, and much worse if you actually lose.
+It would also constitute a massive distraction for management of a company, especially a small eight-man shop like my company.
+Six months into the lawsuit, we finally reached the discovery phase.
+And in discovery phase, we asked the patent troll to please provide screenshots of Fark where the infringement of their patent was actually occurring.
+Now perhaps it's because no such screenshots actually existed, but suddenly Gooseberry wanted to settle.
+Their attorney: "Ah, yes. My company's having a reorganization on our end."
+Never mind the fact that the address led to a strip mall somewhere in Northern L.A. with no employees.
+"And we'd like to go ahead and close this out.
+So would you mind giving us your best and final offer?" My response: "How about nothing?!" We didn't have high hopes for that outcome.
+But they settled.
+No counter offer.
+Now, as mentioned before, one of the reasons I can talk to you about this is because there's no non-disclosure agreement on this case.
+Now how did that happen?
+Well during the settlement process, when we received our copy, I struck it.
+My attorney said, "Nah, no chance of that working."
+It came back signed.
+Now why? You can call them.
+They're not under NDA either.
+Now what did I learn from this case? Well, three things.
+First of all, if you can, don't fight the patent, fight the infringement.
+Patents are very difficult to overturn.
+Infringement is a lot easier to disprove.
+Secondly, make it clear from the beginning that either you have no money at all or that you would rather spend money with your attorney fighting the troll than actually giving them the money.
+Now the reason this works is because patent trolls are paid a percentage of what they're able to recover in settlements.
+If it becomes clear to them that they cannot recover any money, they become less interested in pursuing the case.
+Finally, make sure that you can tell them that you will make this process as annoying and as painful and as difficult as possible for them.
+Now this is a tactic that patent trolls are supposed to use on people to get their way.
+It turns out, because they're paid on contingency, it works really, really well in reverse.
+Don't forget that.
+So what does all this mean?
+Well to sum up, it boils down to one thing: Don't negotiate with terrorists.
+Patent trolls have done more damage to the United States economy than any domestic or foreign terrorist organization in history every year.
+And what do they do with that money?
+They plow it right back into filing more troll lawsuits.
+Now this is the point in the Talk where I'm supposed to come up with some kind of a solution for the patent system.
+And the problem with that is that there are two very large industry groups that have different outcomes in mind for the patent system.
+The health care industry would like stronger protections for inventors.
+The hi-tech industry would like stronger protections for producers.
+And these goals aren't necessarily diametrically opposed, but they are at odds.
+And as a result, patent trolls can kind of live in the space in between.
+So unfortunately I'm not smart enough to have a solution for the patent troll problem.
+However, I did have this idea, and it was kind of good.
+And I thought, "I should patent this."
+Behold, patent infringement via mobile device -- defined as a computer which is not stationary.
+My solution: award me this patent and I will troll them out of existence.
+Thank you.
+I was born in Den Bosch, where the painter Hieronymus Bosch named himself after.
+And so I've always been very fond of this painter who lived and worked in the 15th century.
+And what is interesting about him in relation to morality is that he lived at a time where religion's influence was waning, and he was sort of wondering, I think, what would happen with society if there was no religion or if there was less religion.
+And so he painted this famous painting, "The Garden of Earthly Delights," which some have interpreted as being humanity before the Fall, or being humanity without any Fall at all.
+And so it makes you wonder, what would happen if we hadn't tasted the fruit of knowledge, so to speak, and what kind of morality would we have?
+Much later, as a student, I went to a very different garden, a zoological garden in Arnhem where we keep chimpanzees.
+This is me at an early age with a baby chimpanzee.
+And I discovered there that the chimpanzees are very power hungry and wrote a book about it.
+And at that time the focus in a lot of animal research was on aggression and competition.
+I painted a whole picture of the animal kingdom, and humanity included, was that deep down we are competitors, we are aggressive, we're all out for our own profit basically.
+This is the launch of my book.
+I'm not sure how well the chimpanzees read it, but they surely seemed interested in the book.
+Now in the process of doing all this work on power and dominance and aggression and so on, I discovered that chimpanzees reconcile after fights.
+And so what you see here is two males who have had a fight.
+They ended up in a tree, and one of them holds out a hand to the other.
+And about a second after I took the picture, they came together in the fork of the tree and they kissed and embraced each other.
+Now this is very interesting because at the time everything was about competition and aggression, and so it wouldn't make any sense.
+The only thing that matters is that you win or that you lose.
+But why would you reconcile after a fight?
+That doesn't make any sense.
+This is the way bonobos do it. Bonobos do everything with sex.
+And so they also reconcile with sex.
+But the principle is exactly the same.
+The principle is that you have a valuable relationship that is damaged by conflict, so you need to do something about it.
+So my whole picture of the animal kingdom, and including humans also, started to change at that time.
+So we have this image in political science, economics, the humanities, philosophy for that matter, that man is a wolf to man.
+And so deep down our nature's actually nasty.
+I think it's a very unfair image for the wolf.
+The wolf is, after all, a very cooperative animal.
+And that's why many of you have a dog at home, which has all these characteristics also.
+And it's really unfair to humanity, because humanity is actually much more cooperative and empathic than given credit for.
+So I started getting interested in those issues and studying that in other animals.
+So these are the pillars of morality.
+If you ask anyone, "What is morality based on?" these are the two factors that always come out.
+One is reciprocity, and associated with it is a sense of justice and a sense of fairness.
+And the other one is empathy and compassion.
+And human morality is more than this, but if you would remove these two pillars, there would be not much remaining I think.
+And so they're absolutely essential.
+So let me give you a few examples here.
+This is a very old video from the Yerkes Primate Center where they train chimpanzees to cooperate.
+So this is already about a hundred years ago that we were doing experiments on cooperation.
+What you have here is two young chimpanzees who have a box, and the box is too heavy for one chimp to pull in.
+And of course, there's food on the box.
+Otherwise they wouldn't be pulling so hard.
+And so they're bringing in the box.
+And you can see that they're synchronized.
+You can see that they work together, they pull at the same moment.
+It's already a big advance over many other animals who wouldn't be able to do that.
+And now you're going to get a more interesting picture, because now one of the two chimps has been fed.
+So one of the two is not really interested in the task anymore.
+Now look at what happens at the very end of this.
+He takes basically everything.
+So there are two interesting parts about this.
+One is that the chimp on the right has a full understanding he needs the partner -- so a full understanding of the need for cooperation.
+The second one is that the partner is willing to work even though he's not interested in the food.
+Why would that be? Well that probably has to do with reciprocity.
+There's actually a lot of evidence in primates and other animals that they return favors.
+So he will get a return favor at some point in the future.
+And so that's how this all operates.
+We do the same task with elephants.
+Now with elephants, it's very dangerous to work with elephants.
+Another problem with elephants is that you cannot make an apparatus that is too heavy for a single elephant.
+Now you can probably make it, but it's going to be a pretty flimsy apparatus I think.
+And so what we did in that case -- we do these studies in Thailand for Josh Plotnik -- is we have an apparatus around which there is a rope, a single rope.
+And if you pull on this side of the rope, the rope disappears on the other side.
+So two elephants need to pick it up at exactly the same time and pull.
+Otherwise nothing is going to happen and the rope disappears.
+And the first tape you're going to see is two elephants who are released together arrive at the apparatus.
+The apparatus is on the left with food on it.
+And so they come together, they arrive together, they pick it up together and they pull together.
+So it's actually fairly simple for them.
+There they are.
+And so that's how they bring it in.
+But now we're going to make it more difficult.
+Because the whole purpose of this experiment is to see how well they understand cooperation.
+Do they understand that as well as the chimps, for example?
+And so what we do in the next step is we release one elephant before the other, and that elephant needs to be smart enough to stay there and wait and not pull at the rope -- because if he pulls at the rope, it disappears and the whole test is over.
+Now this elephant does something illegal that we did not teach it.
+But it shows the understanding that he has, because he puts his big foot on the rope, stands on the rope and waits there for the other, and then the other is going to do all the work for him.
+So it's what we call freeloading.
+But it shows the intelligence that the elephants have.
+They develop several of these alternative techniques that we did not approve of necessarily.
+So the other elephant is now coming and is going to pull it in.
+Now look at the other. The other doesn't forget to eat, of course.
+This was the cooperation, reciprocity part.
+Now something on empathy.
+Empathy is my main topic at the moment of research.
+And empathy has sort of two qualities.
+One is the understanding part of it. This is just a regular definition: the ability to understand and share the feelings of another.
+And the emotional part.
+And so empathy has basically two channels.
+One is the body channel.
+If you talk with a sad person, you're going to adopt a sad expression and a sad posture, and before you know it you feel sad.
+And that's sort of the body channel of emotional empathy, which many animals have.
+Your average dog has that also.
+That's actually why people keep mammals in the home and not turtles or snakes or something like that who don't have that kind of empathy.
+And then there's a cognitive channel, which is more that you can take the perspective of somebody else.
+And that's more limited.
+There's few animals -- I think elephants and apes can do that kind of thing -- but there are very few animals who can do that.
+So synchronization, which is part of that whole empathy mechanism is a very old one in the animal kingdom.
+And in humans, of course, we can study that with yawn contagion.
+Humans yawn when others yawn.
+And it's related to empathy.
+It activates the same areas in the brain.
+Also, we know that people who have a lot of yawn contagion are highly empathic.
+People who have problems with empathy, such as autistic children, they don't have yawn contagion.
+So it is connected.
+And we study that in our chimpanzees by presenting them with an animated head.
+So that's what you see on the upper-left, an animated head that yawns.
+And there's a chimpanzee watching, an actual real chimpanzee watching a computer screen on which we play these animations.
+So yawn contagion that you're probably all familiar with -- and maybe you're going to start yawning soon now -- is something that we share with other animals.
+And that's related to that whole body channel of synchronization that underlies empathy and that is universal in the mammals basically.
+Now we also study more complex expressions. This is consolation.
+This is a male chimpanzee who has lost a fight and he's screaming, and a juvenile comes over and puts an arm around him and calms him down.
+That's consolation. It's very similar to human consolation.
+And consolation behavior, it's empathy driven.
+Actually the way to study empathy in human children is to instruct a family member to act distressed, and then they see what young children do.
+And so it is related to empathy, and that's the kind of expressions we look at.
+We also recently published an experiment you may have heard about.
+It's on altruism and chimpanzees where the question is, do chimpanzees care about the welfare of somebody else?
+And for decades it had been assumed that only humans can do that, that only humans worry about the welfare of somebody else.
+Now we did a very simple experiment.
+We do that on chimpanzees that live in Lawrenceville, in the field station of Yerkes.
+And so that's how they live.
+And we call them into a room and do experiments with them.
+In this case, we put two chimpanzees side-by-side.
+and one has a bucket full of tokens, and the tokens have different meanings.
+One kind of token feeds only the partner who chooses, the other one feeds both of them.
+So this is a study we did with Vicky Horner.
+And here you have the two color tokens.
+So they have a whole bucket full of them.
+And they have to pick one of the two colors.
+You will see how that goes.
+So if this chimp makes the selfish choice, which is the red token in this case, he needs to give it to us.
+So we pick it up, we put it on a table where there's two food rewards, but in this case only the one on the right gets food.
+The one on the left walks away because she knows already. that this is not a good test for her.
+Then the next one is the pro-social token.
+So the one who makes the choices -- that's the interesting part here -- for the one who makes the choices, it doesn't really matter.
+So she gives us now a pro-social token and both chimps get fed.
+So the one who makes the choices always gets a reward.
+So it doesn't matter whatsoever.
+And she should actually be choosing blindly.
+But what we find is that they prefer the pro-social token.
+So this is the 50 percent line that's the random expectation.
+And especially if the partner draws attention to itself, they choose more.
+And if the partner puts pressure on them -- so if the partner starts spitting water and intimidating them -- then the choices go down.
+It's as if they're saying, "If you're not behaving, I'm not going to be pro-social today." And this is what happens without a partner, when there's no partner sitting there.
+And so we found that the chimpanzees do care about the well-being of somebody else -- especially, these are other members of their own group.
+So the final experiment that I want to mention to you is our fairness study.
+And so this became a very famous study.
+And there's now many more, because after we did this about 10 years ago, it became very well known.
+And we did that originally with capuchin monkeys.
+And I'm going to show you the first experiment that we did.
+It has now been done with dogs and with birds and with chimpanzees.
+But with Sarah Brosnan we started out with capuchin monkeys.
+So what we did is we put two capuchin monkeys side-by-side.
+Again, these animals, they live in a group, they know each other.
+We take them out of the group, put them in a test chamber.
+And there's a very simple task that they need to do.
+And if you give both of them cucumber for the task, the two monkeys side-by-side, they're perfectly willing to do this 25 times in a row.
+So cucumber, even though it's only really water in my opinion, but cucumber is perfectly fine for them.
+Now if you give the partner grapes -- the food preferences of my capuchin monkeys correspond exactly with the prices in the supermarket -- and so if you give them grapes -- it's a far better food -- then you create inequity between them.
+So that's the experiment we did.
+Recently we videotaped it with new monkeys who'd never done the task, thinking that maybe they would have a stronger reaction, and that turned out to be right.
+The one on the left is the monkey who gets cucumber.
+The one on the right is the one who gets grapes.
+The one who gets cucumber, note that the first piece of cucumber is perfectly fine.
+The first piece she eats.
+Then she sees the other one getting grape, and you will see what happens.
+So she gives a rock to us. That's the task.
+And we give her a piece of cucumber and she eats it.
+The other one needs to give a rock to us.
+And that's what she does.
+And she gets a grape and she eats it.
+The other one sees that.
+She gives a rock to us now, gets, again, cucumber.
+She tests a rock now against the wall.
+She needs to give it to us.
+And she gets cucumber again.
+So this is basically the Wall Street protest that you see here.
+Let me tell you -- I still have two minutes left, let me tell you a funny story about this.
+This study became very famous and we got a lot of comments, especially anthropologists, economists, philosophers.
+They didn't like this at all.
+Because they had decided in their minds, I believe, that fairness is a very complex issue and that animals cannot have it.
+And so one philosopher even wrote us that it was impossible that monkeys had a sense of fairness because fairness was invented during the French Revolution.
+Now another one wrote a whole chapter saying that he would believe it had something to do with fairness if the one who got grapes would refuse the grapes.
+Now the funny thing is that Sarah Brosnan, who's been doing this with chimpanzees, had a couple of combinations of chimpanzees where, indeed, the one who would get the grape would refuse the grape until the other guy also got a grape.
+So we're getting very close to the human sense of fairness.
+And I think philosophers need to rethink their philosophy for awhile.
+So let me summarize.
+I believe there's an evolved morality.
+I think morality is much more than what I've been talking about, but it would be impossible without these ingredients that we find in other primates, which are empathy and consolation, pro-social tendencies and reciprocity and a sense of fairness.
+And so we work on these particular issues to see if we can create a morality from the bottom up, so to speak, without necessarily God and religion involved, and to see how we can get to an evolved morality.
+And I thank you for your attention.
+I'm a process engineer.
+I know all about boilers and incinerators and fabric filters and cyclones and things like that, but I also have Marfan syndrome.
+This is an inherited disorder.
+And in 1992 I participated in a genetic study and found to my horror, as you can see from the slide, that my ascending aorta was not in the normal range, the green line at the bottom.
+Everyone in here will be between 3.2 and 3.6 cm.
+I was already up at 4.4.
+And as you can see, my aorta dilated progressively, and I got closer and closer to the point where surgery was going to be necessary.
+The surgery on offer was pretty gruesome -- anesthetize you, open your chest, put you on an artificial heart and lung machine, drop your body temperature to about 18 centigrade, stop your heart, cut the aorta out, replace it with a plastic valve and a plastic aorta, and, most importantly, commit you to a lifetime of anticoagulation therapy, normally warfarin.
+The thought of the surgery was not attractive.
+The thought of the warfarin was really quite frightening.
+So I said to myself, I'm an engineer, I'm in R and D, this is just a plumbing problem.
+I can do this. I can change this.
+So I set out to change the entire treatment for aortic dilation.
+The project aim is really quite simple.
+The only real problem with the ascending aorta in people with Marfan syndrome is it lacks some tensile strength.
+So the possibility exists to simply externally wrap the pipe.
+And it would remain stable and operate quite happily.
+If your high-pressure hose pipe, or your high-pressure hydraulic line, bulges a little, you just wrap some tape around the outside of it.
+It really is that simple in concept, though not in execution.
+The great advantage of an external support for me was that I could retain all of my own bits, all of my own endothelium and valves, and not need any anticoagulation therapy.
+So where do we start?
+Well this is a sagittal slice through me.
+You could see in the middle that device, that little structure, squeezing out.
+Now that's a left ventricle pushing blood up through the aortic valve -- you can see two of the leaflets of the aortic valve working there -- up into the ascending aorta.
+And it's that part, the ascending aorta, which dilates and ultimately bursts, which, of course, is fatal.
+We started by organizing image acquisition from magnetic resonance imaging machines and CT imaging machines from which to make a model of the patient's aorta.
+This is a model of my aorta.
+I've got a real one in my pocket, if anyone would like to look at it and play with it.
+You can see, it's quite a complex structure.
+It has a funny trilobal shape at the bottom, which contains the aortic valve.
+It then comes back into a round form and then tapers and curves off.
+So it's quite a difficult structure to produce.
+This, like I say, is a CAD model of me, and this is one of the later CAD models.
+We went through an iterative process of producing better and better models.
+When we produced that model we turn it into a solid plastic model, as you can see,
+using a rapid prototyping technique, another engineering technique.
+We then use that former to manufacture a perfectly bespoke porous textile mesh, which takes the shape of the former and perfectly fits the aorta.
+So this is absolutely personalized medicine at its best really.
+Every patient we do has an absolutely bespoke implant.
+Once you've made it, the installation's quite easy.
+John Pepper, bless his heart, professor of cardiothoracic surgery -- never done it before in his life -- he put the first one in, didn't like it, took it out, put the second one in.
+Happy, away I went.
+Four and a half hours on the table and everything was done.
+So the surgical implantation actually was the easiest part.
+If you compare our new treatment to the existing alternative, the so-called composite aortic root graft, there are one of two startling comparisons, which I'm sure will be clear to all of you.
+Two hours to install one of our devices compared to six hours for the existing treatment.
+The existing treatment requires, as I've said, the heart and lung bypass machine and it requires a total body cooling.
+We don't need any of that; we work on a beating heart.
+He opens you up, he accesses the aorta while your heart is beating, all at the right temperature.
+No breaking into your circulatory system.
+So it really is great.
+But for me, absolutely the best point is there is no anticoagulation therapy required.
+I don't take any drugs at all other than recreational ones that I would choose to take.
+And in fact, if you speak to people who are on long-term warfarin, it is a serious compromise to your quality of life.
+And even worse, it inevitably foreshortens your life.
+Likewise, if you have the artificial valve option, you're committed to antibiotic therapy whenever you have any intrusive medical treatment at all.
+Even trips to the dentist require that you take antibiotics, in case you get an internal infection on the valve.
+Again, I don't have any of that, so I'm entirely free.
+My aorta is fixed, I haven't got to worry about it, which is a rebirth for me.
+Back to the theme of the presentation: In multidisciplinary research, how on earth does a process engineer used to working with boilers end up producing a medical device which transforms his own life?
+Well the answer to that is a multidisciplinary team.
+This is a list of the core team.
+And as you can see, there are not only two principal technical disciplines there, medicine and engineering, but also there are various specialists from within those two disciplines.
+John Pepper there was the cardiac surgeon who did the actual work on me, but everyone else there had to contribute one way or another.
+Raad Mohiaddin, medical radiologist: We had to get good quality images from which to make the CAD model.
+Warren Thornton, who still does all our CAD models for us, had to write a bespoke piece of CAD code to produce this model from this really rather difficult input data set.
+There are some barriers to this though. There are some problems with it.
+Jargon is a big one.
+I would think no one in this room understands those four first jargon points there.
+The engineers amongst you will recognize rapid prototyping and CAD.
+The medics amongst you, if there are any, will recognize the first two.
+But there will be nobody else in this room that understands all of those four words.
+Taking the jargon out was very important to ensure that everyone in the team understood exactly what was meant when a particular phrase was used.
+Our disciplinary conventions were funny as well.
+We took a lot of horizontal slice images through me, produced those slices and then used those to build a CAD model.
+And the very first CAD model we made, the surgeons were playing with the plastic model, couldn't quite figure it out.
+And then we realized that it was actually a mirror image of the real aorta.
+And it was a mirror image because in the real world we always look down on plans, plans of houses or streets or maps.
+In the medical world they look up at plans.
+So the horizontal images were all an inversion.
+So one needs to be careful with disciplinary conventions.
+Everyone needs to understand what is assumed and what is not assumed.
+Institutional barriers were another serious headache in the project.
+The Brompton Hospital was taken over by Imperial College's School of Medicine, and there are some seriously bad relationship problems between the two organizations.
+I was working with Imperial and the Brompton, and this generated some serious problems with the project, really problems that shouldn't exist.
+Research and ethics committee: If you want to do anything new in surgery, you have to get a license from your local research and ethics.
+I'm sure it's the same in Poland.
+There will be some form of equivalent, which licenses new types of surgery.
+We didn't only have the bureaucratic problems associated with that, was also had professional jealousies.
+There were people on the research and ethics committee who really didn't want to see John Pepper succeed again, because he's so successful.
+And they made extra problems for us.
+Bureaucratic problems: Ultimately when you have a new treatment you have to have a guidance note going out for all of the hospitals in the country.
+In the U.K. we have the National Institute for Clinical Excellence, NICE.
+You'll have an equivalent in Poland, no doubt.
+We had to get past the NICE problem.
+We now have a great clinical guidance out on the Net.
+So any of the hospitals interested can come along, read the NICE report get in touch with us and then get doing it themselves.
+Funding barriers: Another big area to be concerned with. A big problem with understanding one of those perspectives: When we first approached one of the big U.K. charitable organizations that funds this kind of stuff, what they were looking at was essentially an engineering proposal.
+They didn't understand it; they were doctors, they were next to God.
+It must be rubbish. They binned it.
+So in the end I went to private investors and I just gave up on it.
+But most R and D is going to be institutionally funded, by the Polish Academy of Sciences or the Engineering and Physical Sciences Research Council or whatever, and you need to get past those people.
+Jargon is a huge problem when you're trying to work across disciplines, because in an engineering world, we all understand CAD and R.P. -- not in the medical world.
+I suppose ultimately the funding bureaucrats have really got to get their act together.
+They've really got to start talking to each other, and they've got to exercise a bit of imagination, if that's not too much to ask -- which it probably is.
+I've coined a phrase "obstructive conservatism."
+So many people in the medical world don't want to change, particularly not when some jumped-up engineer has come along with the answer.
+They don't want to change.
+They simply want to do whatever they've done before.
+And in fact, there are many surgeons in the U.K. still waiting for one of our patients to have some sort of episode, so that they can say, "Ah, I told you that was no good." We've actually got 30 patients.
+I'm at seven and a half years.
+We've got 90 post-op patient years between us, and we haven't had a single problem.
+And still, there are people in the U.K. saying, "Yeah, that external aortic root, yeah, it'll never work, you know." It really is a problem. It really is a problem.
+I'm sure everyone in this room has come across arrogance amongst medics, doctors, surgeons at some point.
+The middle point is simply the way that the doctors protect themselves.
+"Yeah, well of course, I'm looking after my patient."
+I think it's not good, but there you are, that's my view.
+Egos, of course, again, a huge problem If you're working in a multidisciplinary team, you've got to give your guys the benefit of the doubt.
+You've got to express support for them.
+Tom Treasure, professor of cardiothoracic surgery: incredible guy.
+Dead easy to give him respect.
+Him giving me respect? Slightly different.
+That's all the bad news.
+The good news is the benefits are stonkingly huge.
+Translate that one. I bet they can't.
+When you have a group of people who have had a different professional training, a different professional experience, they not only have a different knowledge base, but they have a different perspective on everything.
+And if you can bring those guys together and you can get them talking and understanding each other, the results can be spectacular.
+You can find novel solutions, really novel solutions, that have never been looked at before very, very quickly and easily.
+You can shortcut huge amounts of work simply by using the extended knowledge base you have.
+And as a result, it's an entirely different use of the technology and the knowledge around you.
+The result of all this is that you can get incredibly quick progress on incredibly small budgets.
+I'm so embarrassed at how cheap it was to get from my idea to me being implanted that I'm not prepared to tell you what it cost.
+Because I suspect there are absolutely standard surgical treatments probably in the USA which cost more for a one-off patient than the cost of us getting from my dream to my reality.
+That's all I want to say, and I've got three minutes left.
+So Heather's going to like me.
+If you have any questions, please come up and talk to me later on.
+It would be a pleasure to speak with you. Many thanks.
+Just a moment ago, my daughter Rebecca texted me for good luck.
+Her text said, "Mom, you will rock." I love this.
+Getting that text was like getting a hug.
+I embody the central paradox.
+I'm a woman who loves getting texts who's going to tell you that too many of them can be a problem.
+Actually that reminder of my daughter brings me to the beginning of my story.
+1996, when I gave my first TEDTalk, Rebecca was five years old and she was sitting right there in the front row.
+I had just written a book that celebrated our life on the internet and I was about to be on the cover of Wired magazine.
+In those heady days, we were experimenting with chat rooms and online virtual communities.
+We were exploring different aspects of ourselves.
+And then we unplugged.
+I was excited.
+And, as a psychologist, what excited me most was the idea that we would use what we learned in the virtual world about ourselves, about our identity, to live better lives in the real world.
+Now fast-forward to 2012.
+I'm back here on the TED stage again.
+My daughter's 20. She's a college student.
+She sleeps with her cellphone, so do I.
+And I've just written a new book, but this time it's not one that will get me on the cover of Wired magazine.
+So what happened?
+I'm still excited by technology, but I believe, and I'm here to make the case, that we're letting it take us places that we don't want to go.
+Over the past 15 years, I've studied technologies of mobile communication and I've interviewed hundreds and hundreds of people, young and old, about their plugged in lives.
+And what I've found is that our little devices, those little devices in our pockets, are so psychologically powerful that they don't only change what we do, they change who we are.
+Some of the things we do now with our devices are things that, only a few years ago, we would have found odd or disturbing, but they've quickly come to seem familiar, just how we do things.
+So just to take some quick examples: People text or do email during corporate board meetings.
+They text and shop and go on Facebook during classes, during presentations, actually during all meetings.
+People talk to me about the important new skill of making eye contact while you're texting.
+People explain to me that it's hard, but that it can be done.
+Parents text and do email at breakfast and at dinner while their children complain about not having their parents' full attention.
+But then these same children deny each other their full attention.
+This is a recent shot of my daughter and her friends being together while not being together.
+And we even text at funerals.
+I study this.
+We remove ourselves from our grief or from our revery and we go into our phones.
+Why does this matter?
+It matters to me because I think we're setting ourselves up for trouble -- trouble certainly in how we relate to each other, but also trouble in how we relate to ourselves and our capacity for self-reflection.
+We're getting used to a new way of being alone together.
+People want to be with each other, but also elsewhere -- connected to all the different places they want to be.
+People want to customize their lives.
+They want to go in and out of all the places they are because the thing that matters most to them is control over where they put their attention.
+So you want to go to that board meeting, but you only want to pay attention to the bits that interest you.
+And some people think that's a good thing.
+But you can end up hiding from each other, even as we're all constantly connected to each other.
+A 50-year-old business man lamented to me that he feels he doesn't have colleagues anymore at work.
+When he goes to work, he doesn't stop by to talk to anybody, he doesn't call.
+And he says he doesn't want to interrupt his colleagues because, he says, "They're too busy on their email." But then he stops himself and he says, "You know, I'm not telling you the truth.
+I'm the one who doesn't want to be interrupted.
+I think I should want to, but actually I'd rather just do things on my Blackberry." Across the generations, I see that people can't get enough of each other, if and only if they can have each other at a distance, in amounts they can control.
+I call it the Goldilocks effect: not too close, not too far, just right.
+But what might feel just right for that middle-aged executive can be a problem for an adolescent who needs to develop face-to-face relationships.
+An 18-year-old boy who uses texting for almost everything says to me wistfully, "Someday, someday, but certainly not now, I'd like to learn how to have a conversation." When I ask people "What's wrong with having a conversation?" People say, "I'll tell you what's wrong with having a conversation.
+It takes place in real time and you can't control what you're going to say." So that's the bottom line.
+Texting, email, posting, all of these things let us present the self as we want to be.
+We get to edit, and that means we get to delete, and that means we get to retouch, the face, the voice, the flesh, the body -- not too little, not too much, just right.
+Human relationships are rich and they're messy and they're demanding.
+And we clean them up with technology.
+And when we do, one of the things that can happen is that we sacrifice conversation for mere connection.
+We short-change ourselves.
+And over time, we seem to forget this, or we seem to stop caring.
+I was caught off guard when Stephen Colbert asked me a profound question, a profound question.
+He said, "Don't all those little tweets, don't all those little sips of online communication, add up to one big gulp of real conversation?" My answer was no, they don't add up.
+Connecting in sips may work for gathering discreet bits of information, they may work for saying, "I'm thinking about you," or even for saying, "I love you," -- I mean, look at how I felt when I got that text from my daughter -- but they don't really work for learning about each other, for really coming to know and understand each other.
+And we use conversations with each other to learn how to have conversations with ourselves.
+So a flight from conversation can really matter because it can compromise our capacity for self-reflection.
+For kids growing up, that skill is the bedrock of development.
+Over and over I hear, "I would rather text than talk." And what I'm seeing is that people get so used to being short-changed out of real conversation, so used to getting by with less, that they've become almost willing to dispense with people altogether.
+So for example, many people share with me this wish, that some day a more advanced version of Siri, the digital assistant on Apple's iPhone, will be more like a best friend, someone who will listen when others won't.
+I believe this wish reflects a painful truth that I've learned in the past 15 years.
+That feeling that no one is listening to me is very important in our relationships with technology.
+That's why it's so appealing to have a Facebook page or a Twitter feed -- so many automatic listeners. And the feeling that no one is listening to me make us want to spend time with machines that seem to care about us.
+We're developing robots, they call them sociable robots, that are specifically designed to be companions -- to the elderly, to our children, to us.
+Have we so lost confidence that we will be there for each other?
+During my research I worked in nursing homes, and I brought in these sociable robots that were designed to give the elderly the feeling that they were understood.
+And one day I came in and a woman who had lost a child was talking to a robot in the shape of a baby seal.
+It seemed to be looking in her eyes.
+It seemed to be following the conversation.
+It comforted her.
+And many people found this amazing.
+But that woman was trying to make sense of her life with a machine that had no experience of the arc of a human life.
+That robot put on a great show.
+And we're vulnerable.
+People experience pretend empathy as though it were the real thing.
+So during that moment when that woman was experiencing that pretend empathy, I was thinking, "That robot can't empathize.
+It doesn't face death.
+It doesn't know life." And as that woman took comfort in her robot companion, I didn't find it amazing; I found it one of the most wrenching, complicated moments in my 15 years of work.
+But when I stepped back, I felt myself at the cold, hard center of a perfect storm.
+We expect more from technology and less from each other.
+And I ask myself, "Why have things come to this?" And I believe it's because technology appeals to us most where we are most vulnerable.
+And we are vulnerable.
+We're lonely, but we're afraid of intimacy.
+And so from social networks to sociable robots, we're designing technologies that will give us the illusion of companionship without the demands of friendship.
+We turn to technology to help us feel connected in ways we can comfortably control.
+But we're not so comfortable.
+We are not so much in control.
+These days, those phones in our pockets are changing our minds and hearts because they offer us three gratifying fantasies.
+One, that we can put our attention wherever we want it to be; two, that we will always be heard; and three, that we will never have to be alone.
+And that third idea, that we will never have to be alone, is central to changing our psyches.
+Because the moment that people are alone, even for a few seconds, they become anxious, they panic, they fidget, they reach for a device.
+Just think of people at a checkout line or at a red light.
+Being alone feels like a problem that needs to be solved.
+And so people try to solve it by connecting.
+But here, connection is more like a symptom than a cure.
+It expresses, but it doesn't solve, an underlying problem.
+But more than a symptom, constant connection is changing the way people think of themselves.
+It's shaping a new way of being.
+The best way to describe it is, I share therefore I am.
+We use technology to define ourselves by sharing our thoughts and feelings even as we're having them.
+So before it was: I have a feeling, I want to make a call.
+Now it's: I want to have a feeling, I need to send a text.
+The problem with this new regime of "I share therefore I am" is that, if we don't have connection, we don't feel like ourselves. We almost don't feel ourselves. So what do we do? We connect more and more.
+But in the process, we set ourselves up to be isolated.
+How do you get from connection to isolation?
+You end up isolated if you don't cultivate the capacity for solitude, the ability to be separate, to gather yourself.
+Solitude is where you find yourself so that you can reach out to other people and form real attachments.
+When we don't have the capacity for solitude, we turn to other people in order to feel less anxious or in order to feel alive.
+When this happens, we're not able to appreciate who they are.
+It's as though we're using them as spare parts to support our fragile sense of self.
+We slip into thinking that always being connected is going to make us fell less alone.
+But we're at risk, because actually it's the opposite that's true.
+If we're not able to be alone, we're going to be more lonely.
+And if we don't teach our children to be alone, they're only going to know When I spoke at TED in 1996, reporting on my studies of the early virtual communities, I said, "Those who make the most of their lives on the screen come to it in a spirit of self-reflection." And that's what I'm calling for here, now: reflection and, more than that, a conversation about where our current use of technology may be taking us, what it might be costing us.
+We're smitten with technology.
+And we're afraid, like young lovers, that too much talking might spoil the romance.
+But it's time to talk.
+We grew up with digital technology and so we see it as all grown up.
+But it's not, it's early days.
+There's plenty of time for us to reconsider how we use it, how we build it.
+I'm not suggesting that we turn away from our devices, just that we develop a more self-aware relationship with them, with each other and with ourselves.
+I see some first steps.
+Start thinking of solitude as a good thing.
+Make room for it.
+Find ways to demonstrate this as a value to your children.
+Create sacred spaces at home -- the kitchen, the dining room -- and reclaim them for conversation.
+Do the same thing at work.
+At work, we're so busy communicating that we often don't have time to think, we don't have time to talk, about the things that really matter.
+Change that.
+Most important, we all really need to listen to each other, including to the boring bits.
+Because it's when we stumble or hesitate or lose our words that we reveal ourselves to each other.
+Technology is making a bid to redefine human connection -- how we care for each other, how we care for ourselves -- but it's also giving us the opportunity to affirm our values and our direction.
+I'm optimistic.
+We have everything we need to start.
+We have each other.
+And we have the greatest chance of success if we recognize our vulnerability.
+That we listen when technology says it will take something complicated and promises something simpler.
+So in my work, I hear that life is hard, relationships are filled with risk.
+And then there's technology -- simpler, hopeful, optimistic, ever-young.
+It's like calling in the cavalry.
+An ad campaign promises that online and with avatars, you can "Finally, love your friends love your body, love your life, online and with avatars." We're drawn to virtual romance, to computer games that seem like worlds, to the idea that robots, robots, will someday be our true companions.
+We spend an evening on the social network instead of going to the pub with friends.
+But our fantasies of substitution have cost us.
+Now we all need to focus on the many, many ways technology can lead us back to our real lives, our own bodies, our own communities, our own politics, our own planet.
+They need us.
+Let's talk about how we can use digital technology, the technology of our dreams, to make this life the life we can love.
+Thank you.
+I got my start in writing and research as a surgical trainee, as someone who was a long ways away from becoming any kind of an expert at anything.
+So the natural question you ask then at that point is, how do I get good at what I'm trying to do?
+And it became a question of, how do we all get good at what we're trying to do?
+It's hard enough to learn to get the skills, try to learn all the material you have to absorb at any task you're taking on.
+I had to think about how I sew and how I cut, but then also how I pick the right person to come to an operating room.
+And then in the midst of all this came this new context for thinking about what it meant to be good.
+In the last few years we realized we were in the deepest crisis of medicine's existence due to something you don't normally think about when you're a doctor concerned with how you do good for people, which is the cost of health care.
+There's not a country in the world that now is not asking whether we can afford what doctors do.
+The political fight that we've developed has become one around whether it's the government that's the problem or is it insurance companies that are the problem.
+And the answer is yes and no; it's deeper than all of that.
+The cause of our troubles is actually the complexity that science has given us.
+And in order to understand this, I'm going to take you back a couple of generations.
+I want to take you back to a time when Lewis Thomas was writing in his book, "The Youngest Science."
+Lewis Thomas was a physician-writer, one of my favorite writers.
+And he wrote this book to explain, among other things, what it was like to be a medical intern at the Boston City Hospital in the pre-penicillin year of 1937.
+It was a time when medicine was cheap and very ineffective.
+If you were in a hospital, he said, it was going to do you good only because it offered you some warmth, some food, shelter, and maybe the caring attention of a nurse.
+Doctors and medicine made no difference at all.
+That didn't seem to prevent the doctors from being frantically busy in their days, as he explained.
+What they were trying to do was figure out whether you might have one of the diagnoses for which they could do something.
+And there were a few.
+You might have a lobar pneumonia, for example, and they could give you an antiserum, an injection of rabid antibodies to the bacterium streptococcus, if the intern sub-typed it correctly.
+If you had an acute congestive heart failure, they could bleed a pint of blood from you by opening up an arm vein, giving you a crude leaf preparation of digitalis and then giving you oxygen by tent.
+If you had early signs of paralysis and you were really good at asking personal questions, you might figure out that this paralysis someone has is from syphilis, in which case you could give this nice concoction of mercury and arsenic -- as long as you didn't overdose them and kill them.
+Beyond these sorts of things, a medical doctor didn't have a lot that they could do.
+This was when the core structure of medicine was created -- what it meant to be good at what we did and how we wanted to build medicine to be.
+It was at a time when what was known you could know, you could hold it all in your head, and you could do it all.
+If you had a prescription pad, if you had a nurse, if you had a hospital that would give you a place to convalesce, maybe some basic tools, you really could do it all.
+You set the fracture, you drew the blood, you spun the blood, looked at it under the microscope, you plated the culture, you injected the antiserum.
+This was a life as a craftsman.
+As a result, we built it around a culture and set of values that said what you were good at was being daring, at being courageous, at being independent and self-sufficient.
+Autonomy was our highest value.
+Go a couple generations forward to where we are, though, and it looks like a completely different world.
+We have now found treatments for nearly all of the tens of thousands of conditions that a human being can have.
+We can't cure it all.
+We can't guarantee that everybody will live a long and healthy life.
+But we can make it possible for most.
+But what does it take?
+Well, we've now discovered 4,000 medical and surgical procedures.
+We've discovered 6,000 drugs that I'm now licensed to prescribe.
+And we're trying to deploy this capability, town by town, to every person alive -- in our own country, let alone around the world.
+And we've reached the point where we've realized, as doctors, we can't know it all.
+We can't do it all by ourselves.
+There was a study where they looked at how many clinicians it took to take care of you if you came into a hospital, as it changed over time.
+And in the year 1970, it took just over two full-time equivalents of clinicians.
+it took basically the nursing time and then just a little bit of time for a doctor who more or less checked in on you once a day.
+By the end of the 20th century, it had become more than 15 clinicians for the same typical hospital patient -- specialists, physical therapists, the nurses.
+We're all specialists now, even the primary care physicians.
+Everyone just has a piece of the care.
+But holding onto that structure we built around the daring, independence, self-sufficiency of each of those people has become a disaster.
+We have trained, hired and rewarded people to be cowboys.
+But it's pit crews that we need, pit crews for patients.
+There's evidence all around us: 40 percent of our coronary artery disease patients in our communities receive incomplete or inappropriate care.
+60 percent of our asthma, stroke patients receive incomplete or inappropriate care.
+Two million people come into hospitals and pick up an infection they didn't have because someone failed to follow the basic practices of hygiene.
+Our experience as people who get sick, need help from other people, is that we have amazing clinicians that we can turn to -- hardworking, incredibly well-trained and very smart -- that we have access to incredible technologies that give us great hope, but little sense that it consistently all comes together for you from start to finish in a successful way.
+There's another sign that we need pit crews, and that's the unmanageable cost of our care.
+Now we in medicine, I think, are baffled by this question of cost.
+We want to say, "This is just the way it is.
+This is just what medicine requires." When you go from a world where you treated arthritis with aspirin, that mostly didn't do the job, to one where, if it gets bad enough, we can do a hip replacement, a knee replacement that gives you years, maybe decades, without disability, a dramatic change, well is it any surprise that that $40,000 hip replacement replacing the 10-cent aspirin is more expensive?
+It's just the way it is.
+But I think we're ignoring certain facts that tell us something about what we can do.
+As we've looked at the data about the results that have come as the complexity has increased, we found that the most expensive care is not necessarily the best care.
+And vice versa, the best care often turns out to be the least expensive -- has fewer complications, the people get more efficient at what they do.
+And what that means is there's hope.
+Because [if] to have the best results, you really needed the most expensive care in the country, or in the world, well then we really would be talking about rationing who we're going to cut off from Medicare.
+That would be really our only choice.
+But when we look at the positive deviants -- the ones who are getting the best results at the lowest costs -- we find the ones that look the most like systems are the most successful.
+That is to say, they found ways to get all of the different pieces, all of the different components, to come together into a whole.
+Having great components is not enough, and yet we've been obsessed in medicine with components.
+We want the best drugs, the best technologies, the best specialists, but we don't think too much about how it all comes together.
+It's a terrible design strategy actually.
+There's a famous thought experiment that touches exactly on this that said, what if you built a car from the very best car parts?
+Well it would lead you to put in Porsche brakes, a Ferrari engine, a Volvo body, a BMW chassis.
+And you put it all together and what do you get?
+A very expensive pile of junk that does not go anywhere.
+And that is what medicine can feel like sometimes.
+It's not a system.
+Now a system, however, when things start to come together, you realize it has certain skills for acting and looking that way.
+Skill number one is the ability to recognize success and the ability to recognize failure.
+When you are a specialist, you can't see the end result very well.
+You have to become really interested in data, unsexy as that sounds.
+One of my colleagues is a surgeon in Cedar Rapids, Iowa, and he got interested in the question of, well how many CT scans did they do for their community in Cedar Rapids?
+He got interested in this because there had been government reports, newspaper reports, journal articles saying that there had been too many CT scans done.
+He didn't see it in his own patients.
+And so he asked the question, "How many did we do?" and he wanted to get the data.
+It took him three months.
+No one had asked this question in his community before.
+And what he found was that, for the 300,000 people in their community, in the previous year they had done 52,000 CT scans.
+They had found a problem.
+Which brings us to skill number two a system has.
+Skill one, find where your failures are.
+Skill two is devise solutions.
+I got interested in this when the World Health Organization came to my team asking if we could help with a project to reduce deaths in surgery.
+The volume of surgery had spread around the world, but the safety of surgery had not.
+Now our usual tactics for tackling problems like these are to do more training, give people more specialization or bring in more technology.
+Well in surgery, you couldn't have people who are more specialized and you couldn't have people who are better trained.
+And yet we see unconscionable levels of death, disability that could be avoided.
+And so we looked at what other high-risk industries do.
+We looked at skyscraper construction, we looked at the aviation world, and we found that they have technology, they have training, and then they have one other thing: They have checklists.
+I did not expect to be spending a significant part of my time as a Harvard surgeon worrying about checklists.
+And yet, what we found were that these were tools to help make experts better.
+We got the lead safety engineer for Boeing to help us.
+Could we design a checklist for surgery?
+Not for the lowest people on the totem pole, but for the folks who were all the way around the chain, the entire team including the surgeons.
+And what they taught us was that designing a checklist to help people handle complexity actually involves more difficulty than I had understood.
+You have to think about things like pause points.
+You need to identify the moments in a process when you can actually catch a problem before it's a danger and do something about it.
+You have to identify that this is a before-takeoff checklist.
+And then you need to focus on the killer items.
+An aviation checklist, like this one for a single-engine plane, isn't a recipe for how to fly a plane, it's a reminder of the key things that get forgotten or missed if they're not checked.
+So we did this.
+We created a 19-item two-minute checklist
+for surgical teams.
+We had the pause points immediately before anesthesia is given, immediately before the knife hits the skin, immediately before the patient leaves the room.
+And we had a mix of dumb stuff on there -- making sure an antibiotic is given in the right time frame because that cuts the infection rate by half -- and then interesting stuff, because you can't make a recipe for something as complicated as surgery.
+Instead, you can make a recipe for how to have a team that's prepared for the unexpected.
+And we had items like making sure everyone in the room had introduced themselves by name at the start of the day, because you get half a dozen people or more who are sometimes coming together as a team for the very first time that day that you're coming in.
+We implemented this checklist in eight hospitals around the world, deliberately in places from rural Tanzania to the University of Washington in Seattle.
+We found that after they adopted it the complication rates fell 35 percent.
+It fell in every hospital it went into.
+The death rates fell 47 percent.
+This was bigger than a drug.
+And that brings us to skill number three, the ability to implement this, to get colleagues across the entire chain to actually do these things.
+And it's been slow to spread.
+This is not yet our norm in surgery -- let alone making checklists to go onto childbirth and other areas.
+There's a deep resistance because using these tools forces us to confront that we're not a system, forces us to behave with a different set of values.
+Just using a checklist requires you to embrace different values from the ones we've had, like humility, discipline, teamwork.
+This is the opposite of what we were built on: independence, self-sufficiency, autonomy.
+I met an actual cowboy, by the way.
+I asked him, what was it like to actually herd a thousand cattle across hundreds of miles?
+How did you do that?
+And he said, "We have the cowboys stationed at distinct places all around." They communicate electronically constantly, and they have protocols and checklists for how they handle everything -- -- from bad weather to emergencies or inoculations for the cattle.
+Even the cowboys are pit crews now.
+And it seemed like time that we become that way ourselves.
+Making systems work is the great task of my generation of physicians and scientists.
+But I would go further and say that making systems work, whether in health care, education, climate change, making a pathway out of poverty, is the great task of our generation as a whole.
+In every field, knowledge has exploded, but it has brought complexity, it has brought specialization.
+And we've come to a place where we have no choice but to recognize, as individualistic as we want to be, complexity requires group success.
+We all need to be pit crews now.
+Thank you.
+People are living longer and societies are getting grayer.
+You hear about it all the time.
+You read about it in your newspapers.
+You hear about it on your television sets.
+Sometimes I'm concerned that we hear about it so much that we've come to accept longer lives with a kind of a complacency, even ease.
+But make no mistake, longer lives can and, I believe, will improve quality of life at all ages.
+Now to put this in perspective, let me just zoom out for a minute.
+More years were added to average life expectancy in the 20th century than all years added across all prior millennia of human evolution combined. In the blink of an eye, we nearly doubled the length of time that we're living.
+So if you ever feel like you don't have this aging thing quite pegged, don't kick yourself.
+It's brand new.
+And because fertility rates fell across that very same period that life expectancy was going up, that pyramid that has always represented the distribution of age in the population, with many young ones at the bottom winnowed to a tiny peak of older people who make it and survive to old age is being reshaped into a rectangle.
+And now, if you're the kind of person who can get chills from population statistics, these are the ones that should do it.
+Because what that means is that for the first time in the history of the species, the majority of babies born in the Developed World are having the opportunity to grow old.
+How did this happen?
+Well we're no genetically hardier than our ancestors were 10,000 years ago.
+This increase in life expectancy is the remarkable product of culture -- the crucible that holds science and technology and wide-scale changes in behavior that improve health and well-being.
+Through cultural changes, our ancestors largely eliminated early death so that people can now live out their full lives.
+Now there are problems associated with aging -- diseases, poverty, loss of social status.
+It's hardly time to rest on our laurels.
+But the more we learn about aging, the clearer it becomes that a sweeping downward course is grossly inaccurate.
+Aging brings some rather remarkable improvements -- increased knowledge, expertise -- and emotional aspects of life improve.
+That's right, older people are happy.
+They're happier than middle-aged people, and younger people certainly.
+Study after study is coming to the same conclusion.
+The CDC recently conducted a survey where they asked respondents simply to tell them whether they experienced significant psychological distress in the previous week.
+And fewer older people answered affirmatively to that question than middle-aged people, and younger people as well.
+And a recent Gallup poll asked participants how much stress and worry and anger they had experienced the previous day.
+And stress, worry, anger all decrease with age.
+Now social scientists call this the paradox of aging.
+After all, aging is not a piece of cake.
+So we've asked all sorts of questions to see if we could undo this finding.
+We've asked whether it may be that the current generations of older people are and always have been the greatest generations.
+That is that younger people today may not typically experience these improvements as they grow older.
+We've asked, well maybe older people are just trying to put a positive spin on an otherwise depressing existence.
+But the more we've tried to disavow this finding, the more evidence we find to support it.
+Years ago, my colleagues and I embarked on a study where we followed the same group of people over a 10-year period.
+Originally the sample was aged 18 to 94.
+And we studied whether and how their emotional experiences changed as they grew older.
+Our participants would carry electronic pagers for a week at a time, and we'd page them throughout the day and evenings at random times.
+And every time we paged them we'd ask them to answer several questions -- On a one to seven scale, how happy are you right now?
+How sad are you right now?
+How frustrated are you right now? -- so that we could get a sense of the kinds of emotions and feelings they were having in their day-to-day lives.
+And using this intense study of individuals, we find that it's not one particular generation that's doing better than the others, but the same individuals over time come to report relatively greater positive experience.
+Now you see this slight downturn at very advanced ages.
+And there is a slight downturn.
+But at no point does it return to the levels we see in early adulthood.
+Now it's really too simplistic to say that older people are "happy."
+In our study, they are more positive, but they're also more likely than younger people to experience mixed emotions -- sadness at the same time you experience happiness; you know, that tear in the eye when you're smiling at a friend.
+And other research has shown that older people seem to engage with sadness more comfortably.
+They're more accepting of sadness than younger people are.
+And we suspect that this may help to explain why older people are better than younger people at solving hotly-charged emotional conflicts and debates.
+Older people can view injustice with compassion, but not despair.
+And all things being equal, older people direct their cognitive resources, like attention and memory, to positive information more than negative.
+If we show older, middle-aged, younger people images, like the ones you see on the screen, and we later ask them to recall all the images that they can, older people, but not younger people, remember more positive images than negative images.
+We've asked older and younger people to view faces in laboratory studies, some frowning, some smiling. Older people look toward the smiling faces and away from the frowning, angry faces.
+In day-to-day life, this translates into greater enjoyment and satisfaction.
+But as social scientists, we continue to ask about possible alternatives.
+We've said, well maybe older people report more positive emotions because they're cognitively impaired.
+We've said, could it be that positive emotions are simply easier to process than negative emotions, and so you switch to the positive emotions?
+Maybe our neural centers in our brain are degraded such that we're unable to process negative emotions anymore.
+But that's not the case.
+The most mentally sharp older adults are the ones who show this positivity effect the most.
+And under conditions where it really matters, older people do process the negative information just as well as the positive information.
+So how can this be?
+Well in our research, we've found that these changes are grounded fundamentally in the uniquely human ability to monitor time -- not just clock time and calendar time, but lifetime.
+And if there's a paradox of aging, it's that recognizing that we won't live forever changes our perspective on life in positive ways.
+When time horizons are long and nebulous, as they typically are in youth, people are constantly preparing, trying to soak up all the information they possibly can, taking risks, exploring.
+We might spend time with people we don't even like because it's somehow interesting.
+We might learn something unexpected.
+We go on blind dates.
+You know, after all, if it doesn't work out, there's always tomorrow.
+People over 50 don't go on blind dates.
+As we age, our time horizons grow shorter and our goals change.
+When we recognize that we don't have all the time in the world, we see our priorities most clearly.
+We take less notice of trivial matters.
+We savor life.
+We're more appreciative, more open to reconciliation.
+We invest in more emotionally important parts of life, and life gets better, so we're happier day-to-day.
+But that same shift in perspective leads us to have less tolerance than ever for injustice.
+By 2015, there will be more people in the United States over the age of 60 than under 15.
+What will happen to societies that are top-heavy with older people?
+The numbers won't determine the outcome.
+Culture will.
+If we invest in science and technology and find solutions for the real problems that older people face and we capitalize on the very real strengths of older people, then added years of life can dramatically improve quality of life at all ages.
+Societies with millions of talented, emotionally stable citizens who are healthier and better educated than any generations before them, armed with knowledge about the practical matters of life and motivated to solve the big issues can be better societies than we have ever known.
+My father, who is 92, likes to say, "Let's stop talking only about how to save the old folks and start talking about how to get them to save us all."
+Thank you.
+So I want to talk today about money and happiness, which are two things that a lot of us spend a lot of our time thinking about, either trying to earn them or trying to increase them.
+And a lot of us resonate with this phrase.
+So we see it in religions and self-help books, that money can't buy happiness.
+And I want to suggest today that, in fact, that's wrong.
+I'm at a business school, so that's what we do.
+So that's wrong, and, in fact, if you think that, you're actually just not spending it right.
+So that instead of spending it the way you usually spend it, maybe if you spent it differently, that might work a little bit better.
+And before I tell you the ways that you can spend it that will make you happier, let's think about the ways we usually spend it that don't, in fact, make us happier.
+We had a little natural experiment.
+So CNN, a little while ago, wrote this interesting article on what happens to people when they win the lottery.
+It turns out people think when they win the lottery their lives are going to be amazing.
+This article's about how their lives get ruined.
+So what happens when people win the lottery is, number one, they spend all the money and go into debt, and number two, all of their friends and everyone they've ever met find them and bug them for money.
+And it ruins their social relationships, in fact.
+So they have more debt and worse friendships than they had before they won the lottery.
+What was interesting about the article was people started commenting on the article, readers of the thing.
+And instead of talking about how it had made them realize that money doesn't lead to happiness, everyone instantly started saying, "You know what I would do if I won the lottery ... ?" and fantasizing about what they'd do.
+And here's just two of the ones we saw that are just really interesting to think about.
+One person wrote in, "When I win, I'm going to buy my own little mountain and have a little house on top." And another person wrote, "I would fill a big bathtub with money and get in the tub while smoking a big fat cigar and sipping a glass of champagne." This is even worse now: "Then I'd have a picture taken and dozens of glossies made.
+Anyone begging for money or trying to extort from me would receive a copy of the picture and nothing else." And so many of the comments were exactly of this type, where people got money and, in fact, it made them antisocial.
+So I told you that it ruins people's lives and that their friends bug them.
+It also, money often makes us feel very selfish and we do things only for ourselves.
+Well maybe the reason that money doesn't make us happy is that we're always spending it on the wrong things, and in particular, that we're always spending it on ourselves.
+And we thought, I wonder what would happen if we made people spend more of their money on other people.
+So instead of being antisocial with your money, what if you were a little more prosocial with your money?
+And we thought, let's make people do it and see what happens.
+So let's have some people do what they usually do and spend money on themselves, and let's make some people give money away, and measure their happiness and see if, in fact, they get happier.
+So the first way that we did this.
+On one Vancouver morning, we went out on the campus at University of British Columbia and we approached people and said, "Do you want to be in an experiment?" They said, "Yes." We asked them how happy they were, and then we gave them an envelope.
+And one of the envelopes had things in it that said, "By 5:00 pm today, spend this money on yourself." So we gave some examples of what you could spend it on.
+Other people, in the morning, got a slip of paper that said, "By 5:00 pm today, spend this money on somebody else." Also inside the envelope was money.
+And we manipulated how much money we gave them.
+So some people got this slip of paper and five dollars.
+Some people got this slip of paper and 20 dollars.
+We let them go about their day. They did whatever they wanted to do.
+We found out that they did in fact spend it in the way that we asked them to.
+We called them up at night and asked them, "What'd you spend it on, and how happy do you feel now?" What did they spend it on?
+Well these are college undergrads, so a lot of what they spent it on for themselves were things like earrings and makeup.
+One woman said she bought a stuffed animal for her niece.
+People gave money to homeless people.
+Huge effect here of Starbucks.
+So if you give undergraduates five dollars, it looks like coffee to them and they run over to Starbucks and spend it as fast as they can.
+But some people bought a coffee for themselves, the way they usually would, but other people said that they bought a coffee for somebody else.
+So the very same purchase, just targeted toward yourself or targeted toward somebody else.
+What did we find when we called them back at the end of the day?
+People who spent money on other people got happier.
+People who spent money on themselves, nothing happened.
+It didn't make them less happy, it just didn't do much for them.
+And the other thing we saw is the amount of money doesn't matter that much.
+So people thought that 20 dollars would be way better than five dollars.
+In fact, it doesn't matter how much money you spent.
+What really matters is that you spent it on somebody else rather than on yourself.
+We see this again and again when we give people money to spend on other people instead of on themselves.
+Of course, these are undergraduates in Canada -- not the world's most representative population.
+They're also fairly wealthy and affluent and all these other sorts of things.
+We wanted to see if this holds true everywhere in the world or just among wealthy countries.
+So we went, in fact, to Uganda and ran a very similar experiment.
+So imagine, instead of just people in Canada, we said, "Name the last time you spent money on yourself or other people.
+Describe it. How happy did it make you?" Or in Uganda, "Name the last time you spent money on yourself or other people and describe that." And then we asked them how happy they are again.
+And what we see is sort of amazing because there's human universals on what you do with your money and then real cultural differences on what you do as well.
+So for example, one guy from Uganda says this.
+He said, "I called a girl I wished to love." They basically went out on a date, and he says at the end that he didn't "achieve" her up till now.
+Here's a guy from Canada.
+Very similar thing.
+"I took my girlfriend out for dinner.
+We went to a movie, we left early, and then went back to her room for ... " only cake -- just a piece of cake.
+Human universal -- so you spend money on other people, you're being nice to them.
+Maybe you have something in mind, maybe not.
+But then we see extraordinary differences.
+So look at these two.
+This is a woman from Canada.
+We say, "Name a time you spent money on somebody else." She says, "I bought a present for my mom.
+I drove to the mall in my car, bought a present, gave it to my mom." Perfectly nice thing to do.
+It's good to get gifts for people that you know.
+Compare that to this woman from Uganda.
+"I was walking and met a long-time friend whose son was sick with malaria.
+They had no money, they went to a clinic and I gave her this money." This isn't $10,000, it's the local currency.
+So it's a very small amount of money, in fact.
+But enormously different motivations here.
+This is a real medical need, literally a life-saving donation.
+Above, it's just kind of, I bought a gift for my mother.
+What we see again though is that the specific way that you spend on other people isn't nearly as important as the fact that you spend on other people in order to make yourself happy, which is really quite important.
+So you don't have to do amazing things with your money to make yourself happy.
+You can do small, trivial things and yet still get these benefits from doing this.
+These are only two countries.
+We also wanted to go even broader and look at every country in the world if we could to see what the relationship is between money and happiness.
+We got data from the Gallup Organization, which you know from all the political polls that have been happening lately.
+They ask people, "Did you donate money to charity recently?" and they ask them, "How happy are you with your life in general?" And we can see what the relationship is between those two things.
+Are they positively correlated? Giving money makes you happy.
+Or are they negatively correlated?
+On this map, green will mean they're positively correlated and red means they're negatively correlated.
+And you can see, the world is crazily green.
+So in almost every country in the world where we have this data, people who give money to charity are happier people that people who don't give money to charity.
+I know you're all looking at that red country in the middle.
+I would be a jerk and not tell you what it is, but in fact, it's Central African Republic.
+You can make up stories. Maybe it's different there for some reason or another.
+Just below that to the right is Rwanda though, which is amazingly green.
+So almost everywhere we look we see that giving money away makes you happier than keeping it for yourself.
+What about your work life, which is where we spend all the rest of our time when we're not with the people we know.
+We decided to infiltrate some companies and do a very similar thing.
+So these are sales teams in Belgium.
+They work in teams; they go out and sell to doctors and try to get them to buy drugs.
+So we can look and see how well they sell things as a function of being a member of a team.
+Some teams, we give people on the team some money for themselves and say, "Spend it however you want on yourself," just like we did with the undergrads in Canada.
+But other teams we say, "Here's 15 euro.
+Spend it on one of your teammates this week.
+Buy them something as a gift or a present and give it to them.
+And then we can see, well now we've got teams that spend on themselves and we've got these prosocial teams who we give money to make the team a little bit better.
+The reason I have a ridiculous pinata there is one of the teams pooled their money and bought a pinata, and they all got around and smashed the pinata and all the candy fell out and things like that.
+A very silly, trivial thing to do, but think of the difference on a team that didn't do that at all, that got 15 euro, put it in their pocket, maybe bought themselves a coffee, or teams that had this prosocial experience where they all bonded together to buy something and do a group activity.
+What we see is that, in fact, the teams that are prosocial sell more stuff than the teams that only got money for themselves.
+And one way to think about it is for every 15 euro you give people for themselves, they put it in their pocket, they don't do anything different than they did before.
+You don't get any money from that.
+You actually lose money because it doesn't motivate them to perform any better.
+But when you give them 15 euro to spend on their teammates, they do so much better on their teams that you actually get a huge win on investing this kind of money.
+And I realize that you're probably thinking to yourselves, this is all fine, but there's a context that's incredibly important for public policy and I can't imagine it would work there.
+And basically that if he doesn't show me that it works here, I don't believe anything he said.
+And I know what you're all thinking about are dodgeball teams.
+This was a huge criticism that we got to say, if you can't show it with dodgeball teams, this is all stupid.
+So we went out and found these dodgeball teams and infiltrated them.
+And we did the exact same thing as before.
+So some teams, we give people on the team money, they spend it on themselves.
+Other teams, we give them money to spend on their dodgeball teammates.
+The teams that spend money on themselves are just the same winning percentages as they were before.
+The teams that we give the money to spend on each other, they become different teams and, in fact, they dominate the league by the time they're done.
+Across all of these different contexts -- your personal life, you work life, even silly things like intramural sports -- we see spending on other people has a bigger return for you than spending on yourself.
+And so I'll just say, I think if you think money can't buy happiness you're not spending it right.
+The implication is not you should buy this product instead of that product and that's the way to make yourself happier.
+It's in fact, that you should stop thinking about which product to buy for yourself and try giving some of it to other people instead.
+And we luckily have an opportunity for you.
+DonorsChoose.org is a non-profit for mainly public school teachers in low-income schools.
+They post projects, so they say, "I want to teach Huckleberry Finn to my class and we don't have the books," or "I want a microscope to teach my students science and we don't have a microscope."
+You and I can go on and buy it for them.
+The teacher writes you a thank you note. The kids write you a thank you note.
+Sometimes they send you pictures of them using the microscope.
+It's an extraordinary thing.
+Go to the website and start yourself on the process of thinking, again, less about "How can I spend money on myself?" and more about "If I've got five dollars or 15 dollars, what can I do to benefit other people?" Because ultimately when you do that, you'll find that you'll benefit yourself much more.
+Thank you.
+Have you ever wondered what is inside your dental plaque?
+Probably not, but people like me do.
+I'm an archeological geneticist at the Center for Evolutionary Medicine at the University of Zurich, and I study the origins and evolution of human health and disease by conducting genetic research on the skeletal and mummified remains of ancient humans.
+And through this work, I hope to better understand the evolutionary vulnerabilities of our bodies, so that we can improve and better manage our health in the future.
+There are different ways to approach evolutionary medicine, and one way is to extract human DNA from ancient bones.
+And from these extracts, we can reconstruct the human genome at different points in time and look for changes that might be related to adaptations, risk factors and inherited diseases.
+But this is only one half of the story.
+The most important health challenges today are not caused by simple mutations in our genome, but rather result from a complex and dynamic interplay between genetic variation, diet, microbes and parasites and our immune response.
+All of these diseases have a strong evolutionary component that directly relates to the fact that we live today in a very different environment than the ones in which our bodies evolved.
+And in order to understand these diseases, we need to move past studies of the human genome alone and towards a more holistic approach to human health in the past.
+But there are a lot of challenges for this.
+And first of all, what do we even study?
+Skeletons are ubiquitous; they're found all over the place.
+But of course, all of the soft tissue has decomposed, and the skeleton itself has limited health information.
+Mummies are a great source of information, except that they're really geographically limited and limited in time as well.
+Coprolites are fossilized human feces, and they're actually extremely interesting.
+You can learn a lot about ancient diet and intestinal disease, but they are very rare.
+So to address this problem, I put together a team of international researchers in Switzerland, Denmark and the U.K.
+to study a very poorly studied, little known material that's found on people everywhere.
+It's a type of fossilized dental plaque that is called officially dental calculus.
+Many of you may know it by the term tartar.
+It's what the dentist cleans off your teeth every time that you go in for a visit.
+And in a typical dentistry visit, you may have about 15 to 30 milligrams removed.
+But in ancient times before tooth brushing, up to 600 milligrams might have built up on the teeth over a lifetime.
+And what's really important about dental calculus is that it fossilizes just like the rest of the skeleton, it's abundant in quantity before the present day and it's ubiquitous worldwide.
+We find it in every population around the world at all time periods going back tens of thousands of years.
+And we even find it in neanderthals and animals.
+And so previous studies had only focused on microscopy.
+They'd looked at dental calculus under a microscope, and what they had found was things like pollen and plant starches, and they'd found muscle cells from animal meats and bacteria.
+And so what my team of researchers, what we wanted to do, is say, can we apply genetic and proteomic technology to go after DNA and proteins, and from this can we get better taxonomic resolution to really understand what's going on?
+And what we found is that we can find many commensal and pathogenic bacteria that inhabited the nasal passages and mouth.
+We also have found immune proteins related to infection and inflammation and proteins and DNA related to diet.
+But what was surprising to us, and also quite exciting, is we also found bacteria that normally inhabit upper respiratory systems.
+So it gives us virtual access to the lungs, which is where many important diseases reside.
+And we also found bacteria that normally inhabit the gut.
+And so we can also now virtually gain access to this even more distant organ system that, from the skeleton alone, has long decomposed.
+And so by applying ancient DNA sequencing and protein mass spectrometry technologies to ancient dental calculus, we can generate immense quantities of data that then we can use to begin to reconstruct a detailed picture of the dynamic interplay between diet, infection and immunity thousands of years ago.
+So what started out as an idea, is now being implemented to churn out millions of sequences that we can use to investigate the long-term evolutionary history of human health and disease, right down to the genetic code of individual pathogens.
+And from this information we can learn about how pathogens evolve and also why they continue to make us sick.
+And I hope I have convinced you of the value of dental calculus.
+And as a final parting thought, on behalf of future archeologists, I would like to ask you to please think twice before you go home and brush your teeth.
