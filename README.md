@@ -1,6 +1,6 @@
 # 一、项目简介
 
-本项目是一站式深度学习在线百科，内容涵盖[**零基础入门深度学习**](https://aistudio.baidu.com/aistudio/course/introduce/1297)、**产业实践深度学习**、**特色课程（开发中）**；[**深度学习百问**](https://paddlepedia.readthedocs.io/en/latest/index.html)、**产业实践(开发中)**等等。从理论到实践，从科研到产业应用，各类学习材料一应俱全，旨在帮助开发者高效地学习和掌握深度学习知识，快速成为AI跨界人才。
+本项目是一站式深度学习在线百科，内容涵盖[**零基础入门深度学习**](https://aistudio.baidu.com/aistudio/course/introduce/1297)、**产业实践深度学习**、**特色课程（开发中）**；[**深度学习百问**](https://paddlepedia.readthedocs.io/en/latest/index.html)、**产业实践(开发中)** 等等。从理论到实践，从科研到产业应用，各类学习材料一应俱全，旨在帮助开发者高效地学习和掌握深度学习知识，快速成为AI跨界人才。
 
 <center><img src="./docs/images/cover/repo.png" width=70%></center><br></br>
 
@@ -299,8 +299,8 @@
 | ----------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | transformer在图像分类中的应用 | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2154618) | [Python实现](./transformer_courses/Application_of_transformer_in_image_classification) | 本章节将为大家详细介绍 Transformer 在 CV 领域中的两个经典算法：ViT 以及 DeiT。带领大家一起学习Transformer 结构在图像分类领域的具体应用。 |
 |经典的预训练语言模型   |  [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2110336)  |[Python实现](./transformer_courses/Transformer_Machine_Translation)|本章节将为大家详细介绍NLP领域 Transformer。Transformer的前世今生，包括ELMo，GPT，Transformer，BERT等经典模型，还会介绍Transformer在机器翻译里面的应用                                                              |
-| 预训练模型的瘦身策略 – – 高效结构 |  [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2138857)|  [Python实现](./Transformer_Punctuation_Restoration) | 本章节将为大家详细介绍NLP领域，基于Transformer模型的瘦身技巧。包括 Electra，AlBERT 以及 performer。还会介绍代码实现案例：基于Electra的语音识别后处理中文标点符号预测   |
-| 预训练模型的瘦身策略 – – 高效结构 |  [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2138857)|  [Python实现](./Transformer_Punctuation_Restoration) | 本章节将为大家详细介绍NLP领域，基于Transformer模型的瘦身技巧。包括 Electra，AlBERT 以及 performer。还会介绍代码实现案例：基于Electra的语音识别后处理中文标点符号预测   |
+| 预训练模型的瘦身策略 – – 高效结构 |  [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2138857)|  [Python实现](./transformer_courses/Transformer_Punctuation_Restoration) | 本章节将为大家详细介绍NLP领域，基于Transformer模型的瘦身技巧。包括 Electra，AlBERT 以及 performer。还会介绍代码实现案例：基于Electra的语音识别后处理中文标点符号预测   |
+| BERT蒸馏 |  [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2177549)|  [Python实现](./transformer_courses/BERT_distillation) | 本章节为大家详细介绍了针对BERT模型的蒸馏算法，包括：Patient-KD、DistilBERT、TinyBERT、DynaBERT等模型，同时以代码的形式为大家展现了如何使用DynaBERT的训练策略对TinyBERT进行蒸馏。   |
 |                               |                                                              |                                                              |                                                              |
 
 # 五、 经典深度学习案例集（开发中）

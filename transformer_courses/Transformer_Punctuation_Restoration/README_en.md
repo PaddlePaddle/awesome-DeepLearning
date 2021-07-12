@@ -16,9 +16,9 @@
 
 ```
 |-data_transfer.py: Extract the test set and training set data from xml format into txt format
-|-data_process.py: Data set preprocessing, and build training and test data sets separately
+|-data_process.py: Data set preprocessing, and build training, validation and test data sets separately
 |-dataloader.py: Contains methods to build dataloader
-|-train.py: Build dataloader, load pre-training model, set AdamW optimizer, cross entropy loss function and evaluation method in this script, and define ELECTRA training
+|-train.py: Build dataloader, load pre-training model, set AdamW optimizer, cross entropy loss function and evaluation method in this script, and do ELECTRA training and evaluate the trained model on the validation set
 |-predict.py: Start the model prediction script and store the prediction result in a txt file
 ```
 
