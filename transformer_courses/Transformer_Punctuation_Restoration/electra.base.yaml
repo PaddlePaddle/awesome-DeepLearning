@@ -13,7 +13,7 @@ output_test_path: 'test_texts_2012.txt'
 data_path: "data/"
 output_train_tsv: 'train.tsv'
 output_test_tsv: 'test.tsv'
-output_dev_tsv: dev.tsv'
+output_dev_tsv: 'dev.tsv'
 
 # model hyper-parameters
 batch_size: 128
