@@ -15,7 +15,7 @@ cd ./PaddleSlim-develop/demo/ofa/bert/
 |-export_model.py：Export sub-model and turn it into a static graph model
 ```
 
-The current project only supports running in the PaddleSlim-develop version, and we will update with subsequent releases.
+This project supports TinyBERT distillation using DynaBERT's width adaptive strategy. The current project only supports running in the PaddleSlim-develop version, and we will update with subsequent releases.
 
 ### Model introduction
 
@@ -54,7 +54,7 @@ python -u ./run_glue_ofa.py --model_type bert \
 The parameter definitions are as follows :
 
 * `model_type` indicates model type, currently only the BERT model is supported.
-* `model_name_or_path` path to load a pre-trained model.
+* `model_name_or_path` path to load a pre-trained model. If you want to use TinyBERT's pre-trained model under the QQP task, please check: [BERT Distillation](https://aistudio.baidu.com/aistudio/projectdetail/2177549)
 * `task_name` downstream task name.
 * `max_seq_length` Indicates the maximum sentence length, beyond which will be truncated. Default: 128.
 * `batch_size` batch size.

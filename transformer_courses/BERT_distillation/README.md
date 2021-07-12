@@ -15,7 +15,7 @@ cd ./PaddleSlim-develop/demo/ofa/bert/
 |-export_model.py：导出相应的子模型并转为静态图模型
 ```
 
-当前项目仅支持在 PaddleSlim-develop 版本进行运行，随后续发版会进行版本更新。
+本项目支持对TinyBERT模型以DynaBERT的宽度自适应策略进行蒸馏。当前项目仅支持在 PaddleSlim-develop 版本进行运行，随后续发版会进行版本更新。
 
 ### 模型介绍
 
@@ -54,27 +54,16 @@ python -u ./run_glue_ofa.py --model_type bert \
 其中参数释义如下：
 
 - `model_type` 指示了模型类型，当前仅支持BERT模型。
-
-- `model_name_or_path` 预训练模型的存储地址。
-
+- `model_name_or_path` 预训练模型的存储地址。如果你想使用TinyBERT在QQP任务下的预训练模型，请查看：[BERT蒸馏](https://aistudio.baidu.com/aistudio/projectdetail/2177549)
 - `task_name` 下游任务名称。
-
 - `max_seq_length` 表示最大句子长度，超过该长度将被截断。默认：128。
-
 - `batch_size` 每次迭代每张卡上的样本数目。
-
 - `learning_rate` 学习率。
-
 - `num_train_epochs` 训练轮数。
-
 - `logging_steps` 日志打印间隔。
-
 - `save_steps` 模型保存及评估间隔。
-
 - `output_dir` 模型保存路径。
-
 - `n_gpu` 表示使用的 GPU 卡数。若希望多卡训练，将其设置为指定数目即可；若为0，则使用CPU。
-
 - `width_mult_list` 表示压缩训练过程中，对每层 Transformer Block 的宽度选择的范围。
 
 
