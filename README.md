@@ -14,7 +14,7 @@
 
   
 
-# 内容
+# 快速跳转：
 
 | 零基础入门深度学习​[:arrow_heading_down:](#1) | 产业实践深度学习[:arrow_heading_down:](#2)   |
 | -------------------------------------------- | -------------------------------------------- |
@@ -364,4 +364,3 @@
 > pre-commit install
 
 添加修改的代码后，对修改的文件进行代码规范，pre-commit 会自动调整代码格式，执行一次即可，后续commit不需要再执行。提交pr流程，详见：[awesome-DeepLearning 提交 pull request 流程](./examples/awesome-DeepLearning_pr_procedure.md)
-
