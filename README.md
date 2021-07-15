@@ -14,18 +14,16 @@
 
   
 
-# 快速跳转：
+# <span id='0'>快速跳转：</span>
 
-| 零基础入门深度学习​[:arrow_heading_down:](#1) | 产业实践深度学习[:arrow_heading_down:](#2)   |
+| 零基础入门深度学习​[:arrow_heading_down:](#1) | 产业实践深度学习[:arrow_heading_down:](#5)   |
 | -------------------------------------------- | -------------------------------------------- |
 | 特色系列课程[:arrow_heading_down:](#3)       | 经典深度学习案例集[:arrow_heading_down:](#4) |
-| 飞桨产业实践[:arrow_heading_down:](#5)       | 面试宝典[:arrow_heading_down:](#6)           |
+| 深度学习百问[:arrow_heading_down:](#2)       | 面试宝典[:arrow_heading_down:](#6)           |
 
 
 
-# <span id = '1'>二、零基础实践深度学习<span>
-
-
+# <span id = '1'>二、零基础实践深度学习</span>
 
   - **AI Studio在线课程：[《零基础实践深度学习》](https://aistudio.baidu.com/aistudio/course/introduce/1297
     )**：理论和代码结合、实践与平台结合，包含20小时视频课程，由百度杰出架构师、飞桨产品负责人和资深研发人员共同打造。
@@ -139,6 +137,8 @@
     | 视频（上） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1452226](https://aistudio.baidu.com/aistudio/education/lessonvideo/1452226) |
     | 视频（下） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1452227](https://aistudio.baidu.com/aistudio/education/lessonvideo/1452227) |
     | 课件       | [https://aistudio.baidu.com/aistudio/education/preview/1452224](https://aistudio.baidu.com/aistudio/education/preview/1452224) |
+
+[返回快速跳转:arrow_heading_up:](#0) 
 
 # <span id ='2'>三、 深度学习百问</span>
 
@@ -304,6 +304,8 @@
     * [DSSM怎样解决OOV问题的？](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/dssm.html#id2)
     * [推荐系统的PV和UV代表什么？](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/evaluation_metric.html#id2)
     * [协同过滤推荐和基于内容的推荐的区别是什么？](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/evaluation_metric.html#id2)
+  
+  [返回快速跳转:arrow_heading_up:](#0) 
 
 # <span id ='3'> 四、特色课- Transformer系列（开发中）</span>
 
@@ -318,7 +320,13 @@
 | transformer在图像分类中的应用 | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2154618) | [Python实现](./transformer_courses/Application_of_transformer_in_image_classification) | 本章>节将为大家详细介绍 Transformer 在 CV 领域中的两个经典算法：ViT 以及 DeiT。带领大家一起学习Transformer 结构在图像分类领域的具体应用。 |
 |                               |                                                              |                                                              |                                                              |
 
-# <span id ='4'>五、 经典深度学习案例集（开发中）</span>
+[返回快速跳转:arrow_heading_up:](#0) 
+
+# <span id ='4'>五、 经典深度学习案例集（开发中）
+
+# </span>
+
+[返回快速跳转:arrow_heading_up:](#0) 
 
 # <span id ='5'>六、 飞桨产业实践</span>
 
@@ -340,6 +348,7 @@
 | **其他**     | 足球比赛动作定位           | https://github.com/PaddlePaddle/PaddleVideo/tree/application/FootballAction |
 | **其他**     | 基于强化学习的飞行器仿真   |  https://github.com/PaddlePaddle/PARL/tree/develop/examples/tutorials/homework/lesson5/ddpg_quadrotor |
 
+[返回快速跳转:arrow_heading_up:](#0) 
 
 # 七、技术交流
 
