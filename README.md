@@ -12,7 +12,18 @@
 
 * **前沿分享** ：定期分享顶会最新论文解读和代码复现，开发者可以实时掌握最新的深度学习算法。
 
-# 二、 零基础实践深度学习
+  
+
+# 内容
+
+| 零基础入门深度学习​[:arrow_heading_down:](#1) | 产业实践深度学习[:arrow_heading_down:](#2)   |
+| -------------------------------------------- | -------------------------------------------- |
+| 特色系列课程[:arrow_heading_down:](#3)       | 经典深度学习案例集[:arrow_heading_down:](#4) |
+| 飞桨产业实践[:arrow_heading_down:](#5)       | 面试宝典[:arrow_heading_down:](#6)           |
+
+
+
+# <span id = '1'>二、零基础实践深度学习<span>
 
 
 
@@ -129,7 +140,7 @@
     | 视频（下） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1452227](https://aistudio.baidu.com/aistudio/education/lessonvideo/1452227) |
     | 课件       | [https://aistudio.baidu.com/aistudio/education/preview/1452224](https://aistudio.baidu.com/aistudio/education/preview/1452224) |
 
-# 三、 深度学习百问
+# <span id ='2'>三、 深度学习百问</span>
 
 深度学习百问包含深度学习基础篇、深度学习进阶篇、深度学习应用篇、强化学习篇以及面试宝典，详细信息请参阅[Paddle知识点文档平台](https://paddlepedia.readthedocs.io/en/latest/index.html)。
 
@@ -203,7 +214,8 @@
      7. [Q-Learning](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/Q-learning.html)（包括Q-Learning的公式、优缺点等2个知识点）  
      8. [DQN](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/DQN.html#)（包括DQN网络概述及其创新点和算法流程2个知识点）  
 
-* **面试宝典**  
+* <span id ='6'>**面试宝典**</span>  
+  
   1.  深度学习基础
     * [为什么归一化能够提高求解最优解的速度？](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/normalization/basic_normalization.html#id4)
     * [为什么要归一化？](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/normalization/basic_normalization.html)
@@ -223,13 +235,13 @@
     * [交叉熵为什么可以作为分类任务的损失函数？](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/loss_functions/CE_Loss.html)
     * [CTC方法主要使用了什么方式来解决了什么问题？](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/loss_functions/CTC.html#)
     * [机器学习指标精确率，召回率，f1指标是怎样计算的？](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/metrics/evaluation_metric.html)
-
+  
   2. 卷积模型
     * [相较于全连接网络，卷积在图像处理方面有什么样的优势？](https://paddlepedia.readthedocs.io/en/latest/tutorials/CNN/convolution_operator/Convolution.html#id1)
     * [卷积中感受野的计算方式？](https://paddlepedia.readthedocs.io/en/latest/tutorials/CNN/convolution_operator/Convolution.html#receptive-field)
     * [1*1卷积的作用是什么？](https://paddlepedia.readthedocs.io/en/latest/tutorials/CNN/convolution_operator/1%2A1_Convolution.html)
     * [深度可分离卷积的计算方式以及意义是什么？](https://paddlepedia.readthedocs.io/en/latest/tutorials/CNN/convolution_operator/Separable_Convolution.html#id4)
-
+  
   3. 预训练模型
     * [BPE生成词汇表的算法步骤是什么？](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/subword.html#byte-pair-encoding-bpe)
     * [Multi-Head Attention的时间复杂度是多少？](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/transformer.html#multi-head-attention)
@@ -242,7 +254,7 @@
     * [请列举一下BERT的优缺点](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/bert.html#id13)
     * [ALBERT相对于BERT做了哪些改进？](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/ALBERT.html#id2)
     * [NSP和SOP的区别是什么？](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/ALBERT.html#sentence-order-prediction)
-
+  
   4. 对抗神经网络
     * [GAN是怎么训练的？](https://paddlepedia.readthedocs.io/en/latest/tutorials/generative_adversarial_network/basic_concept/GAN%20train.html)
     * [GAN生成器输入为什么是随机噪声？](https://paddlepedia.readthedocs.io/en/latest/tutorials/generative_adversarial_network/basic_concept/Input%20noise.html#gan)
@@ -252,7 +264,7 @@
     * [GAN模式坍塌解决办法](https://paddlepedia.readthedocs.io/en/latest/tutorials/generative_adversarial_network/basic_concept/Collapse.html)
     * [GAN模型训练不稳定的原因](https://paddlepedia.readthedocs.io/en/latest/tutorials/generative_adversarial_network/basic_concept/Unstable%20training.html#)
     * [GAN模式训练不稳定解决办法 or 训练GAN的经验/技巧](https://paddlepedia.readthedocs.io/en/latest/tutorials/generative_adversarial_network/basic_concept/Unstable%20training.html#)
-
+  
   5. 计算机视觉
     * [ResNet中Residual block解决了什么问题？](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/classification/ResNet.html)
     * [使用Cutout进行数据增广有什么样的优势？](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/image_augmentation/ImageAugment.html#cutout)
@@ -267,7 +279,7 @@
     * [介绍一下CTC原理](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/loss_functions/CTC.html)
     * [OCR常用的评估指标](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/OCR/OCR.html#id7)
     * [OCR目前还存在哪些挑战/难点？](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/OCR/OCR.html#id9)
-
+  
   6. 自然语言处理
     * [RNN一般有哪几种常用建模方式?](https://paddlepedia.readthedocs.io/en/latest/tutorials/sequence_model/rnn.html#span-id-4-rnn-span)
     * [LSTM是如何改进RNN，保持长期依赖的?](https://paddlepedia.readthedocs.io/en/latest/tutorials/sequence_model/lstm.html#span-id-1-lstm-span)
@@ -286,14 +298,14 @@
     * [BERT的结构和原理是什么?](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/bert.html#id1)
     * [BERT使用了什么预训练任务?](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/bert.html#id11)
     * [说一下self-attention的原理?](https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/transformer.html#self-attention)
-
+  
   7. 推荐系统
     * [DSSM模型的原理是什么？](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/dssm.html)
     * [DSSM怎样解决OOV问题的？](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/dssm.html#id2)
     * [推荐系统的PV和UV代表什么？](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/evaluation_metric.html#id2)
     * [协同过滤推荐和基于内容的推荐的区别是什么？](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/evaluation_metric.html#id2)
 
-# 四、特色课- Transformer系列（开发中）
+# <span id ='3'> 四、特色课- Transformer系列（开发中）</span>
 
 | 章节名称                      | notebook链接                                                 | Python实现                                                   | 课程简介                                                     |
 | ----------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -306,9 +318,9 @@
 | transformer在图像分类中的应用 | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2154618) | [Python实现](./transformer_courses/Application_of_transformer_in_image_classification) | 本章>节将为大家详细介绍 Transformer 在 CV 领域中的两个经典算法：ViT 以及 DeiT。带领大家一起学习Transformer 结构在图像分类领域的具体应用。 |
 |                               |                                                              |                                                              |                                                              |
 
-# 五、 经典深度学习案例集（开发中）
+# <span id ='4'>五、 经典深度学习案例集（开发中）</span>
 
-# 六、 飞桨产业实践
+# <span id ='5'>六、 飞桨产业实践</span>
 
 | 领域         | 产业案例                   | 链接                                                         |
 | ------------ | -------------------------- | ------------------------------------------------------------ |
