@@ -32,7 +32,7 @@ from paddlenlp.data import Stack, Tuple, Pad, Dict
 
 def clean_text(text):
     '''
-    将符号替换为
+    文本处理：将符号替换为’‘，’.‘，','以及‘？’之一
     '''
     text = text.replace('!', '.')
     text = text.replace(':', ',')
@@ -103,17 +103,41 @@ def format_data(train_text):
             texts.append(cur_text)
     return texts,labels
 
-def write_json(filename, dataset):
-    print('write to'+filename)
-    with codecs.open(filename, mode="w", encoding="utf-8") as f:
-        ujson.dump(dataset, f)
+# def write_json(filename, dataset):
+#     print('write to'+filename)
+#     with codecs.open(filename, mode="w", encoding="utf-8") as f:
+#         ujson.dump(dataset, f)
+
+def output_to_tsv(texts,labels,file_name):
+    data=[]
+    for text,label in zip(texts,labels):
+        if(len(text)!=len(label)):
+            print(text)
+            print(label)
+            continue
+        data.append([' '.join(text),' '.join(label)])
+    df=pd.DataFrame(data,columns=['text_a','label'])
+    df.to_csv(file_name,index=False,sep='\t')
+
+def output_to_train_tsv(texts,labels,file_name):
+    data=[]
+    for text,label in zip(texts,labels):
+        if(len(text)!=len(label)):
+            print(text)
+            print(label)
+            continue
+        if(len(text)==0):
+            continue
+        data.append([' '.join(text),' '.join(label)])
+    # data=data[65000:70000]
+    df=pd.DataFrame(data,columns=['text_a','label'])
+    df.to_csv(file_name,index=False,sep='\t')
 
 if __name__ == '__main__': 
     # 读入参数
     yaml_file = './electra.base.yaml'
     with open(yaml_file, 'rt') as f:
         args = AttrDict(yaml.safe_load(f))
-        # pprint(args)
 
     # 数据读取
     with open(args.data_path + args.output_train_path, 'r', encoding='utf-8') as f:
@@ -139,68 +163,61 @@ if __name__ == '__main__':
             '?': '3',
         }
     
-    # 以一个文本序列为例，引入 format_data 函数的构建
-    text=tokenizer.tokenize("all the projections [ say that ] this one [ billion ] will [ only ] grow with one to two or three percent")
-    print(text)
-    label=[]
-    cur_text=[]
-    for item in text:
-        if(item in punctuation_enc):
-            print(item)
-            label.pop()
-            label.append(punctuation_enc[item])
-        else:
-            cur_text.append(item)
-            label.append(punctuation_enc['O'])
-    # label=[item for item in text]
-    print(label)
-    print(cur_text)
-    print(len(label))
-    print(len(cur_text))
+    # # 以一个文本序列为例，构建模型需要的数据集
 
+    # example_sentence="all the projections [ say that ] this one [ billion ] will [ only ] grow with one to two or three percent"
+    
+    # print('Use the example sentence to create the dataset', example_sentence)
+    
+    # example_text=tokenizer.tokenize(example_sentence)
+    # print(example_text)
+
+    # label=[]
+    # cur_text=[]
+    # for item in example_text:
+    #     if(item in punctuation_enc):
+    #         print(item)
+    #         label.pop()
+    #         label.append(punctuation_enc[item])
+    #     else:
+    #         cur_text.append(item)
+    #         label.append(punctuation_enc['O'])
+    # # label=[item for item in text]
+    # print(label)
+    # print(cur_text)
+    # print(len(label))
+    # print(len(cur_text))
  
     # 构建训练集
-    texts,labels=format_data(train_text)
+    train_texts,train_labels=format_data(train_text)
 
-    print(len(texts))
-    print(texts[0])
-    print(labels[0])
+    # print(len(train_texts))
+    # print(train_texts[0])
+    # print(train_labels[0])
 
-    def output_to_tsv(texts,labels,file_name):
-        data=[]
-        for text,label in zip(texts,labels):
-            if(len(text)!=len(label)):
-                print(text)
-                print(label)
-                continue
-            data.append([' '.join(text),' '.join(label)])
-        df=pd.DataFrame(data,columns=['text_a','label'])
-        df.to_csv(file_name,index=False,sep='\t')
+    # 导出训练集到指定路径
+    output_to_train_tsv(train_texts, train_labels, args.output_train_tsv)
+
+    # 构建测试集，导出测试集到指定路径
+    test_texts,test_labels=format_data(test_text)
+    output_to_tsv(test_texts, test_labels, args.output_test_tsv)
+
+    # print(len(test_texts))
+    # print(test_texts[0])
+    # print(labels[0])
+
+    # 构建验证集，导出验证集到指定路径
+    valid_texts, valid_labels=format_data(valid_text)
+    output_to_tsv(valid_texts, valid_labels, args.output_dev_tsv)
+
+    # 测试
+    # print(len(valid_texts))
+    # print(valid_texts[0])
+    # print(labels[0])
+
+    # raw_path='.'
+    # train_file = os.path.join(raw_path, args.output_train_tsv)
+    # dev_file = os.path.join(raw_path, args.output_dev_tsv)
     
-    def output_to_train_tsv(texts,labels,file_name):
-        data=[]
-        for text,label in zip(texts,labels):
-            if(len(text)!=len(label)):
-                print(text)
-                print(label)
-                continue
-            if(len(text)==0):
-                continue
-            data.append([' '.join(text),' '.join(label)])
-        # data=data[65000:70000]
-        df=pd.DataFrame(data,columns=['text_a','label'])
-        df.to_csv(file_name,index=False,sep='\t')
-
-    output_to_train_tsv(texts,labels, args.output_train_tsv)
-
-    texts,labels=format_data(test_text)
-    output_to_tsv(texts,labels, args.output_test_tsv)
-    texts,labels=format_data(valid_text)
-    output_to_tsv(texts,labels, args.output_dev_tsv)
-
-    raw_path='.'
-    train_file = os.path.join(raw_path, args.output_train_tsv)
-    dev_file = os.path.join(raw_path, args.output_dev_tsv)
-    
-    train_data=pd.read_csv(train_file,sep='\t')
-    train_data.head()
+    # train_data=pd.read_csv(train_file,sep='\t')
+    # train_data.head()

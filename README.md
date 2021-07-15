@@ -1,6 +1,8 @@
 # 一、项目简介
 
-本项目是深度学习材料获取一站式平台，内容涵盖[**深度学习入门课**](https://aistudio.baidu.com/aistudio/course/introduce/1297)、[**深度学习百科**](https://paddlepedia.readthedocs.io/en/latest/index.html)、**产业实践案例(开发中)**以及**系列特色课程（开发中）**等等，后续会分享**深度学习实践Tricks**和**前沿论文复现**等。从理论到实践，从科研到产业应用，各类学习材料一应俱全，旨在帮助开发者高效地学习和掌握深度学习知识，快速成为AI跨界人才。
+本项目是一站式深度学习在线百科，内容涵盖[**零基础入门深度学习**](https://aistudio.baidu.com/aistudio/course/introduce/1297)、**产业实践深度学习**、**特色课程（开发中）**；[**深度学习百问**](https://paddlepedia.readthedocs.io/en/latest/index.html)、**产业实践(开发中)** 等等。从理论到实践，从科研到产业应用，各类学习材料一应俱全，旨在帮助开发者高效地学习和掌握深度学习知识，快速成为AI跨界人才。
+
+<center><img src="./docs/images/cover/repo.png" width=70%></center><br></br>
 
 * **内容全面**：无论您是深度学习初学者，还是资深用户，都可以在本项目中快速获取到需要的学习材料。
 
@@ -10,7 +12,7 @@
 
 * **前沿分享** ：定期分享顶会最新论文解读和代码复现，开发者可以实时掌握最新的深度学习算法。
 
-# 二、 零基础实践深度学习入门课
+# 二、 零基础实践深度学习
 
 
 
@@ -26,33 +28,33 @@
 
     ## [学习地图](https://aistudio.baidu.com/aistudio/projectdetail/2056805)：
 
-    1.零基础实践深度学习七日课 开营介绍
+    **1.零基础实践深度学习七日课 开营介绍**
 
     | 资料 | 链接                                                         |
     | ---- | ------------------------------------------------------------ |
-    | 视频 | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1366742](https://aistudio.baidu.com/aistudio/education/lessonvideo/1366742) |
+    | 视频 | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1452173](https://aistudio.baidu.com/aistudio/education/lessonvideo/1452173) |
     | 课件 | [https://aistudio.baidu.com/aistudio/education/preview/1447519](https://aistudio.baidu.com/aistudio/education/preview/1447519) |
 
-    2.比赛赛题讲解
+    **2.比赛赛题讲解**
 
     | 资料 | 链接                                                         |
     | ---- | ------------------------------------------------------------ |
     | 视频 | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1372844](https://aistudio.baidu.com/aistudio/education/lessonvideo/1372844) |
     | 项目 | [https://aistudio.baidu.com/aistudio/projectdetail/1938271](https://aistudio.baidu.com/aistudio/projectdetail/1938271) |
 
-    3.DAY1-AI职业发展与课程介绍
+    **3.DAY1-AI职业发展与课程介绍**
 
     | 资料 | 链接                                                         |
     | ---- | ------------------------------------------------------------ |
-    | 视频 | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1383195](https://aistudio.baidu.com/aistudio/education/lessonvideo/1383195) |
-    | 课件 | [https://aistudio.baidu.com/aistudio/education/preview/1403278](https://aistudio.baidu.com/aistudio/education/preview/1403278) |
+    | 视频 | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1452185](https://aistudio.baidu.com/aistudio/education/lessonvideo/1452185) |
+    | 课件 | [https://aistudio.baidu.com/aistudio/education/preview/1452186](https://aistudio.baidu.com/aistudio/education/preview/1452186) |
 
-    4.DAY2-手写数字识别案例入门深度学习
+    **4.DAY2-手写数字识别案例入门深度学习**
 
     | 资料       | 链接                                                         |
     | ---------- | ------------------------------------------------------------ |
-    | 视频（上） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1382975](https://aistudio.baidu.com/aistudio/education/lessonvideo/1382975) |
-    | 视频（下） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1383003](https://aistudio.baidu.com/aistudio/education/lessonvideo/1383003) |
+    | 视频（上） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1452194](https://aistudio.baidu.com/aistudio/education/lessonvideo/1452194) |
+    | 视频（下） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1452196](https://aistudio.baidu.com/aistudio/education/lessonvideo/1452196) |
     | 课件       | [https://aistudio.baidu.com/aistudio/education/preview/1382783](https://aistudio.baidu.com/aistudio/education/preview/1382783) |
 
     附：手写数字识别案例入门深度学习项目
@@ -70,13 +72,13 @@
     | 手写数字识别之恢复训练               | [https://aistudio.baidu.com/aistudio/projectdetail/2057069](https://aistudio.baidu.com/aistudio/projectdetail/2057069) |
     | 手写数字识别之动转静部署             | [https://aistudio.baidu.com/aistudio/projectdetail/2057074](https://aistudio.baidu.com/aistudio/projectdetail/2057074) |
 
-    5.DAY3-眼疾识别案例实践计算机视觉
+    **5.DAY3-眼疾识别案例实践计算机视觉**
 
     | 资料       | 链接                                                         |
     | ---------- | ------------------------------------------------------------ |
-    | 视频（上） | https://aistudio.baidu.com/aistudio/education/lessonvideo/1382809 |
-    | 视频（下） | https://aistudio.baidu.com/aistudio/education/lessonvideo/1382861 |
-    | 课件       | https://aistudio.baidu.com/aistudio/education/preview/1382803 |
+    | 视频（上） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1452200](https://aistudio.baidu.com/aistudio/education/lessonvideo/1452200) |
+    | 视频（下） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1452203](https://aistudio.baidu.com/aistudio/education/lessonvideo/1452203) |
+    | 课件       | [https://aistudio.baidu.com/aistudio/education/preview/1452198](https://aistudio.baidu.com/aistudio/education/preview/1452198) |
 
     附：眼疾识别案例项目
 
@@ -85,13 +87,13 @@
     | 卷积神经网络基础 | [https://aistudio.baidu.com/aistudio/projectdetail/2057136](https://aistudio.baidu.com/aistudio/projectdetail/2057136) |
     | 图像分类         | [https://aistudio.baidu.com/aistudio/projectdetail/2057141](https://aistudio.baidu.com/aistudio/projectdetail/2057141) |
 
-    6.DAY4-词向量训练和情感分析任务
+    **6.DAY4-词向量训练和情感分析任务**
 
     | 资料       | 链接                                                         |
     | ---------- | ------------------------------------------------------------ |
-    | 视频（上） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1392063](https://aistudio.baidu.com/aistudio/education/lessonvideo/1392063) |
-    | 视频（下） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1392070](https://aistudio.baidu.com/aistudio/education/lessonvideo/1392070) |
-    | 课件       | [https://aistudio.baidu.com/aistudio/education/preview/1388585](https://aistudio.baidu.com/aistudio/education/preview/1388585) |
+    | 视频（上） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1452210](https://aistudio.baidu.com/aistudio/education/lessonvideo/1452210) |
+    | 视频（下） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1452213](https://aistudio.baidu.com/aistudio/education/lessonvideo/1452213) |
+    | 课件       | [https://aistudio.baidu.com/aistudio/education/preview/1452208](https://aistudio.baidu.com/aistudio/education/preview/1452208) |
 
     附：词向量训练和情感分析任务项目
 
@@ -101,13 +103,13 @@
     | 词向量Word Embedding | [https://aistudio.baidu.com/aistudio/projectdetail/2057101](https://aistudio.baidu.com/aistudio/projectdetail/2057101) |
     | 文本情感倾向性分析   | [https://aistudio.baidu.com/aistudio/projectdetail/2057105](https://aistudio.baidu.com/aistudio/projectdetail/2057105) |
 
-    7.DAY5-基于DSSM的电影推荐案例
+    **7.DAY5-基于DSSM的电影推荐案例**
 
     | 资料       | 链接                                                         |
     | ---------- | ------------------------------------------------------------ |
-    | 视频（上） | https://aistudio.baidu.com/aistudio/education/lessonvideo/1406745 |
-    | 视频（下） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1406747](https://aistudio.baidu.com/aistudio/education/lessonvideo/1406747) |
-    | 课件       | [https://aistudio.baidu.com/aistudio/education/preview/1392088](https://aistudio.baidu.com/aistudio/education/preview/1392088) |
+    | 视频（上） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1452219](https://aistudio.baidu.com/aistudio/education/lessonvideo/1452219) |
+    | 视频（下） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1452220](https://aistudio.baidu.com/aistudio/education/lessonvideo/1452220) |
+    | 课件       | [https://aistudio.baidu.com/aistudio/education/preview/1452217](https://aistudio.baidu.com/aistudio/education/preview/1452217) |
 
     附：DSSM的电影推荐案例项目
 
@@ -119,17 +121,17 @@
     | 模型训练与特征保存 | [https://aistudio.baidu.com/aistudio/projectdetail/2057122](https://aistudio.baidu.com/aistudio/projectdetail/2057122) |
     | 电影推荐           | [https://aistudio.baidu.com/aistudio/projectdetail/2057128](https://aistudio.baidu.com/aistudio/projectdetail/2057128) |
 
-    8.DAY6-模型优化经验与飞桨深入解读
+    **8.DAY6-模型优化经验与飞桨深入解读**
 
     | 资料       | 链接                                                         |
     | ---------- | ------------------------------------------------------------ |
-    | 视频（上） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1428668](https://aistudio.baidu.com/aistudio/education/lessonvideo/1428668) |
-    | 视频（下） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1428674](https://aistudio.baidu.com/aistudio/education/lessonvideo/1428674) |
-    | 课件       | [https://aistudio.baidu.com/aistudio/education/preview/1447773](https://aistudio.baidu.com/aistudio/education/preview/1447773) |
+    | 视频（上） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1452226](https://aistudio.baidu.com/aistudio/education/lessonvideo/1452226) |
+    | 视频（下） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1452227](https://aistudio.baidu.com/aistudio/education/lessonvideo/1452227) |
+    | 课件       | [https://aistudio.baidu.com/aistudio/education/preview/1452224](https://aistudio.baidu.com/aistudio/education/preview/1452224) |
 
-# 三、 深度学习百科
+# 三、 深度学习百问
 
-深度学习百科包含深度学习基础篇、深度学习进阶篇、深度学习应用篇、强化学习篇以及面试宝典，详细信息请参阅[Paddle知识点文档平台](https://paddlepedia.readthedocs.io/en/latest/index.html)。
+深度学习百问包含深度学习基础篇、深度学习进阶篇、深度学习应用篇、强化学习篇以及面试宝典，详细信息请参阅[Paddle知识点文档平台](https://paddlepedia.readthedocs.io/en/latest/index.html)。
 
 * **深度学习基础篇**  
 
@@ -291,13 +293,17 @@
     * [推荐系统的PV和UV代表什么？](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/evaluation_metric.html#id2)
     * [协同过滤推荐和基于内容的推荐的区别是什么？](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/evaluation_metric.html#id2)
 
-# 四、 Transformer系列特色课（开发中）
+# 四、特色课- Transformer系列（开发中）
 
 | 章节名称                      | notebook链接                                                 | Python实现                                                   | 课程简介                                                     |
 | ----------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| transformer在图像分类中的应用 | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2154618) | [Python实现](./transformer_courses/Application_of_transformer_in_image_classification) | 本章节将为大家详细介绍 Transformer 在 CV 领域中的两个经典算法：ViT 以及 DeiT。带领大家一起学习Transformer 结构在图像分类领域的具体应用。 |
-|经典的预训练语言模型   |  [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2110336)  |[Python实现](./transformer_courses/Transformer_Machine_Translation)|本章节将为大家详细介绍NLP领域 Transformer。Transformer的前世今生，包括ELMo，GPT，Transformer，BERT等经典模型，还会介绍Transformer在机器翻译里面的应用                                                              |
-| 预训练模型的瘦身策略 – – 高效结构 |  [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2138857)|  [Python实现](./Transformer_Punctuation_Restoration) | 本章节将为大家详细介绍NLP领域，基于Transformer模型的瘦身技巧。包括 Electra，AlBERT 以及 performer。还会介绍代码实现案例：基于Electra的语音识别后处理中文标点符号预测   |
+|经典的预训练语言模型   |  [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2110336)  |[Python实现](./transformer_courses/Transformer_Machine_Translation)|本章节将为大家详细介绍NLP领域 Transformer。Transformer的前世今生，包括ELMo，GPT，Transformer，BERT等经典模型，还会介绍Transformer在机器翻译里面的应用|
+|经典的预训练语言模型   |  [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2110336)  |[Python实现](./transformer_courses/Transformer_Machine_Translation)|本章节将为大家详细介绍NLP领域 Transformer。Transformer的前世今生，包括ELMo，GPT，Transformer，BERT等经典模型，还会介绍Transformer在机器翻译里面的应用|
+|预训练模型在自然语言理解方面的改进| [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2166195) | [Python实现](./transformer_courses/reading_comprehension_based_on_ernie)|ERNIE， RoBERTa， KBERT，清华ERNIE等，在广度上去分析经典预训练模型的一些改进。|
+|预训练模型在长序列建模方面的改进| [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2166197) |[Python实现](./transformer_courses/sentiment_analysis_based_on_xlnet)|Transformer-xl， xlnet， longformer等，分析BERT和transformer的长度局限，并讨论这些方法的改进点。|
+| BERT蒸馏 |  [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2177549)|  [Python实现](./transformer_courses/BERT_distillation) | 本章节为大家详细介绍了针对BERT模型的蒸馏算法，包括：Patient-KD、DistilBERT、TinyBERT、DynaBERT等模型，同时以代码的形式为大家展现了如何使用DynaBERT的训练策略对TinyBERT进行蒸馏。   |
+| 预训练模型的瘦身策略 – – 高效结构 |  [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2138857)|  [Python实现](./transformer_courses/Transformer_Punctuation_Restoration) | 本章节将为大家>详细介绍NLP领域，基于Transformer模型的瘦身技巧。包括 Electra，AlBERT 以及 performer。还会介绍代码实现案例：基于Electra的语音识别后处理中文标点符号预测   |
+| transformer在图像分类中的应用 | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2154618) | [Python实现](./transformer_courses/Application_of_transformer_in_image_classification) | 本章>节将为大家详细介绍 Transformer 在 CV 领域中的两个经典算法：ViT 以及 DeiT。带领大家一起学习Transformer 结构在图像分类领域的具体应用。 |
 |                               |                                                              |                                                              |                                                              |
 
 # 五、 经典深度学习案例集（开发中）
@@ -329,13 +335,9 @@
 
 <center><img src="https://github.com/ZhangHandi/images-for-paddledocs/blob/main/images/readme/qr_code.png?raw=true"/></center><br></br>
 
-
-
 # 八、许可证书
 
 本项目的发布受[Apache 2.0 license](https://www.apache.org/licenses/LICENSE-2.0.txt)许可认证。
-
-
 
 # 九、贡献内容
 
@@ -350,3 +352,4 @@
 > pre-commit install
 
 添加修改的代码后，对修改的文件进行代码规范，pre-commit 会自动调整代码格式，执行一次即可，后续commit不需要再执行。提交pr流程，详见：[awesome-DeepLearning 提交 pull request 流程](./examples/awesome-DeepLearning_pr_procedure.md)
+
