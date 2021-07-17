@@ -1,0 +1,148 @@
+**归一化方法之Instance Normalization**
+
+**概念：**
+      
+      计算归一化统计量时考虑单个样本，单个通道的所有元素。对于单个输入数据，每个feature map的像素点求均值和方差。
+**计算公式：**
+
+![](https://ai-studio-static-online.cdn.bcebos.com/9c8fcabcaacf4bc7a4b5f3fd9dd38ac90ea8da1b2b744c3a815f70c86cce1a6f)
+**算法流程：**
+
+      1.沿着通道计算每张图的均值u
+      2.沿着通道计算每张图的方差σ^2
+      3.对x做归一化，x’=(x-u)/开根号(σ^2+ε)
+      4.加入缩放和平移变量γ和β ,归一化后的值，y=γx’+β
+```
+def Instancenorm(x, gamma, beta):
+
+    # x_shape:[B, C, H, W]
+    results = 0.
+    eps = 1e-5
+
+    x_mean = np.mean(x, axis=(2, 3), keepdims=True)
+    x_var = np.var(x, axis=(2, 3), keepdims=True0)
+    x_normalized = (x - x_mean) / np.sqrt(x_var + eps)
+    results = gamma * x_normalized + beta
+    return results
+```
+**作用：**
+
+    可以加速模型收敛，且保持每个图像实例之间的独立。
+**应用场景：**
+
+    适用于生成模型中，比如图片风格迁移。用于RNN/LSTM等循环网络或GAN等生成式网络更好。
+
+**归一化方法之Group Normailzation**
+
+**概念：**
+
+GN是指对同一张图片的同一层的某几个（不是全部）通道一起进行Normalization操作。这几个通道称为一个Group。对于单个输入数据，将所有feature map分成G个互不重叠的group，每组内的像素点求均值和方差；当G = 1时，GN = LN，当G = C时，GN = IN（默认G = 32）
+
+**算法流程：**
+```
+def GroupNorm(x, gamma, beta, G=16):
+
+    # x_shape:[B, C, H, W]
+    results = 0.
+    eps = 1e-5
+    x = np.reshape(x, (x.shape[0], G, x.shape[1]/16, x.shape[2], x.shape[3]))
+
+    x_mean = np.mean(x, axis=(2, 3, 4), keepdims=True)
+    x_var = np.var(x, axis=(2, 3, 4), keepdims=True0)
+    x_normalized = (x - x_mean) / np.sqrt(x_var + eps)
+    results = gamma * x_normalized + beta
+    return results
+```
+**作用：**
+
+GN的归一化方式避开了batch size对模型的影响
+
+**应用场景：**
+
+ 适用于占用显存比较大的任务，例如图片分类、目标检测、语义分割、视频分类
+
+
+**归一化之Layer Normalization**
+
+**概念：**
+
+同一个样本的不同通道做归一化。
+
+**计算公式：**
+
+![](https://ai-studio-static-online.cdn.bcebos.com/3b7c2fff453d41a1ba4d094b5578576bb23128d285ae4fce9900c9b2aee1e8ff)
+
+**算法流程：**
+
+```
+def Layernorm(x, gamma, beta):
+
+    # x_shape:[B, C, H, W]
+    results = 0.
+    eps = 1e-5
+
+    x_mean = np.mean(x, axis=(1, 2, 3), keepdims=True)
+    x_var = np.var(x, axis=(1, 2, 3), keepdims=True0)
+    x_normalized = (x - x_mean) / np.sqrt(x_var + eps)
+    results = gamma * x_normalized + beta
+    return results
+```
+**作用：**
+
+可以将数据分布拉到激活函数的非饱和区，具有权重/数据伸缩不变性的特点。起到缓解梯度消失/爆炸、加速训练、正则化的效果。LN得到的模型更稳定；
+
+**应用场景：**
+
+用于RNN/LSTM等循环网络或GAN等生成式网络更好
+
+**可变卷积方法详解：**
+
+**背景**
+
+如何有效地对几何图形的变化进行建模一直是一个挑战，大体上有两种处理方法：（1）构建一个包含各种变化的数据集，其本质是数据扩增（2）使用具有形变不变性的特征和算法（如SIFT）。这两种方法都有很大的局限性：几何形变被假设是固定和已知的，这是一种先验信息，用这些已知的形变去处理未知的形变是不合理的；手工设计的特征或算法无法应对过度复杂的形变，即使该形变是已知的。常规卷积操作的感受域是固定的，但不同大小的目标应该需要不同大小的感受域，甚至是不规则的感受域，为了提高网络结构的几何形变的建模能力，提出了可变卷积。
+
+可变卷积的位置是可变形的，这样可以更准确地提取到我们想要的特征（传统的卷积仅仅只能提取到矩形框的特征），如下图所示，左边传统的卷积显然没有提取到完整绵羊的特征，而右边的可变形卷积则提取到了完整的不规则绵羊的特征。
+
+![](https://ai-studio-static-online.cdn.bcebos.com/696f352229244e7c87fb14e7f1bc1be766fc35a9d93349a4951a7e8506271ff4)
+
+**DCN V1**
+
+**方法：**
+在每一个卷积采样点加上了一个偏移量
+
+![](https://ai-studio-static-online.cdn.bcebos.com/af3d82bba6914e64873c71ea81fdf7b3917499e4c061482693556b6db3dee4e0)
+
+(a) 所示的正常卷积规律的采样 9 个点（绿点），(b)(c)(d) 为可变形卷积，在正常的采样坐标上加上一个位移量（蓝色箭头），其中 (c)(d) 作为 (b) 的特殊情况，展示了可变形卷积可以作为尺度变换，比例变换和旋转变换等特殊情况。
+
+可变形卷积层是通过对feature map进行卷积（注意：offsets的得到是通过常规卷积）得到offsets，offsets是与输入feature map一样尺寸、通道数为2N（N为卷积核的像素点数，如3*3卷积核则N=9），即通过一个简单的卷积之后得到feature map上每个点的对应N个offset，2N是因为每个偏移包含x y两个维度的偏移，这样对当前点进行卷积时候即可得到卷积核的N个点的偏移。如下图所示：
+
+![](https://ai-studio-static-online.cdn.bcebos.com/8bb81cce105f4c81b16babb97b10f471a104bf75357b44febe7ecbd1f2363ceb)
+
+**公式推导：**
+
+![](https://ai-studio-static-online.cdn.bcebos.com/ddc31f2479944e4ab3aa9d74f624b333dc484d0a3a7d4e8aa245e59290f339f5)
+![](https://ai-studio-static-online.cdn.bcebos.com/136dfcbfd83b426996846b5ef34fda82c587f359011546e58f8772af78e886b7)
+
+**DCN V2**
+
+**方法：**
+在V1的基础上，V2针对V1存在的问题RoI外部的这种几何变化适应性表现得不好，导致特征会受到无关的图像内容影响做出了改进。
+
+1.使用更多的可变形卷积
+
+在DCN v1中只在conv 5中使用了三个可变形卷积，在DCN v2中把conv3到conv5都换成了可变形卷积，提高算法对几何形变的建模能力。
+
+2.在DCNv1基础（添加offset）上添加每个采样点的权重
+
+![](https://ai-studio-static-online.cdn.bcebos.com/f3618fb124bc499d96eeeeaacc0df4526db09103927f4f45a400a78b363f8f59)
+
+△mk就是modulation要学习的参数，这个参数的取值范围是[0,1]
+
+3。在模型训练阶段引入RCNN feature mimicking，通过联合训练RCNN网络提供有效的监督信息，发挥modulation的权重作用，使得提取到的特征更加集中于有效区域
+
+基于知识蒸馏的思想，采用feature mimicking的手段在训练阶段进行RCNN feature mimcking
+
+![](https://ai-studio-static-online.cdn.bcebos.com/3ee535f4f0da403fb660da4646f1ca0ee09ad8ecaed842b08047bfbd8227bee1)
+
+左边的网络为主网络（Faster RCNN），右边的网络为子网络（RCNN）。用主网络训练过程中得到的RoI去裁剪原图，将裁剪到的图resize到224×224大小作为子网络的输入，子网络通过RCNN算法提取特征，最终提取到14×14大小的特征图，此时再结合IoU（此时的IoU就是一整个输入图区域，也就是224×224）作为modulated deformable RoI pooling层的输入得到IoU特征，最后通过2个fc层得到1024维特征，这部分特征和主网络输出的1024维特征作为feature mimicking loss的输入，用来约束这2个特征的差异。因为RCNN这个子网络的输入就是RoI在原输入图像上裁剪出来的图像，因此不存在RoI以外区域信息的干扰，这使得RCNN这个网络训练得到的分类结果更加可靠，以此通过一个损失函数监督主网络Faster RCNN的分类支路训练就能够迫使网络提取到更多RoI内部特征，而这个迫使的过程主要就是通过添加的modulation机制和原有的offset实现。
+
