@@ -1,0 +1,112 @@
+#第一问
+OHEM算法，它在训练过程中自动选择困难样本，其核心思想是根据输入样本的损失值进行筛选，筛选出困难样本，然后将筛选得到的这些样本应用在SGD中。这里有一个细节：重合率比较大的ROI之间的损失也比较相似，因此作者先对输入样本进行NMS操作，去除重合率较大的ROI，原文给出的IoU阈值是0.7。
+作者将OHEM应用在Fast RCNN的网络结构。Fast RCNN分成两个components：ConvNet和RoINet， ConvNet为共享的底层卷积层，RoINet为RoI Pooling后的层，包括全连接层。
+实际操作中是将原来的一个ROI Network扩充为两个ROI Network，这两个ROI Network共享参数。首先，ROI经过ROI plooling层生成feature map，然后进入上面的ROI network得到所有ROI的loss；hard ROI sampler结构根据损失排序选出hard example，并把这些hard example作为下面的ROI network的输入。也就是说，上面一个ROI Network只有forward操作，主要用于计算损失；下面一个ROI Network包括forward和backward操作，以hard example作为输入，计算损失并回传梯度。
+论文中还提及到一种OHEM简单的实现方式：在原有的Fast-RCNN里的loss layer里面对所有的props计算其loss，根据loss对其进行排序，选出K个hard examples，反向传播时，只对这K个props的梯度/残差回传，而其他的props的梯度/残差设为0。
+补充：没有采用设定背景和目标样本数的比例方式处理该类问题，这种在线选择方式针对性更强；随着数据集的增大，算法的提升明显 ；但easy example被过滤掉了，网络训练使用的样本几乎都是hard example，这可能导致模型对简单样本的判别能力下降。
+
+
+S-OHEM（基于loss分布采样的在线困难样本挖掘）
+
+先来看看原生的 OHEM 存在什么问题？假设给定 RoI_A 和 RoI_B，其对应的分类和边框回归损失分别为和。
+如果按照原生的 OHEM（假定各损失函数权重相同），此时 RoI_A 的总体 loss 大于 RoI_B，也就是说 A 相对于 B 更难分类；而实际上单从分类损失函数（交叉熵），RoI_A 和 RoI_B 的实际类别概率分别是 61.6% 和 64.5%，在类别概率上两者只相差 0.031，可以认为 A 和 B 具有相同的性能。
+单从边框损失函数（Smooth L1），虽然 A 和 B 的损失函数只相差 0.01，但这个微小的差会导致预测边框和 groudtruth 有 0.14 的差距，此时，B 相对于 A 更难分类，因此单从 top-N 损失函数来筛选困难样本是不可靠的。
+针对上述问题，提出了 S-OHEM 方法[2]（发表于 2017 年的 CCCV），主要考虑 OHEM 训练过程忽略了不同损失分布的影响，因此 S-OHEM 根据 loss 的分布抽样训练样本。它的做法是将预设 loss 的四个分段：
+给定一个 batch，先生成输入 batch 中所有图像的候选 RoI，再将这些 RoI 送入到 Read only RoI 网络得到 RoIs 的损失，然后将每个 RoI 根据损失（这里损失是一个组合，具体公式为，α，β 随着训练阶段变化而变化。
+之所以采用这个公式是因为在训练初期阶段，分类损失占主导作用；在训练后期阶段，边框回归损失函数占主导作用）划分到上面四个分段中，然后针对每个分段，通过排序筛选困难样本。再将经过筛选的 RoIs 送入反向传播，用于更新网络参数。
+优点：相比原生 OHEM，S-OHEM 考虑了基于不同损失函数的分布来抽样选择困难样本，避免了仅使用高损失的样本来更新模型参数。
+缺点：因为不同阶段，分类损失和定位损失的贡献不同，所以选择损失中的两个参数 α，β 需要根据不同训练阶段进行改变，当应用与不同数据集时，参数的选取也是不一样的．即引入了额外的超参数。
+
+Focal Loss（损失函数的权重调整）
+针对 OHEM 算法中忽略易分样本的问题，本文提出了一种新的损失函数 Focal Loss（发表于 2017 ICCV），它是在标准交叉熵损失基础上修改得到的。这个损失函数可以通过减少易分类样本的权重，使得模型在训练时更专注于难分类的样本。
+为了证明 Focal Loss 的有效性，作者设计了一个 dense detector：RetinaNet，并且在训练时采用 Focal Loss 训练。实验证明 RetinaNet 不仅可以达到 one-stage detector 的速度，也能有 two-stage detector 的准确率。
+其中用于控制正负样本的权重，当其取比较小的值来降低负样本（多的那类样本）的权重；用于控制难易样本的权重，目的是通过减少易分样本的权重，从而使得模型在训练的时候更加专注难分样本的学习。文中通过批量实验统计得到当时效果最好。
+
+
+
+#第二问
+yolo v1 
+将一幅图像分成SxS个网格(grid cell)，如果某个object的中心 落在这个网格中，则这个网格就负责预测这个object。每个网络需要预测B个BBox的位置信息和confidence（置信度）信息，一个BBox对应着四个位置信息和一个confidence信息。confidence代表了所预测的box中含有object的置信度和这个box预测的有多准两重信息：
+
+
+YOLOv2
+YOLOv2相对v1版本，在继续保持处理速度的基础上，从预测更准确（Better），速度更快（Faster），识别对象更多（Stronger）这三个方面进行了改进。其中识别更多对象也就是扩展到能够检测9000种不同对象，称之为YOLO9000。
+文章提出了一种新的训练方法–联合训练算法，这种算法可以把这两种的数据集混合到一起。使用一种分层的观点对物体进行分类，用巨量的分类数据集数据来扩充检测数据集，从而把两种不同的数据集混合起来。
+联合训练算法的基本思路就是：同时在检测数据集和分类数据集上训练物体检测器（Object Detectors ），用检测数据集的数据学习物体的准确位置，用分类数据集的数据来增加分类的类别量、提升健壮性。
+
+YOLOv3
+YOLO v3的模型比之前的模型复杂了不少，可以通过改变模型结构的大小来权衡速度与精度。
+多尺度预测 （引入FPN）。
+更好的基础分类网络（darknet-53, 类似于ResNet引入残差结构）。
+分类器不在使用Softmax，分类损失采用binary cross-entropy loss（二分类交叉损失熵）
+YOLOv3不使用Softmax对每个框进行分类，主要考虑因素有两个：
+Softmax使得每个框分配一个类别（score最大的一个），而对于Open Images这种数据集，目标可能有重叠的类别标签，因此Softmax不适用于多标签分类。
+Softmax可被独立的多个logistic分类器替代，且准确率不会下降。
+分类损失采用binary cross-entropy loss。
+多尺度预测
+每种尺度预测3个box, anchor的设计方式仍然使用聚类,得到9个聚类中心,将其按照大小均分给3个尺度.
+尺度1: 在基础网络之后添加一些卷积层再输出box信息.
+尺度2: 从尺度1中的倒数第二层的卷积层上采样(x2)再与最后一个16x16大小的特征图相加,再次通过多个卷积后输出box信息.相比尺度1变大两倍.
+尺度3: 与尺度2类似,使用了32x32大小的特征图.
+
+YOLOv4
+1. 提出了一种高效而强大的目标检测模型。它使每个人都可以使用1080 Ti或2080 Ti GPU 训练超快速和准确的目标检测器（牛逼！）。
+2. 在检测器训练期间，验证了SOTA的Bag-of Freebies 和Bag-of-Specials方法的影响。
+3. 改进了SOTA的方法，使它们更有效，更适合单GPU训练，包括CBN [89]，PAN [49]，SAM [85]等。文章将目前主流的目标检测器框架进行拆分：input、backbone、neck 和 head.
+
+YOLOv5：
+
+(1) CSPDarknet53，CSP就是CSPNet论文里面跨阶段局部融合网络，仿照的是Densenet密集跨层挑层连接思想，但是考虑到内存消耗过大，故修改为部分局部跨层融合做法，图示如上所示
+(2) neck模块采用的是PANet和增强模块SPP。SPP结构非常容易理解，就是不同kernel size的pool操作进行融合，在yolov3的改进版中也有应用，对整个运行速度影响很小，但是效果提升明显。而PANet是FPN结构的改进版本，目的是加快信息之间的流通，具体细节可以参考想读懂YOLOV4，你需要先了解下列技术(二)
+yolov5的模型构建仿照了darknet中采用的cfg模式，即通过配置文件来构建网络，但是考虑到darknet中的cfg文件细粒度过高，对于重新构建网络来说是很累人的，可读性比较差，本文作者借鉴了cfg思想，但是进行了适当改进即不再细分到conv+bn+act层，而最细粒度是模块，为后续模型构建、结构理解有很大好处，但是这种写法缺点是不再能直接采用第三方工具例如netron进行网络模型可视化了。
+
+#问题三
+FASTER -RCNN:
+(1)输入测试图像；
+(2)将整张图片输入CNN，进行特征提取；
+(3)用RPN先生成一堆Anchor box，对其进行裁剪过滤后通过softmax判断anchors属于前景(foreground)或者后景(background)，即是物体or不是物体，所以这是一个二分类；同时，另一分支bounding box regression修正anchor box，形成较精确的proposal（注：这里的较精确是相对于后面全连接层的再一次box regression而言）
+(4)把建议窗口映射到CNN的最后一层卷积feature map上；
+(5)通过RoI pooling层使每个RoI生成固定尺寸的feature map；
+(6)利用Softmax Loss(探测分类概率) 和Smooth L1 Loss(探测边框回归)对分类概率和边框回归(Bounding box regression)联合训练.
+相比FASTER-RCNN，主要两处不同:
+(1)使用RPN(Region Proposal Network)代替原来的Selective Search方法产生建议窗口；
+(2)产生建议窗口的CNN和目标检测的CNN共享
+Faster R CNN由下面几部分组成：
+1.数据集，image input
+2.卷积层CNN等基础网络，提取特征得到feature map
+3-1.RPN层，再在经过卷积层提取到的feature map上用一个3x3的slide window，去遍历整个feature map,在遍历过程中每个window中心按rate，scale（1:2,1:1,2:1）生成9个anchors，然后再利用全连接对每个anchors做二分类（是前景还是背景）和初步bbox regression，最后输出比较精确的300个ROIs。
+3-2.把经过卷积层feature map用ROI pooling固定全连接层的输入维度。
+4.然后把经过RPN输出的rois映射到ROIpooling的feature map上进行bbox回归和分类。
+(1) 如何高效快速产生建议框？
+FASTER-RCNN创造性地采用卷积网络自行产生建议框，并且和目标检测网络共享卷积网络，使得建议框数目从原有的约2000个减少为300个，且建议框的质量也有本质的提高.
+
+#问题4
+1 输入端
+（1）Mosaic数据增强
+Yolov5的输入端采用了和Yolov4一样的Mosaic数据增强的方式。
+Mosaic数据增强提出的作者也是来自Yolov5团队的成员，不过，随机缩放、随机裁剪、随机排布的方式进行拼接，对于小目标的检测效果还是很不错的。
+（2） 自适应锚框计算
+在Yolo算法中，针对不同的数据集，都会有初始设定长宽的锚框。
+在网络训练中，网络在初始锚框的基础上输出预测框，进而和真实框groundtruth进行比对，计算两者差距，再反向更新，迭代网络参数。
+3）自适应图片缩放
+在常用的目标检测算法中，不同的图片长宽都不相同，因此常用的方式是将原始图片统一缩放到一个标准尺寸，再送入检测网络中。
+2 Backbone
+（1）Focus结构
+Focus结构，在Yolov3&Yolov4中并没有这个结构，其中比较关键是切片操作。
+比如右图的切片示意图，4*4*3的图像切片后变成2*2*12的特征图。
+以Yolov5s的结构为例，原始608*608*3的图像输入Focus结构，采用切片操作，先变成304*304*12的特征图，再经过一次32个卷积核的卷积操作，最终变成304*304*32的特征图。
+需要注意的是：Yolov5s的Focus结构最后使用了32个卷积核，而其他三种结构，使用的数量有所增加，
+（2）CSP结构
+Yolov4网络结构中，借鉴了CSPNet的设计思路，在主干网络中设计了CSP结构。
+Yolov5与Yolov4不同点在于，Yolov4中只有主干网络使用了CSP结构。
+而Yolov5中设计了两种CSP结构，以Yolov5s网络为例，CSP1_X结构应用于Backbone主干网络，另一种CSP2_X结构则应用于Neck中。
+3 Neck
+Yolov4的Neck结构中，采用的都是普通的卷积操作。而Yolov5的Neck结构中，采用借鉴CSPnet设计的CSP2结构，加强网络特征融合的能力。
+4 输出端
+1）Bounding box损失函数
+Yolov5中采用其中的GIOU_Loss做Bounding box的损失函数。
+而Yolov4中采用CIOU_Loss作为目标Bounding box的损失。
+（2）nms非极大值抑制
+在目标检测的后处理过程中，针对很多目标框的筛选，通常需要nms操作。
+因为CIOU_Loss中包含影响因子v，涉及groudtruth的信息，而测试推理时，是没有groundtruth的。
+所以Yolov4在DIOU_Loss的基础上采用DIOU_nms的方式，而Yolov5中采用加权nms的方式。
