@@ -2,39 +2,38 @@
 ## 一、可变形卷积v1
 + 在卷积神经网络中，由于卷积核采取了固定的几何结构，因此并不能很好地对存在几何形变（geometric transformations）的物体进行建模。因此，提出了可变形卷积v1和v2，具体叙述如下。
 首先从区别说起，从下面的图 1 中，可以看出标准卷积（standard convolutions）和可变形卷积（deformable convolutions）之间的区别。图（a）是一个常用的 3x3 的标准卷积所对应的采样点（绿色点）。图（b）是一个可变形卷积所对应的采样点（蓝色点），其中的箭头就是本文需要学习的偏移量（offsets），根据这些偏移量，就可以把标准卷积中对应的采样点（ 图(a)中绿色 ）移动到可变形卷积中的不规则采样点处（ 图(b)中蓝色 ）。图（c）和图（d）是图（b）的特殊情况，表明了可变形卷积囊括了长宽比、尺度变换和旋转变换。
- 
+![] (https://github.com/Eric-Zhang-Composing/awesome-DeepLearning/blob/fa6a3f826e3e5604bf0f062d8eb9267d30746794/examples/%E5%8F%AF1.png)
 + 对于普通的卷积，例如3x3卷积——对于每个输出y(p0)，都要从x上采样9个位置，这9个位置都在中心位置x(p0)向四周扩散，(-1,-1)代表x(p0)的左上角，(1,1)代表x(p0)的右下角。
- 
+![] (https://github.com/Eric-Zhang-Composing/awesome-DeepLearning/blob/fa6a3f826e3e5604bf0f062d8eb9267d30746794/examples/%E5%8F%AF2.png)
 + 所以传统的卷积输出就是（其中Pn 就是网格中的n个点）：
- 
+![] (https://github.com/Eric-Zhang-Composing/awesome-DeepLearning/blob/fa6a3f826e3e5604bf0f062d8eb9267d30746794/examples/%E5%8F%AF3.png)
 + 因此，可变形卷积在传统的卷积操作上加入了一个偏移量，正是这个偏移量才让卷积变形为不规则的卷积（这个偏移量可以是小数，所以下面的式子的特征值需要通过双线性插值的方法来计算）。
- 
+![] (https://github.com/Eric-Zhang-Composing/awesome-DeepLearning/blob/fa6a3f826e3e5604bf0f062d8eb9267d30746794/examples/%E5%8F%AF4.png)
 + 偏移量的计算方式如下
- 
+![] (https://github.com/Eric-Zhang-Composing/awesome-DeepLearning/blob/fa6a3f826e3e5604bf0f062d8eb9267d30746794/examples/%E5%8F%AF5.png)
 + 对于输入的一张feature map，假设原来的卷积操作是3×3的，为了学习偏移量offset，定义另外一个3×3的卷积层（图中上面的那层），输出的维度为原来feature map大小，channel数等于2N（分别表示x,y方向的偏移）。下面的可变形卷积即为先基于上面部分生成的offset做一个插值操作，然后执行普通的卷积。
 
 ## 二、可变形池化
- 
+![] (https://github.com/Eric-Zhang-Composing/awesome-DeepLearning/blob/fa6a3f826e3e5604bf0f062d8eb9267d30746794/examples/%E5%8F%AF6.png) 
 + 原始的RoIPooling在操作过程中将RoI划分为k×k个子区域，而可变形池化的偏移量其实就是子区域的偏移。同理，每一个子区域都有一个偏移，因此偏移量对应子区域有k×k个。与可变形卷积不同的是，可变形池化的偏移量是通过全连接层得到的。
 
 # DCN v2可变形卷积v2
 + 在DCN v1中，其只对conv 5使用了三个可变形卷积，在DCN v2中把conv3到conv5都换成了可变形卷积，提高算法对几何形变的建模能力。
- 
+![] (https://github.com/Eric-Zhang-Composing/awesome-DeepLearning/blob/fa6a3f826e3e5604bf0f062d8eb9267d30746794/examples/%E5%8F%AF7.png)
 ## 一、在DCNv1基础（添加offset）上添加每个采样点的权重
 + 在DCN v1中，卷积添加了一个offset ΔPn：
-  
+![] (https://github.com/Eric-Zhang-Composing/awesome-DeepLearning/blob/fa6a3f826e3e5604bf0f062d8eb9267d30746794/examples/%E5%8F%AF8.png)
 + 为了解决引入了一些无关区域的问题，在DCN v2中我们不只添加每一个采样点的偏移，还添加了一个权重系数Δmk
  ，来区分我们引入的区域是否为我们感兴趣的区域，假如这个采样点的区域我们不感兴趣，则把权重学习为0即可：
- 
+![] (https://github.com/Eric-Zhang-Composing/awesome-DeepLearning/blob/fa6a3f826e3e5604bf0f062d8eb9267d30746794/examples/%E5%8F%AF9.png)
 + 总的来说，DCN v1中引入的offset是要寻找有效信息的区域位置，DCN v2中引入权重系数是要给找到的这个位置赋予权重，这两方面保证了有效信息的准确提取。
 
 ## 二、R-CNN Feature Mimicking
 + 在实践中，把R-CNN和Faster RCNN的classification score结合起来可以提升performance。这说明，R-CNN学到的focus在物体上的feature可以解决无关上下文的问题。但是增加额外的R-CNN会使inference速度变慢很多。DCNV2里的解决方法是把R-CNN当做teacher network，让DCN V2的ROIPooling之后的feature去模拟R-CNN的feature，类似知识蒸馏的做法，下面具体展开：
- 
+![] (https://github.com/Eric-Zhang-Composing/awesome-DeepLearning/blob/fa6a3f826e3e5604bf0f062d8eb9267d30746794/examples/%E5%8F%AF10.png)
 + 左边的网络为主网络（Faster RCNN），右边的网络为子网络（RCNN）。实现上大致是用主网络训练过程中得到的RoI去裁剪原图，然后将裁剪到的图resize到224×224大小作为子网络的输入，这部分最后提取的特征和主网络输出的1024维特征作为feature mimicking loss的输入，用来约束这2个特征的差异（通过一个余弦相似度计算，如下图所示），同时子网络通过一个分类损失进行监督学习，因为并不需要回归坐标，所以没有回归损失。在inference阶段仅有主网络部分，因此这个操作不会在inference阶段增加计算成本。
- 
+![] (https://github.com/Eric-Zhang-Composing/awesome-DeepLearning/blob/fa6a3f826e3e5604bf0f062d8eb9267d30746794/examples/%E5%8F%AF11.png)
 + 因为RCNN这个子网络的输入就是RoI在原输入图像上裁剪出来的图像，因此不存在RoI以外区域信息的干扰，这就使得RCNN这个网络训练得到的分类结果更加可靠，以此通过一个损失函数监督主网络Faster RCNN的分类支路训练就能够使网络提取到更多RoI内部特征，而不是自己引入的外部特征。
-
 + 总的loss由三部分组成：mimic loss + R-CNN classification loss + Faster-RCNN loss.
 
 
