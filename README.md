@@ -2,7 +2,7 @@
 
 本项目是一站式深度学习在线百科，内容涵盖[**零基础入门深度学习**](https://aistudio.baidu.com/aistudio/course/introduce/1297)、**产业实践深度学习**、**特色课程（开发中）**；[**深度学习百问**](https://paddlepedia.readthedocs.io/en/latest/index.html)、**产业实践(开发中)** 等等。从理论到实践，从科研到产业应用，各类学习材料一应俱全，旨在帮助开发者高效地学习和掌握深度学习知识，快速成为AI跨界人才。
 
-<center><img src="./docs/images/cover/repo.png" width=70%></center><br></br>
+<center><img src="./docs/images/cover/repo.png" width=70%></center>
 
 * **内容全面**：无论您是深度学习初学者，还是资深用户，都可以在本项目中快速获取到需要的学习材料。
 
@@ -14,7 +14,7 @@
 
   
 
-# <span id='0'>快速传送：</span>
+# <span id='0'>快速跳转：</span>
 
 | 零基础入门深度学习​[:arrow_heading_down:](#1) | 产业实践深度学习[:arrow_heading_down:](#5)   |
 | -------------------------------------------- | -------------------------------------------- |
@@ -68,21 +68,46 @@
 
     附：手写数字识别案例入门深度学习项目
 
-    | 项目                                 | 链接                                                         |
-    | ------------------------------------ | ------------------------------------------------------------ |
-    | 使用飞桨完成手写数字识别模型         | [https://aistudio.baidu.com/aistudio/projectdetail/2057038](https://aistudio.baidu.com/aistudio/projectdetail/2057038) |
-    | 通过极简方案快速构建手写数字识别模型 | [https://aistudio.baidu.com/aistudio/projectdetail/2056976](https://aistudio.baidu.com/aistudio/projectdetail/2056976) |
-    | 手写数字识别之数据处理               | [https://aistudio.baidu.com/aistudio/projectdetail/2056979](https://aistudio.baidu.com/aistudio/projectdetail/2056979) |
-    | 手写数字识别之网络结构               | [https://aistudio.baidu.com/aistudio/projectdetail/2057051](https://aistudio.baidu.com/aistudio/projectdetail/2057051) |
-    | 手写数字识别之损失函数               | [https://aistudio.baidu.com/aistudio/projectdetail/1910072](https://aistudio.baidu.com/aistudio/projectdetail/1910072) |
-    | 手写数字识别之优化算法               | [https://aistudio.baidu.com/aistudio/projectdetail/2057060](https://aistudio.baidu.com/aistudio/projectdetail/2057060) |
-    | 手写数字识别之资源配置               | [https://aistudio.baidu.com/aistudio/projectdetail/2057061](https://aistudio.baidu.com/aistudio/projectdetail/2057061) |
-    | 手写数字识别之训练调试与优化         | [https://aistudio.baidu.com/aistudio/projectdetail/2057066](https://aistudio.baidu.com/aistudio/projectdetail/2057066) |
-    | 手写数字识别之恢复训练               | [https://aistudio.baidu.com/aistudio/projectdetail/2057069](https://aistudio.baidu.com/aistudio/projectdetail/2057069) |
-    | 手写数字识别之动转静部署             | [https://aistudio.baidu.com/aistudio/projectdetail/2057074](https://aistudio.baidu.com/aistudio/projectdetail/2057074) |
+    <table>
+        <tr>
+            <td>项目</td> 
+            <td>链接</td> 
+        </tr>
+        <tr>
+            <td >使用飞桨完成手写数字识别模型</td>
+            <td rowspan="10">https://aistudio.baidu.com/aistudio/education/group/info/1297</td>
+        </tr>
+        <tr>
+            <td >通过极简方案快速构建手写数字识别模型</td>
+        </tr>
+        <tr>
+            <td >手写数字识别之数据处理</td>
+        </tr>
+        <tr>
+            <td >手写数字识别之网络结构</td>
+        </tr>
+        <tr>
+            <td >手写数字识别之损失函数</td>
+        </tr>
+        <tr>
+            <td >手写数字识别之优化算法</td>
+        </tr>
+        <tr>
+            <td >手写数字识别之资源配置</td>
+        </tr>
+        <tr>
+            <td >手写数字识别之训练调试与优化</td>
+        </tr>
+        <tr>
+            <td >手写数字识别之恢复训练</td>
+        </tr>
+        <tr>
+            <td >手写数字识别之动转静部署</td>
+        </tr>
+    </table>
 
     **5.DAY3-眼疾识别案例实践计算机视觉**
-
+    
     | 资料       | 链接                                                         |
     | ---------- | ------------------------------------------------------------ |
     | 视频（上） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1452200](https://aistudio.baidu.com/aistudio/education/lessonvideo/1452200) |
@@ -90,11 +115,20 @@
     | 课件       | [https://aistudio.baidu.com/aistudio/education/preview/1452198](https://aistudio.baidu.com/aistudio/education/preview/1452198) |
 
     附：眼疾识别案例项目
-
-    | 项目             | 链接                                                         |
-    | ---------------- | ------------------------------------------------------------ |
-    | 卷积神经网络基础 | [https://aistudio.baidu.com/aistudio/projectdetail/2057136](https://aistudio.baidu.com/aistudio/projectdetail/2057136) |
-    | 图像分类         | [https://aistudio.baidu.com/aistudio/projectdetail/2057141](https://aistudio.baidu.com/aistudio/projectdetail/2057141) |
+    
+    <table>
+        <tr>
+            <td>项目</td> 
+            <td>链接</td> 
+        </tr>
+        <tr>
+            <td >卷积神经网络基础</td>
+            <td rowspan="2">https://aistudio.baidu.com/aistudio/education/group/info/1297</td>
+        </tr>
+        <tr>
+            <td >图像分类</td>
+        </tr>
+    </table>
 
     **6.DAY4-词向量训练和情感分析任务**
 
@@ -103,35 +137,61 @@
     | 视频（上） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1452210](https://aistudio.baidu.com/aistudio/education/lessonvideo/1452210) |
     | 视频（下） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1452213](https://aistudio.baidu.com/aistudio/education/lessonvideo/1452213) |
     | 课件       | [https://aistudio.baidu.com/aistudio/education/preview/1452208](https://aistudio.baidu.com/aistudio/education/preview/1452208) |
-
+    
     附：词向量训练和情感分析任务项目
-
-    | 项目                 | 链接                                                         |
-    | -------------------- | ------------------------------------------------------------ |
-    | 自然语言处理综述     | [https://aistudio.baidu.com/aistudio/projectdetail/2057099](https://aistudio.baidu.com/aistudio/projectdetail/2057099) |
-    | 词向量Word Embedding | [https://aistudio.baidu.com/aistudio/projectdetail/2057101](https://aistudio.baidu.com/aistudio/projectdetail/2057101) |
-    | 文本情感倾向性分析   | [https://aistudio.baidu.com/aistudio/projectdetail/2057105](https://aistudio.baidu.com/aistudio/projectdetail/2057105) |
-
+    
+    <table>
+        <tr>
+            <td>项目</td> 
+            <td>链接</td> 
+        </tr>
+        <tr>
+            <td >自然语言处理综述</td>
+            <td rowspan="3">https://aistudio.baidu.com/aistudio/education/group/info/1297</td>
+        </tr>
+        <tr>
+            <td >词向量Word Embedding</td>
+        </tr>
+        <tr>
+            <td >文本情感倾向性分析</td>
+        </tr>
+    </table>
+    
     **7.DAY5-基于DSSM的电影推荐案例**
-
+    
     | 资料       | 链接                                                         |
     | ---------- | ------------------------------------------------------------ |
     | 视频（上） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1452219](https://aistudio.baidu.com/aistudio/education/lessonvideo/1452219) |
     | 视频（下） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1452220](https://aistudio.baidu.com/aistudio/education/lessonvideo/1452220) |
     | 课件       | [https://aistudio.baidu.com/aistudio/education/preview/1452217](https://aistudio.baidu.com/aistudio/education/preview/1452217) |
-
+    
     附：DSSM的电影推荐案例项目
-
-    | 项目               | 链接                                                         |
-    | ------------------ | ------------------------------------------------------------ |
-    | 推荐系统介绍       | [https://aistudio.baidu.com/aistudio/projectdetail/2057116](https://aistudio.baidu.com/aistudio/projectdetail/2057116) |
-    | 数据处理与读取     | [https://aistudio.baidu.com/aistudio/projectdetail/2057118](https://aistudio.baidu.com/aistudio/projectdetail/2057118) |
-    | 电影推荐模型设计   | [https://aistudio.baidu.com/aistudio/projectdetail/2057121](https://aistudio.baidu.com/aistudio/projectdetail/2057121) |
-    | 模型训练与特征保存 | [https://aistudio.baidu.com/aistudio/projectdetail/2057122](https://aistudio.baidu.com/aistudio/projectdetail/2057122) |
-    | 电影推荐           | [https://aistudio.baidu.com/aistudio/projectdetail/2057128](https://aistudio.baidu.com/aistudio/projectdetail/2057128) |
-
+    
+    <table>
+        <tr>
+            <td>项目</td> 
+            <td>链接</td> 
+        </tr>
+        <tr>
+            <td >推荐系统介绍</td>
+            <td rowspan="5">https://aistudio.baidu.com/aistudio/education/group/info/1297</td>
+        </tr>
+        <tr>
+            <td >数据处理与读取</td>
+        </tr>
+        <tr>
+            <td >电影推荐模型设计</td>
+        </tr>
+        <tr>
+            <td >模型训练与特征保存</td>
+        </tr>
+        <tr>
+            <td >电影推荐</td>
+        </tr>
+    </table>
+    
     **8.DAY6-模型优化经验与飞桨深入解读**
-
+    
     | 资料       | 链接                                                         |
     | ---------- | ------------------------------------------------------------ |
     | 视频（上） | [https://aistudio.baidu.com/aistudio/education/lessonvideo/1452226](https://aistudio.baidu.com/aistudio/education/lessonvideo/1452226) |
