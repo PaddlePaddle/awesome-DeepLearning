@@ -5,8 +5,11 @@
 其核心为**根据上下文的词向量推测中心词**
 
 该框架的神经网络表示如下图：
-
-<img src="images\1.png" style="zoom:80%;" />
+<div align="center">
+    <a>
+    	<img src="images\1.png"style="zoom:80%";>  
+    </a>
+</div>
 
 由图可以看出，该网络包含三层：输入层，隐藏层和输出层。
 
