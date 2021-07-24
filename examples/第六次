@@ -5,7 +5,7 @@ DSSM（Deep Structured Semantic Models）的原理是通过搜索引擎里 Query
 ## 模型：
 DSSM 从下往上可以分为三层结构：输入层、表示层、匹配层
 
-(((((((
+![](https://github.com/Eric-Zhang-Composing/awesome-DeepLearning/blob/864857e027344cbdcee38029df80bab46ba9ff7c/examples/D1.jpg)
 
 （1）输入层
  输入层把句子映射到一个向量空间里并输入到 DNN 中，其中对英语和中文的处理有所不同。
@@ -22,15 +22,16 @@ DSSM 从下往上可以分为三层结构：输入层、表示层、匹配层
 （2）DSSM 的表示层采用 BOW（Bag of words）的方式，相当于把字向量的位置信息抛弃了，整个句子里的词都放在一个袋子里了，不分先后顺序。当然这样做会有问题，我们先为 CNN-DSSM 和 LSTM-DSSM 埋下一个伏笔。
 紧接着是一个含有多个隐层的 DNN，如下图所示：
 
-999999999
+![](https://github.com/Eric-Zhang-Composing/awesome-DeepLearning/blob/864857e027344cbdcee38029df80bab46ba9ff7c/examples/D2.jpg)
+
 
 用 Wi 表示第 i 层的权值矩阵，bi 表示第 i 层的 bias 项。则第一隐层向量 l1（300 维），第 i 个隐层向量 li（300 维），输出向量 y（128 维）可以分别表示为：
 
-999999999
+![](https://github.com/Eric-Zhang-Composing/awesome-DeepLearning/blob/864857e027344cbdcee38029df80bab46ba9ff7c/examples/D3.jpg)
 
 用 tanh 作为隐层和输出层的激活函数：
 
-999999
+![](https://github.com/Eric-Zhang-Composing/awesome-DeepLearning/blob/864857e027344cbdcee38029df80bab46ba9ff7c/examples/D4.jpg)
 
 最终输出一个 128 维的低纬语义向量。
 
@@ -38,17 +39,17 @@ DSSM 从下往上可以分为三层结构：输入层、表示层、匹配层
 
 Query 和 Doc 的语义相似性可以用这两个语义向量(128 维) 的 cosine 距离来表示：
 
-9999999
+![](https://github.com/Eric-Zhang-Composing/awesome-DeepLearning/blob/864857e027344cbdcee38029df80bab46ba9ff7c/examples/D5.jpg)
 
 通过softmax 函数可以把Query 与正样本 Doc 的语义相似性转化为一个后验概率：
 
-9999999
+![](https://github.com/Eric-Zhang-Composing/awesome-DeepLearning/blob/864857e027344cbdcee38029df80bab46ba9ff7c/examples/D6.jpg)
 
 其中 r 为 softmax 的平滑因子，D 为 Query 下的正样本，D-为 Query 下的负样本（采取随机负采样），D 为 Query 下的整个样本空间。
 
 在训练阶段，通过极大似然估计，我们最小化损失函数：
 
-99999999
+![](https://github.com/Eric-Zhang-Composing/awesome-DeepLearning/blob/864857e027344cbdcee38029df80bab46ba9ff7c/examples/D7.jpg)
 
 残差会在表示层的 DNN 中反向传播，最终通过随机梯度下降（SGD）使模型收敛，得到各网络层的参数{Wi,bi}。
 
@@ -65,43 +66,43 @@ Query 和 Doc 的语义相似性可以用这两个语义向量(128 维) 的 cosi
 
 LSTM（Long-Short-Term Memory）是一种 RNN 特殊的类型，可以学习长期依赖信息。我们分别来介绍它最重要的几个模块：
 
-999999999999
+![](https://github.com/Eric-Zhang-Composing/awesome-DeepLearning/blob/864857e027344cbdcee38029df80bab46ba9ff7c/examples/D8.jpg)
 
 （0）细胞状态
 
 细胞状态这条线可以理解成是一条信息的传送带，只有一些少量的线性交互。在上面流动可以保持信息的不变性。
 
-999999999999999
+![](https://github.com/Eric-Zhang-Composing/awesome-DeepLearning/blob/864857e027344cbdcee38029df80bab46ba9ff7c/examples/D9.jpg)
 
 （1）遗忘门
 
 遗忘门由 Gers 提出，它用来控制细胞状态 cell 有哪些信息可以通过，继续往下传递。如下图所示，上一层的输出 h(t-1) concat 上本层的输入 xt，经过一个 sigmoid 网络（遗忘门）产生一个从 0 到 1 的数值 ft，然后与细胞状态 C(t-1) 相乘，最终决定有多少细胞状态可以继续往后传递。
 
-98999999999999
+![](https://github.com/Eric-Zhang-Composing/awesome-DeepLearning/blob/864857e027344cbdcee38029df80bab46ba9ff7c/examples/D10.jpg)
 
 （2）输入门
 
 输入门决定要新增什么信息到细胞状态，这里包含两部分：一个 sigmoid 输入门和一个 tanh 函数。sigmoid 决定输入的信号控制，tanh 决定输入什么内容。如下图所示，上一层的输出 h(t-1) concat 上本层的输入 xt，经过一个 sigmoid 网络（输入门）产生一个从 0 到 1 的数值 it，同样的信息经过 tanh 网络做非线性变换得到结果 Ct，sigmoid 的结果和 tanh 的结果相乘，最终决定有哪些信息可以输入到细胞状态里。
 
-999999999999
+![](https://github.com/Eric-Zhang-Composing/awesome-DeepLearning/blob/864857e027344cbdcee38029df80bab46ba9ff7c/examples/D11.jpg)
 
 （3）输出门
 
 输出门决定从细胞状态要输出什么信息，这里也包含两部分：一个 sigmoid 输出门和一个 tanh 函数。sigmoid 决定输出的信号控制，tanh 决定输出什么内容。如下图所示，上一层的输出 h(t-1) concat 上本层的输入 xt，经过一个 sigmoid 网络（输出门）产生一个从 0 到 1 的数值 Ot，细胞状态 Ct 经过 tanh 网络做非线性变换，得到结果再与 sigmoid 的结果 Ot 相乘，最终决定有哪些信息可以输出，输出的结果 ht 会作为这个细胞的输出，也会作为传递个下一个细胞。
 
-99999999999999
+![](https://github.com/Eric-Zhang-Composing/awesome-DeepLearning/blob/864857e027344cbdcee38029df80bab46ba9ff7c/examples/D12.jpg)
 
 ## LSTM-DSSM
 
 LSTM-DSSM 其实用的是 LSTM 的一个变种——加入了peephole的 LSTM。如下图所示：
 
-99999999999
+![](https://github.com/Eric-Zhang-Composing/awesome-DeepLearning/blob/864857e027344cbdcee38029df80bab46ba9ff7c/examples/D13.jpg)
 
 这里三条黑线就是所谓的 peephole，传统的 LSTM 中遗忘门、输入门和输出门只用了 h(t-1) 和 xt 来控制门缝的大小，peephole 的意思是说不但要考虑 h(t-1) 和 xt，也要考虑 Ct-1 和 Ct，其中遗忘门和输入门考虑了 Ct-1，而输出门考虑了 Ct。总体来说需要考虑的信息更丰富了。
 
 一个 LSTM-DSSM 整体的网络结构如下;
 
-999999999999999999999999
+![](https://github.com/Eric-Zhang-Composing/awesome-DeepLearning/blob/864857e027344cbdcee38029df80bab46ba9ff7c/examples/D14.jpg)
 
 红色的部分可以清晰的看到残差传递的方向。
 
