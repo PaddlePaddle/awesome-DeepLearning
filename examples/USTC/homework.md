@@ -32,9 +32,9 @@ https://github.com/PaddlePaddle/PaddleClas
 使用 aistudio 实训平台进行作业实现，在 github repo 中以提pr的形式提交 aistudio 链接（注意:作业需要公开才能看到)，注意保留训练结果和日志；提交 python 版本可以获得额外 加分，python 版本需要将代码按模块拆分，并提交详细的 readme(包括模型简介、数据 准备、模型训练、模型测试及测试结果、模型推理和参考论文)，可参考: https://github.com/PaddlePaddle/PaddleVideo/blob/develop/docs/zh-CN/model_zoo/recognition/tsm.md
 
 作业提交地址:
-https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/examples
+https://github.com/PaddlePaddle/awesome-DeepLearning/tree/develop/examples
 
 提交pr流程:
-https://github.com/PaddlePaddle/awesome-DeepLearning/blob/master/examples/awesome-DeepLearning_pr_procedure.md
+https://github.com/PaddlePaddle/awesome-DeepLearning/blob/develop/examples/awesome-DeepLearning_pr_procedure.md
 
 
