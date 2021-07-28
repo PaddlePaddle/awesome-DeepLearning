@@ -108,7 +108,7 @@
 
     ![pr1](../docs/images/pr_procedure/pr1.png)
 
-    ![pr2](../docs/images/pr_procedure/pr2.png)
+    ![pr2](../docs/images/pr_procedure/pr.png)
 
 
 
