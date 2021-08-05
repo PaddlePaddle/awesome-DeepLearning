@@ -251,6 +251,7 @@
      2. [图像分类](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/classification/index.html)（包括LeNet、AlexNet、VGG、GoogleNet、DarkNet、ResNet、ViT等7个知识点）  
      3. [目标检测](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/object_detection/index.html)（包括目标检测综述、边界框、锚框、交并比、NMS等5个知识点）  
      4. [OCR](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/OCR/index.html)（包括OCR综述、OCR常用检测方法(CTPN、EAST、DBNet)、OCR常用识别方法(CRNN)等5个知识点）
+     5. [视频分类](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/video_understanding/index.html)（包括TSM、TimeSformer详解）
   2. [自然语言处理](https://paddlepedia.readthedocs.io/en/latest/tutorials/natural_language_processing/index.html)  
      1. [命名实体识别](https://paddlepedia.readthedocs.io/en/latest/tutorials/natural_language_processing/ner/index.html) (包括bilstm+CRF架构剖析、CRF原理等8个知识点)  
   3. [推荐系统](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/index.html)  
