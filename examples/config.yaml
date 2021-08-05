@@ -1,0 +1,62 @@
+debug: false
+workspace: "."
+
+dataset:
+  - name: train_sample
+    type: DataLoader
+    batch_size: 5
+    data_path: "{workspace}/dat/"
+    sparse_slots: "click 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26"
+    dense_slots: "dense_feature:13"
+  - name: infer_sample
+    type: DataLoader
+    batch_size: 5
+    data_path: "{workspace}/dat/"
+    sparse_slots: "click 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26"
+    dense_slots: "dense_feature:13"
+
+hyper_parameters:
+    optimizer:
+        class: Adam
+        learning_rate: 0.001
+        strategy: async
+    sparse_inputs_slots: 27
+    sparse_feature_number: 1000001
+    sparse_feature_dim: 9
+    dense_input_dim: 13
+    fc_sizes: [512, 256, 128, 32]
+    distributed_embedding: 0
+
+
+mode: [train_runner,infer_runner]
+# if infer, change mode to "infer_runner" and change phase to "infer_phase"
+
+runner:
+  - name: train_runner
+    class: train
+    epochs: 1
+    device: cpu
+    init_model_path: ""
+    save_checkpoint_interval: 1
+    save_inference_interval: 1
+    save_checkpoint_path: "increment"
+    save_inference_path: "inference"
+    print_interval: 1
+    phases: phase1
+  - name: infer_runner
+    class: infer
+    device: cpu
+    init_model_path: "increment/0"
+    print_interval: 1
+    phases: infer_phase
+    
+
+phase:
+- name: phase1
+  model: "{workspace}/model.py"
+  dataset_name: train_sample
+  thread_num: 1
+- name: infer_phase
+  model: "{workspace}/model.py"
+  dataset_name: infer_sample
+  thread_num: 1
