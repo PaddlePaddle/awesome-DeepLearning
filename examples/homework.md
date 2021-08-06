@@ -1,4 +1,4 @@
-【作业】
+【作业】123123123
 1.	使用CIFAR10数据集，基于EffNet网络实现图像分类。
 2.	使用CIFAR10数据集，基于DarkNet网络实现图像分类。
 3.	在眼疾识别数据集上训练SENet网络。
@@ -36,5 +36,4 @@ https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/examples
 
 提交pr流程:
 https://github.com/PaddlePaddle/awesome-DeepLearning/blob/master/examples/awesome-DeepLearning_pr_procedure.md
-
 
