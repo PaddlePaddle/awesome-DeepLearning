@@ -25,4 +25,4 @@ model.fit(train_dataset,batch_size=512,epochs=30,verbose=1,save_dir="log/vgg/",s
 #记录结果
 result = model.evaluate(test_dataset, verbose=1,batch_size=512)
 print(result)
-model.save('/model/vgg')
+model.save('/model/vgg') 
