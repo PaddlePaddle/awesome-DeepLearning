@@ -320,7 +320,7 @@
 | **其他**     | 人摔倒检测                 |                                                              |
 | **其他**     | 足球比赛动作定位           | https://github.com/PaddlePaddle/PaddleVideo/tree/application/FootballAction |
 | **其他**     | 基于强化学习的飞行器仿真   |  https://github.com/PaddlePaddle/PARL/tree/develop/examples/tutorials/homework/lesson5/ddpg_quadrotor |
-
+| **其他**     | 基于PaddleDetection的PCB瑕疵检测   |  https://aistudio.baidu.com/aistudio/projectdetail/2240725 |
 
 # 七、技术交流
 
