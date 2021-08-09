@@ -4,7 +4,7 @@
 
 Transformer 网络架构架构由 Ashish Vaswani 等人在 Attention Is All You Need一文中提出，并用于机器翻译任务，和以往网络架构有所区别的是，该网络架构中，编码器和解码器没有采用 RNN 或 CNN 等网络架构，而是采用完全依赖于注意力机制的架构。网络架构如下所示：
 
-![](./Transformer/transformer.png)
+![](../../images/pretrain_model/Transformer/transformer.png)
 
 Transformer改进了RNN被人诟病的训练慢的特点，利用self-attention可以实现快速并行。下面的章节会详细介绍Transformer的各个组成部分。
 
@@ -37,11 +37,11 @@ decoder也包含encoder提到的两层网络，但是在这两层中间还有一
 ## 3. Transformer的结构
 Transformer的结构解析出来如下图表示，包括Input Embedding, Position Embedding, Encoder, Decoder。
 
-![](./Transformer/Transformer_architecture.png)
+![](../../images/pretrain_model/Transformer/Transformer_architecture.png)
 
 ## 3.1 Embedding
 
-![](./Transformer/input_embedding.png)
+![](../../images/pretrain_model/Transformer/input_embedding.png)
 
 字向量与位置编码的公式表示如下：
 
@@ -63,7 +63,7 @@ $$PE(pos,2i+1)=cos(pos/10000^{2i}/d_{model})$$
 
 ## 3.2 Encoder
 
-![](./Transformer/encoder.png)
+![](../../images/pretrain_model/Transformer/encoder.png)
 
 用公式把一个Transformer Encoder block 的计算过程整理一下
 
@@ -206,7 +206,7 @@ $$ LN(x_{i})=\alpha \dfrac{x_{i}-\mu_{L}}{\sqrt{\delta^{2}+\epsilon}}+\beta $$
 ### 3.2.7 Feed Forward
 
 
-![](./Transformer/feed_forward.png)
+![](../../images/pretrain_model/Transformer/feed_forward.png)
 
 将Multi-Head Attention得到的向量再投影到一个更大的空间（论文里将空间放大了4倍）在那个大空间里可以更方便地提取需要的信息（使用Relu激活函数），最后再投影回token向量原来的空间
 
@@ -218,7 +218,7 @@ $$FFN(x)=ReLU(W_{1}x+b_{1})W_{2}+b_{2}$$
 
 ## 3.3 Decoder
 
-![](./Transformer/decoder.png)
+![](../../images/pretrain_model/Transformer/decoder.png)
 
 和 Encoder 一样，上面三个部分的每一个部分，都有一个残差连接，后接一个 Layer Normalization。Decoder 的中间部件并不复杂，大部分在前面 Encoder 里我们已经介绍过了，但是 Decoder 由于其特殊的功能，因此在训练时会涉及到一些细节，下面会介绍Decoder的Masked Self-Attention和Encoder-Decoder Attention两部分，其结构图如下图所示
 
@@ -245,7 +245,7 @@ Mask 非常简单，首先生成一个下三角全 0，上三角全为负无穷�
 
 下图展示了Decoder的解码过程，Decoder中的字符预测完之后，会当成输入预测下一个字符，知道遇见终止符号为止。
 
-![](./Transformer/transformer_decoding_2.gif)
+![](../../images/pretrain_model/Transformer/transformer_decoding_2.gif)
 
 ## 3.4 Transformer的最后一层和Softmax
 
@@ -253,7 +253,7 @@ Mask 非常简单，首先生成一个下三角全 0，上三角全为负无穷�
 
 softmax层将这些分数转换为概率（全部为正值，总和为1.0）。选择概率最高的单元，并生成与其关联的单词作为此时间步的输出。如图softmax的输出。
 
-![](./Transformer/linear_softmax.png)
+![](../../images/pretrain_model/Transformer/linear_softmax.png)
 
 
 ## 3.5 Transformer的权重共享
