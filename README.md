@@ -21,7 +21,7 @@
 | 特色系列课程[:arrow_heading_down:](#3)       | 经典深度学习案例集[:arrow_heading_down:](#4) |
 | 深度学习百问[:arrow_heading_down:](#2)       | 面试宝典[:arrow_heading_down:](#6)           |
 
-
+### **如果本项目对您有帮忙，欢迎点击页面右上方star，方便访问**
 
 # <span id = '1'>二、零基础实践深度学习</span>
 
