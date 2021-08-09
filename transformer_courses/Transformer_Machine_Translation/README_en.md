@@ -9,13 +9,6 @@
 
 
 ## Project Introduction
-```
-|-data: Store the ImageNet verification set
-|-transform.py: data preprocessing script
-|-dataset.py: script to read data
-|-model.py: The script defines the network structure of ViT and DeiT
-|-eval.py: Script to start model evaluation
-```
 
 ```
 |-data_process.py: data cleaning script

@@ -40,7 +40,7 @@
 
 对于标准卷积而言，当标准卷积核尺寸为 $3\times{3}$ 时，我们在输入矩阵上连续进行两次标准卷积计算，得到两个特征图。我们可以观察不同层数的卷积核感受野大小，如 **图4** 所示。
 
-![图4 标准卷积的感受野示例](../../../images/CNN/convolution_operator/Receptive_Field_5*5.png)
+![图4 标准卷积的感受野示例](../../../images/CNN/convolution_operator/Receptive_Field_5x5.png)
 
 图4 标准卷积的感受野示例
 
