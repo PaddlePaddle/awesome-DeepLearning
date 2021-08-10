@@ -379,7 +379,7 @@
 | BERT蒸馏 |  [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2177549)|  [Python实现](./transformer_courses/BERT_distillation) | 本章节为大家详细介绍了针对BERT模型的蒸馏算法，包括：Patient-KD、DistilBERT、TinyBERT、DynaBERT等模型，同时以代码的形式为大家展现了如何使用DynaBERT的训练策略对TinyBERT进行蒸馏。   |
 | 预训练模型的瘦身策略 – – 高效结构 |  [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2138857)|  [Python实现](./transformer_courses/Transformer_Punctuation_Restoration) | 本章节将为大家>详细介绍NLP领域，基于Transformer模型的瘦身技巧。包括 Electra，AlBERT 以及 performer。还会介绍代码实现案例：基于Electra的语音识别后处理中文标点符号预测   |
 | transformer在图像分类中的应用（上） | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2154618) | [Python实现](./transformer_courses/Application_of_transformer_in_image_classification) | 本章节将为大家详细介绍 Transformer 在 CV 领域中的两个经典算法：ViT 以及 DeiT。带领大家一起学习Transformer 结构在图像分类领域的具体应用。 |
-| transformer在图像分类中的应用（下） | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2271352) | [Python实现](./transformer_courses/Application_of_transformer_in_image_classification_1) | 本章节将为大家详细介绍 Transformer 在 CV 领域中的经典算法：Swin Transformer。带领大家一起学习Transformer 结构在图像分类领域的具体应用。 |
+| transformer在图像分类中的应用（下） | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2271352) | [Python实现](./transformer_courses/Application_of_transformer_in_image_classification_Swin) | 本章节将为大家详细介绍 Transformer 在 CV 领域中的经典算法：Swin Transformer。带领大家一起学习Transformer 结构在图像分类领域的具体应用。 |
 |                               |                                                              |                                                              |                                                              |
 
 [返回快速跳转:arrow_heading_up:](#0) 
