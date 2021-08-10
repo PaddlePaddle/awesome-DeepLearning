@@ -1,240 +1,153 @@
-<!DOCTYPE html>
-<html lang="zh">
-<head>
-    <title>百度认证平台</title>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="viewport" content="width=device-width, maximum-scale=1.0, user-scalable=0, initial-scale=1.0">
-    <meta content="telephone=no" name="format-detection">
+# Copyright (c) 2020 PaddlePaddle Authors. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
-    <link rel="icon" href="/ico/favicon.ico" type="image/x-icon"/>
-    <link rel="shortcut icon" href="/ico/favicon.ico" type="image/x-icon"/>
-    <link rel="bookmark" href="/ico/favicon.ico" type="image/x-icon"/>
-    <link rel="stylesheet" href="/css/base.css?v=2.0">
-    <link rel="stylesheet" href="/css/login.css?v=2.0">
-    <link rel="stylesheet" href="/css/action.min.css?v=2.0">
-</head>
+import numpy as np
+import cv2
+from PIL import Image
+import six
 
-<body>
+class DecodeImage(object):
+    """ decode image """
 
-<div class="wrap">
+    def __init__(self, to_rgb=True, to_np=False, channel_first=False):
+        self.to_rgb = to_rgb
+        self.to_np = to_np  # to numpy
+        self.channel_first = channel_first  # only enabled when to_np is True
 
-    <div class="header">
-        <a href="/login">
-            <img class="logo" src="/images/logo.png">
-        </a>
+    def __call__(self, img):
+        if six.PY2:
+            assert type(img) is str and len(
+                img) > 0, "invalid input 'img' in DecodeImage"
+        else:
+            assert type(img) is bytes and len(
+                img) > 0, "invalid input 'img' in DecodeImage"
+        data = np.frombuffer(img, dtype='uint8')
+        img = cv2.imdecode(data, 1)
+        if self.to_rgb:
+            assert img.shape[2] == 3, 'invalid shape of image[%s]' % (
+                img.shape)
+            img = img[:, :, ::-1]
 
-        <div class="more">
-            <img src="/images/more.svg">
-        </div>
+        if self.channel_first:
+            img = img.transpose((2, 0, 1))
 
-        <div class="right">
-            <a href="/login?service=https%3A%2F%2F82011.icoding.baidu-int.com%2Fplatform%2Fuser%2Fstokendecrypt%3Fcallback%3Dhttps%3A%2F%2F82011.icoding.baidu-int.com%2F&amp;appKey=uuapclient-17-Q2TW0PsuYElPAhSDGwIT&amp;locale=en">EN</a>
-            
-            
-        </div>
-    </div>
+        return img
 
-    <div class="h5-nav hide">
-        <div class="container">
-            
-            <a href="https://eac.baidu-int.com/#/pwd/reset">忘记密码</a>
-            <a href="/login?service=https%3A%2F%2F82011.icoding.baidu-int.com%2Fplatform%2Fuser%2Fstokendecrypt%3Fcallback%3Dhttps%3A%2F%2F82011.icoding.baidu-int.com%2F&amp;appKey=uuapclient-17-Q2TW0PsuYElPAhSDGwIT&amp;locale=en">EN</a>
-            
-            
-            <a href="/manage/help">帮助</a>
-            <s>
-                <i></i>
-            </s>
-        </div>
-    </div>
+class ResizeImage(object):
+    """ resize image """
 
-    <div class="shade">
-        <img src="/images/loginSuccess/wait.gif"/>
-        <p>正在登录</p>
-    </div>
+    def __init__(self, size=None, resize_short=None, interpolation=-1):
+        self.interpolation = interpolation if interpolation >= 0 else None
+        if resize_short is not None and resize_short > 0:
+            self.resize_short = resize_short
+            self.w = None
+            self.h = None
+        elif size is not None:
+            self.resize_short = None
+            self.w = size if type(size) is int else size[0]
+            self.h = size if type(size) is int else size[1]
+        else:
+            raise OperatorParamError("invalid params for ReisizeImage for '\
+                'both 'size' and 'resize_short' are None")
 
-    <div class="login">
-        <div class="content">
-            <div class="box">
-                <div class="loading"></div>
-                <div class="toast-wrap">
-                    <span class="toast-msg">网络超时,请刷新重试</span>
-                </div>
-                <div class="tooltip">
-                    <div class="tooltip-arrow"></div>
-                    <div class="tooltip-inner">
-                        <div>请保证手机如流版本</div>
-                        <div>IOS版本在1.0.0以上</div>
-                        <div>Android在1.9.9以上</div>
-                    </div>
-                </div>
-                <div class="nav">
-                    <div class="h5-title">账号密码登录</div>
-                    <span class="tab on" data-type="email" id="1">账号密码登录</span>
-                    <span class="line">|</span>
-                    <span class="tab" data-type="scan" id="2">扫码登录</span>
-                    <span class="line">|</span>
-                    <span class="tab" data-type="token" id="3">Token登录</span>
-                </div>
+    def __call__(self, img):
+        img_h, img_w = img.shape[:2]
+        if self.resize_short is not None:
+            percent = float(self.resize_short) / min(img_w, img_h)
+            w = int(round(img_w * percent))
+            h = int(round(img_h * percent))
+        else:
+            w = self.w
+            h = self.h
+        if self.interpolation is None:
+            return cv2.resize(img, (w, h))
+        else:
+            return cv2.resize(img, (w, h), interpolation=self.interpolation)
 
-                <form method="post" id="form-email" action="/login">
-                    <div class="email-area">
-                        
-                        
-                        <div class="li list text username">
-                            <input type="text" id="username" data-type="username" name="username" maxlength="90"
-                                   value=""
-                                   placeholder="百度员工账号"/>
-                        </div>
-                        <div class="li list text password">
-                            <input type="password" id="password-email" data-type="password"
-                                   placeholder='账号密码'>
-                        </div>
-                        <div class="li attach">
-                            <span class="checkbox check"></span>
-                            <span>自动登录</span>
-                        </div>
+class CropImage(object):
+    """ crop image """
 
-                        <div class="li hint">
-                            <em>
-                                
-                            </em>
-                        </div>
+    def __init__(self, size):
+        if type(size) is int:
+            self.size = (size, size)
+        else:
+            self.size = size  # (h, w)
 
-                        <div class="li bt-login commit" id="emailLogin">
-                            <span>登录</span>
-                        </div>
+    def __call__(self, img):
+        w, h = self.size
+        img_h, img_w = img.shape[:2]
+        w_start = (img_w - w) // 2
+        h_start = (img_h - h) // 2
 
-                        <div class="li changeLoginType">
-                            <span class="show-actions">切换登录方式</span>
-                        </div>
+        w_end = w_start + w
+        h_end = h_start + h
+        return img[h_start:h_end, w_start:w_end, :]
 
-                        <div class="li other">
-                        <span class="help">
-                            
-                            <a target="_blank" href="https://eac.baidu-int.com/#/pwd/reset">忘记密码</a>
-                            <a href="/manage/help" target="_blank">帮助</a>
-                        </span>
-                        </div>
-                        <input type="hidden" name="password" id="encrypted_password_email" value=''/>
-                        <input type="hidden" name="rememberMe" value="on">
-                        <input type="hidden" name="lt" id="lt-email" value="LT-631912788680781825-q9xsj">
-                        
-                        <input type="hidden" name="execution" value="e6s1">
-                        <input type="hidden" name="_eventId" value="submit">
-                        <input type="hidden" value='1' name="type">
-                    </div>
-                </form>
+class NormalizeImage(object):
+    """ normalize image such as substract mean, divide std
+    """
 
-                <form method="post" id="form-token" action="/login">
-                    <div class="token-area">
-                        
-                        
-                        <div class="li list text username">
-                            <input type="text" id="token" data-type="username" name="username" maxlength="90"
-                                   value=""
-                                   placeholder="百度员工账号">
-                        </div>
-                        <div class="li list text password">
-                            <input type="password" id="password-token" data-type="password"
-                                   placeholder="PIN+RSA(RSA Token)动态码">
-                        </div>
-                        <div class="li attach" style="display: none">
-                            <span class="checkbox"></span>
-                            <span>自动登录</span>
-                        </div>
+    def __init__(self, scale=None, mean=None, std=None, order='chw'):
+        if isinstance(scale, str):
+            scale = eval(scale)
+        self.scale = np.float32(scale if scale is not None else 1.0 / 255.0)
+        mean = mean if mean is not None else [0.485, 0.456, 0.406]
+        std = std if std is not None else [0.229, 0.224, 0.225]
 
-                        <div class="li hint">
-                            <em>
-                                
-                            </em>
-                        </div>
+        shape = (3, 1, 1) if order == 'chw' else (1, 1, 3)
+        self.mean = np.array(mean).reshape(shape).astype('float32')
+        self.std = np.array(std).reshape(shape).astype('float32')
 
-                        <div class="li bt-login commit" id="tokenLogin">
-                            <span>登录</span>
-                        </div>
+    def __call__(self, img):
+        from PIL import Image
+        if isinstance(img, Image.Image):
+            img = np.array(img)
 
-                        <div class="li changeLoginType">
-                            <span class="show-actions">切换登录方式</span>
-                        </div>
+        assert isinstance(img,
+                          np.ndarray), "invalid input 'img' in NormalizeImage"
+        return (img.astype('float32') * self.scale - self.mean) / self.std
 
-                        <div class="li other">
-                        <span class="help">
-                            <a href="/manage/help" target="_blank">帮助</a>
-                        </span>
-                        </div>
-                        <input type="hidden" name="password" id="encrypted_password_token" value=''/>
-                        <input type="hidden" name="rememberMe" value="on">
-                        <input type="hidden" name="lt" id="lt-token" value="LT-631912788680781825-q9xsj">
-                        
-                        <input type="hidden" name="execution" value="e6s1">
-                        <input type="hidden" name="_eventId" value="submit">
-                        <input type="hidden" value='3' name="type">
-                    </div>
-                </form>
+class ToCHWImage(object):
+    """ convert hwc image to chw image
+    """
 
-                <form method="post" id="formQRCode" action="/login">
-                    <div class="qcode-area">
-                        <div class="qcode" id="qcode">
-                        </div>
-                        <div class="scan-success">
-                        </div>
-                        <div class="li hint">
-                            <em>
-                                
-                            </em>
-                        </div>
-                        <div class="li changeLoginType">
-                            <span class="show-actions">切换登录方式</span>
-                        </div>
-                        <input type="hidden" name="username" maxlength="90" id="qrCodeUsername">
-                        <input type="hidden" name="password" id="qrCodePassword">
-                        <input type="hidden" name="rememberMe" value="on">
-                        <input type="hidden" name="lt" id="lt-qrCode" value="LT-631912788680781825-q9xsj">
-                        
-                        <input type="hidden" name="execution" value="e6s1">
-                        <input type="hidden" name="_eventId" value="submit">
-                        <input type="hidden" value='2' name="type">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    
-</div>
+    def __init__(self):
+        pass
 
-<script src="/js/lib/flex.min.js?v=2.0"></script>
-<script type="text/javascript" src="/js/lib/jquery3.2.1.min.js"></script>
-<script type="text/javascript" src="/js/lib/jquery.placeholder.min.js"></script>
-<script type="text/javascript" src="/js/jsencrypt.min.js"></script>
-<script type="text/javascript" src="/js/lib/actions.min.js?v=2.0"></script>
-<script type="text/javascript" src="/js/login.js?v=6.0"></script>
-<script type="text/javascript" src="/js/header.js?v=2.0"></script>
-<script type="text/javascript"
-        src="/beep-sdk.js?language=zh&amp;v=1628589349194"></script>
+    def __call__(self, img):
+        from PIL import Image
+        if isinstance(img, Image.Image):
+            img = np.array(img)
 
+        return img.transpose((2, 0, 1))
 
-<script type="text/javascript">
-    var notnull = "\u8F93\u5165\u4E0D\u80FD\u4E3A\u7A7A!",
-        sp_noemail = "\u8D26\u53F7\u4E0D\u5305\u62EC\u90AE\u7BB1\u540E\u7F00\uFF0C\u5982@baidu.com",
-        sp_username = "\u767E\u5EA6\u5458\u5DE5\u8D26\u53F7",
-        sp_passwd = "\u8D26\u53F7\u5BC6\u7801",
-        sp_hardToken = "PIN+RSA(RSA Token)\u52A8\u6001\u7801",
-        usernameformaterror = "\u8D26\u53F7\u683C\u5F0F\u9519\u8BEF!",
-        usernameprompt = "\u767E\u5EA6\u5458\u5DE5\u8D26\u53F7",
-        lastLoginType = 1,
-        securityLevel = 2,
-        rsaPublicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDSzTSkeLSG1wAOAMRh4L4O78jP4KgSwvMWSnpiWUrOpGknhHMMeoESI94NXdp9DZkptocfuo6dygUOsM+YM60+EVpRg2e9yWApvj88n88+yqQSJeCTRMRS2CDKZrOqf3WOQx7X72Ogj+yTx7mE+Ld+hhrl1ghPxCulQyOnMDSzbwIDAQAB",
-        beepQrCodeToken = "6eef72577bf7820f72f71e6ac90d0461f1450bf99014af3c2cacaef55b461410",
-        mailBoxLoginTabName = "\u8D26\u53F7\u5BC6\u7801\u767B\u5F55",
-        qrCodeLoginTabName = "\u626B\u7801\u767B\u5F55",
-        mobileHiLoginTabName = "\u624B\u673A\u5982\u6D41\u767B\u5F55",
-        hardTokenLoginTabName = "Token\u767B\u5F55",
-        cancelButtonName = "\u53D6\u6D88";
-</script>
+# 图像预处理方法汇总
+def transform(data, mode='eval'):
 
-</body>
-</html>
+    # 图像解码
+    decode_image = DecodeImage()
+    data = decode_image(data)
+    # 图像缩放
+    resize_image = ResizeImage( resize_short=256)
+    data = resize_image(data)
+    # 图像裁剪
+    crop_image = CropImage(size=224)
+    data = crop_image(data)
+    # 标准化
+    normalize_image = NormalizeImage(scale=1.0/255.0, mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225],order='')
+    data = normalize_image(data)
+    # 通道变换
+    to_CHW_image = ToCHWImage()
+    data = to_CHW_image(data)
+    return data

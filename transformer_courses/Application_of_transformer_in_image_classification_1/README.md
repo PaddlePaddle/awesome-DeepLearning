@@ -1,240 +1,70 @@
-<!DOCTYPE html>
-<html lang="zh">
-<head>
-    <title>百度认证平台</title>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="viewport" content="width=device-width, maximum-scale=1.0, user-scalable=0, initial-scale=1.0">
-    <meta content="telephone=no" name="format-detection">
+# 基于 Swin Transformer 的图像分类 [[English](./README_en.md)]
 
-    <link rel="icon" href="/ico/favicon.ico" type="image/x-icon"/>
-    <link rel="shortcut icon" href="/ico/favicon.ico" type="image/x-icon"/>
-    <link rel="bookmark" href="/ico/favicon.ico" type="image/x-icon"/>
-    <link rel="stylesheet" href="/css/base.css?v=2.0">
-    <link rel="stylesheet" href="/css/login.css?v=2.0">
-    <link rel="stylesheet" href="/css/action.min.css?v=2.0">
-</head>
+## 依赖模块
+- os
+- numpy
+- opencv
+- pillow
+- paddlepaddle==2.1.1
 
-<body>
+## 项目介绍
+```
+|-data: 存放ImageNet验证集
+|-model_file:存放模型权重文件
+|-transform.py: 数据预处理脚本
+|-dataset.py: 读取数据脚本
+|-swin_transformer.py: 该脚本中定义了Swin Transformer的网络结构
+|-eval.py: 启动模型评估的脚本
+```
 
-<div class="wrap">
+**模型介绍**
 
-    <div class="header">
-        <a href="/login">
-            <img class="logo" src="/images/logo.png">
-        </a>
+Swin Transformer是一种新的视觉领域的Transformer模型，来自论文“Swin Transformer: Hierarchical Vision Transformer using Shifted Windows”，该模型可以作为计算机视觉任务的backbone。[论文地址](https://arxiv.org/pdf/2103.14030.pdf)
 
-        <div class="more">
-            <img src="/images/more.svg">
-        </div>
+## 数据集准备
+- 进入 repo 目录
 
-        <div class="right">
-            <a href="/login?service=https%3A%2F%2F82011.icoding.baidu-int.com%2Fplatform%2Fuser%2Fstokendecrypt%3Fcallback%3Dhttps%3A%2F%2F82011.icoding.baidu-int.com%2F&amp;appKey=uuapclient-17-Q2TW0PsuYElPAhSDGwIT&amp;locale=en">EN</a>
-            
-            
-        </div>
-    </div>
+  ```
+  cd Swin_Transformer_for_image_classification
+  ```
 
-    <div class="h5-nav hide">
-        <div class="container">
-            
-            <a href="https://eac.baidu-int.com/#/pwd/reset">忘记密码</a>
-            <a href="/login?service=https%3A%2F%2F82011.icoding.baidu-int.com%2Fplatform%2Fuser%2Fstokendecrypt%3Fcallback%3Dhttps%3A%2F%2F82011.icoding.baidu-int.com%2F&amp;appKey=uuapclient-17-Q2TW0PsuYElPAhSDGwIT&amp;locale=en">EN</a>
-            
-            
-            <a href="/manage/help">帮助</a>
-            <s>
-                <i></i>
-            </s>
-        </div>
-    </div>
+- 下载[ImageNet验证集](https://aistudio.baidu.com/aistudio/datasetdetail/93561)并解压到`data`目录下
 
-    <div class="shade">
-        <img src="/images/loginSuccess/wait.gif"/>
-        <p>正在登录</p>
-    </div>
+  ```
+  mkdir data && cd data
+  tar -xvf ILSVRC2012_val.tar
+  cd ../
+  ```
 
-    <div class="login">
-        <div class="content">
-            <div class="box">
-                <div class="loading"></div>
-                <div class="toast-wrap">
-                    <span class="toast-msg">网络超时,请刷新重试</span>
-                </div>
-                <div class="tooltip">
-                    <div class="tooltip-arrow"></div>
-                    <div class="tooltip-inner">
-                        <div>请保证手机如流版本</div>
-                        <div>IOS版本在1.0.0以上</div>
-                        <div>Android在1.9.9以上</div>
-                    </div>
-                </div>
-                <div class="nav">
-                    <div class="h5-title">账号密码登录</div>
-                    <span class="tab on" data-type="email" id="1">账号密码登录</span>
-                    <span class="line">|</span>
-                    <span class="tab" data-type="scan" id="2">扫码登录</span>
-                    <span class="line">|</span>
-                    <span class="tab" data-type="token" id="3">Token登录</span>
-                </div>
+- 请按照如下格式组织数据集
 
-                <form method="post" id="form-email" action="/login">
-                    <div class="email-area">
-                        
-                        
-                        <div class="li list text username">
-                            <input type="text" id="username" data-type="username" name="username" maxlength="90"
-                                   value=""
-                                   placeholder="百度员工账号"/>
-                        </div>
-                        <div class="li list text password">
-                            <input type="password" id="password-email" data-type="password"
-                                   placeholder='账号密码'>
-                        </div>
-                        <div class="li attach">
-                            <span class="checkbox check"></span>
-                            <span>自动登录</span>
-                        </div>
+  ```
+  data/ILSVRC2012_val
+  |_ val
+  |_ val_list.txt
+  ```
 
-                        <div class="li hint">
-                            <em>
-                                
-                            </em>
-                        </div>
+## 模型准备
 
-                        <div class="li bt-login commit" id="emailLogin">
-                            <span>登录</span>
-                        </div>
+- 下载Swin Transformer的模型权重文件到`model_file`目录下
 
-                        <div class="li changeLoginType">
-                            <span class="show-actions">切换登录方式</span>
-                        </div>
+  ```
+  mkdir model_file && cd model_file
+  wget https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/SwinTransformer_tiny_patch4_window7_224_pretrained.pdparams
+  cd ../
+  ```
 
-                        <div class="li other">
-                        <span class="help">
-                            
-                            <a target="_blank" href="https://eac.baidu-int.com/#/pwd/reset">忘记密码</a>
-                            <a href="/manage/help" target="_blank">帮助</a>
-                        </span>
-                        </div>
-                        <input type="hidden" name="password" id="encrypted_password_email" value=''/>
-                        <input type="hidden" name="rememberMe" value="on">
-                        <input type="hidden" name="lt" id="lt-email" value="LT-631912759807168512-lGK3L">
-                        
-                        <input type="hidden" name="execution" value="e4s1">
-                        <input type="hidden" name="_eventId" value="submit">
-                        <input type="hidden" value='1' name="type">
-                    </div>
-                </form>
+## 模型评估
 
-                <form method="post" id="form-token" action="/login">
-                    <div class="token-area">
-                        
-                        
-                        <div class="li list text username">
-                            <input type="text" id="token" data-type="username" name="username" maxlength="90"
-                                   value=""
-                                   placeholder="百度员工账号">
-                        </div>
-                        <div class="li list text password">
-                            <input type="password" id="password-token" data-type="password"
-                                   placeholder="PIN+RSA(RSA Token)动态码">
-                        </div>
-                        <div class="li attach" style="display: none">
-                            <span class="checkbox"></span>
-                            <span>自动登录</span>
-                        </div>
+可以通过以下方式开始模型评估过程
 
-                        <div class="li hint">
-                            <em>
-                                
-                            </em>
-                        </div>
+```bash
+python3 eval.py 
+    --model SwinTransformer  \
+    --data data/ILSVRC2012_val
+```
 
-                        <div class="li bt-login commit" id="tokenLogin">
-                            <span>登录</span>
-                        </div>
+上述命令中，需要传入如下参数:
 
-                        <div class="li changeLoginType">
-                            <span class="show-actions">切换登录方式</span>
-                        </div>
-
-                        <div class="li other">
-                        <span class="help">
-                            <a href="/manage/help" target="_blank">帮助</a>
-                        </span>
-                        </div>
-                        <input type="hidden" name="password" id="encrypted_password_token" value=''/>
-                        <input type="hidden" name="rememberMe" value="on">
-                        <input type="hidden" name="lt" id="lt-token" value="LT-631912759807168512-lGK3L">
-                        
-                        <input type="hidden" name="execution" value="e4s1">
-                        <input type="hidden" name="_eventId" value="submit">
-                        <input type="hidden" value='3' name="type">
-                    </div>
-                </form>
-
-                <form method="post" id="formQRCode" action="/login">
-                    <div class="qcode-area">
-                        <div class="qcode" id="qcode">
-                        </div>
-                        <div class="scan-success">
-                        </div>
-                        <div class="li hint">
-                            <em>
-                                
-                            </em>
-                        </div>
-                        <div class="li changeLoginType">
-                            <span class="show-actions">切换登录方式</span>
-                        </div>
-                        <input type="hidden" name="username" maxlength="90" id="qrCodeUsername">
-                        <input type="hidden" name="password" id="qrCodePassword">
-                        <input type="hidden" name="rememberMe" value="on">
-                        <input type="hidden" name="lt" id="lt-qrCode" value="LT-631912759807168512-lGK3L">
-                        
-                        <input type="hidden" name="execution" value="e4s1">
-                        <input type="hidden" name="_eventId" value="submit">
-                        <input type="hidden" value='2' name="type">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    
-</div>
-
-<script src="/js/lib/flex.min.js?v=2.0"></script>
-<script type="text/javascript" src="/js/lib/jquery3.2.1.min.js"></script>
-<script type="text/javascript" src="/js/lib/jquery.placeholder.min.js"></script>
-<script type="text/javascript" src="/js/jsencrypt.min.js"></script>
-<script type="text/javascript" src="/js/lib/actions.min.js?v=2.0"></script>
-<script type="text/javascript" src="/js/login.js?v=6.0"></script>
-<script type="text/javascript" src="/js/header.js?v=2.0"></script>
-<script type="text/javascript"
-        src="/beep-sdk.js?language=zh&amp;v=1628589342311"></script>
-
-
-<script type="text/javascript">
-    var notnull = "\u8F93\u5165\u4E0D\u80FD\u4E3A\u7A7A!",
-        sp_noemail = "\u8D26\u53F7\u4E0D\u5305\u62EC\u90AE\u7BB1\u540E\u7F00\uFF0C\u5982@baidu.com",
-        sp_username = "\u767E\u5EA6\u5458\u5DE5\u8D26\u53F7",
-        sp_passwd = "\u8D26\u53F7\u5BC6\u7801",
-        sp_hardToken = "PIN+RSA(RSA Token)\u52A8\u6001\u7801",
-        usernameformaterror = "\u8D26\u53F7\u683C\u5F0F\u9519\u8BEF!",
-        usernameprompt = "\u767E\u5EA6\u5458\u5DE5\u8D26\u53F7",
-        lastLoginType = 1,
-        securityLevel = 2,
-        rsaPublicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDSzTSkeLSG1wAOAMRh4L4O78jP4KgSwvMWSnpiWUrOpGknhHMMeoESI94NXdp9DZkptocfuo6dygUOsM+YM60+EVpRg2e9yWApvj88n88+yqQSJeCTRMRS2CDKZrOqf3WOQx7X72Ogj+yTx7mE+Ld+hhrl1ghPxCulQyOnMDSzbwIDAQAB",
-        beepQrCodeToken = "6eef72577bf7820f72f71e6ac90d0461f1450bf99014af3c2cacaef55b461410",
-        mailBoxLoginTabName = "\u8D26\u53F7\u5BC6\u7801\u767B\u5F55",
-        qrCodeLoginTabName = "\u626B\u7801\u767B\u5F55",
-        mobileHiLoginTabName = "\u624B\u673A\u5982\u6D41\u767B\u5F55",
-        hardTokenLoginTabName = "Token\u767B\u5F55",
-        cancelButtonName = "\u53D6\u6D88";
-</script>
-
-</body>
-</html>
++ `model`: 模型名称;
++ `data`: 保存ImageNet验证集的目录, 默认值为 `data/ILSVRC2012_val`。
