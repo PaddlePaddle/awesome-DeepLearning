@@ -36,7 +36,7 @@ class StockTradingEnv(gym.Env):
         self.observation_space = spaces.Box(
             low=0, high=1, shape=(19,), dtype=np.float32)
 
-    def seed(seld, seed):
+    def seed(self, seed):
         random.seed(seed)
         np.random.seed(seed)
 
@@ -45,7 +45,7 @@ class StockTradingEnv(gym.Env):
         d10 = self.df.loc[self.current_step, 'peTTM'] / 1e4
         d11 = self.df.loc[self.current_step, 'pbMRQ'] / 100
         d12 = self.df.loc[self.current_step, 'psTTM'] / 100
-        if np.isnan(d10):       # 某些股票大多是0.00000000e+00，如果是nan会报错
+        if np.isnan(d10):       # 某些数据是0.00000000e+00，如果是nan会报错
             d10 = d11 = d12 = 0.00000000e+00
         obs = np.array([
             self.df.loc[self.current_step, 'open'] / MAX_SHARE_PRICE,
