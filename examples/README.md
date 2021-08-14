@@ -1,3 +1,22 @@
+<script>
+// based on https://github.com/stevenkaras/stevenkaras.github.com/blob/master/_includes/js/katex.js
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    renderMathInElement(document.body, {'delimiters' : [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "$", right: "$", display: false},
+        {left: "\\(", right: "\\)", display: true}
+    ]});
+
+
+​    document.querySelectorAll("script[type='math/tex; mode=display']").forEach(function(el) {
+​        el.outerHTML = katex.renderToString(el.textContent.replace(/%.*/g, ''), { displayMode: true });
+​    });
+});
+</script>
+
 aistudio链接：
 
 https://aistudio.baidu.com/aistudio/projectdetail/2221634
