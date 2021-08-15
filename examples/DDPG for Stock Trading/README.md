@@ -33,7 +33,7 @@ https://aistudio.baidu.com/aistudio/projectdetail/2221634
 
 股票交易是一个经典的时序决策问题，其指的是在每个交易时间点通过分析历史图表，从而做出对应决策（如：买入、卖出、观望等），以达到长期的最大收益。该问题如图1所示。
 
-![image-20210807061418761](jpg/image-20210807061418761.png)
+![image-20210807061418761](images/image-20210807061418761.png)
 
 <center>图1 股票交易问题</center>
 
@@ -156,7 +156,7 @@ import paddle.nn.functional as F
 
 强化学习的基本原理在于智能体与其所处环境的交互并从中进行学习。在DQN算法中，智能体会在与所处环境`environment`进行交互后，获得一个环境提供的状态 $s_t$`state`(也可以说是获得环境提供的观测值`observation`)，接收状态后，智能体会利用`actor`网络计算出当前状态应采取的动作$a_t$`action`，同时智能体会根据`critic`网络预测出在该状态下行动$a_t$对应的Q值，当行动反馈给环境后，环境会给出对应的奖励$r_t$`reward`、新的状态$s_{t+1}$，以及是否触发终止条件`done`。每一次交互完成，DDPG算法都会将$s_t,a_t,r_t,s_{t+1},\mathbb{done}$作为一条经验储存在经验池中，每次会从经验池中抽取一定量的经验作为输入数据训练神经网络。
 
-![image-20210807065202651](jpg/image-20210807065202651.png)
+![image-20210807065202651](images/image-20210807065202651.png)
 
 <center>图2 本项目中应用的强化学习框架结构</center>
 
@@ -174,7 +174,7 @@ import paddle.nn.functional as F
 
 DQN算法使用神经网络来拟合Q函数，以应对高维的、连续的状态空间。常见的强化学习环境的状态数量如图3所示。
 
-![image-20210807061611187](jpg/image-20210807061611187.png)
+![image-20210807061611187](images/image-20210807061611187.png)
 
 <center>图3 不同强化学习环境下的状态数量</center>
 
@@ -191,7 +191,7 @@ D=\{<s_1,a_1,r_1,s_{2}>,<s_2,a_2,r_2,s_{3}>,\cdots,<s_n,r_n,a_n,s_{n+1}>\}
 $$
 每一个元组$<s_t,a_t,r_t,s_{t+1}>$表示一次智能体与环境的交互，从而形成转移关系。其示意如图4所示：
 
-![image-20210410171729586](jpg/image-20210410171729586.png)
+![image-20210410171729586](images/image-20210410171729586.png)
 
 <center>图4 经验存储容器</center>
 
@@ -254,13 +254,13 @@ $$
 
 使用猫（estimation）追老鼠（target）来表征两个网络
 
-![image-20210410174646116](jpg/image-20210410174646116.png)
+![image-20210410174646116](images/image-20210410174646116.png)
 
 <center>图5 猫鼠和网络示意图</center>
 
 如图6所示，可以看到在固定之前，猫和老鼠参数一样，在状态空间内，猫很难追上老鼠
 
-![image-20210410174849192](jpg/image-20210410174849192.png)
+![image-20210410174849192](images/image-20210410174849192.png)
 
 <center>图6 参数一样时的状态空间</center>
 
@@ -545,7 +545,7 @@ class ReplayBuffer(object):
 
 DDPG的算法流程所示：
 
-![](jpg/Actor-network-and-critic-network-in-DDPG.png)
+![](images/Actor-network-and-critic-network-in-DDPG.png)
 
 <center>图7 DDPG算法流程</center>
 
@@ -554,7 +554,7 @@ DDPG的算法流程所示：
 
 DDPG算法的伪代码如下：
 
-![image-20210807032130354](jpg/image-20210807032130354.png)
+![image-20210807032130354](images/image-20210807032130354.png)
 
 **实际代码编写：**
 
@@ -804,7 +804,7 @@ if __name__ == '__main__':
 
 在本项目中，我们使用自制的继承自`gym.env`的环境。`gym`是强化学习中的经典环境库，用于研究和开发强化学习相关算法的仿真平台。其具体的API如图8所示。
 
-![img](https://ai-studio-static-online.cdn.bcebos.com/0ca4b83a4c0047ef9e00cdcbe7395911ef5beb79b7764ae99e967f84d48ae806)
+![image-20210815224035466](images/image-20210815224035466.png)
 
 <center>图8 gym环境</center>
 
@@ -972,7 +972,7 @@ env = StockEnv.StockTradingEnv(df)
 python train.py --save_model
 ```
 
-![image-20210807053722193](jpg/image-20210807053722193.png)
+![image-20210807053722193](images/image-20210807053722193.png)
 
 
 
@@ -982,7 +982,7 @@ python train.py --save_model
 python test.py
 ```
 
-![image-20210807053359716](jpg/image-20210807053359716.png)
+![image-20210807053359716](images/image-20210807053359716.png)
 
 可以看到，每个评测环境都能在10步左右被成功求解，算法能够抓住关键时间点做出决策，且奖励也是递增变化。
 
