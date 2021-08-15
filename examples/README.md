@@ -1,35 +1,8 @@
-{% comment %} include katex >>>  {% endcomment %}
+数据集aistudio链接：
 
-<!-- katex -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+https://aistudio.baidu.com/aistudio/datasetdetail/102715
 
-<!-- The loading of KaTeX is deferred to speed up page rendering -->
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
-
-<!-- To automatically render math in text elements, include the auto-render extension: -->
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
-    onload="renderMathInElement(document.body);"></script>
-
-{% comment %} include katex <<< {% endcomment %}
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    renderMathInElement(document.body, {'delimiters' : [
-        {left: "$$", right: "$$", display: true},
-        {left: "\\[", right: "\\]", display: true},
-        {left: "$", right: "$", display: false},
-        {left: "\\(", right: "\\)", display: true}
-    ]});
-
-    document.querySelectorAll("script[type='math/tex; mode=display']").forEach(function(el) {
-        el.outerHTML = katex.renderToString(el.textContent.replace(/%.*/g, ''), { displayMode: true });
-    });
-});
-</script>
-
-
-
-aistudio链接：
+项目aistudio链接：
 
 https://aistudio.baidu.com/aistudio/projectdetail/2221634
 
@@ -49,9 +22,9 @@ https://aistudio.baidu.com/aistudio/projectdetail/2221634
 
 ### 1.1项目目的
 
-1. 理解并掌握强化学习的基础要素，包括[智能体](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/basic_information.html)、[环境](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/basic_information.html)、[状态](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/basic_information.html)、[动作](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/basic_information.html)、[策略](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/basic_information.html)和[奖励](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/basic_information.html)。
-2. 理解DDPG算法，包括该算法解决了DQN的哪些不足，DDPG的创新点及算法的具体内容。
-3. 熟悉经典强化学习算法的设计原理，以及构建流程。
+1. 理解并掌握强化学习的基础要素，包括[智能体](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/basic_information.html)、[环境](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/basic_information.html)、[状态](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/basic_information.html)、[动作](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/basic_information.html)、[策略](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/basic_information.html)和[奖励](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/basic_information.html)；
+2. 理解DDPG算法，包括该算法解决了DQN的哪些不足，DDPG的创新点及算法的具体内容；
+3. 熟悉经典强化学习算法的设计原理，以及构建流程；
 4. 熟悉飞桨框架，并通过飞桨框架实现深度强化学习中的一个经典算法——DDPG算法。
 
 
@@ -87,7 +60,7 @@ https://aistudio.baidu.com/aistudio/projectdetail/2221634
 | total_shares_sold | 总共抛出的手数                              |
 | total_sales_value | 总共抛出的价值                              |
 
-**`NOTE`：**上述属性值均会经过归一化处理，因此在此项目中，状态为一个长度为19的一维向量，其中每一个值的值域均为$[0,1]$。
+`NOTE`：上述属性值均会经过归一化处理，因此在此项目中，状态为一个长度为19的一维向量，其中每一个值的值域均为$[0,1]$。
 
 
 
@@ -105,7 +78,7 @@ https://aistudio.baidu.com/aistudio/projectdetail/2221634
 
 在该项目中，若触发以下三种情况任意一种，则一轮实验终止（我们称一个序幕（episode）为一轮实验）：
 
-1. 最大资产净值大于等于最大金钱乘以最大预测的收益比，即：
+1. 历史最大资产净值大于等于最大金钱乘以最大预测的收益比，即：
 
 $$
 \mathbb{max\_net\_worth\ge{initial\_account\_balance\times{max\_predict\_rate}}}
@@ -118,7 +91,35 @@ $$
 \mathbb{net\_worth\le0}
 $$
 
-本实验中的股票环境将继承gym库的环境实现，提供`reset(),step()`等训练接口。人每次根据环境状态执行上述三种动作中的一种，并根据股票市场交易规则计算奖励信号，DDPG算法同DQN算法一样，会将每一条经验，即$s_t,a_t,r_t,s_{t+1},\mathbb{done}$存储在经验池中，在随机抽取一批数据，送进神经网络中学习。同时，区别于DQN算法的$\varepsilon-greedy$算法选取离散动作，DDPG引入了动作网络actor来得到连续的动作信号。我们将通过这个实验来更好地理解DDPG算法。
+
+
+该项目中的奖励信号reward设计基于相对初始收益比来度量，具体地：
+
+1. 计算出当前状态状态$s$采取动作$a$的资产净值`net_worth`，其由两部分构成：当前资产和当前持有股票的价值，即：
+
+$$
+\mathbb{net\_worth=balance+num\_shares\_held\times{current\_price}}
+$$
+
+2. 计算出相对收益比：
+
+$$
+\mathbb{profit\_percent=\frac{net\_worth-initial\_account\_balance}{initial\_account\_balance}}
+$$
+
+3. 奖励设计：若相对收益比大于等于0，则奖励信号取相对收益比的1000倍与1之间的较大值；反之，则此轮决策交互的奖励为-100。即有：
+
+$$
+\mathbb{reward=}
+\begin{cases}
+\max(1,\mathbb{\frac{profit\_percent}{0.001}}),\quad{if\ }\mathbb{profit\_percent\ge0}\\
+-100,\quad\quad\quad\quad\quad\quad\quad{others}
+\end{cases}
+$$
+
+
+
+该项目中的股票环境将继承gym库的环境实现，提供`reset(),step()`等训练接口。人每次根据环境状态执行上述三种动作中的一种，并根据股票市场交易规则计算奖励信号，DDPG算法同DQN算法一样，会将每一条经验，即$s_t,a_t,r_t,s_{t+1},\mathbb{done}$存储在经验池中，在随机抽取一批数据，送进神经网络中学习。同时，区别于DQN算法的$\varepsilon-greedy$算法选取离散动作，DDPG引入了动作网络actor来得到连续的动作信号。我们将通过这个实验来更好地理解DDPG算法。
 
 
 
@@ -180,7 +181,7 @@ DQN算法使用神经网络来拟合Q函数，以应对高维的、连续的状�
 同时，由于采用了神经网络来拟合Q函数，会导致一些问题出现。
 
 1. 由于强化学习的数据为带有时序关系的数据，因此并不是独立同分布的。为了解决在神经网络梯度更新时，数据样本间的关联性导致的梯度不准的问题，DQN算法采用了**经验回放**机制。
-2. 由于参数化了Q函数，因此在q_target中包含了正在优化的网咯参数，这样计算出来的梯度也是不准的，我们成为半梯度。针对这个问题，DQN算法采用了**固定目标**机制。
+2. 由于参数化了Q函数，因此在q_target中包含了正在优化的网络参数，这样计算出来的梯度也是不准的，我们称为半梯度。针对这个问题，DQN算法采用了**固定目标**机制。
 
 **经验回放机制：**
 
@@ -309,17 +310,18 @@ DDPG应用于股票交易项目流程包含如下6个步骤：
 继承`gym.env`，并重写相应的接口即可，如`__init__(),reset(),step()`等，详细代码见`StockEnv.py`。此处仅列出这三个接口的写法：
 
 ```python
-MAX_ACCOUNT_BALANCE = 214748
-MAX_NUM_SHARES = 214748
-MAX_SHARE_PRICE = 5000
-MAX_VOLUME = 1000e6
-MAX_AMOUNT = 3e5
-MAX_OPEN_POSITIONS = 5
-MAX_STEPS = 500
-MAX_DAY_CHANGE = 1
-max_loss =-50000
-max_predict_rate = 4
-INITIAL_ACCOUNT_BALANCE = 10000
+# 默认的一些数据，用于归一化属性值
+MAX_ACCOUNT_BALANCE = 214748        # 组大的账户财产
+MAX_NUM_SHARES = 214748             # 最大的手数
+MAX_SHARE_PRICE = 5000              # 最大的单手价格
+MAX_VOLUME = 1000e6                 # 最大的成交量
+MAX_AMOUNT = 3e5                    # 最大的成交额
+MAX_OPEN_POSITIONS = 5              # 最大的持仓头寸
+MAX_STEPS = 500                     # 最大的交互次数
+MAX_DAY_CHANGE = 1                  # 最大的日期改变
+max_loss =-50000                    # 最大的损失
+max_predict_rate = 4                # 最大的预测率
+INITIAL_ACCOUNT_BALANCE = 10000     # 初始的金钱
 
 
 class StockTradingEnv(gym.Env):
@@ -332,20 +334,94 @@ class StockTradingEnv(gym.Env):
         self.df = df
         self.reward_range = (0, MAX_ACCOUNT_BALANCE)
 
-        # Actions of the format Buy x%, Sell x%, Hold, etc.
+        # 动作的可能情况：买入x%, 卖出x%, 观望
         self.action_space = spaces.Box(
             low=np.array([-3, 0]), high=np.array([3, 1]), dtype=np.float32)
 
-        # Prices contains the OHCL values for the last five prices
+        # 环境状态的维度
         self.observation_space = spaces.Box(
             low=0, high=1, shape=(19,), dtype=np.float32)
 
-        
+    
+    def seed(self, seed):
+        random.seed(seed)
+        np.random.seed(seed)
+
+    
+    # 处理状态
+    def _next_observation(self):
+        # 有些股票数据缺失一些数据，处理一下
+        d10 = self.df.loc[self.current_step, 'peTTM'] / 1e4
+        d11 = self.df.loc[self.current_step, 'pbMRQ'] / 100
+        d12 = self.df.loc[self.current_step, 'psTTM'] / 100
+        if np.isnan(d10):       # 某些数据是0.00000000e+00，如果是nan会报错
+            d10 = d11 = d12 = 0.00000000e+00
+        obs = np.array([
+            self.df.loc[self.current_step, 'open'] / MAX_SHARE_PRICE,
+            self.df.loc[self.current_step, 'high'] / MAX_SHARE_PRICE,
+            self.df.loc[self.current_step, 'low'] / MAX_SHARE_PRICE,
+            self.df.loc[self.current_step, 'close'] / MAX_SHARE_PRICE,
+            self.df.loc[self.current_step, 'volume'] / MAX_VOLUME,
+            self.df.loc[self.current_step, 'amount'] / MAX_AMOUNT,
+            self.df.loc[self.current_step, 'adjustflag'] / 10,
+            self.df.loc[self.current_step, 'tradestatus'] / 1,
+            self.df.loc[self.current_step, 'pctChg'] / 100,
+            d10,
+            d11,
+            d12,
+            self.df.loc[self.current_step, 'pctChg'] / 1e3,
+            self.balance / MAX_ACCOUNT_BALANCE,
+            self.max_net_worth / MAX_ACCOUNT_BALANCE,
+            self.shares_held / MAX_NUM_SHARES,
+            self.cost_basis / MAX_SHARE_PRICE,
+            self.total_shares_sold / MAX_NUM_SHARES,
+            self.total_sales_value / (MAX_NUM_SHARES * MAX_SHARE_PRICE),
+        ])
+        return obs
+
+
+    # 执行当前动作，并计算出当前的数据（如：资产等）
+    def _take_action(self, action):
+        # 随机设置当前的价格，其范围上界为当前时间点的价格
+        current_price = random.uniform(
+            self.df.loc[self.current_step, "open"], self.df.loc[self.current_step, "close"])
+        action_type = action[0]
+        amount = action[1]
+        if action_type > 1:     # 买入amount%
+            total_possible = int(self.balance / current_price)
+            shares_bought = int(total_possible * amount)
+            prev_cost = self.cost_basis * self.shares_held
+            additional_cost = shares_bought * current_price
+
+            self.balance -= additional_cost
+            self.cost_basis = (
+                prev_cost + additional_cost) / (self.shares_held + shares_bought)
+            self.shares_held += shares_bought
+
+        elif action_type < -1:  # 卖出amount%
+            shares_sold = int(self.shares_held * amount)
+            self.balance += shares_sold * current_price
+            self.shares_held -= shares_sold
+            self.total_shares_sold += shares_sold
+            self.total_sales_value += shares_sold * current_price
+
+        # 计算出执行动作后的资产净值
+        self.net_worth = self.balance + self.shares_held * current_price
+
+        if self.net_worth > self.max_net_worth:
+            self.max_net_worth = self.net_worth
+
+        if self.shares_held == 0:
+            self.cost_basis = 0
+
+
+    # 与环境交互
     def step(self, action):
-        # Execute one time step within the environment
+        # 在环境内执行动作
         self._take_action(action)
         done = False
 
+        # 判断是否终止
         self.current_step += 1
         if self.max_net_worth >= INITIAL_ACCOUNT_BALANCE * max_predict_rate:
             done = True
@@ -356,7 +432,7 @@ class StockTradingEnv(gym.Env):
 
         delay_modifier = (self.current_step / MAX_STEPS)
 
-        # profits
+        # 计算相对收益比，并据此来计算奖励
         profit = self.net_worth - INITIAL_ACCOUNT_BALANCE
         profit_percent = profit / INITIAL_ACCOUNT_BALANCE
         if profit_percent>=0:
@@ -371,8 +447,10 @@ class StockTradingEnv(gym.Env):
 
         return obs, reward, done, {}
 
+
+    # 重置环境
     def reset(self, new_df=None):
-        # Reset the state of the environment to an initial state
+        # 重置环境的变量为初始值
         self.balance = INITIAL_ACCOUNT_BALANCE
         self.net_worth = INITIAL_ACCOUNT_BALANCE
         self.max_net_worth = INITIAL_ACCOUNT_BALANCE
@@ -383,18 +461,15 @@ class StockTradingEnv(gym.Env):
         self.count = 0
         self.interval = 5
 
-        # pass test dataset to environment
+        # 传入环境数据集
         if new_df:
             self.df = new_df
 
-        # Set the current step to a random point within the data frame
-        # self.current_step = random.randint(
-        #     0, len(self.df.loc[:, 'open'].values) - 6)
         self.current_step = 0
 
         return self._next_observation()
     '''
-    other functions ignored.
+    其他代码
     '''
 ```
 
@@ -416,6 +491,8 @@ class StockTradingEnv(gym.Env):
 import numpy as np
 import paddle
 
+
+# 缓存容器：内容为{obs, act, obs_, reward, done}五元组
 class ReplayBuffer(object):
     def __init__(self, state_dim, action_dim, max_size=int(1e4)):
         self.max_size = max_size
@@ -431,6 +508,7 @@ class ReplayBuffer(object):
         self.device = paddle.get_device()
 
     
+    # 存入数据
     def add(self, state, action, next_state, reward, done):
         self.states[self.cur] = state
         self.actions[self.cur] = action
@@ -438,13 +516,16 @@ class ReplayBuffer(object):
         self.rewards[self.cur] = reward
         self.dones[self.cur] = done
 
+        # 指针移动
         self.cur = (self.cur + 1) % self.max_size
         self.size = min(self.size + 1, self.max_size)
 
     
+    # 采样
     def sample(self, batch):
         ids = np.random.randint(0, self.size, size=batch)
 
+        # 返回paddle张量
         return (
             paddle.to_tensor(self.states[ids], dtype='float32', place=self.device),
             paddle.to_tensor(self.actions[ids], dtype='float32', place=self.device),
@@ -486,8 +567,11 @@ import paddle.optimizer as optim
 import paddle.nn.functional as F
 import copy
 
+# 是否使用GPU
 device = paddle.get_device()
 
+
+# 动作网络：输出连续的动作信号
 class Actor(nn.Layer):
     def __init__(self, state_dim, action_dim, max_action):
         super(Actor, self).__init__()
@@ -502,10 +586,11 @@ class Actor(nn.Layer):
     def forward(self, state):
         a = F.relu(self.l1(state))
         a = F.relu(self.l2(a))
-        # return self.max_action * F.tanh(self.l3(a))
+        # 输出层激活函数采用tanh，将输出映射至[-1,1]
         return F.tanh(self.l3(a))
 
 
+# 值函数网络：评价一个动作的价值
 class Critic(nn.Layer):
     def __init__(self, state_dim, action_dim):
         super(Critic, self).__init__()
@@ -519,13 +604,16 @@ class Critic(nn.Layer):
         q = F.relu(self.l2(q))
         return self.l3(q)
 
-    
+
+# DDPG算法模型    
 class DDPGModel(object):
     def __init__(self, state_dim, action_dim, max_action, gamma = 0.99, tau = 0.001):
+        # 动作网络与目标动作网络
         self.actor = Actor(state_dim, action_dim, max_action)
         self.actor_target = copy.deepcopy(self.actor)
         self.actor_optimizer = optim.Adam(parameters=self.actor.parameters(), learning_rate=1e-4)
 
+        # 值函数网络与目标值函数网络
         self.critic = Critic(state_dim, action_dim)
         self.critic_target = copy.deepcopy(self.critic)
         self.critic_optimizer = optim.Adam(parameters=self.critic.parameters(), weight_decay=1e-2)
@@ -533,42 +621,44 @@ class DDPGModel(object):
         self.gamma = gamma
         self.tau = tau
 
-    
+
+    # 根据当前状态，选择动作：过一个动作网络得到动作
     def select_action(self, state):
         state = paddle.to_tensor(state.reshape(1, -1), dtype='float32', place=device)
         return self.actor(state).numpy().flatten()
 
     
+    # 训练函数
     def train(self, replay_buffer, batch=64):
-        # sample
+        # 从缓存容器中采样
         state, action, next_state, reward, done = replay_buffer.sample(batch)
 
-        # compute q target
+        # 计算目标网络q值
         q_target = self.critic_target(next_state, self.actor_target(next_state))
         q_target = reward + ((1- done) * self.gamma * q_target).detach()
 
-        # get q eval
+        # 计算当前网络q值
         q_eval = self.critic(state, action)
 
-        # compute critic loss
+        # 计算值网络的损失函数
         critic_loss = F.mse_loss(q_eval, q_target)
         # print(critic_loss)
 
-        # optimize the critic
+        # 梯度回传，优化网络参数
         self.critic_optimizer.clear_grad()
         critic_loss.backward()
         self.critic_optimizer.step()
 
-        # compute actor loss
+        # 计算动作网络的损失函数
         actor_loss = -self.critic(state, self.actor(state)).mean()
         # print(actor_loss)
 
-        # optimize the actor
+        # 梯度回传，优化网络参数
         self.actor_optimizer.clear_grad()
         actor_loss.backward()
         self.actor_optimizer.step()
 
-        # update the froze target models
+        # 更新目标网络参数
         for param, target_param in zip(self.critic.parameters(), self.critic_target.parameters()):
             target_param.set_value(target_param * (1.0 - self.tau) + param * self.tau)
         for param, target_param in zip(self.actor.parameters(), self.actor_target.parameters()):
@@ -599,6 +689,7 @@ import numpy as np
 import paddle
 import argparse
 import os
+from visualdl import LogWriter
 
 
 import model
@@ -607,21 +698,50 @@ import StockEnv
 import pandas as pd
 
 
-# get data
+# 获得数据
 df = pd.read_csv('data/data102715/train.csv')
 # df = df.sort_values('date')
 
 
-# default hyperparams
-default_seed = 123
-default_batch = 64
-default_gamma = 0.95
-default_tau = 0.005
-default_timesteps = 2e5
-default_expl_noise = 0.1
-default_eval_freq = 6e3
+# 评估模型
+def eval_policy(policy, df, seed, eval_episodes=10):
+    # 创建评估环境，并设置随机种子
+    eval_env = StockEnv.StockTradingEnv(df)
+    eval_env.seed(seed + 100)
 
-# args
+    avg_reward = 0.
+    for _ in range(eval_episodes):
+        # 初始化环境
+        state, done = eval_env.reset(), False
+        
+        # 与环境交互
+        while not done:
+            action = policy.select_action(state)
+            # TODO: step with env
+            action[0] *= 3
+            state, reward, done, _ = eval_env.step(action)
+            avg_reward += reward
+    
+    # 计算平均奖励
+    avg_reward /= eval_episodes
+
+    print('-----------------------------------------')
+    print(f'Evaluation over {eval_episodes} episodes: {avg_reward:.3f}')
+    print('-----------------------------------------')
+
+    return avg_reward
+
+
+# 默认的超参数
+default_seed = 123          # 随机种子
+default_batch = 64          # 批量大小
+default_gamma = 0.95        # 折扣因子
+default_tau = 0.005         # 当前网络参数比例，用于更新目标网络
+default_timesteps = 2e5     # 训练步数
+default_expl_noise = 0.1    # 高斯噪声
+default_eval_freq = 6e3     # 评估模型的频率
+
+# 参数语法解析器
 parser = argparse.ArgumentParser()
 parser.add_argument("--seed", default=default_seed, type=int)
 parser.add_argument("--batch_size", default=default_batch, type=int)
@@ -635,24 +755,25 @@ parser.add_argument("--load_model", default="")
 args = parser.parse_args()
 
 file_name = f'DDPG_Stock_{args.seed}'
-
+writer = LogWriter('./log/train')
 
 if __name__ == '__main__':
+    # 路径设置
     if not os.path.exists("./results"):
 	    os.makedirs('./results')
 
     if args.save_model and not os.path.exists("./models"):
         os.makedirs('./models')
 
-    # set env
+    # 根据数据集设置环境
     env = StockEnv.StockTradingEnv(df)
 
-    # set seed
+    # 设置随机种子
     env.seed(args.seed)
     paddle.seed(args.seed)
     np.random.seed(args.seed)
 
-    # TODO: set valeus according to env
+    # T得到环境的参数信息（如：状态和动作的维度）
     state_dim = env.observation_space.shape[0]
     action_dim = env.action_space.shape[0]
     max_action = float(env.action_space.high[1])
@@ -666,14 +787,14 @@ if __name__ == '__main__':
         'tau': args.tau
     }
 
-    # set model policy
+    # 设置模型：DDPG算法
     policy = model.DDPGModel(**kwarg)
 
     if args.load_model != "":
-        policy_file = filename if args.load_model == "default" else args.load_model
+        policy_file = file_name if args.load_model == "default" else args.load_model
         policy.load(f'./models/{policy_file}')
     
-    # set replay buffer
+    # 设置缓存容器
     replay_buffer = ReplayBuffer.ReplayBuffer(state_dim, action_dim)
 ```
 
@@ -700,44 +821,50 @@ if __name__ == '__main__':
 详细代码见`train.py`，此处只给出关键代码。
 
 ```python
-state, done = env.reset(), False
-episode_reward = 0
-episode_timesteps = 0
-episode_num = 0
+# 初始化环境
+    state, done = env.reset(), False
+    episode_reward = 0
+    episode_timesteps = 0
+    episode_num = 0
 
-for t in range(int(args.timesteps)):
+    # 与环境交互
+    for t in range(int(args.timesteps)):
 
-    episode_timesteps += 1
+        episode_timesteps += 1
 
-    # get action from state
-    action = (
-        policy.select_action(np.array(state))
-        + np.random.normal(0, max_action * args.expl_noise, size=action_dim)
-    ).clip(-max_action, max_action)
-    action[0] *= 3
-    print('action', action)
+        # 根据状态得到动作
+        action = (
+            policy.select_action(np.array(state))
+            + np.random.normal(0, max_action * args.expl_noise, size=action_dim)
+        ).clip(-max_action, max_action)
+        action[0] *= 3
+        print('action', action)
 
-    # perform action
-    next_state, reward, done, _ = env.step(action)
-    print('reward', reward)
+        # 在环境中执行动作
+        next_state, reward, done, _ = env.step(action)
+        print('reward', reward)
+        writer.add_scalar(tag='reward', step=t, value=reward)
 
-    # store data in replay buffer
-    replay_buffer.add(state, action, next_state, reward, done)
+        # 将交互数据存入容器
+        replay_buffer.add(state, action, next_state, reward, done)
 
-    state = next_state
-    episode_reward += reward
+        # 状态更新
+        state = next_state
+        episode_reward += reward
 
-    # train
-    policy.train(replay_buffer, args.batch_size)
+        # 算法训练
+        policy.train(replay_buffer, args.batch_size)
 
-    if done:
-        # +1 to account for 0 indexing. +0 on ep_timesteps since it will increment +1 even if done=True
-        print(f'Total T: {t+1} Episode Num: {episode_num+1} Episode T: {episode_timesteps} Reward: {episode_reward:.3f}')
-        # Reset environment
-        state, done = env.reset(), False
-        episode_reward = 0
-        episode_timesteps = 0
-        episode_num += 1
+        # 该轮交互结束
+        if done:
+            # 打印信息，重置状态
+            print(f'Total T: {t+1} Episode Num: {episode_num+1} Episode T: {episode_timesteps} Reward: {episode_reward:.3f}')
+            # Reset environment
+            writer.add_scalar(tag='episode_reward', step=episode_num, value= episode_reward)
+            state, done = env.reset(), False
+            episode_reward = 0
+            episode_timesteps = 0
+            episode_num += 1
 ```
 
 
@@ -760,15 +887,18 @@ for t in range(int(args.timesteps)):
 详细代码见`train.py`，此处只给出关键代码。
 
 ```python
+# 评估模型
 def eval_policy(policy, df, seed, eval_episodes=10):
-    # TODO: get env
+    # 创建评估环境，并设置随机种子
     eval_env = StockEnv.StockTradingEnv(df)
     eval_env.seed(seed + 100)
 
     avg_reward = 0.
     for _ in range(eval_episodes):
-        # TODO: reset env
+        # 初始化环境
         state, done = eval_env.reset(), False
+        
+        # 与环境交互
         while not done:
             action = policy.select_action(state)
             # TODO: step with env
@@ -776,6 +906,7 @@ def eval_policy(policy, df, seed, eval_episodes=10):
             state, reward, done, _ = eval_env.step(action)
             avg_reward += reward
     
+    # 计算平均奖励
     avg_reward /= eval_episodes
 
     print('-----------------------------------------')
@@ -792,6 +923,7 @@ def eval_policy(policy, df, seed, eval_episodes=10):
 使用`paddle`的`save()`即可保存模型参数：
 
 ```python
+# 保存模型参数
 def save(self, filename):
     paddle.save(self.critic.state_dict(), filename + '_critic')
     paddle.save(self.critic_optimizer.state_dict(), filename + '_critic_optimizer')
@@ -807,6 +939,7 @@ def save(self, filename):
 首先，使用`paddle`的`load()`装载模型：
 
 ```python
+# 导入模型参数
 def load(self, filename):
     self.critic.set_state_dict(paddle.load(filename + '_critic'))
     self.critic_optimizer.set_state_dict(paddle.load(filename + '_critic_optimizer'))
@@ -851,7 +984,7 @@ python test.py
 
 ![image-20210807053359716](jpg/image-20210807053359716.png)
 
-可以看到，每个评测环境都能在10步左右被成功求解，且奖励也是递增变化。
+可以看到，每个评测环境都能在10步左右被成功求解，算法能够抓住关键时间点做出决策，且奖励也是递增变化。
 
 ## 5.项目总结
 
