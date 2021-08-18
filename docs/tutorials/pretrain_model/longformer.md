@@ -31,7 +31,7 @@ Longformer对长文档建模主要的改进是提出了新的Self-Attention模�
 
 ### 2.2 Dilated Sliding Window
 
-在对一个token进行Self-Attention操作时，普通的Sliding Window Attention只能考虑到长度为$w$的上下文，在不增加计算符合的情况下，Longformer提出了Dilated Sliding Window，如**图1c**所示。在进行Self-Attention的两个相邻token之间会存在大小为$d$的间隙，这样序列中的每个token的感受野范围可扩展到$d\times w$。在第$m$层，感受野的范围将是$m\times d \times w$。
+在对一个token进行Self-Attention操作时，普通的Sliding Window Attention只能考虑到长度为$w$的上下文，在不增加计算量的情况下，Longformer提出了Dilated Sliding Window，如**图1c**所示。在进行Self-Attention的两个相邻token之间会存在大小为$d$的间隙，这样序列中的每个token的感受野范围可扩展到$d\times w$。在第$m$层，感受野的范围将是$m\times d \times w$。
 
 作者在文中提到，在进行Multi-Head Self-Attention时，在某些Head上不设置Dilated Sliding Window以让模型聚焦在局部上下文，在某些Head上设置Dilated Sliding Window以让模型聚焦在更长的上下文序列，这样能够提高模型表现。
 

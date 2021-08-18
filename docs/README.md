@@ -1,4 +1,6 @@
-深度学习百问包含深度学习基础篇、深度学习进阶篇、深度学习应用篇、强化学习篇以及面试宝典，详细信息请参阅[Paddle知识点文档平台](https://paddlepedia.readthedocs.io/en/latest/index.html)
+# 深度学习百问
+
+深度学习百问包含深度学习基础篇、深度学习进阶篇、深度学习应用篇、强化学习篇以及面试宝典，详细信息请参阅[Paddle知识点文档平台](https://paddlepedia.readthedocs.io/en/latest/index.html)。
 
 * **深度学习基础篇**  
 
@@ -168,4 +170,11 @@
     * [推荐系统的PV和UV代表什么？](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/evaluation_metric.html#id2)
     * [协同过滤推荐和基于内容的推荐的区别是什么？](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/evaluation_metric.html#id2)
 
-  [返回快速跳转:arrow_heading_up:](#0) 
+  
+
+# 贡献内容
+
+您要是能贡献新的深度学习知识点那就太好了！欢迎扫码加入SIG群，了解SIG成员权益，共同建设飞桨教育生态。
+
+<center><img src='./images/cover/SIG.png', width=20%></center>
+
