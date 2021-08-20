@@ -406,7 +406,7 @@
 | **智慧农林** | [AI识虫](https://aistudio.baidu.com/aistudio/projectdetail/439888)                     |   -   |
 | **智慧医疗** | [医学常见中草药分类](https://aistudio.baidu.com/aistudio/projectdetail/1434738?channelType=0&channel=0)         | - |
 | **智慧医疗** | [眼疾识别](https://www.paddlepaddle.org.cn/tutorials/projectdetail/1630501)                   | - |
-| **其他**     | 人摔倒检测                 |    -                                                          |
+| **其他**     | [人摔倒检测](https://aistudio.baidu.com/aistudio/projectdetail/2071768)          |    -   |
 | **其他**     | [足球比赛动作定位](https://github.com/PaddlePaddle/PaddleVideo/tree/application/FootballAction)           | - |
 | **其他**     | [基于强化学习的飞行器仿真](https://github.com/PaddlePaddle/PARL/tree/develop/examples/tutorials/homework/lesson5/ddpg_quadrotor)   | -  |
 | **其他**     | [基于ERNIE-Gram实现语义匹配](https://aistudio.baidu.com/aistudio/projectdetail/2247755)   | -  |
