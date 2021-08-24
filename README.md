@@ -384,9 +384,16 @@
 
 [返回快速跳转:arrow_heading_up:](#0) 
 
-# <span id ='4'>五、 经典深度学习案例集（开发中）
+# <span id ='4'>五、 经典深度学习案例集（开发中）</span>
 
-# </span>
+| 领域         | 学术案例                   | 介绍                                                        |
+| ------------ | -------------------------- | ------------------------------------------------------------ |
+| **机器学习** |  |  -|
+| **NLP**      |  | - |
+| **语音**     |  | - |
+| **CV**       | [一文详解yolov3目标检测算法](https://aistudio.baidu.com/aistudio/projectdetail/2240328) | - |
+| **推荐**     |  | - |
+| **强化学习** |  | - |
 
 [返回快速跳转:arrow_heading_up:](#0) 
 
@@ -402,16 +409,25 @@
 | **智慧城市** | [积雪语义分割](https://paddlex.readthedocs.io/zh_CN/develop/examples/multi-channel_remote_sensing/README.html)               | - |
 | **智慧城市** | [戴口罩的人脸识别](https://aistudio.baidu.com/aistudio/projectdetail/267322?channelType=0&channel=0)           | - |
 | **智慧交通** | [车道线分割和红绿灯安全检测](https://github.com/PaddlePaddle/PaddleDetection/blob/release/2.1/configs/vehicle/README_cn.md) | - |
+| **智慧交通** | [PaddleOCR: 车牌识别](https://aistudio.baidu.com/aistudio/projectdetail/739559?channelType=0&channel=0) | - |
 | **智慧农林** | [耕地地块识别](https://mp.weixin.qq.com/s/JlDVmYlhN7sF0hpRlncDNw)               |             |
 | **智慧农林** | [AI识虫](https://aistudio.baidu.com/aistudio/projectdetail/439888)                     |   -   |
+| **智慧农林** | [基于PaddleX实现森林火灾监测](https://aistudio.baidu.com/aistudio/projectdetail/1968964?channelType=0&channel=0) | - |
 | **智慧医疗** | [医学常见中草药分类](https://aistudio.baidu.com/aistudio/projectdetail/1434738?channelType=0&channel=0)         | - |
 | **智慧医疗** | [眼疾识别](https://www.paddlepaddle.org.cn/tutorials/projectdetail/1630501)                   | - |
+| **智慧生活** | [智能相册分类](https://aistudio.baidu.com/aistudio/projectdetail/2057379) | - |
+| **智慧生活** | [老北京城影像修复](https://aistudio.baidu.com/aistudio/projectdetail/1161285?channelType=0&channel=0) | - |
 | **其他**     | [人摔倒检测](https://aistudio.baidu.com/aistudio/projectdetail/2071768)          |    -   |
 | **其他**     | [足球比赛动作定位](https://github.com/PaddlePaddle/PaddleVideo/tree/application/FootballAction)           | - |
 | **其他**     | [基于强化学习的飞行器仿真](https://github.com/PaddlePaddle/PARL/tree/develop/examples/tutorials/homework/lesson5/ddpg_quadrotor)   | -  |
 | **其他**     | [基于ERNIE-Gram实现语义匹配](https://aistudio.baidu.com/aistudio/projectdetail/2247755)   | -  |
 | **其他**     | [基于PaddleDetection的PCB瑕疵检测](https://aistudio.baidu.com/aistudio/projectdetail/2240725)   |  - |
 | **其他**     | [中文语音识别](https://aistudio.baidu.com/aistudio/projectdetail/2280562)   |  - |
+| **其他**     | [全流程，从零搞懂基于PaddlePaddle的图像分割](https://aistudio.baidu.com/aistudio/projectdetail/1674328?channelType=0&channel=0) | - |
+| **其他**     | [PaddleHub一键OCR中文识别(超轻量8.1M模型，火爆)](https://aistudio.baidu.com/aistudio/projectdetail/507159?channelType=0&channel=0)  | - |
+| **其他**     | [天下第一AI武道会-Deepfake换脸](https://aistudio.baidu.com/aistudio/projectdetail/1189026?channelType=0&channel=0)  | - |
+| **其他**     | [飞桨创意之星 宋代诗人念诗的秘密——PaddleGAN实现精准唇形合成](https://aistudio.baidu.com/aistudio/projectdetail/1463208?channelType=0&channel=0)  | - |
+| **其他**     | [通过OCR实现验证码识别](https://aistudio.baidu.com/aistudio/projectdetail/1100507?channelType=0&channel=0) | - |
 
 
 [返回快速跳转:arrow_heading_up:](#0) 
