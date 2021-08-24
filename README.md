@@ -26,7 +26,7 @@
 
 ---
 
-# 📣<span id ='0'>Who are you  & Learning map </span> 
+# <span id ='0'>Who are you  & Learning map </span> 
 
 ## 👨‍🏫我是高校用户
 
