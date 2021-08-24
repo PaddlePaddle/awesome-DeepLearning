@@ -26,21 +26,19 @@
 
 ---
 
-# <span id ='0'>Who are you  & Learning map </span> 
-
 ## 👨‍🏫我是高校用户
 
-| 您希望：     | 您可以学习：                                                 |
+| 我希望：     | 我可以学习：                                                 |
 | ------------ | ------------------------------------------------------------ |
-| 入门深度学习 | 零基础实践深度学习[:arrow_heading_down:](#1)、深度学习百问[:arrow_heading_down:](#2)、动手学深度学习paddle版 |
+| 入门深度学习 | 零基础实践深度学习[:arrow_heading_down:](#1)、深度学习百问[:arrow_heading_down:](#2)、动手学深度学习paddle版[:arrow_heading_down:](#dive) |
 | 进阶深度学习 | 产业实践深度学习、深度学习百问[:arrow_heading_down:](#2)、面试宝典[:arrow_heading_down:](#6) |
 | 趣味深度学习 | 特色课程[:arrow_heading_down:](#3)、产业实践案例[:arrow_heading_down:](#5) |
 
 ## 👷‍♂️我是企业用户
 
-| 您希望：     | 您可以学习：                                                 |
+| 我希望：     | 我可以学习：                                                 |
 | ------------ | ------------------------------------------------------------ |
-| 入门深度学习 | 零基础实践深度学习[:arrow_heading_down:](#1)、深度学习百问[:arrow_heading_down:](#2)、动手学深度学习paddle版 |
+| 入门深度学习 | 零基础实践深度学习[:arrow_heading_down:](#1)、深度学习百问[:arrow_heading_down:](#2)、动手学深度学习paddle版[:arrow_heading_down:](#dive) |
 | 进阶深度学习 | 产业实践深度学习、特色课程[:arrow_heading_down:](#3)、面试宝典[:arrow_heading_down:](#6) |
 | 实践深度学习 | 产业实践案例[:arrow_heading_down:](#5)、飞桨各产品课程[:arrow_heading_down:](#fj) |
 
@@ -81,7 +79,7 @@
 
 # 👉书籍类
 
-## 《动手学深度学习》paddle版
+## <span id ='dive'>《动手学深度学习》paddle版</span>
 
 [本项目](https://github.com/tngt/awesome-DeepLearning/tree/develop/Dive-into-DL-paddlepaddle)将《[动手学深度学习](http://zh.d2l.ai/)》原书中MXNet代码实现改为PaddlePaddle实现。原书作者：阿斯顿·张、李沐、扎卡里 C. 立顿、亚历山大 J. 斯莫拉以及其他社区贡献者，GitHub地址：https://github.com/d2l-ai/d2l-zh。
 
@@ -145,7 +143,7 @@
 
 # 👉案例类
 
-#  <span id ='5'>飞桨产业实践案例</span>
+## <span id ='5'>飞桨产业实践案例</span>
 
 | 领域         | 产业案例                                                     |
 | ------------ | ------------------------------------------------------------ |
@@ -174,7 +172,7 @@
 
 # 👉汇总
 
-# <span id='fj'>飞桨各产品学习资料汇总</span>
+## <span id='fj'>飞桨各产品学习资料汇总</span>
 
 | 产品                             | 视频课程                                                     | 学习文档 |
 | -------------------------------- | ------------------------------------------------------------ | -------- |
