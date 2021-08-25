@@ -4,4 +4,4 @@
 .. toctree::
    :maxdepth: 2
 
-   层归一化 <Layer_Normalization/index>
+   层归一化 <Layer_Normalization>
