@@ -413,7 +413,7 @@
 | **智慧农林** | [耕地地块识别](https://mp.weixin.qq.com/s/JlDVmYlhN7sF0hpRlncDNw)               |             |
 | **智慧农林** | [AI识虫](https://aistudio.baidu.com/aistudio/projectdetail/439888)                     |   -   |
 | **智慧农林** | [基于PaddleX实现森林火灾监测](https://aistudio.baidu.com/aistudio/projectdetail/1968964?channelType=0&channel=0) | - |
-| **智慧医疗** | [医学常见中草药分类](https://aistudio.baidu.com/aistudio/projectdetail/1434738?channelType=0&channel=0) | 本案例使用VGG模型对中草药数据集进行分类识别，案例详细的讲解了数据读取和预处理，模型介绍，训练，优化，评估，预测，部署这一完整流程，同时提供带有详细注释的代码 |
+| **智慧医疗** | [医学常见中草药分类](https://aistudio.baidu.com/aistudio/projectdetail/2310126?channelType=0&channel=0) | 本案例使用VGG模型对中草药数据集进行分类识别，案例详细的讲解了数据读取和预处理，模型介绍，训练，优化，评估，预测，部署这一完整流程，同时提供带有详细注释的代码 |
 | **智慧医疗** | [眼疾识别](https://www.paddlepaddle.org.cn/tutorials/projectdetail/1630501)                   | - |
 | **智慧生活** | [智能相册分类](https://aistudio.baidu.com/aistudio/projectdetail/2057379) | - |
 | **智慧生活** | [老北京城影像修复](https://aistudio.baidu.com/aistudio/projectdetail/1161285?channelType=0&channel=0) | - |
