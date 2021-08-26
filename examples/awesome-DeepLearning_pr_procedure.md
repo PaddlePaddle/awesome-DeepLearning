@@ -60,13 +60,13 @@
 
 
 
-8. 切换到上游的 upstream/master 分支
+8. 切换到上游的 upstream/develop 分支
 
-   > git checkout upstream/master
+   > git checkout upstream/develop
 
 
 
-9. 在上游分支 upstream/master 的基础上新建 my_branch 分支
+9. 在上游分支 upstream/develop 的基础上新建 my_branch 分支
 
    > git checkout -b my_branch
 
@@ -108,7 +108,7 @@
 
     ![pr1](../docs/images/pr_procedure/pr1.png)
 
-    ![pr2](../docs/images/pr_procedure/pr2.png)
+    ![pr2](../docs/images/pr_procedure/pr.png)
 
 
 
