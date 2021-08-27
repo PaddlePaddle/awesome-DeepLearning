@@ -459,4 +459,5 @@
 
 ## 贡献者
 以下是越来越多的awesome-DeepLearning贡献者列表：
-[youngzhou](https://youngzhou1999.github.io/cv/)，[Niki_173](https://github.com/Niki173)
+[youngzhou](https://youngzhou1999.github.io/cv/)，[Niki_173](https://github.com/Niki173)，[Twelveeee](https://github.com/Twelveeee)
+
