@@ -96,6 +96,64 @@ plt.show()
 
 可以看出，随着迭代次数的增加，损失值不断下降
 
+随着深度学习的发展，更深的神经网络有着更好的拟合效果，这里演示一个具有两层的隐藏层的神经网络，网络图如下图所示：
+
+<img src="../../../images/deep_learning/basic_concepts/full_connected2.png" alt="full_connected2" style="zoom:50%;" />
+
+在之前没有隐藏层的代码的基础上稍加修改就能实现这个网络，这就是使用框架的便利和魅力之处。
+
+```
+import paddle
+from paddle import nn
+from paddle.optimizer import Adam
+from paddle.nn import MSELoss
+import numpy as np
+import matplotlib.pyplot as plt
+
+x=paddle.to_tensor([[0.8, 1, 4],
+                    [0.4 ,2, 6],  
+                    [0.1 ,3, 3],
+                    [0.9, 4, 10]]).astype("float32")
+y=paddle.to_tensor([[2],[3],[4],[5]]).astype("float32")
+
+#定义模型的结构
+class FullConnected(nn.Layer):
+    def __init__(self):
+        super(FullConnected,self).__init__()
+        self.fc1=nn.Linear(3,4)
+        self.fc2=nn.Linear(4,3)
+        self.fc3=nn.Linear(3,1)
+        #必须重写forward方法，在调用模型的时候会自动地执行forward方法
+    def forward(self,x):
+        x = self.fc1(x)#这里接收3个数据然后得到一个数据out
+        x = self.fc2(x)
+        out = self.fc3(x)
+        return out
+
+model = FullConnected()#实例化模型
+adam = Adam(learning_rate=0.001,parameters=model.parameters())#优化器
+mse = MSELoss()#均方差损失函数，不使用绝对值损失函数而使用均方差是方便求导
+
+LOSS=[]
+for i in range(100):
+    ls=[]
+    for data,label in zip(x,y):
+        pred = model(data)#模型得到一个预测值
+        loss = mse(pred, label)#计算真实值和预测值之间的损失
+        ls.append(loss.item())
+        loss.backward()#将损失反向传播
+        adam.step()
+        adam.clear_grad()
+    print("第{}轮，损失为：{}".format(i,np.mean(ls)))
+    LOSS.append(np.mean(ls))
+
+#画出损失值
+plt.plot(range(len(LOSS)),LOSS)
+plt.show()
+```
+
+**本文档中的代码没有使用激活函数，是以全连接网络为主**
+
 ## 全连接的缺点
 
 在卷积神经网络出现之前，人们处理图片这种二维的数据集通常是将其拉平变成一维的数据，这样的结果就是数据特征极多，计算量大，而且效果不好，所以全连接适合处理的数据是每个样本本身就是一行即[N,M]形状的数据
