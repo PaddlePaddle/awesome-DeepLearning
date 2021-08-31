@@ -165,7 +165,7 @@
 | **其他**     | [基于ERNIE-Gram实现语义匹配](https://aistudio.baidu.com/aistudio/projectdetail/2247755) | 外部开发者 |
 | **其他**     | [基于PaddleDetection的PCB瑕疵检测](https://aistudio.baidu.com/aistudio/projectdetail/2240725) | 外部开发者 |
 | **其他**     | [中文语音识别](https://aistudio.baidu.com/aistudio/projectdetail/2280562) | 外部开发者 |
-
+| **其他**     | [基于PP-YOLOV2的吸烟检测](https://aistudio.baidu.com/aistudio/projectdetail/2158389) | 外部开发者 |
 返回[:arrow_heading_up:](#0)
 
 ----
