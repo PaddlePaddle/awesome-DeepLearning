@@ -3,7 +3,7 @@
 
 ## 1. Transformer-XL的由来
 
-在正式讨论Transformer-XL之前，我们先来看看经典的Transformer（后文称**Vanilla Transformer**）是如何处理数据和训练评估模型的将，如**图1**所示。
+在正式讨论Transformer-XL之前，我们先来看看经典的Transformer（后文称**Vanilla Transformer**）是如何处理数据和训练评估模型的，如**图1**所示。
 
 ![image-20210604171637306](https://raw.githubusercontent.com/1649759610/images_for_blog/master/image-20210604171637306.png)
 
