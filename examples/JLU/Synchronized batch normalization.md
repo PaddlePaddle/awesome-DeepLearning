@@ -16,7 +16,7 @@ Batch Normalization(批标准化)，和普通的数据标准化类似，是将�
 
 ​			  可学习的参数为$\gamma, \beta$
 
-<img src="awesome-DeepLearning/examples/JLU/diagram-20210824.png" alt="diagram-20210824" style="zoom:50%;" />
+<img src="https://github.com/FileCrasher/awesome-DeepLearning/blob/master/examples/JLU/diagram-20210824.png" alt="diagram-20210824" style="zoom:50%;" />
 
 ​																											图1
 
