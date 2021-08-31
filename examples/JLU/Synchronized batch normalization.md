@@ -16,7 +16,7 @@ Batch Normalization(批标准化)，和普通的数据标准化类似，是将�
 
 ​			  可学习的参数为$\gamma, \beta$
 
-<img src="https://github.com/FileCrasher/awesome-DeepLearning/blob/master/examples/JLU/diagram-20210824.png" alt="diagram-20210824" style="zoom:50%;" />
+<img src="https://github.com/FileCrasher/awesome-DeepLearning/blob/master/examples/JLU/images/diagram-20210824.png" alt="diagram-20210824" style="zoom:50%;" />
 
 ​																											图1
 
@@ -65,7 +65,7 @@ $$
 SyncBN 的关键是在前向运算的时候拿到全局的均值和方差，在后向运算时候得到相应的全局梯度。最简单的实现方法是先同步求均值，再发回各卡然后同步求方差。
 
 ### 2.4算法论证
-
+<img src="https://github.com/FileCrasher/awesome-DeepLearning/blob/master/examples/JLU/images/VGD0CHGAS_71F%7BBQ%24_5MV%24S.png" alt="VGD0CHGAS_71F%7BBQ%24_5MV%24S" style="zoom:50%;" />
 假设有$ N $个输入样本 $ X = {x_1, ...x_N} $，那么方差可以表示为:
 $$
 \begin{aligned}
