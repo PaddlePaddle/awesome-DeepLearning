@@ -159,7 +159,7 @@
 | **智慧农林** | [AI识虫](https://aistudio.baidu.com/aistudio/projectdetail/439888) | 飞桨官方   | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase)  |
 | **智慧医疗** | [医学常见中草药分类](https://aistudio.baidu.com/aistudio/projectdetail/1434738?channelType=0&channel=0) | 飞桨官方   | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase)  |
 | **智慧医疗** | [眼疾识别](https://www.paddlepaddle.org.cn/tutorials/projectdetail/1630501) | 飞桨官方   | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase)  |
-| **其他**     | [人摔倒检测](https://aistudio.baidu.com/aistudio/projectdetail/2071768) | 外部开发者 | [该开发者更多案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/474269) |
+| **其他**     | [人摔倒检测](https://aistudio.baidu.com/aistudio/projectdetail/2071768) | 开发者[Niki_173](https://github.com/Niki173) | [该开发者更多案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/474269) |
 | **其他**     | [足球比赛动作定位](https://github.com/PaddlePaddle/PaddleVideo/tree/application/FootballAction) | 飞桨官方   | ----------  |
 | **其他**     | [基于强化学习的飞行器仿真](https://github.com/PaddlePaddle/PARL/tree/develop/examples/tutorials/homework/lesson5/ddpg_quadrotor) | 外部开发者 | ----------  |
 | **其他**     | [基于ERNIE-Gram实现语义匹配](https://aistudio.baidu.com/aistudio/projectdetail/2247755) | 外部开发者 | ----------  |
