@@ -188,6 +188,10 @@
 
 返回​[:arrow_heading_up:](#0)
 
+# 👉竞赛类
+
+返回​[:arrow_heading_up:](#0)
+
 # 三、技术交流
 
 非常感谢您使用本项目。您在使用过程中有任何建议或意见，可以在 **[Issue](https://github.com/PaddlePaddle/tutorials/issues)** 上反馈给我们，也可以通过扫描下方的二维码联系我们，飞桨的开发人员非常高兴能够帮助到您，并与您进行更深入的交流和技术探讨。
