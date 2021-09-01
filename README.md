@@ -145,27 +145,27 @@
 
 ## <span id ='5'>飞桨产业实践案例</span>
 
-| 领域         | 产业案例                                                     | 来源       |
-| ------------ | ------------------------------------------------------------ | ---------- |
-| **智能工业** | [厂区传统仪表统计监测](https://paddlex.readthedocs.io/zh_CN/develop/examples/meter_reader.html) | 飞桨官方   |
-| **智能工业** | [新能源汽车锂电池隔膜质检](https://www.paddlepaddle.org.cn/support/news?action=detail&id=2104) | 飞桨官方   |
-| **智能工业** | [天池铝材表面缺陷检测](https://paddlex.readthedocs.io/zh_CN/develop/examples/industrial_quality_inspection/README.html) | 飞桨官方   |
-| **智能工业** | [安全帽检测](https://github.com/PaddleCV-FAQ/PaddleDetection-FAQ/blob/main/Lite%E9%83%A8%E7%BD%B2/yolov3_for_raspi.md) | 飞桨官方   |
-| **智慧城市** | [高尔夫球场遥感监测](https://www.paddlepaddle.org.cn/support/news?action=detail&id=2103) | 飞桨官方   |
-| **智慧城市** | [积雪语义分割](https://paddlex.readthedocs.io/zh_CN/develop/examples/multi-channel_remote_sensing/README.html) | 飞桨官方   |
-| **智慧城市** | [戴口罩的人脸识别](https://aistudio.baidu.com/aistudio/projectdetail/267322?channelType=0&channel=0) | 飞桨官方   |
-| **智慧交通** | [车道线分割和红绿灯安全检测](https://github.com/PaddlePaddle/PaddleDetection/blob/release/2.1/configs/vehicle/README_cn.md) | 飞桨官方   |
-| **智慧农林** | [耕地地块识别](https://mp.weixin.qq.com/s/JlDVmYlhN7sF0hpRlncDNw) | 飞桨官方   |
-| **智慧农林** | [AI识虫](https://aistudio.baidu.com/aistudio/projectdetail/439888) | 飞桨官方   |
-| **智慧医疗** | [医学常见中草药分类](https://aistudio.baidu.com/aistudio/projectdetail/1434738?channelType=0&channel=0) | 飞桨官方   |
-| **智慧医疗** | [眼疾识别](https://www.paddlepaddle.org.cn/tutorials/projectdetail/1630501) | 飞桨官方   |
-| **其他**     | [人摔倒检测](https://aistudio.baidu.com/aistudio/projectdetail/2071768) | 外部开发者 |
-| **其他**     | [足球比赛动作定位](https://github.com/PaddlePaddle/PaddleVideo/tree/application/FootballAction) | 飞桨官方   |
-| **其他**     | [基于强化学习的飞行器仿真](https://github.com/PaddlePaddle/PARL/tree/develop/examples/tutorials/homework/lesson5/ddpg_quadrotor) | 外部开发者 |
-| **其他**     | [基于ERNIE-Gram实现语义匹配](https://aistudio.baidu.com/aistudio/projectdetail/2247755) | 外部开发者 |
-| **其他**     | [基于PaddleDetection的PCB瑕疵检测](https://aistudio.baidu.com/aistudio/projectdetail/2240725) | 外部开发者 |
-| **其他**     | [中文语音识别](https://aistudio.baidu.com/aistudio/projectdetail/2280562) | 外部开发者 |
-| **其他**     | [基于PP-YOLOV2的吸烟检测](https://aistudio.baidu.com/aistudio/projectdetail/2158389) | 外部开发者 |
+| 领域         | 产业案例                                                     | 来源       | |
+| ------------ | ------------------------------------------------------------ | ---------- | |
+| **智能工业** | [厂区传统仪表统计监测](https://paddlex.readthedocs.io/zh_CN/develop/examples/meter_reader.html) | 飞桨官方   | |
+| **智能工业** | [新能源汽车锂电池隔膜质检](https://www.paddlepaddle.org.cn/support/news?action=detail&id=2104) | 飞桨官方   | |
+| **智能工业** | [天池铝材表面缺陷检测](https://paddlex.readthedocs.io/zh_CN/develop/examples/industrial_quality_inspection/README.html) | 飞桨官方   | |
+| **智能工业** | [安全帽检测](https://github.com/PaddleCV-FAQ/PaddleDetection-FAQ/blob/main/Lite%E9%83%A8%E7%BD%B2/yolov3_for_raspi.md) | 飞桨官方   | | 
+| **智慧城市** | [高尔夫球场遥感监测](https://www.paddlepaddle.org.cn/support/news?action=detail&id=2103) | 飞桨官方   | | 
+| **智慧城市** | [积雪语义分割](https://paddlex.readthedocs.io/zh_CN/develop/examples/multi-channel_remote_sensing/README.html) | 飞桨官方   | |
+| **智慧城市** | [戴口罩的人脸识别](https://aistudio.baidu.com/aistudio/projectdetail/267322?channelType=0&channel=0) | 飞桨官方   | |
+| **智慧交通** | [车道线分割和红绿灯安全检测](https://github.com/PaddlePaddle/PaddleDetection/blob/release/2.1/configs/vehicle/README_cn.md) | 飞桨官方   | |
+| **智慧农林** | [耕地地块识别](https://mp.weixin.qq.com/s/JlDVmYlhN7sF0hpRlncDNw) | 飞桨官方   | |
+| **智慧农林** | [AI识虫](https://aistudio.baidu.com/aistudio/projectdetail/439888) | 飞桨官方   | |
+| **智慧医疗** | [医学常见中草药分类](https://aistudio.baidu.com/aistudio/projectdetail/1434738?channelType=0&channel=0) | 飞桨官方   | |
+| **智慧医疗** | [眼疾识别](https://www.paddlepaddle.org.cn/tutorials/projectdetail/1630501) | 飞桨官方   | |
+| **其他**     | [人摔倒检测](https://aistudio.baidu.com/aistudio/projectdetail/2071768) | 外部开发者 | [该开发者更多案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/474269)
+| **其他**     | [足球比赛动作定位](https://github.com/PaddlePaddle/PaddleVideo/tree/application/FootballAction) | 飞桨官方   | |
+| **其他**     | [基于强化学习的飞行器仿真](https://github.com/PaddlePaddle/PARL/tree/develop/examples/tutorials/homework/lesson5/ddpg_quadrotor) | 外部开发者 | |
+| **其他**     | [基于ERNIE-Gram实现语义匹配](https://aistudio.baidu.com/aistudio/projectdetail/2247755) | 外部开发者 | |
+| **其他**     | [基于PaddleDetection的PCB瑕疵检测](https://aistudio.baidu.com/aistudio/projectdetail/2240725) | 外部开发者 | |
+| **其他**     | [中文语音识别](https://aistudio.baidu.com/aistudio/projectdetail/2280562) | 外部开发者 | |
+| **其他**     | [基于PP-YOLOV2的吸烟检测](https://aistudio.baidu.com/aistudio/projectdetail/2158389) | 外部开发者 | |
 返回[:arrow_heading_up:](#0)
 
 ----
