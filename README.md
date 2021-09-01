@@ -156,10 +156,10 @@
 | **智慧城市** | [积雪语义分割](https://paddlex.readthedocs.io/zh_CN/develop/examples/multi-channel_remote_sensing/README.html) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
 | **智慧城市** | [戴口罩的人脸识别](https://aistudio.baidu.com/aistudio/projectdetail/267322?channelType=0&channel=0) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
 | **智慧交通** | [车道线分割和红绿灯安全检测](https://github.com/PaddlePaddle/PaddleDetection/blob/release/2.1/configs/vehicle/README_cn.md) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
-| **智慧交通** | [PaddleOCR: 车牌识别](https://aistudio.baidu.com/aistudio/projectdetail/739559?channelType=0&channel=0) |                                              | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
+| **智慧交通** | [PaddleOCR: 车牌识别](https://aistudio.baidu.com/aistudio/projectdetail/739559?channelType=0&channel=0) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
 | **智慧农林** | [耕地地块识别](https://mp.weixin.qq.com/s/JlDVmYlhN7sF0hpRlncDNw) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
 | **智慧农林** | [AI识虫](https://aistudio.baidu.com/aistudio/projectdetail/439888) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
-| **智慧农林** | [基于PaddleX实现森林火灾监测](https://aistudio.baidu.com/aistudio/projectdetail/1968964?channelType=0&channel=0) |                                              | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
+| **智慧农林** | [基于PaddleX实现森林火灾监测](https://aistudio.baidu.com/aistudio/projectdetail/1968964?channelType=0&channel=0) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
 | **智慧医疗** | [医学常见中草药分类](https://aistudio.baidu.com/aistudio/projectdetail/1434738?channelType=0&channel=0) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
 | **智慧医疗** | [眼疾识别](https://www.paddlepaddle.org.cn/tutorials/projectdetail/1630501) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
 | **其他**     | [人摔倒检测](https://aistudio.baidu.com/aistudio/projectdetail/2071768) | 开发者[Niki_173](https://github.com/Niki173) | [该开发者更多案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/474269) |
@@ -181,7 +181,7 @@
 | 机器学习 |                                                              |      |
 | NLP      |                                                              |      |
 | 语音     |                                                              |      |
-|          | [一文详解yolov3目标检测算法](https://aistudio.baidu.com/aistudio/projectdetail/2240328) |      |
+| CV       | [一文详解yolov3目标检测算法](https://aistudio.baidu.com/aistudio/projectdetail/2240328) |      |
 | 推荐     |                                                              |      |
 | 强化学习 |                                                              |      |
 
