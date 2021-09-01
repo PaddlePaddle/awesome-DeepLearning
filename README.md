@@ -63,8 +63,8 @@
 
 | 章节名称                            | notebook链接                                                 | Python实现                                                   | 课程简介                                                     |
 | ----------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| 经典的预训练语言模型                | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2110336) | [Python实现](./transformer_courses/Transformer_Machine_Translation) | 本章节将为大家详细介绍NLP领域 Transformer。Transformer的前世今生，包括ELMo，GPT，Transformer，BERT等经典模型，还会介绍Transformer在机器翻译里面的应用。 |
-| 经典的预训练语言模型                | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2110336) | [Python实现](./transformer_courses/Transformer_Machine_Translation) | 本章节将为大家详细介绍NLP领域 Transformer。Transformer的前世今生，包括ELMo，GPT，Transformer，BERT等经典模型，还会介绍Transformer在机器翻译里面的应用。 |
+| 经典的预训练语言模型(上)                | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2110336) | [Python实现](./transformer_courses/Transformer_Machine_Translation) | 本章节将为大家详细介绍NLP领域经典的模型word2vec，ELMo，Transformer |
+| 经典的预训练语言模型（下）                | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2110336) | [Python实现](./transformer_courses/Transformer_Machine_Translation) | 本章节将为大家详细介绍NLP领域2个基于Transformer的预训练语言模型GPT，BERT，还会介绍Transformer在机器翻译里面的应用。 |
 | 预训练模型在自然语言理解方面的改进  | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2166195) | [Python实现](./transformer_courses/reading_comprehension_based_on_ernie) | ERNIE， RoBERTa， KBERT，清华ERNIE等，在广度上去分析经典预训练模型的一些改进。 |
 | 预训练模型在长序列建模方面的改进    | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2166197) | [Python实现](./transformer_courses/sentiment_analysis_based_on_xlnet) | Transformer-xl， xlnet， longformer等，分析BERT和transformer的长度局限，并讨论这些方法的改进点。 |
 | BERT蒸馏                            | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2177549) | [Python实现](./transformer_courses/BERT_distillation)        | 本章节为大家详细介绍了针对BERT模型的蒸馏算法，包括：Patient-KD、DistilBERT、TinyBERT、DynaBERT等模型，同时以代码的形式为大家展现了如何使用DynaBERT的训练策略对TinyBERT进行蒸馏。 |
@@ -246,5 +246,5 @@
 
 ### 贡献者
 
-以下是awesome-DeepLearning贡献者列表： [youngzhou](https://youngzhou1999.github.io/cv/)，[Niki_173](https://github.com/Niki173)，[Twelveeee](https://github.com/Twelveeee)
+以下是awesome-DeepLearning贡献者列表： [yang zhou](https://youngzhou1999.github.io/cv/)，[Niki_173](https://github.com/Niki173)，[Twelveeee](https://github.com/Twelveeee)
 
