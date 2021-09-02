@@ -5,7 +5,6 @@
    :maxdepth: 2
 
    学习率 <learning_rate>
-   归一化 <normalization/index>
    注意力机制 <attention/index>
    正则化 <regularization/index>
    Batch Size <batch_size>

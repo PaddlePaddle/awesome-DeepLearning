@@ -37,7 +37,7 @@ $$
 
 可将该损失函数寻求最优解过程可视化为下图：
 
-![normalization](../../../../images/deep_learning/model_tuning/normalization/normalization.png)
+![normalization](../../../images/deep_learning/model_tuning/normalization/normalization.png)
 
 <center>图1: 损失函数的等高线，图1（左）为未归一化时，图1（右）为归一化</center><br></br>
 
@@ -127,7 +127,7 @@ $$
 
 在查找资料的时候，我看到很多文章都提出了：“在分类、聚类算法中，需要使用距离来度量相似性的时候，z-score归一化也就是标准化的效果比归一化要好，但是对于这个观点并没有给出足够的技术支持。因此，我选取了KNN分类网络搜索了相关论文，在论文Comparative Analysis of KNN Algorithm using Various Normalization Techniques <sup><a href="#ref1">[1]</a></sup> 中，在K值不同的情况下，对于相同的数据分别进行min-max归一化和z-score归一化，得到的结果如下图所示：
 
-![Comparative_Analysis_of_KNN_Algorithm](../../../../images/deep_learning/model_tuning/normalization/Comparative_Analysis_of_KNN_Algorithm.png)
+![Comparative_Analysis_of_KNN_Algorithm](../../../images/deep_learning/model_tuning/normalization/Comparative_Analysis_of_KNN_Algorithm.png)
 
 <center>图2: 对于不同的K值，相同数据集不同归一化方式下的预测精确度</center><br></br>
 

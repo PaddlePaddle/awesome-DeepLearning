@@ -216,7 +216,7 @@
 | 语音     |                                                              |      |
 | CV       |  |      |
 | 推荐     |                                                              |      |
-| 强化学习 |  
+| 强化学习 |
 
 返回​[:arrow_heading_up:](#0)
 
@@ -246,5 +246,5 @@
 
 ### 贡献者
 
-以下是awesome-DeepLearning贡献者列表： [yang zhou](https://youngzhou1999.github.io/cv/)，[Niki_173](https://github.com/Niki173)，[Twelveeee](https://github.com/Twelveeee)
+以下是awesome-DeepLearning贡献者列表： [yang zhou](https://youngzhou1999.github.io/cv/)，[Niki_173](https://github.com/Niki173)，[Twelveeee](https://github.com/Twelveeee)，[buriedms](https://github.com/buriedms)
 
