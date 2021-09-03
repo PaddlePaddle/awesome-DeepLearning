@@ -2,7 +2,7 @@
 
 # 一、项目简介
 
-本项目是飞桨官方出品的一站式深度学习在线百科，当前内容涵盖：
+本项目是[飞桨官方](https://www.paddlepaddle.org.cn/?fr=paddleEdu_github)出品的一站式深度学习在线百科，飞桨致力于让深度学习技术的创新与应用更简单，更多飞桨内容欢迎访问[飞桨官网](https://www.paddlepaddle.org.cn/?fr=paddleEdu_github)。本项目内容涵盖：
 
 📒课程类：[**零基础实践深度学习**](https://aistudio.baidu.com/aistudio/course/introduce/1297)、**产业实践深度学习**、**[特色课程](https://aistudio.baidu.com/aistudio/education/group/info/24322)、飞桨套件课程汇总资料**
 
@@ -63,8 +63,8 @@
 
 | 章节名称                            | notebook链接                                                 | Python实现                                                   | 课程简介                                                     |
 | ----------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| 经典的预训练语言模型                | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2110336) | [Python实现](./transformer_courses/Transformer_Machine_Translation) | 本章节将为大家详细介绍NLP领域 Transformer。Transformer的前世今生，包括ELMo，GPT，Transformer，BERT等经典模型，还会介绍Transformer在机器翻译里面的应用。 |
-| 经典的预训练语言模型                | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2110336) | [Python实现](./transformer_courses/Transformer_Machine_Translation) | 本章节将为大家详细介绍NLP领域 Transformer。Transformer的前世今生，包括ELMo，GPT，Transformer，BERT等经典模型，还会介绍Transformer在机器翻译里面的应用。 |
+| 经典的预训练语言模型(上)                | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2110336) | [Python实现](./transformer_courses/Transformer_Machine_Translation) | 本章节将为大家详细介绍NLP领域经典的模型word2vec，ELMo，Transformer |
+| 经典的预训练语言模型（下）                | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2110336) | [Python实现](./transformer_courses/Transformer_Machine_Translation) | 本章节将为大家详细介绍NLP领域2个基于Transformer的预训练语言模型GPT，BERT，还会介绍Transformer在机器翻译里面的应用。 |
 | 预训练模型在自然语言理解方面的改进  | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2166195) | [Python实现](./transformer_courses/reading_comprehension_based_on_ernie) | ERNIE， RoBERTa， KBERT，清华ERNIE等，在广度上去分析经典预训练模型的一些改进。 |
 | 预训练模型在长序列建模方面的改进    | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2166197) | [Python实现](./transformer_courses/sentiment_analysis_based_on_xlnet) | Transformer-xl， xlnet， longformer等，分析BERT和transformer的长度局限，并讨论这些方法的改进点。 |
 | BERT蒸馏                            | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2177549) | [Python实现](./transformer_courses/BERT_distillation)        | 本章节为大家详细介绍了针对BERT模型的蒸馏算法，包括：Patient-KD、DistilBERT、TinyBERT、DynaBERT等模型，同时以代码的形式为大家展现了如何使用DynaBERT的训练策略对TinyBERT进行蒸馏。 |
@@ -208,6 +208,19 @@
 
 返回​[:arrow_heading_up:](#0)
 
+# 👉竞赛类
+
+| 领域     | 竞赛案例                                                     | 介绍 |
+| -------- | ------------------------------------------------------------ | ---- |
+| 机器学习 |                                                              |      |
+| NLP      | [【Paddle打比赛】讯飞赛题—中文问题相似度挑战赛0.9+Baseline](https://aistudio.baidu.com/aistudio/projectdetail/2271498)                                                             |      |
+| 语音     |                                                              |      |
+| CV       |  |      |
+| 推荐     |                                                              |      |
+| 强化学习 |
+
+返回​[:arrow_heading_up:](#0)
+
 # 三、技术交流
 
 非常感谢您使用本项目。您在使用过程中有任何建议或意见，可以在 **[Issue](https://github.com/PaddlePaddle/tutorials/issues)** 上反馈给我们，也可以通过扫描下方的二维码联系我们，飞桨的开发人员非常高兴能够帮助到您，并与您进行更深入的交流和技术探讨。
@@ -234,5 +247,5 @@
 
 ### 贡献者
 
-以下是awesome-DeepLearning贡献者列表： [youngzhou](https://youngzhou1999.github.io/cv/)，[Niki_173](https://github.com/Niki173)，[Twelveeee](https://github.com/Twelveeee)
+以下是awesome-DeepLearning贡献者列表： [yang zhou](https://youngzhou1999.github.io/cv/)，[Niki_173](https://github.com/Niki173)，[Twelveeee](https://github.com/Twelveeee)，[buriedms](https://github.com/buriedms)
 
