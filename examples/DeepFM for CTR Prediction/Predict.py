@@ -1,3 +1,5 @@
+import paddle
+
 testFileLineNum = 1788219
 testFilePath = './work/slot_test_data_full'
 batchsize = 400

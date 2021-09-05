@@ -2,6 +2,8 @@
 #paddle.save(deepFM_model.state_dict(), "./model/deepFM_model.pdparams")
 #paddle.save(adam.state_dict(), "./model/adam.pdopt")
 
+import paddle
+
 layer_state_dict = paddle.load("./model/deepFM_model.pdparams")
 opt_state_dict = paddle.load("./model/adam.pdopt")
 
