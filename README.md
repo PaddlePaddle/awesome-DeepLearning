@@ -148,7 +148,7 @@
 
 | 领域         | 产业案例                                                     | 来源                                         | 更多内容                                                     |
 | ------------ | ------------------------------------------------------------ | -------------------------------------------- | ------------------------------------------------------------ |
-| **智能工业** | [厂区传统仪表统计监测](https://paddlex.readthedocs.io/zh_CN/develop/examples/meter_reader.html) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
+| **智能工业** | [厂区传统仪表统计监测](https://paddlex.readthedocs.io/zh_CN/develop/examples/meter_reader.html) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase/?fr=paddleEdu_github) |
 | **智能工业** | [新能源汽车锂电池隔膜质检](https://www.paddlepaddle.org.cn/support/news?action=detail&id=2104) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
 | **智能工业** | [天池铝材表面缺陷检测](https://paddlex.readthedocs.io/zh_CN/develop/examples/industrial_quality_inspection/README.html) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
 | **智能工业** | [安全帽检测](https://github.com/PaddleCV-FAQ/PaddleDetection-FAQ/blob/main/Lite%E9%83%A8%E7%BD%B2/yolov3_for_raspi.md) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
