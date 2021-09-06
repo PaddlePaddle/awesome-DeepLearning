@@ -183,8 +183,8 @@
 | NLP      |                                                              |      |
 | 语音     |                                                              |      |
 | CV       | [一文详解yolov3目标检测算法](https://aistudio.baidu.com/aistudio/projectdetail/2240328) |      |
-| 推荐     |                                                              |      |
-| 强化学习 | [基于 DeepFM 模型的点击率预估](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/examples/DeepFM%20for%20CTR%20Prediction)                                                             |      |
+| 推荐     |  [基于 DeepFM 模型的点击率预估](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/examples/DeepFM%20for%20CTR%20Prediction)                                                              |      |
+| 强化学习 |                                                            |      |
 
 返回[:arrow_heading_up:](#0)
 
