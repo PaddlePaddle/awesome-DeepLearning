@@ -189,6 +189,20 @@
 
 ----
 
+# 👉竞赛类
+
+| 领域     | 竞赛案例                                                     | 介绍 |
+| -------- | ------------------------------------------------------------ | ---- |
+| 机器学习 |                                                              |      |
+| NLP      | [【Paddle打比赛】讯飞赛题—中文问题相似度挑战赛0.9+Baseline](https://aistudio.baidu.com/aistudio/projectdetail/2271498)                                                             |      |
+| 语音     |                                                              |      |
+| CV       |  |      |
+| 推荐     |                                                              |      |
+| 强化学习 |
+
+返回​[:arrow_heading_up:](#0)
+
+
 # 👉汇总
 
 ## <span id='fj'>飞桨各产品学习资料汇总</span>
@@ -207,18 +221,6 @@
 
 返回​[:arrow_heading_up:](#0)
 
-# 👉竞赛类
-
-| 领域     | 竞赛案例                                                     | 介绍 |
-| -------- | ------------------------------------------------------------ | ---- |
-| 机器学习 |                                                              |      |
-| NLP      | [【Paddle打比赛】讯飞赛题—中文问题相似度挑战赛0.9+Baseline](https://aistudio.baidu.com/aistudio/projectdetail/2271498)                                                             |      |
-| 语音     |                                                              |      |
-| CV       |  |      |
-| 推荐     |                                                              |      |
-| 强化学习 |
-
-返回​[:arrow_heading_up:](#0)
 
 # 三、技术交流
 
@@ -246,5 +248,5 @@
 
 ### 贡献者
 
-以下是awesome-DeepLearning贡献者列表： [yang zhou](https://youngzhou1999.github.io/cv/)，[Niki_173](https://github.com/Niki173)，[Twelveeee](https://github.com/Twelveeee)，[buriedms](https://github.com/buriedms)
+以下是awesome-DeepLearning贡献者列表： [yang zhou](https://youngzhou1999.github.io/cv/)，[Niki_173](https://github.com/Niki173)，[Twelveeee](https://github.com/Twelveeee)，[buriedms](https://github.com/buriedms),[AqourAreA](https://github.com/AqourAreA)
 
