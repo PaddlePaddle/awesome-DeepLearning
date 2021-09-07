@@ -144,35 +144,36 @@
 
 # 👉案例类
 
-## <span id ='5'>飞桨产业实践案例集</span>
+## <span id ='5'>飞桨应用案例集</span>
 
 | 领域         | 产业案例                                                     | 来源                                         | 更多内容                                                     |
 | ------------ | ------------------------------------------------------------ | -------------------------------------------- | ------------------------------------------------------------ |
-| **智能工业** | [厂区传统仪表统计监测](https://paddlex.readthedocs.io/zh_CN/develop/examples/meter_reader.html) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
-| **智能工业** | [新能源汽车锂电池隔膜质检](https://www.paddlepaddle.org.cn/support/news?action=detail&id=2104) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
-| **智能工业** | [天池铝材表面缺陷检测](https://paddlex.readthedocs.io/zh_CN/develop/examples/industrial_quality_inspection/README.html) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
-| **智能工业** | [安全帽检测](https://github.com/PaddleCV-FAQ/PaddleDetection-FAQ/blob/main/Lite%E9%83%A8%E7%BD%B2/yolov3_for_raspi.md) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
-| **智慧城市** | [高尔夫球场遥感监测](https://www.paddlepaddle.org.cn/support/news?action=detail&id=2103) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
-| **智慧城市** | [积雪语义分割](https://paddlex.readthedocs.io/zh_CN/develop/examples/multi-channel_remote_sensing/README.html) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
-| **智慧城市** | [戴口罩的人脸识别](https://aistudio.baidu.com/aistudio/projectdetail/267322?channelType=0&channel=0) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
-| **智慧交通** | [车道线分割和红绿灯安全检测](https://github.com/PaddlePaddle/PaddleDetection/blob/release/2.1/configs/vehicle/README_cn.md) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
-| **智慧交通** | [PaddleOCR: 车牌识别](https://aistudio.baidu.com/aistudio/projectdetail/739559?channelType=0&channel=0) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
-| **智慧农林** | [耕地地块识别](https://mp.weixin.qq.com/s/JlDVmYlhN7sF0hpRlncDNw) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
-| **智慧农林** | [AI识虫](https://aistudio.baidu.com/aistudio/projectdetail/439888) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
-| **智慧农林** | [基于PaddleX实现森林火灾监测](https://aistudio.baidu.com/aistudio/projectdetail/1968964?channelType=0&channel=0) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
-| **智慧医疗** | [医学常见中草药分类](https://aistudio.baidu.com/aistudio/projectdetail/1434738?channelType=0&channel=0) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
-| **智慧医疗** | [眼疾识别](https://www.paddlepaddle.org.cn/tutorials/projectdetail/1630501) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
+| **智能工业** | [厂区传统仪表统计监测](https://paddlex.readthedocs.io/zh_CN/develop/examples/meter_reader.html) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase?fr=paddleEdu_github) |
+| **智能工业** | [新能源汽车锂电池隔膜质检](https://www.paddlepaddle.org.cn/support/news?action=detail&id=2104) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase?fr=paddleEdu_github) |
+| **智能工业** | [天池铝材表面缺陷检测](https://paddlex.readthedocs.io/zh_CN/develop/examples/industrial_quality_inspection/README.html) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase?fr=paddleEdu_github) |
+| **智能工业** | [安全帽检测](https://github.com/PaddleCV-FAQ/PaddleDetection-FAQ/blob/main/Lite%E9%83%A8%E7%BD%B2/yolov3_for_raspi.md) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase?fr=paddleEdu_github) |
+| **智慧城市** | [高尔夫球场遥感监测](https://www.paddlepaddle.org.cn/support/news?action=detail&id=2103) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase?fr=paddleEdu_github) |
+| **智慧城市** | [积雪语义分割](https://paddlex.readthedocs.io/zh_CN/develop/examples/multi-channel_remote_sensing/README.html) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase?fr=paddleEdu_github) |
+| **智慧城市** | [戴口罩的人脸识别](https://aistudio.baidu.com/aistudio/projectdetail/267322?channelType=0&channel=0) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase?fr=paddleEdu_github) |
+| **智慧交通** | [车道线分割和红绿灯安全检测](https://github.com/PaddlePaddle/PaddleDetection/blob/release/2.1/configs/vehicle/README_cn.md) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase?fr=paddleEdu_github) |
+| **智慧交通** | [PaddleOCR: 车牌识别](https://aistudio.baidu.com/aistudio/projectdetail/739559?channelType=0&channel=0) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase?fr=paddleEdu_github) |
+| **智慧农林** | [耕地地块识别](https://mp.weixin.qq.com/s/JlDVmYlhN7sF0hpRlncDNw) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase?fr=paddleEdu_github) |
+| **智慧农林** | [AI识虫](https://aistudio.baidu.com/aistudio/projectdetail/439888) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase?fr=paddleEdu_github) |
+| **智慧农林** | [基于PaddleX实现森林火灾监测](https://aistudio.baidu.com/aistudio/projectdetail/1968964?channelType=0&channel=0) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase?fr=paddleEdu_github) |
+| **智慧医疗** | [医学常见中草药分类](https://aistudio.baidu.com/aistudio/projectdetail/1434738?channelType=0&channel=0) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase?fr=paddleEdu_github) |
+| **智慧医疗** | [眼疾识别](https://www.paddlepaddle.org.cn/tutorials/projectdetail/1630501) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase?fr=paddleEdu_github) |
 | **其他**     | [人摔倒检测](https://aistudio.baidu.com/aistudio/projectdetail/2071768) | 开发者[Niki_173](https://github.com/Niki173) | [该开发者更多案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/474269) |
-| **其他**     | [足球比赛动作定位](https://github.com/PaddlePaddle/PaddleVideo/tree/application/FootballAction) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
-| **其他**     | [基于强化学习的飞行器仿真](https://github.com/PaddlePaddle/PARL/tree/develop/examples/tutorials/homework/lesson5/ddpg_quadrotor) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
-| **其他**     | [基于ERNIE-Gram实现语义匹配](https://aistudio.baidu.com/aistudio/projectdetail/2247755) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
-| **其他**     | [基于PaddleDetection的PCB瑕疵检测](https://aistudio.baidu.com/aistudio/projectdetail/2240725) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
-| **其他**     | [中文语音识别](https://aistudio.baidu.com/aistudio/projectdetail/2280562) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
+| **其他**     | [足球比赛动作定位](https://github.com/PaddlePaddle/PaddleVideo/tree/application/FootballAction) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase?fr=paddleEdu_github) |
+| **强化学习**     | [基于强化学习的飞行器仿真](https://github.com/PaddlePaddle/PARL/tree/develop/examples/tutorials/homework/lesson5/ddpg_quadrotor) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase?fr=paddleEdu_github) |
+| **其他**     | [基于ERNIE-Gram实现语义匹配](https://aistudio.baidu.com/aistudio/projectdetail/2247755) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase?fr=paddleEdu_github) |
+| **其他**     | [基于PaddleDetection的PCB瑕疵检测](https://aistudio.baidu.com/aistudio/projectdetail/2240725) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase?fr=paddleEdu_github) |
+| **其他**     | [中文语音识别](https://aistudio.baidu.com/aistudio/projectdetail/2280562) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase?fr=paddleEdu_github) |
 | **其他**     | [全流程，从零搞懂基于PaddlePaddle的图像分割](https://aistudio.baidu.com/aistudio/projectdetail/1674328?channelType=0&channel=0) | 开发者                                       |                                                              |
-| **其他**     | [PaddleHub一键OCR中文识别(超轻量8.1M模型，火爆)](https://aistudio.baidu.com/aistudio/projectdetail/507159?channelType=0&channel=0) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
-| **其他**     | [天下第一AI武道会-Deepfake换脸](https://aistudio.baidu.com/aistudio/projectdetail/1189026?channelType=0&channel=0) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
-| **其他**     | [飞桨创意之星 宋代诗人念诗的秘密——PaddleGAN实现精准唇形合成](https://aistudio.baidu.com/aistudio/projectdetail/1463208?channelType=0&channel=0) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
-| **其他**     | [通过OCR实现验证码识别](https://aistudio.baidu.com/aistudio/projectdetail/1100507?channelType=0&channel=0) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
+| **其他**     | [PaddleHub一键OCR中文识别(超轻量8.1M模型，火爆)](https://aistudio.baidu.com/aistudio/projectdetail/507159?channelType=0&channel=0) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase?fr=paddleEdu_github) |
+| **其他**     | [天下第一AI武道会-Deepfake换脸](https://aistudio.baidu.com/aistudio/projectdetail/1189026?channelType=0&channel=0) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase?fr=paddleEdu_github) |
+| **其他**     | [飞桨创意之星 宋代诗人念诗的秘密——PaddleGAN实现精准唇形合成](https://aistudio.baidu.com/aistudio/projectdetail/1463208?channelType=0&channel=0) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase?fr=paddleEdu_github) |
+| **其他**     | [通过OCR实现验证码识别](https://aistudio.baidu.com/aistudio/projectdetail/1100507?channelType=0&channel=0) | 飞桨官方                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase?fr=paddleEdu_github) |
+| **强化学习**     | [DDPG算法应用于股票量化交易](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/examples/DDPG%20for%20Stock%20Trading) | 开发者                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase?fr=paddleEdu_github) |
 
 ## <span id ='5'>飞桨学术案例集</span>
 
@@ -182,12 +183,26 @@
 | NLP      |                                                              |      |
 | 语音     |                                                              |      |
 | CV       | [一文详解yolov3目标检测算法](https://aistudio.baidu.com/aistudio/projectdetail/2240328) |      |
-| 推荐     |                                                              |      |
-| 强化学习 |                                                              |      |
+| 推荐     |  [基于 DeepFM 模型的点击率预估](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/examples/DeepFM%20for%20CTR%20Prediction)                                                              |      |
+| 强化学习 |                                                            |      |
 
 返回[:arrow_heading_up:](#0)
 
 ----
+
+# 👉竞赛类
+
+| 领域     | 竞赛案例                                                     | 介绍 |
+| -------- | ------------------------------------------------------------ | ---- |
+| 机器学习 |                                                              |      |
+| NLP      | [【Paddle打比赛】讯飞赛题—中文问题相似度挑战赛0.9+Baseline](https://aistudio.baidu.com/aistudio/projectdetail/2271498)                                                             |      |
+| 语音     |                                                              |      |
+| CV       |  |      |
+| 推荐     |                                                              |      |
+| 强化学习 |
+
+返回​[:arrow_heading_up:](#0)
+
 
 # 👉汇总
 
@@ -207,18 +222,6 @@
 
 返回​[:arrow_heading_up:](#0)
 
-# 👉竞赛类
-
-| 领域     | 竞赛案例                                                     | 介绍 |
-| -------- | ------------------------------------------------------------ | ---- |
-| 机器学习 |                                                              |      |
-| NLP      | [【Paddle打比赛】讯飞赛题—中文问题相似度挑战赛0.9+Baseline](https://aistudio.baidu.com/aistudio/projectdetail/2271498)                                                             |      |
-| 语音     |                                                              |      |
-| CV       |  |      |
-| 推荐     |                                                              |      |
-| 强化学习 |
-
-返回​[:arrow_heading_up:](#0)
 
 # 三、技术交流
 
@@ -246,5 +249,5 @@
 
 ### 贡献者
 
-以下是awesome-DeepLearning贡献者列表： [yang zhou](https://youngzhou1999.github.io/cv/)，[Niki_173](https://github.com/Niki173)，[Twelveeee](https://github.com/Twelveeee)，[buriedms](https://github.com/buriedms)
+以下是awesome-DeepLearning贡献者列表： [yang zhou](https://youngzhou1999.github.io/cv/)，[Niki_173](https://github.com/Niki173)，[Twelveeee](https://github.com/Twelveeee)，[buriedms](https://github.com/buriedms)，[AqourAreA](https://github.com/AqourAreA)
 
