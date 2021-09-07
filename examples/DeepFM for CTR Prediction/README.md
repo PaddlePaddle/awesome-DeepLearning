@@ -1,6 +1,6 @@
 项目aistudio链接：
 
-[基于 DeepFM 模型的点击率预估模型](https://github.com/PaddlePaddle/awesome-DeepLearning)
+[基于 DeepFM 模型的点击率预估模型](https://aistudio.baidu.com/aistudio/projectdetail/2251589)
 
 # 基于 DeepFM 模型的点击率预估模型
 
