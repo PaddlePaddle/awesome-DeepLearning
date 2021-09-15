@@ -25,10 +25,10 @@ class SimpleNet(paddle.nn.Layer):
         # super(SimpleNet, self).__init__(name_scope)
         self.conv1 = Conv2D(
             in_channels=3, out_channels=6, kernel_size=5, stride=1, padding=2)
-        self.max_pool1 = MaxPool2D(kernel_size=2, tride=2)
+        self.max_pool1 = MaxPool2D(kernel_size=2, stride=2)
         self.conv2 = Conv2D(
             in_channels=6, out_channels=16, kernel_size=5, stride=1, padding=2)
-        self.max_pool2 = MaxPool2D(kernel_size=2, tride=2)
+        self.max_pool2 = MaxPool2D(kernel_size=2, stride=2)
         self.fc1 = Linear(in_features=50176, out_features=64)
         self.fc2 = Linear(in_features=64, out_features=num_classes)
 
