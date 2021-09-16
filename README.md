@@ -229,7 +229,6 @@
 | CV       | [中文场景文字识别挑战赛baseline](https://aistudio.baidu.com/aistudio/projectdetail/229728?channelType=0&channel=0) | 中文场景文字识别挑战赛的baseline项目, 用于参赛选手借鉴参考   |
 | CV       | [2020 CCF BDCI: 遥感影像地块分割baseline](https://aistudio.baidu.com/aistudio/projectdetail/1090790?channelType=0&channel=0) | 2020 CCF BDCI: 遥感影像地块分割的baseline模型库，包括baseline模型的训练方法和比赛的评测脚本。 |
 | CV       | [第三届中国AI+创新创业大赛：半监督学习目标定位竞赛第1名方案](https://aistudio.baidu.com/aistudio/projectdetail/2210815)| 半监督学习目标定位竞赛第一名方案分享 A榜得分0.81425 B榜得分0.80428 |
-| CV       | [第三届中国AI+创新创业大赛：半监督学习目标定位竞赛第1名方案](https://aistudio.baidu.com/aistudio/projectdetail/2210815)| 半监督学习目标定位竞赛第一名方案分享 A榜得分0.81425 B榜得分0.80428 |
 | 推荐     |                                                              |                                                              |
 | 强化学习 |                                                              ||
 
