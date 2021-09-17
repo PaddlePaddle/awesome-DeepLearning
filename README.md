@@ -210,6 +210,7 @@
 | CV       | [图像分类-ResNet](https://aistudio.baidu.com/aistudio/projectdetail/56779?channelType=0&channel=0) | 使用ResNet网络实现花卉分类(雏菊，蒲公英，玫瑰，向日葵，郁金香) |
 | CV       | [课程6-卷积神经网络实践-猫狗分类](https://aistudio.baidu.com/aistudio/projectdetail/78960?channelType=0&channel=0) | 使用经典卷积神经网络实现猫狗二分类(Cifar10数据集)            |
 | CV       | [PaddleSeg_DeepLabv3+](https://aistudio.baidu.com/aistudio/projectdetail/226703?channelType=0&channel=0) | 使用PaddleSeg套件中DeepLabv3+模型进行图像分割，学习分割的整个过程 |
+| CV       | [【实践】图像分类网络VGG在多表情识别任务中的应用](https://aistudio.baidu.com/aistudio/projectdetail/2369842) | 表情识别-paddle实现三种表情图片分类(fer2013数据集)|
 | 推荐     | [基于 DeepFM 模型的点击率预估](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/examples/DeepFM%20for%20CTR%20Prediction) | 使用推荐系统中的DeepFM模型实践，并基于Criteo数据集完成对点击率模型的训练和预测。 |
 | 强化学习 |                                                              |                                                              |
 
