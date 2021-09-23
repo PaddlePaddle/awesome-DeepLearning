@@ -203,7 +203,7 @@
 | 领域     | 学术案例                                                     | 介绍                                                         |
 | -------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | 机器学习 |                                                              |                                                              |
-| NLP      |                                                              |                                                              |
+| NLP      | [手把手教你使用PaddlePaddle进行情绪识别](https://aistudio.baidu.com/aistudio/projectdetail/2342217?contributionType=1)     |   基于BERT模型的情绪识别(积极、愤怒、悲伤、恐惧、惊奇和无情绪)项目  |
 | 语音     |                                                              |                                                              |
 | CV       | [一文详解yolov3目标检测算法](https://aistudio.baidu.com/aistudio/projectdetail/2240328) | 目标检测-YOLOv3实现AI识虫任务                                |
 | CV       | [波士顿房价预测](https://aistudio.baidu.com/aistudio/projectdetail/79112?channelType=0&channel=0) | 基于Paddle静态图实现波士顿房价预测                           |
