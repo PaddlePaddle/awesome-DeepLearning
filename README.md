@@ -280,5 +280,5 @@
 
 ### 贡献者
 
-以下是awesome-DeepLearning贡献者列表： [yang zhou](https://youngzhou1999.github.io/cv/)，[Niki_173](https://github.com/Niki173)，[Twelveeee](https://github.com/Twelveeee)，[buriedms](https://github.com/buriedms)，[AqourAreA](https://github.com/AqourAreA)，[zhangjin12138](https://github.com/zhangjin12138)，[rerny](https://github.com/rerny)
+以下是awesome-DeepLearning贡献者列表： [yang zhou](https://youngzhou1999.github.io/cv/)，[Niki_173](https://github.com/Niki173)，[Twelveeee](https://github.com/Twelveeee)，[buriedms](https://github.com/buriedms)，[AqourAreA](https://github.com/AqourAreA)，[zhangjin12138](https://github.com/zhangjin12138)，[rerny](https://github.com/rerny)，[LiuCongNLP](https://www.zhihu.com/people/LiuCongNLP)
 
