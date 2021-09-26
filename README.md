@@ -219,6 +219,7 @@
 | 图像检测     | [一文详解yolov3目标检测算法](https://aistudio.baidu.com/aistudio/projectdetail/2240328) | [开发者AIStudio96069](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/96069) | [更多飞桨案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/908086) |
 | 图像检测     | [CV领域的Transformer模型DETR在目标检测任务中的应用](https://aistudio.baidu.com/aistudio/projectdetail/2290729) | [PaddleEdu](https://github.com/PaddlePaddle/awesome-DeepLearning) | [更多飞桨案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/908086) |
 | 视频分类     | [TSN视频分类](https://aistudio.baidu.com/aistudio/projectdetail/2280460) | [PaddleEdu](https://github.com/PaddlePaddle/awesome-DeepLearning) | [更多飞桨案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/908086) |
+| 视频分类     | [Paddle2.1实现视频理解经典模型  — TSM](https://aistudio.baidu.com/aistudio/projectdetail/2311166?contributionType=1) | [PaddleEdu](https://github.com/PaddlePaddle/awesome-DeepLearning) | [更多飞桨案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/908086) |
 | 视频分类     | [基于Attention和Bi-LSTM实现视频分类](https://aistudio.baidu.com/aistudio/projectdetail/2313514) | [PaddleEdu](https://github.com/PaddlePaddle/awesome-DeepLearning) | [更多飞桨案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/908086) |
 | 视频分类     | [CV领域的Transformer模型TimeSformer实视频理解](https://aistudio.baidu.com/aistudio/projectdetail/2291410) | [PaddleEdu](https://github.com/PaddlePaddle/awesome-DeepLearning) | [更多飞桨案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/908086) |
 | GAN          | [一文搞懂生成对抗网络之经典GAN（动态图、VisualDL2.0）](https://aistudio.baidu.com/aistudio/projectdetail/551962?channelType=0&channel=0) | [开发者FutureSI](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/76563) | [更多飞桨案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/908086) |
@@ -234,6 +235,8 @@
 | 多模态       | [【Paddle   CLIP】你写啥他画啥，一个专属于你的小画家](https://aistudio.baidu.com/aistudio/projectdetail/2332016?channelType=0&channel=0) | [PaddleFleet](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/940489) | [更多飞桨案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/908086) |
 | 强化学习     | [从代码到论文理解并复现MADDPG算法(PARL)](https://aistudio.baidu.com/aistudio/projectdetail/637951?channelType=0&channel=0) | [开发者Mr.郑先生_](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/147378) | [更多飞桨案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/908086) |
 | 推荐         | [基于   DeepFM 模型的点击率预估](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/examples/DeepFM for CTR Prediction) | [PaddleEdu](https://github.com/PaddlePaddle/awesome-DeepLearning) | [更多飞桨案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/908086) |
+| 推荐         | [基于DSSM的电影推荐](https://aistudio.baidu.com/aistudio/projectdetail/2324144) | [AIStudio官方](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/7) | [更多飞桨案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/908086) |
+| 知识蒸馏     | [基于CIFAR100的SSLD蒸馏实验](https://github.com/PaddlePaddle/PaddleClas/blob/release/2.2/docs/zh_CN/advanced_tutorials/distillation/distillation.md) | [PaddleClas](https://github.com/PaddlePaddle/PaddleClas)     | [更多飞桨案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/908086) |
 
 返回[:arrow_heading_up:](#0)
 
