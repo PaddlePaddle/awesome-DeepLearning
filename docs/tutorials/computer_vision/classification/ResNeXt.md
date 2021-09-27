@@ -11,6 +11,7 @@ ResNeXt是由何凯明团队在2017年CVPR会议上提出来的新型图像分�
 下图是InceptionNet的两种inception module结构，左边是inception module的naive版本，右边是使用了降维方法的inception module。相较于右边，左边很明显的缺点就是参数大，计算量巨大。使用不同大小的卷积核目的是为了提取不同尺度的特征信息，对于图像而言，多尺度的信息有助于网络更好地对图像信息进行选择，并且使得网络对于不同尺寸的图像输入有更好的适应能力，但多尺度带来的问题就是计算量的增加。因此在右边的模型中，InceptionNet很好地解决了这个问题，首先是1×1的卷积用于特征降维，减小特征的通道数后再采取多尺度的结构提取特征信息，在降低参数量的同时捕获到多尺度的特征信息。
 
 ResNeXt正是借鉴了这种“分割-变换-聚合”的策略，但用相同的拓扑结构组建ResNeXt模块。每个结构都是相同的卷积核，保持了结构的简洁，使得模型在编程上更方便更容易，而InceptionNet则需要更为复杂的设计。
+
 ![inception](../../../images/computer_vision/classification/resnext_inceptionnet.jpg)
 
 ## 3. 模型实现
