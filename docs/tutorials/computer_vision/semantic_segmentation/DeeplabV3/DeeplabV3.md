@@ -153,13 +153,13 @@ DeepLabV3的提出是为了解决多尺度下的目标分割问题。如图2所�
 
 受到了采用不同大小网格层次结构的多重网格方法的启发，我们提出的模型在block4和block7中采用了不同的空洞率。
 
-特别的，我们定义*Multi_Grid* *=*![[公式]](https://www.zhihu.com/equation?tex=%28r_%7B1%7D%2Cr_%7B2%7D%2Cr_%7B3%7D%29)为block4到block7内三个卷积层的unit rates。卷积层的最终空洞率等于unit rate和corresponding rate的乘积。例如，当*output_stride* = 16 ，*Multi_Grid* = (1, 2, 4)，三个卷积就会在block4有 *rates* = 2 · (1, 2, 4) = (2, 4, 8) 。
+特别的，我们定义$ Multi\_Grid = ({r_1},{r_2},{r_3}) $为block4到block7内三个卷积层的unit rates。卷积层的最终空洞率等于unit rate和corresponding rate的乘积。例如，当$  output\_stride = 16,Multi\_Grid = (1,2,4)$，三个卷积就会在block4有。$  rates = 2 \cdot (1,2,4) = (2,4,8)$
 
 #### **3.将 batch normalization 加入到 ASPP模块.**
 
 #### **4.将全局上下文信息纳入模型**
 
-具有不同 atrous rates 的 ASPP 能够有效的捕获多尺度信息。不过，论文发现，随着sampling rate的增加，有效filter特征权重(即有效特征区域，而不是补零区域的权重)的数量会变小，极端情况下，当空洞卷积的 rate 和 feature map 的大小一致时， ![[公式]](https://www.zhihu.com/equation?tex=3%5Ctimes+3) 卷积会退化成 ![[公式]](https://www.zhihu.com/equation?tex=1%5Ctimes+1) ：
+具有不同 atrous rates 的 ASPP 能够有效的捕获多尺度信息。不过，论文发现，随着sampling rate的增加，有效filter特征权重(即有效特征区域，而不是补零区域的权重)的数量会变小，极端情况下，当空洞卷积的 rate 和 feature map 的大小一致时，$ 3~\times 3 $ 卷积会退化成 $ 1~\times 1 $ ：
 
 ![image-20210924231902861](../../../../images/computer_vision/semantic_segmentation/DeeplabV3/image-20210924231902861.png)
 
@@ -171,8 +171,8 @@ DeepLabV3的提出是为了解决多尺度下的目标分割问题。如图2所�
 
 最后改进后的ASPP包括：
 
-- (a)一个1×1的卷积与三个3×3的*rates*=(6, 12, 18)的空洞卷积，滤波器数量都为256，包含BN层。针对output_stride=16的情况
-- (b)图像级特征，如图5所示。当output_stride=8时，加倍了采样率。然后将所有分支的特征图通过一个1×1卷积(有256个滤波器和BN)concatenate起来，送入最后的1×1卷积以产生最终分数.
+- (a)一个 $ 1~\times 1 $的卷积与三个$ 3~\times 3 $ 的$ rates = (6,12,18) $的空洞卷积，滤波器数量都为256，包含BN层。针对output_stride=16的情况
+- (b)图像级特征，如图5所示。当output_stride=8时，加倍了采样率。然后将所有分支的特征图通过一个$ 1~\times 1 $卷积(有256个滤波器和BN)concatenate起来，送入最后的1×1卷积以产生最终分数.
 
 ![image-20210924232337417](../../../../images/computer_vision/semantic_segmentation/DeeplabV3/image-20210924232337417.png)
 
@@ -184,7 +184,7 @@ DeepLabV3的提出是为了解决多尺度下的目标分割问题。如图2所�
 
 #### 1.**Learning rate policy:**
 
-- 采用poly策略， 在初始学习率基础上乘 ![[公式]](https://www.zhihu.com/equation?tex=%5Cleft%28+1-%5Cfrac%7Biter%7D%7Bmax~iter%7D+%5Cright%29%5E%7Bpower%7D) ，其中 ![[公式]](https://www.zhihu.com/equation?tex=power%3D0.9)
+- 采用poly策略， 在初始学习率基础上乘$ {(1 - \frac{{iter}}{{\max iter}})^{power}} $,其中$ power = 0.9 $
 
 #### **2.Crop size:**
 
@@ -250,9 +250,9 @@ DeepLabV3的提出是为了解决多尺度下的目标分割问题。如图2所�
 
 实验观察到的：
 
-- 应用Multi-gird策略通常比单倍数 ![[公式]](https://www.zhihu.com/equation?tex=%28r_%7B1%7D%2Cr_%7B2%7D%2Cr_%7B3%7D%29%3D%281%2C1%2C1%29) 效果要好
-- 简单的提升倍数例如![[公式]](https://www.zhihu.com/equation?tex=%28r_%7B1%7D%2Cr_%7B2%7D%2Cr_%7B3%7D%29%3D%282%2C2%2C2%29) 是无效的
-- 增加网络深度再配合Multi-gird可以提升性能。图中最好的模型即block7下 ![[公式]](https://www.zhihu.com/equation?tex=%28r_%7B1%7D%2Cr_%7B2%7D%2Cr_%7B3%7D%29%3D%281%2C2%2C1%29)
+- 应用Multi-gird策略通常比单倍数 $ ({r_1},{r_2},{r_3}) = (1,1,1) $效果要好
+- 简单的提升倍数例如$ ({r_1},{r_2},{r_3}) = (2,2,2) $是无效的
+- 增加网络深度再配合Multi-gird可以提升性能。图中最好的模型即block7下 $ ({r_1},{r_2},{r_3}) = (1,2,1) $
 
 \--
 
@@ -302,31 +302,7 @@ DeepLab V3的ASPP模块与DeepLab V2的主要区别在于，增加了BN层，增
 
 deeplabv2中的aspp如上图所示，在特征顶部映射图使用了四中不同采样率的空洞卷积。这表明以不同尺度采样时有效的，在Deeolabv3中向ASPP中添加了BN层。不同采样率的空洞卷积可以有效捕获多尺度信息，但会发现随着采样率的增加，滤波器有效权重（权重有效的应用在特征区域，而不是填充0）逐渐变小。具体ASPP改进点在上文中已提到过。
 
-当output_stride=8时，加倍了采样率。所有特征通过1x1级联到一起，生成最终的分数。代码(pytorch)为：
-
-```python
-class ASPPPooling(Layer):
-    def __init__(self, num_channels, num_filters):
-        super(ASPPPooling, self).__init__()
-        self.features = fluid.dygraph.Sequential(
-                        Conv2D(num_channels, num_filters, 1),
-                        BatchNorm(num_filters, act='relu')
-                        )
-
-    def forward(self, inputs):
-        n, c, h, w = inputs.shape
-
-        x = fluid.layers.adaptive_pool2d(inputs,1)
-        x = self.features(x)
-
-        x = fluid.layers.interpolate(x, (h, w), align_corners=False)
-        return x
-
-
-
-```
-
-
+当output_stride=8时，加倍了采样率。所有特征通过1x1级联到一起，生成最终的分数。
 
 #### 2.DenseCRF
 
@@ -364,7 +340,7 @@ CRF的全称是Conditional Random Field.它的形式如下所示：
 
 可以看出，pairwise函数中还是比较复杂的，我们从左往右以此介绍。
 
-首先是![[公式]](https://www.zhihu.com/equation?tex=%5Cmu%28x_i%2Cx_j%29)，这一项被称作label compatibility项，简单来说这里约束了“力”传导的条件，只有相同label条件下，能量才可以相互传导。具体来说，“一个像素可能是飞机”的能量可以和“另一个像素可能是飞机”的能量相互传导，从而增加或者减少后者“可能是飞机”的能量，从而影响“可能是飞机”的概率，而“一个像素可能是飞机”的能量是不能影响“另一个像素是人”的概率的。
+首先是$ \mu ({x_i},{x_j}) $，这一项被称作label compatibility项，简单来说这里约束了“力”传导的条件，只有相同label条件下，能量才可以相互传导。具体来说，“一个像素可能是飞机”的能量可以和“另一个像素可能是飞机”的能量相互传导，从而增加或者减少后者“可能是飞机”的能量，从而影响“可能是飞机”的概率，而“一个像素可能是飞机”的能量是不能影响“另一个像素是人”的概率的。
 
 文章中也提到了，这个简单地一刀切似乎有点不人性。拿Pascal-VOC中的20类+背景类来说，有些类别之间的相似性是很强的，而另外一些类别则完全不相似，所以作者后面提到了一些学习相关的事情，这里我们就不再深入下去了。
 
