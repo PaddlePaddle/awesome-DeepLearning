@@ -389,132 +389,198 @@ appearance kernel里面的p表示像素的位置——position，我们的图像
 ​	**ASPPModule**
 
 ```python
-class ASPPModule(Layer):
-    def __init__(self, num_channels, num_filters, rates):
-        super(ASPPModule, self).__init__()
+class ASPPModule(nn.Layer):
+    """
+    Atrous Spatial Pyramid Pooling.
+    Args:
+        aspp_ratios (tuple): The dilation rate using in ASSP module.
+        in_channels (int): The number of input channels.
+        out_channels (int): The number of output channels.
+        align_corners (bool): An argument of F.interpolate. It should be set to False when the output size of feature
+            is even, e.g. 1024x512, otherwise it is True, e.g. 769x769.
+        use_sep_conv (bool, optional): If using separable conv in ASPP module. Default: False.
+        image_pooling (bool, optional): If augmented with image-level features. Default: False
+    """
 
-        self.features = []
-        self.features.append(
-                fluid.dygraph.Sequential(
-                    Conv2D(num_channels, num_filters, 1),
-                    BatchNorm(num_filters, act='relu')
-                )
-        )
-        self.features.append(ASPPPooling(num_channels, num_filters))
+    def __init__(self,
+                 aspp_ratios,
+                 in_channels,
+                 out_channels,
+                 align_corners,
+                 use_sep_conv=False,
+                 image_pooling=False,
+                 data_format='NCHW'):
+        super().__init__()
 
-        for r in rates:
-            self.features.append(
-                ASPPConv(num_channels, num_filters, r)
-                )
-        self.project = fluid.dygraph.Sequential(
-                                    Conv2D(num_filters*(2 + len(rates) ), num_filters, 1),
-                                    BatchNorm(num_filters, act='relu'),
-        )
+        self.align_corners = align_corners
+        self.data_format = data_format
+        self.aspp_blocks = nn.LayerList()
 
-    def forward(self, inputs):
-        res = []
-        for op in self.features:
-            res.append(op(inputs))
-            
-        x = fluid.layers.concat(res,axis=1)
-        x = self.project(x)
+        for ratio in aspp_ratios:
+            if use_sep_conv and ratio > 1:
+                conv_func = layers.SeparableConvBNReLU
+            else:
+                conv_func = layers.ConvBNReLU
+
+            block = conv_func(
+                in_channels=in_channels,
+                out_channels=out_channels,
+                kernel_size=1 if ratio == 1 else 3,
+                dilation=ratio,
+                padding=0 if ratio == 1 else ratio,
+                data_format=data_format)
+            self.aspp_blocks.append(block)
+
+        out_size = len(self.aspp_blocks)
+
+        if image_pooling:
+            self.global_avg_pool = nn.Sequential(
+                nn.AdaptiveAvgPool2D(
+                    output_size=(1, 1), data_format=data_format),
+                layers.ConvBNReLU(
+                    in_channels,
+                    out_channels,
+                    kernel_size=1,
+                    bias_attr=False,
+                    data_format=data_format))
+            out_size += 1
+        self.image_pooling = image_pooling
+
+        self.conv_bn_relu = layers.ConvBNReLU(
+            in_channels=out_channels * out_size,
+            out_channels=out_channels,
+            kernel_size=1,
+            data_format=data_format)
+
+        self.dropout = nn.Dropout(p=0.1)  # drop rate
+
+    def forward(self, x):
+        outputs = []
+        if self.data_format == 'NCHW':
+            interpolate_shape = paddle.shape(x)[2:]
+            axis = 1
+        else:
+            interpolate_shape = paddle.shape(x)[1:3]
+            axis = -1
+        for block in self.aspp_blocks:
+            y = block(x)
+            y = F.interpolate(
+                y,
+                interpolate_shape,
+                mode='bilinear',
+                align_corners=self.align_corners,
+                data_format=self.data_format)
+            outputs.append(y)
+
+        if self.image_pooling:
+            img_avg = self.global_avg_pool(x)
+            img_avg = F.interpolate(
+                img_avg,
+                interpolate_shape,
+                mode='bilinear',
+                align_corners=self.align_corners,
+                data_format=self.data_format)
+            outputs.append(img_avg)
+
+        x = paddle.concat(outputs, axis=axis)
+        x = self.conv_bn_relu(x)
+        x = self.dropout(x)
 
         return x
-        
-
 ```
 
-​	**DeepLab**
+​	**DeepLab**V3
 
 ```python
-class DeepLab(Layer):
-    def __init__(self, num_classes=59):
-        super(DeepLab, self).__init__()
-        
-        back = ResNet50(pretrained=False, duplicate_blocks=True)
+class DeepLabV3(nn.Layer):
+    """
+    The DeepLabV3 implementation based on PaddlePaddle.
+    The original article refers to
+     Liang-Chieh Chen, et, al. "Rethinking Atrous Convolution for Semantic Image Segmentation"
+     (https://arxiv.org/pdf/1706.05587.pdf).
+    Args:
+        Please Refer to DeepLabV3P above.
+    """
 
-        self.layer0 = fluid.dygraph.Sequential(
-                                    back.conv,
-                                    back.pool2d_max,
-                                    )
-        self.layer1 = back.layer1
-        self.layer2 = back.layer2
-        self.layer3 = back.layer3
-        
-        # multigrid
-        self.layer4 = back.layer4
-        self.layer5 = back.layer5
-        self.layer6 = back.layer6
-        self.layer7 = back.layer7
+    def __init__(self,
+                 num_classes,
+                 backbone,
+                 backbone_indices=(3, ),
+                 aspp_ratios=(1, 6, 12, 18),
+                 aspp_out_channels=256,
+                 align_corners=False,
+                 pretrained=None):
+        super().__init__()
 
-        feature_dim = 2048
-        self.classifier = DeepLabHead(feature_dim, num_classes)
+        self.backbone = backbone
+        backbone_channels = [
+            backbone.feat_channels[i] for i in backbone_indices
+        ]
 
-    def forward(self, inputs):
-        n, c, h, w = inputs.shape
-        x = self.layer0(inputs)
-        x = self.layer1(x)
-        x = self.layer2(x)
-        x = self.layer3(x)
-        x = self.layer4(x)
-        x = self.layer5(x)
-        x = self.layer6(x)
-        x = self.layer7(x)
+        self.head = DeepLabV3Head(num_classes, backbone_indices,
+                                  backbone_channels, aspp_ratios,
+                                  aspp_out_channels, align_corners)
+        self.align_corners = align_corners
+        self.pretrained = pretrained
+        self.init_weight()
 
-        x = self.classifier(x)      # ASPP & classifier
+    def forward(self, x):
+        feat_list = self.backbone(x)
+        logit_list = self.head(feat_list)
+        return [
+            F.interpolate(
+                logit,
+                paddle.shape(x)[2:],
+                mode='bilinear',
+                align_corners=self.align_corners) for logit in logit_list
+        ]
 
-        x = fluid.layers.interpolate(x, (h, w), align_corners=False)    # resize
-
-        return  x
-        
+    def init_weight(self):
+        if self.pretrained is not None:
+            utils.load_entire_model(self, self.pretrained)
 
 ```
 
-​	**DeepLabHead**
+​	**DeepLabV3Head**
 
 ```python
-class DeepLabHead(fluid.dygraph.Sequential):
-    def __init__(self, num_channels, num_classes):
-        super(DeepLabHead, self).__init__(
-                ASPPModule(num_channels, 256, [12, 24, 36]),
-                Conv2D(256, 256, 3, padding=1),
-                BatchNorm(256, act='relu'),
-                Conv2D(256, num_classes, 1)
-                )
+class DeepLabV3Head(nn.Layer):
+    """
+    The DeepLabV3Head implementation based on PaddlePaddle.
+    Args:
+        Please Refer to DeepLabV3PHead above.
+    """
+
+    def __init__(self, num_classes, backbone_indices, backbone_channels,
+                 aspp_ratios, aspp_out_channels, align_corners):
+        super().__init__()
+
+        self.aspp = layers.ASPPModule(
+            aspp_ratios,
+            backbone_channels[0],
+            aspp_out_channels,
+            align_corners,
+            use_sep_conv=False,
+            image_pooling=True)
+
+        self.cls = nn.Conv2D(
+            in_channels=aspp_out_channels,
+            out_channels=num_classes,
+            kernel_size=1)
+
+        self.backbone_indices = backbone_indices
+
+    def forward(self, feat_list):
+        logit_list = []
+        x = feat_list[self.backbone_indices[0]]
+        x = self.aspp(x)
+        logit = self.cls(x)
+        logit_list.append(logit)
+
+        return logit_list
 
 
 ```
-
-​	**ASPPConv**
-
-```python
-class ASPPConv(fluid.dygraph.Sequential):
-    def __init__(self, num_channels, num_filters, dilation):
-        super(ASPPConv, self).__init__(
-            Conv2D(num_channels, num_filters, filter_size=3, padding=dilation, dilation=dilation),
-            BatchNorm(num_filters, act='relu')
-        )
-
-
-```
-
-​	**main**
-
-```python
-def main():
-    place = paddle.fluid.CUDAPlace(0)
-    with fluid.dygraph.guard(place):
-        x_data = np.random.rand(2, 3, 512, 512).astype(np.float32)
-        x = to_variable(x_data)
-        model = DeepLab(num_classes=59)
-        model.eval()
-        pred = model(x)
-        print(pred.shape)
-
-
-```
-
-
 
 ## **参考文献**
 
