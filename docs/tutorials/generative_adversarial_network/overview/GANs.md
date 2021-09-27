@@ -14,13 +14,17 @@
 
 ![image-20210924121445444](../../../images/generative_adversarial_network/overview/image-20210924121445444.png)
 
-图1 经典GAN模型发展示意图
+<center>图1 经典GAN模型发展示意图</center><br></br>
+
+
 
 ​		GAN如其名，是一个生成与对抗并存的神经网络。一般一个GAN网络包括了一个生成器（Generator）和一个判别器（Discriminator）。生成器用来根据要求不断生成越来越接近实际标签的数据，判别器用来不断区分生成器的生成结果和实际标签的区别。例如对于图像超分辨率问题来说，一般神经网络使用损失函数从不同角度（例如像素、特征图等）监督生成图像与真实标签之间的区别，通过优化寻找损失函数的最小值所对应的模型参数。一个GAN网络模型则会通过生成器生成图像，再通过判别器动态的判别生成图像与真实图像的区别。如下图所示，为了具有对比性，左眼展示的是图像原本样子，右眼是通过GAN网络后的样子。很明显， GAN网络将原本模糊的图像变得更加清晰，细节纹理表现的更加突出了。
 
 ![SRdemo](../../../images/generative_adversarial_network/overview/SRdemo.png)
 
-图2 用于图像超分的GAN模型效果示例
+<center>图2 用于图像超分的GAN模型效果示例</center><br></br>
+
+
 
 ​		当然，GAN网络也不仅仅用于图像超分任务中，图像转换，图像理解，图像填补等任务都可以使用GAN。下图是一个经典的GAN网络模型。我们先来理解下GAN的两个模型要做什么。首先是判别模型，就是图中右半部分的网络，直观来看就是一个简单的神经网络结构，输入一副图像，输出一个概率值，用于判断真假使用（概率值大于0.5为真，小于0.5为假），但真假也不过是人们定义的概率而已。其次是生成模型，生成模型同样也可以看成是一个神经网络模型，输入一组随机数Z，输出一个图像。从图中可以看到，会存在两个数据集，一个是真实数据集，另一个是假的数据集，这个数据集就是有生成网络造出来的数据集。根据这个图我们再来理解一下GAN的目标：
 
@@ -32,7 +36,9 @@
 
 ![image-20210924163643263](../../../images/generative_adversarial_network/overview/image-20210924163643263.png)
 
-图3 GAN模型结构示意图
+<center>图3 GAN模型结构示意图</center><br></br>
+
+
 
 ​		隐变量 ![[公式]](https://www.zhihu.com/equation?tex=z) （通常为服从高斯分布的随机噪声）通过Generator生成 ![[公式]](https://www.zhihu.com/equation?tex=X_%7Bfake%7D) , 判别器负责判别输入的data是生成的样本 ![[公式]](https://www.zhihu.com/equation?tex=X_%7Bfake%7D) 还是真实样本 ![[公式]](https://www.zhihu.com/equation?tex=X_%7Breal%7D) 。优化的目标函数如下：
 
@@ -52,7 +58,9 @@
 
 ![image-20210924200004116](../../../images/generative_adversarial_network/overview/image-20210924200004116.png)
 
-图4生成算法树状图
+<center>图4生成算法树状图</center><br></br>
+
+
 
 ​		生成算法可分为两类：显式密度模型和隐式密度模型。
 
@@ -94,7 +102,9 @@ GAN背后的思想是训练已知数据的网络。GAN开始了解数据，通�
 
 ![image-20210924182721882](../../../images/generative_adversarial_network/overview/image-20210924182721882.png)
 
-图5 InfoGAN结构示意图
+<center>图5 InfoGAN结构示意图</center><br></br>
+
+
 
 在实际过程中，classifier和discriminator会共享参数，只有最后一层是不一样的，classifier输出的是一个vector, discriminator输出的是一个标量。
 
@@ -110,7 +120,9 @@ GAN背后的思想是训练已知数据的网络。GAN开始了解数据，通�
 
 ![v2-3cda6e503b5fbef0811a9e7c58d0fb16_720w](../../../images/generative_adversarial_network/overview/v2-3cda6e503b5fbef0811a9e7c58d0fb16_720w.jpg)
 
-图6 InfoGAN结果
+<center>图6 InfoGAN结果</center><br></br>
+
+
 
 #### Conditional GANs (cGANs)
 
@@ -132,13 +144,17 @@ GAN背后的思想是训练已知数据的网络。GAN开始了解数据，通�
 
 ![image-20210924184248089](../../../images/generative_adversarial_network/overview/image-20210924184248089.png)
 
-图7 cGAN结果示意图
+<center>图7 cGAN结果示意图</center><br></br>
+
+
 
 pix2pix的插图：训练条件GANs映射灰度→颜色鉴别器学习在真实灰度、颜色元组和伪（由生成器合成）之间进行分类。与原始GANs不同，发生器和鉴别器都观察输入的灰度图像，pix2pix发生器没有噪声输入。
 
 ![watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3B5MTg0NDczODk0,size_16,color_FFFFFF,t_70](../../../images/generative_adversarial_network/overview/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3B5MTg0NDczODk0,size_16,color_FFFFFF,t_70.png)
 
-图8 生成器与判别器示意图
+<center>图8 生成器与判别器示意图</center><br></br>
+
+
 
 整个网络结构如上图所示，其中z为生成网络随机的输入，y为条件，x为真实样本。训练过程仍如GANs，先训练判别器，再训练生成器，交。替进行，直到判别器无法判定真实样本和生成的样本。训练过程中的不同在于，判别器D需要判别三种类型：
 
@@ -152,7 +168,9 @@ pix2pix的插图：训练条件GANs映射灰度→颜色鉴别器学习在真实
 
 ![image-20210924184050192](../../../images/generative_adversarial_network/overview/image-20210924184050192.png)
 
-图9 cGAN生成结果示意图
+<center>图9 cGAN生成结果示意图</center><br></br>
+
+
 
 在训练一个GAN时，只把0这个数字的图片作为真实样本放入GAN训练，GAN能生成一个数字的图片（比如0这个数字的图片），而要想生成0-9所有的对应图片，则需要训练10个不同的GAN，
 
@@ -164,11 +182,13 @@ CycleGAN本质上是两个镜像对称的GAN，构成了一个环形网络。两
 
 ![image-20210924201752871](../../../images/generative_adversarial_network/overview/image-20210924201752871.png)
 
-图10 循环一致性损失
+<center>图10 循环一致性损失</center><br></br>
+
+
 
 论文里最终使用均方误差损失表示：
 
-![webp](../../../images/generative_adversarial_network/overview/webp.webp)
+![webp](../../../images/generative_adversarial_network/overview/webp.png)
 
 CycleGAN的网络架构如图所示：
 
@@ -176,7 +196,9 @@ CycleGAN的网络架构如图所示：
 
 ![image-20210924201943914](../../../images/generative_adversarial_network/overview/image-20210924201943914.png)
 
-图11 CycleGAN结构示意图
+<center>图11 CycleGAN结构示意图</center><br></br>
+
+
 
 可以实现无配对的两个图片集的训练是CycleGAN与Pixel2Pixel相比的一个典型优点。但是我们仍然需要通过训练创建这个映射来确保输入图像和生成图像间存在有意义的关联，即输入输出共享一些特征。
 
@@ -200,19 +222,25 @@ BiCoGAN 模型的提出者认为MIRZA提出的模型的输入 z 与 c 相互纠�
 
 ![image-20210924210514863](../../../images/generative_adversarial_network/overview/image-20210924210514863.png)
 
-图12 BiCoGAN 模型
+<center>图12 BiCoGAN 模型</center><br></br>
+
+
 
 IcGAN （invertible conditional GAN）以MIRZA的模型为基础，增加了两个预训练的编码器 E z 和E y ，E z 用于生成隐空间中的随机变量 z，E y 用于生成原始条件 y，通过将 y 修改成 y'作为 cGAN的输入条件，从而控制合成图像的细节（如图 4所示）。本文提出了 3 种从分布中进行采样获得y'的方法：当 y 为二进制向量时，可通过 KDE（kernel denisity estimation）拟合分布并进行采样；当 y 为实向量时，可选取训练集的标签向量进行直接插值；当某个条件并不是在所有训练集中表现唯一时，可直接对 p data 进行采样。
 
 ![image-20210924211205242](../../../images/generative_adversarial_network/overview/image-20210924211205242.png)
 
-图13 IcGAN模型
+<center>图13 IcGAN模型</center><br></br>
+
+
 
 DeLiGAN 适用于训练数据规模小、种类多的场景，DeliGAN 模型如图14所示。Gurumurthy等提出使用 GMM（Gaussian mixture model）对隐空间进行参数化，再随机选择一个高斯分量进行重参数化，从指定的高斯分布中获取样本，但模型使用 GMM 是一种简化假设，限制了其逼近更复杂分布的能力。
 
 ![image-20210924211241513](../../../images/generative_adversarial_network/overview/image-20210924211241513.png)
 
-图14 DeLiGAN 模型
+<center>图14 DeLiGAN 模型</center><br></br>
+
+
 
 NEMGAN（noise engineered mode matchingGAN）的提出者提出一种能够在训练集存在数据不均衡情况下表现较好的模式匹配策略，根据生成样本训练出其在隐空间中的对应表示，得到潜在模式的先验分布，从而将生成样本的多种模式进行分离，并且与真实样本的模式进行匹配，保证了生成样本中包含多个真实样本的模式，以缓解模式崩溃问题。
 
@@ -222,7 +250,9 @@ SGAN（semi-supervised learning GAN） 是一种能够为数据集重建标签�
 
 ![image-20210924211300696](../../../images/generative_adversarial_network/overview/image-20210924211300696.png)
 
-图15 SGAN 模型
+<center>图15 SGAN 模型</center><br></br>
+
+
 
 AC-GAN（auxiliary classifier GAN）同时具备MIRZA的模型和ODENA的模型的特点，G 输入随机变量与分类信息 c，D 输出样本为假和分类概率，该方法能够在有条件生成样本时输出生成样本所属的类别。
 
@@ -236,19 +266,25 @@ MADGAN（multi-agent diverse GAN）由多个生成器和一个判别器组成，
 
 ![image-20210924211326380](../../../images/generative_adversarial_network/overview/image-20210924211326380.png)
 
-图16 MADGAN 模型
+<center>图16 MADGAN 模型</center><br></br>
+
+
 
 MGAN 缓解模式崩溃问题的思路与HOANG等人的思路类似，其模型如图17所示。该模型设计了一种与判别器权值共享但去除掉 Softmax 层的分类器，用于承担判断生成样本所属生成器的功能，判别器仅负责判别样本为真实样本还是生成样本。
 
 ![image-20210924211533198](../../../images/generative_adversarial_network/overview/image-20210924211533198.png)
 
-图17 MGAN 模型
+<center>图17 MGAN 模型</center><br></br>
+
+
 
 MPMGAN（message passing multi-agent GAN）模型是一种引入消息传递机制的多生成器，生成器输出作为传递给其他生成器的消息。在消息共享机制的作用下，所有生成器都有合作目标、竞争目标两种目标。合作目标鼓励其他生成器的生成样本优于自身的生成样本；竞争目标促使自身的生成样本优于其他生成器的生成样本。两种目标共同作用使生成样本质量得以优化。
 
 ![image-20210924211557485](../../../images/generative_adversarial_network/overview/image-20210924211557485.png)
 
-图18 MPMGAN 模型
+<center>图18 MPMGAN 模型</center><br></br>
+
+
 
 ##### 基于判别器改进的GAN模型
 
@@ -258,25 +294,33 @@ PacGAN 模型如图19所示。PacGAN 将同一类的多个样本“打包”后�
 
 ![image-20210924211618756](../../../images/generative_adversarial_network/overview/image-20210924211618756.png)
 
-图19 PacGAN模型
+<center>图19 PacGAN模型</center><br></br>
+
+
 
 GMAN （ generative multi-adversarial net-works）模型的提出者认为过度改进判别器会使目标函数过于苛刻，反而抑制生成器学习，因此提出一种结合集成学习的方法，通过设置多个判别器，生成器从多判别器聚合结果中学习，从而使网络加速收敛。GMAN 模型如图 20所示。
 
 ![image-20210924211650061](../../../images/generative_adversarial_network/overview/image-20210924211650061.png)
 
-图20 GMAN模型
+<center>图20 GMAN模型</center><br></br>
+
+
 
 DropoutGAN设置了一组判别器，在每批样本训练结束时，以一定概率删除该结果，将剩余结果聚合后反馈到生成器，以此使生成器不局限于欺骗特定判别器。DropoutGAN 模型的提出者认为模式崩溃问题是生成器对特定判别器或静态集成判别器的过度拟合，即生成器学习到了使判别器输出真值的特殊条件而非学习到了样本模式，而该模型的结构中，判别器集合是动态变化的，生成器无法学习到欺骗判别器的特殊条件，从而使生成器学习多种样本模式，有助于缓解模式崩溃问题。DropoutGAN 模型如图21所示。
 
 ![image-20210924211712464](../../../images/generative_adversarial_network/overview/image-20210924211712464.png)
 
-图21 DropoutGAN模型
+<center>图21 DropoutGAN模型</center><br></br>
+
+
 
 D2GAN（dual discriminator GAN）设置了两个判别器 D 1 、D 2 ，分别使用正向 KL 散度及逆向 KL 散度，以充分利用二者互补的统计特性。其中 D 1 通过正确判定样本来自真实样本分布获得奖励，D 2 则通过正确判定样本来自生成样本分布获得奖励。生成器同时欺骗两个判别器，以此来提升生成样本的质量。D2GAN 模型如图22所示。
 
 ![image-20210924211738775](../../../images/generative_adversarial_network/overview/image-20210924211738775.png)
 
-图22 D2GAN模型
+<center>图22 D2GAN模型</center><br></br>
+
+
 
 StabilizingGAN 模型的提出者认为真实样本在空间中集中分布，而生成样本初始时在空间中分散分布，导致训练初期判别器能够准确判断出几乎所有生成样本，产生无效梯度，使生成器训练缓慢。因此，他们提出同时训练一组视角受限的判别器，每个判别器都专注于空间中的一部分投影，生成器逐渐满足所有判别器的限制，以此稳定训练，提升生成样本质量。
 
@@ -284,7 +328,9 @@ StabilizingGAN 模型的提出者认为真实样本在空间中集中分布，�
 
 ![image-20210924211812360](../../../images/generative_adversarial_network/overview/image-20210924211812360.png)
 
-图23 EBGAN模型
+<center>图23 EBGAN模型</center><br></br>
+
+
 
 ##### 基于多模块组合改进的 GAN 模型
 
@@ -296,7 +342,9 @@ StackGAN 以MIRZA的模型为基础构建了一种两阶段模型（如图24所�
 
 ![image-20210924211830154](../../../images/generative_adversarial_network/overview/image-20210924211830154.png)
 
-图24 StackGAN模型
+<center>图24 StackGAN模型</center><br></br>
+
+
 
 ProgressGAN 模型的提出者认为小尺度图像能够保证多样性且细节不丢失，他们使用多个且逐渐增大的 WGAN-GP 网络，逐步训练最终生成高清图像。
 
@@ -304,19 +352,25 @@ TripleGAN 通过增加一个分类器网络为真实样本生成标签，生成�
 
 ![image-20210924211848410](../../../images/generative_adversarial_network/overview/image-20210924211848410.png)
 
-图25 TripleGAN模型
+<center>图25 TripleGAN模型</center><br></br>
+
+
 
 ControlGAN 模型的提出者认为MIRZA的模型中的判别器同时承担了真实样本分类与判别真假样本两个任务，因此将其拆分为独立的分类器和判别器，从而在有条件生成样本时更细粒度地控制生成样本的特征。ControlGAN 模型如图26所示。
 
 ![image-20210924211907600](../../../images/generative_adversarial_network/overview/image-20210924211907600.png)
 
-图26 ControlGAN模型
+<center>图26 ControlGAN模型</center><br></br>
+
+
 
 SGAN（several local pairs GAN）使用若干组局部网络对和一组全局网络对，每组网络对有一个生成器与一个判别器。局部网络对使用固定的配对网络进行训练，不同局部网络对之间没有信息交互，全局网络利用局部网络进行训练。由于每一个局部网络对都可以学到一种模式，在使用局部网络对更新全局网络对后，能够保证全局网络对综合了多种模式，从而缓解模式崩溃问题。SGAN 模型如图27所示。
 
 ![image-20210924211928053](../../../images/generative_adversarial_network/overview/image-20210924211928053.png)
 
-图27 SGAN模型
+<center>图27 SGAN模型</center><br></br>
+
+
 
 MemoryGAN 模型的提出者认为隐空间具有连续的分布，但不同种类的结构却具有不连续性，因此在网络中加入存储网络供生成器和判别器访问，使生成器和判别器学习数据的聚类分布以优化该问题。
 
@@ -328,13 +382,17 @@ DCGAN [7] 使 用 去 除 池 化 层 的 CNN（convolutional neural network）�
 
 ![image-20210924211952892](../../../images/generative_adversarial_network/overview/image-20210924211952892.png)
 
-图28 DCGAN模型中的CNN
+<center>图28 DCGAN模型中的CNN</center><br></br>
+
+
 
 CapsuleGAN 使用胶囊网络作为判别器的框架（如图29所示）。胶囊网络可以用于替代神经元，将节点输出由一个值转变为一个向量，神经元用于检测某个特定模式，而胶囊网络可以检测某个种类的模式，以此提高判别器的泛化能力，从而提高生成样本质量。
 
 ![image-20210924212013245](../../../images/generative_adversarial_network/overview/image-20210924212013245.png)
 
-图29 CapsuleGAN的基本原理
+<center>图29 CapsuleGAN的基本原理</center><br></br>
+
+
 
 VAEGAN 利用GAN来提高VAE生成样本的质量。其观点是：在 VAE 中，编码器将真实分布编码到隐空间，而解码器将隐空间恢复为真实分布。单独解码器即可用作生成模型，但生成样本质量较差，因此再将其输入判别器中。
 
@@ -346,7 +404,9 @@ BiGAN 使用编码器来提取真实样本特征，使用解码器来模仿生�
 
 ![image-20210924212057187](../../../images/generative_adversarial_network/overview/image-20210924212057187.png)
 
-图30 BiGAN模型
+<center>图30 BiGAN模型</center><br></br>
+
+
 
 MatAN（matching adversarial network）使用孪生网络替换判别器，以将正确标签考虑在生成器目标函数中。孪生网络用于衡量真实数据与生成数据的相似度。该方法对加快生成器训练有效。
 
@@ -358,7 +418,9 @@ IRGAN 利用 GAN 将 IR（information re-trieval）领域中的生成式检索�
 
 ![image-20210924212120899](../../../images/generative_adversarial_network/overview/image-20210924212120899.png)
 
-图31 IRGAN模型
+<center>图31 IRGAN模型</center><br></br>
+
+
 
 LapGAN使用了图像处理领域的思想，同时使用三组 cGAN ，按照高斯金字塔的模式对图像逐级下采样训练网络，按照拉普拉斯金字塔的模式对图像逐级上采样，从而达到从模糊图像中重构高像素图像的目的。
 
@@ -458,7 +520,9 @@ GAN 在三维空间上对物体的立体形状补全或重构，是对三维重�
 
 ![image-20210924210253343](../../../images/generative_adversarial_network/overview/image-20210924210253343.png)
 
-图32 现实世界物品扫描的 3D 
+<center>图32 现实世界物品扫描的 3D </center><br></br>
+
+
 
 Yang 等人提出了一种 3D-RecGAN 模型，该模型仍一个随机深度视图重建指定对象的完整三维结构。Hermoza 和 Siiran 在GAN 结构上提出了一种编码器-解码器 3D 深度神经网络，结合了两个目标损失：用于 3D 物体重建的损失和改迚的 Wasserstein GAN 损失。Achlioptas等人 提出了用于语义部件编辑、形状类比和形状揑值以及三维物体形状补全的代数操作和深度自动编码器 GAN (AE-EMD)。
 
