@@ -578,7 +578,9 @@ DeepLab V3的ASPP模块与DeepLab V2的主要区别在于，增加了BN层，增
 
 总的来说，本文从DeepLab系列出发，分别介绍了各版本的Deeplab的动机，并给予动机进行改进的创新点和策略。然后针对DeeplabV3详细的解释了该模型从问题的提出到实验结果相关内容。从解决问题的角度出发，DeeplabV3主要解决了物体的多尺度问题，在DCNN问题上并没有进行深入讨论。DCNN的多次下采样会造成特征图分辨率变小，导致预测精度降低，边界信息丢失，该问题于DeeplabV3+中进行了深入的讨论与解决。从实验结果来看，DeeplabV3表现出相较于以前版本更好的性能。
 
-​		**参考文献**
+
+
+## **参考文献**
 
 [1] [Rethinking Atrous Convolution for Semantic Image Segmentation]([[1706.05587\] Rethinking Atrous Convolution for Semantic Image Segmentation (arxiv.org)](https://arxiv.org/abs/1706.05587))
 
