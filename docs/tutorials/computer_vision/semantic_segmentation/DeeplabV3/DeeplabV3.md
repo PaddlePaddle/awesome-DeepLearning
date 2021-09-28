@@ -1,3 +1,9 @@
+
+
+
+
+
+
 # DeepLabV3深入解读
 
 ## 1、DeepLab系列简介
@@ -155,144 +161,9 @@ DeepLabV3的提出是为了解决多尺度下的目标分割问题。如图2所�
 
 特别的，我们定义$ Multi\_Grid = ({r_1},{r_2},{r_3}) $为block4到block7内三个卷积层的unit rates。卷积层的最终空洞率等于unit rate和corresponding rate的乘积。例如，当$  output\_stride = 16,Multi\_Grid = (1,2,4)$，三个卷积就会在block4有。$  rates = 2 \cdot (1,2,4) = (2,4,8)$
 
-#### **3.将 batch normalization 加入到 ASPP模块.**
+#### **3.将 batch normalization 加入到 ASPP模块.*
 
-#### **4.将全局上下文信息纳入模型**
-
-具有不同 atrous rates 的 ASPP 能够有效的捕获多尺度信息。不过，论文发现，随着sampling rate的增加，有效filter特征权重(即有效特征区域，而不是补零区域的权重)的数量会变小，极端情况下，当空洞卷积的 rate 和 feature map 的大小一致时，$ 3~\times 3 $ 卷积会退化成 $ 1~\times 1 $ ：
-
-![image-20210924231902861](../../../../images/computer_vision/semantic_segmentation/DeeplabV3/image-20210924231902861.png)
-
-<center>图4 在65x65尺寸特征图上使用3x3卷积时标准化计数随空洞率的变化</center><br></br>
-
-
-
-为了克服这个问题，并将全局上下文信息纳入模型，采用了图像级特征。具体来说，在模型的最后一个特征图采用全局平均池化，将重新生成的图像级别的特征提供给带256个滤波器(和BN)的1×1卷积，然后双线性插值将特征提升到所需的空间维度。
-
-最后改进后的ASPP包括：
-
-- (a)一个 $ 1~\times 1 $的卷积与三个$ 3~\times 3 $ 的$ rates = (6,12,18) $的空洞卷积，滤波器数量都为256，包含BN层。针对output_stride=16的情况
-- (b)图像级特征，如图5所示。当output_stride=8时，加倍了采样率。然后将所有分支的特征图通过一个$ 1~\times 1 $卷积(有256个滤波器和BN)concatenate起来，送入最后的1×1卷积以产生最终分数.
-
-![image-20210924232337417](../../../../images/computer_vision/semantic_segmentation/DeeplabV3/image-20210924232337417.png)
-
-<center>图5 ASPP，增加了多级特征图</center><br></br>
-
-
-
-### 3.训练策略
-
-#### 1.**Learning rate policy:**
-
-- 采用poly策略， 在初始学习率基础上乘$ {(1 - \frac{{iter}}{{\max iter}})^{power}} $,其中$ power = 0.9 $
-
-#### **2.Crop size:**
-
-- 为了大采样率的空洞卷积能够有效，需要较大的图片大小；否则，大采样率的空洞卷积权值就会主要用于padding区域。
-- 在Pascal VOC 2012数据集的训练和测试中我们采用了513的裁剪尺寸。
-
-#### 3.**Batch normalization：**
-
-- 我们在ResNet之上添加的模块都包括BN层
-- 当output_stride=16时，采用batchsize=16，同时BN层的参数做参数衰减0.9997。
-- 在增强的数据集上，以初始学习率0.007训练30K后，冻结BN层参数，然后采用output_stride=8，再使用初始学习率0.001在PASCAL官方的数据集上训练30K。
-- 训练output_stride=16比output_stride=8要快很多，因为其中间的特征映射在空间上小四倍。但output_stride=16在特征映射上相对粗糙，快是因为牺牲了精度。
-
-#### 4.**Upsampling logits:**
-
-- 在先前的工作上，我们是将output_stride=8的输出与Ground Truth下采样8倍做比较。
-- 现在我们发现保持Ground Truth更重要，故我们是将最终的输出上采样8倍与完整的Ground Truth比较。
-
-#### 5.**Data augmentation:**
-
-在训练阶段，随机缩放输入图像(从0.5到2.0)和随机左-右翻转
-
-### 4.实验结果
-
-我们首先实验级联更多的空洞卷积模块。
-
-\--
-
-**ResNet50：**
-
-使用ResNet-50时，我们探究output_stride的影响。如表1所示。
-
-- 当output_stride为256时，由于严重的信号抽取，性能相比其他output_stride大大的下降了。
-- 当使用不同采样率的空洞卷积时，性能上升，这说明了语义分割中使用空洞卷积的必要性。
-
-\--
-
-**ResNet-50 vs. ResNet-101:**
-
-用更深的模型，并改变级联模块的数量。
-
-![image-20210924233250610](../../../../images/computer_vision/semantic_segmentation/DeeplabV3/image-20210924233250610-16326804902533.png)
-
-<center>表2 使用不同叠块数的ResNet-50和ResNet-101时，使用输出步长Output_stride= 16</center><br></br>
-
-
-
-- 当block增加，性能也随之增加。
-- 随着添加更多的block，提升变得更小。
-- 值得注意的是，ResNet-50使用block7会稍微降低性能，同时ResNet-101使用后仍然可以提升性能。
-
-\--
-
-**Multi-grid:**
-
-采用Multi-gird策略，在ResNet-101使用变体残差模块。block4和其他添加进来的block中，主分支中的三个卷积都使用空洞卷积，采样率设置Multi-gird策略。
-
-![image-20210924233654968](../../../../images/computer_vision/semantic_segmentation/DeeplabV3/image-20210924233654968.png)
-
-<center>表3 使用ResNet-101对不同叠块数采用多重网格法，Output_stride = 16。</center><br></br>
-
-
-
-实验观察到的：
-
-- 应用Multi-gird策略通常比单倍数 $ ({r_1},{r_2},{r_3}) = (1,1,1) $效果要好
-- 简单的提升倍数例如$ ({r_1},{r_2},{r_3}) = (2,2,2) $是无效的
-- 增加网络深度再配合Multi-gird可以提升性能。图中最好的模型即block7下 $ ({r_1},{r_2},{r_3}) = (1,2,1) $
-
-\--
-
-**Inference strategy on val set:**
-
-模型训练阶段使用output_stride=16，在推理过程中应用output_stride=8以获得更精细的特征图。
-
-![image-20210924233908829](../../../../images/computer_vision/semantic_segmentation/DeeplabV3/image-20210924233908829.png)
-
-<center>表4 推理策略. MG:多重网络. OS: 输出步长. MS: 多尺度输入. Flip: 输入左右翻转.</center><br></br>
-
-
-
-- 评估时output_stride=8比output_stride=16性能提高了1.39%。
-- 使用多尺度输入(scales={0.5, 0.75, 1.0, 1.25, 1.5, 1.75})和左-右翻转，进行数据增强后，进一步提高了性能。
-- 最后，计算每个尺度和翻转图像的平均概率来作为最终结果。
-
-**Atrous Spatial Pyramid Pooling:**
-
-DeepLab V3的ASPP模块与DeepLab V2的主要区别在于，增加了BN层，增加了图像级别的特征。表5记录了ASPP模块block4使用multi-grid策略和图像级特征后的效果。
-
-![image-20210924234255382](../../../../images/computer_vision/semantic_segmentation/DeeplabV3/image-20210924234255382.png)
-
-<center>表5 在Output_stide = 16下，使用多重网格方法和图像级特征的ASPP</center><br></br>
-
-
-
-**Inference strategy on val set:**
-
-推断期间使用output_stride = 8，采用多尺度输入和左-右翻转数据增强。
-
-![image-20210924234451247](../../../../images/computer_vision/semantic_segmentation/DeeplabV3/image-20210924234451247.png)
-
-<center>表6 推理策略 MG：多重网格方法。 ASPP：空洞空间金字塔。 OS：Output_stride。 MS：多尺度输入。 Flip： 输入左右翻转。COCO： 在MS-COCO上预训练。</center><br></br>
-
-
-
-### 5.补充知识
-
-#### 1.Atrous Spatial Pyramid Pooling(ASPP):
+#### Atrous Spatial Pyramid Pooling(ASPP):
 
 ![image-20210924235518873](../../../../images/computer_vision/semantic_segmentation/DeeplabV3/image-20210924235518873.png)
 
@@ -300,69 +171,11 @@ DeepLab V3的ASPP模块与DeepLab V2的主要区别在于，增加了BN层，增
 
 
 
-deeplabv2中的aspp如上图所示，在特征顶部映射图使用了四中不同采样率的空洞卷积。这表明以不同尺度采样时有效的，在Deeolabv3中向ASPP中添加了BN层。不同采样率的空洞卷积可以有效捕获多尺度信息，但会发现随着采样率的增加，滤波器有效权重（权重有效的应用在特征区域，而不是填充0）逐渐变小。具体ASPP改进点在上文中已提到过。
+上图是DeeplabV2中的ASPP，在特征顶部映射图使用了四中不同采样率的空洞卷积。我这表明以不同尺度采样时有效的，在Deeolabv3中向ASPP中添加了BN层。不同采样率的空洞卷积可以有效捕获多尺度信息，但会发现随着采样率的增加，滤波器有效权重（权重有效的应用在特征区域，而不是填充0）逐渐变小。
 
 当output_stride=8时，加倍了采样率。所有特征通过1x1级联到一起，生成最终的分数。
 
-#### 2.DenseCRF
-
-**	CRF**
-
-CRF的全称是Conditional Random Field.它的形式如下所示：
-
-![[公式]](https://www.zhihu.com/equation?tex=P%28Y%7CX%29%3D%5Cfrac%7B1%7D%7BZ%28X%29%7D%5Ctilde%7BP%7D%28Y%2CX%29)
-
-![[公式]](https://www.zhihu.com/equation?tex=%5Ctilde%7BP%7D%28Y%2CX%29%3Dexp%28%5Csum_i+w_i+%2A+f_i%28Y%2CX%29%29)
-
-![[公式]](https://www.zhihu.com/equation?tex=Z%28X%29%3D%5Csum_Y+exp%28%5Csum_i+w_i+%2A+f_i%28Y%2CX%29%29)
-
-可以看出，条件随机场在建模的时候同样需要计算联合概率，只不过这一次参与计算的有两部分随机变量——X和Y。一般来说，我们把X称作观察变量，也就是已知的变量；Y称作目标变量或者隐含变量，是我们想知道的变量。
-
-比方说图像分割的问题，X就是图像的像素，Y就是每个像素所归属的类别。当然对于二维的图像问题还是有点复杂，那么我们用一个简单的一维问题做了例子：比方说自然语言处理中的词性标注问题，那么它的建模形式如下所示：
-
-![[公式]](https://www.zhihu.com/equation?tex=%5Ctilde%7BP%7D%28Y%2CX%29%3Dexp%28%5Csum_i+f_1%28X_i%2CY_i%29+%2B+f_2%28Y_i%2CY_%7Bi%2B1%7D%29%29)
-
-​	**Dense CRF**
-
-我们看过了它的模型形式，下面直接来看看模型的能量函数表达形式：
-
-![[公式]](https://www.zhihu.com/equation?tex=E%28x%29%3D%5Csum_i+%5Cpsi+_u%28x_i%29%2B%5Csum_%7Bi%3Cj%7D%5Cpsi_p%28x_i%2Cx_j%29)
-
-可以看出每一个像素都有一个unary的函数，也就是说在这个特征函数里w，剩下的参数都出现在图像的像我们只考虑当前像素的类别，而暂时不考虑别的像素的类别信息。
-
-而后面的pairwise函数里，每一个像素的类别都和其他像素计算一个energy feature。于是就有了上面的公式形式。注意这里的能量函数是所有像素点的联合能量和不是某一个像素点的能量，所以后面的pairwise项，我们有n(n-1)/2组特征，总的来说，特征数量是像素数量的平方级别，如果我们有一张100万像素的图片，那么我们就会建立4950亿组pairwise特征。正是因为这种复杂的形式，所以这个模型被称作Dense CRF。满满的全是dense啊！
-
-关于unary函数的内容，我们可以尽情发挥，在denseCRF中我们并没有对这一部分做详细的限制。因此关于这部分我们就暂时略去不谈了，在后面的文章中我们会重新回来，挖掘unary函数的潜力。下面我们专注于解决pairwise这个大坑。
-
-下面我们讲piarwise部分展开，其中
-
-![[公式]](https://www.zhihu.com/equation?tex=%5Cpsi_p%28x_i%2Cx_j%29%3D%5Cmu%28x_i%2Cx_j%29%5Csum_%7Bm%3D1%7D%5EKw%5E%7B%28m%29%7Dk%5E%7B%28m%29%7D%28f_i%2Cf_j%29)
-
-可以看出，pairwise函数中还是比较复杂的，我们从左往右以此介绍。
-
-首先是$ \mu ({x_i},{x_j}) $，这一项被称作label compatibility项，简单来说这里约束了“力”传导的条件，只有相同label条件下，能量才可以相互传导。具体来说，“一个像素可能是飞机”的能量可以和“另一个像素可能是飞机”的能量相互传导，从而增加或者减少后者“可能是飞机”的能量，从而影响“可能是飞机”的概率，而“一个像素可能是飞机”的能量是不能影响“另一个像素是人”的概率的。
-
-文章中也提到了，这个简单地一刀切似乎有点不人性。拿Pascal-VOC中的20类+背景类来说，有些类别之间的相似性是很强的，而另外一些类别则完全不相似，所以作者后面提到了一些学习相关的事情，这里我们就不再深入下去了。
-
-加和项里面就是经典的权重*feature的套路了，其中
-
-![[公式]](https://www.zhihu.com/equation?tex=k%5E%7B%28m%29%7D%28f_i%2Cf_j%29%3Dw%5E%7B%281%29%7Dexp%28-%5Cfrac%7B%7Cp_i-p_j%7C%5E2%7D%7B2%5Ctheta_%7B%5Calpha%7D%5E2%7D-%5Cfrac%7B%7CI_i-I_j%7C%5E2%7D%7B2%5Ctheta_%7B%5Cbeta%7D%5E2%7D%29%2Bw%5E%7B%282%29%7Dexp%28-%5Cfrac%7B%7Cp_i-p_j%7C%5E2%7D%7B2%5Ctheta_%7B%5Cgamma%7D%5E2%7D%29)
-
-这一项以特征的形式表示了不同像素之前的“亲密度”。前面我们提到了特征不同于tabular形式的factor，我们看不到表格，只能看到公式。上面的公式中，第一项被称作appearance kernel，第二项被称作smooth kernel。这里面有很多变量，我们一一来看。
-
-appearance kernel里面的p表示像素的位置——position，我们的图像是2维的，那么position就有2维。I表示图像的像素值——Intensity，我们的图像是彩色的，那么Intensity就有3维。分式下面的两个参数无论从位置还是长相都像高斯分布中的方差，这里的含义也差不多的。
-
-于是乎我们可以看出，如果两个像素距离近且颜色近，那么这个feature特征就会很强，反之则不强。同时分母也控制了强弱性，分母越大越难强起来。其实这一项和图像处理中的bilateral filter很像。我们相当于在一个5维的空间内寻找相近的像素对并给予它们的特征加强。
-
-​	**DeepLabV3 取消DenseCRF的原因**
-
-语义分割与分类不同。分类主要是识别物体，而语义分割不但要识别物体，还要找出物体的位置信息。DCNN卷积网络越深，其位置信息丢失的越严重。所以在deeplab v1/v2中用到了，全局CRF增强其位置信息。
-
-但是在deeplabv3中，使用大采样率的3X3空洞卷积，图像边界响应无法捕捉远距离信息，会退化为1×1的卷积, 所以deeplabv3将图像级特征融合到ASPP模块中。融合图像级特征，相当于融合了其位置信息。所以就不需要最后再用CRF了。这就是用了CRF，其精度也增加的不多的原因。
-
-#### 3.paddle 代码
-
-​	**ASPPModule**
+ASPPModule代码：
 
 ```python
 class ASPPModule(nn.Layer):
@@ -465,7 +278,122 @@ class ASPPModule(nn.Layer):
         return x
 ```
 
-​	**DeepLab**V3
+#### **4.将全局上下文信息纳入模型**
+
+具有不同 atrous rates 的 ASPP 能够有效的捕获多尺度信息。不过，论文发现，随着sampling rate的增加，有效filter特征权重(即有效特征区域，而不是补零区域的权重)的数量会变小，极端情况下，当空洞卷积的 rate 和 feature map 的大小一致时，$ 3~\times 3 $ 卷积会退化成 $ 1~\times 1 $ ：
+
+![image-20210924231902861](../../../../images/computer_vision/semantic_segmentation/DeeplabV3/image-20210924231902861.png)
+
+<center>图4 在65x65尺寸特征图上使用3x3卷积时标准化计数随空洞率的变化</center><br></br>
+
+
+
+为了克服这个问题，并将全局上下文信息纳入模型，采用了图像级特征。具体来说，在模型的最后一个特征图采用全局平均池化，将重新生成的图像级别的特征提供给带256个滤波器(和BN)的1×1卷积，然后双线性插值将特征提升到所需的空间维度。
+
+最后改进后的ASPP包括：
+
+- (a)一个 $ 1~\times 1 $的卷积与三个$ 3~\times 3 $ 的$ rates = (6,12,18) $的空洞卷积，滤波器数量都为256，包含BN层。针对output_stride=16的情况
+- (b)图像级特征，如图5所示。当output_stride=8时，加倍了采样率。然后将所有分支的特征图通过一个$ 1~\times 1 $卷积(有256个滤波器和BN)concatenate起来，送入最后的1×1卷积以产生最终分数.
+
+![image-20210924232337417](../../../../images/computer_vision/semantic_segmentation/DeeplabV3/image-20210924232337417.png)
+
+<center>图5 ASPP，增加了多级特征图</center><br></br>
+
+**5.取消DenseCRF**
+
+**	CRF**
+
+CRF的全称是Conditional Random Field.它的形式如下所示：
+$$
+{\rm{P}}(Y|X) = \frac{1}{{Z(X)}}\tilde P(Y,X)
+$$
+
+$$
+\tilde P(Y,X) = \exp (\sum\limits_i {{w_i} * {f_i}(Y,X)} )
+$$
+
+
+$$
+Z(X) = \sum\limits_Y {\exp (\sum\limits_i {{w_i} * {f_i}(Y,X)} )}
+$$
+可以看出，条件随机场在建模的时候同样需要计算联合概率，只不过这一次参与计算的有两部分随机变量——X和Y。一般来说，我们把X称作观察变量，也就是已知的变量；Y称作目标变量或者隐含变量，是我们想知道的变量。
+
+比方说图像分割的问题，X就是图像的像素，Y就是每个像素所归属的类别。当然对于二维的图像问题还是有点复杂，那么我们用一个简单的一维问题做了例子：比方说自然语言处理中的词性标注问题，那么它的建模形式如下所示：
+
+![[公式]](https://www.zhihu.com/equation?tex=%5Ctilde%7BP%7D%28Y%2CX%29%3Dexp%28%5Csum_i+f_1%28X_i%2CY_i%29+%2B+f_2%28Y_i%2CY_%7Bi%2B1%7D%29%29)
+$$
+
+$$
+​	**Dense CRF**
+
+我们看过了它的模型形式，下面直接来看看模型的能量函数表达形式：
+$$
+E(x) = \sum\limits_i {{\varphi _u}({x_i}) + } \sum\limits_{i < j} {{\varphi _p}({x_i},{x_j})}
+$$
+可以看出每一个像素都有一个unary的函数，也就是说在这个特征函数里w，剩下的参数都出现在图像的像我们只考虑当前像素的类别，而暂时不考虑别的像素的类别信息。
+
+而后面的pairwise函数里，每一个像素的类别都和其他像素计算一个energy feature。于是就有了上面的公式形式。注意这里的能量函数是所有像素点的联合能量和不是某一个像素点的能量，所以后面的pairwise项，我们有n(n-1)/2组特征，总的来说，特征数量是像素数量的平方级别，如果我们有一张100万像素的图片，那么我们就会建立4950亿组pairwise特征。正是因为这种复杂的形式，所以这个模型被称作Dense CRF。满满的全是dense啊！
+
+关于unary函数的内容，我们可以尽情发挥，在denseCRF中我们并没有对这一部分做详细的限制。因此关于这部分我们就暂时略去不谈了，在后面的文章中我们会重新回来，挖掘unary函数的潜力。下面我们专注于解决pairwise这个大坑。
+
+下面我们讲piarwise部分展开，其中
+$$
+{\varphi _p}({x_i},{x_j}) = \mu ({x_i},{x_j})\sum\limits_{m = 1}^K {{w^{(m)}}{k^{(m)}}({f_i},{f_j})}
+$$
+
+
+可以看出，pairwise函数中还是比较复杂的，我们从左往右以此介绍。
+
+首先是$ \mu ({x_i},{x_j}) $，这一项被称作label compatibility项，简单来说这里约束了“力”传导的条件，只有相同label条件下，能量才可以相互传导。具体来说，“一个像素可能是飞机”的能量可以和“另一个像素可能是飞机”的能量相互传导，从而增加或者减少后者“可能是飞机”的能量，从而影响“可能是飞机”的概率，而“一个像素可能是飞机”的能量是不能影响“另一个像素是人”的概率的。
+
+文章中也提到了，这个简单地一刀切似乎有点不人性。拿Pascal-VOC中的20类+背景类来说，有些类别之间的相似性是很强的，而另外一些类别则完全不相似，所以作者后面提到了一些学习相关的事情，这里我们就不再深入下去了。
+
+加和项里面就是经典的权重*feature的套路了，其中
+$$
+k(m)({f_i},{f_j}) = {w^{(1)}}\exp ( - \frac{{{{\left| {{p_i} - {p_j}} \right|}^2}}}{{2\theta _\alpha ^2}} - \frac{{{{\left| {{I_i} - {I_j}} \right|}^2}}}{{2\theta _\beta ^2}}) + {w^{(2)}}\exp ( - \frac{{{{\left| {{p_i} - {p_j}} \right|}^2}}}{{2\theta _\gamma ^2}})
+$$
+这一项以特征的形式表示了不同像素之前的“亲密度”。前面我们提到了特征不同于tabular形式的factor，我们看不到表格，只能看到公式。上面的公式中，第一项被称作appearance kernel，第二项被称作smooth kernel。这里面有很多变量，我们一一来看。
+
+appearance kernel里面的p表示像素的位置——position，我们的图像是2维的，那么position就有2维。I表示图像的像素值——Intensity，我们的图像是彩色的，那么Intensity就有3维。分式下面的两个参数无论从位置还是长相都像高斯分布中的方差，这里的含义也差不多的。
+
+于是乎我们可以看出，如果两个像素距离近且颜色近，那么这个feature特征就会很强，反之则不强。同时分母也控制了强弱性，分母越大越难强起来。其实这一项和图像处理中的bilateral filter很像。我们相当于在一个5维的空间内寻找相近的像素对并给予它们的特征加强。
+
+​	**DeepLabV3 取消DenseCRF的原因**
+
+语义分割与分类不同。分类主要是识别物体，而语义分割不但要识别物体，还要找出物体的位置信息。DCNN卷积网络越深，其位置信息丢失的越严重。所以在deeplab v1/v2中用到了，全局CRF增强其位置信息。
+
+但是在deeplabv3中，使用大采样率的3X3空洞卷积，图像边界响应无法捕捉远距离信息，会退化为1×1的卷积, 所以deeplabv3将图像级特征融合到ASPP模块中。融合图像级特征，相当于融合了其位置信息。所以就不需要最后再用CRF了。这就是用了CRF，其精度也增加的不多的原因。
+
+### 3.训练策略
+
+#### 1.**Learning rate policy:**
+
+- 采用poly策略， 在初始学习率基础上乘$ {(1 - \frac{{iter}}{{\max iter}})^{power}} $,其中$ power = 0.9 $
+
+#### **2.Crop size:**
+
+- 为了大采样率的空洞卷积能够有效，需要较大的图片大小；否则，大采样率的空洞卷积权值就会主要用于padding区域。
+- 在Pascal VOC 2012数据集的训练和测试中我们采用了513的裁剪尺寸。
+
+#### 3.**Batch normalization：**
+
+- 我们在ResNet之上添加的模块都包括BN层
+- 当output_stride=16时，采用batchsize=16，同时BN层的参数做参数衰减0.9997。
+- 在增强的数据集上，以初始学习率0.007训练30K后，冻结BN层参数，然后采用output_stride=8，再使用初始学习率0.001在PASCAL官方的数据集上训练30K。
+- 训练output_stride=16比output_stride=8要快很多，因为其中间的特征映射在空间上小四倍。但output_stride=16在特征映射上相对粗糙，快是因为牺牲了精度。
+
+#### 4.**Upsampling logits:**
+
+- 在先前的工作上，我们是将output_stride=8的输出与Ground Truth下采样8倍做比较。
+- 现在我们发现保持Ground Truth更重要，故我们是将最终的输出上采样8倍与完整的Ground Truth比较。
+
+#### 5.**Data augmentation:**
+
+在训练阶段，随机缩放输入图像(从0.5到2.0)和随机左-右翻转
+
+### 4.主要代码（Paddle版）
+
+**DeepLab**V3
 
 ```python
 class DeepLabV3(nn.Layer):
@@ -558,7 +486,80 @@ class DeepLabV3Head(nn.Layer):
 
 ```
 
-## **参考文献**
+### 5.实验结果
+
+我们首先实验级联更多的空洞卷积模块。
+
+**ResNet50：**
+
+使用ResNet-50时，我们探究output_stride的影响。如表1所示。
+
+- 当output_stride为256时，由于严重的信号抽取，性能相比其他output_stride大大的下降了。
+- 当使用不同采样率的空洞卷积时，性能上升，这说明了语义分割中使用空洞卷积的必要性。
+
+**ResNet-50 vs. ResNet-101:**
+
+用更深的模型，并改变级联模块的数量。
+
+![image-20210924233250610](../../../../images/computer_vision/semantic_segmentation/DeeplabV3/image-20210924233250610-16326804902533.png)
+
+<center>表2 使用不同叠块数的ResNet-50和ResNet-101时，使用输出步长Output_stride= 16</center><br></br>
+
+
+
+- 当block增加，性能也随之增加。
+- 随着添加更多的block，提升变得更小。
+- 值得注意的是，ResNet-50使用block7会稍微降低性能，同时ResNet-101使用后仍然可以提升性能。
+
+**Multi-grid:**
+
+采用Multi-gird策略，在ResNet-101使用变体残差模块。block4和其他添加进来的block中，主分支中的三个卷积都使用空洞卷积，采样率设置Multi-gird策略。
+
+![image-20210924233654968](../../../../images/computer_vision/semantic_segmentation/DeeplabV3/image-20210924233654968.png)
+
+<center>表3 使用ResNet-101对不同叠块数采用多重网格法，Output_stride = 16。</center><br></br>
+
+
+
+实验观察到的：
+
+- 应用Multi-gird策略通常比单倍数 $ ({r_1},{r_2},{r_3}) = (1,1,1) $效果要好
+- 简单的提升倍数例如$ ({r_1},{r_2},{r_3}) = (2,2,2) $是无效的
+- 增加网络深度再配合Multi-gird可以提升性能。图中最好的模型即block7下 $ ({r_1},{r_2},{r_3}) = (1,2,1) $
+
+**Inference strategy on val set:**
+
+模型训练阶段使用output_stride=16，在推理过程中应用output_stride=8以获得更精细的特征图。
+
+![image-20210924233908829](../../../../images/computer_vision/semantic_segmentation/DeeplabV3/image-20210924233908829.png)
+
+<center>表4 推理策略. MG:多重网络. OS: 输出步长. MS: 多尺度输入. Flip: 输入左右翻转.</center><br></br>
+
+
+
+- 评估时output_stride=8比output_stride=16性能提高了1.39%。
+- 使用多尺度输入(scales={0.5, 0.75, 1.0, 1.25, 1.5, 1.75})和左-右翻转，进行数据增强后，进一步提高了性能。
+- 最后，计算每个尺度和翻转图像的平均概率来作为最终结果。
+
+**Atrous Spatial Pyramid Pooling:**
+
+DeepLab V3的ASPP模块与DeepLab V2的主要区别在于，增加了BN层，增加了图像级别的特征。表5记录了ASPP模块block4使用multi-grid策略和图像级特征后的效果。
+
+![image-20210924234255382](../../../../images/computer_vision/semantic_segmentation/DeeplabV3/image-20210924234255382.png)
+
+<center>表5 在Output_stide = 16下，使用多重网格方法和图像级特征的ASPP</center><br></br>
+
+
+
+**Inference strategy on val set:**
+
+推断期间使用output_stride = 8，采用多尺度输入和左-右翻转数据增强。
+
+![image-20210924234451247](../../../../images/computer_vision/semantic_segmentation/DeeplabV3/image-20210924234451247.png)
+
+<center>表6 推理策略 MG：多重网格方法。 ASPP：空洞空间金字塔。 OS：Output_stride。 MS：多尺度输入。 Flip： 输入左右翻转。COCO： 在MS-COCO上预训练。</center><br></br>
+
+​		**参考文献**
 
 [1] [Rethinking Atrous Convolution for Semantic Image Segmentation]([[1706.05587\] Rethinking Atrous Convolution for Semantic Image Segmentation (arxiv.org)](https://arxiv.org/abs/1706.05587))
 
