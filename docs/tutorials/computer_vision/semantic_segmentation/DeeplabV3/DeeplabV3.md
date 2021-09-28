@@ -405,7 +405,7 @@ appearance kernel里面的p表示像素的位置——position，我们的图像
 
 在训练阶段，随机缩放输入图像(从0.5到2.0)和随机左-右翻转
 
-### 2.4.主要代码（Paddle版）
+### 2.4.主要代码
 
 **DeepLab**V3
 
@@ -421,31 +421,32 @@ class DeepLabV3(nn.Layer):
     """
 
     def __init__(self,
-                 num_classes,
-                 backbone,
+                 num_classes, #分割类别数
+                 backbone, # 主干网络
                  backbone_indices=(3, ),
-                 aspp_ratios=(1, 6, 12, 18),
-                 aspp_out_channels=256,
-                 align_corners=False,
-                 pretrained=None):
+                 aspp_ratios=(1, 6, 12, 18), # aspp 空洞卷积率
+                 aspp_out_channels=256, # aspp输出通道数
+                 align_corners=False, # 是否对齐
+                 pretrained=None): # 是否预处理
         super().__init__()
 
-        self.backbone = backbone
+        self.backbone = backbone #主干网络
         backbone_channels = [
             backbone.feat_channels[i] for i in backbone_indices
         ]
-
+		#定义头模块
         self.head = DeepLabV3Head(num_classes, backbone_indices,
                                   backbone_channels, aspp_ratios,
-                                  aspp_out_channels, align_corners)
+                                  aspp_out_channels, align_corners) 
         self.align_corners = align_corners
         self.pretrained = pretrained
-        self.init_weight()
+        self.init_weight() # 初始化权重
 
     def forward(self, x):
         feat_list = self.backbone(x)
         logit_list = self.head(feat_list)
         return [
+            # 执行上采样，填充方式使用‘bilinear’
             F.interpolate(
                 logit,
                 paddle.shape(x)[2:],
@@ -455,7 +456,7 @@ class DeepLabV3(nn.Layer):
 
     def init_weight(self):
         if self.pretrained is not None:
-            utils.load_entire_model(self, self.pretrained)
+            utils.load_entire_model(self, self.pretrained) # 载入预处理模型
 
 ```
 
@@ -472,7 +473,7 @@ class DeepLabV3Head(nn.Layer):
     def __init__(self, num_classes, backbone_indices, backbone_channels,
                  aspp_ratios, aspp_out_channels, align_corners):
         super().__init__()
-
+		#定义ASPP模块
         self.aspp = layers.ASPPModule(
             aspp_ratios,
             backbone_channels[0],
@@ -480,7 +481,7 @@ class DeepLabV3Head(nn.Layer):
             align_corners,
             use_sep_conv=False,
             image_pooling=True)
-
+		#定义分类头
         self.cls = nn.Conv2D(
             in_channels=aspp_out_channels,
             out_channels=num_classes,
@@ -500,7 +501,7 @@ class DeepLabV3Head(nn.Layer):
 
 ```
 
-### 2.5.实验结果
+## 3.实验结果
 
 我们首先实验级联更多的空洞卷积模块。
 
@@ -572,6 +573,10 @@ DeepLab V3的ASPP模块与DeepLab V2的主要区别在于，增加了BN层，增
 ![image-20210924234451247](../../../../images/computer_vision/semantic_segmentation/DeeplabV3/image-20210924234451247.png)
 
 <center>表6 推理策略 MG：多重网格方法。 ASPP：空洞空间金字塔。 OS：Output_stride。 MS：多尺度输入。 Flip： 输入左右翻转。COCO： 在MS-COCO上预训练。</center><br></br>
+
+## 4.总结
+
+总的来说，本文从DeepLab系列出发，分别介绍了各版本的Deeplab的动机，并给予动机进行改进的创新点和策略。然后针对DeeplabV3详细的解释了该模型从问题的提出到实验结果相关内容。从解决问题的角度出发，DeeplabV3主要解决了物体的多尺度问题，在DCNN问题上并没有进行深入讨论。DCNN的多次下采样会造成特征图分辨率变小，导致预测精度降低，边界信息丢失，该问题于DeeplabV3+中进行了深入的讨论与解决。从实验结果来看，DeeplabV3表现出相较于以前版本更好的性能。
 
 ​		**参考文献**
 
