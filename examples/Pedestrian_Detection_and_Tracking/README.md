@@ -122,12 +122,18 @@ PaddleDetection对于多目标追踪算法主要提供了三种模型，DeepSORT
 git clone https://github.com/PaddlePaddle/PaddleDetection.git
 ```
 
+在训练前先正确安装PaddleDetection所需依赖：
+
+```bash
+cd PaddleDetection/
+pip install -r requirements.txt
+```
+
 运行如下代码开始训练模型：
 
 使用两个GPU开启训练
 
 ```bash
-cd PaddleDetection/
 python -m paddle.distributed.launch --log_dir=./fairmot_dla34_30e_1088x608/ --gpus 0,1 tools/train.py -c configs/mot/fairmot/fairmot_dla34_30e_1088x608.yml
 ```
 

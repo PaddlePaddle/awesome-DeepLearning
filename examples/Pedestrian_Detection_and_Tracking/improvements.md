@@ -187,13 +187,30 @@ self.attention = SANN_Attention(c_state = False, s_state = True) # spatial_atten
 
 ![dla](./images/optimization/dla.png)
 
-在本实验中，我们尝试将baseline中的centernet的backbone由DLA-34更换为其他更大的模型，如DLA-46-C、DLA-60及DLA-102。因为更换的backbone都只有在ImageNet上的预训练模型，而我们实验中使用的dla34 backbone 是在CrowdHuman上做过预训练的。所以这一部分的实验结果要与 `baseline (dla34 4gpu bs8 momentum + image_pretrain)` 进行比较。实验结果如下：
+在本实验中，我们尝试将baseline中的centernet的backbone由DLA-34更换为其他更大的模型，如DLA-46-C、DLA-60及DLA-102。因为更换的backbone都只有在ImageNet上的预训练模型，而我们实验中使用的dla34 backbone 是在CrowdHuman上做过预训练的。所以这一部分的实验结果要与 `baseline (dla34 4gpu bs8 momentum + image_pretrain)` 进行比较。替换backbone可以通过 `code/dla_backbones`中的代码来替换 `PaddleDetection/ppdet/modeling/backbones/dla.py` 中的代码，并通过调整 `depth` 来选择backbone的结构，可选择dla34、46c、60和102。
+
+```python
+class DLA(nn.Layer):
+    """
+    DLA, see https://arxiv.org/pdf/1707.06484.pdf
+
+    Args:
+        depth (int): DLA depth, should be 34.
+        residual_root (bool): whether use a reidual layer in the root block
+
+    """
+
+    def __init__(self, depth=34, residual_root=False):
+      
+```
+
+
 
 | 模型                                         | MOTA | 推理速度 |
 | -------------------------------------------- | ---- | -------- |
 | dla46c 4gpu bs8 momentum + imagenet_pretrain | 61.2 | 16.863   |
 | dla60 4gpu bs8 momentum + imagenet_pretrain  | 58.8 | 12.531   |
-| dla60 4gpu bs8 momentum + imagenet_pretrain  | 54.8 | 12.469   |
+| dla102 4gpu bs8 momentum + imagenet_pretrain | 54.8 | 12.469   |
 
 
 
