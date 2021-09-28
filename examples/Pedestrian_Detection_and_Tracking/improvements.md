@@ -34,7 +34,7 @@
 * Cutout：将图像中随机区域剪裁掉，用0像素值来填充；
 * CutMix：将一张图像中的随机区域剪裁掉，并随机选取另一张图片，用其对应区域中的像素来填充剪裁掉的部分。
 
-![cutmix](/Users/zhanghandi/Desktop/Work/repo/tutorials/examples/Pedestrian_Detection_and_Tracking/images/optimization/cutmix.png)
+![cutmix](./images/optimization/cutmix.png)
 
 相比于Mixup和Cutout，CutMix在图像分类和目标检测任务上都用哟欧更好的效果。因为CutMix要求模型从局部识别对象，可以进一步增强模型定位能力。
 
@@ -75,7 +75,7 @@ TrainReader:
 
 可变形卷积（Deformable Convolution Network, DCN）顾名思义就是卷积的位置是可变形的，并非在传统的 $N \times N$ 网格上做卷积，这样的好处就是更准确地提取到我们想要的特征（传统的卷积仅仅只能提取到矩形框的特征），通过一张图我们可以更直观地了解：
 
-![dcn](/Users/zhanghandi/Desktop/Work/repo/tutorials/examples/Pedestrian_Detection_and_Tracking/images/optimization/dcn.png)
+![dcn](./images/optimization/dcn.png)
 
 在上面这张图里面，左边传统的卷积显然没有提取到完整绵羊的特征，而右边的可变形卷积则提取到了完整的不规则绵羊的特征。本实验在 CenterNet head 中加入了DCN，具体实现方法为：使用 `code/centernet_head_dcn.py` 中的代码替换 `ppdet/modeling/heads/centernet_head.py` 中的代码。
 
@@ -185,7 +185,7 @@ self.attention = SANN_Attention(c_state = False, s_state = True) # spatial_atten
 
 #### (7) backbone
 
-![dla](/Users/zhanghandi/Desktop/Work/repo/tutorials/examples/Pedestrian_Detection_and_Tracking/images/optimization/dla.png)
+![dla](./images/optimization/dla.png)
 
 在本实验中，我们尝试将baseline中的centernet的backbone由DLA-34更换为其他更大的模型，如DLA-46-C、DLA-60及DLA-102。因为更换的backbone都只有在ImageNet上的预训练模型，而我们实验中使用的dla34 backbone 是在CrowdHuman上做过预训练的。所以这一部分的实验结果要与 `baseline (dla34 4gpu bs8 momentum + image_pretrain)` 进行比较。实验结果如下：
 
