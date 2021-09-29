@@ -582,5 +582,5 @@ DeepLab V3的ASPP模块与DeepLab V2的主要区别在于，增加了BN层，增
 
 ## **参考文献**
 
-[1] [Rethinking Atrous Convolution for Semantic Image Segmentation]([[1706.05587\] Rethinking Atrous Convolution for Semantic Image Segmentation (arxiv.org)](https://arxiv.org/abs/1706.05587))
+[1] [Rethinking Atrous Convolution for Semantic Image Segmentation](https://arxiv.org/abs/1706.05587)
 
