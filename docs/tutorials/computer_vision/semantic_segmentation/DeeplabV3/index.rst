@@ -1,7 +1,7 @@
-DeepLabV3
+DeepLabV3详解
 ======================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    DeepLabV3 <DeeplabV3>
