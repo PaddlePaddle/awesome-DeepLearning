@@ -36,7 +36,7 @@
 
 ![cutmix](./images/optimization/cutmix.png)
 
-相比于Mixup和Cutout，CutMix在图像分类和目标检测任务上都用哟欧更好的效果。因为CutMix要求模型从局部识别对象，可以进一步增强模型定位能力。
+相比于Mixup和Cutout，CutMix在图像分类和目标检测任务上都有更好的效果。因为CutMix要求模型从局部识别对象，可以进一步增强模型定位能力。
 
 实现上，可以通过修改 `configs/mot/fairmot/__base__/fairmot_reader_1088x608.yml`，加入如下代码，实现CutMix数据增强：
 
