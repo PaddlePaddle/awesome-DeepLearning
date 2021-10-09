@@ -4,6 +4,8 @@
 
 本案例面向人流量统计/人体检测等场景，提供基于PaddleDetection的解决方案，希望通过梳理优化模型精度和性能的思路帮助用户更高效的解决实际问题。
 
+本项目AI Studio链接：https://aistudio.baidu.com/aistudio/projectdetail/2421822
+
 应用场景：静态场景下的人员计数和动态场景下的人流量统计
 
 ![demo](./images/demo.png)
@@ -121,6 +123,8 @@ PaddleDetection对于多目标追踪算法主要提供了三种模型，DeepSORT
 ```bash
 git clone https://github.com/PaddlePaddle/PaddleDetection.git
 ```
+
+**说明：** 本实验使用**PaddleDetection release/2.2**，如遇PaddleDetection更新训练效果出现变动，可尝试下载PaddleDetection 2.2版本进行实验。
 
 在训练前先正确安装PaddleDetection所需依赖：
 

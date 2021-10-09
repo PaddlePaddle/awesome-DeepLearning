@@ -260,7 +260,7 @@ return loss
 | baseline (dla34 4gpu bs8 momentum)                           | 67.5 | 15.291                   |
 | baseline (dla34 4gpu bs8 momentum + imagenet_pretrain)       | 64.3 | 15.314                   |
 | dla34 4gpu bs8 momentum + dcn                                | 67.2 | 16.695                   |
-| dla34 4gpu bs8 momentum + syncbn + ema                       | 67.4 | 15.528                   |
+| dla34 4gpu bs8 momentum + syncbn + ema                       | 67.4 | 16.103                   |
 | dla34 4gpu bs8 momentum + cutmix                             | 67.7 | 15.528                   |
 | dla34 4gpu bs8 momentum + attention                          | 67.6 | -                        |
 | dla34 4gpu bs6 adam lr=0.0002                                | 71.1 | 15.823                   |
