@@ -376,7 +376,7 @@ Deeplab v3在原有基础上的改动是：
 
 纯粹的三维数据集是稀缺的，通常可以提供CAD网格或者其他的体元表示如点云等。为分割问题获取三维数据集是困难的，因此很少有深度学习方法可以处理这种数据。也因此，三维数据集目前还不是很受欢迎。尽管如此，我们还是介绍目前出现的相关数据集来解决现有的问题。
 
-#### 3.2.1. [ShapeNet部分数据集](http://cs.stanford.edu/ericyi/project page/part annotation/)
+#### 3.3.1. [ShapeNet部分数据集](http://cs.stanford.edu/ericyi/project page/part annotation/)
 
 该数据集是ShapeNet数据集的子集，关注于细粒度的三维物体分割。包含取自元数据及16个类的31693个网格，每个形状类被标注为二到五个部分，整个数据集共有50个物体部分，也就是说，物体的每个部分比如飞机的机翼、机身、机尾、发动机等都被标注了。真实标注按照被网格分割开的点呈现。
 
@@ -384,7 +384,7 @@ Deeplab v3在原有基础上的改动是：
 
 <center>图37 ShapeNet数据集示例</center><br></br>
 
-#### 3.2.2. [**斯坦福****2D-3D-S****数据集**](http://buildingparser.stanford.edu)
+#### 3.3.2. [**斯坦福****2D-3D-S****数据集**](http://buildingparser.stanford.edu)
 
 该数据集是一个多模态、大规模室内空间数据集，是斯坦福三维语义分析工作的扩展。提供了多个模态：二维RGB，2.5维添加深度信息的图片、三维网格和点云，均提供分割标注信息。该数据集有70496张高分辨率的RGB图像（1080x1080分辨率），以及其对应的深度图谱、表面法线、网格以及点云，军事带有像素级别及点级别的语义标注信息。这些数据取自6个室内区域，分别来自三个不同的教育与办公建筑。共有271个房间，大约7亿个点，被标以13个类。
 
@@ -392,7 +392,7 @@ Deeplab v3在原有基础上的改动是：
 
 <center>图38 斯坦福2D-3D-S数据集示例</center><br></br>
 
-#### 3.2.3. [**三维网格分割基准数据集**](http://segeval.cs.princeton.edu/)
+#### 3.3.3. [**三维网格分割基准数据集**](http://segeval.cs.princeton.edu/)
 
 该基准数据集有380个网格，被分为19个类。每个网格手动的被分割为不同的功能区域，主要目标是提供对于人们如何分配网格功能的一个概率分布。
 
@@ -400,7 +400,7 @@ Deeplab v3在原有基础上的改动是：
 
 <center>图39 三维网格分割基准数据集示例</center><br></br>
 
-#### 3.2.4. **[悉尼城市物体数据集](http://www.acfr.usyd.edu.au/papers/SydneyUrbanObjectsDataset.shtml)**
+#### 3.3.4. **[悉尼城市物体数据集](http://www.acfr.usyd.edu.au/papers/SydneyUrbanObjectsDataset.shtml)**
 
 该数据集包含多个常见的城市道路物体，由Velodyne HDK-64E LIDAR扫描得到，共有631个独立扫描的点云，由车辆、行人、标志、树木等类别组成。有趣的是，除了正常的扫描之外，还提供了全景360度的扫描标注。
 
@@ -408,7 +408,7 @@ Deeplab v3在原有基础上的改动是：
 
 <center>图40 悉尼城市物体数据集示例</center><br></br>
 
-#### 3.2.5. **[大规模点云分类基准数据集](http://www.semantic3d.net/)**
+#### 3.3.5. **[大规模点云分类基准数据集](http://www.semantic3d.net/)**
 
 该基准数据集提供手工标注的三维点云，面向自然与城市场景。该数据集在形成点云时保留了细节与密度等信息，训练集和测试集各包含15个大规模的点云，其规模达到超过十亿个标注点的级别。
 
@@ -431,28 +431,18 @@ Deeplab v3在原有基础上的改动是：
 
 ## 参考文献
 
-​		[1] [语义分割技术综述](https://blog.csdn.net/u011435933/article/details/105198437/)
+​		[1] [Image Segmentation Using Deep Learning: A Survey](https://arxiv.org/abs/2001.05566)
 
-​		[2] [语义分割|发展综述](https://zhuanlan.zhihu.com/p/37618829)
+​		[2] [Global Convolutional Network(GCN)](https://arxiv.org/abs/1703.02719)
 
-​		[3] [图像语义分割论文综述](https://zhuanlan.zhihu.com/p/265994777)
+​		[3] [A survey on deep learning-based precise boundary recovery of semantic segmentation for images and point clouds](https://www.sciencedirect.com/science/article/pii/S0303243421001185?via%3Dihub)
 
-​		[4] [全卷积网络FCN详解](https://zhuanlan.zhihu.com/p/30195134)
+​		[4] [Features to Text: A Comprehensive Survey of Deep Learning on Semantic Segmentation and Image Captioning](https://www.hindawi.com/journals/complexity/2021/5538927/)
 
-​		[5] [语义分割江湖那些事儿——从Semantic Segmentation 说起](https://bbs.cvmart.net/articles/263)
+​		[5] [Deep multimodal fusion for semantic image segmentation: A survey](https://www.sciencedirect.com/science/article/abs/pii/S0262885620301748?via%3Dihub)
 
-​		[6] [Image Segmentation Using Deep Learning: A Survey](https://arxiv.org/abs/2001.05566)
+​		[6] [A survey of semi- and weakly supervised semantic segmentation of images](https://link.springer.com/article/10.1007%2Fs10462-019-09792-7)
 
-​		[7] [Global Convolutional Network(GCN)](https://arxiv.org/abs/1703.02719)
+​		[7] [A Brief Survey on Semantic Segmentation with Deep Learning](https://www.sciencedirect.com/science/article/abs/pii/S0925231220305476?via%3Dihub)
 
-​		[8] [A survey on deep learning-based precise boundary recovery of semantic segmentation for images and point clouds](https://www.sciencedirect.com/science/article/pii/S0303243421001185?via%3Dihub)
-
-​		[9] [Features to Text: A Comprehensive Survey of Deep Learning on Semantic Segmentation and Image Captioning](https://www.hindawi.com/journals/complexity/2021/5538927/)
-
-​		[10] [Deep multimodal fusion for semantic image segmentation: A survey](https://www.sciencedirect.com/science/article/abs/pii/S0262885620301748?via%3Dihub)
-
-​		[11] [A survey of semi- and weakly supervised semantic segmentation of images](https://link.springer.com/article/10.1007%2Fs10462-019-09792-7)
-
-​		[12] [A Brief Survey on Semantic Segmentation with Deep Learning](https://www.sciencedirect.com/science/article/abs/pii/S0925231220305476?via%3Dihub)
-
-​		[13] [A survey on indoor RGB-D semantic segmentation: from hand-crafted features to deep convolutional neural networks](https://link.springer.com/article/10.1007%2Fs11042-019-7684-3)
+​		[8] [A survey on indoor RGB-D semantic segmentation: from hand-crafted features to deep convolutional neural networks](https://link.springer.com/article/10.1007%2Fs11042-019-7684-3)
