@@ -2,7 +2,9 @@ DeepFM模型
 
 ## 模型简介
 
-CTR预估是目前推荐系统的核心技术，其目标是预估用户点击推荐内容的概率。DeepFM模型包含FM和DNN两部分，FM模型可以抽取low-order特征，DNN可以抽取high-order特征。无需Wide&Deep模型人工特征工程。由于输入仅为原始特征，而且FM和DNN共享输入向量特征，DeepFM模型训练速度很快。
+CTR预估是目前推荐系统的核心技术，其目标是预估用户点击推荐内容的概率。DeepFM模型包含FM和DNN两部分，FM模型可以抽取low-order（低阶）特征，DNN可以抽取high-order（高阶）特征。无需Wide&Deep模型人工特征工程。由于输入仅为原始特征，而且FM和DNN共享输入向量特征，DeepFM模型训练速度很快。
+
+注解：Wide&Deep是一种融合浅层（wide）模型和深层（deep）模型进行联合训练的框架，综合利用浅层模型的记忆能力和深层模型的泛化能力，实现单模型对推荐系统准确性和扩展性的兼顾。
 
 ### 1）DeepFM模型
 
@@ -18,8 +20,9 @@ DeepFM模型结构如下图所示，完成对稀疏特征的嵌入后，由FM层
 
 ### 2）FM
 
-FM模型不单可以建模1阶特征，还可以通过隐向量点积的方法高效的获得2阶特征表示，即使交叉特征在数据集中非常稀疏甚至是从来没出现过。这也是FM的优势所在。
+FM（Factorization Machines，因子分解机）最早由Steffen Rendle于2010年在ICDM上提出，它是一种通用的预测方法，在即使数据非常稀疏的情况下，依然能估计出可靠的参数进行预测。与传统的简单线性模型不同的是，因子分解机考虑了特征间的交叉，对所有嵌套变量交互进行建模（类似于SVM中的核函数），因此在推荐系统和计算广告领域关注的点击率CTR（click-through rate）和转化率CVR（conversion rate）两项指标上有着良好的表现。
 
+FM模型不单可以建模1阶特征，还可以通过隐向量点积的方法高效的获得2阶特征表示，即使交叉特征在数据集中非常稀疏甚至是从来没出现过。这也是FM的优势所在。
 $$
 y_{FM}= <w,x> + \sum_{j_1=1}^{d}\sum_{j_2=j_1+1}^{d}<V_i,V_j>x_{j_1}\cdot x_{j_2}
 $$
@@ -49,6 +52,14 @@ DNN深度神经网络层结构如下图所示：
 ![](https://ai-studio-static-online.cdn.bcebos.com/df8159e1d56646fe868e8a3ed71c6a46f03c716ad1d74f3fae88800231e2f6d8)
 
 ### 4）Loss及Auc计算
+
+DeepFM模型的损失函数选择Binary_Cross_Entropy（二值交叉熵）函数
+$$
+H_p(q)=-\frac{1}{N}\sum_{i=1}^Ny_i\cdot log(p(y_i))+(1-y_i) \cdot log(1-p(y_i))
+$$
+Auc是Area Under Curve的首字母缩写，这里的Curve指的就是ROC曲线，AUC就是ROC曲线下面的面积,作为模型评价指标，他可以用来评价二分类模型。其中，ROC曲线全称为受试者工作特征曲线 （receiver operating characteristic curve），它是根据一系列不同的二分类方式（分界值或决定阈），以真阳性率（敏感性）为纵坐标，假阳性率（1-特异性）为横坐标绘制的曲线。
+
+可使用paddle.metric.Auc()进行调用。具体计算过程如下：
 
 * 预测的结果将FM的一阶项部分，二阶项部分以及dnn部分相加，再通过激活函数sigmoid给出，为了得到每条样本分属于正负样本的概率，我们将预测结果和1-predict合并起来得到predict_2d，以便接下来计算auc。
 * 每条样本的损失为负对数损失值，label的数据类型将转化为float输入。
