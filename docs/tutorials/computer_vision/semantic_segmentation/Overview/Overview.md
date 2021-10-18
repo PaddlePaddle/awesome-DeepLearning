@@ -34,7 +34,7 @@
 
 <center>图2 语义分割和实例分割区别示例</center><br></br>
 
-## 2.语义分割的发展
+## 2.语义分割算法
 
 ​			传统的分割算法已经推出了历史舞台，目前工业界常用的分割算法都是使用大数据驱动的深度学习模型。我们从深度学习的角度出发，细数一下基于深度学习的分割模型发展历程，如**表1**所示。另外，根据模型的创新方向不同，**图3**形象化的展示了**表1**所提及的方法的分类。
 
@@ -50,13 +50,17 @@
 
 ### 		2.1. FCN
 
-FCN是语义分割的开山之作，主要特色有两点：
+经典CNN在卷积层之后使用全连接层得到固定长度的特征向量进行分类（全联接层＋softmax输出），做到了基于图像级别对图片进行分类，但不能识别图片中特定部分的物体。2015年Jonathan Long发表了《Fully Convolutional Networks for Semantic Segmentation》提出全卷积网络FCN可以接受任意尺寸的输入图像，采用反卷积层对最后一个卷积层的feature map进行上采样, 使它恢复到与输入图像相同的尺寸，从而可以对每个像素都产生了一个预测,，同时保留了原始输入图像中的空间信息， 最后在上采样的特征图上进行逐像素分类，解决了语义分割的问题。FCN主要有两个特点：
 
 1.全连接层换成卷积层
 
-2.不同尺度的信息融合FCN-8S,16s,32s
+2.不同尺度的信息融合FCN-8s,16s,32s
 
 #### 2.1.1 全连接层换成卷积层
+
+FCN与CNN的主要区别在于FCN把CNN最后的三层全连接层转换成三层卷积层，输出的是一张已经Label好的图片, 而这个图片就可以做语义分割
+
+![img](Overview.assets/FCN.png)
 
 ![image-20210930221623495](../../../../images/computer_vision/semantic_segmentation/Overview/image-20210930221623495.png)
 
@@ -64,7 +68,7 @@ FCN是语义分割的开山之作，主要特色有两点：
 
 该变换最初的想法是把每个像素周围的区域输入CNN，得到一个标签。在变成全卷积网络后，相当于卷积网络在一张大的图片上滑动，在单个向前传播的过程中完成任务。
 
-以AlexNet为例，AlexNet原来的结构是224x224大小的图片经过一系列卷积，得到大小为1/32 = 7x7的feature map，经过三层全连接层，得到基于FC的分布式表示。我们把三层全连接层全都换成卷积层，卷积核的大小和个数如**图5**中间行所示，我们去掉了全连接层，但是得到了另外一种基于不同channel的分布式表示：Heatmap
+以AlexNet为例，AlexNet原来的结构是224x224大小的图片经过一系列卷积，得到大小为1/32 = 7x7的feature map，经过三层全连接层，得到基于FC的分布式表示。我们把三层全连接层全都换成卷积层，卷积核的大小和个数如**图5**中间行所示，我们去掉了全连接层，但是得到了另外一种基于不同channel的分布式表示：Heatmap热图。（经过多次卷积和pooling以后，得到的图像越来越小，分辨率越来越低，最终产生的热图就是我们最重要的高维特征图，得到heatmap之后就是最重要的一步也是最后的一步对原图像进行upsampling，把图像进行放大到原图像的大小）
 
 ![image-20210930221602054](../../../../images/computer_vision/semantic_segmentation/Overview/image-20210930221602054.png)
 
@@ -72,19 +76,13 @@ FCN是语义分割的开山之作，主要特色有两点：
 
 #### 2.1.2 不同尺度的信息融合
 
-就像刚刚举的Alexnet的例子，对于任何的分类神经网络我们都可以用卷积层替换FC层，只是换了一种信息的分布式表示。如果我们直接把Heatmap上采样，就得到FCN-32s。如**图6**所示。
+如下图所示，对原图像进行卷积conv1、pool1后原图像缩小为1/2；之后对图像进行第二次conv2、pool2后图像缩小为1/4；接着继续对图像进行第三次卷积操作conv3、pool3缩小为原图像的1/8，此时保留pool3的featureMap；接着继续对图像进行第四次卷积操作conv4、pool4，缩小为原图像的1/16，保留pool4的featureMap；最后对图像进行第五次卷积操作conv5、pool5，缩小为原图像的1/32，然后把原来CNN操作中的全连接变成卷积操作conv6、conv7，图像的FeatureMap数量改变但是图像大小依然为原图的1/32，此时图像不再叫featureMap而是叫HeatMap。之后再进行上采样（反卷积），这个时候就看是需要采用哪个层的特征图了，所以也就会有FCN-32s,FCN-16s,FCN-8s。
 
-![image-20210930222103015](../../../../images/computer_vision/semantic_segmentation/Overview/image-20210930222103015.png)
+但是我们知道，随着一次次的池化，虽然感受野不断增大，语义信息不断增强。但是池化造成了像素位置信息的丢失：直观举例，1/32大小的Heatmap上采样到原图之后，在Heatmap上如果偏移一个像素，在原图就偏移32个像素，这是不能容忍的。如**图6**,前面的层虽然语义信息较少，但是位置信息较多，作者就把1/8 1/16 1/32的三个层的输出融合起来了。先把1/32的输出上采样到1/16,和Pool4的输出做elementwose addition , 结果再上采样到1/8,和Pool3的输出各个元素相加。得到1/8的结果，上采样8倍，求Loss。
 
-<center>图6 FCN-32s</center><br></br>
+![image-20211018150130175](../../../../images/computer_vision/semantic_segmentation/Overview/image-20211018150130175.png)
 
-但是我们知道，随着一次次的池化，虽然感受野不断增大，语义信息不断增强。但是池化造成了像素位置信息的丢失：直观举例，1/32大小的Heatmap上采样到原图之后，在Heatmap上如果偏移一个像素，在原图就偏移32个像素，这是不能容忍的。如**图7**,前面的层虽然语义信息较少，但是位置信息较多，作者就把1/8 1/16 1/32的三个层的输出融合起来了。先把1/32的输出上采样到1/16,和Pool4的输出做elementwose addition , 结果再上采样到1/8,和Pool3的输出各个元素相加。得到1/8的结果，上采样8倍，求Loss。
-
-
-
-![image-20210930222205921](../../../../images/computer_vision/semantic_segmentation/Overview/image-20210930222205921.png)
-
-<center>图7 多尺度融合</center><br></br>
+<center>图6 多尺度融合</center><br></br>
 
 ### 		2.2. U-net
 
@@ -92,11 +90,11 @@ FCN是语义分割的开山之作，主要特色有两点：
 
 
 
-<center>图8 U-net结构图</center><br></br>
+<center>图7 U-net结构图</center><br></br>
 
-U-net用于解决小样本的简单问题分割，比如医疗影片的分割。它遵循的基本原理与FCN一样：
+U-net的提出者为了解决生物医学领域的细胞分割任务，通过对可用的训练图像应用弹性变形来获得大量扩增的数据，只需很少的训练图像就可以进行更精确的分割。U-net可用于解决小样本的简单问题分割，比如医疗影片的分割。它遵循的基本原理与FCN一样：
 
-1.Encoder-Decoder结构：前半部分为多层卷积池化，不断扩大感受野，用于提取特征。后半部分上采样回复图片尺寸。
+1.Encoder-Decoder结构：前半部分为多层卷积池化，不断扩大感受野，用于提取特征。后半部分上采样回复图片尺寸。和FCN相比，U-Net的第一个特点是完全对称，也就是左边和右边是很类似的，而FCN的decoder相对简单，只用了一个deconvolution的操作，之后并没有跟上卷积结构。
 
 2.更丰富的信息融合：如灰色剪头，更多的前后层之间的信息融合。这里是把前面层的输出和后面层concat(串联)到一起，区别于FCN的逐元素加和。不同Feature map串联到一起后，后面接卷积层，可以让卷积核在channel上自己做出选择。注意的是，在串联之前，需要把前层的feature map crop到和后层一样的大小。
 
@@ -104,61 +102,85 @@ U-net用于解决小样本的简单问题分割，比如医疗影片的分割。
 
 ![image-20210930222623864](../../../../images/computer_vision/semantic_segmentation/Overview/image-20210930222623864.png)
 
-<center>图9 SegNet结构图</center><br></br>
+<center>图8 SegNet结构图</center><br></br>
 
-在结构上看，SegNet和U-net其实大同小异，都是编码-解码结果。区别在意，SegNet没有直接融合不同尺度的层的信息，为了解决为止信息丢失的问题，SegNet使用了带有坐标（index）的池化。如**图10**所示，在Max pooling时，选择最大像素的同时，记录下该像素在Feature map的位置（左图）。在反池化的时候，根据记录的坐标，把最大值复原到原来对应的位置，其他的位置补零（右图）。后面的卷积可以把0的元素给填上。这样一来，就解决了由于多次池化造成的位置信息的丢失。
+SegNet基于FCN，修改VGG-16网络得到的语义分割网络，有两种版本的SegNet，分别为SegNet与Bayesian SegNet，同时SegNet作者根据网络的深度提供了一个basic版（浅网络）。 SegNet和FCN思路十分相似，只是Encoder,Decoder(Upsampling)使用的技术不一致。此外SegNet的编码器部分使用的是VGG16的前13层卷积网络，每个编码器层都对应一个解码器层，最终解码器的输出被送入soft-max分类器以独立的为每个像素产生类概率。
+
+在结构上看，SegNet和U-net其实大同小异，都是编码-解码结果。区别在意，SegNet没有直接融合不同尺度的层的信息，为了解决为止信息丢失的问题，SegNet使用了带有坐标（index）的池化。如**图9**所示，在Max pooling时，选择最大像素的同时，记录下该像素在Feature map的位置（左图）。在反池化的时候，根据记录的坐标，把最大值复原到原来对应的位置，其他的位置补零（右图）。后面的卷积可以把0的元素给填上。这样一来，就解决了由于多次池化造成的位置信息的丢失。
 
 ![image-20210930223347536](../../../../images/computer_vision/semantic_segmentation/Overview/image-20210930223347536.png)
 
-<center>图10 Pooling与Unpooling</center><br></br>
+<center>图9 Pooling与Unpooling</center><br></br>
 
-### 		2.4. Deeplab V1
+### 		2.4. Dilated Convolutions
 
-![查看源图像](../../../../images/computer_vision/semantic_segmentation/Overview/0CA60C26FE09854E8A9A5A03E2849B77997C8406_size40_w800_h373.jpeg)
+在进行图像分割任务时，使用pooling增加了感受域的大小，但是却使图像的很多细小特征丢失了，这样导致分割出来的图像分辨率很低，于是有学者就提出了基于稀疏卷积核的卷积网络。这种新的卷积网络模块能够整合多尺度的上下文信息，同时不丧失分辨率，也不需要分析重新放缩的图像。这种模块是为稠密预测专门设计的，没有pooling或其它下采样。这个模块是基于空洞卷积，空洞卷积支持感受野指数级的增长，同时还不损失分辨率。
 
-<center>图11 DeeplabV1结构图</center><br></br>
+![v2-b448e1e8b5bbf7ace5f14c6c4d44c44e_r](../../../../images/computer_vision/semantic_segmentation/Overview/v2-b448e1e8b5bbf7ace5f14c6c4d44c44e_r.jpg)
 
-这篇论文不同于之前的思路，他的特色有两点：
+<center>图10 不同的卷积核</center><br></br>
 
-1.由于Pooling-Upsample会丢失位置信息而且多层上下采样开销较大，把控制感受野大小的方法化成：带孔卷积（Atrous conv）
+以上图为例，红色圆点为卷积核对应的输入“像素”，绿色为其在原输入中的感受野。
 
-2.加入CRF(条件随机场)，利用像素之间的关连信息：相邻的像素，或者颜色相近的像素有更大的可能属于同一个class。
+(a)图对应3x3的扩张率为1的卷积，和普通的卷积操作一样；
 
-2.4.1 Atrous Conv
+(b)图对应3x3的扩张率为2的卷积，实际的卷积核还是3x3，但是空洞率为2，也就是对于一个7x7的图像块，只有9个红色的点也就是3x3的卷积核发生卷积操作，其余的点略过。也可以理解为卷积核的大小为7x7，但是只有图中的9个点的权重不为0，其余都为0。可以看到虽然卷积核的大小只有3x3，但是这个卷积的感受野已经增大到了7x7。如果考虑到这个2-dilated convolution的前一层有一个1-dilated convolution的话，那么每个红点就是1-dilated的卷积输出，感受野为3x3，所以1-dilated和2-dilated合起来就能达到7x7的卷积；
 
-如**图12**右下所示，一个扩张率为2的带孔卷积接在一个扩张率为1的正常卷积后面，可以达到大小为7的感受野，但是输出的大小并没有减小，参数量也没有增大。
+(c)图是4-dilated convolution操作，同理跟在1-dilated和2-dilated convolution的后面，能达到15x15的感受野。
 
-![image-20210930223858413](../../../../images/computer_vision/semantic_segmentation/Overview/image-20210930223858413.png)
+Dilated Convolutions的思路就是将用于分类的神经网络（论文里为VGG）的最后两个池化层去掉，用这种基于稀疏卷积核的卷积网络代替。这样，我们在不降低感受域大小的同时，使输出的数据的维度更大，保留了更多的原始图像的细小特征，避免了池化层降低数据维度造成的细小特征丢失的问题。
 
-<center>图12 Atrous Conv示意图</center><br></br>
+### 		2.5. RefineNet
 
-### 		2.5. PSPnet
+基于稀疏核的卷积也不是没有缺点，缺点就是会极大的增加计算量和需要的内存空间，因为稀疏核增加了参数的个数，使得要处理的数据维度增大。这就增大了获取更高分辨率分割图的成本。因此有学者提出了使用Encoder-Decoder架构的RefineNet
+
+![image-20211018173256077](../../../../images/computer_vision/semantic_segmentation/Overview/image-20211018173256077.png)
+
+<center>图11 RefineNet结构图</center><br></br>
+
+RefineNet可以分为三个主要部分： 1. 不同尺度（也可能只有一个输入尺度）的特征输入首先经过两个Residual模块的处理； 2. 之后是不同尺寸的特征进行融合。当然如果只有一个输入尺度，该模块则可以省去。所有特征上采样至最大的输入尺寸，然后进行加和。上采样之前的卷积模块是为了调整不同特征的数值尺度； 3. 最后是一个链式的pooling模块。其设计本意是使用侧支上一系列的pooling来获取背景信息（通常尺寸较大）。直连通路上的ReLU可以在不显著影响梯度流通的情况下提高后续pooling的性能，同时不让网络的训练对学习率很敏感。最后再经过一个Residual模块即得RefineNet的输出。
+
+### 		2.6. PSPnet
 
 ![image-20210930233950581](../../../../images/computer_vision/semantic_segmentation/Overview/image-20210930233950581.png)
 
-<center>图13 PSPnet结构示意图</center><br></br>
+<center>图12 PSPnet结构示意图</center><br></br>
 
 原理都大同小异，前面的不同level的信息融合都是融合浅层和后层的Feature Map,因为后层的感受野大，语义特征强，浅层的感受野小，局部特征明显且位置信息丰富。PSPnet则使用了空间金字塔池化，得到一组感受野大小不同的feature map,将这些感受野不同的map concat到一起，完成多层次的语义特征融合。
 
-### 		2.6. Deeplab V2
+### 		2.7. Deeplab 系列
+
+#### 2.7.1. Deeplab V1
+
+![查看源图像](../../../../images/computer_vision/semantic_segmentation/Overview/0CA60C26FE09854E8A9A5A03E2849B77997C8406_size40_w800_h373.jpeg)
+
+<center>图13 DeeplabV1结构图</center><br></br>
+
+针对标准的深度卷积神经网络的两个主要问题：1.Striding操作使得输出尺寸减小； 2.Pooling对输入小变化的不变性。Deeplab v1 使用带孔卷积(atrous convolution)+条件随机场(CRFs)来解决这两个问题。将图像分类网络转换成dense feature extractors而不用学习额外的参数。
+
+1.由于Pooling-Upsample会丢失位置信息而且多层上下采样开销较大，把控制感受野大小的方法化成：带孔卷积(atrous convolution)
+
+2.加入CRF(条件随机场)，利用像素之间的关连信息：相邻的像素，或者颜色相近的像素有更大的可能属于同一个class。
+
+#### 		2.7.2. Deeplab V2
 
 ![image-20210930224329456](../../../../images/computer_vision/semantic_segmentation/Overview/image-20210930224329456.png)
 
 <center>图14 DeeplabV2结构示意图</center><br></br>
 
-Deeplab v2在v1的基础上做出了改进，引入了ASPP(Atrous Spatial Pyramid Pooling)的结构，如上图所示。我们注意到，Deeplab v1使用带孔卷积扩大感受野之后，没有融合不同层之间的信息。
+Deeplab v2在v1的基础上做出了改进，引入了空洞空间金字塔池化ASPP(Atrous Spatial Pyramid Pooling)的结构，如上图所示。
 
 ASPP层就是为了融合不同级别的语义信息：选择不同扩张率的带孔卷积去处理Feature Map，由于感受野不同，得到的信息的Level也就不同，ASPP层把这些不同层级的feature map concat到一起，进行信息融合。
 
-### 		2.7. Deeplab V3
+#### 		2.7.3 Deeplab V3
 
 Deeplab v3在原有基础上的改动是：
 
-1.改进了ASPP模块
+1、DeeplabV3，即多尺度(multiple scales)分割物体，设计了串行和并行的带孔卷积模块，采用多种不同的atrous rates来获取多尺度的内容信息；
 
-2.引入Resnet Block
+2、DeeplabV3中提出 Atrous Spatial Pyramid Pooling(ASPP)模块, 挖掘不同尺度的卷积特征，以及编码了全局内容信息的图像层特征，提升分割效果；
 
-3.丢弃CRF
+3、DeeplabV3中，不需要DenseCRF后处理（与之前的不一样的处理）。
 
 ![查看源图像](../../../../images/computer_vision/semantic_segmentation/Overview/DeepLabv3-network-structure-diagram-used-in-this-study.jpg)
 
@@ -166,7 +188,7 @@ Deeplab v3在原有基础上的改动是：
 
 新的ASPP模块：
 
-1.加入了Batch Norm
+1.加入了Batch Norm：一个1×1卷积和3个3×3的空洞卷积(采样率为(6,12,18))，每个卷积核都有256个且都有BN层
 
 2.加入特征的全局平均池化（在扩张率很大的情况下，有效权重会变小）。如图14中的（b）Image Pooling就是全局平均池化，它的加入是对全局特征的强调、加强。
 
@@ -174,25 +196,13 @@ Deeplab v3在原有基础上的改动是：
 
 具体DeeplabV3详解请见[链接](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/semantic_segmentation/DeeplabV3/index.html)
 
-### 		2.8. Deeplab V3+
+#### 		2.7.4 Deeplab V3+
 
 ![查看源图像](../../../../images/computer_vision/semantic_segmentation/Overview/deeplabv3plus.png)
 
 <center>图16 DeeplabV3+结构示意图</center><br></br>
 
-可以看成是把Deeplab v3作为编码器（上半部分）。后面再进行解码，并且在解码的过程中在此运用了不同层级特征的融合。此外，在encoder部分加入了Xception的结构减少了参数量，提高运行速递。关于Xception如何减少参数量，提高速度。
-
-### 		2.9. 总结
-
-综合以上论文方法，可以发现遵循一些规则可以涨点。但是要结合自己的项目要求，选择合适的方法。
-
-1. 全卷积网络，滑窗的形式
-2. 感受野的控制： Pooling+Upsample => Atrous convolution
-3. 不同Level的特征融合： 统一尺寸之后Add / Concat+Conv, SPP, ASPP…
-4. 考虑相邻像素之间的关系：CRF
-5. 在条件允许的情况下，图像越大越好。
-6. 分割某一个特定的类别，可以考虑使用先验知识+ 对结果进行图像形态学处理
-7. 此外还有一些其他的研究思路：实时语义分割，视频语义分割
+可以看成是把原Deeplab V3当作encoder，添加decoder得到新的模型（Deeplab V3+）。与V3不同的是，这里将空洞卷积和深度分离卷积结合，得到一个atrous separale convolution（也就是把空洞卷积应用在深度分离卷积上），能够在维持相同性能的情况下，深度分离卷积可以大大减小计算复杂度。后面再进行解码，并且在解码的过程中在此运用了不同层级特征的融合。此外，在encoder部分加入了Xception的结构减少了参数量，提高运行速度。
 
 ## 3.常用数据集
 
