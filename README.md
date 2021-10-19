@@ -83,8 +83,8 @@
 | NLP      | 预训练模型之长序列建模-Longformer           | 讲解预训练模型之长序列建模的改进：Longformer                 | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2307544) |
 | 模型优化 | 预训练模型-高效结构                         | 基于ELECTRA的标点符号预测                                    | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2294324) |
 | 模型优化 | 预训练模型-蒸馏                             | 预训练模型蒸馏算法：Patient-KD、DistilBERT、TinyBERT、DynaBERT模型详解，以及使用DynaBERT策略对TinyBERT进行模型蒸馏 | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2258091) |
-| CV       | 深入理解图像领域的Transformer-Vit,DeiT      | 详细讲解ViT 以及 DeiT原理                                    | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2299267) |
-| CV       | 屠榜各大CV任务的Swin Transformer            | 详细讲解Swin Transformer原理                                 | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2292148) |
+| CV       | 图像领域的Transformer-Vit,DeiT              | 详细讲解ViT 以及 DeiT原理                                    | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2299267) |
+| CV       | 图像领域的Transformer-Swin Transformer      | 详细讲解Swin Transformer原理                                 | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2292148) |
 
 返回[:arrow_heading_up:](#0)
 
