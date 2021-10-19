@@ -233,6 +233,8 @@ CUDA_VISIBLE_DEVICES=0 python tools/export_model.py -c configs/mot/fairmot/fairm
 | -------- | -------- | ---- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | DLA-34   | 1088x608 | 58.2 | [下载链接](https://paddledet.bj.bcebos.com/models/mot/fairmot_dla34_30e_1088x608_headtracking21.pdparams) | [配置文件](https://github.com/PaddlePaddle/PaddleDetection/tree/release/2.2/configs/mot/headtracking21/fairmot_dla34_30e_1088x608_headtracking21.yml) |
 
+
+
 **注意: **
 
  FairMOT使用2个GPU进行训练，每个GPU上batch size为6，训练30个epoch。
