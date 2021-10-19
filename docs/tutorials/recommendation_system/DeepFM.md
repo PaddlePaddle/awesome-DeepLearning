@@ -57,7 +57,7 @@ $$
 
 ![](https://ai-studio-static-online.cdn.bcebos.com/bda8da10940b43ada3337c03332fe06ad1cd95f7780243888050023be33fc88c)
 
-想更详细地了解FM，可以参考这篇文章：[CTR预估模型FM、FFM、DeepFM](https://www.biaodianfu.com/ctr-fm-ffm-deepfm.html)
+
 
 ## 4.DNN
 
