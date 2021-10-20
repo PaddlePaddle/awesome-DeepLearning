@@ -28,7 +28,7 @@ Y = w_1X^{-1} + w_2X^0 + w_3X^{+1}
 $$
 第一步位移是不需要时间成本的，第二步乘法累加需要更大的计算消耗，但是TSM将乘法累加部分合并在了2D卷积中，因此它和基本的2D CNN网络相比不存在额外开销。
 
-![TSM](../../../images/computer_vision/video_understanding/TSM.png)
+![TSM](../../../images/computer_vision/video_understanding/TSM/TSM.png)
 
 <center>图1 Temporal Shift module</center><br></br>
 
@@ -44,13 +44,13 @@ Temporal Shift Module(TSM) 如 **图1** 所示，在 **图1 a** 中，作者描�
 
 1. **减少数据移动。** 为了研究数据移动的影响，作者测量了TSM模型在不同硬件设备上的推理延迟，作者移动了不同比例的通道数并测量了延迟，位移方式分为无位移、部分位移（位移1/8、1/4、1/2的通道）和全部位移，使用ResNet-50主干和8帧输入测量模型。作者观察到，如果移动所有的通道，那么延迟开销将占CPU推理时间的13.7%（如 **图2 a** 所示），如果只移动一小部分通道，如1/8，则可将开销限制在3%左右。
 
-![latency of TSM due to data movement](../../../images/computer_vision/video_understanding/latency_data_movement.png)
+![latency of TSM due to data movement](../../../images/computer_vision/video_understanding/TSM/latency_data_movement.png)
 
 <center>图2 不同比例的通道位移下延迟与准确率对比</center><br></br>
 
 2. **保持空间特征学习能力。** 一种简单的TSM使用方法是将其直接插入到每个卷基层或残差模块前，如 **图3 a** 所示，这种方法被称为 in-place shift，但是它会损失主干模型的空间特征学习能力，尤其当我们移动大量通道时，存储在通道中的当前帧信息会随着通道移动而丢失。为解决这个问题，作者提出了另一种方法，即将TSM放在残差模块的残差分支中，这种方法被称为 residual TSM，如 **图3 b** 所示，它可以解决退化的空间特征学习问题，因为原始的激活信息在时间转移后仍可通过identity映射访问。 
 
-   ![inplace TSM and residual TSM](../../../images/computer_vision/video_understanding/residual_TSM.png)
+   ![inplace TSM and residual TSM](../../../images/computer_vision/video_understanding/TSM/residual_TSM.png)
 
    <center>图3 In-place TSM 和 Residual TSM</center><br></br>
 
@@ -66,19 +66,19 @@ Temporal Shift Module(TSM) 如 **图1** 所示，在 **图1 a** 中，作者描�
 
 在线视频理解是现实生活中很重要的任务，单向TSM将特征从前一帧转移到当前帧。用于在线识别的单向TSM 推理图如 **图4** 所示，在推理过程中，对于每一帧，我们保存每个残差块的前 1/8 特征图并将其缓存在内存中，对于下一帧，我们用缓存的特征图来替换当前特征图的前 1/8。我们使用 7/8 当前特征图和 1/8 前一帧的特征图组合来生成下一层，并重复。
 
-![uni-directional TSM](../../../images/computer_vision/video_understanding/uni_directional_TSM.png)
+![uni-directional TSM](../../../images/computer_vision/video_understanding/TSM/uni_directional_TSM.png)
 
 <center>图4 单向TSM</center><br></br>
 
 ## 3. 实验结果
 
-![compare with tsn](../../../images/computer_vision/video_understanding/compare_with_tsn.png)
+![compare with tsn](../../../images/computer_vision/video_understanding/TSM/compare_with_tsn.png)
 
 <center>表1 与TSN在不同数据集上的精度对比</center><br></br>
 
 如 **表1** 所示，作者在不同的数据集上分别测试了TSN的精度和TSM的精度。该表格可分为两部分，上部分涉及的数据集在时间关系上没有那么重要，TSM的计算结果小幅度优于2D TSN基线。下部分数据集，Something-Something V1和V2 以及 Jester，它们很大程度上取决于时间关系，TSM在这些数据集上性能有大幅度的明显提升。
 
-![compare with sota](../../../images/computer_vision/video_understanding/compare_with_sota.png)
+![compare with sota](../../../images/computer_vision/video_understanding/TSM/compare_with_sota.png)
 
 <center>表2 与SOTA模型对比</center><br></br>
 

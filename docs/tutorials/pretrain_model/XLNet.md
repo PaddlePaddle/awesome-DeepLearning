@@ -22,7 +22,7 @@ $$
 
 ## 2. Permutation Language Model
 
-Permuatation Language Mode (下文将简称为PLM) l是XLNet的核心建模思路，在正式介绍之前，我们再来回顾一下AR模型的建模策略，给定一串文本序列$\text{x}=[x_1,x_2,...,x_n]$，其中每个$x_i$表示一个token，AR模型的通过最大化下边这个似然函数进行建模：
+Permuatation Language Mode (下文将简称为PLM) 是XLNet的核心建模思路，在正式介绍之前，我们再来回顾一下AR模型的建模策略，给定一串文本序列$\text{x}=[x_1,x_2,...,x_n]$，其中每个$x_i$表示一个token，AR模型的通过最大化下边这个似然函数进行建模：
 
 $$
 \begin{align}
@@ -32,7 +32,7 @@ $$
 
 这里，$\text{x}_{<t}$表示在$t$位置前边的token序列，$h_{\theta}(\text{x}_{1:t-1})$表示数据由模型产生的上下文向量，$e(x_t)$表示token $x_t$的embedding。
 
-这种建模方式是单向的，为了在预测某个位置单词的时候，能够让模型看见双向的信息，**XLNet**次采用了全排列的思路，允许模型在不同文本序列排列上进行建模，但模型的参数在不同序列上是共享的，相当于是模型能够看见**预测位置单词**左右两侧的信息。
+这种建模方式是单向的，为了在预测某个位置单词的时候，能够让模型看见双向的信息，**XLNet**采用了全排列的思路，允许模型在不同文本序列排列上进行建模，但模型的参数在不同序列上是共享的，相当于是模型能够看见**预测位置单词**左右两侧的信息。
 
 举个例子，假设当前有文本序列$\text{x}=[x_1,x_2,x_3]$，这串序列中共有3个token，这三个token共计有6种排列组合方式，其相关的索引序列为：
 
@@ -60,7 +60,7 @@ $$
 $$
 \begin{align}
 \mathop{max}_{\theta} \quad L &=\mathbb{E}_{\text{z}∼\mathbb{Z}} \left[ \sum_{t=1}^n log\;p_{\theta}(x_{z_t}|\text{x}_{z<t}) \right] \\
-&\approx \frac{1}{n}\sum_{i=1}^{m}\sum_{t=1}^n log\;p_{\theta}(x_{z_{it}}|\text{x}_{\text{z}_i<t})
+&\approx \frac{1}{m}\sum_{i=1}^{m}\sum_{t=1}^n log\;p_{\theta}(x_{z_{it}}|\text{x}_{\text{z}_i<t})
 \end{align}
 $$
 
@@ -185,7 +185,7 @@ Relative Segment Encoding (相对段编码) ， 这里的Segment不是上边将�
 
 BERT直接使用了绝对编码，直接给$\text{A}$和$\text{B}$中的token依次设置了0和1，用来指示整个序列中$\text{A}$和$\text{B}$是不同的**segment**，即是不同的文本段，例如一个是query，另一个是answer。
 
-**XLNet**与BERT不同，它使用了相对编码，给定序列中的两个位置$i$和$j$，判断这两个位置对应的token是否在同一个**segment**里面，如果两者在同一个segment里面，$s_{ij}=s_+$，否则$s_{ij}=s_-$。 当预测第$i$个位置token到时候，需要计算用$i$位置的向量向另一位置$j$做attention获取分数，其按照如下公式计算：
+**XLNet**与BERT不同，它使用了相对编码，给定序列中的两个位置$i$和$j$，判断这两个位置对应的token是否在同一个**segment**里面，如果两者在同一个segment里面，$s_{ij}=s_+$，否则$s_{ij}=s_-$。 当预测第$i$个位置token的时候，需要计算用$i$位置的向量向另一位置$j$做attention获取分数，其按照如下公式计算：
 
 $$
 \alpha_{i,j} = (q_i+b)^T s_{ij}
