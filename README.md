@@ -160,6 +160,19 @@
 
 ## <span id ='5'>飞桨应用案例集</span>
 
+* 安防
+  * [车流量计数](Paddle_Enterprise_CaseBook/Vehicle_Detection_and_Tracking/README.md) | [人流量计数](Paddle_Enterprise_CaseBook/Pedestrian_Detection_and_Tracking/README.md) | [安全帽检测](Paddle_Enterprise_CaseBook/) | [火灾烟雾检测](Paddle_Enterprise_CaseBook/Fire_and_Smoke_Detection/README.md)
+* 工业视觉
+  * [铝板缺陷检测]() | [齿轮缺陷检测]() | [表计读数]() | [钢筋计数]() | [视觉辅助定位抓取]()
+* 交通
+  * [车道线检测/车辆/行人检测]()
+* 遥感
+  * [地块检测]() | [变化检测]()
+* 互联网
+  * [快递信息智能提取]() | [文本情感分析]() | [文字识别]() | [文本重建]()
+
+## <span id ='5'>飞桨应用案例集</span>
+
 | 领域         | 产业案例                                                     | 来源                                                         | 更多内容                                                     |
 | ------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | **智能工业** | [厂区传统仪表统计监测](https://paddlex.readthedocs.io/zh_CN/develop/examples/meter_reader.html) | 飞桨官方                                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
