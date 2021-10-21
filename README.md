@@ -158,7 +158,7 @@
 
 # 👉案例类
 
-## <span id ='5'>飞桨应用案例集</span>
+## <span id ='5'>产业级应用案例</span>
 
 * 安防
   * [车流量计数](Paddle_Enterprise_CaseBook/Vehicle_Detection_and_Tracking/README.md) | [人流量计数](Paddle_Enterprise_CaseBook/Pedestrian_Detection_and_Tracking/README.md) | [安全帽检测](Paddle_Enterprise_CaseBook/) | [火灾烟雾检测](Paddle_Enterprise_CaseBook/Fire_and_Smoke_Detection/README.md)
