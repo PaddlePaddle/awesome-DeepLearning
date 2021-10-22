@@ -27,6 +27,9 @@
 
 ![](./images/demo.jpeg)
 
+本项目AI Studio版本请参考：[https://aistudio.baidu.com/aistudio/projectdetail/2500639](https://aistudio.baidu.com/aistudio/projectdetail/2500639)
+
+
 ## 数据准备
 
 本案例用到了AI Studio公开的数据集[new_fall_dataset](https://aistudio.baidu.com/aistudio/datasetdetail/105389)。其标注格式为VOC，具体数据解压后目录如下所示：
