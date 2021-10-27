@@ -173,19 +173,6 @@
 
 # 👉案例类
 
-## <span id ='5'>产业级应用案例</span>
-
-* 安防
-  * [车流量计数](Paddle_Enterprise_CaseBook/Vehicle_Detection_and_Tracking/README.md) | [人流量计数](Paddle_Enterprise_CaseBook/Pedestrian_Detection_and_Tracking/README.md) | [安全帽检测](Paddle_Enterprise_CaseBook/) | [火灾烟雾检测](Paddle_Enterprise_CaseBook/Fire_and_Smoke_Detection/README.md)
-* 工业视觉
-  * [铝板缺陷检测]() | [齿轮缺陷检测]() | [表计读数]() | [钢筋计数]() | [视觉辅助定位抓取]()
-* 交通
-  * [车道线检测/车辆/行人检测]()
-* 遥感
-  * [地块检测]() | [变化检测]()
-* 互联网
-  * [快递信息智能提取]() | [文本情感分析]() | [文字识别]() | [文本重建]()
-
 ## <span id ='5'>飞桨应用案例集</span>
 
 | 领域         | 产业案例                                                     | 来源                                                         | 更多内容                                                     |
@@ -229,7 +216,6 @@
 | **其他**     | [中文语音识别](https://aistudio.baidu.com/aistudio/projectdetail/2280562) | 飞桨官方                                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
 | **其他**     | [PaddleHub一键OCR中文识别(超轻量8.1M模型，火爆)](https://aistudio.baidu.com/aistudio/projectdetail/507159?channelType=0&channel=0) | 飞桨官方                                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
 | **其他**     | [老北京城影像修复](https://aistudio.baidu.com/aistudio/projectdetail/1161285?channelType=0&channel=0) | 飞桨PaddleGAN                                                | [更多PaddleGAN案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/52570) |
-| **其他**     | [天下第一AI武道会-Deepfake换脸](https://aistudio.baidu.com/aistudio/projectdetail/1189026?channelType=0&channel=0) | 飞桨官方                                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
 | **其他**     | [飞桨创意之星 宋代诗人念诗的秘密——PaddleGAN实现精准唇形合成](https://aistudio.baidu.com/aistudio/projectdetail/1463208?channelType=0&channel=0) | 飞桨官方                                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
 | **其他**     | [通过OCR实现验证码识别](https://aistudio.baidu.com/aistudio/projectdetail/1100507?channelType=0&channel=0) | 飞桨官方                                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
 | **其他**     | [PaddleHub一键OCR中文识别（超轻量8.1M模型，火爆）](https://aistudio.baidu.com/aistudio/projectdetail/507159?channelType=0&channel=0) | 飞桨PaddleHub                                                | [更多PaddleHub案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/79927) |
@@ -275,7 +261,7 @@
 | NLP          | [用PaddlePaddle实现BERT](https://aistudio.baidu.com/aistudio/projectdetail/122282?channelType=0&channel=0) | [AIStudio官方](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/7) | [更多飞桨案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/908086) |
 | 多模态       | [【Paddle   CLIP】你写啥他画啥，一个专属于你的小画家](https://aistudio.baidu.com/aistudio/projectdetail/2332016?channelType=0&channel=0) | [PaddleFleet](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/940489) | [更多飞桨案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/908086) |
 | 强化学习     | [从代码到论文理解并复现MADDPG算法(PARL)](https://aistudio.baidu.com/aistudio/projectdetail/637951?channelType=0&channel=0) | [开发者Mr.郑先生_](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/147378) | [更多飞桨案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/908086) |
-| 推荐         | [基于   DeepFM 模型的点击率预估](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/examples/DeepFM for CTR Prediction) | [PaddleEdu](https://github.com/PaddlePaddle/awesome-DeepLearning) | [更多飞桨案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/908086) |
+| 推荐         | [基于DeepFM 模型的点击率预估](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/examples/DeepFM for CTR Prediction) | [PaddleEdu](https://github.com/PaddlePaddle/awesome-DeepLearning) | [更多飞桨案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/908086) |
 | 推荐         | [基于DSSM的电影推荐](https://aistudio.baidu.com/aistudio/projectdetail/2324144) | [AIStudio官方](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/7) | [更多飞桨案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/908086) |
 | 知识蒸馏     | [基于CIFAR100的SSLD蒸馏实验](https://github.com/PaddlePaddle/PaddleClas/blob/release/2.2/docs/zh_CN/advanced_tutorials/distillation/distillation.md) | [PaddleClas](https://github.com/PaddlePaddle/PaddleClas)     | [更多飞桨案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/908086) |
 
