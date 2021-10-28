@@ -15,4 +15,5 @@
 | 工业   | [钢筋计数](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/rebar_count) |
 | 工业   | [机械手抓取](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/robot_grab) |
 | 互联网 | [财报识别与关键字段抽取](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/Report_Recognition_and_Analysis) |
-| 互联网 | [电子快递单信息提取]()                                       |
+| 互联网 | [电子快递单信息提取](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/Waybill_Information_Extraction) |
+
