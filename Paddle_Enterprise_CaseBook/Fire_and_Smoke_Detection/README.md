@@ -18,21 +18,23 @@
 
 ## 1 项目说明
 
-计算机视觉中的烟雾和火灾检测在住宅、加油站、公路、森林等室内外场景自动发现监控区域内的烟雾和火灾，以尽可能最快的方式及时报警，那么就会大大减少损失，在日常生活中具有重要意义。
+在住宅、加油站、公路、森林等室内外场景自动发现监控区域内的烟雾和火灾，以尽可能最快的方式及时报警，那么就会大大减少损失，在日常生活中具有重要意义。
 
-在该项目中，主要向大家介绍如何使用[PaddleX](https://github.com/PaddlePaddle/PaddleX/tree/develop)实现烟雾和火灾的检测，主要针对城市和森林应用场景，希望通过梳理优化模型精度和性能的思路能帮助用户更高效地解决实际火灾和烟雾检测应用中的问题。开放烟雾和火灾数据和预训练模型，并提供服务器Serving和Jetson NX边缘侧芯片的部署指南。
+在该项目中，主要向大家介绍如何使用[PaddleX](https://github.com/PaddlePaddle/PaddleX/tree/develop)实现烟雾和火灾的检测，希望通过梳理优化模型精度和性能的思路能帮助用户更高效地解决实际火灾和烟雾检测应用中的问题。开放烟雾和火灾数据和预训练模型，并提供服务器Serving和Jetson NX边缘侧芯片的部署指南。
 
 ![demo](docs/images/demo.png)
 
 **方案难点**：
 
-* **召回要求高、误检要求低：**烟雾和火灾检测要求较高的召回率，在发现火情即可做出响应，相关人员可及时做出应对，减缓火势发展的速度甚至消灭火情，最大程度降低人员伤亡及财物损失；同时要最大限度的降低误检，如果烟雾和火灾误检太多，还须增加人工筛选过程，提高了运行成本，降低响应速度。
+* **召回要求高、误检要求低：** 烟雾和火灾检测要求较高的召回率，在发现火情即可做出响应，相关人员可及时做出应对，减缓火势发展的速度甚至消灭火情，最大程度降低人员伤亡及财物损失；同时要最大限度的降低误检，如果烟雾和火灾误检太多，还须增加人工筛选过程，提高了运行成本，降低响应速度。
 
-* **没有具体形状：**烟雾和火灾没有具体形状，不像其他目标检测物体有明显特征，比如人、人脸、车牌等，所以检测难度远大于人脸和车牌。如下图所示，火灾烟雾形状多种多样，但是人只是矩形框：
+* **没有具体形状：** 烟雾和火灾形状多变，不像其它目标检测物体有明显的轮廓特征，比如车辆、行人、车牌等，所以烟雾检测难度远大于车辆、行人检测。如下图所示，火灾烟雾形状多种多样，但是人只是矩形框：
 
   ![demo](docs/images/hard_1.png)
 
-* **烟火的类型比较多：**黑烟、白烟、青烟、蓝烟、黄烟，黄色火苗、蓝色火苗、红色火苗等等，不同的应用场景，检测的目标类型也是不一样的，而且生活中视频很多物体非常接近很难区分（比如：视频模糊，灰色物体，白云等），造成误检。
+  注：图片来源于[Stock up](https://www.sitebuilderreport.com/stock-up)，侵权删稿
+
+* **烟火的类型比较多：** 烟雾有黑烟、白烟、蓝烟等，火焰也包含黄色火焰、红色火焰等等，不同的应用场景，检测的目标类型也是不一样的。而且生活中有很多物体和烟火是非常接近的，很难区分（比如：云朵、红色的灯光等），容易造成误检。
 
 <a name="安装说明"></a>
 
@@ -60,7 +62,7 @@ git checkout develop
 
 ---
 
-本案例使用数据集包含互联网下载图片和已公开数据，共有6675张图片，分别检测烟雾和火灾，示例图片如下图所示：
+本案例使用数据集包含[MIT协议互联网下载图片](https://github.com/gengyanlei/fire-smoke-detect-yolov4  )和[MIT协议公开数据集](https://aistudio.baidu.com/aistudio/datasetdetail/90352/0)，共有6675张图片，分别检测烟雾和火灾，示例图片如下图所示：
 
 ![dataset](docs/images/dataset.png)
 
@@ -226,6 +228,8 @@ python predict.py
 
 ![](docs/images/predict_result.png)
 
+注：图片来源于互联网，侵权删稿
+
 <a name="模型导出"></a>
 
 ## 8 模型导出
@@ -328,5 +332,5 @@ python infer.py
 
 ## 11 模型部署
 
-我们可以将训练好的模型通过一套部署代码实现快速部署，包含两种部署方式：[兼容并包的PaddleX-Inference部署方式](https://github.com/PaddlePaddle/PaddleX/tree/release/2.0.0/examples/C%23_deploy)和[基于QT的Jetson Xavier部署Demo](https://github.com/yzl19940819/PaddleX/tree/develop/deploy/cpp/docs/jetson-deploy)。
+我们可以将训练好的模型通过一套部署代码实现快速部署，包含两种部署方式：[兼容并包的PaddleX-Inference部署方式](https://github.com/PaddlePaddle/PaddleX/tree/release/2.0.0/examples/C%23_deploy)和[基于QT的Jetson Xavier部署Demo](https://paddlex.readthedocs.io/zh_CN/release-1.3/deploy/jetson/index.html)。
 
