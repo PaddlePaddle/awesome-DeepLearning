@@ -7,8 +7,6 @@
 * 安防
   * [火灾烟雾检测](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/Fire_and_Smoke_Detection) | [人流量统计](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/Pedestrian_Detection_and_Tracking) 
   *  [车流量统计](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/Vehicle_Detection_and_Tracking) | [安全帽检测](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/Hemtle%20Detection) 
-  *  [摔倒检测](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/Fall_Identify) | [螺丝螺母检测](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/Bolt_and_Nut_Detection)
-  * [PCB瑕疵检测](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/PCB_Fault_Detection) | 
 * 工业
   * [工业指针型表计读数](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/meter_reader) | [钢材缺陷检测](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/paddlex_steel_defect_seg-master) 
   *  [钢筋计数](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/rebar_count) | [机械手抓取](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/robot_grab)
