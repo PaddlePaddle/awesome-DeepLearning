@@ -36,6 +36,8 @@
 
 ![cutmix](./images/optimization/cutmix.png)
 
+图片来源：[CutMix: Regularization Strategy to Train Strong Classifiers with Localizable Features](https://arxiv.org/pdf/1905.04899.pdf)
+
 相比于Mixup和Cutout，CutMix在图像分类和目标检测任务上都有更好的效果。因为CutMix要求模型从局部识别对象，可以进一步增强模型定位能力。
 
 实现上，可以通过修改 `configs/mot/fairmot/__base__/fairmot_reader_1088x608.yml`，加入如下代码，实现CutMix数据增强：
@@ -76,6 +78,8 @@ TrainReader:
 可变形卷积（Deformable Convolution Network, DCN）顾名思义就是卷积的位置是可变形的，并非在传统的 $N \times N$ 网格上做卷积，这样的好处就是更准确地提取到我们想要的特征（传统的卷积仅仅只能提取到矩形框的特征），通过一张图我们可以更直观地了解：
 
 ![dcn](./images/optimization/dcn.png)
+
+图片来源：[Deformable Convolutional Networks](https://arxiv.org/pdf/1703.06211.pdf)
 
 在上面这张图里面，左边传统的卷积显然没有提取到完整绵羊的特征，而右边的可变形卷积则提取到了完整的不规则绵羊的特征。本实验在 CenterNet head 中加入了DCN，具体实现方法为：使用 `code/centernet_head_dcn.py` 中的代码替换 `ppdet/modeling/heads/centernet_head.py` 中的代码。
 
@@ -154,6 +158,8 @@ OptimizerBuilder:
 
 ![spatial gate module](./images/optimization/spatial_attention_module.png)
 
+图片来源：[CBAM: Convolutional Block Attention Module](https://arxiv.org/pdf/1807.06521.pdf)
+
 模块的输入特征为F。首先会基于通道维度进行global max pooling和global average pooling，得到两个H×W×1 的特征图，然后将这两个特征图进行通道拼接。再经过一个7×7卷积操作，将通道数降维为1。然后经过sigmoid函数生成spatial attention feature，即$M_s$。该feature与输入特征相乘则得到最终的特征。
 
 本实验中通过将 `code/centernet_fpn_attention.py` 中的代码替换 `PaddleDetection/ppdet/modeling/necks/centernet_fpn.py` 来实现Spatial Gate Module。设置 `self.attention = SpatialGate()`。
@@ -184,6 +190,8 @@ self.attention = SpatialGate()
 #### (7) backbone
 
 ![dla](./images/optimization/dla.png)
+
+图片来源：[Deep Layer Aggregation](https://arxiv.org/pdf/1707.06484.pdf)
 
 在本实验中，我们尝试将baseline中的centernet的backbone由DLA-34更换为其他更大的模型，如DLA-46-C、DLA-60及DLA-102。因为更换的backbone都只有在ImageNet上的预训练模型，而我们实验中使用的dla34 backbone 是在CrowdHuman上做过预训练的。所以这一部分的实验结果要与 `baseline (dla34 4gpu bs8 momentum + image_pretrain)` 进行比较。替换backbone可以通过 `code/dla_backbones`中的代码来替换 `PaddleDetection/ppdet/modeling/backbones/dla.py` 中的代码，并通过调整 `depth` 来选择backbone的结构，可选择dla34、46c、60和102。
 
