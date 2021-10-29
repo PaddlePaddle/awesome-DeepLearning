@@ -28,6 +28,7 @@
    计算机视觉 <tutorials/computer_vision/index>
    自然语言处理 <tutorials/natural_language_processing/index>
    推荐系统 <tutorials/recommendation_system/index>
+   元学习 <tutorials/meta_learning/index>
 
 .. toctree::
    :maxdepth: 2
