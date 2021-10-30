@@ -25,6 +25,7 @@ MAML通过引入元学习器，可以提高深度神经网络模型的泛化能�
 <center>
 图1 	MAML示意图
 </center>
+
 ![](../../images/meta_learning/MAML/Fig2.PNG)
 
 ## 2.3	MAML算法的步骤
