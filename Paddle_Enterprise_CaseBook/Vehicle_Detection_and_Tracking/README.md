@@ -75,8 +75,25 @@ FairMOT属于JDE（Jointly learns the Detector and Embedding model ）的一种�
 
 ## 4 模型训练
 
+本案例利用[PaddleDetection](https://github.com/PaddlePaddle/PaddleDetection)套件实现。
+
+通过下面的命令下载PaddleDetection代码：
+```
+git clone https://github.com/PaddlePaddle/PaddleDetection.git
+```
+
+通过下面的命令部署环境：
+```
+cd PaddleDetection
+pip install -r requirements.txt
+python setup.py install
+pip install pycocotools
+```
+
 运行如下代码开始训练模型：
-'python3.7 -m paddle.distributed.launch --log_dir log_vehicle --gpus 0,1,2,3,4,5,6,7 tools/train.py   -c configs/mot/vehicle/fairmot_dla34_30e_1088x608_bdd100k_vehicle.yml' 
+```
+python3.7 -m paddle.distributed.launch --log_dir log_vehicle --gpus 0,1,2,3,4,5,6,7 tools/train.py   -c configs/mot/vehicle/fairmot_dla34_30e_1088x608_bdd100k_vehicle.yml
+```
 
 - '--log_dir'参数指定训练log存放的目录；
 - '--gpus'参数配置了用当前机器的GPU卡编号；
@@ -104,6 +121,20 @@ OVERALL           46.5% 67.2% 35.6% 48.7% 91.9% 14530 1661 5371 7498 16517 19758
 
 ## 6 模型优化
 为了进一步提升模型的精度，在项目中采用了一系列优化的方式，如sync_bn、更换更大的backbone hardnet85等。
+
+下表是BDD100K数据集中所有四轮车视为一个类别进行训练的结果：
+
+| 模型                                                                               | MOTA | 
+| --------------------------------------------------------------------------------- | ---- |
+| baseline dla34 coco预训练 lr=0.0005  bs=16*8卡  epoch=12(8epoch降lr)| 39.6 | 
+
+| dla34,coco预训练，lr=0.0005  bs=16*8卡，12epoch（8epoch降lr）8w检测数据| 39.7 | 
+| baseline, coco预训练，dla34, 4gpu, bs6, 12epoch(8epoch降lr), lr=0.0002 | 38.1 | 
+| coco预训练，dla34, 4gpu, bs6, 12epoch, lr=0.0002, +sync_bn+ema | 38.5 | 
+| coco预训练，dla34, 4gpu, bs6, 12epoch, lr=0.0002, +dcn+sync_bn,epoch=11 | 34.4 | 
+| hardnet85+sync_bn+dcn,4卡，epoch=8 | 38.9 | 
+| hardnet85+sync_bn,4卡,epoch=8 | 38.2 | 
+
 具体见[模型优化文档](./accuracy_improvement.md)。
 
 ## 7 模型预测
@@ -120,6 +151,8 @@ python3.7 tools/infer_mot.py -c configs/mot/vehicle/fairmot_dla34_30e_1088x608_b
 --image_dir=/home/aistudio/work/test_data/b251064f-8d92db81  \
 --draw_threshold 0.2 --save_images
 ```
+
+<center><img src="./images/demo.png" width=70%></center>
 
 ## 8 模型导出
 
