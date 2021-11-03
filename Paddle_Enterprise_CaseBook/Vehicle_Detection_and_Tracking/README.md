@@ -51,6 +51,17 @@ Annotation包含了被标记对象的： 源图像的URL、类别标签、大小
 
 BDD100K数据集采集自6中不同的天气，其中晴天样本较多；采集的场景有6种，以城市街道为主；采集的时间有3个阶段，其中白天和夜晚居多。
 
+多目标跟踪数据准备见：https://github.com/PaddlePaddle/PaddleDetection/blob/6e65f11d8ec0169655b5ec7614a6360b25090ae3/docs/tutorials/PrepareMOTDataSet_cn.md
+
+所有数据集的标注是以统一数据格式提供的。各个数据集中每张图片都有相应的标注文本。给定一个图像路径，可以通过将字符串`images`替换为`labels_with_ids`并将`.jpg`替换为`.txt`来生成标注文本路径。在标注文本中，每行都描述一个边界框，格式如下：
+```
+[class] [identity] [x_center] [y_center] [width] [height]
+```
+**注意**:
+- `class`为`0`，目前仅支持单类别多目标跟踪。
+- `identity`是从`1`到`num_identifies`的整数(`num_identifies`是数据集中不同物体实例的总数)，如果此框没有`identity`标注，则为`-1`。
+- `[x_center] [y_center] [width] [height]`是中心点坐标和宽高，注意它们的值是由图片的宽度/高度标准化的，因此它们是从0到1的浮点数。
+
 本案例数据处理脚本请参考：https://github.com/PaddlePaddle/PaddleDetection/tree/develop/configs/mot/vehicle/tools/bdd100kmot
 
 ## 3 模型选择
