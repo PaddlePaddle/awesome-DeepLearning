@@ -220,18 +220,13 @@ im_show.save('result.jpg')
 ```python
 from paddlenlp import Taskflow
 
-lac = Taskflow("lexical_analysis")
-lac("LAC是个优秀的分词工具")
-'''
-[{'text': 'LAC是个优秀的分词工具', 'segs': ['LAC', '是', '个', '优秀', '的', '分词', '工具'], 'tags': ['nz', 'v', 'q', 'a', 'u', 'n', 'n']}]
-'''
+tag = Taskflow("pos_tagging")
+tag("第十四届全运会在西安举办")
+>>>[('第十四届', 'm'), ('全运会', 'nz'), ('在', 'p'), ('西安', 'LOC'), ('举办', 'v')]
 
-lac(["LAC是个优秀的分词工具", "三亚是一个美丽的城市"])
-'''
-[{'text': 'LAC是个优秀的分词工具', 'segs': ['LAC', '是', '个', '优秀', '的', '分词', '工具'], 'tags': ['nz', 'v', 'q', 'a', 'u', 'n', 'n']},
- {'text': '三亚是一个美丽的城市', 'segs': ['三亚', '是', '一个', '美丽', '的', '城市'], 'tags': ['LOC', 'v', 'm', 'a', 'u', 'n']}
-]
-'''
+tag(["第十四届全运会在西安举办", "三亚是一个美丽的城市"])
+>>> [[('第十四届', 'm'), ('全运会', 'nz'), ('在', 'p'), ('西安', 'LOC'), ('举办', 'v')], [('三亚', 'LOC'), ('是', 'v'), ('一个', 'm'), ('美丽', 'a'), ('的', 'u'), ('城市', 'n')]]
+
 ```
 
 关于词法分析的详细说明文档可以参考 [此处](https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/lexical_analysis) ，其中包含在自定义数据集上的训练、评估和导出。
@@ -262,6 +257,5 @@ python DocRec.py
 <div align="center">
   <img src="./imgs/img.png" width="1000"/>
 </div>  
-
 
 
