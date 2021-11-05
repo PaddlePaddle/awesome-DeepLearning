@@ -334,3 +334,11 @@ python infer.py
 
 我们可以将训练好的模型通过一套部署代码实现快速部署，包含两种部署方式：[兼容并包的PaddleX-Inference部署方式](https://github.com/PaddlePaddle/PaddleX/tree/release/2.0.0/examples/C%23_deploy)和[基于QT的Jetson Xavier部署Demo](https://paddlex.readthedocs.io/zh_CN/release-1.3/deploy/jetson/index.html)。
 
+
+
+## 开源数据
+
+* 非常感谢[gengyanlei](https://github.com/gengyanlei/fire-smoke-detect-yolov4)和[Thomas-yanxin](https://aistudio.baidu.com/aistudio/datasetdetail/90352/0)开源的火灾和烟雾数据集
+
+  
+
