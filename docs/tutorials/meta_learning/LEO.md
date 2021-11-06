@@ -7,9 +7,8 @@ LEO (Latent Embedding Optimization)：从高维度输入数据提取低维度的
 在元学习器中，使用SGD最小化任务验证集损失函数，使得模型的泛化能力最大化，计算元参数，元学习器将元参数输入基础学习器，继而，基础学习器最小化任务训练集损失函数，快速给出任务上的预测结果。LEO结构如图1所示。
 
 ![LEOStructure](../../images/meta_learning/LEO/LEOStructure.png)
-<center>
-图1	LEO结构图。
-</center>
+
+图1	LEO结构图。$D^{\mathrm{tr}}$ 是任务 $\varepsilon$ 的 support set， $D^{\mathrm{val}}$ 是任务 $\varepsilon$ 的 query set，$z$ 是通过编码器计算的 $N$ 个类别的类别特征，$f_{\theta}$ 是基学习器， $\theta$ 是基学习器参数， $L^{\mathrm{tr}}=f_{\theta}\left( D^{\mathrm{tr}}\right)$, $L^{\mathrm{val}}=f_{\theta}\left( D^{\mathrm{val}}\right)$。
 
 LEO 包括基础学习器和元学习器，还包括编码器和解码器。在基础学习器中，编码器将高维输入数据映射成特征向量，解码器将输入数据的特征向量映射成输入数据属于各个类别的概率值，基础学习器使用元学习器提供的元参数进行参数更新，给出数据标注的预测结果。元学习器为基础学习器的编码器和解码器提供元参数，元参数包括特征提取模型的参数、编码器的参数、解码器的参数等，通过最小化所有任务上的泛化误差，更新元参数。
 
@@ -53,7 +52,7 @@ $$
 图2	LEO 基础学习器工作原理图。
 </center>
 
-LEO各部分模型结构及参数如表1所示。
+LEO是一种与模型无关的元学习，[1] 中给出的各部分模型结构及参数如表1所示。
 <center>
 表1	LEO各部分模型结构及参数。
 </center>
