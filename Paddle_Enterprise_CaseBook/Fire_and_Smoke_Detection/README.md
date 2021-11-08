@@ -28,7 +28,7 @@
 
 - **干扰样本多，容易造成误检：** 生活中有很多物体和烟火是非常接近的，很难区分（比如：云朵、红色的灯光等），容易造成模型误检。
 
-  注：AI Studio在线运行代码请参考[【产业级应用案例】火灾/烟雾检测](https://aistudio.baidu.com/aistudio/projectdetail/2591097)(配备Tesla V100高级算力资源)。
+  注：AI Studio在线运行代码请参考[【产业级应用案例】火灾/烟雾检测](https://aistudio.baidu.com/aistudio/projectdetail/2503301?contributionType=1)(配备Tesla V100高级算力资源)。
 
 <a name="安装说明"></a>
 
