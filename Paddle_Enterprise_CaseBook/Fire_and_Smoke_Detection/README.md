@@ -182,14 +182,18 @@ python -m paddle.distributed.launch --gpus 0,1 1.train_ppyolov2_imagenet.py
 
 因为采用多个数据集一起训练，每个数据集标注方式不同，如下图左数据集A将火标注为一个检测框，但是下图右数据集B又将火标注为多个检测框。
 
-![eval_1](docs/images/eval_1.png)
+<div align="center">
+  <img src="docs/images/eval_1.png"/>
+</div>  
 
 不同的标注方式就导致训练好的模型，无法有效的计算mAP值。我们可以通过下图从两方面分析：
 
 * 蓝色框表示真实标注框，可以看出有很多小检测框。实际评估时，火灾只有2个绿色检测框，能正确检测火灾，但没能和真实框一一对应，如果使用mAP作为指标，就不能正确反映检测效果。
 * 有些数据集没标注烟雾，但是可以检测到烟雾，同样mAP也不能正确反映检测效果。
 
-<img src="docs/images/eval_2.png" alt="eval_2" style="zoom:48%;" />
+<div align="center">
+  <img src="docs/images/eval_2.png" alt="eval_2" style="zoom:48%;" />
+  </div>
 
 综上，我们计算不同置信度阈值下图片级召回率和图片级误检率，找到符合要求的召回率和误检率，对应的置信度阈值用于后续模型预测阶段。使用PPYOLOV2训练好的模型进行评估，运行下行命令即可：
 
@@ -220,7 +224,9 @@ python predict.py
 
 可视化预测结果示例如下，可以看出室内的火灾也可以有效检测出来：
 
-![](docs/images/predict_result.png)
+<div align="center">
+ <img src='docs/images/predict_result.png'/>
+   </div>
 
 注：图片来源于互联网，侵权删稿
 
@@ -332,7 +338,9 @@ python infer.py
 
 在项目中为用户提供了基于Jetson NX的部署Demo方案，支持用户输入单张图片、文件夹、视频流进行预测。用户可根据实际情况自行参考。
 
-![deploy](docs/images/deploy.png)
+<div align="center">
+  <img src="docs/images/deploy.png"/>
+</div>  
 
 部署方式可以参考：[兼容并包的PaddleX-Inference部署方式](https://github.com/PaddlePaddle/PaddleX/tree/release/2.0.0/examples/C%23_deploy)和[基于QT的Jetson Xavier部署Demo](https://paddlex.readthedocs.io/zh_CN/release-1.3/deploy/jetson/index.html)。
 
