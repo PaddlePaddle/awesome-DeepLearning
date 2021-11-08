@@ -127,7 +127,7 @@ PaddleX提供了5种目标检测模型：FasterRCNN、YOLOV3、PPYOVO、PPYOLOv2
   - [Spatial Pyramid Pooling](https://arxiv.org/abs/1406.4729)
   - 更优的预训练模型
 
-* [PPYOLOv2](https://arxiv.org/abs/2104.10419)：相较20年发布的PP-YOLO，PPYOLOv2版本在COCO 2017 test-dev上的精度提升了3.6个百分点，由45.9%提升到了49.5%；在640*640的输入尺寸下，FPS达到68.9FPS。 PP-YOLOv2在同等速度下，精度超越YOLOv5，主要改进点：
+* [PPYOLOv2](https://arxiv.org/abs/2104.10419)：相较20年发布的PP-YOLO，PPYOLOv2版本在COCO 2017 test-dev上的精度提升了3.6个百分点，由45.9%提升到了49.5%；在640*640的输入尺寸下，FPS达到68.9FPS。 主要改进点：
   * Path Aggregation Network
   * Mish Activation Function
   * Larger Input Size
