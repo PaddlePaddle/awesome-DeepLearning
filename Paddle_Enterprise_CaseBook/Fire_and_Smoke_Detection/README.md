@@ -18,23 +18,17 @@
 
 ## 1 项目说明
 
-在住宅、加油站、公路、森林等室内外场景自动发现监控区域内的烟雾和火灾，以尽可能最快的方式及时报警，那么就会大大减少损失，在日常生活中具有重要意义。
-
-在该项目中，主要向大家介绍如何使用[PaddleX](https://github.com/PaddlePaddle/PaddleX/tree/develop)实现烟雾和火灾的检测，希望通过梳理优化模型精度和性能的思路能帮助用户更高效地解决实际火灾和烟雾检测应用中的问题。开放烟雾和火灾数据和预训练模型，并提供服务器Serving和Jetson NX边缘侧芯片的部署指南。
+针对住宅、加油站、公路、森林等火灾高发场景，应用飞桨[PaddleX](https://github.com/PaddlePaddle/PaddleX/tree/develop)的目标检测技术，可以自动检测监控区域内的烟雾和火灾，帮助相关人员及时应对，最大程度降低人员伤亡及财物损失，模型效果如图1所示。希望通过梳理优化模型精度和性能的思路能帮助用户更高效地解决实际火灾和烟雾检测应用中的问题。开放烟雾和火灾数据和预训练模型，并提供服务器Serving和Jetson NX边缘侧芯片的部署指南。
 
 ![demo](docs/images/demo.png)
 
 **方案难点**：
 
-* **召回要求高、误检要求低：** 烟雾和火灾检测要求较高的召回率，在发现火情即可做出响应，相关人员可及时做出应对，减缓火势发展的速度甚至消灭火情，最大程度降低人员伤亡及财物损失；同时要最大限度的降低误检，如果烟雾和火灾误检太多，还须增加人工筛选过程，提高了运行成本，降低响应速度。
+- **推理速度要求高：** 在烟雾和火灾检测场景，希望模型能在火情发生的第一时间即做出响应，对模型推理速度有较高的要求；
 
-* **没有具体形状：** 烟雾和火灾形状多变，不像其它目标检测物体有明显的轮廓特征，比如车辆、行人、车牌等，所以烟雾检测难度远大于车辆、行人检测。如下图所示，火灾烟雾形状多种多样，但是人只是矩形框：
+- **干扰样本多，容易造成误检：** 生活中有很多物体和烟火是非常接近的，很难区分（比如：云朵、红色的灯光等），容易造成模型误检。
 
-  ![demo](docs/images/hard_1.png)
-
-  注：图片来源于[Stock up](https://www.sitebuilderreport.com/stock-up)，侵权删稿
-
-* **烟火的类型比较多：** 烟雾有黑烟、白烟、蓝烟等，火焰也包含黄色火焰、红色火焰等等，不同的应用场景，检测的目标类型也是不一样的。而且生活中有很多物体和烟火是非常接近的，很难区分（比如：云朵、红色的灯光等），容易造成误检。
+  注：AI Studio在线运行代码请参考[【产业级应用案例】火灾/烟雾检测](https://aistudio.baidu.com/aistudio/projectdetail/2591097)(配备Tesla V100高级算力资源)。
 
 <a name="安装说明"></a>
 
@@ -315,6 +309,8 @@ python infer.py
 | **PPYOLO**+ResNet50+aug+COCO预训练              | 20              | 90.0   | 8.81       |
 | **YOLOV3**+DarkNet53+img_size(640)              | 21              | 88.4   | 6.01       |
 
+**说明：** 从表1的实验结论中可以发现，有些优化策略在精度优化上起到了正向结果，有些策略则相反。这些结论在不同的模型和不同的数据集上并不是相通的，还需根据具体情况验证。
+
 **模型优化思路**：
 
 - 1.通过选择更好的检测架构可以提高检测的Recall值——即**Neck，Head部分的优化**可以提高Recall，。<**YOLOV3 到 PPYOLOV2**>
@@ -332,9 +328,11 @@ python infer.py
 
 ## 11 模型部署
 
-我们可以将训练好的模型通过一套部署代码实现快速部署，包含两种部署方式：[兼容并包的PaddleX-Inference部署方式](https://github.com/PaddlePaddle/PaddleX/tree/release/2.0.0/examples/C%23_deploy)和[基于QT的Jetson Xavier部署Demo](https://paddlex.readthedocs.io/zh_CN/release-1.3/deploy/jetson/index.html)。
+在项目中为用户提供了基于Jetson NX的部署Demo方案，支持用户输入单张图片、文件夹、视频流进行预测。用户可根据实际情况自行参考。
 
+![deploy](docs/images/deploy.png)
 
+部署方式可以参考：[兼容并包的PaddleX-Inference部署方式](https://github.com/PaddlePaddle/PaddleX/tree/release/2.0.0/examples/C%23_deploy)和[基于QT的Jetson Xavier部署Demo](https://paddlex.readthedocs.io/zh_CN/release-1.3/deploy/jetson/index.html)。
 
 ## 开源数据
 
