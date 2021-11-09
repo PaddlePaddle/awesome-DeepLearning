@@ -6,6 +6,8 @@
 
 本案例以文档场景下的文字识别和命名实体识别为串联任务，对研报实体进行词频统计，使用[PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR)和[PaddleNLP](https://github.com/PaddlePaddle/PaddleNLP)两个开发套件，迅速搭建一套文字与命名实体识别统计系统。
 
+AI Studio项目链接可参考：https://aistudio.baidu.com/aistudio/projectdetail/2574084
+
 ### 1.1 安装PaddleOCR
 
 #### 1.1.1 项目克隆
@@ -43,7 +45,7 @@ pip install --upgrade paddlenlp
 
 #### 2.2.1 研报数据获取
 
-获取研报的渠道有很多，比如艾瑞网、199IT以及各类国家机构的公开数据。这里使用东方财富网，研报覆盖范围广、数量多、下载方便。
+获取研报的渠道有很多，比如各种资讯机构以及各类国家机构的公开数据。
 
 #### 2.1.2 数据格式转换
 
