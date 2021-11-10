@@ -6,6 +6,8 @@
 
 本案例以文档场景下的文字识别和命名实体识别为串联任务，对研报实体进行词频统计，使用[PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR)和[PaddleNLP](https://github.com/PaddlePaddle/PaddleNLP)两个开发套件，迅速搭建一套文字与命名实体识别统计系统。
 
+AI Studio项目链接可参考：https://aistudio.baidu.com/aistudio/projectdetail/2574084
+
 ### 1.1 安装PaddleOCR
 
 #### 1.1.1 项目克隆
@@ -43,7 +45,7 @@ pip install --upgrade paddlenlp
 
 #### 2.2.1 研报数据获取
 
-获取研报的渠道有很多，比如艾瑞网、199IT以及各类国家机构的公开数据。这里使用东方财富网，研报覆盖范围广、数量多、下载方便。
+获取研报的渠道有很多，比如各种资讯机构以及各类国家机构的公开数据。
 
 #### 2.1.2 数据格式转换
 
@@ -220,18 +222,13 @@ im_show.save('result.jpg')
 ```python
 from paddlenlp import Taskflow
 
-lac = Taskflow("lexical_analysis")
-lac("LAC是个优秀的分词工具")
-'''
-[{'text': 'LAC是个优秀的分词工具', 'segs': ['LAC', '是', '个', '优秀', '的', '分词', '工具'], 'tags': ['nz', 'v', 'q', 'a', 'u', 'n', 'n']}]
-'''
+tag = Taskflow("pos_tagging")
+tag("第十四届全运会在西安举办")
+>>>[('第十四届', 'm'), ('全运会', 'nz'), ('在', 'p'), ('西安', 'LOC'), ('举办', 'v')]
 
-lac(["LAC是个优秀的分词工具", "三亚是一个美丽的城市"])
-'''
-[{'text': 'LAC是个优秀的分词工具', 'segs': ['LAC', '是', '个', '优秀', '的', '分词', '工具'], 'tags': ['nz', 'v', 'q', 'a', 'u', 'n', 'n']},
- {'text': '三亚是一个美丽的城市', 'segs': ['三亚', '是', '一个', '美丽', '的', '城市'], 'tags': ['LOC', 'v', 'm', 'a', 'u', 'n']}
-]
-'''
+tag(["第十四届全运会在西安举办", "三亚是一个美丽的城市"])
+>>> [[('第十四届', 'm'), ('全运会', 'nz'), ('在', 'p'), ('西安', 'LOC'), ('举办', 'v')], [('三亚', 'LOC'), ('是', 'v'), ('一个', 'm'), ('美丽', 'a'), ('的', 'u'), ('城市', 'n')]]
+
 ```
 
 关于词法分析的详细说明文档可以参考 [此处](https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/lexical_analysis) ，其中包含在自定义数据集上的训练、评估和导出。
@@ -262,6 +259,5 @@ python DocRec.py
 <div align="center">
   <img src="./imgs/img.png" width="1000"/>
 </div>  
-
 
 
