@@ -24,7 +24,7 @@
 
 📒宝典类：[**深度学习百问**](https://paddlepedia.readthedocs.io/en/latest/index.html)、**面试宝典**
 
-📒案例类：**产业实践案例**
+📒案例类：**[产业实践案例](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook)**（包含智慧城市：[火灾烟雾检测](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/Fire_and_Smoke_Detection)、 [安全帽检测](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/Hemtle%20Detection) ；智能制造：[钢材缺陷检测](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/paddlex_steel_defect_seg-master) 、 [机械手抓取](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/robot_grab)；互联网：[财报识别与关键字段抽取](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/Report_Recognition_and_Analysis) 等）
 
 从理论到实践，从科研到产业应用，各类学习材料一应俱全，旨在帮助开发者高效地学习和掌握深度学习知识，快速成为AI跨界人才。
 
