@@ -1,39 +1,39 @@
 # 元学习
 
-## 1 元学习概念
+## 元学习概念
 
 元学习 (Meta-Learning) 通常被理解为“学会学习 (Learning-to-Learn)”，指的是在多个学习阶段改进学习算法的过程。在基础学习过程中，内部（或下层/基础）学习算法解决由数据集和目标定义的任务。在元学习过程中，外部（或上层/元）算法更新内部学习算法，使其学习的模型改进外部目标。
 
-## 2 元学习含义
+## 元学习含义
 
 元学习的含义有两层，第一层是让机器学会学习，使其具备分析和解决问题的能力，机器通过完成任务获取经验，提高完成任务的能力; 第二层是让机器学习模型可以更好地泛化到新领域中，从而完成差异很大的新任务。
 
-## 3 元学习单位
+## 元学习单位
 
 元学习的基本单元是任务，任务结构如图1所示。元训练集 (Meta-Training Data)、元验证集 (Meta-Validation Data) 和元测试集 (Meta-Testing Data) 都是由抽样任务组成的任务集合。元训练集和元验证集中的任务用来训练元学习模型，元测试集中的任务用来衡量元学习模型完成任务的效果。
 
-![任务](../../images/meta_learning/Preliminaries/Task.png)
+![Task](../../images/meta_learning/Preliminaries/Task.png)
 <center>
 图1 任务。每个任务包含两部分：Support Set 和 Query Set。Support Set 又是一个 N-Way K-Shot 问题，即有 N 个类别，每个类有 K 个样例。 
 </center>
 
-## 4 基学习器和元学习器
+## 基学习器和元学习器
 
 元学习本质上是层次优化问题 (双层优化问题 Bilevel Optimization Problem)，其中一个优化问题嵌套在另一个优化问题中。外部优化问题和内部优化问题通常分别称为上层优化问题和下层优化问题，如图2所示的MAML。
 
-![双层优化元学习](../../images/meta_learning/Preliminaries/BilevelOptimization.png)
+![BilevelOptimization](../../images/meta_learning/Preliminaries/BilevelOptimization.png)
 <center>
 图2 双层优化元学习MAML。
 </center>
 
 两层优化问题涉及两个参与者：1) 上层的参与者是元学习器，2) 下层的参与者是基学习器。元学习器的最优决策依赖于基学习器的反应，基学习器自身会优化自己内部的决策。这两个层次有各自不同的目标函数、约束条件和决策变量。基学习器和元学习器的作用对象及功能如图3所示。
 
-![基学习器和元学习器](../../images/meta_learning/Preliminaries/MetaBaseLearner.png)
+![MetaBaseLearner](../../images/meta_learning/Preliminaries/MetaBaseLearner.png)
 <center>
 图3 基学习器和元学习器。元学习器总结任务经验进行任务之间的共性学习，同时指导基学习器对新任务进行特性学习。 
 </center>
 
-### 4.1 基学习器
+### 基学习器
 
 基学习器 (Base-Learner)，是基础层中的模型，每次训练基础学习器时，考虑的是单个任务上的数据集，其基本功能如下：
 
@@ -45,7 +45,7 @@
 
 - 在单个任务上训练完成后，将训练的模型和参数都反馈给元学习器。
 
-### 4.2 元学习器
+### 元学习器
 
 元学习器 (Meta-Learner)，是元层中的模型，对所有任务上的训练经验进行归纳总结。每次训练基础学习器后，元学习器都会综合新的经验，更新元学习器中的参数，其基本功能如下：
 
@@ -57,16 +57,16 @@
 
 - 提取任务上与模型和训练相关的特征。
 
-## 5 元学习工作原理
+## 元学习工作原理
 
 元学习的主要目的是寻找元学习器 $F$, 在 $F$ 的指导下基学习器 $f$ 在 support set $D^{\mathrm{tr}}$ 的作用下经过几步微调就可以得到适应当前新任务的最优状态 $f^{*}$。而 $F$ 的优化需要当前所有任务损失的累计和，即 $\nabla\sum_{n=1}^{N} l \left( f_{n}^{*}, D_{n}^{\mathrm{te}} \right)$。元学习工作原理如图4所示。
 
-![元学习工作原理](../../images/meta_learning/Preliminaries/MetaLearningWorkingPrinciple.png)
+![MetaLearningWorkingPrinciple](../../images/meta_learning/Preliminaries/MetaLearningWorkingPrinciple.png)
 <center>
 图4 元学习工作原理。 
 </center>
 
-## 6 元学习关键
+## 元学习关键
 
 元学习的关键在于发现不同问题之间的普适规律，通过推广普适规律解决末知难题。普适规律需要达到对问题共性和特性表示力的均衡。普适规律的寻找主要依赖于以下几点：
 

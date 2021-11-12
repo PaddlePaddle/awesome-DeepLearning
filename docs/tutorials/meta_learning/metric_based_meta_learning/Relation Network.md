@@ -1,14 +1,14 @@
-# 基于度量的元学习 —— Relation Network
+# Metric-Based Meta-Learning: Relation Network
 
 Relation Network (RN) 使用有监督度量学习估计样本点之间的距离，根据新样本点和过去样本点之间的距离远近，对新样本点进行分类。
 
-## 1. 嵌入模块和关系模块 
+## 嵌入模块和关系模块 
 
 RN 包括两个组成部分：嵌入模块和关系模块，且两者都是通过有监督学习得到的。
 嵌入模块从输入数据中提取特征，关系模块根据特征计算任务之间的距离，判断任务之间的相似性，找到过去可借鉴的经验进行加权平均。
 RN 结构如图1所示。
 
-![Relation Network Architecture](../../images/meta_learning/Relation_Network/Relation_Network_Architecture.png)
+![Relation Network Architecture](../../../images/meta_learning/metric_based_meta_learning/Relation_Network/RelationNetworkArchitecture.png)
 <center>
 图1	Relation Network 结构。
 </center>
@@ -25,7 +25,7 @@ r_{i, j}=g_{\phi}\left(C\left(f_{\varphi}\left(\boldsymbol{x}_{i}\right), f_{\va
 i = 1, 2, ..., C
 $$
 
-## 2. 目标函数
+## 目标函数
 
 $$
 \phi, \varphi \leftarrow \underset{\phi, \varphi}{\arg \min } \sum_{i=1}^{m} \sum_{j=1}^{n}\left(r_{i, j}-1\left(\boldsymbol{y}_{i}==\boldsymbol{y}_{j}\right)\right)^{2}
@@ -33,25 +33,25 @@ $$
 
 其中， $1\left(\boldsymbol{y}_{i}=\boldsymbol{y}_{j}\right)$ 用来判断 $\boldsymbol{x}_{i}$ 和 $\boldsymbol{x}_{j}$ 是否属于同一类别。当 $\boldsymbol{y}_{i}=\boldsymbol{y}_{j}$ 时， $1\left(\boldsymbol{y}_{i}==\boldsymbol{y}_{j}\right)=1$，当 $\boldsymbol{y}_{i} \neq \boldsymbol{y}_{j}$ 时，$1\left(\boldsymbol{y}_{i}==\boldsymbol{y}_{j}\right)=0$ 。
 
-## 3. 网络结构
+## 网络结构
 
 嵌入模块和关系模块的选取有很多种，包括卷积网络、残差网络等。
 
 图2给出了 [1] 中使用的 RN 模型结构。
 
-![Relation Network Model](../../images/meta_learning/Relation_Network/Relation_Network_Model.png)
+![Relation Network Model](../../../images/meta_learning/metric_based_meta_learning/Relation_Network/RelationNetworkModel.png)
 <center>
 图2	Relation Network 模型结构。
 </center>
 
-### 3.1 嵌入模块结构
+### 嵌入模块结构
 
 - 每个卷积块分别包含 64 个 3 $\times$ 3 滤波器进行卷积，一个归一化层、一个 ReLU 非线性层。
 
 - 总共有四个卷积块，前两个卷积块包含 2 $\times$ 2 的最大池化层，后边两个卷积块没有池化层。
 
 
-### 3.2 关系模块结构 
+### 关系模块结构 
 
 - 有两个卷积块，每个卷积模块中都包含 2 $\times$ 2 的最大池化层。
 
