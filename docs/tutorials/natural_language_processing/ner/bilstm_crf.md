@@ -437,3 +437,8 @@ $x_{00}+t_{10}+x_{11}+t_{01}+x_{20} > x_{01}+t_{01}+x_{10}+t_{10}+x_{21}$
 
 
 **恭喜**，看到这里，相信你已经懂得了CRF的核心原理。江湖虽路远，但总会再见，如对笔者的文章满意，还请[多多支持](https://github.com/PaddlePaddle/tutorials/tree/release/2.0)。
+
+## 3. Reference
+[1] 邱锡鹏. 神经网络与深度学习[M]. 北京：机械工业出版社，2021.  
+[2] 吴飞. 人工智能导论：模型与算法[M]. 北京：高等教育出版社，2020.  
+[3] [CRF Layer on the Top of BiLSTM](https://createmomo.github.io/2017/09/12/CRF_Layer_on_the_Top_of_BiLSTM_1//)
