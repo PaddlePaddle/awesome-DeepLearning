@@ -1,21 +1,56 @@
-# 人流量统计/人体检测
+# 人流量统计
 
-## 1. 项目说明
+## 1. 项目概述
 
-本案例面向人流量统计/人体检测等场景，提供基于PaddleDetection多目标跟踪解决方案，希望通过梳理优化模型精度的思路帮助用户更高效的解决实际问题。
-
-在商场或火车站等人流量较大的公开场合，其管理者可能需要进行动态人流量统计来监控商场/火车站每天的客流量数。因为人员基数较大、流动性较高，通过人工来进行流量统计并不现实。针对该问题，本项目使用PaddleDetection多目标跟踪的方案，智能高效地实现动态场景下的人流量统计。同时，也可实现静态场景下的人员计数。
+在地铁站、火车站、机场、展馆、景区等公共场所，需要实时检测人流数量，当人流密度过高时及时预警，并实施导流、限流等措施，防止安全隐患。
+在人流密度较高的公共场所，使用PaddleDetection多目标跟踪方案，可以实现动态场景下和静态场景下的人流数量统计，帮助场所工作人员制定智能化管理方案，模型效果如 **图1** 所示。
 
 ![demo](./images/demo.png)
 
-方案难点：
+<center>图1 人流量统计效果</center><br></br>
 
-* 遮挡重识别问题。场景中行人可能比较密集，人与人之间存在遮挡问题。这可能会导致误检、漏检问题。同时，对遮挡后重新出现的行人进行准确的重识别也是一个比较复杂的问题。容易出现ID切换问题。
-* 行人检测的实时性。在实际应用中，往往对行人检测的处理速度有一定要求。
+本案例提供从“模型选择→模型优化→模型部署”的全流程指导，模型可以直接或经过少量数据微调后用于相关任务中，无需耗时耗力从头训练。
 
 本项目AI Studio链接：https://aistudio.baidu.com/aistudio/projectdetail/2421822
 
-## 2. 数据准备
+**如果您觉得本案例对您有帮助，欢迎Star收藏一下，不易走丢哦~，链接指路：** [awesome-DeepLearning](https://github.com/PaddlePaddle/awesome-DeepLearning)
+
+
+
+## 2.技术难点 
+
+* **人流密度过高时，容易造成漏检：** 在人流密度较高的场合，人与人之间存在遮挡，会导致模型误检、漏检问题。
+* **在动态场景下，容易造成重识别问题：** 模型需要对遮挡后重新出现的行人进行准确的重识别，否则对一段时间内的人流统计会有较大的影响。
+
+
+
+## 3. 解决方案
+
+人流量统计任务需要在检测到目标的类别和位置信息的同时，识别出帧与帧间的关联信息，确保视频中的同一个人不会被多次识别并计数。本案例选取PaddleDetection目标跟踪算法中的FairMOT模型来解决人流量统计问题。 
+
+FairMOT以Anchor Free的CenterNet检测器为基础，深浅层特征融合使得检测和ReID任务各自获得所需要的特征，实现了两个任务之间的公平性，并获得了更高水平的实时多目标跟踪精度。 
+
+针对拍摄角度不同（平角或俯角）以及人员疏密程度，在本案例设计了不同的训练方法：
+
+* **针对人员相对稀疏的场景：** 基于Caltech Pedestrian、CityPersons、CHUK-SYSU、PRW、ETHZ、MOT16和MOT17数据集进行训练，**对场景中的行人进行全身检测和跟踪。** 如 **图2** 所示，模型会对场景中检测到的行人进行标识，并在左上角显示出该帧场景下的行人数量，实现人流量统计。
+
+  ![pedestrian detection](./images/pedestrian_detection.png)
+
+  <center>图2 对行人进行全身检测和跟踪</center><br></br>
+
+* **针对人员相对密集的场景：** 人与人之间的遮挡问题会非常严重，这时如果选择对行人整体检测，会导致漏检率升高。因此，本场景中使用人头跟踪方法。基于HT-21数据集进行训练，**对场景中的行人进行人头检测和跟踪**，对人流量的统计基于检测到的人头进行计数，如 **图3** 所示。
+
+  ![ht_fairmot.gif](./images/ht_fairmot.gif)
+
+  <center>图3 对行人进行人头检测和跟踪</center><br></br>
+
+  使用PaddleDetection完成人流量统计任务，只需完成如 **图4** 所示的步骤：
+
+  ![procedure](./images/procedure.png)
+
+<center>图4 实现流程</center><br></br>
+
+## 5. 数据准备
 
 ### 数据集介绍与获取
 
@@ -98,7 +133,7 @@ dataset/mot
 
 
 
-## 3. 模型选择
+## 6. 模型选择
 
 PaddleDetection对于多目标追踪算法主要提供了三种模型，DeepSORT、JDE和FairMOT。
 
@@ -110,7 +145,7 @@ PaddleDetection对于多目标追踪算法主要提供了三种模型，DeepSORT
 
 
 
-## 4. 模型训练
+## 7. 模型训练
 
 下载PaddleDetection
 
@@ -137,7 +172,7 @@ python -m paddle.distributed.launch --log_dir=./fairmot_dla34_30e_1088x608/ --gp
 
 
 
-## 5. 模型评估
+## 8. 模型评估
 
 ### 评估指标
 
@@ -177,13 +212,13 @@ EvalMOTDataset:
 
 
 
-## 6. 模型优化(进阶)
+## 9. 模型优化(进阶)
 
 具体内容参见[模型优化文档](./improvements.md)。
 
 
 
-## 7. 模型预测
+## 10. 模型预测
 
 使用单个GPU通过如下命令预测一个视频，并保存为视频
 
@@ -203,7 +238,7 @@ CUDA_VISIBLE_DEVICES=0 python tools/infer_mot.py -c configs/mot/fairmot/fairmot_
 
 
 
-## 8. 模型导出
+## 11. 模型导出
 
 ```bash
 CUDA_VISIBLE_DEVICES=0 python tools/export_model.py -c configs/mot/fairmot/fairmot_dla34_30e_1088x608.yml -o weights=https://paddledet.bj.bcebos.com/models/mot/fairmot_dla34_30e_1088x608.pdparams
@@ -211,13 +246,17 @@ CUDA_VISIBLE_DEVICES=0 python tools/export_model.py -c configs/mot/fairmot/fairm
 
 
 
-## 9.人头跟踪
+## 12.模型部署
+
+本案例为用户提供了基于Jetson NX的部署Demo方案，如下图所示。支持用户输入单张图片、文件夹文件夹或视频流进行预测。
+
+![depoly](./images/deploy.png)
+
+
+
+## 12.人头跟踪
 
 人流量统计/人体检测对高人群密度场景表现不佳，人头跟踪更适用于密集场景的跟踪。人头跟踪使用的仍是PaddleDetection多目标跟踪算法FairMOT，其区别在于人头跟踪基于 [HT-21](https://motchallenge.net/data/Head_Tracking_21) 数据集进行训练。HT-21是一个高人群密度拥挤场景下的人头跟踪数据集，场景包括不同的光线和环境条件下的拥挤的室内和室外场景，所有序列的帧速率都是25fps。
-
-![ht_fairmot.gif](./images/ht_fairmot.gif)
-
-
 
 ### 模型库
 
@@ -296,7 +335,19 @@ python deploy/python/mot_jde_infer.py --model_dir=output_inference/fairmot_dla34
 
 
 
-## 10. 引用
+## 资源
+
+更多资源请参考：
+
+* 更多深度学习知识、产业案例，请参考：[awesome-DeepLearning](https://github.com/paddlepaddle/awesome-DeepLearning)
+
+* 更多目标检测模型，请参考：[PaddleDetection](https://github.com/PaddlePaddle/PaddleDetection)
+
+* 更多学习资料请参阅[飞桨深度学习平台](https://www.paddlepaddle.org.cn/?fr=paddleEdu_aistudio)
+
+  
+
+## 13. 引用
 
 ```
 @article{zhang2020fair,
