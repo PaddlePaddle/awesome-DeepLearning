@@ -18,23 +18,17 @@
 
 ## 1 项目说明
 
-在住宅、加油站、公路、森林等室内外场景自动发现监控区域内的烟雾和火灾，以尽可能最快的方式及时报警，那么就会大大减少损失，在日常生活中具有重要意义。
-
-在该项目中，主要向大家介绍如何使用[PaddleX](https://github.com/PaddlePaddle/PaddleX/tree/develop)实现烟雾和火灾的检测，希望通过梳理优化模型精度和性能的思路能帮助用户更高效地解决实际火灾和烟雾检测应用中的问题。开放烟雾和火灾数据和预训练模型，并提供服务器Serving和Jetson NX边缘侧芯片的部署指南。
+针对住宅、加油站、公路、森林等火灾高发场景，应用飞桨[PaddleX](https://github.com/PaddlePaddle/PaddleX/tree/develop)的目标检测技术，可以自动检测监控区域内的烟雾和火灾，帮助相关人员及时应对，最大程度降低人员伤亡及财物损失，模型效果如图1所示。希望通过梳理优化模型精度和性能的思路能帮助用户更高效地解决实际火灾和烟雾检测应用中的问题。开放烟雾和火灾数据和预训练模型，并提供服务器Serving和Jetson NX边缘侧芯片的部署指南。
 
 ![demo](docs/images/demo.png)
 
 **方案难点**：
 
-* **召回要求高、误检要求低：** 烟雾和火灾检测要求较高的召回率，在发现火情即可做出响应，相关人员可及时做出应对，减缓火势发展的速度甚至消灭火情，最大程度降低人员伤亡及财物损失；同时要最大限度的降低误检，如果烟雾和火灾误检太多，还须增加人工筛选过程，提高了运行成本，降低响应速度。
+- **推理速度要求高：** 在烟雾和火灾检测场景，希望模型能在火情发生的第一时间即做出响应，对模型推理速度有较高的要求；
 
-* **没有具体形状：** 烟雾和火灾形状多变，不像其它目标检测物体有明显的轮廓特征，比如车辆、行人、车牌等，所以烟雾检测难度远大于车辆、行人检测。如下图所示，火灾烟雾形状多种多样，但是人只是矩形框：
+- **干扰样本多，容易造成误检：** 生活中有很多物体和烟火是非常接近的，很难区分（比如：云朵、红色的灯光等），容易造成模型误检。
 
-  ![demo](docs/images/hard_1.png)
-
-  注：图片来源于[Stock up](https://www.sitebuilderreport.com/stock-up)，侵权删稿
-
-* **烟火的类型比较多：** 烟雾有黑烟、白烟、蓝烟等，火焰也包含黄色火焰、红色火焰等等，不同的应用场景，检测的目标类型也是不一样的。而且生活中有很多物体和烟火是非常接近的，很难区分（比如：云朵、红色的灯光等），容易造成误检。
+  注：AI Studio在线运行代码请参考[【产业级应用案例】火灾/烟雾检测](https://aistudio.baidu.com/aistudio/projectdetail/2503301?contributionType=1)(配备Tesla V100高级算力资源)。
 
 <a name="安装说明"></a>
 
@@ -133,7 +127,7 @@ PaddleX提供了5种目标检测模型：FasterRCNN、YOLOV3、PPYOVO、PPYOLOv2
   - [Spatial Pyramid Pooling](https://arxiv.org/abs/1406.4729)
   - 更优的预训练模型
 
-* [PPYOLOv2](https://arxiv.org/abs/2104.10419)：相较20年发布的PP-YOLO，PPYOLOv2版本在COCO 2017 test-dev上的精度提升了3.6个百分点，由45.9%提升到了49.5%；在640*640的输入尺寸下，FPS达到68.9FPS。 PP-YOLOv2在同等速度下，精度超越YOLOv5，主要改进点：
+* [PPYOLOv2](https://arxiv.org/abs/2104.10419)：相较20年发布的PP-YOLO，PPYOLOv2版本在COCO 2017 test-dev上的精度提升了3.6个百分点，由45.9%提升到了49.5%；在640*640的输入尺寸下，FPS达到68.9FPS。 主要改进点：
   * Path Aggregation Network
   * Mish Activation Function
   * Larger Input Size
@@ -172,14 +166,14 @@ PaddleX提供了单卡/多卡训练模型，满足用户多种训练需求
 
 ```
 export CUDA_VISIBLE_DEVICES=0 #windows和Mac下不需要执行该命令
-python train.py
+python 1.train_ppyolov2_imagenet.py
 ```
 
 * GPU多卡训练，例如使用2张卡时执行：
 
 ```
 export CUDA_VISIBLE_DEVICES=0,1 #windows和Mac下不需要执行该命令
-python -m paddle.distributed.launch --gpus 0,1 code/train.py
+python -m paddle.distributed.launch --gpus 0,1 1.train_ppyolov2_imagenet.py
 ```
 
 <a name="模型评估"></a>
@@ -188,14 +182,18 @@ python -m paddle.distributed.launch --gpus 0,1 code/train.py
 
 因为采用多个数据集一起训练，每个数据集标注方式不同，如下图左数据集A将火标注为一个检测框，但是下图右数据集B又将火标注为多个检测框。
 
-![eval_1](docs/images/eval_1.png)
+<div align="center">
+  <img src="docs/images/eval_1.png"/>
+</div>  
 
 不同的标注方式就导致训练好的模型，无法有效的计算mAP值。我们可以通过下图从两方面分析：
 
 * 蓝色框表示真实标注框，可以看出有很多小检测框。实际评估时，火灾只有2个绿色检测框，能正确检测火灾，但没能和真实框一一对应，如果使用mAP作为指标，就不能正确反映检测效果。
 * 有些数据集没标注烟雾，但是可以检测到烟雾，同样mAP也不能正确反映检测效果。
 
-<img src="docs/images/eval_2.png" alt="eval_2" style="zoom:48%;" />
+<div align="center">
+  <img src="docs/images/eval_2.png" alt="eval_2" style="zoom:48%;" />
+  </div>
 
 综上，我们计算不同置信度阈值下图片级召回率和图片级误检率，找到符合要求的召回率和误检率，对应的置信度阈值用于后续模型预测阶段。使用PPYOLOV2训练好的模型进行评估，运行下行命令即可：
 
@@ -226,7 +224,9 @@ python predict.py
 
 可视化预测结果示例如下，可以看出室内的火灾也可以有效检测出来：
 
-![](docs/images/predict_result.png)
+<div align="center">
+ <img src='docs/images/predict_result.png'/>
+   </div>
 
 注：图片来源于互联网，侵权删稿
 
@@ -303,21 +303,25 @@ python infer.py
 
 #### 10.3 不同模型结果
 
-| 模型                                            | 推理时间（FPS） | Recall | Error Rate |
-| ----------------------------------------------- | --------------- | ------ | ---------- |
-| PPYOLV2+ResNet50(**Baseline**)                  | **24**          | 95.1   | 23.22      |
-| PPYOLV2+ResNet50+**aug**                        | -               | 94.1   | 14.9       |
-| PPYOLV2+ResNet50+**COCO预训练**                 | -               | 97.4   | 28.6       |
-| PPYOLV2+ResNet50+**aug+COCO预训练**             | -               | 96     | 14.9       |
-| PPYOLOV2+ResNet50+aug+COCO预训练+**SPP**        | -               | 96.3   | 11.1       |
-| PPYOLV2+ResNet50+aug+COCO预训练+SPP+**背景图**  | **23.6**        | 93.9   | 1.1        |
-| PPYOLV2+**ResNet101**+aug+COCO预训练+SPP+背景图 | 21              | **96** | **2.2**    |
-| **PPYOLO**+ResNet50+aug+COCO预训练              | 20              | 90.0   | 8.81       |
-| **YOLOV3**+DarkNet53+img_size(640)              | 21              | 88.4   | 6.01       |
+| 序号 | 模型                                           | 推理时间（FPS） | Recall | Error Rate |
+| ---- | ---------------------------------------------- | --------------- | ------ | ---------- |
+| 1    | PPYOLV2+ResNet50+ImageNet预训练(**Baseline**)  | **24**          | 95.1   | 23.22      |
+| 2    | PPYOLV2+ResNet50+ImageNet预训练+**aug**        | -               | 94.1   | 14.9       |
+| 3    | PPYOLV2+ResNet50+**COCO预训练**                | -               | 97.4   | 28.6       |
+| 4    | PPYOLV2+ResNet50+COCO预训练+**aug**            | -               | 96.3   | 11.1       |
+| 5    | PPYOLOV2+ResNet50+COCO预训练+aug+**SPP=False** | -               | 96     | 13.21      |
+| 6    | PPYOLV2+ResNet50+aug+COCO预训练+**背景图**     | **23.6**        | 93.9   | 1.1        |
+| 7    | PPYOLV2+**ResNet101**+aug+COCO预训练+背景图    | 21              | **96** | **2.2**    |
+| 8    | **PPYOLO**+ResNet50+COCO预训练+aug             | 20              | 90.0   | 8.81       |
+| 9    | **YOLOV3**+DarkNet53+COCO预训练+img_size(640)  | 21              | 88.4   | 6.01       |
+
+**说明：** 从表1的实验结论中可以发现，有些优化策略在精度优化上起到了正向结果，有些策略则相反。这些结论在不同的模型和不同的数据集上并不是相通的，还需根据具体情况验证。
+
+​			本实验未提供"背景图"数据集(包含5116张图片)，大家自行选择不包含的烟雾和火灾的数据作为负样本即可。
 
 **模型优化思路**：
 
-- 1.通过选择更好的检测架构可以提高检测的Recall值——即**Neck，Head部分的优化**可以提高Recall，。<**YOLOV3 到 PPYOLOV2**>
+- 1.通过选择更好的检测架构可以提高检测的Recall值——即**Neck，Head部分的优化**可以提高Recall。<**YOLOV3 到 PPYOLOV2**>
 - 2.添加数据增强、背景图可以降低误检率。
 - 3.在数据量比较少的情况下，可以增加预训练模型。
 
@@ -332,9 +336,13 @@ python infer.py
 
 ## 11 模型部署
 
-我们可以将训练好的模型通过一套部署代码实现快速部署，包含两种部署方式：[兼容并包的PaddleX-Inference部署方式](https://github.com/PaddlePaddle/PaddleX/tree/release/2.0.0/examples/C%23_deploy)和[基于QT的Jetson Xavier部署Demo](https://paddlex.readthedocs.io/zh_CN/release-1.3/deploy/jetson/index.html)。
+在项目中为用户提供了基于Jetson NX的部署Demo方案，支持用户输入单张图片、文件夹、视频流进行预测。用户可根据实际情况自行参考。
 
+<div align="center">
+  <img src="docs/images/deploy.png"/>
+</div>  
 
+部署方式可以参考：[兼容并包的PaddleX-Inference部署方式](https://github.com/PaddlePaddle/PaddleX/tree/release/2.0.0/examples/C%23_deploy)和[基于QT的Jetson Xavier部署Demo](https://paddlex.readthedocs.io/zh_CN/release-1.3/deploy/jetson/index.html)。
 
 ## 开源数据
 
