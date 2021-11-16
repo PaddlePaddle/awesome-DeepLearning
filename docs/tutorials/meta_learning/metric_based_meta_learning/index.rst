@@ -5,8 +5,11 @@
    :maxdepth: 5
    :caption: 目录结构
    
-   Prototypical Network <Prototypical Network>
-   Relation Network <Relation Network>
+   SNAIL <SNAIL>
+   RN <RN>
+   PN <PN>
+   MN <MN>
+
 
    
    

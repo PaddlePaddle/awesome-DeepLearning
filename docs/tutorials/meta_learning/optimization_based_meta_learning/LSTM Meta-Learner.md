@@ -1,10 +1,29 @@
-# Optimization-Based Meta-Learning: LSTM Meta-Learner
+# LSTM Meta-Learner
 
-## 算法思路
+基于小样本的梯度下降存在以下两个问题：
 
-### 梯度下降更新规则和 LSTM 单元状态更新规则的等价性
+- 小样本意味着梯度下降的次数有限，在非凸的情况下，得到的模型必然性能很差；
 
-(1) 一般的梯度下降更新规则如下：
+- 对于每个单独的数据集而言，神经网络每次都是随机初始化，在若干次迭代后也很难收敛到最佳性能。
+
+元学习在处理 few-shot 问题时，分两步完成：
+
+- 基学习器在元学习器的引导下处理特定任务，发现任务特性；
+
+- 元学习器总结所有任务共性，既掌握任务中的短期知识，也掌握所有任务中常见的长期知识。
+
+因此，元学习为小样本学习提供了一种提高模型泛化性能的策略。
+
+LSTM Meta-Learner 使用单元状态表示 Learner 参数的更新。
+训练 Meta-Learner 既能发现一个良好的 Learner 初始化参数，
+又能成功将 Learner 的参数更新到一个给定的小训练集，以完成一些新的任务。
+
+
+## 1 LSTM Meta-Learner
+
+### 1.1 梯度下降更新规则和 LSTM 单元状态更新规则的等价性
+
+**一般的梯度下降更新规则**
 
 $$
 \theta_{t}=\theta_{t-1}-\alpha_{t} \nabla_{\theta_{t-1}} L_{t}
@@ -12,7 +31,7 @@ $$
 
 其中，$\theta_{t}$ 是第 $t$ 次迭代更新时的参数值，$\alpha_{t}$ 是第 $t$ 次迭代更新时的学习率，$\nabla_{\theta_{t-1}} L_{t}$ 是损失函数在 $\theta_{t-1}$ 处的梯度值。
 
-(2) LSTM 单元状态更新规则如下：
+**LSTM 单元状态更新规则**
 
 $$
 c_{t}=f_{t} \cdot c_{t-1}+i_{t} \cdot \tilde{c}_{t}
@@ -24,7 +43,7 @@ $$
 
 经过这样的替换，利用 LSTM 的状态更新替换学习器参数 $\theta$。
 
-### LSTM Meta-Learner
+### 1.2 LSTM Meta-Learner 设计思路
 
 Meta-Learner 的目标是学习 LSTM 的更新规则，并将其应用于更新 Learner 的参数上。
 
@@ -65,7 +84,7 @@ $$
 它们的更新规则是一样的，即 $W_I$ ， $b_I$ ， $W_I$ ， $b_I$ 是相同的。
 
 
-## LSTM Meta-Learner 单元状态更新过程
+## 2 LSTM Meta-Learner 单元状态更新过程
 
 将 LSTM 单元状态更新过程作为随机梯度下降法的近似，实现 Meta-Learner 对 Leraner 参数更新的指导。
 
@@ -80,7 +99,7 @@ $$
 (5) 初始单元状态：$c_{0}=\theta$，是 Learner 最早的参数初始值。LSTM 模型需要找到最好的初始细胞状态，使得每轮更新后的参数初始值更好地反映任务的共性，在 Learner 上只需要少量更新，就可以达到不错的精度。
 
 
-## LSTM Meta-Learner 算法流程
+## 3 LSTM Meta-Learner 算法流程
 
 LSTM Meta-Learner 前向传递计算如图1所示，其中，
 基学习器 $\mathrm{M}$，包含可训练参数 $\theta$；元学习器 $R$，包含可训练参数 $\Theta$。
@@ -123,14 +142,14 @@ Meta-Learner 使用 Learner 提供的信息，更新 Learner 中的参数和自�
 - 处理完第 $d$ 个任务中所有 $T$ 个批次的训练数据后，使用第 $d$ 个任务的验证集 $(X, Y)$, 计算验证集上的损失函数值 $L_{\mathrm{test}}=L\left[M\left(X; \theta_{T}\right), Y\right]$ 和损失函数梯度值 $\nabla_{\theta_{d-1}} L_{\mathrm{test}}$ ，更新 meta-learner 参数 $\boldsymbol{\Theta}_{d}$ 。
 
 
-## LSTM Meta-Learner 模型结构
+## 4 LSTM Meta-Learner 模型结构
 
 LSTM Meta-Learner 是一个两层的 LSTM 网络，第一层是正常的 LSTM 模型，第二层是近似随机梯度的 LSTM 模型。
 所有的损失函数值和损失函数梯度值经过预处理，输入第一层 LSTM 中，
 计算学习率和遗忘门等参数，损失函数梯度值还要输入第二层 LSTM 中用于参数更新。
 
 
-## LSTM Meta-Learner 和 MAML 的区别
+## 5 LSTM Meta-Learner 和 MAML 的区别
 
 - 在 MAML 中，元学习器给基学习器提供参数初始值，基学习器给元学习器提供损失函数值；
 在 LSTM Meta-Learner 中，元学习器给基学习器提供更新的参数，基学习器给元学习器提供每个批次数据上的损失函数值和损失函数梯度值。
@@ -147,6 +166,24 @@ LSTM Meta-Learner 是一个两层的 LSTM 网络，第一层是正常的 LSTM �
 - MAML 适用于任意模型结构；
 LSTM Meta-Learner 中的元学习器只能是 LSTM 结构，基学习器可以适用于任意模型结构。
 
+
+## 6 LSTM Meta-Learner 分类结果
+
+<center>
+表1	SNAIL 在 miniImageNet 上的分类结果。
+</center>
+
+| Method | 5-way 1-shot | 5-way 5-shot |
+| :----: | :----: | :----: |
+| Baseline-finetune  | 28.86 $\pm$ 0.54 $\%$ | 49.79 $\pm$ 0.79 $\%$ |
+| Baseline-nearest-neighbor | 41.08 $\pm$ 0.70 $\%$ | 51.04 $\pm$ 0.65 $\%$ |
+| Matching Network | **43.40 $\pm$ 0.78** $\%$ | 51.09 $\pm$ 0.71 $\%$ |
+| Matching Network FCE | **43.56 $\pm$ 0.84** $\%$ | 55.31 $\pm$ 0.73 $\%$ |
+| Meta-Learner LSTM | **43.44 $\pm$ 0.77** $\%$ | **60.60 $\pm$ 0.71** $\%$ |
+
+
 ## 参考文献
 
 [1] [Optimization as a Model for Few-Shot Learning](https://openreview.net/forum?id=rJY0-Kcll)
+
+[2] [长短时记忆网络 LSTM](https://paddlepedia.readthedocs.io/en/latest/tutorials/sequence_model/lstm.html)

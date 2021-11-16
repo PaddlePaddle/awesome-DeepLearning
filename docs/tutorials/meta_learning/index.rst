@@ -5,9 +5,9 @@
    :maxdepth: 5
    :caption: 目录结构
    
-   Preliminaries <preliminaries>
-   Optimization-Based Meta-Learning <optimization_based_meta_learning/index>
-   Metric-Based Meta-Learning <metric_based_meta_learning/index>
+   元学习概述 <preliminaries>
+   基于优化的元学习 <optimization_based_meta_learning/index>
+   基于度量的元学习 <metric_based_meta_learning/index>
 
    
    
