@@ -32,6 +32,36 @@
 
 2. 由于池化之后特征图会变小，如果后面连接的是全连接层，能有效的**减小神经元的个数，节省存储空间并提高计算效率**。
 
+## 池化中填充的方式
+在飞桨中，无论是Conv2D中的padding还是Average2D中的padding,接收值类型都包括int、list、tuple和string。下面用代码、公式和图片来介绍一下这些方式吧。
+
+### int输入
+int输入即接收一个int类型的数字n，对图片的四周包裹n行n列的0来填充图片。如果要保持图片尺寸不变，n的值和池化窗口的大小是有关的。假如 $H_{in}, W_{in}$ 为图片输入的大小，$k_h, k_w$ 为池化窗口的大小，$H_{out}, H_{out}$ 为结果图的大小的话，他们之间有着这样的关系。
+$$H_{out} = \frac{H_{in} + 2*p_h - k_h}{s_h} + 1 \\
+  W_{out} = \frac{W_{out} + 2*p_w -k_w}{s_w} + 1
+$$
+在使用3×3的池化窗口且步长为1的情况下，还要保持图片大小不变，则需要使用padding=1的填充。
+那么，公式就变为了
+$$H_{out} = \frac{6 - 3 + 2*1}{1} + 1 \\
+  W_{out} = \frac{6 - 3 + 2*1}{1} + 1
+$$
+另外，在stride不为1且不能被整除的情况下，整体结果向下取整。
+关于Padding和K的公式如下
+$$
+Padding = \frac{(k-1)}{2} \quad \quad (k \% 2 != 0)
+$$
+### list和tuple输入
+因为图像有宽高，所以list和tuple为1维长度为2的组合，分别对应了高和宽，计算方式和上面int输入的一样，单独计算。一般用作输入图片宽高不一致，或者池化窗口大小不一的情况。
+
+### string输入
+string输入有两个值，一个是SAME，一个是VALID。这两个的计算公式如下：
+
+SAME:$H_{out} = \lceil \frac{H_{in}}{s_h} \rceil$, $W_{out} = \lceil\frac{W_{in}}{s_w}\rceil$
+
+VALID:$H_{out} = \frac{H_{in} - k_h}{s_h} + 1$, $W_{out} = \frac{W_{in} - k_w}{s_w} + 1$
+
+可以看到，VALID方式就是默认采用的不填充的方式，与上面不Padding的公式一样。而SAME则与池化窗口的大小无关，若$s_h$和$s_w$为1，无论池化窗口的大小，输出的特征图的大小都与原图保持一致。当任意一个大于1时，如果能整除，输出的尺寸就是整除的结果，如果不能整除，则通过padding的方式继续向上取整。
+
 ## 应用示例
 
 与卷积核类似，池化窗口在图片上滑动时，每次移动的步长称为步幅，当宽和高方向的移动大小不一样时，分别用$s_w$和$s_h$表示。也可以对需要进行池化的图片进行填充，填充方式与卷积类似，假设在第一行之前填充$p_{h1}$行，在最后一行后面填充$p_{h2}$行。在第一列之前填充$p_{w1}$列，在最后一列之后填充$p_{w2}$列，则池化层的输出特征图大小为：
@@ -62,3 +92,46 @@ $$W_{out} = \frac{W + p_{w1} + p_{w2} - k_w}{s_w} + 1=\frac{4 + 0 + 0 - 2}{2} + 
 4. 池化窗口向右移动两个像素，对应黄色区域，此时输出为 $13.5 = \frac{11 + 12 + 15 + 16}{4}$ 。
 
 **图1(b)** 中，使用最大池化进行运算，将上述过程的求均值改为求最大值即为最终结果。
+
+在池化过程中，padding是一样的参数和效果，但是需要注意的是，池化里stride的值与卷积核的大小保持一致。这里用paddle代码举几个例子来论证以下。
+```python
+import paddle # No padding
+x = paddle.rand((1, 1, 6, 6))
+avgpool = paddle.nn.AvgPool2D(kernel_size=2, padding=0)
+y = avgpool(x)
+print('result:', 'shape of x:', x.shape, 'shape of result:', y.shape)
+
+result: shape of x: [1, 1, 6, 6] shape of result: [1, 1, 3, 3]
+
+这是池化中不padding，stride为2的结果，可以看出6/2=3，因此结果为3。
+            
+import paddle # Padding 1
+x = paddle.rand((1, 1, 6, 6))
+avgpool = paddle.nn.AvgPool2D(kernel_size=2, padding=1)
+y = avgpool(x)
+print('result:', 'shape of x:', x.shape, 'shape of result:', y.shape)
+
+result: shape of x: [1, 1, 6, 6] shape of result: [1, 1, 4, 4]
+            
+这是池化中padding为1，stride为2的结果，根据公式计算 （6-2+2）/2 +1 = 4。和结果一致。
+            
+import paddle # Padding SAME
+x = paddle.rand((1, 1, 6, 6))
+avgpool = paddle.nn.AvgPool2D(kernel_size=2, padding='SAME')
+y = avgpool(x)
+print('result:', 'shape of x:', x.shape, 'shape of result:', y.shape)
+
+result: shape of x: [1, 1, 6, 6] shape of result: [1, 1, 3, 3]
+            
+这是池化中padding为SAME，stride为2的结果，根据公式计算 6/2=3。和结果一致。
+
+
+import paddle # padding SAME, Stride 4
+x = paddle.rand((1, 1, 6, 6))
+avgpool = paddle.nn.AvgPool2D(kernel_size=4, padding="SAME")
+y = avgpool(x)
+print('result:', 'shape of x:', x.shape, 'shape of result:', y.shape)
+
+result: shape of x: [1, 1, 6, 6] shape of result: [1, 1, 3, 3]
+```
+不使用padding的时候，6×6的特征图被2×2的池化窗口覆盖，并且步长为2，因此结果为3×3的特征图。但如果padding为1，根据公式我们可以算出池化的结果为 $\lfloor (6-3+2)/2 \rfloor + 1 = 4$。当填充方式为SAME的时候，6能被2整除，因此结果为3×3的特征图。6不能被4整除，向上取整，结果是2×2的特征图。另外，池化一般不用padding，而在卷积中常用。
