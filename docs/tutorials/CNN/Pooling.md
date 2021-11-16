@@ -102,9 +102,11 @@ y = avgpool(x)
 print('result:', 'shape of x:', x.shape, 'shape of result:', y.shape)
 
 result: shape of x: [1, 1, 6, 6] shape of result: [1, 1, 3, 3]
+```
 
 这是池化中不padding，stride为2的结果，可以看出6/2=3，因此结果为3。
-            
+
+```python            
 import paddle # Padding 1
 x = paddle.rand((1, 1, 6, 6))
 avgpool = paddle.nn.AvgPool2D(kernel_size=2, padding=1)
@@ -112,9 +114,11 @@ y = avgpool(x)
 print('result:', 'shape of x:', x.shape, 'shape of result:', y.shape)
 
 result: shape of x: [1, 1, 6, 6] shape of result: [1, 1, 4, 4]
-            
+```
+
 这是池化中padding为1，stride为2的结果，根据公式计算 （6-2+2）/2 +1 = 4。和结果一致。
-            
+ 
+```python
 import paddle # Padding SAME
 x = paddle.rand((1, 1, 6, 6))
 avgpool = paddle.nn.AvgPool2D(kernel_size=2, padding='SAME')
@@ -122,10 +126,11 @@ y = avgpool(x)
 print('result:', 'shape of x:', x.shape, 'shape of result:', y.shape)
 
 result: shape of x: [1, 1, 6, 6] shape of result: [1, 1, 3, 3]
-            
+```
+
 这是池化中padding为SAME，stride为2的结果，根据公式计算 6/2=3。和结果一致。
 
-
+```python
 import paddle # padding SAME, Stride 4
 x = paddle.rand((1, 1, 6, 6))
 avgpool = paddle.nn.AvgPool2D(kernel_size=4, padding="SAME")
@@ -134,6 +139,7 @@ print('result:', 'shape of x:', x.shape, 'shape of result:', y.shape)
 
 result: shape of x: [1, 1, 6, 6] shape of result: [1, 1, 3, 3]
 ```
+
 不使用padding的时候，6×6的特征图被2×2的池化窗口覆盖，并且步长为2，因此结果为3×3的特征图。但如果padding为1，根据公式我们可以算出池化的结果为 $\lfloor (6-3+2)/2 \rfloor + 1 = 4$。当填充方式为SAME的时候，6能被2整除，因此结果为3×3的特征图。6不能被4整除，向上取整，结果是2×2的特征图。另外，池化一般不用padding，而在卷积中常用。那么在卷积中，其实区别就在于卷积核和步长需要单独设置了。下面用卷积的代码来展示一下卷积中Padding的效果。
 
 ```python
@@ -179,9 +185,11 @@ y = conv(x)
 print('result:', 'shape of x:', x.shape, 'shape of result:', y.shape)
 
 result: shape of x: [1, 1, 6, 6] shape of result: [1, 1, 6, 6]
+```
 
 这是padding为SAME的结果，可以看出在stride为1的时候还是原来的大小。那么stride为2呢？
-            
+
+```python            
 import paddle # padding SAME Stride=2
 x = paddle.rand((1, 1, 6, 6))
 conv = paddle.nn.Conv2D(1, 1, kernel_size=3, stride=2, padding='SAME')
@@ -189,9 +197,11 @@ y = conv(x)
 print('result:', 'shape of x:', x.shape, 'shape of result:', y.shape)
 
 result: shape of x: [1, 1, 6, 6] shape of result: [1, 1, 3, 3]
-            
+```
+
 这是padding为SAME，stride为2的结果，可以看出6/2=3，因此结果为3。
-            
+
+```python
 import paddle # padding VALID
 x = paddle.rand((1, 1, 6, 6))
 conv = paddle.nn.Conv2D(1, 1, kernel_size=3, stride=1, padding='VALID')
@@ -200,4 +210,5 @@ print('result:', 'shape of x:', x.shape, 'shape of result:', y.shape)
 
 result: shape of x: [1, 1, 6, 6] shape of result: [1, 1, 4, 4]
 ```
+
 这是padding为VALID的结果，和不padding一样。
