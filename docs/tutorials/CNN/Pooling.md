@@ -134,4 +134,70 @@ print('result:', 'shape of x:', x.shape, 'shape of result:', y.shape)
 
 result: shape of x: [1, 1, 6, 6] shape of result: [1, 1, 3, 3]
 ```
-不使用padding的时候，6×6的特征图被2×2的池化窗口覆盖，并且步长为2，因此结果为3×3的特征图。但如果padding为1，根据公式我们可以算出池化的结果为 $\lfloor (6-3+2)/2 \rfloor + 1 = 4$。当填充方式为SAME的时候，6能被2整除，因此结果为3×3的特征图。6不能被4整除，向上取整，结果是2×2的特征图。另外，池化一般不用padding，而在卷积中常用。
+不使用padding的时候，6×6的特征图被2×2的池化窗口覆盖，并且步长为2，因此结果为3×3的特征图。但如果padding为1，根据公式我们可以算出池化的结果为 $\lfloor (6-3+2)/2 \rfloor + 1 = 4$。当填充方式为SAME的时候，6能被2整除，因此结果为3×3的特征图。6不能被4整除，向上取整，结果是2×2的特征图。另外，池化一般不用padding，而在卷积中常用。那么在卷积中，其实区别就在于卷积核和步长需要单独设置了。下面用卷积的代码来展示一下卷积中Padding的效果。
+
+```python
+import paddle # 不使用padding
+x = paddle.rand((1, 1, 6, 6))
+conv = paddle.nn.Conv2D(1, 1, kernel_size=3, stride=1, padding=0)
+y = conv(x)
+print('result:', 'shape of x:', x.shape, 'shape of result:', y.shape)
+
+result: shape of x: [1, 1, 6, 6] shape of result: [1, 1, 4, 4]
+```
+这是不使用padding的结果，可以看出，和我们画的图是一致的。
+
+再来看看卷积核为3，padding为1的效果。
+```python
+import paddle # kernel_size 3, padding 1
+x = paddle.rand((1, 1, 6, 6))
+conv = paddle.nn.Conv2D(1, 1, kernel_size=3, stride=1, padding=1)
+y = conv(x)
+print('result:', 'shape of x:', x.shape, 'shape of result:', y.shape)
+
+result: shape of x: [1, 1, 6, 6] shape of result: [1, 1, 6, 6]
+```
+这是padding为1， 卷积核为3的结果。和我们的图2也是一致的，这里我们在验证以下Padding与K的公式。选择卷积核为5，padding为2来试试。
+
+```python
+import paddle # kernel_size 5, padding 2
+x = paddle.rand((1, 1, 6, 6))
+conv = paddle.nn.Conv2D(1, 1, kernel_size=5, stride=1, padding=2)
+y = conv(x)
+print('result:', 'shape of x:', x.shape, 'shape of result:', y.shape)
+
+result: shape of x: [1, 1, 6, 6] shape of result: [1, 1, 6, 6]
+```
+这是padding为2， 卷积核为5的结果。和公式一致。
+
+接下来看看SAME和VALID参数。直接放代码吧。
+```python
+import paddle # padding SAME, Stride=1
+x = paddle.rand((1, 1, 6, 6))
+conv = paddle.nn.Conv2D(1, 1, kernel_size=3, stride=1, padding='SAME')
+y = conv(x)
+print('result:', 'shape of x:', x.shape, 'shape of result:', y.shape)
+
+result: shape of x: [1, 1, 6, 6] shape of result: [1, 1, 6, 6]
+
+这是padding为SAME的结果，可以看出在stride为1的时候还是原来的大小。那么stride为2呢？
+            
+import paddle # padding SAME Stride=2
+x = paddle.rand((1, 1, 6, 6))
+conv = paddle.nn.Conv2D(1, 1, kernel_size=3, stride=2, padding='SAME')
+y = conv(x)
+print('result:', 'shape of x:', x.shape, 'shape of result:', y.shape)
+
+result: shape of x: [1, 1, 6, 6] shape of result: [1, 1, 3, 3]
+            
+这是padding为SAME，stride为2的结果，可以看出6/2=3，因此结果为3。
+            
+import paddle # padding VALID
+x = paddle.rand((1, 1, 6, 6))
+conv = paddle.nn.Conv2D(1, 1, kernel_size=3, stride=1, padding='VALID')
+y = conv(x)
+print('result:', 'shape of x:', x.shape, 'shape of result:', y.shape)
+
+result: shape of x: [1, 1, 6, 6] shape of result: [1, 1, 4, 4]
+```
+这是padding为VALID的结果，和不padding一样。
