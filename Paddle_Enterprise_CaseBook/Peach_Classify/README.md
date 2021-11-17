@@ -34,7 +34,7 @@
 
 
 ```python
-!pip install paddlehub==2.0.4 -i https://pypi.tuna.tsinghua.edu.cn/simple
+pip install paddlehub==2.0.4 -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
 # **3. 数据处理**
@@ -81,7 +81,7 @@ label_list.txt的格式如下：
 
 
 ```python
-!unzip -q -o ./dataset/peach.zip -d ./dataset
+unzip -q -o ./dataset/peach.zip -d ./dataset
 ```
 
 准备好数据后即可使用PaddleHub完成数据读取器的构建，实现方法如下所示：构建数据读取Python类，并继承paddle.io.Dataset这个类完成数据读取器构建。在定义数据集时，需要预先定义好对数据集的预处理操作，并且设置好数据模式。在数据集定义中，需要重新定义`__init__`，`__getitem__`和`__len__`三个部分。示例如下：
@@ -171,7 +171,7 @@ PaddleHub提供了丰富的数据预处理方式，具体可以参见[预处理]
 
 ```python
 #安装预训练模型
-!hub install resnet50_vd_imagenet_ssld==1.1.0
+hub install resnet50_vd_imagenet_ssld==1.1.0
 ```
 
 

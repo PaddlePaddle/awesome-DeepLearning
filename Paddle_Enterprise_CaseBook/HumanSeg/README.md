@@ -32,7 +32,7 @@
 
 
 ```python
-!pip install paddleseg
+pip install paddleseg
 ```
 
 3. 下载PaddleSeg仓库
@@ -40,17 +40,17 @@
 
 ```python
 # 若您在本地环境运行，使用git下载PaddleSeg代码
-#!git clone https://github.com/PaddlePaddle/PaddleSeg.git
+#git clone https://github.com/PaddlePaddle/PaddleSeg.git
 
 # 为快速体验，此处我们已下载PaddleSeg代码，解压后可直接执行后续代码
-!unzip PaddleSeg.zip
+unzip PaddleSeg.zip
 ```
 
 以下案例中所有命令均在`PaddleSeg/contrib/HumanSeg`目录下执行。
 
 
 ```python
-%cd PaddleSeg/contrib/HumanSeg
+cd PaddleSeg/contrib/HumanSeg
 ```
 
 # **3. 数据处理**
@@ -69,7 +69,7 @@
 
 
 ```python
-!python data/download_data.py
+python data/download_data.py
 ```
 
 # **4. 模型构建**
@@ -125,7 +125,7 @@ NOTE:
 
 
 ```python
-!python pretrained_model/download_pretrained_model.py
+python pretrained_model/download_pretrained_model.py
 ```
 
 # 5. 模型训练
@@ -133,10 +133,10 @@ NOTE:
 
 
 ```python
-!export CUDA_VISIBLE_DEVICES=0 # 设置1张可用的卡
+export CUDA_VISIBLE_DEVICES=0 # 设置1张可用的卡
 # windows下请执行以下命令
 # set CUDA_VISIBLE_DEVICES=0
-!python train.py \
+python train.py \
 --config configs/fcn_hrnetw18_small_v1_humanseg_192x192_mini_supervisely.yml \
 --save_dir saved_model/fcn_hrnetw18_small_v1_humanseg_192x192_mini_supervisely \
 --save_interval 100 --do_eval --use_vdl
@@ -150,7 +150,7 @@ NOTE:
 
 
 ```python
-!python train.py --help
+python train.py --help
 ```
 
 # 6. 模型评估
@@ -158,7 +158,7 @@ NOTE:
 
 
 ```python
-!python val.py \
+python val.py \
 --config configs/fcn_hrnetw18_small_v1_humanseg_192x192_mini_supervisely.yml \
 --model_path saved_model/fcn_hrnetw18_small_v1_humanseg_192x192_mini_supervisely/best_model/model.pdparams
 ```
@@ -168,7 +168,7 @@ NOTE:
 
 
 ```python
-!python predict.py \
+python predict.py \
 --config configs/fcn_hrnetw18_small_v1_humanseg_192x192_mini_supervisely.yml \
 --model_path saved_model/fcn_hrnetw18_small_v1_humanseg_192x192_mini_supervisely/best_model/model.pdparams \
 --image_path data/human_image.jpg
@@ -184,10 +184,10 @@ NOTE:
 
 
 ```python
-!export CUDA_VISIBLE_DEVICES=0 # 设置1张可用的卡
+export CUDA_VISIBLE_DEVICES=0 # 设置1张可用的卡
 # windows下请执行以下命令
 # set CUDA_VISIBLE_DEVICES=0
-!python ../../export.py \
+python ../../export.py \
 --config configs/fcn_hrnetw18_small_v1_humanseg_192x192_mini_supervisely.yml \
 --model_path saved_model/fcn_hrnetw18_small_v1_humanseg_192x192_mini_supervisely/best_model/model.pdparams \
 --save_dir export_model/fcn_hrnetw18_small_v1_humanseg_192x192_mini_supervisely_with_softmax \
@@ -198,7 +198,7 @@ NOTE:
 
 
 ```python
-!python ../../export.py \
+python ../../export.py \
 --config ../../configs/ppseg_lite/ppseg_lite_export_398x224.yml \
 --save_dir export_model/ppseg_lite_portrait_398x224_with_softmax \
 --model_path pretrained_model/ppseg_lite_portrait_398x224/model.pdparams \
@@ -250,7 +250,7 @@ output
 
 
 ```python
-!python export_model/download_export_model.py
+python export_model/download_export_model.py
 ```
 
 * **视频流人像分割**
@@ -258,11 +258,11 @@ output
 结合DIS（Dense Inverse Search-basedmethod）光流算法预测结果与分割结果，改善视频流人像分割。
 ```
 # 通过电脑摄像头进行实时分割处理
-!python bg_replace.py \
+python bg_replace.py \
 --config export_model/ppseg_lite_portrait_398x224_with_softmax/deploy.yaml
 
 # 对人像视频进行分割处理
-!python bg_replace.py \
+python bg_replace.py \
 --config export_model/deeplabv3p_resnet50_os8_humanseg_512x512_100k_with_softmax/deploy.yaml \
 --video_path data/video_test.mp4
 ```
@@ -270,7 +270,7 @@ output
 
 ```python
 # 对人像视频进行分割处理
-!python bg_replace.py \
+python bg_replace.py \
 --config export_model/deeplabv3p_resnet50_os8_humanseg_512x512_100k_with_softmax/deploy.yaml \
 --video_path data/video_test.mp4
 ```
@@ -284,19 +284,19 @@ output
 根据所选背景进行背景替换，背景可以是一张图片，也可以是一段视频。
 ```
 # 通过电脑摄像头进行实时背景替换处理, 也可通过'--background_video_path'传入背景视频
-!python bg_replace.py \
+python bg_replace.py \
 --config export_model/ppseg_lite_portrait_398x224_with_softmax/deploy.yaml \
 --input_shape 224 398 \
 --bg_img_path data/background.jpg
 
 # 对人像视频进行背景替换处理, 也可通过'--background_video_path'传入背景视频
-!python bg_replace.py \
+python bg_replace.py \
 --config export_model/deeplabv3p_resnet50_os8_humanseg_512x512_100k_with_softmax/deploy.yaml \
 --bg_img_path data/background.jpg \
 --video_path data/video_test.mp4
 
 # 对单张图像进行背景替换
-!python bg_replace.py \
+python bg_replace.py \
 --config export_model/ppseg_lite_portrait_398x224_with_softmax/deploy.yaml \
 --input_shape 224 398 \
 --img_path data/human_image.jpg
@@ -305,13 +305,13 @@ output
 
 ```python
 # 对人像视频进行背景替换处理, 也可通过'--background_video_path'传入背景视频
-!python bg_replace.py \
+python bg_replace.py \
 --config export_model/deeplabv3p_resnet50_os8_humanseg_512x512_100k_with_softmax/deploy.yaml \
 --bg_img_path data/background.jpg \
 --video_path data/video_test.mp4
 
 # 对单张图像进行背景替换
-!python bg_replace.py \
+python bg_replace.py \
 --config export_model/ppseg_lite_portrait_398x224_with_softmax/deploy.yaml \
 --input_shape 224 398 \
 --img_path data/human_image.jpg
