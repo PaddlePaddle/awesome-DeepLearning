@@ -28,8 +28,9 @@ Few-Shot Learning 是 Meta-Learning 在监督学习领域的应用。
 
 ## 3 元学习单位
 
-元学习的基本单元是任务，任务结构如图1所示。
-元训练集 (Meta-Training Data)、元验证集 (Meta-Validation Data) 和元测试集 (Meta-Testing Data) 都是由抽样任务组成的任务集合。
+元学习的基本单元是任务，任务结构如图 1 所示。
+元训练集 (Meta-Training Data)、元验证集 (Meta-Validation Data) 
+和元测试集 (Meta-Testing Data) 都是由抽样任务组成的任务集合。
 元训练集和元验证集中的任务用来训练元学习模型，
 元测试集中的任务用来衡量元学习模型完成任务的效果。
 
@@ -40,9 +41,8 @@ Few-Shot Learning 是 Meta-Learning 在监督学习领域的应用。
 支持集又是一个 N-Way K-Shot 问题，即有 N 个类别，每个类有 K 个样例。 
 
 ![Task](../../images/meta_learning/preliminaries/Task.png)
-<center>
-图1 任务结构。
-</center>
+
+图 1  任务结构
 
 
 ## 4 基学习器和元学习器
@@ -50,24 +50,21 @@ Few-Shot Learning 是 Meta-Learning 在监督学习领域的应用。
 元学习本质上是层次优化问题 (双层优化问题 Bilevel Optimization Problem)，
 其中一个优化问题嵌套在另一个优化问题中。
 外部优化问题和内部优化问题通常分别称为上层优化问题和下层优化问题，
-如图2所示的MAML。
+如图 2  所示的 MAML 。
 
 ![BilevelOptimization](../../images/meta_learning/preliminaries/BilevelOptimization.png)
-<center>
-图2 双层优化元学习 MAML。
-</center>
 
-两层优化问题涉及两个参与器：
-1) 上层的参与者是元学习器，
-2) 下层的参与者是基学习器。
+图 2  双层优化元学习 MAML
+
+
+两层优化问题涉及两个参与者：上层的参与者是元学习器；下层的参与者是基学习器。
 元学习器的最优决策依赖于基学习器的反应，基学习器自身会优化自己内部的决策。
 这两个层次有各自不同的目标函数、约束条件和决策变量。
-基学习器和元学习器的作用对象及功能如图3所示。
+基学习器和元学习器的作用对象及功能如图 3 所示。
 
 ![MetaBaseLearner](../../images/meta_learning/preliminaries/MetaBaseLearner.png)
-<center>
-图3 基学习器和元学习器。元学习器总结任务经验进行任务之间的共性学习，同时指导基学习器对新任务进行特性学习。 
-</center>
+
+图 3  基学习器和元学习器。元学习器总结任务经验进行任务之间的共性学习，同时指导基学习器对新任务进行特性学习。 
 
 ### 4.1 基学习器
 
@@ -104,16 +101,15 @@ Few-Shot Learning 是 Meta-Learning 在监督学习领域的应用。
 元学习的主要目的是寻找元学习器 $F$, 
 在 $F$ 的指导下基学习器 $f$ 在支持集 (support set) $D^{\mathrm{tr}}$ 的作用下经过几步微调就可以得到适应当前新任务的最优状态 $f^{*}$。而 $F$ 的优化需要当前所有任务损失的累计和，
 即 $\nabla\sum_{n=1}^{N} l \left( f_{n}^{*}, D_{n}^{\mathrm{te}} \right)$。
-元学习工作原理如图4所示。
+元学习工作原理如图 4 所示。
 
 ![MetaLearningWorkingPrinciple](../../images/meta_learning/preliminaries/MetaLearningWorkingPrinciple.png)
-<center>
-图4 元学习工作原理。 
-</center>
+
+图 4  元学习工作原理
 
 ### 5.1 元学习训练过程
 
-以分类任务为例，元学习中 N-Way K-Shot 问题的具体训练过程:
+以分类任务为例，元学习中 N-Way K-Shot 问题的具体训练过程：
 
 首先提供一个 few-shot 的数据集，该数据集一般包含了很多的类别，
 每个类别中又包含了很多个样本。
@@ -161,8 +157,8 @@ support set 和 query set 构成一个 task。
 
 ## 7 元学习分类
 
-- 基于优化的元学习：如 MAML, Reptile, LEO, ...
+- 基于优化的元学习：如 MAML, Reptile, LEO, ......
 
-- 基于度量的元学习：如 SNAIL, RN, PN, MN, ...
+- 基于度量的元学习：如 SNAIL, RN, PN, MN, ......
 
-- 基于模型的元学习：如 Learning to learn, Meta-learner LSTM, ...
+- 基于模型的元学习：如 Learning to learn, Meta-learner LSTM, ......

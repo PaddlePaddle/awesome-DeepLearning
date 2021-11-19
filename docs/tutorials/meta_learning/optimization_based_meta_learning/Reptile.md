@@ -1,13 +1,16 @@
 # Reptile
 
-Reptil 是 MAML 的特例、近似和简化，主要解决 MAML 元学习器中出现的高阶导数问题。
-因此，Reptil 同样学习网络参数的初始值，并且适用于任何基于梯度的模型结构。
+Reptil 是 MAML 的特例、近似和简化，
+主要解决 MAML 元学习器中出现的高阶导数问题。
+因此，Reptil 同样学习网络参数的初始值，
+并且适用于任何基于梯度的模型结构。
 
 在 MAML 的元学习器中，使用了求导数的算式来更新参数初始值，
 导致在计算中出现了任务损失函数的二阶导数。
 在 Reptile 的元学习器中，参数初始值更新时，
 直接使用了任务上的参数估计值和参数初始值之间的差，
-来近似损失函数对参数初始值的导数，进行参数初始值的更新，从而不会出现任务损失函数的二阶导数。
+来近似损失函数对参数初始值的导数，进行参数初始值的更新，
+从而不会出现任务损失函数的二阶导数。
 
 Peptile 有两个版本：Serial Version 和 Batched Version，两者的差异如下：
  
@@ -52,7 +55,8 @@ $$
 \theta \leftarrow \theta+\varepsilon \frac{1}{n} \sum_{i=1}^{n}\left(\theta_{i}^{N}-\theta\right)
 $$
 
-其中，$n$ 是指每次训练完 $n$ 个任务上的基础学习器后，才更新一次元学习器中的参数初始值。
+其中，$n$ 是指每次训练完 $n$ 个任务上的基础学习器后，
+才更新一次元学习器中的参数初始值。
 
 **Batched Version Reptile 算法流程**
 
@@ -69,7 +73,7 @@ $$
 ## 3 Reptile 分类结果
 
 <center>
-表1	Reptile 在 Omniglot 上的分类结果。
+表 1	Reptile 在 Omniglot 上的分类结果
 </center>
 
 | Algorithm  | 5-way 1-shot | 5-way 5-shot | 20-way 1-shot | 20-way 5-shot |  
@@ -80,7 +84,7 @@ $$
 | Reptile + Transduction | 97.97 $\pm$ 0.08 $\%$ | 99.47 $\pm$ 0.04 $\%$ | 89.36 $\pm$ 0.20 $\%$ | 97.47 $\pm$ 0.10 $\%$ |
 
 <center>
-表1	Reptile 在 miniImageNet 上的分类结果。
+表 2	Reptile 在 miniImageNet 上的分类结果
 </center>
 
 | Algorithm  | 5-way 1-shot | 5-way 5-shot |

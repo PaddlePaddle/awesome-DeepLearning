@@ -14,24 +14,29 @@ MAML 是典型的双层优化结构，其内层和外层的优化方式如下：
 
 ### 1.1 MAML 内层优化方式
 
-内层优化涉及到基学习器，从任务分布 $p(T)$ 中随机采样第 $i$ 个任务 $T_{i}$。任务 $T_{i}$ 上，基学习器的目标函数是：
+内层优化涉及到基学习器，从任务分布 $p(T)$ 中随机采样第 $i$ 个任务 $T_{i}$。
+任务 $T_{i}$ 上，基学习器的目标函数是：
 
 $$ 
 \min _{\phi} L_{T_{i}}\left(f_{\phi}\right) 
 $$
 
-其中，$f_{\phi}$ 是基学习器，$\phi$ 是基学习器参数，$L_{T_{i}}\left(f_{\phi}\right)$ 是基学习器在 $T_{i}$ 上的损失。更新基学习器参数：
+其中，$f_{\phi}$ 是基学习器，$\phi$ 是基学习器参数，
+$L_{T_{i}}\left(f_{\phi}\right)$ 是基学习器在 $T_{i}$ 上的损失。
+更新基学习器参数：
 
 $$
 \theta_{i}^{N}=\theta_{i}^{N-1}-\alpha\left[\nabla_{\phi}
 L_{T_{i}}\left(f_{\phi}\right)\right]_{\phi=\theta_{i}^{N-1}} 
 $$
 
-其中，$\theta$ 是元学习器提供给基学习器的参数初始值 $\phi=\theta$，在任务 $T_{i}$ 上更新 $N$ 后 $\phi=\theta_{i}^{N-1}$.
+其中，$\theta$ 是元学习器提供给基学习器的参数初始值 $\phi=\theta$，
+在任务 $T_{i}$ 上更新 $N$ 后 $\phi=\theta_{i}^{N-1}$ 。
 
 ### 1.2 MAML 外层优化方式
 
-外层优化涉及到元学习器，将 $\theta_{i}^{N}$ 反馈给元学匀器，此时元目标函数是：
+外层优化涉及到元学习器，将 $\theta_{i}^{N}$ 反馈给元学匀器，
+此时元目标函数是：
 
 $$ 
 \min _{\theta} \sum_{T_{i}\sim p(T)} L_{T_{i}}\left(f_{\theta_{i}^{N}}\right) 
@@ -55,12 +60,14 @@ $$
 >   4. update $\theta \leftarrow \theta-\beta \sum_{T_{i} \sim p(T)} \nabla_{\theta}\left[L_{T_{i}}\left(f_{\phi}\right)\right]_{\phi=\theta_{i}^{N}} $
 >3. end while
 
-MAML 中执行了两次梯度下降 (gradient by gradient)，分别作用在基学习器和元学习器上。图1给出了 MAML 中特定任务参数 $\theta_{i}^{*}$ 和元级参数 $\theta$ 的更新过程。
+MAML 中执行了两次梯度下降 (gradient by gradient)，分别作用在基学习器和元学习器上。
+图 1 给出了 MAML 中特定任务参数 $\theta_{i}^{*}$ 和元级参数 $\theta$ 的更新过程。
 
 ![MAML Schematic Diagram](../../../images/meta_learning/optimization_based_meta_learning/MAML/MAMLSchematicDiagram.png)
-<center>
-图1	MAML 示意图。灰色线表示特定任务所产生的梯度值（方向）；黑色线表示元级参数选择更新的方向（黑色线方向是几个特定任务产生方向的平均值）；虚线代表快速适应，不同的方向代表不同任务更新的方向。
-</center>
+
+图 1	MAML 示意图。灰色线表示特定任务所产生的梯度值（方向）；
+黑色线表示元级参数选择更新的方向（黑色线方向是几个特定任务产生方向的平均值）；
+虚线代表快速适应，不同的方向代表不同任务更新的方向。
 
 
 ## 3 MAML 模型结构
@@ -76,7 +83,7 @@ and 2 $\times$ 2 max-pooling。
 ## 4 MAML 分类结果
 
 <center>
-表1	MAML 在 Omniglot 上的分类结果。
+表 1	MAML 在 Omniglot 上的分类结果
 </center>
 
 | Method | 5-way 1-shot | 5-way 5-shot | 20-way 1-shot | 20-way 5-shot |  
@@ -90,7 +97,7 @@ and 2 $\times$ 2 max-pooling。
 | MAML | **98.7 $\pm$ 0.4** $\%$ | **99.9 $\pm$ 0.1** $\%$ | **95.8 $\pm$ 0.3** $\%$ | **98.9 $\pm$ 0.2** $\%$ |
 
 <center>
-表1	MAML 在 miniImageNet 上的分类结果。
+表 2	MAML 在 miniImageNet 上的分类结果
 </center>
 
 | Method | 5-way 1-shot | 5-way 5-shot |

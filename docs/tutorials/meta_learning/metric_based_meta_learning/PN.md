@@ -42,12 +42,11 @@ $$
 J(\phi)= \underset{\phi}{\operatorname{argmin}}\left(\sum_{k=1}^{K}-\log \left(p_{\phi}\left(\boldsymbol{y}=k \mid \boldsymbol{x}_{k}\right)\right)\right)
 $$
 
-PN 示意图如图1所示。
+PN 示意图如图 1 所示。
 
 ![PN](../../../images/meta_learning/metric_based_meta_learning/PN/PN.png)
-<center>
-图1	PN 示意图。
-</center>
+
+图 1	PN 示意图
 
 ## 2 PN 算法流程
 
@@ -76,10 +75,11 @@ PN 示意图如图1所示。
 - $N_{Q}$ 是每类中 query set 的样本个数;
 - $\mathrm{RANDOMSAMPLE}(S, N)$ 表示从集合 $\mathrm{S}$ 中随机选出 $\mathrm{N}$ 个元素。
 
+
 ## 3 PN 分类结果
 
 <center>
-表1	PN 在 Omniglot 上的分类结果。
+表 1	PN 在 Omniglot 上的分类结果
 </center>
 
 | Model | Dist. | Fine Tune | 5-way 1-shot | 5-way 5-shot | 20-way 1-shot | 20-way 5-shot |  
@@ -91,7 +91,7 @@ PN 示意图如图1所示。
 | PROTOTYPICAL NETWORKS | Euclid. | N | **98.8** $\%$ |  99.7 $\%$ | **96.0** $\%$  | **98.9** $\%$ |
 
 <center>
-表1	PN 在 miniImageNet 上的分类结果。
+表 2	PN 在 miniImageNet 上的分类结果
 </center>
 
 | Model | Dist. | Fine Tune | 5-way 1-shot | 5-way 5-shot | 

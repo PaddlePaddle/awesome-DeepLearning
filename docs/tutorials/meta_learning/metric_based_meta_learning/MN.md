@@ -52,13 +52,11 @@ $f$ 与 $g$ 表示施加在测试样本与训练样本上的嵌入函数 (Embedd
 从而使得从 $x_{i}$ 到 $\hat{x}$ 的注意力机制为 0 ，
 则上式等价于 KNN 。
 
-图1是 MN 的网络结构示意图。
+图 1 是 MN 的网络结构示意图。
 
 ![MN](../../../images/meta_learning/metric_based_meta_learning/MN/MN.png)
-<center>
-图1	MN 示意图。
-</center>
 
+图 1	MN 示意图
 
 ### 1.2 Full Context Embeddings
 
@@ -130,7 +128,7 @@ $$
 ## 5 MN 分类结果
 
 <center>
-表1	MN 在 Omniglot 上的分类结果。
+表 1	MN 在 Omniglot 上的分类结果
 </center>
 
 | Model | Matching Fn | Fine Tune | 5-way 1-shot | 5-way 5-shot | 20-way 1-shot | 20-way 5-shot |  
@@ -147,7 +145,7 @@ $$
 
 
 <center>
-表1	MN 在 miniImageNet 上的分类结果。
+表 2	MN 在 miniImageNet 上的分类结果
 </center>
 
 | Model | Matching Fn | Fine Tune | 5-way 1-shot | 5-way 5-shot | 
