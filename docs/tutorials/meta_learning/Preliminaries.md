@@ -39,7 +39,7 @@ Few-Shot Learning 是 Meta-Learning 在监督学习领域的应用。
 内部的训练集和测试集一般称为支持集 (Support Set) 和查询集 (Query Set)。
 支持集又是一个 N-Way K-Shot 问题，即有 N 个类别，每个类有 K 个样例。 
 
-![Task](../../images/meta_learning/Preliminaries/Task.png)
+![Task](../../images/meta_learning/preliminaries/Task.png)
 <center>
 图1 任务结构。
 </center>
@@ -52,7 +52,7 @@ Few-Shot Learning 是 Meta-Learning 在监督学习领域的应用。
 外部优化问题和内部优化问题通常分别称为上层优化问题和下层优化问题，
 如图2所示的MAML。
 
-![BilevelOptimization](../../images/meta_learning/Preliminaries/BilevelOptimization.png)
+![BilevelOptimization](../../images/meta_learning/preliminaries/BilevelOptimization.png)
 <center>
 图2 双层优化元学习MAML。
 </center>
@@ -64,7 +64,7 @@ Few-Shot Learning 是 Meta-Learning 在监督学习领域的应用。
 这两个层次有各自不同的目标函数、约束条件和决策变量。
 基学习器和元学习器的作用对象及功能如图3所示。
 
-![MetaBaseLearner](../../images/meta_learning/Preliminaries/MetaBaseLearner.png)
+![MetaBaseLearner](../../images/meta_learning/preliminaries/MetaBaseLearner.png)
 <center>
 图3 基学习器和元学习器。元学习器总结任务经验进行任务之间的共性学习，同时指导基学习器对新任务进行特性学习。 
 </center>
@@ -106,7 +106,7 @@ Few-Shot Learning 是 Meta-Learning 在监督学习领域的应用。
 即 $\nabla\sum_{n=1}^{N} l \left( f_{n}^{*}, D_{n}^{\mathrm{te}} \right)$。
 元学习工作原理如图4所示。
 
-![MetaLearningWorkingPrinciple](../../images/meta_learning/Preliminaries/MetaLearningWorkingPrinciple.png)
+![MetaLearningWorkingPrinciple](../../images/meta_learning/preliminaries/MetaLearningWorkingPrinciple.png)
 <center>
 图4 元学习工作原理。 
 </center>

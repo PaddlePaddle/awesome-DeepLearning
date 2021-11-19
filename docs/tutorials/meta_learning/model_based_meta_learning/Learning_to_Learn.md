@@ -1,8 +1,8 @@
 # Learning to Learn
 
 Learning to Learn by Gradient Descent by Gradient Descent 
-提出了一种全新的优化算法学习策略，
-用 LSTM 代替传统优化方法学习出一个针对特定任务的优化器。
+提出了一种全新的优化策略，
+用 LSTM 替代传统优化方法学习一个针对特定任务的优化器。
 
 
 ## 1 问题提出
