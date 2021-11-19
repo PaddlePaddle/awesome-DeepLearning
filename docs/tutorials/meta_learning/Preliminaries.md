@@ -54,7 +54,7 @@ Few-Shot Learning 是 Meta-Learning 在监督学习领域的应用。
 
 ![BilevelOptimization](../../images/meta_learning/preliminaries/BilevelOptimization.png)
 <center>
-图2 双层优化元学习MAML。
+图2 双层优化元学习 MAML。
 </center>
 
 两层优化问题涉及两个参与者：
