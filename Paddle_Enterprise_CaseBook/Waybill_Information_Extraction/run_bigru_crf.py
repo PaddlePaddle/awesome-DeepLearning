@@ -7,6 +7,7 @@ from paddlenlp.datasets import MapDataset
 from paddlenlp.data import Stack, Tuple, Pad
 from paddlenlp.layers import LinearChainCrf, ViterbiDecoder, LinearChainCrfLoss
 from paddlenlp.metrics import ChunkEvaluator
+from paddlenlp.embeddings import TokenEmbedding
 from utils import load_dict, evaluate, predict, parse_decodes1, parse_decodes2
 from paddlenlp.transformers import ErnieGramTokenizer, ErnieGramForTokenClassification
 from utils import convert_example
