@@ -66,3 +66,18 @@ MOT16数据集是在2016年提出的用于衡量多目标跟踪检测和跟踪�
 
 MOT17与MOT16数据集相同，但标注更为准确。更多信息可参考：[MOT17](https://motchallenge.net/data/MOT17/)
 
+
+
+## 数据来源
+
+本案例数据来源于：
+
+1. Caltech Pedestrian Detection Benchmark: http://www.vision.caltech.edu/Image_Datasets/CaltechPedestrians/
+2. CityPersons: https://github.com/cvgroup-njust/CityPersons
+3. CUHK-SYSU: http://www.ee.cuhk.edu.hk/~xgwang/PS/dataset.html
+4. PRW: https://github.com/liangzheng06/PRW-baseline
+5. ETHZ: https://data.vision.ee.ethz.ch/cvl/aess/dataset/
+6. MOT16: https://motchallenge.net/data/MOT16/
+7. MOT17: https://motchallenge.net/data/MOT17/
+8. Head Tracking 21: https://motchallenge.net/data/Head_Tracking_21
+
