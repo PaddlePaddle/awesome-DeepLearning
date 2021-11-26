@@ -15,6 +15,7 @@
 import paddle.nn as nn
 from paddlenlp.transformers import ErniePretrainedModel
 from paddlenlp.layers.crf import LinearChainCrf, ViterbiDecoder, LinearChainCrfLoss
+from paddlenlp.embeddings import TokenEmbedding
 
 
 class BiGRUWithCRF(nn.Layer):
