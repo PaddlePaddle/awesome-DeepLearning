@@ -1,6 +1,6 @@
 # 池化
 
-## 1 基础概念
+## 基础概念
 
 在图像处理中，由于图像中存在较多冗余信息，可用某一区域子块的统计信息（如最大值或均值等）来刻画该区域中所有像素点呈现的空间分布模式，以替代区域子块中所有像素点取值，这就是卷积神经网络中池化(pooling)操作。
 
@@ -22,7 +22,7 @@
 
 - **K-max池化：** 对输入特征图的区域子块中像素点取前K个最大值，常用于自然语言处理中的文本特征提取。如图2，从包含了4个取值的每一列中选取前2个最大值就得到了K最大池化结果。
 
-## 2 特点
+## 特点
 
 1. 当输入数据做出少量平移时，经过池化后的大多数输出还能保持不变，因此，池化**对微小的位置变化具有鲁棒性**。例如 **图3** 中，输入矩阵向右平移一个像素值，使用最大池化后，结果与平移前依旧能保持不变。
 
@@ -32,10 +32,10 @@
 
 2. 由于池化之后特征图会变小，如果后面连接的是全连接层，能有效的**减小神经元的个数，节省存储空间并提高计算效率**。
 
-## 3 池化中填充的方式
-在飞桨中，无论是Conv2D中的padding还是Average2D中的padding,接收值类型都包括int、list、tuple和string。下面用代码、公式和图片来介绍一下这些方式吧。
+## 池化中填充的方式
+在飞桨中，各种Pooling API中的Padding参数, 接收值类型都包括int、list、tuple和string。下面用代码和公式来介绍一下这些方式吧。
 
-### 3.1 int类型输入
+### int输入
 int输入即接收一个int类型的数字n，对图片的四周包裹n行n列的0来填充图片。如果要保持图片尺寸不变，n的值和池化窗口的大小是有关的。假如 $H_{in}, W_{in}$ 为图片输入的大小，$k_h, k_w$ 为池化窗口的大小，$H_{out}, H_{out}$ 为结果图的大小的话，他们之间有着这样的关系。
 $$H_{out} = \frac{H_{in} + 2*p_h - k_h}{s_h} + 1 \\
   W_{out} = \frac{W_{out} + 2*p_w -k_w}{s_w} + 1
@@ -50,19 +50,94 @@ $$
 $$
 Padding = \frac{(k-1)}{2} \quad \quad (k \% 2 != 0)
 $$
-### 3.2 list和tuple类型输入
-因为图像有宽高，所以list和tuple为1维长度为2的组合，分别对应了高和宽，计算方式和上面int输入的一样，单独计算。一般用作输入图片宽高不一致，或者池化窗口大小不一的情况。
 
-### 3.3 string类型输入
+关于上面的讲解，下面用飞桨的API来看看吧。
+
+```python
+import paddle # No padding
+x = paddle.rand((1, 1, 6, 6))
+avgpool = paddle.nn.AvgPool2D(kernel_size=3, stride=1, padding=0)
+y = avgpool(x)
+print('result:', 'shape of x:', x.shape, 'shape of result:', y.shape)
+
+result: shape of x: [1, 1, 6, 6] shape of result: [1, 1, 4, 4]
+```
+这是池化中不padding，stride为1的结果，可以根据公式填入，$H_{out} = W_{out} = (6 + 0 - 3) + 1 = 4$，因此池化后的结果为4。如果填充呢？
+
+```python
+import paddle # Padding 1
+x = paddle.rand((1, 1, 6, 6))
+avgpool = paddle.nn.AvgPool2D(kernel_size=3, stride=1, padding=1)
+y = avgpool(x)
+print('result:', 'shape of x:', x.shape, 'shape of result:', y.shape)
+
+result: shape of x: [1, 1, 6, 6] shape of result: [1, 1, 6, 6]
+```
+正如我们上面的公式，$H_{out} = W_{out} = (6 + 2 - 3) + 1 = 6$, 填充为1的时候图像保持为原大小。
+
+
+### list和tuple输入
+因为图像有宽和高，所以list和tuple的长度应该为2，里面的两个值分别对应了高和宽，计算方式和上面int输入的一样，单独计算。一般用作输入图片宽高不一致，或者池化窗口大小不一的情况。我们直接用飞桨的API来看看吧。
+```python
+import paddle # No padding and different kernel size
+x = paddle.rand((1, 1, 12, 6)) # 12为高H， 6为宽W
+avgpool = paddle.nn.AvgPool2D(kernel_size=(3, 5), stride=1, padding=0)
+y = avgpool(x)
+print('result:', 'shape of x:', x.shape, 'shape of result:', y.shape)
+result: shape of x: [1, 1, 12, 6] shape of result: [1, 1, 10, 2]
+```
+这里我们带入公式推理一下，$H_{out} = 12 - 3 + 1 = 10, W_{out} = 6 - 5 + 1 = 2$.与结果相符。下面是有填充的情况，且3的滑动窗口大小我们需要填充1，5的话则需要填充2了。下面来看看吧。
+```python
+import paddle # No padding and different kernel size
+x = paddle.rand((1, 1, 12, 6)) # 12为高H， 6为宽W
+avgpool = paddle.nn.AvgPool2D(kernel_size=(3, 5), stride=1, padding=(1, 2))
+y = avgpool(x)
+print('result:', 'shape of x:', x.shape, 'shape of result:', y.shape)
+result: shape of x: [1, 1, 12, 6] shape of result: [1, 1, 12, 6]
+```
+这里的结果与我们的期望一致，大家试着带入公式算一下吧。
+
+
+
+### string输入
 string输入有两个值，一个是SAME，一个是VALID。这两个的计算公式如下：
 
 SAME:$H_{out} = \lceil \frac{H_{in}}{s_h} \rceil$, $W_{out} = \lceil\frac{W_{in}}{s_w}\rceil$
 
 VALID:$H_{out} = \frac{H_{in} - k_h}{s_h} + 1$, $W_{out} = \frac{W_{in} - k_w}{s_w} + 1$
 
-可以看到，VALID方式就是默认采用的不填充的方式，与上面不Padding的公式一样。而SAME则与池化窗口的大小无关，若$s_h$和$s_w$为1，无论池化窗口的大小，输出的特征图的大小都与原图保持一致。当任意一个大于1时，如果能整除，输出的尺寸就是整除的结果，如果不能整除，则通过padding的方式继续向上取整。
+可以看到，VALID方式就是默认采用的不填充的方式，与上面不Padding的公式一样。而SAME则与池化窗口的大小无关，若$s_h$和$s_w$为1，无论池化窗口的大小，输出的特征图的大小都与原图保持一致。当任意一个大于1时，如果能整除，输出的尺寸就是整除的结果，如果不能整除，则通过padding的方式继续向上取整。理论过于难懂，我们直接用飞桨的API来看看吧。
+```python
+import paddle # Padding SAME kernel_size 2
+x = paddle.rand((1, 1, 6, 6))
+avgpool = paddle.nn.AvgPool2D(kernel_size=2, padding='SAME')
+y = avgpool(x)
+print('result:', 'shape of x:', x.shape, 'shape of result:', y.shape)
+result: shape of x: [1, 1, 6, 6] shape of result: [1, 1, 3, 3]
+ ```
+  代码的结果出来了，我们来直接带入公式来计算吧，$H_{out} = 6/2 = 3, W_{out} = 6/2 = 3$,结果一致。
 
-## 4 应用示例
+ ```python
+import paddle # Padding SAME kernel_size 1
+x = paddle.rand((1, 1, 6, 6))
+avgpool = paddle.nn.AvgPool2D(kernel_size=1, padding='SAME')
+y = avgpool(x)
+print('result:', 'shape of x:', x.shape, 'shape of result:', y.shape)
+result: shape of x: [1, 1, 6, 6] shape of result: [1, 1, 6, 6]
+ ```
+ 这个呢，就和我们上面说的一致。下面来看看VALID填充方式吧。
+```python 
+import paddle # Padding VALID
+x = paddle.rand((1, 1, 6, 6))
+avgpool = paddle.nn.AvgPool2D(kernel_size=2, padding='VALID')
+y = avgpool(x)
+print('result:', 'shape of x:', x.shape, 'shape of result:', y.shape)
+result: shape of x: [1, 1, 6, 6] shape of result: [1, 1, 3, 3]
+```
+这就是VALID的填充方式的结果啦。大家自己按照公式算算，看看你的答案和程序输出的对不对哦。
+
+
+## 应用示例
 
 与卷积核类似，池化窗口在图片上滑动时，每次移动的步长称为步幅，当宽和高方向的移动大小不一样时，分别用$s_w$和$s_h$表示。也可以对需要进行池化的图片进行填充，填充方式与卷积类似，假设在第一行之前填充$p_{h1}$行，在最后一行后面填充$p_{h2}$行。在第一列之前填充$p_{w1}$列，在最后一列之后填充$p_{w2}$列，则池化层的输出特征图大小为：
 
@@ -92,123 +167,3 @@ $$W_{out} = \frac{W + p_{w1} + p_{w2} - k_w}{s_w} + 1=\frac{4 + 0 + 0 - 2}{2} + 
 4. 池化窗口向右移动两个像素，对应黄色区域，此时输出为 $13.5 = \frac{11 + 12 + 15 + 16}{4}$ 。
 
 **图1(b)** 中，使用最大池化进行运算，将上述过程的求均值改为求最大值即为最终结果。
-
-在池化过程中，padding是一样的参数和效果，但是需要注意的是，池化里stride的值与卷积核的大小保持一致。这里用paddle代码举几个例子来论证以下。
-```python
-import paddle # No padding
-x = paddle.rand((1, 1, 6, 6))
-avgpool = paddle.nn.AvgPool2D(kernel_size=2, padding=0)
-y = avgpool(x)
-print('result:', 'shape of x:', x.shape, 'shape of result:', y.shape)
-
-result: shape of x: [1, 1, 6, 6] shape of result: [1, 1, 3, 3]
-```
-
-这是池化中不padding，stride为2的结果，可以看出6/2=3，因此结果为3。
-
-```python            
-import paddle # Padding 1
-x = paddle.rand((1, 1, 6, 6))
-avgpool = paddle.nn.AvgPool2D(kernel_size=2, padding=1)
-y = avgpool(x)
-print('result:', 'shape of x:', x.shape, 'shape of result:', y.shape)
-
-result: shape of x: [1, 1, 6, 6] shape of result: [1, 1, 4, 4]
-```
-
-这是池化中padding为1，stride为2的结果，根据公式计算 （6-2+2）/2 +1 = 4。和结果一致。
- 
-```python
-import paddle # Padding SAME
-x = paddle.rand((1, 1, 6, 6))
-avgpool = paddle.nn.AvgPool2D(kernel_size=2, padding='SAME')
-y = avgpool(x)
-print('result:', 'shape of x:', x.shape, 'shape of result:', y.shape)
-
-result: shape of x: [1, 1, 6, 6] shape of result: [1, 1, 3, 3]
-```
-
-这是池化中padding为SAME，stride为2的结果，根据公式计算 6/2=3。和结果一致。
-
-```python
-import paddle # padding SAME, Stride 4
-x = paddle.rand((1, 1, 6, 6))
-avgpool = paddle.nn.AvgPool2D(kernel_size=4, padding="SAME")
-y = avgpool(x)
-print('result:', 'shape of x:', x.shape, 'shape of result:', y.shape)
-
-result: shape of x: [1, 1, 6, 6] shape of result: [1, 1, 3, 3]
-```
-
-不使用padding的时候，6×6的特征图被2×2的池化窗口覆盖，并且步长为2，因此结果为3×3的特征图。但如果padding为1，根据公式我们可以算出池化的结果为 $\lfloor (6-3+2)/2 \rfloor + 1 = 4$。当填充方式为SAME的时候，6能被2整除，因此结果为3×3的特征图。6不能被4整除，向上取整，结果是2×2的特征图。另外，池化一般不用padding，而在卷积中常用。那么在卷积中，其实区别就在于卷积核和步长需要单独设置了。下面用卷积的代码来展示一下卷积中Padding的效果。
-
-```python
-import paddle # 不使用padding
-x = paddle.rand((1, 1, 6, 6))
-conv = paddle.nn.Conv2D(1, 1, kernel_size=3, stride=1, padding=0)
-y = conv(x)
-print('result:', 'shape of x:', x.shape, 'shape of result:', y.shape)
-
-result: shape of x: [1, 1, 6, 6] shape of result: [1, 1, 4, 4]
-```
-这是不使用padding的结果，可以看出，和我们画的图是一致的。
-
-再来看看卷积核为3，padding为1的效果。
-```python
-import paddle # kernel_size 3, padding 1
-x = paddle.rand((1, 1, 6, 6))
-conv = paddle.nn.Conv2D(1, 1, kernel_size=3, stride=1, padding=1)
-y = conv(x)
-print('result:', 'shape of x:', x.shape, 'shape of result:', y.shape)
-
-result: shape of x: [1, 1, 6, 6] shape of result: [1, 1, 6, 6]
-```
-这是padding为1， 卷积核为3的结果。和我们的图2也是一致的，这里我们在验证以下Padding与K的公式。选择卷积核为5，padding为2来试试。
-
-```python
-import paddle # kernel_size 5, padding 2
-x = paddle.rand((1, 1, 6, 6))
-conv = paddle.nn.Conv2D(1, 1, kernel_size=5, stride=1, padding=2)
-y = conv(x)
-print('result:', 'shape of x:', x.shape, 'shape of result:', y.shape)
-
-result: shape of x: [1, 1, 6, 6] shape of result: [1, 1, 6, 6]
-```
-这是padding为2， 卷积核为5的结果。和公式一致。
-
-接下来看看SAME和VALID参数。直接放代码吧。
-```python
-import paddle # padding SAME, Stride=1
-x = paddle.rand((1, 1, 6, 6))
-conv = paddle.nn.Conv2D(1, 1, kernel_size=3, stride=1, padding='SAME')
-y = conv(x)
-print('result:', 'shape of x:', x.shape, 'shape of result:', y.shape)
-
-result: shape of x: [1, 1, 6, 6] shape of result: [1, 1, 6, 6]
-```
-
-这是padding为SAME的结果，可以看出在stride为1的时候还是原来的大小。那么stride为2呢？
-
-```python            
-import paddle # padding SAME Stride=2
-x = paddle.rand((1, 1, 6, 6))
-conv = paddle.nn.Conv2D(1, 1, kernel_size=3, stride=2, padding='SAME')
-y = conv(x)
-print('result:', 'shape of x:', x.shape, 'shape of result:', y.shape)
-
-result: shape of x: [1, 1, 6, 6] shape of result: [1, 1, 3, 3]
-```
-
-这是padding为SAME，stride为2的结果，可以看出6/2=3，因此结果为3。
-
-```python
-import paddle # padding VALID
-x = paddle.rand((1, 1, 6, 6))
-conv = paddle.nn.Conv2D(1, 1, kernel_size=3, stride=1, padding='VALID')
-y = conv(x)
-print('result:', 'shape of x:', x.shape, 'shape of result:', y.shape)
-
-result: shape of x: [1, 1, 6, 6] shape of result: [1, 1, 4, 4]
-```
-
-这是padding为VALID的结果，和不padding一样。
