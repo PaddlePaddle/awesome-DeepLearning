@@ -8,6 +8,8 @@ MAML 通过少量的数据寻找一个合适的初始值范围，从而改变梯
 该方法可以用于回归、分类以及强化学习。
 
 
+该模型的Paddle实现请参考链接：[PaddleRec版本](https://github.com/PaddlePaddle/PaddleRec/tree/master/models/multitask/maml)
+
 ## 1 MAML 
 
 MAML 是典型的双层优化结构，其内层和外层的优化方式如下：
