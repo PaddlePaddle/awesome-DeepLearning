@@ -99,6 +99,7 @@
 | 模型优化 | 预训练模型-蒸馏                             | 预训练模型蒸馏算法：Patient-KD、DistilBERT、TinyBERT、DynaBERT模型详解，以及使用DynaBERT策略对TinyBERT进行模型蒸馏 | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2258091) |
 | CV       | 图像领域的Transformer-Vit,DeiT              | 详细讲解ViT 以及 DeiT原理                                    | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2299267) |
 | CV       | 图像领域的Transformer-Swin Transformer      | 详细讲解Swin Transformer原理                                 | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2292148) |
+| CV | CV领域的Transformer模型DETR在目标检测任务中的应用 | 详细讲解DETR原理及代码解析 | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2290729) |
 
 返回[:arrow_heading_up:](#0)
 
