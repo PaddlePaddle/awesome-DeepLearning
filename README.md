@@ -283,8 +283,6 @@
 | CV       | [2020 CCF BDCI: 遥感影像地块分割baseline](https://aistudio.baidu.com/aistudio/projectdetail/1090790?channelType=0&channel=0) | 2020 CCF BDCI: 遥感影像地块分割的baseline模型库，包括baseline模型的训练方法和比赛的评测脚本。 |
 | CV       | [第三届中国AI+创新创业大赛：半监督学习目标定位竞赛第1名方案](https://aistudio.baidu.com/aistudio/projectdetail/2210815)| 半监督学习目标定位竞赛第一名方案分享 A榜得分0.81425 B榜得分0.80428 |
 |数据挖掘|[【Padddle打比赛】心电图智能诊断竞赛Baseline-0.6765](https://aistudio.baidu.com/aistudio/projectdetail/2712180)|AIWIN 心电图智能诊断竞赛|
-| 推荐     |                                                              |                                                              |
-| 强化学习 |                                                              ||
 
 返回​[:arrow_heading_up:](#0)
 
