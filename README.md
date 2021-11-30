@@ -272,13 +272,17 @@
 
 | 领域     | 竞赛案例                                                     | 介绍                                                         |
 | -------- | ------------------------------------------------------------ | ---- |
-| 机器学习 |                                                              |                                                              |
+| 机器学习 |   [【Paddle打比赛】个贷违约预测Baseline+ 0.607](https://aistudio.baidu.com/aistudio/projectdetail/2466206)                                                           |         DataFountain个贷违约预测，参考官方的baseline并用paddle进行改进                                                  |
 | NLP      | [【Paddle打比赛】讯飞赛题—中文问题相似度挑战赛0.9+Baseline](https://aistudio.baidu.com/aistudio/projectdetail/2271498) | 中文问题相似度挑战赛paddle版本Baseline，基于paddlenlp通过预训练模型的微调完成问题相似度评定任务 |
 | NLP      | [基于PaddleHub的疫情期间网民情绪识别](https://aistudio.baidu.com/aistudio/projectdetail/294224?channelType=0&channel=0) | 本项目为疫情期间网民情绪识别比赛的解决方案。使用了PaddleHub和ERNIE实现对疫情期间微博文本的情绪识别。 |
-| 语音     |                                                              |                                                              |
+| NLP      | [【Paddle打比赛】产品评论观点提取竞赛baseline](https://aistudio.baidu.com/aistudio/projectdetail/2417709) | DataFountain基于BERT的产品评论观点提取竞赛baseline，增加了优化方法|
+| NLP      | [【Paddle打比赛】剧本角色情感识别baseline-精度0.676](https://aistudio.baidu.com/aistudio/projectdetail/2423977) | 剧本角色情感识别baseline，使用bert模型|
+| 语音     |[【Paddle打比赛】语音合成](https://aistudio.baidu.com/aistudio/projectdetail/2793102?contributionType=1)                                                              |2021 新网银行智能语音大赛baseline。截止2021.11.17，该方案在总分榜第一，作品榜第二                                                              |
 | CV       | [中文场景文字识别挑战赛baseline](https://aistudio.baidu.com/aistudio/projectdetail/229728?channelType=0&channel=0) | 中文场景文字识别挑战赛的baseline项目, 用于参赛选手借鉴参考   |
+|CV|[【Paddle打比赛】手写字体OCR识别竞赛baseline](https://aistudio.baidu.com/aistudio/projectdetail/2606211)|2021世界人工智能创新大赛，手写字体OCR识别竞赛baseline|
 | CV       | [2020 CCF BDCI: 遥感影像地块分割baseline](https://aistudio.baidu.com/aistudio/projectdetail/1090790?channelType=0&channel=0) | 2020 CCF BDCI: 遥感影像地块分割的baseline模型库，包括baseline模型的训练方法和比赛的评测脚本。 |
 | CV       | [第三届中国AI+创新创业大赛：半监督学习目标定位竞赛第1名方案](https://aistudio.baidu.com/aistudio/projectdetail/2210815)| 半监督学习目标定位竞赛第一名方案分享 A榜得分0.81425 B榜得分0.80428 |
+|数据挖掘|[【Padddle打比赛】心电图智能诊断竞赛Baseline-0.6765](https://aistudio.baidu.com/aistudio/projectdetail/2712180)|AIWIN 心电图智能诊断竞赛|
 | 推荐     |                                                              |                                                              |
 | 强化学习 |                                                              ||
 
