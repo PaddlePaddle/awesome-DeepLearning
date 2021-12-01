@@ -111,11 +111,11 @@ xml文件中包含以下字段：
 
 ##  模型选择
 
-PaddleX提供了5种目标检测模型：FasterRCNN、YOLOV3、PPYOVO、PPYOLOv2和PPYOLOTiny。
+PaddleX提供了5种目标检测模型：FasterRCNN、YOLOv3、PP-YOLO、PP-YOLOv2和PP-YOLO-tiny。
 
 * [Faster RCNN](https://arxiv.org/pdf/1506.01497.pdf)：Ross B. Girshick在2016年提出了新的FasterRCNN，需要先产生候选区域，再对RoI做分类和位置坐标的预测，这类算法被称为两阶段目标检测算法。在结构上，Faster RCNN已经将特征抽取(feature extraction)，proposal提取，bounding box regression(rect refine)，classification都整合在了一个网络中，使得综合性能有较大提高，在检测速度方面尤为明显。
-* [YOLOv3](https://pjreddie.com/media/files/papers/YOLOv3.pdf)：Joseph Redmon等人在2015年提出YOLO（You Only Look Once，YOLO）算法，通常也被称为YOLOv1；2016年，他们对算法进行改进，又提出YOLOv2版本；2018年发展出YOLOV3版本。YOLOv3使用单个网络结构，在产生候选区域的同时即可预测出物体类别和位置，这类算法被称为单阶段目标检测算法。另外，YOLOv3算法产生的预测框数目比Faster R-CNN少很多。Faster R-CNN中每个真实框可能对应多个标签为正的候选区域，而YOLOv3里面每个真实框只对应一个正的候选区域。这些特性使得YOLOv3算法具有更快的速度，能到达实时响应的水平。
-* [PP-YOLO](https://arxiv.org/abs/2007.12099)：PPYOLO是[PaddleDetection]()优化和改进的YOLOv3的模型，其精度(COCO数据集mAP)和推理速度均优于[YOLOv4](https://arxiv.org/abs/2004.10934)模型。PP-YOLO在[COCO](http://cocodataset.org/) test-dev2017数据集上精度达到45.9%，在单卡V100上FP32推理速度为72.9 FPS, V100上开启TensorRT下FP16推理速度为155.6 FPS。PP-YOLO从如下方面优化和提升YOLOv3模型的精度和速度：
+* [YOLOv3](https://pjreddie.com/media/files/papers/YOLOv3.pdf)：Joseph Redmon等人在2015年提出YOLO（You Only Look Once，YOLO）算法，通常也被称为YOLOv1；2016年，他们对算法进行改进，又提出YOLOv2版本；2018年发展出YOLOv3版本。YOLOv3使用单个网络结构，在产生候选区域的同时即可预测出物体类别和位置，这类算法被称为单阶段目标检测算法。另外，YOLOv3算法产生的预测框数目比Faster R-CNN少很多。Faster R-CNN中每个真实框可能对应多个标签为正的候选区域，而YOLOv3里面每个真实框只对应一个正的候选区域。这些特性使得YOLOv3算法具有更快的速度，能到达实时响应的水平。
+* [PP-YOLO](https://arxiv.org/abs/2007.12099)：PP-YOLO是[PaddleDetection]()优化和改进的YOLOv3的模型，在[COCO](http://cocodataset.org/) test-dev2017数据集上精度达到45.9%，在单卡V100上FP32推理速度为72.9 FPS，V100上开启TensorRT下FP16推理速度为155.6 FPS。PP-YOLO从如下方面优化：
   - 更优的骨干网络: ResNet50vd-DCN
   - 更大的训练batch size: 8 GPUs，每GPU batch_size=24，对应调整学习率和迭代轮数
   - [Drop Block](https://arxiv.org/abs/1810.12890)
@@ -127,12 +127,12 @@ PaddleX提供了5种目标检测模型：FasterRCNN、YOLOV3、PPYOVO、PPYOLOv2
   - [Spatial Pyramid Pooling](https://arxiv.org/abs/1406.4729)
   - 更优的预训练模型
 
-* [PPYOLOv2](https://arxiv.org/abs/2104.10419)：相较20年发布的PP-YOLO，PPYOLOv2版本在COCO 2017 test-dev上的精度提升了3.6个百分点，由45.9%提升到了49.5%；在640*640的输入尺寸下，FPS达到68.9FPS。 主要改进点：
+* [PP-YOLOv2](https://arxiv.org/abs/2104.10419)：相较20年发布的PP-YOLO，PP-YOLOv2版本在COCO 2017 test-dev上的精度提升了3.6个百分点，由45.9%提升到了49.5%；在640*640的输入尺寸下，FPS达到68.9FPS。 主要改进点：
   * Path Aggregation Network
   * Mish Activation Function
   * Larger Input Size
   * IoU Aware Branch
-* PPYOLOTiny：在当前移动互联网、物联网、车联网等行业迅猛发展的背景下，边缘设备上直接部署目标检测的需求越来越旺盛。生产线上往往需要在极低硬件成本的硬件例如树莓派、FPGA、K210 等芯片上部署目标检测算法。而我们常用的手机 App，也很难直接在终端采用超过 6M 的深度学习算法。如何在尽量不损失精度的前提下，获得体积更小、运算速度更快的算法呢？得益于 PaddleSlim 飞桨模型压缩工具的能力，体积仅为 1.3M 的 PP-YOLO Tiny 诞生了！PP-YOLO Tiny 沿用了 PP-YOLO 系列模型的 spp，iou loss, drop block, mixup, sync bn 等优化方法，并进一步采用了针对移动端的优化策略：
+* PP-YOLO-tiny：在当前移动互联网、物联网、车联网等行业迅猛发展的背景下，边缘设备上直接部署目标检测的需求越来越旺盛。生产线上往往需要在极低硬件成本的硬件例如树莓派、FPGA、K210 等芯片上部署目标检测算法。而我们常用的手机 App，也很难直接在终端采用超过 6M 的深度学习算法。如何在尽量不损失精度的前提下，获得体积更小、运算速度更快的算法呢？得益于 PaddleSlim 飞桨模型压缩工具的能力，体积仅为 1.3M 的 PP-YOLO-tiny 诞生了！PP-YOLO-tiny 沿用了 PP-YOLO 系列模型的 spp，iou loss, drop block, mixup, sync bn 等优化方法，并进一步采用了针对移动端的优化策略：
   * 更适用于移动端的骨干网络：MobileNetV3
   * 更适用移动端的检测头（head）：深度可分离卷积
   * 去除对模型体积、速度有显著影响的优化策略：iou aware、matrix NMS等
@@ -141,13 +141,13 @@ PaddleX提供了5种目标检测模型：FasterRCNN、YOLOV3、PPYOVO、PPYOLOv2
   * 更大的batch size
   * 量化后压缩
 
-根据部署场景以及烟火检测实时性、高召回低误检要求，这里我们选择了PPYOLOV2算法进行火灾和烟雾检测。
+根据部署场景以及烟火检测实时性、高召回低误检要求，这里我们选择了PP-YOLOv2算法进行火灾和烟雾检测。
 
 <a name="模型训练"></a>
 
 ## 5 模型训练
 
-本项目采用PPYOLOV2作为烟火检测的模型，模型训练需要经过如下环节：
+本项目采用PP-YOLOv2作为烟火检测的模型，模型训练需要经过如下环节：
 
 ![dataset](docs/images/train.png)
 
@@ -157,7 +157,7 @@ PaddleX提供了5种目标检测模型：FasterRCNN、YOLOV3、PPYOVO、PPYOLOv2
 * eval_transforms：验证预处理参数，可以增加、修改预处理方法和参数；
 * train_dataset：训练使用数据集，修改图片路径、标签路径以及是否进行数据shuffle；
 * eval_dataset：验证使用数据集，修改图片路径、标签路径以及是否进行数据shuffle；
-* pdx.models.*：设置不同的模型，可选[FasterRCNN、YOLOv3、PPYOLO、PPYOLOTiny、PPYOLOV2]，这里选择PPYOLV2；
+* pdx.models.*：设置不同的模型，可选[FasterRCNN、YOLOv3、PP-YOLO、PP-YOLO-tiny、PP-YOLOv2，这里选择PP-YOLOv2；
 * model.train：设置训练epoch、训练和验证数据集、batch size、学习率learning rate、warmup step、lr衰减lr_decay_epoch、模型保存间隔save_interval_epoch、模型保存路径save_dir，详细介绍[训练参数](https://github.com/PaddlePaddle/PaddleX/blob/develop/docs/apis/models/detection.md)。
 
 PaddleX提供了单卡/多卡训练模型，满足用户多种训练需求
@@ -195,17 +195,17 @@ python -m paddle.distributed.launch --gpus 0,1 1.train_ppyolov2_imagenet.py
   <img src="docs/images/eval_2.png" alt="eval_2" style="zoom:48%;" />
   </div>
 
-综上，我们计算不同置信度阈值下图片级召回率和图片级误检率，找到符合要求的召回率和误检率，对应的置信度阈值用于后续模型预测阶段。使用PPYOLOV2训练好的模型进行评估，运行下行命令即可：
+综上，我们计算不同置信度阈值下图片级召回率和图片级误检率，找到符合要求的召回率和误检率，对应的置信度阈值用于后续模型预测阶段。使用PP-YOLOv2训练好的模型进行评估，运行下行命令即可：
 
 ```
 python eval.py
 ```
 
-得到PPYOLOV2烟雾和火灾检测指标，召回相对达到预期，但是召回比较高，后续我们将一起探究如何降低误检率：
+得到PP-YOLOv2烟雾和火灾检测指标，召回相对达到预期，但是召回比较高，后续我们将一起探究如何降低误检率：
 
-| 模型             | 召回率/% | 误检率/% |
-| ---------------- | -------- | -------- |
-| PPYOLV2+ResNet50 | 95.1     | 23.22    |
+| 模型               | 召回率/% | 误检率/% |
+| ------------------ | -------- | -------- |
+| PP-YOLOv2+ResNet50 | 95.1     | 23.22    |
 
 【名词解释】
 
@@ -278,9 +278,9 @@ python infer.py
 
 * 数据增强：数据处理时，使用不同的预处理、增强方法组合，包含：RandomHorizontalFlip、RandomDistort 、 RandomCrop 、RandomExpand、MixupImage等，详细解释请参考[图像预处理/增强](https://github.com/PaddlePaddle/PaddleX/blob/develop/docs/apis/transforms/transforms.md)
 
-* 不同模型：两阶段(Faster RCNN)、单阶段(YOLOV3、PPYOLO、PPYOLOV2等)
+* 不同模型：两阶段(Faster RCNN)、单阶段(YOLOv3、PP-YOLO、PP-YOLOv2等)
 
-* 不同backbone：ResNet50、ResNet101、DarkNet53、MobileNet3，具体每个模型可选参数，可参考检测模型文件[https://github.com/PaddlePaddle/PaddleX/blob/develop/paddlex/cv/models/detector.py]每个模型的backbone，如YOLOV3，就表示这些模型可以作为YOLOV3的backbone：
+* 不同backbone：ResNet50、ResNet101、DarkNet53、MobileNet3，具体每个模型可选参数，可参考检测模型文件[https://github.com/PaddlePaddle/PaddleX/blob/develop/paddlex/cv/models/detector.py]每个模型的backbone，如YOLOv3，就表示这些模型可以作为YOLOv3的backbone：
 
   ```python
       if backbone not in [
@@ -303,17 +303,17 @@ python infer.py
 
 #### 10.3 不同模型结果
 
-| 序号 | 模型                                           | 推理时间（FPS） | Recall | Error Rate |
-| ---- | ---------------------------------------------- | --------------- | ------ | ---------- |
-| 1    | PPYOLV2+ResNet50+ImageNet预训练(**Baseline**)  | **24**          | 95.1   | 23.22      |
-| 2    | PPYOLV2+ResNet50+ImageNet预训练+**aug**        | -               | 94.1   | 14.9       |
-| 3    | PPYOLV2+ResNet50+**COCO预训练**                | -               | 97.4   | 28.6       |
-| 4    | PPYOLV2+ResNet50+COCO预训练+**aug**            | -               | 96.3   | 11.1       |
-| 5    | PPYOLOV2+ResNet50+COCO预训练+aug+**SPP=False** | -               | 96     | 13.21      |
-| 6    | PPYOLV2+ResNet50+aug+COCO预训练+**背景图**     | **23.6**        | 93.9   | 1.1        |
-| 7    | PPYOLV2+**ResNet101**+aug+COCO预训练+背景图    | 21              | **96** | **2.2**    |
-| 8    | **PPYOLO**+ResNet50+COCO预训练+aug             | 20              | 90.0   | 8.81       |
-| 9    | **YOLOV3**+DarkNet53+COCO预训练+img_size(640)  | 21              | 88.4   | 6.01       |
+| 序号 | 模型                                                | 推理时间（FPS） | Recall | Error Rate |
+| ---- | --------------------------------------------------- | --------------- | ------ | ---------- |
+| 1    | **PP-YOLOv2**+ResNet50+ImageNet预训练(**Baseline**) | **24**          | 95.1   | 23.22      |
+| 2    | **PP-YOLOv2**+ResNet50+ImageNet预训练+**aug**       | -               | 94.1   | 14.9       |
+| 3    | **PP-YOLOv2**+ResNet50+**COCO预训练**               | -               | 97.4   | 28.6       |
+| 4    | **PP-YOLOv2**+ResNet50+COCO预训练+**aug**           | -               | 96.3   | 11.1       |
+| 5    | **PP-YOLOv2**+ResNet50+COCO预训练+aug+**SPP=False** | -               | 96     | 13.21      |
+| 6    | **PP-YOLOv2**+ResNet50+aug+COCO预训练+**背景图**    | **23.6**        | 93.9   | 1.1        |
+| 7    | **PP-YOLOv2**+**ResNet101**+aug+COCO预训练+背景图   | 21              | **96** | **2.2**    |
+| 8    | **PP-YOLO**+ResNet50+COCO预训练+aug                 | 20              | 90.0   | 8.81       |
+| 9    | **YOLOv3**+DarkNet53+COCO预训练+img_size(640)       | 21              | 88.4   | 6.01       |
 
 **说明：** 从表1的实验结论中可以发现，有些优化策略在精度优化上起到了正向结果，有些策略则相反。这些结论在不同的模型和不同的数据集上并不是相通的，还需根据具体情况验证。
 
@@ -321,16 +321,16 @@ python infer.py
 
 **模型优化思路**：
 
-- 1.通过选择更好的检测架构可以提高检测的Recall值——即**Neck，Head部分的优化**可以提高Recall。<**YOLOV3 到 PPYOLOV2**>
+- 1.通过选择更好的检测架构可以提高检测的Recall值——即**Neck，Head部分的优化**可以提高Recall。<**YOLOV3 到 PP-YOLOv2**>
 - 2.添加数据增强、背景图可以降低误检率。
 - 3.在数据量比较少的情况下，可以增加预训练模型。
 
 通过以上的简单优化方式，获取了两个较好的模型结果：【前者模型**速度更快**、后者**召回更高**】
 
-| 模型                                            | 推理时间（FPS） | Recall | Error Rate |
-| ----------------------------------------------- | --------------- | ------ | ---------- |
-| PPYOLV2+ResNet50+aug+COCO预训练+SPP+**背景图**  | **23.6**        | 93.9   | 1.1        |
-| PPYOLV2+**ResNet101**+aug+COCO预训练+SPP+背景图 | 21              | **96** | **2.2**    |
+| 模型                                              | 推理时间（FPS） | Recall | Error Rate |
+| ------------------------------------------------- | --------------- | ------ | ---------- |
+| PP-YOLOv2+ResNet50+aug+COCO预训练+SPP+**背景图**  | **23.6**        | 93.9   | 1.1        |
+| PP-YOLOv2+**ResNet101**+aug+COCO预训练+SPP+背景图 | 21              | **96** | **2.2**    |
 
 <a name="模型部署"></a>
 
