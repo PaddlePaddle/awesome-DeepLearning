@@ -1,5 +1,5 @@
 metric: COCO           # Label评价指标，coco IoU:0.5:0.95
-num_classes: 7         # 类别数量，coco类别比实际类别（voc类别）+1
+num_classes: 6         # 类别数量，6种瑕疵
 
 TrainDataset:
   !COCODataSet

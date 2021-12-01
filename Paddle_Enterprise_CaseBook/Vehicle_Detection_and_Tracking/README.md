@@ -9,9 +9,12 @@
 
 目标跟踪和目标检测任务都能够输出检测信息。对于目标检测，输出一段视频流，输出目标的类别和位置信息，但是视频帧之间没有关联信息，因为目标检测无法对帧与帧进行建模。目标跟踪模型增加了一个目标个体的ID信息，利用目标跟踪模型可以构建出帧与帧之间的联系。两个任务之间的差异点在于目标跟踪需要持续追踪目标运动状态，目标检测只需要检测出目标在某个瞬间的状态即可。
 
-目标跟踪的应用场景有流水线上零件计数、车辆行人计数与轨迹跟踪、医学分析等。
-
 本案例是智慧交通的AI应用-车辆计数与轨迹跟踪，单镜头多车辆追踪计数。
+
+案例的难点如下：
+- 道路及周边环境复杂，存在车辆在行驶过程中被树木、建筑物或其他车辆遮挡的情况，导致模型漏检或同一辆车在不同时刻被识别成多辆车；
+- 在道路拥堵情况下，车辆分布密集，为模型选择和参数优化等提出了挑战；
+- 此外，实时车辆跟踪对模型推理速度要求较高，避免选择较大模型或推理较慢的模型。
 
 本项目采用MOTA评估模型精度，采用FPS评估模型的速度。
 
@@ -48,6 +51,17 @@ Annotation包含了被标记对象的： 源图像的URL、类别标签、大小
 
 BDD100K数据集采集自6中不同的天气，其中晴天样本较多；采集的场景有6种，以城市街道为主；采集的时间有3个阶段，其中白天和夜晚居多。
 
+多目标跟踪数据准备见：https://github.com/PaddlePaddle/PaddleDetection/blob/6e65f11d8ec0169655b5ec7614a6360b25090ae3/docs/tutorials/PrepareMOTDataSet_cn.md
+
+所有数据集的标注是以统一数据格式提供的。各个数据集中每张图片都有相应的标注文本。给定一个图像路径，可以通过将字符串`images`替换为`labels_with_ids`并将`.jpg`替换为`.txt`来生成标注文本路径。在标注文本中，每行都描述一个边界框，格式如下：
+```
+[class] [identity] [x_center] [y_center] [width] [height]
+```
+**注意**:
+- `class`为`0`，目前仅支持单类别多目标跟踪。
+- `identity`是从`1`到`num_identifies`的整数(`num_identifies`是数据集中不同物体实例的总数)，如果此框没有`identity`标注，则为`-1`。
+- `[x_center] [y_center] [width] [height]`是中心点坐标和宽高，注意它们的值是由图片的宽度/高度标准化的，因此它们是从0到1的浮点数。
+
 本案例数据处理脚本请参考：https://github.com/PaddlePaddle/PaddleDetection/tree/develop/configs/mot/vehicle/tools/bdd100kmot
 
 ## 3 模型选择
@@ -75,8 +89,25 @@ FairMOT属于JDE（Jointly learns the Detector and Embedding model ）的一种�
 
 ## 4 模型训练
 
+本案例利用[PaddleDetection](https://github.com/PaddlePaddle/PaddleDetection)套件实现。
+
+通过下面的命令下载PaddleDetection代码：
+```
+git clone https://github.com/PaddlePaddle/PaddleDetection.git
+```
+
+通过下面的命令部署环境：
+```
+cd PaddleDetection
+pip install -r requirements.txt
+python setup.py install
+pip install pycocotools
+```
+
 运行如下代码开始训练模型：
-'python3.7 -m paddle.distributed.launch --log_dir log_vehicle --gpus 0,1,2,3,4,5,6,7 tools/train.py   -c configs/mot/vehicle/fairmot_dla34_30e_1088x608_bdd100k_vehicle.yml' 
+```
+python3.7 -m paddle.distributed.launch --log_dir log_vehicle --gpus 0,1,2,3,4,5,6,7 tools/train.py   -c configs/mot/vehicle/fairmot_dla34_30e_1088x608_bdd100k_vehicle.yml
+```
 
 - '--log_dir'参数指定训练log存放的目录；
 - '--gpus'参数配置了用当前机器的GPU卡编号；
@@ -104,6 +135,19 @@ OVERALL           46.5% 67.2% 35.6% 48.7% 91.9% 14530 1661 5371 7498 16517 19758
 
 ## 6 模型优化
 为了进一步提升模型的精度，在项目中采用了一系列优化的方式，如sync_bn、更换更大的backbone hardnet85等。
+
+下表是BDD100K数据集中所有四轮车视为一个类别进行训练的结果：
+
+| 模型                                                                               | MOTA | 
+| --------------------------------------------------------------------------------- | ---- |
+| baseline dla34 coco预训练 lr=0.0005  bs=16*8卡  epoch=12(8epoch降lr)| 39.6 | 
+| dla34,coco预训练，lr=0.0005  bs=16*8卡，12epoch（8epoch降lr）8w检测数据| 39.7 | 
+| baseline, coco预训练，dla34, 4gpu, bs6, 12epoch(8epoch降lr), lr=0.0002 | 38.1 | 
+| coco预训练，dla34, 4gpu, bs6, 12epoch, lr=0.0002, +sync_bn+ema | 38.5 | 
+| coco预训练，dla34, 4gpu, bs6, 12epoch, lr=0.0002, +dcn+sync_bn,epoch=11 | 34.4 | 
+| hardnet85+sync_bn+dcn,4卡，epoch=8 | 38.9 | 
+| hardnet85+sync_bn,4卡,epoch=8 | 38.2 | 
+
 具体见[模型优化文档](./accuracy_improvement.md)。
 
 ## 7 模型预测
@@ -120,6 +164,8 @@ python3.7 tools/infer_mot.py -c configs/mot/vehicle/fairmot_dla34_30e_1088x608_b
 --image_dir=/home/aistudio/work/test_data/b251064f-8d92db81  \
 --draw_threshold 0.2 --save_images
 ```
+
+<center><img src="./images/demo.png" width=70%></center>
 
 ## 8 模型导出
 
