@@ -24,7 +24,7 @@
 
 📒宝典类：[**深度学习百问**](https://paddlepedia.readthedocs.io/en/latest/index.html)、**面试宝典**
 
-📒案例类：**[飞桨产业实践范例库](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/awe/Paddle_Industry_Practice_Sample_Library)**（包含智慧城市：[火灾烟雾检测](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/Fire_and_Smoke_Detection)、 [安全帽检测](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/Hemtle%20Detection) ；智能制造：[钢材缺陷检测](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/paddlex_steel_defect_seg-master) 、 [机械手抓取](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/robot_grab)；互联网：[财报识别与关键字段抽取](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/Report_Recognition_and_Analysis) 等）
+📒案例类：**[飞桨产业实践范例库](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library)**（包含智慧城市：[火灾烟雾检测](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/Fire_and_Smoke_Detection)、 [安全帽检测](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/Hemtle%20Detection) ；智能制造：[钢材缺陷检测](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/paddlex_steel_defect_seg-master) 、 [机械手抓取](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/robot_grab)；互联网：[财报识别与关键字段抽取](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/Report_Recognition_and_Analysis) 等）
 
 从理论到实践，从科研到产业应用，各类学习材料一应俱全，旨在帮助开发者高效地学习和掌握深度学习知识，快速成为AI跨界人才。
 
@@ -45,7 +45,7 @@
 | ------------ | ------------------------------------------------------------ |
 | 入门深度学习 | 零基础实践深度学习[:arrow_heading_down:](#1)、深度学习百问[:arrow_heading_down:](#2)、动手学深度学习paddle版[:arrow_heading_down:](#dive) |
 | 进阶深度学习 | 产业实践深度学习、深度学习百问[:arrow_heading_down:](#2)、面试宝典[:arrow_heading_down:](#6) |
-| 趣味深度学习 | 特色课程[:arrow_heading_down:](#3)、[飞桨产业实践范例库](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/awe/Paddle_Industry_Practice_Sample_Library) |
+| 趣味深度学习 | 特色课程[:arrow_heading_down:](#3)、[飞桨产业实践范例库](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library) |
 
 ## 👷‍♂️我是企业用户
 
@@ -53,7 +53,7 @@
 | ------------ | ------------------------------------------------------------ |
 | 入门深度学习 | 零基础实践深度学习[:arrow_heading_down:](#1)、深度学习百问[:arrow_heading_down:](#2)、动手学深度学习paddle版[:arrow_heading_down:](#dive) |
 | 进阶深度学习 | 产业实践深度学习、特色课程[:arrow_heading_down:](#3)、面试宝典[:arrow_heading_down:](#6) |
-| 实践深度学习 | [飞桨产业实践范例库](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/awe/Paddle_Industry_Practice_Sample_Library)、飞桨各产品课程[:arrow_heading_down:](#fj) |
+| 实践深度学习 | [飞桨产业实践范例库](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library)、飞桨各产品课程[:arrow_heading_down:](#fj) |
 
 ---
 
