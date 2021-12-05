@@ -236,15 +236,27 @@ Deeplab v3在原有基础上的改动是：
 
 可以看成是把原Deeplab V3当作encoder，添加decoder得到新的模型（Deeplab V3+）。与V3不同的是，这里将空洞卷积和深度分离卷积结合，得到一个atrous separale convolution（也就是把空洞卷积应用在深度分离卷积上），能够在维持相同性能的情况下，深度分离卷积可以大大减小计算复杂度。后面再进行解码，并且在解码的过程中在此运用了不同层级特征的融合。此外，在encoder部分加入了Xception的结构减少了参数量，提高运行速度。
 
+### 2.8 部分模型对比结果
+
+如下**表2**和**表3**所示，在CityCapes公开数据集上现有部分语义分割模型进行实验比较，从分割准确性和实时性角度分别排序。
+
+![image-20211205203253823](../../../../images/computer_vision/semantic_segmentation/Overview/image-20211205203253823.png)
+
+<center>表2 CityCapes 像素级语义分割准确性比较结果</center><br></br>
+
+![image-20211205203342758](../../../../images/computer_vision/semantic_segmentation/Overview/image-20211205203342758.png)
+
+<center>表3 CityCapes 像素级语义分割实时性比较结果</center><br></br>
+
 ## 3.常用数据集
 
 ​		关于分割的开源/闭源数据集数量众多，并且基于很多重大数据集举办了很多竞赛。为了综述的完整性考虑，对现有的经典数据集进行总结。
 
-​		[论文](https://arxiv.org/abs/1704.06857)给出了分割常用的数据集，所有列出的数据集均包含像素级别或点级别的标签。根据数据内在属性分为3个部分：2维的或平面的RGB数据集，2.5维或带有深度信息的RGB（RGB-D）数据集，以及纯体数据或3维数据集。**表2**给出了这些数据集的概览，以及他们被构建的目的、类数、数据格式以及训练集、验证集、测试集划分情况。
+​		[论文](https://arxiv.org/abs/1704.06857)给出了分割常用的数据集，所有列出的数据集均包含像素级别或点级别的标签。根据数据内在属性分为3个部分：2维的或平面的RGB数据集，2.5维或带有深度信息的RGB（RGB-D）数据集，以及纯体数据或3维数据集。**表4**给出了这些数据集的概览，以及他们被构建的目的、类数、数据格式以及训练集、验证集、测试集划分情况。
 
 ![datasets_all](../../../../images/computer_vision/semantic_segmentation/Overview/datasets_all.png)
 
-<center>表2 常用大规模数据集总览</center><br></br>
+<center>表4 常用大规模数据集总览</center><br></br>
 
 ### 3.1.  二维数据集
 
