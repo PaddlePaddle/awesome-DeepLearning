@@ -1,3 +1,5 @@
+
+# 基于HRNet的模型优化
 在项目中，我们采用HRNET作为钢板缺陷分割的模型。具体代码请参考[train.py](./train.py)。
 
 运行如下代码开始训练模型(单机单卡)：
@@ -116,4 +118,7 @@ train_transforms = T.Compose([
 | -- | -- | -- | -- | -- | -- | -- | -- |
 |  HRNET | 150 | 800x128 | 16 | 0.01 | CrossEntropyLoss|RandomHorizontalFlip | 62.75%
 | HRNET  | 150 | 800x128 | 16 | 0.01 | CrossEntropyLoss+DiceLoss|RandomHorizontalFlip | 64.46%
-| HRNET  | 150 | 800x128 | 16 | 0.01 | CrossEntropyLoss+DiceLoss|RandomHorizontalFlip+RandomDistort | 64.46%
+| HRNET  | 150 | 800x128 | 16 | 0.01 | CrossEntropyLoss+DiceLoss|RandomCrop+RandomHorizontalFlip+RandomDistort+RandomBlur | 66.35%
+
+可以看到，通过添加数据增强又上升了1.89%。
+
