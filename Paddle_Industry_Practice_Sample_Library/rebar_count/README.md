@@ -1,33 +1,25 @@
 # 钢筋计数
 
-> 基于Paddlex1.3.11API 开发
-
 ## 1.项目说明
 
-在该项目中，主要向大家介绍如何使用目标检测来实现对钢筋计数。涉及代码亦可用于车辆计数、螺母计数、圆木计数等。
-
-在工地现场，对于进场的钢筋车，验收人员需要对车上的钢筋进行现场人工点根，确认数量后钢筋车才能完成进场卸货。上述过程繁琐、消耗人力且速度很慢。针对上述问题，希望通过手机拍照->目标检测计数->人工修改少量误检的方式智能、高效的完成此任务：
+在工地现场，验收人员需要对入场车辆上的钢筋进行现场人工点根，确认数量无误后，才能进场卸货。上述过程繁琐、速度慢，耗费大量的人力成本
+针对上述问题，飞桨PaddleX通过与摄像头结合，可以实现自动钢筋计数，再结合人工修改少量误检的方式，可以智能、高效地完成此任务。
 
 <div align="center">
-    <img src="./images/1.png" width="1024"/>
+    <img src="./images/1.png" width="600"/>
 </div>
 
-
+除钢筋计数外，本案例中介绍的方案同样适用于密集检测的移动端部署场景，如：餐饮计数，药品计数，零件计数等。
 
 **业务难点：**
 
-- **精度要求高** 钢筋本身价格较昂贵，且在实际使用中数量很大，误检和漏检都需要人工在大量的标记点中找出，所以需要精度非常高才能保证验收人员的使用体验。需要专门针对此密集目标的检测算法进行优化，另外，还需要处理拍摄角度、光线不完全受控，钢筋存在长短不齐、可能存在遮挡等情况。
-- **钢筋尺寸不一** 钢筋的直径变化范围较大且截面形状不规则、颜色不一，拍摄的角度、距离也不完全受控，这也导致传统算法在实际使用的过程中效果很难稳定。
-- **边界难以区分** 一辆钢筋车一次会运输很多捆钢筋，如果直接全部处理会存在边缘角度差、遮挡等问题效果不好，目前在用单捆处理+最后合计的流程，这样的处理过程就会需要对捆间进行分割或者对最终结果进行去重，难度较大。
-
-<div align="center">
-    <img src="./images/2.jpg" width="1024"/>
-</div>
-
+- **精度要求高** 实际业务中，钢筋数量庞大，容易导致模型误检和漏检，需要专门针对此密集目标的检测算法进行优化；
+- **钢筋尺寸不一** 钢筋的直径变化范围较大且截面形状不规则、颜色不一，拍摄的角度、距离也不完全受控，导致传统算法在实际使用的过程中效果不稳定；
+- **边界难以区分** 钢筋车每次会装载很多捆钢筋，如果直接全部处理会存在边缘角度差、遮挡等问题。而使用“单捆处理+合计”的方式，需要对捆间进行分割或者对最终结果进行去重，难度较大。
 
 ## 2.数据准备
 
-数据集中包含了250张已经标注好的数据，具体数据源于datafountain平台，用户可直接访问[链接](https://www.datafountain.cn/competitions/332/datasets)下载
+数据集中包含了250张已经标注好的数据，具体数据源于datafountain和广联达公司举办的钢筋计数比赛，用户可直接访问[链接](https://www.datafountain.cn/competitions/332/datasets)下载
 
 更多数据格式信息请参考[数据标注说明文档](https://paddlex.readthedocs.io/zh_CN/develop/data/annotation/index.html)
 
@@ -148,7 +140,7 @@ python code/infer.py
 预测结果如下：
 
 <div align="center">
-    <img src="./images/4.jpg" width="1024"/>
+    <img src="./images/4.jpg" width="800"/>
 </div>
 # 7.模型导出
 
@@ -207,12 +199,12 @@ paddlex --export_inference --model_dir=output/yolov3_ResNet50_vd_ssld/best_model
 - **召回率更低**，可能有更少的误检——但由于模型轻量化缘故，漏检情况可能会更多一点。
 
 ## 9.模型部署方式
-
-
-
-模型部署采用了PaddleX提供的C++ inference部署方案，在方案中提供了C#部署[Demo](https://github.com/PaddlePaddle/PaddleX/tree/release/2.0.0/examples/C%23_deploy)，用户可根据实际情况自行参考。
+模型部署采用了PaddleX提供的C++ inference部署方案，在方案中提供了基于Paddle Lite部署[Demo](https://github.com/yzl19940819/example_Demo/tree/master/android_demo)，用户可根据实际情况自行参考。
 
 <div align="center">
-    <img src="./images/android.png" width="500"/>
+    <img src="./images/android.png" width="300"/>
 </div>
+
+* 感谢[蔡敬辉](https://github.com/cjh3020889729)同学对本案例的贡献
+* 示例图片引用说明：案例中钢筋数据样本源于datafountain和广联达公司举办的钢筋计数比赛，用户可直接访问[链接](https://www.datafountain.cn/competitions/332/datasets)
 

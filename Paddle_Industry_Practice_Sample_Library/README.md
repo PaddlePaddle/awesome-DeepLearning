@@ -6,14 +6,14 @@
 
 | 行业     | 案例                                                         |
 | -------- | ------------------------------------------------------------ |
-| 智慧城市 | [火灾烟雾检测](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/Fire_and_Smoke_Detection) |
+| 智慧城市 | [火灾烟雾检测](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/Fire&Smoke_Detection) |
 | 智慧城市 | [人流量统计](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/Pedestrian_Detection_and_Tracking) |
 | 智慧城市 | [车流量统计](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/Vehicle_Detection_and_Tracking) |
-| 智慧城市 | [安全帽检测](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/Hemtle%20Detection) |
+| 智慧城市 | [安全帽检测](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/Hemtle_Detection) |
 | 智慧城市 | [电子快递单信息提取](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/Waybill_Information_Extraction) |
-| 智能制造 | [工业指针型表计读数](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/meter_reader) |
-| 智能制造 | [钢材缺陷检测](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/paddlex_steel_defect_seg-master) |
-| 智能制造 | [钢筋计数](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/rebar_count) |
-| 智能制造 | [机械手抓取](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/robot_grab) |
+| 智能制造 | [工业指针型表计读数](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/meter_Reader) |
+| 智能制造 | [钢材缺陷检测](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/Steel_Detection) |
+| 智能制造 | [钢筋计数](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/Rebar_Count) |
+| 智能制造 | [机械手抓取](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/Robot_Grab) |
 | 互联网   | [财报识别与关键字段抽取](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Enterprise_CaseBook/Report_Recognition_and_Analysis) |
 

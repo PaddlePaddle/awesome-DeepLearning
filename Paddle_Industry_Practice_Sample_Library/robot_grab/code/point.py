@@ -1,14 +1,14 @@
-import cv2
+import paddlex
+import cv2 
 import numpy as np
-from PIL import Image
 
-img = cv2.imread('xiaoduxiong_ins_det/JPEGImages/Xiaoduxiong114.jpeg')
-result = model.predict(
-    'xiaoduxiong_ins_det/JPEGImages/Xiaoduxiong114.jpeg',
-    transforms=model.test_transforms)
+from point_tools import parse_mask_edge_points, visualize_mask_edge
 
-mask_edge_points = parse_mask_edge_points(result)
-img = cv2.drawContours(img, mask_edge_points[0], 0, (0, 0, 255), 3)
+model = paddlex.load_model('output/mask_rcnn_r50_fpn/best_model')
 
+img = cv2.imread('dataset/JPEGImages/Image_20210615204210757.bmp')
+result = model.predict('dataset/JPEGImages/Image_20210615204210757.bmp', transforms=model.test_transforms)
+
+mask_edge_points = parse_mask_edge_points(result, score_threshold=0.95)
+img = visualize_mask_edge(img, mask_edge_points=mask_edge_points, point_size=1, color=(0,0,255))
 cv2.imwrite('./test.png', img)
-# Image.fromarray(img.astype('uint8'))
