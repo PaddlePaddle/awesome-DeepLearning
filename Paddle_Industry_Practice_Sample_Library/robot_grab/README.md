@@ -2,7 +2,7 @@
 ### 1 项目说明
 随着制造业的产线自动化、智能化需求的不断提升，机器人和AI视觉技术的结合越来越广泛，如：视觉引导的涂装、焊接或机械手抓取等。
 <div align="center">
-<img src="./images/rebot1.png"  width = "300" /
+<img src="./images/rebot1.png"  width = "600" /
 >              </div>
 在项目落地中，目标物体轮廓的精准定位非常关键。在视觉定位过程中，需要通过对相机的标定，来求取相机和实际物体的坐标关系，进而转化成机械手可以识别的坐标空间。但在实际场景中，目标所处的环境非常复杂，遨博机器人结合自身经验，总结出了一套深度学习抓取方案。
 
@@ -113,7 +113,7 @@ python code/infer.py
 
 预测结果如下：
 <div align="center">
-<img src="./images/predict.bmp"  width = "1000" />              </div>
+<img src="./images/predict.bmp"  width = "700" />              </div>
 
 ### 9 边缘坐标的获取
 
@@ -121,6 +121,12 @@ python code/infer.py
 ``` shell
 python code/point.py > log
 ```
-生成的点的坐标如：
 <div align="center">
-<img src="./images/point.png"  width = "1000" />              </div>
+<img src="./images/point.png"  width = "500" />              </div>
+
+### 10 模型部署
+
+模型部署采用了PaddleX提供的C++ inference部署方案，在该方案中提供了C#部署[Demo](https://github.com/PaddlePaddle/PaddleX/tree/develop/examples/C%23_deploy)，用户可根据实际情况自行参考修改。
+
+<div align="center">
+<img src="./images/deploy.png"  width = "700" />              </div>
