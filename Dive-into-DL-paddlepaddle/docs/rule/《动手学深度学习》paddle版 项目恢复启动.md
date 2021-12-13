@@ -34,11 +34,13 @@ https://github.com/PaddlePaddle/awesome-DeepLearning/blob/master/examples/awesom
 
 #### 3.统一规范本项目pr的标题【#d2l + commit的内容】
 
+<img src="./img/55.png" alt="image-20211213150423184" style="zoom:50%;" />
+
 ## 三、审核流程
 
-#### 1.分配相应的RD同学进行pr review，并直接在pr下面留下修改建议。
+#### 1.分配相应的技术同学进行pr review，并直接在pr下面留下修改建议。
 
-#### 2.内容无问题，开发者同学将自己负责的内容进行文件格式转化（jupyter—>md）并提交pr。
+#### 2.审核通过后，开发者同学将自己负责的内容进行文件格式转化（jupyter—>md）并提交pr。
 
 #### 3.pr merge，开发者同学获得积分。
 
@@ -48,7 +50,7 @@ https://github.com/PaddlePaddle/awesome-DeepLearning/blob/master/examples/awesom
 
 飞桨官方将会把参与本次项目建设的成员账号展示在contributor目录下，给予署名。
 
-<img src="file:////Users/xutongtong/Library/Group%20Containers/UBF8T346G9.Office/TemporaryItems/msohtmlclip/clip_image001.png" alt="img" style="zoom:50%;" />
+<img src="./img/66.png" alt="image-20211213150423184" style="zoom:50%;" />
 
 #### 2.实习机会及工作推荐机会
 
@@ -60,7 +62,7 @@ https://github.com/PaddlePaddle/awesome-DeepLearning/blob/master/examples/awesom
 
 2）项目完成度：按时完成分配的任务；
 
-3）周会参与度：积极参与双周会，分享工作进展，反馈遇到的问题，或者及时帮助其他成员答疑都会是加分项哦~ 
+3）活跃度：分享工作进展，反馈遇到的问题，或者及时帮助其他成员答疑都会是加分项哦~ 
 
 #### 3.算力卡
 
