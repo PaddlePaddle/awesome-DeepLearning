@@ -8,11 +8,11 @@ http://zh.d2l.ai
 
 #### 2.点击图示，jupyter记事本，下载书籍内容。
 
-<img src="/Users/xutongtong/Library/Application Support/typora-user-images/image-20211213143842958.png" alt="image-20211213143842958" style="zoom:50%;" />
+<img src="./img/11.png" alt="image-20211213143842958" style="zoom:50%;" />
 
 #### 3.找到pytorch版本，基于pytorch版本进行框架更换。
 
-<img src="/Users/xutongtong/Library/Application Support/typora-user-images/image-20211213143955266.png" alt="image-20211213143955266" style="zoom:50%;" />
+<img src="./img/22.png" alt="image-20211213143955266" style="zoom:50%;" />
 
 #### 4.对完成内容进行自测，提交pr。
 
@@ -26,15 +26,21 @@ https://github.com/PaddlePaddle/awesome-DeepLearning/blob/master/examples/awesom
 
 #### 2.cd到‘Dive-into-DL-paddlepaddle’文件夹中，进行文件的添加或者修改，提交pr。
 
-<img src="/Users/xutongtong/Library/Application Support/typora-user-images/image-20211213145901973.png" alt="image-20211213145901973" style="zoom:50%;" />
+<img src="./img/33.png" alt="image-20211213145901973" style="zoom:50%;" />
+
+例如，我在该文件下加入‘rule’文件。
+
+<img src="./img/44.png" alt="image-20211213150423184" style="zoom:50%;" />
 
 #### 3.统一规范本项目pr的标题【#d2l + commit的内容】
 
+<img src="./img/55.png" alt="image-20211213150423184" style="zoom:50%;" />
+
 ## 三、审核流程
 
-#### 1.分配相应的RD同学进行pr review，并直接在pr下面留下修改建议。
+#### 1.分配相应的技术同学进行pr review，并直接在pr下面留下修改建议。
 
-#### 2.内容无问题，开发者同学将自己负责的内容进行文件格式转化（jupyter—>md）并提交pr。
+#### 2.审核通过后，开发者同学将自己负责的内容进行文件格式转化（jupyter—>md）并提交pr。
 
 #### 3.pr merge，开发者同学获得积分。
 
@@ -44,7 +50,7 @@ https://github.com/PaddlePaddle/awesome-DeepLearning/blob/master/examples/awesom
 
 飞桨官方将会把参与本次项目建设的成员账号展示在contributor目录下，给予署名。
 
-<img src="file:////Users/xutongtong/Library/Group%20Containers/UBF8T346G9.Office/TemporaryItems/msohtmlclip/clip_image001.png" alt="img" style="zoom:50%;" />
+<img src="./img/66.png" alt="image-20211213150423184" style="zoom:50%;" />
 
 #### 2.实习机会及工作推荐机会
 
@@ -56,7 +62,7 @@ https://github.com/PaddlePaddle/awesome-DeepLearning/blob/master/examples/awesom
 
 2）项目完成度：按时完成分配的任务；
 
-3）周会参与度：积极参与双周会，分享工作进展，反馈遇到的问题，或者及时帮助其他成员答疑都会是加分项哦~ 
+3）活跃度：分享工作进展，反馈遇到的问题，或者及时帮助其他成员答疑都会是加分项哦~ 
 
 #### 3.算力卡
 
