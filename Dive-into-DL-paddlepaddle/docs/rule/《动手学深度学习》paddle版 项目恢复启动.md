@@ -8,11 +8,11 @@ http://zh.d2l.ai
 
 #### 2.点击图示，jupyter记事本，下载书籍内容。
 
-<img src="/Users/xutongtong/Library/Application Support/typora-user-images/image-20211213143842958.png" alt="image-20211213143842958" style="zoom:50%;" />
+<img src="./img/11.png" alt="image-20211213143842958" style="zoom:50%;" />
 
 #### 3.找到pytorch版本，基于pytorch版本进行框架更换。
 
-<img src="/Users/xutongtong/Library/Application Support/typora-user-images/image-20211213143955266.png" alt="image-20211213143955266" style="zoom:50%;" />
+<img src="./img/22.png" alt="image-20211213143955266" style="zoom:50%;" />
 
 #### 4.对完成内容进行自测，提交pr。
 
@@ -26,7 +26,11 @@ https://github.com/PaddlePaddle/awesome-DeepLearning/blob/master/examples/awesom
 
 #### 2.cd到‘Dive-into-DL-paddlepaddle’文件夹中，进行文件的添加或者修改，提交pr。
 
-<img src="/Users/xutongtong/Library/Application Support/typora-user-images/image-20211213145901973.png" alt="image-20211213145901973" style="zoom:50%;" />
+<img src="./img/33.png" alt="image-20211213145901973" style="zoom:50%;" />
+
+例如，我在该文件下加入‘rule’文件。
+
+<img src="./img/44.png" alt="image-20211213150423184" style="zoom:50%;" />
 
 #### 3.统一规范本项目pr的标题【#d2l + commit的内容】
 
