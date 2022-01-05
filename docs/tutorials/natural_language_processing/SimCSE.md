@@ -7,6 +7,7 @@ SimCSE（simple contrastive
 sentence embedding framework），即**简单的对比句向量表征框架**。SimCSE共包含了无监督和有监督的两种方法。**无监督方法**，采用[dropout技术](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/regularization/dropout.html)，对原始文本进行数据增强，从而构造出正样本，用于后续对比学习训练；**监督学习方法**，借助于文本蕴含（自然语言推理）数据集，将蕴涵-pair作为正例，矛盾-pair作为难负例，用于后续对比学习训练。并且通过对比学习解决了预训练Embedding的各向异性问题，使其空间分布更均匀，当有监督数据可用时，可以使正样本直接更紧密。模型结构如下图所示：
 ![](../../images/natural_language_processing/SimCSE/sim_cse_1.png)
 
+其中，图a为无监督SimCSE，图b为有监督SimCSE，详细模型介绍见第3节和第4节。
 下面将从对比学习背景、无监督SimCSE、有监督SimCSE、各向异性问题、实验细节五个方面进行详细介绍。
 
 ## 2.对比学习背景
@@ -61,32 +62,42 @@ $l_{i}=-\log\frac{e^{sim(h_{i}^{z_i},h_{i}^{^{z_i^{’}}})/\tau}}{\sum_{j=1}^{N}
 ### 4.1监督数据的选择
 共存在四种数据集，适合构造对比学习$(x_{i}, x_{i}^{+})$数据对，分别是：
 - QQP：Quora问题对；
+
+相似的问题对为正样本，如下：
 ```
 正样本
 How can I improve my communication and verbal skills? 
 What should we do to improve communication skills?
 ```
+不相似的问题对为负样本，如下：
 ```
 负样本
 Why are you so sexy? 
 How sexy are you?
 ```
 - Flickr30k：每个图像都有5个人进行描述，可以认为同一图像的任意两个描述为一对$(x_{i}, x_{i}^{+})$数据对；
+以下图为例：
+![](../../images/natural_language_processing/SimCSE/sim_cse_14.png)
+
+对图片中的人物的5段描述，如下
 ```
-对一个图形的5段描述
-A girl wearing a red and multicolored bikini is laying on her back in shallow water .
-Girl wearing a bikini lying on her back in a shallow pool of clear blue water .
-A young girl is lying in the sand , while ocean water is surrounding her .
-A little girl in a red swimsuit is laying on her back in shallow water .
-A girl is stretched out in shallow water
+人物描述
+Gray haired man in black suit and yellow tie working in a financial environment.
+A graying man in a suit is perplexed at a business meeting.
+A businessman in a yellow tie gives a frustrated look.
+A man in a yellow tie is rubbing the back of his neck.
+A man with a yellow tie looks concerned.
 ```
 - ParaNMT：大规模的回译数据集；
+
+针对原数据进行机器翻译，获得回译数据，如下：
 ```
-原数据与回译数据
-so, what’s half an hour?
-half an hour won’t kill you.
+原数据：so, what’s half an hour?
+回译数据：half an hour won’t kill you.
 ```
 - NLI datasets：自然语言推理数据集，包括：SNLI和MNLI。
+
+自然语言推理数据集，包含蕴含、矛盾和中立；蕴含表示第二句话可以推理出第一句话；矛盾表示第二句话不能推理出第一句话；中立表示两句话无关；举例如下：
 ```
 蕴含样本
 well you see that on television also 
