@@ -60,9 +60,48 @@ $l_{i}=-\log\frac{e^{sim(h_{i}^{z_i},h_{i}^{^{z_i^{’}}})/\tau}}{\sum_{j=1}^{N}
 ### 4.1监督数据的选择
 共存在四种数据集，适合构造对比学习$(x_{i}, x_{i}^{+})$数据对，分别是：
 - QQP：Quora问题对；
+```
+正样本
+How can I improve my communication and verbal skills? 
+What should we do to improve communication skills?
+```
+```
+负样本
+Why are you so sexy? 
+How sexy are you?
+```
 - Flickr30k：每个图像都有5个人进行描述，可以认为同一图像的任意两个描述为一对$(x_{i}, x_{i}^{+})$数据对；
+```
+对一个图形的5段描述
+A girl wearing a red and multicolored bikini is laying on her back in shallow water .
+Girl wearing a bikini lying on her back in a shallow pool of clear blue water .
+A young girl is lying in the sand , while ocean water is surrounding her .
+A little girl in a red swimsuit is laying on her back in shallow water .
+A girl is stretched out in shallow water
+```
 - ParaNMT：大规模的回译数据集；
+```
+原数据与回译数据
+so, what’s half an hour?
+half an hour won’t kill you.
+```
 - NLI datasets：自然语言推理数据集，包括：SNLI和MNLI。
+```
+蕴含样本
+well you see that on television also 
+You can see that on television, as well.
+```
+```
+矛盾样本
+but that takes too much planning 
+It doesn't take much planning.
+```
+```
+中立样本
+Conceptually cream skimming has two basic dimensions - product and geography. 
+Product and geography are what make cream skimming work.
+```
+
 在四种数据集上,直接使用$(x_{i}, x_{i}^{+})$数据对进行训练的结果如下表所示，
 ![](../../images/natural_language_processing/SimCSE/sim_cse_6.png)
 可以发现，NLI数据集上，采用语义蕴含对作为$(x_{i}, x_{i}^{+})$数据对的效果最好；并且统计发现，语义蕴含对(SNLI + MNLI)的词汇重叠仅占比39%，而QQP和ParaNMT数据集占比60%和55%。最终，选择NLI数据集进行监督学习。
