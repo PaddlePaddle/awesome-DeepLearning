@@ -7,7 +7,6 @@ SimCSE（simple contrastive
 sentence embedding framework），即**简单的对比句向量表征框架**。SimCSE共包含了无监督和有监督的两种方法。**无监督方法**，采用[dropout技术](https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/model_tuning/regularization/dropout.html)，对原始文本进行数据增强，从而构造出正样本，用于后续对比学习训练；**监督学习方法**，借助于文本蕴含（自然语言推理）数据集，将蕴涵-pair作为正例，矛盾-pair作为难负例，用于后续对比学习训练。并且通过对比学习解决了预训练Embedding的各向异性问题，使其空间分布更均匀，当有监督数据可用时，可以使正样本直接更紧密。模型结构如下图所示：
 ![](../../images/natural_language_processing/SimCSE/sim_cse_1.png)
 
-
 下面将从对比学习背景、无监督SimCSE、有监督SimCSE、各向异性问题、实验细节五个方面进行详细介绍。
 
 ## 2.对比学习背景
@@ -49,10 +48,12 @@ $l_{i}=-\log\frac{e^{sim(h_{i}^{z_i},h_{i}^{^{z_i^{’}}})/\tau}}{\sum_{j=1}^{N}
 ### 3.2为什么该方法可以work？
 - 为了进一步理解dropout噪声在无监督SimCSE中的作用，论文尝试了不同的dropout率，如下表所示，
 ![](../../images/natural_language_processing/SimCSE/sim_cse_4.png)
+
 可以发现仅在默认dropout概率p=0.1时效果最优，并且当dropout概率p=0，或者相同输入有同样的dropout mask时，效果显著下降。
 
 - 在训练过程中，每隔10步检查一次模型，并可视化alignment和uniformity在训练过程中的变化，如下图所示，
 ![](../../images/natural_language_processing/SimCSE/sim_cse_5.png)
+
 可以发现，在训练过程中，所有模型的均匀性都在提高，但是对于no-dropout和fixed-0.1模型来说对齐性急剧下降，而无监督SimCSE和delete-one-word模型进本持平。虽然delete-one-word模型的对齐性好于无监督SimCSE，但是均匀性相差较多，因此在整体效果上，无监督SimCSE更胜一筹。
 
 ## 4.有监督SimCSE
@@ -104,6 +105,7 @@ Product and geography are what make cream skimming work.
 
 在四种数据集上,直接使用$(x_{i}, x_{i}^{+})$数据对进行训练的结果如下表所示，
 ![](../../images/natural_language_processing/SimCSE/sim_cse_6.png)
+
 可以发现，NLI数据集上，采用语义蕴含对作为$(x_{i}, x_{i}^{+})$数据对的效果最好；并且统计发现，语义蕴含对(SNLI + MNLI)的词汇重叠仅占比39%，而QQP和ParaNMT数据集占比60%和55%。最终，选择NLI数据集进行监督学习。
 ### 4.2难负例的使用
 NLI数据集中，一个前提假设文本，具有对应的蕴含文本和矛盾文本，将矛盾文本作为难负例；即，$(x_{i}, x_{i}^{+})$数据对变成$(x_{i}, x_{i}^{+}, x_{i}^{-})$数据组，其中，$x_{i}^{+}$为蕴含文本，$x_{i}^{-}$为矛盾文本；监督学习SimCSE的训练目标变成：
@@ -138,6 +140,7 @@ $- \frac{1}{\tau}\mathop{E}\limits_{(x_{i}, x_{i}^{+}) \sim p_{pos}}[f(x)^{T}f(x
 ### 6.3MLM
 在训练过程中引入masked language modeling变量，可以提到模型的迁移效果，如下表所示，
 ![](../../images/natural_language_processing/SimCSE/sim_cse_12.png)
+
 但值得注意的是，迁移性的提高，会造成原始任务上的效果下降。
 ### 6.4Temperature
 在训练过程中，温度为0.05时，效果最佳。
