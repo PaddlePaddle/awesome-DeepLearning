@@ -153,8 +153,8 @@ $- \frac{1}{\tau}\mathop{E}\limits_{(x_{i}, x_{i}^{+}) \sim p_{pos}}[f(x)^{T}f(x
 ![](../../images/natural_language_processing/SimCSE/sim_cse_12.png)
 
 但值得注意的是，迁移性的提高，会造成原始任务上的效果下降。
-### 6.4Temperature
-在训练过程中，温度为0.05时，效果最佳。
+### 6.4温度
+温度主要用于调整softmax函数的平滑程度，在训练过程中，温度为0.05时，效果最佳。
 ![](../../images/natural_language_processing/SimCSE/sim_cse_13.png)
 
 ## 7.总结
