@@ -6,5 +6,6 @@
 
    命名实体识别 <ner/index>
    N-Gram <N-Gram>
+   SimCSE <SimCSE>
 
 
