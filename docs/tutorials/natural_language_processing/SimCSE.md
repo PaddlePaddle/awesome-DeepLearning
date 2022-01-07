@@ -77,9 +77,10 @@ How sexy are you?
 ```
 - Flickr30k：每个图像都有5个人进行描述，可以认为同一图像的任意两个描述为一对$(x_{i}, x_{i}^{+})$数据对；
 以下图为例：
+
 ![](../../images/natural_language_processing/SimCSE/sim_cse_14.png)
 
-对图片中的人物的5段描述，如下
+对图片中的人物的5段描述，如下：
 ```
 人物描述
 Gray haired man in black suit and yellow tie working in a financial environment.
