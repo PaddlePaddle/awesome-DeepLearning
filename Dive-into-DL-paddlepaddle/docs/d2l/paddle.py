@@ -476,7 +476,7 @@ class Residual(nn.Layer):
 
 ones = paddle.ones
 zeros = paddle.zeros
-tensor = paddle.tensor
+tensor = paddle.to_tensor
 arange = paddle.arange
 meshgrid = paddle.meshgrid
 sin = paddle.sin
