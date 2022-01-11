@@ -4,8 +4,3 @@ docs/_build/
 docs/build/
 docs/_static/
 docs/_templates/
-.vs
-/Paddle_Industry_Practice_Sample_Library/meter_reader/deploy/cpp/meter_reader/out/build/x64-Release/CMakeFiles
-/Paddle_Industry_Practice_Sample_Library/meter_reader/deploy/cpp/meter_reader/out/build/x64-Release/CMakeCache.txt
-/Paddle_Industry_Practice_Sample_Library/meter_reader/deploy/cpp/meter_reader/out/build/x64-Release/VSInheritEnvironments.txt
-/Paddle_Industry_Practice_Sample_Library/meter_reader/deploy/cpp/meter_reader/out/build/x64-Release/.cmake/api/v1/query/client-MicrosoftVS/query.json
