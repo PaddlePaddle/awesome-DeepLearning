@@ -333,7 +333,7 @@ def evaluate_loss(net, data_iter, loss):  #@save
 DATA_HUB = dict()
 DATA_URL = 'http://d2l-data.s3-accelerate.amazonaws.com/'
 
-def download(name, cache_dir=os.path.join('..', 'data')):  #@save
+def download(name, cache_dir=os.path.join('.', 'data')):  #@save
     """下载一个DATA_HUB中的文件，返回本地文件名"""
     assert name in DATA_HUB, f"{name} 不存在于 {DATA_HUB}"
     url, sha1_hash = DATA_HUB[name]
