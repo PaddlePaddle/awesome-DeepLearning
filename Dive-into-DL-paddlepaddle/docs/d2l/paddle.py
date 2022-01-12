@@ -196,7 +196,13 @@ def accuracy(y_hat, y):  #@save
     """计算预测正确的数量"""
     if len(y_hat.shape) > 1 and y_hat.shape[1] > 1:
         y_hat = y_hat.argmax(axis=1)
-    cmp = y_hat.astype(y.dtype) == y
+    """
+    为了防止出现y_hat.shape=[batch_size]而y.shape=[batch_size,1]的问题导致判断相等错误
+    """
+    if len(y_hat.shape) < len(y.shape):
+        cmp = y_hat.astype(y.dtype) == y.squeeze()
+    else:
+        cmp = y_hat.astype(y.dtype) == y
     return float(cmp.astype(y.dtype).sum())
 
 def evaluate_accuracy(net, data_iter):  #@save
@@ -251,12 +257,13 @@ def train_epoch_ch3(net, train_iter, loss, updater):  #@save
         metric.add(float(l.sum()), accuracy(y_hat, y), y.numel())
     return metric[0] / metric[2], metric[1] / metric[2]
 
-class Animator:  #@save
+class Animator:
     """在动画中绘制数据"""
     def __init__(self, xlabel=None, ylabel=None, legend=None, xlim=None,
                  ylim=None, xscale='linear', yscale='linear',
                  fmts=('-', 'm--', 'g-.', 'r:'), nrows=1, ncols=1,
                  figsize=(3.5, 2.5)):
+        """Defined in :numref:`sec_softmax_scratch`"""
         # 增量地绘制多条线
         if legend is None:
             legend = []
@@ -404,23 +411,25 @@ def corr2d(X, K):
     return Y
 
 """6.6"""
-def evaluate_accuracy(data_iter, net):
-
-    acc_sum, n = 0.0, 0
+def evaluate_accuracy_gpu(net, data_iter, device=None):
+    """使用GPU计算模型在数据集上的精度
+    Defined in :numref:`sec_lenet`"""
+    if isinstance(net, nn.Layer):
+        net.eval()  # 设置为评估模式
+        if not device:
+            device = next(iter(net.parameters())).place
+    # 正确预测的数量，总预测的数量
+    metric = d2l.Accumulator(2)
     with paddle.no_grad():
         for X, y in data_iter:
-            if isinstance(net, nn.Layer):
-                net.eval() # 评估模式, 这会关闭dropout
-                acc_sum += (net(X).argmax(axis=1) == y.flatten()).astype('float32').sum().numpy()[0]
-                net.train() # 改回训练模式
-            else: # 自定义的模型, 3.13节之后不会用到, 不考虑GPU
-                if('is_training' in net.__code__.co_varnames): # 如果有is_training这个参数
-                    # 将is_training设置成False
-                    acc_sum += (net(X, is_training=False).argmax(dim=1) == y).float().sum().item() 
-                else:
-                    acc_sum += (net(X).argmax(dim=1) == y).float().sum().item() 
-            n += y.shape[0]
-    return acc_sum / n
+            if isinstance(X, list):
+                # BERT微调所需的（之后将介绍）
+                X = [paddle.to_tensor(x, place=device) for x in X]
+            else:
+                X = paddle.to_tensor(X, place=device)
+            y = paddle.to_tensor(y, place=device)
+            metric.add(d2l.accuracy(net(X), y), d2l.size(y))
+    return metric[0] / metric[1]
 
 def train_ch6(net, train_iter, test_iter, batch_size, optimi, num_epochs):
 
@@ -543,6 +552,104 @@ def truncate_pad(line, num_steps, padding_token):
         return line[:num_steps]  # 截断
     return line + [padding_token] * (num_steps - len(line))  # 填充
 
+"""13.1"""
+def train_batch_ch13(net, X, y, loss, trainer, devices):
+    """用多GPU进行小批量训练
+    Defined in :numref:`sec_image_augmentation`"""
+    if isinstance(X, list):
+        # 微调BERT中所需（稍后讨论）
+        X = [paddle.to_tensor(x, place=devices[0]) for x in X]
+    else:
+        X = paddle.to_tensor(X, place=devices[0])
+    y = paddle.to_tensor(y, place=devices[0])
+    net.train()
+    trainer.clear_grad()
+    pred = net(X)
+    l = loss(pred, y)
+    l.sum().backward()
+    trainer.step()
+    train_loss_sum = l.sum()
+    train_acc_sum = d2l.accuracy(pred, y)
+    return train_loss_sum, train_acc_sum
+
+def train_ch13(net, train_iter, test_iter, loss, trainer, num_epochs,
+               devices=d2l.try_all_gpus()):
+    """用多GPU进行模型训练
+    Defined in :numref:`sec_image_augmentation`"""
+    timer, num_batches = d2l.Timer(), len(train_iter)
+    animator = d2l.Animator(xlabel='epoch', xlim=[1, num_epochs], ylim=[0, 1],
+                            legend=['train loss', 'train acc', 'test acc'])
+    net = paddle.DataParallel(net)
+    for epoch in range(num_epochs):
+        # 4个维度：储存训练损失，训练准确度，实例数，特点数
+        metric = d2l.Accumulator(4)
+        for i, (features, labels) in enumerate(train_iter):
+            timer.start()
+            l, acc = train_batch_ch13(
+                net, features, labels, loss, trainer, devices)
+            metric.add(l, acc, labels.shape[0], labels.numel())
+            timer.stop()
+            if (i + 1) % (num_batches // 5) == 0 or i == num_batches - 1:
+                animator.add(epoch + (i + 1) / num_batches,
+                             (metric[0] / metric[2], metric[1] / metric[3],
+                              None))
+        test_acc = d2l.evaluate_accuracy_gpu(net, test_iter)
+        animator.add(epoch + 1, (None, None, test_acc))
+    print(f'loss {metric[0] / metric[2]:.3f}, train acc '
+          f'{metric[1] / metric[3]:.3f}, test acc {test_acc:.3f}')
+    print(f'{metric[2] * num_epochs / timer.sum():.1f} examples/sec on '
+          f'{str(devices)}')
+
+
+"""不知道哪个章节的，我先开发填充了，大家后续帮忙改一下"""
+d2l.DATA_HUB['glove.6b.50d'] = (d2l.DATA_URL + 'glove.6B.50d.zip',
+                                '0b8703943ccdb6eb788e6f091b8946e82231bc4d')
+
+d2l.DATA_HUB['glove.6b.100d'] = (d2l.DATA_URL + 'glove.6B.100d.zip',
+                                 'cd43bfb07e44e6f27cbcc7bc9ae3d80284fdaf5a')
+
+d2l.DATA_HUB['glove.42b.300d'] = (d2l.DATA_URL + 'glove.42B.300d.zip',
+                                  'b5116e234e9eb9076672cfeabf5469f3eec904fa')
+
+d2l.DATA_HUB['wiki.en'] = (d2l.DATA_URL + 'wiki.en.zip',
+                           'c1816da3821ae9f43899be655002f6c723e91b88')
+
+"""不知道哪个章节的，我先开发填充了，大家后续帮忙改一下"""
+class TokenEmbedding:
+    """GloVe嵌入"""
+    def __init__(self, embedding_name):
+        """Defined in :numref:`sec_synonyms`"""
+        self.idx_to_token, self.idx_to_vec = self._load_embedding(
+            embedding_name)
+        self.unknown_idx = 0
+        self.token_to_idx = {token: idx for idx, token in
+                             enumerate(self.idx_to_token)}
+
+    def _load_embedding(self, embedding_name):
+        idx_to_token, idx_to_vec = ['<unk>'], []
+        data_dir = d2l.download_extract(embedding_name)
+        # GloVe网站：https://nlp.stanford.edu/projects/glove/
+        # fastText网站：https://fasttext.cc/
+        with open(os.path.join(data_dir, 'vec.txt'), 'r') as f:
+            for line in f:
+                elems = line.rstrip().split(' ')
+                token, elems = elems[0], [float(elem) for elem in elems[1:]]
+                # 跳过标题信息，例如fastText中的首行
+                if len(elems) > 1:
+                    idx_to_token.append(token)
+                    idx_to_vec.append(elems)
+        idx_to_vec = [[0] * len(idx_to_vec[0])] + idx_to_vec
+        return idx_to_token, d2l.tensor(idx_to_vec)
+
+    def __getitem__(self, tokens):
+        indices = [self.token_to_idx.get(token, self.unknown_idx)
+                   for token in tokens]
+        vecs = self.idx_to_vec[d2l.tensor(indices)]
+        return vecs
+
+    def __len__(self):
+        return len(self.idx_to_token)
+
 """15.1"""
 d2l.DATA_HUB['aclImdb'] = (
     'http://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz',
@@ -579,6 +686,13 @@ def load_data_imdb(batch_size, num_steps=500):
                                batch_size,
                                is_train=False)
     return train_iter, test_iter, vocab
+
+"""15.2"""
+def predict_sentiment(net, vocab, sequence):
+    """预测文本序列的情感"""
+    sequence = paddle.to_tensor(vocab[sequence.split()], place=d2l.try_gpu())
+    label = paddle.argmax(net(sequence.reshape((1, -1))), axis=1)
+    return 'positive' if label == 1 else 'negative'
 
 ones = paddle.ones
 zeros = paddle.zeros
