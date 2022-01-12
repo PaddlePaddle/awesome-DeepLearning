@@ -408,23 +408,26 @@ def corr2d(X, K):
     return Y
 
 """6.6"""
-def evaluate_accuracy(data_iter, net):
+def evaluate_accuracy_gpu(net, data_iter, device=None):   #@save
+    """使用GPU计算模型在数据集上的精度
+    Defined in :numref:`sec_lenet`"""
+    
+    if isinstance(net, nn.Layer):
+        net.eval()  # 设置为评估模式
+        if not device:
+            device = next(iter(net.parameters())).place
 
-    acc_sum, n = 0.0, 0
+    metric = d2l.Accumulator(2)
     with paddle.no_grad():
         for X, y in data_iter:
-            if isinstance(net, nn.Layer):
-                net.eval() # 评估模式, 这会关闭dropout
-                acc_sum += (net(X).argmax(axis=1) == y.flatten()).astype('float32').sum().numpy()[0]
-                net.train() # 改回训练模式
-            else: # 自定义的模型, 3.13节之后不会用到, 不考虑GPU
-                if('is_training' in net.__code__.co_varnames): # 如果有is_training这个参数
-                    # 将is_training设置成False
-                    acc_sum += (net(X, is_training=False).argmax(dim=1) == y).float().sum().item() 
-                else:
-                    acc_sum += (net(X).argmax(dim=1) == y).float().sum().item() 
-            n += y.shape[0]
-    return acc_sum / n
+            if isinstance(X, list):
+                # BERT微调所需的（之后将介绍）
+                X = [paddle.to_tensor(x, place=device) for x in X]
+            else:
+                X = paddle.to_tensor(X, place=device)
+            y = paddle.to_tensor(y, place=device)
+            metric.add(d2l.accuracy(net(X), y), d2l.size(y))
+    return metric[0] / metric[1]
 
 def train_ch6(net, train_iter, test_iter, batch_size, optimi, num_epochs):
 
