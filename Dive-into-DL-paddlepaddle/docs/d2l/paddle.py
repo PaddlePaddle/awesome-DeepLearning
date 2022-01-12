@@ -468,7 +468,7 @@ class Residual(nn.Layer):
         Y += X
         return F.relu(Y)
 
-"""15.1"""
+"""不知道哪个章节的，我先开发填充了，大家后续帮忙改一下"""
 def tokenize(lines, token='word'):
     """将文本行拆分为单词或字符词元
     Defined in :numref:`sec_text_preprocessing`"""
@@ -479,6 +479,7 @@ def tokenize(lines, token='word'):
     else:
         print('错误：未知词元类型：' + token)
 
+"""不知道哪个章节的，我先开发填充了，大家后续帮忙改一下"""
 class Vocab:
     """文本词表"""
     def __init__(self, tokens=None, min_freq=0, reserved_tokens=None):
@@ -524,6 +525,7 @@ class Vocab:
     def token_freqs(self):
         return self._token_freqs
 
+"""不知道哪个章节的，我先开发填充了，大家后续帮忙改一下"""
 def count_corpus(tokens):
     """统计词元的频率
     Defined in :numref:`sec_text_preprocessing`"""
@@ -533,12 +535,50 @@ def count_corpus(tokens):
         tokens = [token for line in tokens for token in line]
     return collections.Counter(tokens)
 
+"""不知道哪个章节的，我先开发填充了，大家后续帮忙改一下"""
 def truncate_pad(line, num_steps, padding_token):
     """截断或填充文本序列
     Defined in :numref:`sec_machine_translation`"""
     if len(line) > num_steps:
         return line[:num_steps]  # 截断
     return line + [padding_token] * (num_steps - len(line))  # 填充
+
+"""15.1"""
+d2l.DATA_HUB['aclImdb'] = (
+    'http://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz',
+    '01ada507287d82875905620988597833ad4e0903')
+
+def read_imdb(data_dir, is_train):
+    """读取IMDb评论数据集文本序列和标签"""
+    data, labels = [], []
+    for label in ('pos', 'neg'):
+        folder_name = os.path.join(data_dir, 'train' if is_train else 'test',
+                                   label)
+        for file in os.listdir(folder_name):
+            with open(os.path.join(folder_name, file), 'rb') as f:
+                review = f.read().decode('utf-8').replace('\n', '')
+                data.append(review)
+                labels.append(1 if label == 'pos' else 0)
+    return data, labels
+
+def load_data_imdb(batch_size, num_steps=500):
+    """返回数据迭代器和IMDb评论数据集的词表"""
+    data_dir = d2l.download_extract('aclImdb', 'aclImdb')
+    train_data = read_imdb(data_dir, True)
+    test_data = read_imdb(data_dir, False)
+    train_tokens = d2l.tokenize(train_data[0], token='word')
+    test_tokens = d2l.tokenize(test_data[0], token='word')
+    vocab = d2l.Vocab(train_tokens, min_freq=5)
+    train_features = d2l.tensor([d2l.truncate_pad(
+        vocab[line], num_steps, vocab['<pad>']) for line in train_tokens])
+    test_features = d2l.tensor([d2l.truncate_pad(
+        vocab[line], num_steps, vocab['<pad>']) for line in test_tokens])
+    train_iter = d2l.load_array((train_features, d2l.tensor(train_data[1])),
+                                batch_size)
+    test_iter = d2l.load_array((test_features, d2l.tensor(test_data[1])),
+                               batch_size,
+                               is_train=False)
+    return train_iter, test_iter, vocab
 
 ones = paddle.ones
 zeros = paddle.zeros
