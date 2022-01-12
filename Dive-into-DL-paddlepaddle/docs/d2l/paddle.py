@@ -32,20 +32,17 @@ from paddle.vision import transforms
 """2.4"""
 def use_svg_display():
     """使用svg格式在Jupyter中显示绘图
-
     Defined in :numref:`sec_calculus`"""
     display.set_matplotlib_formats('svg')
 
 def set_figsize(figsize=(3.5, 2.5)):
     """设置matplotlib的图表大小
-
     Defined in :numref:`sec_calculus`"""
     use_svg_display()
     d2l.plt.rcParams['figure.figsize'] = figsize
 
 def set_axes(axes, xlabel, ylabel, xlim, ylim, xscale, yscale, legend):
     """设置matplotlib的轴
-
     Defined in :numref:`sec_calculus`"""
     axes.set_xlabel(xlabel)
     axes.set_ylabel(ylabel)
@@ -61,7 +58,6 @@ def plot(X, Y=None, xlabel=None, ylabel=None, legend=None, xlim=None,
          ylim=None, xscale='linear', yscale='linear',
          fmts=('-', 'm--', 'g-.', 'r:'), figsize=(3.5, 2.5), axes=None):
     """绘制数据点
-
     Defined in :numref:`sec_calculus`"""
     if legend is None:
         legend = []
@@ -144,10 +140,10 @@ def sgd(params, lr, batch_size):  #@save
         return a
 
 """3.3"""
-def test_load_array(data_arrays, batch_size, is_train=True):
+def load_array(data_arrays, batch_size, is_train=True):
     """构造一个Paddle数据迭代器。"""
-    dataset = TensorDataset(data_arrays)
-    return DataLoader(dataset, batch_size, shuffle=is_train)
+    dataset = paddle.io.TensorDataset(data_arrays)
+    return paddle.io.DataLoader(dataset, batch_size=batch_size, shuffle=is_train)
 
 """3.5"""
 def get_fashion_mnist_labels(labels):  #@save
@@ -180,10 +176,10 @@ def get_dataloader_workers():
 
 def load_data_fashion_mnist(batch_size, resize=None):  #@save
     """下载Fashion-MNIST数据集，然后将其加载到内存中"""
-    trans = [T.ToTensor()]
+    trans = [transforms.ToTensor()]
     if resize:
-        trans.insert(0, T.Resize(resize))
-    trans = T.Compose(trans)
+        trans.insert(0, transforms.Resize(resize))
+    trans = transforms.Compose(trans)
     mnist_train = paddle.vision.datasets.FashionMNIST(mode="train",transform=trans)
     mnist_test = paddle.vision.datasets.FashionMNIST(mode="test",transform=trans)
     return (paddle.io.DataLoader(dataset=mnist_train, 
@@ -472,7 +468,77 @@ class Residual(nn.Layer):
         Y += X
         return F.relu(Y)
 
+"""15.1"""
+def tokenize(lines, token='word'):
+    """将文本行拆分为单词或字符词元
+    Defined in :numref:`sec_text_preprocessing`"""
+    if token == 'word':
+        return [line.split() for line in lines]
+    elif token == 'char':
+        return [list(line) for line in lines]
+    else:
+        print('错误：未知词元类型：' + token)
 
+class Vocab:
+    """文本词表"""
+    def __init__(self, tokens=None, min_freq=0, reserved_tokens=None):
+        """Defined in :numref:`sec_text_preprocessing`"""
+        if tokens is None:
+            tokens = []
+        if reserved_tokens is None:
+            reserved_tokens = []
+        # 按出现频率排序
+        counter = count_corpus(tokens)
+        self._token_freqs = sorted(counter.items(), key=lambda x: x[1],
+                                   reverse=True)
+        # 未知词元的索引为0
+        self.idx_to_token = ['<unk>'] + reserved_tokens
+        self.token_to_idx = {token: idx
+                             for idx, token in enumerate(self.idx_to_token)}
+        self.idx_to_token, self.token_to_idx = [], dict()
+        for token, freq in self._token_freqs:
+            if freq < min_freq:
+                break
+            if token not in self.token_to_idx:
+                self.idx_to_token.append(token)
+                self.token_to_idx[token] = len(self.idx_to_token) - 1
+
+    def __len__(self):
+        return len(self.idx_to_token)
+
+    def __getitem__(self, tokens):
+        if not isinstance(tokens, (list, tuple)):
+            return self.token_to_idx.get(tokens, self.unk)
+        return [self.__getitem__(token) for token in tokens]
+
+    def to_tokens(self, indices):
+        if not isinstance(indices, (list, tuple)):
+            return self.idx_to_token[indices]
+        return [self.idx_to_token[index] for index in indices]
+
+    @property
+    def unk(self):  # 未知词元的索引为0
+        return 0
+
+    @property
+    def token_freqs(self):
+        return self._token_freqs
+
+def count_corpus(tokens):
+    """统计词元的频率
+    Defined in :numref:`sec_text_preprocessing`"""
+    # 这里的`tokens`是1D列表或2D列表
+    if len(tokens) == 0 or isinstance(tokens[0], list):
+        # 将词元列表展平成一个列表
+        tokens = [token for line in tokens for token in line]
+    return collections.Counter(tokens)
+
+def truncate_pad(line, num_steps, padding_token):
+    """截断或填充文本序列
+    Defined in :numref:`sec_machine_translation`"""
+    if len(line) > num_steps:
+        return line[:num_steps]  # 截断
+    return line + [padding_token] * (num_steps - len(line))  # 填充
 
 ones = paddle.ones
 zeros = paddle.zeros
@@ -506,4 +572,3 @@ argmax = lambda x, *args, **kwargs: x.argmax(*args, **kwargs)
 astype = lambda x, *args, **kwargs: x.type(*args, **kwargs)
 transpose = lambda x, *args, **kwargs: x.t(*args, **kwargs)
 reduce_mean = lambda x, *args, **kwargs: x.mean(*args, **kwargs)
-
