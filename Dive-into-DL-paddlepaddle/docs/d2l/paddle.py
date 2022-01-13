@@ -752,8 +752,9 @@ def train_ch8(net, train_iter, vocab, lr, num_epochs, device, use_random_iter=Fa
                             legend=['train'], xlim=[10, num_epochs])
     # 初始化
     if isinstance(net, nn.Layer):
+        clip = paddle.nn.ClipGradByNorm(clip_norm=1.0)
         updater = paddle.optimizer.SGD(
-                learning_rate=lr, parameters=net.parameters())
+                learning_rate=lr, parameters=net.parameters(), grad_clip=clip)
     else:
         updater = lambda batch_size: d2l.sgd(net.params, lr, batch_size)
     predict = lambda prefix: predict_ch8(prefix, 50, net, vocab, device)
