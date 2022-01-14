@@ -473,7 +473,7 @@ class Residual(nn.Layer):
         return F.relu(Y)
 
 
-"""13.4"""
+"""13.3"""
 def box_corner_to_center(boxes):
     """从（左上，右下）转换到（中间，宽度，高度）"""
     x1, y1, x2, y2 = boxes[:, 0], boxes[:, 1], boxes[:, 2], boxes[:, 3]
@@ -493,6 +493,45 @@ def box_center_to_corner(boxes):
     y2 = cy + 0.5 * h
     boxes = paddle.stack((x1, y1, x2, y2), axis=-1)
     return boxes
+
+"""13.4"""
+def multibox_prior(data, sizes, ratios):
+    """生成以每个像素为中心具有不同形状的锚框"""
+    in_height, in_width = data.shape[-2:]
+    place, num_sizes, num_ratios = data.place, len(sizes), len(ratios)
+    boxes_per_pixel = (num_sizes + num_ratios - 1)
+    size_tensor = paddle.to_tensor(sizes, place=place)
+    ratio_tensor = paddle.to_tensor(ratios, place=place)
+
+    # 为了将锚点移动到像素的中心，需要设置偏移量。
+    # 因为一个像素的的高为1且宽为1，我们选择偏移我们的中心0.5
+    offset_h, offset_w = 0.5, 0.5
+    steps_h = 1.0 / in_height  # 在y轴上缩放步长
+    steps_w = 1.0 / in_width  # 在x轴上缩放步长
+
+    # 生成锚框的所有中心点
+    center_h = (paddle.arange(in_height) + offset_h) * steps_h
+    center_w = (paddle.arange(in_width) + offset_w) * steps_w
+    shift_y, shift_x = paddle.meshgrid(center_h, center_w)
+    shift_y, shift_x = shift_y.reshape([-1]), shift_x.reshape([-1])
+
+    # 生成“boxes_per_pixel”个高和宽，
+    # 之后用于创建锚框的四角坐标(xmin,xmax,ymin,ymax)
+    w = paddle.concat((size_tensor * paddle.sqrt(ratio_tensor[0]),
+                   sizes[0] * paddle.sqrt(ratio_tensor[1:])))\
+                   * in_height / in_width  # 处理矩形输入
+    h = paddle.concat((size_tensor / paddle.sqrt(ratio_tensor[0]),
+                   sizes[0] / paddle.sqrt(ratio_tensor[1:])))
+    # 除以2来获得半高和半宽
+    anchor_manipulations = paddle.tile(paddle.stack((-w, -h, w, h)).T,
+                                        (in_height * in_width, 1)) / 2
+
+    # 每个中心点都将有“boxes_per_pixel”个锚框，
+    # 所以生成含所有锚框中心的网格，重复了“boxes_per_pixel”次
+    out_grid = paddle.tile(paddle.stack([shift_x, shift_y, shift_x, shift_y],
+                axis=1),(boxes_per_pixel,1))
+    output = out_grid + anchor_manipulations
+    return output.unsqueeze(0)
 
 
 ones = paddle.ones
