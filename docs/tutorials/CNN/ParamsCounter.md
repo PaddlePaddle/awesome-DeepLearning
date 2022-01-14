@@ -50,28 +50,33 @@ if __name__ == "__main__":
 Total GFlops: 0.00778     Total Params: 76.00
 ```
 API得出的参数量为76，GFLOPs为0.00778，这里的GFLOPs就是FLOPs的10$^9$倍，我们的参数量求得的也是76，那么FLOPs呢？我们来算一下，输入的尺寸为320 * 320， 卷积核为3 * 3， 且padding为1，那么图片输入的大小和输出的大小一致，即输出也是320 * 320， 那么根据我们的公式可得: $76 * 320 * 320 = 7782400$, 与API的一致！因此大家计算卷积层的参数和FLOPs的时候就可以用上面的公式。
-## 3. 归一化层
-最常用的归一化层为BatchNorm2D啦，我们这里就用BatchNorm2D来做例子介绍。
-### 3.1 归一化层参数量计算
+## 2. 归一化层
+最常用的归一化层为BatchNorm2D啦，我们这里就用BatchNorm2D来做例子介绍。在算参数量和FLOPs，先看看BatchNorm的算法流程吧！
+![图1 BatchNorm算法流程](../../images/CNN/bn.png)
+
+在这个图中，$B$ 为一个Batch的数据，$\beta$ 和 $\gamma$ 为可学习的参数，$\mu$ 和 $\sigma^2$ 为均值和方差，由输入的数据的值求得。该算法先求出整体数据集的均值和方差，然后根据第三行的更新公式求出新的x，最后根据可学习的$\beta$ 和 $\gamma$调整数据。第三行中的 $\epsilon$ 在飞桨中默认为 1e-5， 用于处理除法中的极端情况。
+
+### 2.1 归一化层参数量计算
 由于归一化层较为简单，这里直接写出公式：
 $$Param_{bn2d} = 4 * C_{out} $$
 其中4表示四个参数值，每个特征图对应一组四个元素的参数组合；
 
-beta_initializer Beta 权重的初始值设定项。
+beta_initializer $\beta$ 权重的初始值设定项。
 
-gamma_initializer 伽马权重的初始值设定项。
+gamma_initializer $\gamma$ 伽马权重的初始值设定项。
 
-moving_mean_initializer 移动均值的初始值设定项。
+moving_mean_initializer $\mu$ 移动均值的初始值设定项。
 
-moving_variance_initializer 移动方差的初始值设定项。
-### 3.2 归一化层FLOPs计算
+moving_variance_initializer $\sigma^2$ 移动方差的初始值设定项。
+### 2.2 归一化层FLOPs计算
+因为只有两个可以学习的权重，$\beta$ 和 $\gamma$，所以FLOPs只需要2乘以输出通道数和输入的尺寸即可。
 归一化的FLOPs计算公式则为:
 $$ FLOP_{bn2d} = 2 * C_{out} * M_{outh} * M_{outw} $$
 与1.3相似，欢迎大家使用上面的代码进行验证。
 
-## 4. 线性层
+## 3. 线性层
 线性层也是常用的分类层了，我们以飞桨的Linear为例来介绍。
-### 4.1 线性层参数量计算
+### 3.1 线性层参数量计算
 其实线性层是比较简单的，它就是相当于卷积核为1的卷积层，线性层的每一个参数与对应的数据进行矩阵相乘，再加上偏置项bias，线性层没有类似于卷积层的“卷”的操作的，所以计算公式如下：
 $$Param_{linear} = C_{in} * C_{out}  + C_{out} $$。我们这里打印一下线性层参数的形状看看。
 ```python
@@ -86,11 +91,11 @@ shape of weight:  (2, 4)
 shape of bias:  (4,)
 ```
 可以看到，线性层相较于卷积层还是简单的，这里我们直接计算这个定义的线性层的参数量为 $2 * 4 + 4 = 12$。具体对不对，我们在下面的实例演示中检查。
-### 4.2 线性层FLOPs计算
+### 3.2 线性层FLOPs计算
 与卷积层不同的是，线性层没有”卷“的过程，所以线性层的FLOPs计算公式为:
 $$ FLOP_{linear} = C_{in} * C_{out}$$
 
-## 5. 实例演示
+## 4. 实例演示
 这里我们就以LeNet为例子，计算出LeNet的所有参数量和计算量。LeNet的结构如下。输入的图片大小为28 * 28
 ```python
 LeNet(
