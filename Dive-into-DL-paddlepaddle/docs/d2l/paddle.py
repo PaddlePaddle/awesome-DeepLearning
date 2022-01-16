@@ -474,7 +474,7 @@ class Residual(nn.Layer):
         Y += X
         return F.relu(Y)
 
-"""8.3"""
+"""8.2"""
 d2l.DATA_HUB['time_machine'] = (d2l.DATA_URL + 'timemachine.txt',
                                 '090b5e7e70c295757f55df93cb0a180b9691891a')
 
@@ -562,6 +562,7 @@ def load_corpus_time_machine(max_tokens=-1):
         corpus = corpus[:max_tokens]
     return corpus, vocab
 
+"""8.3"""
 def seq_data_iter_random(corpus, batch_size, num_steps):
     """使用随机抽样生成一个小批量子序列
     Defined in :numref:`sec_language_model`"""
@@ -687,6 +688,38 @@ def load_data_nmt(batch_size, num_steps, num_examples=600):
     data_arrays = (src_array, src_valid_len, tgt_array, tgt_valid_len)
     data_iter = d2l.load_array(data_arrays, batch_size)
     return data_iter, src_vocab, tgt_vocab
+
+"""9.6"""
+class Encoder(nn.Layer):
+    """编码器-解码器架构的基本编码器接口"""
+    def __init__(self, **kwargs):
+        super(Encoder, self).__init__(**kwargs)
+
+    def forward(self, X, *args):
+        raise NotImplementedError
+
+class Decoder(nn.Layer):
+    """编码器-解码器架构的基本解码器接口"""
+    def __init__(self, **kwargs):
+        super(Decoder, self).__init__(**kwargs)
+
+    def init_state(self, enc_outputs, *args):
+        raise NotImplementedError
+
+    def forward(self, X, state):
+        raise NotImplementedError
+
+class EncoderDecoder(nn.Layer):
+    """编码器-解码器架构的基类"""
+    def __init__(self, encoder, decoder, **kwargs):
+        super(EncoderDecoder, self).__init__(**kwargs)
+        self.encoder = encoder
+        self.decoder = decoder
+
+    def forward(self, enc_X, dec_X, *args):
+        enc_outputs = self.encoder(enc_X, *args)
+        dec_state = self.decoder.init_state(enc_outputs, *args)
+        return self.decoder(dec_X, dec_state)
 
 ones = paddle.ones
 zeros = paddle.zeros
