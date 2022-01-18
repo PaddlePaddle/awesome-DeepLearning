@@ -77,9 +77,10 @@ How sexy are you?
 ```
 - Flickr30k：每个图像都有5个人进行描述，可以认为同一图像的任意两个描述为一对$(x_{i}, x_{i}^{+})$数据对；
 以下图为例：
+
 ![](../../images/natural_language_processing/SimCSE/sim_cse_14.png)
 
-对图片中的人物的5段描述，如下
+对图片中的人物的5段描述，如下：
 ```
 人物描述
 Gray haired man in black suit and yellow tie working in a financial environment.
@@ -160,8 +161,8 @@ $- \frac{1}{\tau}\mathop{E}\limits_{(x_{i}, x_{i}^{+}) \sim p_{pos}}[f(x)^{T}f(x
 ## 7.总结
 SimCSE论文，在无监督句向量表征上，通过简单的dropout方式，构造了对比学习的正例，达到堪比监督学习效果，堪称大道至简。并且在监督学习上，对比学习框架效果也取得了SOTA。
 
-## 8.参考资料
-- https://aclanthology.org/2021.emnlp-main.552.pdf
+## 8.参考文献
+- [SimCSE: Simple Contrastive Learning of Sentence Embeddings](https://aclanthology.org/2021.emnlp-main.552.pdf)
 
 
 
