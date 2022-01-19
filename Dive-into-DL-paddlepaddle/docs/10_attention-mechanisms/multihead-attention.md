@@ -56,6 +56,7 @@ $$\mathbf W_o \begin{bmatrix}\mathbf h_1\\\vdots\\\mathbf h_h\end{bmatrix} \in \
 ```python
 import math
 import paddle
+import numpy as np
 from paddle import nn
 from d2l import paddle as d2l
 ```
@@ -99,9 +100,9 @@ class MultiHeadAttention(nn.Layer):
         if valid_lens is not None:
             # 在轴0，将第一项（标量或者矢量）复制num_heads次，
             # 然后如此复制第二项，然后诸如此类。
-            valid_lens = paddle.tile(valid_lens.reshape((-1,1)), [self.num_heads,1]).reshape((-1,))
-            # valid_lens = torch.repeat_interleave(
-            #     valid_lens, repeats=self.num_heads, dim=0)
+            valid_lens_np = valid_lens.numpy()
+            valid_lens_np = np.repeat(valid_lens_np, self.num_heads, axis=0)
+            valid_lens = paddle.to_tensor(valid_lens_np)
 
         # output的形状:(batch_size*num_heads，查询的个数，
         # num_hiddens/num_heads)
