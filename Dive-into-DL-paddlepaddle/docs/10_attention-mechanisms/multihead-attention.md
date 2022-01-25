@@ -103,6 +103,7 @@ class MultiHeadAttention(nn.Layer):
             valid_lens_np = valid_lens.numpy()
             valid_lens_np = np.repeat(valid_lens_np, self.num_heads, axis=0)
             valid_lens = paddle.to_tensor(valid_lens_np)
+            valid_lens = paddle.squeeze(valid_lens)
 
         # output的形状:(batch_size*num_heads，查询的个数，
         # num_hiddens/num_heads)
