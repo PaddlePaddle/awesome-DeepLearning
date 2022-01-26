@@ -129,6 +129,7 @@ $$\mathbf{H}_t = \mathbf{O}_t \odot \tanh(\mathbf{C}_t).$$
 import paddle
 from paddle import nn
 from d2l import paddle as d2l
+import paddle.nn.functional as Function
 
 batch_size, num_steps = 32, 35
 train_iter, vocab = d2l.load_data_time_machine(batch_size, num_steps)
@@ -198,9 +199,9 @@ def lstm(inputs, state, params):
     (H, C) = state
     outputs = []
     for X in inputs:
-        I = paddle.nn.functional.sigmoid((X @ W_xi) + (H @ W_hi) + b_i)
-        F = paddle.nn.functional.sigmoid((X @ W_xf) + (H @ W_hf) + b_f)
-        O = paddle.nn.functional.sigmoid((X @ W_xo) + (H @ W_ho) + b_o)
+        I = Function.sigmoid((X @ W_xi) + (H @ W_hi) + b_i)
+        F = Function.sigmoid((X @ W_xf) + (H @ W_hf) + b_f)
+        O = Function.sigmoid((X @ W_xo) + (H @ W_ho) + b_o)
         C_tilda = paddle.tanh((X @ W_xc) + (H @ W_hc) + b_c)
         C = F * C + I * C_tilda
         H = O * paddle.tanh(C)
@@ -219,13 +220,11 @@ def lstm(inputs, state, params):
 
 ```python
 vocab_size, num_hiddens, device = len(vocab), 256, d2l.try_gpu()
-num_epochs, lr = 500, 1
+num_epochs, lr = 500, 1.0
 model = d2l.RNNModelScratch(len(vocab), num_hiddens, device, get_lstm_params,
                             init_lstm_state, lstm)
-d2l.train_ch8(model, train_iter, vocab, lr, num_epochs, device)
-    
+d2l.train_ch8(model, train_iter, vocab, lr, num_epochs, device)  
 ```
-
 
 ## [**简洁实现**]
 
@@ -237,16 +236,11 @@ d2l.train_ch8(model, train_iter, vocab, lr, num_epochs, device)
 
 
 ```python
-batch_size, num_steps = 32, 32
-train_iter, vocab = d2l.load_data_time_machine(batch_size, num_steps)
-vocab_size, num_hiddens, device = len(vocab), 256, d2l.try_gpu()
-num_epochs, lr = 500, 1.0
 num_inputs = vocab_size
-lstm_layer = nn.LSTM(num_inputs, num_hiddens)
+lstm_layer = nn.LSTM(num_inputs, num_hiddens, time_major=True)
 model = d2l.RNNModel(lstm_layer, len(vocab))
 d2l.train_ch8(model, train_iter, vocab, lr, num_epochs, device)
 ```
-
 
 长短期记忆网络是典型的具有重要状态控制的隐变量自回归模型。
 多年来已经提出了其许多变体，例如，多层、残差连接、不同类型的正则化。
