@@ -161,6 +161,7 @@ $$\mathbf{H}_t = \mathbf{Z}_t \odot \mathbf{H}_{t-1}  + (1 - \mathbf{Z}_t) \odot
 import paddle
 from paddle import nn
 from d2l import paddle as d2l
+import paddle.nn.functional as F
 
 batch_size, num_steps = 32, 35
 train_iter, vocab = d2l.load_data_time_machine(batch_size, num_steps)
@@ -210,7 +211,7 @@ def get_params(vocab_size, num_hiddens, device):
 
 ```python
 def init_gru_state(batch_size, num_hiddens, device):
-    return (paddle.zeros([batch_size, num_hiddens], ))
+    return (paddle.zeros([batch_size, num_hiddens]),)
 ```
 
 现在我们准备[**定义门控循环单元模型**]，
@@ -225,8 +226,8 @@ def gru(inputs, state, params):
     H,*_ = state
     outputs = []
     for X in inputs:
-        Z = paddle.nn.functional.sigmoid((X @ W_xz) + (H @ W_hz) + b_z)
-        R = paddle.nn.functional.sigmoid((X @ W_xr) + (H @ W_hr) + b_r)
+        Z = F.sigmoid((X @ W_xz) + (H @ W_hz) + b_z)
+        R = F.sigmoid((X @ W_xr) + (H @ W_hr) + b_r)
         H_tilda = paddle.tanh((X @ W_xh) + ((R * H) @ W_hh) + b_h)
         H = Z * H + (1 - Z) * H_tilda
         Y = H @ W_hq + b_q
@@ -244,7 +245,7 @@ def gru(inputs, state, params):
 
 ```python
 vocab_size, num_hiddens, device = len(vocab), 256, d2l.try_gpu()
-num_epochs, lr = 500, 1
+num_epochs, lr = 500, 1.0
 model = d2l.RNNModelScratch(len(vocab), num_hiddens, device, get_params,
                             init_gru_state, gru)
 d2l.train_ch8(model, train_iter, vocab, lr, num_epochs, device)
@@ -262,14 +263,10 @@ d2l.train_ch8(model, train_iter, vocab, lr, num_epochs, device)
 
 ```python
 num_inputs = vocab_size
-num_epochs, lr = 600, 1.0
-batch_size, num_steps = 32, 32
-train_iter, vocab = d2l.load_data_time_machine(batch_size, num_steps)
-rnn_layer = nn.GRU(len(vocab), num_hiddens)
-net = d2l.RNNModel(rnn_layer, vocab_size=len(vocab))
-d2l.train_ch8(net, train_iter, vocab, lr, num_epochs, device)
+gru_layer = nn.GRU(num_inputs, num_hiddens, time_major=True)
+model = d2l.RNNModel(gru_layer, len(vocab))
+d2l.train_ch8(model, train_iter, vocab, lr, num_epochs, device)
 ```
-
 
 ## 小结
 
