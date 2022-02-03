@@ -112,18 +112,18 @@ class Seq2SeqEncoder(d2l.Encoder):
         weight_hh_attr = paddle.ParamAttr(initializer=nn.initializer.XavierUniform())
         # 嵌入层
         self.embedding = nn.Embedding(vocab_size, embed_size)
-        self.rnn = nn.GRU(embed_size, num_hiddens, num_layers,
-                          dropout=dropout, weight_ih_attr=weight_ih_attr, weight_hh_attr=weight_hh_attr)
+        self.rnn = nn.GRU(embed_size, num_hiddens, num_layers, dropout=dropout,
+                          time_major=True, weight_ih_attr=weight_ih_attr, weight_hh_attr=weight_hh_attr)
 
     def forward(self, X, *args):
         # 输出'X'的形状：(batch_size,num_steps,embed_size)
         X = self.embedding(X)
         # 在循环神经网络模型中，第一个轴对应于时间步
+        X = X.transpose([1, 0, 2])
         # 如果未提及状态，则默认为0
         output, state = self.rnn(X)
-        output = output.transpose([1, 0, 2])
-        # PaddlePaddle的GRU层output的形状:(batch_size,time_steps,num_directions * hidden_size)
-        # 需将其转置为(num_steps,batch_size,num_directions * num_hiddens)
+        # PaddlePaddle的GRU层output的形状:(batch_size,time_steps,num_directions * num_hiddens),
+        # 需设定time_major=True,指定input的第一个维度为time_steps
         # state[0]的形状:(num_layers,batch_size,num_hiddens)
         return output, state
 ```
@@ -208,8 +208,8 @@ class Seq2SeqDecoder(d2l.Decoder):
         weight_attr = paddle.ParamAttr(initializer=nn.initializer.XavierUniform())
         weight_ih_attr = paddle.ParamAttr(initializer=nn.initializer.XavierUniform())
         weight_hh_attr = paddle.ParamAttr(initializer=nn.initializer.XavierUniform())
-        self.rnn = nn.GRU(embed_size + num_hiddens, num_hiddens, num_layers,
-                          dropout=dropout,weight_ih_attr=weight_ih_attr,weight_hh_attr=weight_hh_attr)
+        self.rnn = nn.GRU(embed_size + num_hiddens, num_hiddens, num_layers, dropout=dropout,
+                          time_major=True, weight_ih_attr=weight_ih_attr,weight_hh_attr=weight_hh_attr)
         self.dense = nn.Linear(num_hiddens, vocab_size,weight_attr=weight_attr)
 
     def init_state(self, enc_outputs, *args):
@@ -221,8 +221,8 @@ class Seq2SeqDecoder(d2l.Decoder):
         # 广播context，使其具有与X相同的num_steps
         context = state[-1].tile([X.shape[0], 1, 1])
         X_and_context = d2l.concat((X, context), 2)
-        output, state = self.rnn(X_and_context.transpose([1, 0, 2]), state)
-        output = self.dense(output)
+        output, state = self.rnn(X_and_context, state)
+        output = self.dense(output).transpose([1, 0, 2])
         # output的形状:(batch_size,num_steps,vocab_size)
         # state[0]的形状:(num_layers,batch_size,num_hiddens)
         return output, state
