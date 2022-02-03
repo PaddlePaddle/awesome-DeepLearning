@@ -112,9 +112,10 @@ class Seq2SeqEncoder(d2l.Encoder):
         weight_hh_attr = paddle.ParamAttr(initializer=nn.initializer.XavierUniform())
         # 嵌入层
         self.embedding = nn.Embedding(vocab_size, embed_size)
+        # PaddlePaddle的GRU层output的形状:(batch_size,time_steps,num_directions * num_hiddens),
+        # 需设定time_major=True,指定input的第一个维度为time_steps
         self.rnn = nn.GRU(embed_size, num_hiddens, num_layers, dropout=dropout,
                           time_major=True, weight_ih_attr=weight_ih_attr, weight_hh_attr=weight_hh_attr)
-
     def forward(self, X, *args):
         # 输出'X'的形状：(batch_size,num_steps,embed_size)
         X = self.embedding(X)
@@ -122,8 +123,7 @@ class Seq2SeqEncoder(d2l.Encoder):
         X = X.transpose([1, 0, 2])
         # 如果未提及状态，则默认为0
         output, state = self.rnn(X)
-        # PaddlePaddle的GRU层output的形状:(batch_size,time_steps,num_directions * num_hiddens),
-        # 需设定time_major=True,指定input的第一个维度为time_steps
+        # output的形状:(num_steps,batch_size,num_hiddens)
         # state[0]的形状:(num_layers,batch_size,num_hiddens)
         return output, state
 ```
