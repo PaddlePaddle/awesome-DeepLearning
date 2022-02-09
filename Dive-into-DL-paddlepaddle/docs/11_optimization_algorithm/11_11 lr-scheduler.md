@@ -84,7 +84,6 @@ def train(net, train_iter, test_iter, num_epochs, loss, trainer, device,
                 # Usingcustomdefinedscheduler
                 for param_group in trainer.state_dict():
                     trainer.state_dict()[param_group]['last_lr'] = scheduler.state_dict()['last_epoch']
-                # trainer.state_dict()['LR_Scheduler']['last_lr']=scheduler.state_dict()['last_epoch']
     print(f'train loss {train_loss:.3f}, train acc {train_acc:.3f}, '
 f'test acc {test_acc:.3f}')
 ```
@@ -139,7 +138,7 @@ class SquareRootScheduler:
 
 ```python
 scheduler = SquareRootScheduler(lr=0.1)
-d2l.plot(paddle.arange(num_epochs), [scheduler(t) for t in range(num_epochs)])
+d2l.plot(d2l.arange(num_epochs), [scheduler(t) for t in range(num_epochs)])
 ```
 
 现在让我们来看看这对在Fashion-MNIST数据集上的训练有何影响。
@@ -197,12 +196,10 @@ d2l.plot(paddle.arange(50), [scheduler(t) for t in range(50)])
 
 ```python
 net = net_fn()
-# scheduler = MultiStepLR(trainer, milestones=[15, 30], gamma=0.5)
 scheduler =paddle.optimizer.lr.MultiStepDecay(learning_rate = 0.5, milestones = [15,30], gamma=0.5)
 trainer = paddle.optimizer.SGD(learning_rate = scheduler, parameters=net.parameters())
 def get_lr(trainer, scheduler):
     lr=trainer.state_dict()['LR_Scheduler']['last_lr']
-    # lr = scheduler.get_last_lr()[0]
     trainer.step()
     scheduler.step()
     return lr
@@ -262,7 +259,7 @@ class CosineScheduler:
         return self.base_lr
 
 scheduler = CosineScheduler(max_update=20, base_lr=0.3, final_lr=0.01)
-d2l.plot(paddle.arange(num_epochs), [scheduler(t) for t in range(num_epochs)])
+d2l.plot(d2l.arange(num_epochs), [scheduler(t) for t in range(num_epochs)])
 ```
 
 在计算机视觉中，这个调度可以引出改进的结果。
@@ -293,7 +290,7 @@ train(net, train_iter, test_iter, num_epochs, loss, trainer, device,
 
 ```python
 scheduler = CosineScheduler(20, warmup_steps=5, base_lr=0.3, final_lr=0.01)
-d2l.plot(paddle.arange(num_epochs), [scheduler(t) for t in range(num_epochs)])
+d2l.plot(d2l.arange(num_epochs), [scheduler(t) for t in range(num_epochs)])
 ```
 
 注意，观察前5个迭代轮数的性能，网络最初收敛得更好。
