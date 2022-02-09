@@ -177,7 +177,7 @@ train_iter, vocab = d2l.load_data_time_machine(batch_size, num_steps)
 
 
 ```python
-def get_params(vocab_size, num_hiddens, device):
+def get_params(vocab_size, num_hiddens):
     num_inputs = num_outputs = vocab_size
 
     def normal(shape):
@@ -210,7 +210,7 @@ def get_params(vocab_size, num_hiddens, device):
 
 
 ```python
-def init_gru_state(batch_size, num_hiddens, device):
+def init_gru_state(batch_size, num_hiddens):
     return (paddle.zeros([batch_size, num_hiddens]),)
 ```
 
