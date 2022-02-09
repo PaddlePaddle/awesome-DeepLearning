@@ -24,7 +24,7 @@ import math
 import pandas as pd
 import paddle
 from paddle import nn
-from d2l import paddle1 as d2l
+from d2l import paddle as d2l
 ```
 
 ## [**基于位置的前馈网络**]
