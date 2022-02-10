@@ -26,7 +26,7 @@ $$FLOP_{conv2d} = Param_{conv2d} * M_{outh} * M_{outw}$$
 
 ### 1.3 卷积层参数计算示例
 Paddle有提供计算FLOPs和参数量的API，[paddle.flops](https://www.paddlepaddle.org.cn/documentation/docs/zh/api/paddle/flops_cn.html#flops), 这里我们用我们的方法和这个API的方法来测一下，看看一不一致吧。代码如下：
-```pythob
+```python
 import paddle
 from paddle import nn
 from paddle.nn import functional as F
@@ -52,9 +52,24 @@ Total GFlops: 0.00778     Total Params: 76.00
 API得出的参数量为76，GFLOPs为0.00778，这里的GFLOPs就是FLOPs的10$^9$倍，我们的参数量求得的也是76，那么FLOPs呢？我们来算一下，输入的尺寸为320 * 320， 卷积核为3 * 3， 且padding为1，那么图片输入的大小和输出的大小一致，即输出也是320 * 320， 那么根据我们的公式可得: $76 * 320 * 320 = 7782400$, 与API的一致！因此大家计算卷积层的参数和FLOPs的时候就可以用上面的公式。
 ## 2. 归一化层
 最常用的归一化层为BatchNorm2D啦，我们这里就用BatchNorm2D来做例子介绍。在算参数量和FLOPs，先看看BatchNorm的算法流程吧！
-![图1 BatchNorm算法流程](../../images/CNN/bn.png)
 
-在这个图中，$B$ 为一个Batch的数据，$\beta$ 和 $\gamma$ 为可学习的参数，$\mu$ 和 $\sigma^2$ 为均值和方差，由输入的数据的值求得。该算法先求出整体数据集的均值和方差，然后根据第三行的更新公式求出新的x，最后根据可学习的$\beta$ 和 $\gamma$调整数据。第三行中的 $\epsilon$ 在飞桨中默认为 1e-5， 用于处理除法中的极端情况。
+输入为：Values of $x$ over a mini-batch:$B={x_1,...,m}$,
+
+$\quad\quad\quad$Params to be learned: $\beta$, $\gamma$
+
+输出为：{$y_i$=BN$_{\gamma}$,$\beta(x_i)$}
+
+流程如下：
+
+$\quad\quad\quad$$\mu_B\gets$ $\frac{1}{m}\sum_{1}^mx_i$
+
+$\quad\quad\quad\sigma_{B}^2\gets\frac{1}{m}\sum_{1}^m(x_i-\mu_B)^2$
+
+$\quad\quad\quad\hat{x}_i\gets\frac{x_i-\mu_B}{\sqrt{\sigma_{B}^2+\epsilon}}$
+
+$\quad\quad\quad y_i\gets\gamma\hat{x}_i+\beta\equiv BN_{\gamma}$,$\beta(x_i)$
+
+在这个公式中，$B$ 为一个Batch的数据，$\beta$ 和 $\gamma$ 为可学习的参数，$\mu$ 和 $\sigma^2$ 为均值和方差，由输入的数据的值求得。该算法先求出整体数据集的均值和方差，然后根据第三行的更新公式求出新的x，最后根据可学习的$\beta$ 和 $\gamma$调整数据。第三行中的 $\epsilon$ 在飞桨中默认为 1e-5， 用于处理除法中的极端情况。
 
 ### 2.1 归一化层参数量计算
 由于归一化层较为简单，这里直接写出公式：
