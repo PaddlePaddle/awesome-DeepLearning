@@ -1,0 +1,21 @@
+# training setting
+num_epochs: 50
+batch_size: 32
+learning_rate: 0.001
+
+save_epochs: -1
+log_steps: 20
+eval_steps: 140
+
+save_dir: "./checkpoint"
+train_path: "./data/train.json"
+test_path: "./data/test.json"
+vocab_path: "./data/vocab.dict"
+intent_path: "./data/intent.dict"
+slot_path: "./data/slot.dict"
+
+# model setting
+embedding_size: 256
+lstm_hidden_size: 384
+lstm_layers: 1
+dropout_rate: 0.2
