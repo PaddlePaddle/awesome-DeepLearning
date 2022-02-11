@@ -78,14 +78,13 @@ def train(net, train_iter, test_iter, num_epochs, loss, trainer, device,
 
         if scheduler:
             if scheduler.__module__ == MultiStepDecay.__name__:
-                # UsingPyTorchIn-Builtscheduler
+                # UsingPaddleIn-Builtscheduler
                 scheduler.step()
             else:
                 # Usingcustomdefinedscheduler
                 for param_group in trainer.state_dict():
                     trainer.state_dict()[param_group]['last_lr'] = scheduler.state_dict()['last_epoch']
-    print(f'train loss {train_loss:.3f}, train acc {train_acc:.3f}, '
-f'test acc {test_acc:.3f}')
+    print(f'train loss {train_loss:.3f}, train acc {train_acc:.3f}, 'f'test acc {test_acc:.3f}')
 ```
 
 让我们来看看如果使用默认设置，调用此算法会发生什么。
