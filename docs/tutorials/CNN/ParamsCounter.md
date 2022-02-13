@@ -124,7 +124,7 @@ $$ FLOP_{linear} = C_{in} * C_{out} $$
 
 ## 4. 实例演示
 这里我们就以LeNet为例子，计算出LeNet的所有参数量和计算量。LeNet的结构如下。输入的图片大小为28 * 28
-```python
+```
 LeNet(
   (features): Sequential(
     (0): Conv2D(1, 6, kernel_size=[3, 3], padding=1, data_format=NCHW)
