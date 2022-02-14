@@ -28,6 +28,9 @@
 </figure>
 </center>
 
+欢迎报名直播课加入交流群，如需更多技术交流与合作可点击以下链接
+[https://paddleqiyeban.wjx.cn/vj/Qlb0uS3.aspx?udsid=531417](https://paddleqiyeban.wjx.cn/vj/Qlb0uS3.aspx?udsid=531417)
+
 ### 1.2 项目亮点
 
 - **花样滑冰细粒度分类数据集。** 竞技体育是动作分析的难点。数据集Figure Skating Dataset 旨在通过花样滑冰研究人体的运动。在花样滑冰运动中，人体姿态和运动轨迹相较于其他运动呈现**复杂性强、类别多的特点**，对于研究视频中的人体动态是非常好的素材。**希望对我国竞技体育辅助训练和评估做出重要贡献**。
@@ -700,3 +703,6 @@ FSD-10: https://paperswithcode.com/paper/fsd-10-a-dataset-for-competitive-sports
 * 更多目标检测模型，请参考：[PaddleDetection](https://github.com/PaddlePaddle/PaddleDetection)
 
 * 更多学习资料请参阅[飞桨深度学习平台](https://www.paddlepaddle.org.cn/?fr=paddleEdu_aistudio)
+
+欢迎报名直播课加入交流群，如需更多技术交流与合作可点击以下链接
+[https://paddleqiyeban.wjx.cn/vj/Qlb0uS3.aspx?udsid=531417](https://paddleqiyeban.wjx.cn/vj/Qlb0uS3.aspx?udsid=531417)
