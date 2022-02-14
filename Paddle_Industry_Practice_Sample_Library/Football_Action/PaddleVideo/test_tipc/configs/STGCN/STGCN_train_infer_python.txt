@@ -1,0 +1,51 @@
+===========================train_params===========================
+model_name:STGCN
+python:python3.7
+gpu_list:0
+Global.use_gpu:null|null
+Global.auto_cast:null
+-o epochs:2
+null:null
+DATASET.batch_size:null
+null:null
+train_model_name:null
+train_infer_video_dir:null
+null:null
+##
+trainer:norm_train
+norm_train:main.py -c configs/recognition/stgcn/stgcn_fsd.yaml --seed 1234 --max_iters=10 -o DATASET.train.file_path="data/fsd10/FSD_train_data.npy" -o DATASET.train.label_path="data/fsd10/FSD_train_label.npy" -o DATASET.test.file_path="data/fsd10/FSD_train_data.npy"
+pact_train:null
+fpgm_train:null
+distill_train:null
+null:null
+null:null
+##
+===========================eval_params===========================
+eval:main.py --test -c configs/recognition/stgcn/stgcn_fsd.yaml -o DATASET.train.file_path="data/fsd10/FSD_train_data.npy" -o DATASET.train.label_path="data/fsd10/FSD_train_label.npy" -o DATASET.test.file_path="data/fsd10/FSD_train_data.npy"
+-w:output/STGCN/STGCN_epoch_00001.pdparams
+##
+===========================infer_params===========================
+-o:inference/STGCN
+-p:null
+norm_export:tools/export_model.py -c configs/recognition/stgcn/stgcn_fsd.yaml
+quant_export:null
+fpgm_export:null
+distill_export:null
+export1:null
+export2:null
+inference_dir:null
+infer_model:./data/STGCN_fsd.pdparams
+infer_export:tools/export_model.py -c configs/recognition/stgcn/stgcn_fsd.yaml
+infer_quant:False
+inference:tools/predict.py --config configs/recognition/stgcn/stgcn_fsd.yaml
+--use_gpu:True|False
+--enable_mkldnn:False|True
+--cpu_threads:1|6
+--batch_size:1|2
+--use_tensorrt:False|True
+--precision:fp32|fp16
+--model_file:inference/STGCN/STGCN.pdmodel
+--input_file:./data/fsd10/example_skeleton.npy
+null:null
+--enable_benchmark:True
+--params_file:inference/STGCN/STGCN.pdiparams

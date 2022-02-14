@@ -1,0 +1,3 @@
+Current video file: ./data/example.avi
+        top-1 class: 5
+        top-1 score: 0.990794837474823

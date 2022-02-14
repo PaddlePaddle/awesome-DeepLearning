@@ -1,0 +1,125 @@
+MODEL: #MODEL field
+    framework: "Recognizer2D" #Mandatory, indicate the type of network, associate to the 'paddlevideo/modeling/framework/' .
+    backbone: #Mandatory, indicate the type of backbone, associate to the 'paddlevideo/modeling/backbones/' .
+        name: "ResNetTSM" #Mandatory, The name of backbone.
+        pretrained: "data/TSM_k400.pdparams" #Optional, pretrained model path.
+        num_seg: 8
+        depth: 50 #Optional, the depth of backbone architecture.
+        data_format: "NHWC"
+    head:
+        name: "TSMHead" #Mandatory, indicate the type of head, associate to the 'paddlevideo/modeling/heads'
+        num_classes: 101 #Optional, the number of classes to be classified.
+        in_channels: 2048 #input channel of the extracted feature.
+        drop_ratio: 0.8 #the ratio of dropout
+        std: 0.001 #std value in params initialization
+        data_format: "NHWC"
+
+
+DATASET: #DATASET field
+    batch_size: 16 #Mandatory, bacth size
+    num_workers: 4 #Mandatory, XXX the number of subprocess on each GPU.
+    train:
+        format: "FrameDataset" #Mandatory, indicate the type of dataset, associate to the 'paddlevidel/loader/dateset'
+        data_prefix: "" #Mandatory, train data root path
+        file_path: "data/ucf101/ucf101_train_split_1_rawframes.txt" #Mandatory, train data index file path
+        suffix: 'img_{:05}.jpg'
+    valid:
+        format: "FrameDataset" #Mandatory, indicate the type of dataset, associate to the 'paddlevidel/loader/dateset'
+        data_prefix: "" #Mandatory, valid data root path
+        file_path: "data/ucf101/ucf101_val_split_1_rawframes.txt" #Mandatory, valid data index file path
+        suffix: 'img_{:05}.jpg'
+    test:
+        format: "FrameDataset" #Mandatory, indicate the type of dataset, associate to the 'paddlevidel/loader/dateset'
+        data_prefix: "" #Mandatory, valid data root path
+        file_path: "data/ucf101/ucf101_val_split_1_rawframes.txt" #Mandatory, valid data index file path
+        suffix: 'img_{:05}.jpg'
+
+
+PIPELINE: #PIPELINE field
+    train: #Mandotary, indicate the pipeline to deal with the training data, associate to the 'paddlevideo/loader/pipelines/'
+        decode:
+            name: "FrameDecoder"
+        sample:
+            name: "Sampler"
+            num_seg: 8
+            seg_len: 1
+            valid_mode: False
+            select_left: True
+        transform: #Mandotary, image transform operator.
+            - MultiScaleCrop:
+                target_size: 224
+                allow_duplication: True
+            - RandomFlip:
+            - Image2Array:
+                transpose: False
+            - Normalization:
+                mean: [0.485, 0.456, 0.406]
+                std: [0.229, 0.224, 0.225]
+                tensor_shape: [1,1,3]
+
+    valid: #Mandatory, indicate the pipeline to deal with the validing data. associate to the 'paddlevideo/loader/pipelines/'
+        decode:
+            name: "FrameDecoder"
+        sample:
+            name: "Sampler"
+            num_seg: 8
+            seg_len: 1
+            valid_mode: True
+            select_left: True
+        transform:
+            - Scale:
+                short_size: 256
+                fixed_ratio: False
+            - CenterCrop:
+                target_size: 224
+            - Image2Array:
+                transpose: False
+            - Normalization:
+                mean: [0.485, 0.456, 0.406]
+                std: [0.229, 0.224, 0.225]
+                tensor_shape: [1,1,3]
+
+    test:
+        decode:
+            name: "FrameDecoder"
+        sample:
+            name: "Sampler"
+            num_seg: 8
+            seg_len: 1
+            valid_mode: True
+            select_left: True
+        transform:
+            - Scale:
+                short_size: 256
+                fixed_ratio: False
+            - CenterCrop:
+                target_size: 224
+            - Image2Array:
+                transpose: False
+            - Normalization:
+                mean: [0.485, 0.456, 0.406]
+                std: [0.229, 0.224, 0.225]
+                tensor_shape: [1,1,3]
+
+
+OPTIMIZER: #OPTIMIZER field
+    name: 'Momentum' #Mandatory, the type of optimizer, associate to the 'paddlevideo/solver/'
+    momentum: 0.9
+    learning_rate: #Mandatory, the type of learning rate scheduler, associate to the 'paddlevideo/solver/'
+        name: 'PiecewiseDecay'
+        boundaries: [10, 20]
+        values: [0.001, 0.0001, 0.00001]  #4 cards * 16 batch size
+    grad_clip:
+        name: 'ClipGradByGlobalNorm'
+        value: 20.0
+
+
+METRIC:
+    name: 'CenterCropMetric'
+
+
+model_name: "TSM"
+log_interval: 20 #Optional, the interal of logger, default:10
+save_interval: 10
+epochs: 25 #Mandatory, total epoch
+log_level: "INFO" #Optional, the logger level. default: "INFO"

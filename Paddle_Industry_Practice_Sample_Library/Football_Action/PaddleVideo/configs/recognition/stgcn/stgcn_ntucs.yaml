@@ -1,0 +1,62 @@
+MODEL: #MODEL field
+    framework: "RecognizerGCN" #Mandatory, indicate the type of network, associate to the 'paddlevideo/modeling/framework/' .
+    backbone: #Mandatory, indicate the type of backbone, associate to the 'paddlevideo/modeling/backbones/' .
+        name: "STGCN" #Mandatory, The name of backbone.
+        in_channels: 3
+        dropout: 0.5
+        layout: 'ntu-rgb+d'
+    head:
+        name: "STGCNHead" #Mandatory, indicate the type of head, associate to the 'paddlevideo/modeling/heads'
+        num_classes: 60  #Optional, the number of classes to be classified.
+
+DATASET: #DATASET field
+    batch_size: 16 #Mandatory, bacth size
+    num_workers: 4 #Mandatory, the number of subprocess on each GPU.
+    test_batch_size: 1
+    test_num_workers: 0
+    train:
+        format: "SkeletonDataset" #Mandatory, indicate the type of dataset, associate to the 'paddlevidel/loader/dateset'
+        file_path: "NTU-RGB-D/xsub/train_data.npy" #Mandatory, train data index file path
+        label_path: "NTU-RGB-D/xsub/train_label.pkl"
+    valid:
+        format: "SkeletonDataset" #Mandatory, indicate the type of dataset, associate to the 'paddlevidel/loader/dateset'
+        file_path: "NTU-RGB-D/xsub/val_data.npy" #Mandatory, valid data index file path
+        label_path: "NTU-RGB-D/xsub/val_label.pkl"
+        test_mode: True
+    test:
+        format: "SkeletonDataset" #Mandatory, indicate the type of dataset, associate to the 'paddlevidel/loader/dateset'
+        file_path: "NTU-RGB-D/xsub/val_data.npy" #Mandatory, valid data index file path
+        label_path: "NTU-RGB-D/xsub/val_label.pkl"
+        test_mode: True
+
+PIPELINE: #PIPELINE field
+    train: #Mandotary, indicate the pipeline to deal with the training data, associate to the 'paddlevideo/loader/pipelines/'
+        transform: #Mandotary, image transfrom operator
+            - Iden:
+    valid: #Mandotary, indicate the pipeline to deal with the training data, associate to the 'paddlevideo/loader/pipelines/'
+        transform: #Mandotary, image transfrom operator
+            - Iden:
+    test: #Mandotary, indicate the pipeline to deal with the training data, associate to the 'paddlevideo/loader/pipelines/'
+        transform: #Mandotary, image transfrom operator
+            - Iden:
+
+OPTIMIZER: #OPTIMIZER field
+  name: 'Momentum'
+  momentum: 0.9
+  learning_rate:
+    name: 'PiecewiseDecay'
+    boundaries: [30, 40]
+    values: [0.1, 0.01, 0.001]
+  weight_decay:
+    name: 'L2'
+    value: 1e-4
+  use_nesterov: True
+
+
+METRIC:
+    name: 'SkeletonMetric'
+
+
+model_name: "STGCN"
+log_interval: 10 #Optional, the interal of logger, default:10
+epochs: 50 #Mandatory, total epoch

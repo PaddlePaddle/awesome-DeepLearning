@@ -1,0 +1,55 @@
+MODEL:
+    framework: "TransNetV2Partitioner"
+    backbone:
+        name: "TransNetV2"
+        F: 16
+        L: 3
+        S: 2
+        D: 1024
+        use_many_hot_targets: True
+        use_frame_similarity: True
+        use_color_histograms: True
+        use_mean_pooling: False
+        dropout_rate: 0.5
+        use_convex_comb_reg: False
+        use_resnet_features: False
+        use_resnet_like_top: False
+        frame_similarity_on_last_layer: False
+        mean: [0.485, 0.456, 0.406]
+        std: [0.229, 0.224, 0.225]
+    head:
+        name: "TransNetV2Head"
+        num_classes: 2 # not used
+        in_channels: 3 # not used
+
+
+# OPTIMIZER: #OPTIMIZER field
+#     name: 'Momentum'
+#     momentum: 0.9
+#     learning_rate:
+#         name: 'LRScheduler'
+#         values: 0.01
+#     weight_decay:
+#         name: 'L2'
+#         value: 0.0001
+#     grad_clip:
+#         name: 'ClipGradByGlobalNorm'
+#         value: 10.0
+
+# METRIC:
+#     name: 'TransNetV2Metric'
+
+
+INFERENCE:
+    name: 'TransNetV2_Inference_helper'
+    num_frames: 100
+    height: 27
+    width: 48
+    num_channels: 3
+    threshold: 0.5
+    output_path: inference_results
+    visualize: True
+
+
+model_name: "TransNetV2"
+log_level: "INFO" #Optional, the logger level. default: "INFO"

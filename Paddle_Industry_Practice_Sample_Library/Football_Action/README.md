@@ -34,13 +34,15 @@
 
 # 4.数据准备
 ## 4.1 数据集介绍
-数据集由EuroCup2012, EuroCup2016, WorldCup2014, WorldCup2018四个赛事的比赛视频组成，共计272个训练集、25个测试集，支持15种足球精彩动作定位与识别，动作类别分别为：射门、进球、进球有欢呼、角球、任意球、黄牌、红牌、点球、换人、界外球、球门球、开球、越位挥旗、回放空中对抗和回放进球。本案例中我们提供一条视频数据供大家进行测试，可以通过如下命令，下载视频。
+数据集由EuroCup2012, EuroCup2016, WorldCup2014, WorldCup2018四个赛事的比赛视频组成，共计272个训练集、25个测试集，支持15种足球精彩动作定位与识别，动作类别分别为：射门、进球、进球有欢呼、角球、任意球、黄牌、红牌、点球、换人、界外球、球门球、开球、越位挥旗、回放空中对抗和回放进球。
 
-!wget https://bj.bcebos.com/v1/tmt-pub/datasets/EuroCup2016/63e51df254d2402fac703b6c4fdb4ea9.mp4
+下载数据集：
+```
+cd PaddleVideo/applications/FootballAction/datasets/EuroCup2016
+sh download_dataset.sh
+```
 
-!mv 63e51df254d2402fac703b6c4fdb4ea9.mp4 football.mp4
-
-除视频文件外，数据集中还包含视频对应的标注文件，这里我们在`PaddleVideo/applications/FootballAction/datasets/EuroCup2016` 文件路径下提供了标注文件 `label.json`。标注格式为：
+除视频文件外，数据集中还包含视频对应的标注文件，这里我们在`PaddleVideo/applications/FootballAction/datasets/EuroCup2016` 文件路径下提供了标注文件 `label_train.json`。标注格式为：
 
 ```json
 {
@@ -92,13 +94,13 @@
 
 ```bash
 # 开始运行代码前先安装好依赖
-%cd /home/aistudio/PaddleVideo/
-!python -m pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple/
+cd PaddleVideo/
+python -m pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple/
 ```
 
 ```bash
-%cd /home/aistudio/PaddleVideo/applications/FootballAction
-!python3.7 datasets/script/get_frames_pcm.py
+cd PaddleVideo/applications/FootballAction
+python3.7 datasets/script/get_frames_pcm.py
 ```
 
 数据预处理后得到的文件夹格式如下：
@@ -145,7 +147,7 @@ mv ResNet50_vd_ssld_v2_pretrained.pdparams pretrain/ResNet50_vd_ssld_v2_pretrain
 
 ```bash
 # 启动训练
-cd /home/aistudio/PaddleVideo/
+cd PaddleVideo/
 python -B -m paddle.distributed.launch \
     --gpus="0" \
     --log_dir=applications/FootballAction/train_pptsm/logs \
@@ -176,13 +178,13 @@ python tools/export_model.py -c applications/FootballAction/train_proposal/confi
 wget https://videotag.bj.bcebos.com/PaddleVideo-release2.1/FootballAction/audio.tar
 tar -xvf audio.tar
 rm audio.tar
-mv AUDIO/ /home/aistudio/PaddleVideo/applications/FootballAction/checkpoints/
+mv AUDIO/ PaddleVideo/applications/FootballAction/checkpoints/
 ```
 
 提取视频图像和音频特征：
 
 ```bash
-cd /home/aistudio/PaddleVideo/applications/FootballAction/extractor
+cd PaddleVideo/applications/FootballAction/extractor
 python extract_feat.py
 ```
 
@@ -202,7 +204,7 @@ python extract_feat.py
 `get_instance_for_bmn` 文件用于提取二分类的proposal，根据标注文件和音视频特征得到BMN所需要的数据集。
 
 ```bash
-cd /home/aistudio/PaddleVideo/applications/FootballAction
+cd PaddleVideo/applications/FootballAction
 python datasets/script/get_instance_for_bmn.py
 ```
 
@@ -245,7 +247,7 @@ duration_second 代表视频片段时长，duration_frame 代表涵盖多少帧�
 该步骤训练与PP-TSM模型训练类似，可以调整 bmn_football_v2.0.yaml 文件，修改训练参数。
 
 ```bash
-cd /home/aistudio/PaddleVideo/
+cd PaddleVideo/
 python -B -m paddle.distributed.launch \
     --gpus='0' \
     --log_dir=applications/FootballAction/train_bmn/logs \
@@ -271,7 +273,7 @@ python tools/export_model.py \
 进行模型预测，得到动作proposal的信息，包括动作开始时间、结束时间以及置信度。
 
 ```bash
-cd /home/aistudio/PaddleVideo/applications/FootballAction/extractor
+cd PaddleVideo/applications/FootballAction/extractor
 python extract_bmn.py
 ```
 
@@ -291,7 +293,7 @@ python extract_bmn.py
 按照BMN预测到的proposal截断视频特征，生成训练AttentionLSTM所需数据集。
 
 ```bash
-cd /home/aistudio/PaddleVideo/applications/FootballAction/datasets/script/
+cd PaddleVideo/applications/FootballAction/datasets/script/
 python get_instance_for_lstm.py
 ```
 
@@ -299,7 +301,7 @@ python get_instance_for_lstm.py
 通过如下命令训练AttentionLSTM网络。
 
 ```bash
-cd /home/aistudio/PaddleVideo/applications/FootballAction/train_lstm/
+cd PaddleVideo/applications/FootballAction/train_lstm/
 python -u scenario_lib/train.py  \
     --model_name=ActionNet \
     --config=conf/conf.txt \
@@ -310,7 +312,7 @@ python -u scenario_lib/train.py  \
 生成预测所需的模型结构文件。
 
 ```bash
-cd /home/aistudio/PaddleVideo/applications/FootballAction/train_lstm/
+cd PaddleVideo/applications/FootballAction/train_lstm/
 
 python inference_model.py --config=conf/conf.yaml --weights=../football_lstm/ActionNet_epoch15_acc77.84016927083333.pdparams --save_dir=../checkpoints/LSTM
 ```
@@ -319,7 +321,8 @@ python inference_model.py --config=conf/conf.yaml --weights=../football_lstm/Act
 输入一条视频数据，以该网络结构进行推理。
 
 ```python
-cd predict && python predict.py
+cd PaddleVideo/applications/FootballAction/predict
+python predict.py
 ```
 
 # 7. 模型评估
@@ -327,7 +330,8 @@ cd predict && python predict.py
 
 ```bash
 # 包括bmn proposal 评估和最终action评估
-cd predict && python eval.py results.json
+cd PaddleVideo/applications/FootballAction/predict
+python eval.py results.json
 ```
 
 # 8. 模型优化
@@ -362,7 +366,7 @@ cd predict && python eval.py results.json
 
 ```bash
 # 训练TSN
-cd /home/aistudio/PaddleVideo/
+cd PaddleVideo/
 python -B -m paddle.distributed.launch \
     --gpus="0" \
     --log_dir=applications/FootballAction/train_tsn/logs \
@@ -374,7 +378,7 @@ python -B -m paddle.distributed.launch \
 
 ```bash
 # 训练TSM
-cd /home/aistudio/PaddleVideo/
+cd PaddleVideo/
 python -B -m paddle.distributed.launch \
     --gpus="0" \
     --log_dir=applications/FootballAction/train_tsm/logs \
@@ -404,7 +408,7 @@ python -B -m paddle.distributed.launch \
 可通过以下代码扩展proposal特征：
 
 ```bash
-cd /home/aistudio/PaddleVideo/applications/FootballAction/datasets/script/
+cd applications/FootballAction/datasets/script/
 python get_instance_for_lstm_long_proposal.py
 ```
 
