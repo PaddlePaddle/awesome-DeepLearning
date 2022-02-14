@@ -1,0 +1,3161 @@
+{
+    "fps": 5,
+    "gts": [
+        {
+            "url": "EuroCup2016/5572686cb90f440988ded956a60e555d.mp4",
+            "total_frames": 6341,
+            "actions": [
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 760,
+                    "end_id": 763
+                },
+                {
+                    "label_ids": [
+                        4
+                    ],
+                    "label_names": [
+                        "黄牌"
+                    ],
+                    "start_id": 820,
+                    "end_id": 828
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 914,
+                    "end_id": 920
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 966,
+                    "end_id": 971
+                },
+                {
+                    "label_ids": [
+                        1
+                    ],
+                    "label_names": [
+                        "进球"
+                    ],
+                    "start_id": 1282,
+                    "end_id": 1313
+                },
+                {
+                    "label_ids": [
+                        4
+                    ],
+                    "label_names": [
+                        "黄牌"
+                    ],
+                    "start_id": 1475,
+                    "end_id": 1488
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 1634,
+                    "end_id": 1637
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 1921,
+                    "end_id": 1929
+                },
+                {
+                    "label_ids": [
+                        4
+                    ],
+                    "label_names": [
+                        "黄牌"
+                    ],
+                    "start_id": 1946,
+                    "end_id": 1961
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 2194,
+                    "end_id": 2197
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 2306,
+                    "end_id": 2311
+                },
+                {
+                    "label_ids": [
+                        1,
+                        2
+                    ],
+                    "label_names": [
+                        "进球",
+                        "角球"
+                    ],
+                    "start_id": 2343,
+                    "end_id": 2376
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 2520,
+                    "end_id": 2524
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 2854,
+                    "end_id": 2859
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 2914,
+                    "end_id": 2920
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 3084,
+                    "end_id": 3089
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 3225,
+                    "end_id": 3228
+                },
+                {
+                    "label_ids": [
+                        6
+                    ],
+                    "label_names": [
+                        "换人"
+                    ],
+                    "start_id": 3304,
+                    "end_id": 3315
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 3520,
+                    "end_id": 3524
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 3789,
+                    "end_id": 3792
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 3897,
+                    "end_id": 3900
+                },
+                {
+                    "label_ids": [
+                        1
+                    ],
+                    "label_names": [
+                        "进球"
+                    ],
+                    "start_id": 3912,
+                    "end_id": 3947
+                },
+                {
+                    "label_ids": [
+                        4
+                    ],
+                    "label_names": [
+                        "黄牌"
+                    ],
+                    "start_id": 4151,
+                    "end_id": 4167
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 4252,
+                    "end_id": 4257
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 4359,
+                    "end_id": 4363
+                },
+                {
+                    "label_ids": [
+                        3
+                    ],
+                    "label_names": [
+                        "任意球"
+                    ],
+                    "start_id": 4467,
+                    "end_id": 4473
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 4525,
+                    "end_id": 4530
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 4554,
+                    "end_id": 4560
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 4633,
+                    "end_id": 4636
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 4652,
+                    "end_id": 4655
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 4724,
+                    "end_id": 4727
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 4810,
+                    "end_id": 4812
+                },
+                {
+                    "label_ids": [
+                        4
+                    ],
+                    "label_names": [
+                        "黄牌"
+                    ],
+                    "start_id": 5091,
+                    "end_id": 5099
+                },
+                {
+                    "label_ids": [
+                        6
+                    ],
+                    "label_names": [
+                        "换人"
+                    ],
+                    "start_id": 5128,
+                    "end_id": 5139
+                },
+                {
+                    "label_ids": [
+                        3
+                    ],
+                    "label_names": [
+                        "任意球"
+                    ],
+                    "start_id": 5140,
+                    "end_id": 5147
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 5216,
+                    "end_id": 5220
+                },
+                {
+                    "label_ids": [
+                        6
+                    ],
+                    "label_names": [
+                        "换人"
+                    ],
+                    "start_id": 5263,
+                    "end_id": 5274
+                },
+                {
+                    "label_ids": [
+                        6
+                    ],
+                    "label_names": [
+                        "换人"
+                    ],
+                    "start_id": 5428,
+                    "end_id": 5438
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 5664,
+                    "end_id": 5669
+                },
+                {
+                    "label_ids": [
+                        4
+                    ],
+                    "label_names": [
+                        "黄牌"
+                    ],
+                    "start_id": 5716,
+                    "end_id": 5719
+                },
+                {
+                    "label_ids": [
+                        1
+                    ],
+                    "label_names": [
+                        "进球"
+                    ],
+                    "start_id": 5733,
+                    "end_id": 5773
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 5848,
+                    "end_id": 5854
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 5954,
+                    "end_id": 5960
+                },
+                {
+                    "label_ids": [
+                        3
+                    ],
+                    "label_names": [
+                        "任意球"
+                    ],
+                    "start_id": 6006,
+                    "end_id": 6014
+                }
+            ]
+        },
+        {
+            "url": "EuroCup2016/f6e64ee9b13a4088b24c45c257894c1e.mp4",
+            "total_frames": 9270,
+            "actions": [
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 669,
+                    "end_id": 682
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 691,
+                    "end_id": 711
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 780,
+                    "end_id": 791
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 889,
+                    "end_id": 893
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 999,
+                    "end_id": 1019
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 1163,
+                    "end_id": 1171
+                },
+                {
+                    "label_ids": [
+                        6
+                    ],
+                    "label_names": [
+                        "换人"
+                    ],
+                    "start_id": 1357,
+                    "end_id": 1381
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 1441,
+                    "end_id": 1450
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 1459,
+                    "end_id": 1462
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 1603,
+                    "end_id": 1609
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 1822,
+                    "end_id": 1825
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 1874,
+                    "end_id": 1880
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 2158,
+                    "end_id": 2163
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 2483,
+                    "end_id": 2492
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 2526,
+                    "end_id": 2530
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 2665,
+                    "end_id": 2671
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 2694,
+                    "end_id": 2708
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 2825,
+                    "end_id": 2840
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 3085,
+                    "end_id": 3099
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 3121,
+                    "end_id": 3129
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 3177,
+                    "end_id": 3188
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 3619,
+                    "end_id": 3622
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 3700,
+                    "end_id": 3705
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 3712,
+                    "end_id": 3716
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 3791,
+                    "end_id": 3810
+                },
+                {
+                    "label_ids": [
+                        4
+                    ],
+                    "label_names": [
+                        "黄牌"
+                    ],
+                    "start_id": 3899,
+                    "end_id": 3909
+                },
+                {
+                    "label_ids": [
+                        4
+                    ],
+                    "label_names": [
+                        "黄牌"
+                    ],
+                    "start_id": 3967,
+                    "end_id": 3981
+                },
+                {
+                    "label_ids": [
+                        3
+                    ],
+                    "label_names": [
+                        "任意球"
+                    ],
+                    "start_id": 4026,
+                    "end_id": 4037
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 4273,
+                    "end_id": 4286
+                },
+                {
+                    "label_ids": [
+                        1
+                    ],
+                    "label_names": [
+                        "进球"
+                    ],
+                    "start_id": 4434,
+                    "end_id": 4462
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 4667,
+                    "end_id": 4683
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 4710,
+                    "end_id": 4715
+                },
+                {
+                    "label_ids": [
+                        6
+                    ],
+                    "label_names": [
+                        "换人"
+                    ],
+                    "start_id": 4862,
+                    "end_id": 4870
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 5044,
+                    "end_id": 5050
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 5124,
+                    "end_id": 5149
+                },
+                {
+                    "label_ids": [
+                        1
+                    ],
+                    "label_names": [
+                        "进球"
+                    ],
+                    "start_id": 5208,
+                    "end_id": 5228
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 5435,
+                    "end_id": 5446
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 5578,
+                    "end_id": 5581
+                },
+                {
+                    "label_ids": [
+                        6
+                    ],
+                    "label_names": [
+                        "换人"
+                    ],
+                    "start_id": 5718,
+                    "end_id": 5742
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 5748,
+                    "end_id": 5753
+                },
+                {
+                    "label_ids": [
+                        4
+                    ],
+                    "label_names": [
+                        "黄牌"
+                    ],
+                    "start_id": 5936,
+                    "end_id": 5943
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 6049,
+                    "end_id": 6053
+                },
+                {
+                    "label_ids": [
+                        4
+                    ],
+                    "label_names": [
+                        "黄牌"
+                    ],
+                    "start_id": 6242,
+                    "end_id": 6252
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 6394,
+                    "end_id": 6398
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 6406,
+                    "end_id": 6411
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 6421,
+                    "end_id": 6427
+                },
+                {
+                    "label_ids": [
+                        3
+                    ],
+                    "label_names": [
+                        "任意球"
+                    ],
+                    "start_id": 6634,
+                    "end_id": 6640
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 6760,
+                    "end_id": 6772
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 6787,
+                    "end_id": 6792
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 6826,
+                    "end_id": 6837
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 6856,
+                    "end_id": 6882
+                },
+                {
+                    "label_ids": [
+                        4
+                    ],
+                    "label_names": [
+                        "黄牌"
+                    ],
+                    "start_id": 6928,
+                    "end_id": 6934
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 7070,
+                    "end_id": 7074
+                },
+                {
+                    "label_ids": [
+                        6
+                    ],
+                    "label_names": [
+                        "换人"
+                    ],
+                    "start_id": 7347,
+                    "end_id": 7382
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 7591,
+                    "end_id": 7599
+                },
+                {
+                    "label_ids": [
+                        4
+                    ],
+                    "label_names": [
+                        "黄牌"
+                    ],
+                    "start_id": 7659,
+                    "end_id": 7667
+                },
+                {
+                    "label_ids": [
+                        3
+                    ],
+                    "label_names": [
+                        "任意球"
+                    ],
+                    "start_id": 7863,
+                    "end_id": 7868
+                },
+                {
+                    "label_ids": [
+                        3
+                    ],
+                    "label_names": [
+                        "任意球"
+                    ],
+                    "start_id": 7899,
+                    "end_id": 7905
+                },
+                {
+                    "label_ids": [
+                        6
+                    ],
+                    "label_names": [
+                        "换人"
+                    ],
+                    "start_id": 8151,
+                    "end_id": 8168
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 8175,
+                    "end_id": 8184
+                }
+            ]
+        },
+        {
+            "url": "EuroCup2016/259856b769044b4d8dc94076deb356bf.mp4",
+            "total_frames": 8820,
+            "actions": [
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 460,
+                    "end_id": 463
+                },
+                {
+                    "label_ids": [
+                        3
+                    ],
+                    "label_names": [
+                        "任意球"
+                    ],
+                    "start_id": 487,
+                    "end_id": 496
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 522,
+                    "end_id": 524
+                },
+                {
+                    "label_ids": [
+                        1
+                    ],
+                    "label_names": [
+                        "进球"
+                    ],
+                    "start_id": 526,
+                    "end_id": 556
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 621,
+                    "end_id": 623
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 680,
+                    "end_id": 683
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 842,
+                    "end_id": 845
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 953,
+                    "end_id": 955
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 976,
+                    "end_id": 978
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 1003,
+                    "end_id": 1005
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 1110,
+                    "end_id": 1118
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 1178,
+                    "end_id": 1187
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 1197,
+                    "end_id": 1200
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 1242,
+                    "end_id": 1248
+                },
+                {
+                    "label_ids": [
+                        3
+                    ],
+                    "label_names": [
+                        "任意球"
+                    ],
+                    "start_id": 1385,
+                    "end_id": 1393
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 1527,
+                    "end_id": 1530
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 1654,
+                    "end_id": 1660
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 1744,
+                    "end_id": 1752
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 1789,
+                    "end_id": 1791
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 1836,
+                    "end_id": 1839
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 2023,
+                    "end_id": 2026
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 2270,
+                    "end_id": 2272
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 2349,
+                    "end_id": 2351
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 2383,
+                    "end_id": 2385
+                },
+                {
+                    "label_ids": [
+                        1
+                    ],
+                    "label_names": [
+                        "进球"
+                    ],
+                    "start_id": 2394,
+                    "end_id": 2431
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 2578,
+                    "end_id": 2582
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 2595,
+                    "end_id": 2598
+                },
+                {
+                    "label_ids": [
+                        3
+                    ],
+                    "label_names": [
+                        "任意球"
+                    ],
+                    "start_id": 2734,
+                    "end_id": 2753
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 2812,
+                    "end_id": 2823
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 2835,
+                    "end_id": 2839
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 2852,
+                    "end_id": 2854
+                },
+                {
+                    "label_ids": [
+                        4
+                    ],
+                    "label_names": [
+                        "黄牌"
+                    ],
+                    "start_id": 2917,
+                    "end_id": 2932
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 3363,
+                    "end_id": 3366
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 3389,
+                    "end_id": 3390
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 3971,
+                    "end_id": 3975
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 4164,
+                    "end_id": 4168
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 4213,
+                    "end_id": 4215
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 4224,
+                    "end_id": 4227
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 4280,
+                    "end_id": 4282
+                },
+                {
+                    "label_ids": [
+                        4
+                    ],
+                    "label_names": [
+                        "黄牌"
+                    ],
+                    "start_id": 4484,
+                    "end_id": 4494
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 4593,
+                    "end_id": 4596
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 4621,
+                    "end_id": 4621
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 4710,
+                    "end_id": 4728
+                },
+                {
+                    "label_ids": [
+                        6
+                    ],
+                    "label_names": [
+                        "换人"
+                    ],
+                    "start_id": 4941,
+                    "end_id": 4963
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 5250,
+                    "end_id": 5260
+                },
+                {
+                    "label_ids": [
+                        6
+                    ],
+                    "label_names": [
+                        "换人"
+                    ],
+                    "start_id": 5320,
+                    "end_id": 5340
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 5413,
+                    "end_id": 5419
+                },
+                {
+                    "label_ids": [
+                        6
+                    ],
+                    "label_names": [
+                        "换人"
+                    ],
+                    "start_id": 5431,
+                    "end_id": 5456
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 5572,
+                    "end_id": 5576
+                },
+                {
+                    "label_ids": [
+                        4
+                    ],
+                    "label_names": [
+                        "黄牌"
+                    ],
+                    "start_id": 5834,
+                    "end_id": 5861
+                },
+                {
+                    "label_ids": [
+                        3
+                    ],
+                    "label_names": [
+                        "任意球"
+                    ],
+                    "start_id": 5938,
+                    "end_id": 5944
+                },
+                {
+                    "label_ids": [
+                        4
+                    ],
+                    "label_names": [
+                        "黄牌"
+                    ],
+                    "start_id": 6071,
+                    "end_id": 6082
+                },
+                {
+                    "label_ids": [
+                        3
+                    ],
+                    "label_names": [
+                        "任意球"
+                    ],
+                    "start_id": 6111,
+                    "end_id": 6118
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 6276,
+                    "end_id": 6277
+                },
+                {
+                    "label_ids": [
+                        6
+                    ],
+                    "label_names": [
+                        "换人"
+                    ],
+                    "start_id": 6523,
+                    "end_id": 6536
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 6557,
+                    "end_id": 6559
+                },
+                {
+                    "label_ids": [
+                        6
+                    ],
+                    "label_names": [
+                        "换人"
+                    ],
+                    "start_id": 6626,
+                    "end_id": 6652
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 6664,
+                    "end_id": 6668
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 6759,
+                    "end_id": 6761
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 6860,
+                    "end_id": 6863
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 6887,
+                    "end_id": 6888
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 7066,
+                    "end_id": 7068
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 7083,
+                    "end_id": 7086
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 7197,
+                    "end_id": 7200
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 7316,
+                    "end_id": 7336
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 7512,
+                    "end_id": 7515
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 7533,
+                    "end_id": 7537
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 7581,
+                    "end_id": 7587
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 7708,
+                    "end_id": 7711
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 7808,
+                    "end_id": 7812
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 8118,
+                    "end_id": 8120
+                }
+            ]
+        },
+        {
+            "url": "EuroCup2016/1f0a0698e38d493988fe42a50f7e8723.mp4",
+            "total_frames": 6031,
+            "actions": [
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 432,
+                    "end_id": 437
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 497,
+                    "end_id": 501
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 711,
+                    "end_id": 714
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 740,
+                    "end_id": 753
+                },
+                {
+                    "label_ids": [
+                        1,
+                        3
+                    ],
+                    "label_names": [
+                        "进球",
+                        "任意球"
+                    ],
+                    "start_id": 934,
+                    "end_id": 967
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 1013,
+                    "end_id": 1016
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 1035,
+                    "end_id": 1039
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 1081,
+                    "end_id": 1084
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 1163,
+                    "end_id": 1165
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 1264,
+                    "end_id": 1275
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 1320,
+                    "end_id": 1336
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 1356,
+                    "end_id": 1360
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 1382,
+                    "end_id": 1386
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 1477,
+                    "end_id": 1480
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 1496,
+                    "end_id": 1498
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 1529,
+                    "end_id": 1541
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 1584,
+                    "end_id": 1586
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 1998,
+                    "end_id": 2001
+                },
+                {
+                    "label_ids": [
+                        4
+                    ],
+                    "label_names": [
+                        "黄牌"
+                    ],
+                    "start_id": 2394,
+                    "end_id": 2406
+                },
+                {
+                    "label_ids": [
+                        3
+                    ],
+                    "label_names": [
+                        "任意球"
+                    ],
+                    "start_id": 2454,
+                    "end_id": 2465
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 2673,
+                    "end_id": 2676
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 2894,
+                    "end_id": 2903
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 3165,
+                    "end_id": 3179
+                },
+                {
+                    "label_ids": [
+                        4
+                    ],
+                    "label_names": [
+                        "黄牌"
+                    ],
+                    "start_id": 3206,
+                    "end_id": 3217
+                },
+                {
+                    "label_ids": [
+                        3
+                    ],
+                    "label_names": [
+                        "任意球"
+                    ],
+                    "start_id": 3254,
+                    "end_id": 3263
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 3392,
+                    "end_id": 3396
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 3454,
+                    "end_id": 3456
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 3541,
+                    "end_id": 3554
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 3586,
+                    "end_id": 3590
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 3646,
+                    "end_id": 3658
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 3692,
+                    "end_id": 3695
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 3902,
+                    "end_id": 3926
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 4012,
+                    "end_id": 4022
+                },
+                {
+                    "label_ids": [
+                        4
+                    ],
+                    "label_names": [
+                        "黄牌"
+                    ],
+                    "start_id": 4034,
+                    "end_id": 4043
+                },
+                {
+                    "label_ids": [
+                        3
+                    ],
+                    "label_names": [
+                        "任意球"
+                    ],
+                    "start_id": 4067,
+                    "end_id": 4078
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 4349,
+                    "end_id": 4353
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 4376,
+                    "end_id": 4392
+                },
+                {
+                    "label_ids": [
+                        4
+                    ],
+                    "label_names": [
+                        "黄牌"
+                    ],
+                    "start_id": 4435,
+                    "end_id": 4443
+                },
+                {
+                    "label_ids": [
+                        3
+                    ],
+                    "label_names": [
+                        "任意球"
+                    ],
+                    "start_id": 4480,
+                    "end_id": 4488
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 4551,
+                    "end_id": 4554
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 4565,
+                    "end_id": 4570
+                },
+                {
+                    "label_ids": [
+                        6
+                    ],
+                    "label_names": [
+                        "换人"
+                    ],
+                    "start_id": 4581,
+                    "end_id": 4599
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 4808,
+                    "end_id": 4814
+                },
+                {
+                    "label_ids": [
+                        6
+                    ],
+                    "label_names": [
+                        "换人"
+                    ],
+                    "start_id": 4868,
+                    "end_id": 4890
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 4901,
+                    "end_id": 4907
+                },
+                {
+                    "label_ids": [
+                        6
+                    ],
+                    "label_names": [
+                        "换人"
+                    ],
+                    "start_id": 4955,
+                    "end_id": 4979
+                },
+                {
+                    "label_ids": [
+                        1,
+                        2
+                    ],
+                    "label_names": [
+                        "进球",
+                        "角球"
+                    ],
+                    "start_id": 5053,
+                    "end_id": 5093
+                },
+                {
+                    "label_ids": [
+                        1
+                    ],
+                    "label_names": [
+                        "进球"
+                    ],
+                    "start_id": 5150,
+                    "end_id": 5186
+                },
+                {
+                    "label_ids": [
+                        6
+                    ],
+                    "label_names": [
+                        "换人"
+                    ],
+                    "start_id": 5242,
+                    "end_id": 5256
+                },
+                {
+                    "label_ids": [
+                        6
+                    ],
+                    "label_names": [
+                        "换人"
+                    ],
+                    "start_id": 5265,
+                    "end_id": 5276
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 5335,
+                    "end_id": 5348
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 5359,
+                    "end_id": 5375
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 5447,
+                    "end_id": 5450
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 5461,
+                    "end_id": 5468
+                },
+                {
+                    "label_ids": [
+                        3
+                    ],
+                    "label_names": [
+                        "任意球"
+                    ],
+                    "start_id": 5636,
+                    "end_id": 5649
+                },
+                {
+                    "label_ids": [
+                        4
+                    ],
+                    "label_names": [
+                        "黄牌"
+                    ],
+                    "start_id": 5743,
+                    "end_id": 5758
+                },
+                {
+                    "label_ids": [
+                        1
+                    ],
+                    "label_names": [
+                        "进球"
+                    ],
+                    "start_id": 5816,
+                    "end_id": 5848
+                },
+                {
+                    "label_ids": [
+                        4
+                    ],
+                    "label_names": [
+                        "黄牌"
+                    ],
+                    "start_id": 5898,
+                    "end_id": 5918
+                }
+            ]
+        },
+        {
+            "url": "EuroCup2016/8cfb4e605af44055b1576c37eb0e3209.mp4",
+            "total_frames": 6082,
+            "actions": [
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 398,
+                    "end_id": 400
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 496,
+                    "end_id": 499
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 508,
+                    "end_id": 510
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 556,
+                    "end_id": 558
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 627,
+                    "end_id": 629
+                },
+                {
+                    "label_ids": [
+                        3
+                    ],
+                    "label_names": [
+                        "任意球"
+                    ],
+                    "start_id": 695,
+                    "end_id": 701
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 923,
+                    "end_id": 927
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 1064,
+                    "end_id": 1067
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 1107,
+                    "end_id": 1109
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 1264,
+                    "end_id": 1266
+                },
+                {
+                    "label_ids": [
+                        3
+                    ],
+                    "label_names": [
+                        "任意球"
+                    ],
+                    "start_id": 1316,
+                    "end_id": 1322
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 1505,
+                    "end_id": 1507
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 1519,
+                    "end_id": 1521
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 1677,
+                    "end_id": 1681
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 1709,
+                    "end_id": 1711
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 1714,
+                    "end_id": 1717
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 2045,
+                    "end_id": 2046
+                },
+                {
+                    "label_ids": [
+                        3
+                    ],
+                    "label_names": [
+                        "任意球"
+                    ],
+                    "start_id": 2078,
+                    "end_id": 2085
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 2097,
+                    "end_id": 2099
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 2107,
+                    "end_id": 2109
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 2126,
+                    "end_id": 2129
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 2220,
+                    "end_id": 2222
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 2239,
+                    "end_id": 2241
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 2252,
+                    "end_id": 2254
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 2360,
+                    "end_id": 2361
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 2384,
+                    "end_id": 2386
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 2528,
+                    "end_id": 2530
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 2573,
+                    "end_id": 2575
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 2620,
+                    "end_id": 2623
+                },
+                {
+                    "label_ids": [
+                        3
+                    ],
+                    "label_names": [
+                        "任意球"
+                    ],
+                    "start_id": 2676,
+                    "end_id": 2682
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 2717,
+                    "end_id": 2727
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 2763,
+                    "end_id": 2765
+                },
+                {
+                    "label_ids": [
+                        4
+                    ],
+                    "label_names": [
+                        "黄牌"
+                    ],
+                    "start_id": 2927,
+                    "end_id": 2930
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 3030,
+                    "end_id": 3032
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 3113,
+                    "end_id": 3114
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 3212,
+                    "end_id": 3214
+                },
+                {
+                    "label_ids": [
+                        3
+                    ],
+                    "label_names": [
+                        "任意球"
+                    ],
+                    "start_id": 3366,
+                    "end_id": 3370
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 3425,
+                    "end_id": 3428
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 3438,
+                    "end_id": 3440
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 3579,
+                    "end_id": 3580
+                },
+                {
+                    "label_ids": [
+                        6
+                    ],
+                    "label_names": [
+                        "换人"
+                    ],
+                    "start_id": 3629,
+                    "end_id": 3643
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 3664,
+                    "end_id": 3667
+                },
+                {
+                    "label_ids": [
+                        3
+                    ],
+                    "label_names": [
+                        "任意球"
+                    ],
+                    "start_id": 3815,
+                    "end_id": 3821
+                },
+                {
+                    "label_ids": [
+                        4
+                    ],
+                    "label_names": [
+                        "黄牌"
+                    ],
+                    "start_id": 3831,
+                    "end_id": 3838
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 3906,
+                    "end_id": 3910
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 3928,
+                    "end_id": 3931
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 3955,
+                    "end_id": 3957
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 3990,
+                    "end_id": 3994
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 4031,
+                    "end_id": 4033
+                },
+                {
+                    "label_ids": [
+                        6
+                    ],
+                    "label_names": [
+                        "换人"
+                    ],
+                    "start_id": 4092,
+                    "end_id": 4106
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 4139,
+                    "end_id": 4141
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 4209,
+                    "end_id": 4211
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 4224,
+                    "end_id": 4226
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 4248,
+                    "end_id": 4250
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 4317,
+                    "end_id": 4319
+                },
+                {
+                    "label_ids": [
+                        4
+                    ],
+                    "label_names": [
+                        "黄牌"
+                    ],
+                    "start_id": 4382,
+                    "end_id": 4390
+                },
+                {
+                    "label_ids": [
+                        3
+                    ],
+                    "label_names": [
+                        "任意球"
+                    ],
+                    "start_id": 4417,
+                    "end_id": 4422
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 4427,
+                    "end_id": 4429
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 4471,
+                    "end_id": 4472
+                },
+                {
+                    "label_ids": [
+                        6
+                    ],
+                    "label_names": [
+                        "换人"
+                    ],
+                    "start_id": 4486,
+                    "end_id": 4508
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 4526,
+                    "end_id": 4529
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 4610,
+                    "end_id": 4614
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 4802,
+                    "end_id": 4804
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 4826,
+                    "end_id": 4828
+                },
+                {
+                    "label_ids": [
+                        1
+                    ],
+                    "label_names": [
+                        "进球"
+                    ],
+                    "start_id": 4853,
+                    "end_id": 4869
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 5048,
+                    "end_id": 5050
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 5061,
+                    "end_id": 5063
+                },
+                {
+                    "label_ids": [
+                        6
+                    ],
+                    "label_names": [
+                        "换人"
+                    ],
+                    "start_id": 5090,
+                    "end_id": 5096
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 5102,
+                    "end_id": 5104
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 5120,
+                    "end_id": 5122
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 5131,
+                    "end_id": 5134
+                },
+                {
+                    "label_ids": [
+                        3
+                    ],
+                    "label_names": [
+                        "任意球"
+                    ],
+                    "start_id": 5166,
+                    "end_id": 5170
+                },
+                {
+                    "label_ids": [
+                        6
+                    ],
+                    "label_names": [
+                        "换人"
+                    ],
+                    "start_id": 5376,
+                    "end_id": 5393
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 5447,
+                    "end_id": 5451
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 5675,
+                    "end_id": 5677
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 5756,
+                    "end_id": 5760
+                },
+                {
+                    "label_ids": [
+                        7
+                    ],
+                    "label_names": [
+                        "界外球"
+                    ],
+                    "start_id": 5960,
+                    "end_id": 5963
+                },
+                {
+                    "label_ids": [
+                        4
+                    ],
+                    "label_names": [
+                        "黄牌"
+                    ],
+                    "start_id": 5965,
+                    "end_id": 5977
+                },
+                {
+                    "label_ids": [
+                        2
+                    ],
+                    "label_names": [
+                        "角球"
+                    ],
+                    "start_id": 6016,
+                    "end_id": 6020
+                }
+            ]
+        }
+    ]
+}

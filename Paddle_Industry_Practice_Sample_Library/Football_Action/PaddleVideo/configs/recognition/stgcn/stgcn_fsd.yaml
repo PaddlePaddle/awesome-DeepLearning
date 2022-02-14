@@ -1,0 +1,64 @@
+MODEL: #MODEL field
+    framework: "RecognizerGCN" #Mandatory, indicate the type of network, associate to the 'paddlevideo/modeling/framework/' .
+    backbone: #Mandatory, indicate the type of backbone, associate to the 'paddlevideo/modeling/backbones/' .
+        name: "STGCN" #Mandatory, The name of backbone.
+    head:
+        name: "STGCNHead" #Mandatory, indicate the type of head, associate to the 'paddlevideo/modeling/heads'
+        num_classes: 30 #Optional, the number of classes to be classified.
+
+DATASET: #DATASET field
+    batch_size: 64 #Mandatory, bacth size
+    num_workers: 4 #Mandatory, the number of subprocess on each GPU.
+    test_batch_size: 1
+    test_num_workers: 0
+    train:
+        format: "SkeletonDataset" #Mandatory, indicate the type of dataset, associate to the 'paddlevidel/loader/dateset'
+        file_path: "train_data.npy" #Mandatory, train data index file path
+        label_path: "train_label.npy"
+    test:
+        format: "SkeletonDataset" #Mandatory, indicate the type of dataset, associate to the 'paddlevidel/loader/dateset'
+        file_path: "test_A_data.npy" #Mandatory, valid data index file path
+        test_mode: True
+
+PIPELINE: #PIPELINE field
+    train: #Mandotary, indicate the pipeline to deal with the training data, associate to the 'paddlevideo/loader/pipelines/'
+        sample:
+            name: "AutoPadding"
+            window_size: 350
+        transform: #Mandotary, image transfrom operator
+            - SkeletonNorm:
+    test: #Mandatory, indicate the pipeline to deal with the validing data. associate to the 'paddlevideo/loader/pipelines/'
+        sample:
+            name: "AutoPadding"
+            window_size: 350
+        transform: #Mandotary, image transfrom operator
+            - SkeletonNorm:
+
+OPTIMIZER: #OPTIMIZER field
+  name: 'Momentum'
+  momentum: 0.9
+  learning_rate:
+    name: 'CosineAnnealingDecay'
+    learning_rate: 0.05
+    T_max: 90
+  weight_decay:
+    name: 'L2'
+    value: 1e-4
+
+
+METRIC:
+    name: 'SkeletonMetric'
+    out_file: 'submission.csv'
+
+
+INFERENCE:
+    name: 'STGCN_Inference_helper'
+    num_channels: 2
+    window_size: 350
+    vertex_nums: 25
+    person_nums: 1
+
+
+model_name: "STGCN"
+log_interval: 10 #Optional, the interal of logger, default:10
+epochs: 90 #Mandatory, total epoch

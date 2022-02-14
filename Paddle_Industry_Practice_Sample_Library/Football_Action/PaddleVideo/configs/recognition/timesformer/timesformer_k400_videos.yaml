@@ -1,0 +1,149 @@
+MODEL: #MODEL field
+    framework: "RecognizerTransformer" #Mandatory, indicate the type of network, associate to the 'paddlevideo/modeling/framework/' .
+    backbone: #Mandatory, indicate the type of backbone, associate to the 'paddlevideo/modeling/backbones/' .
+        name: "VisionTransformer" #Mandatory, The name of backbone.
+        pretrained: "data/ViT_base_patch16_224_pretrained.pdparams" #Optional, pretrained model path.
+        img_size: 224
+        patch_size: 16
+        in_channels: 3
+        embed_dim: 768
+        depth: 12
+        num_heads: 12
+        mlp_ratio: 4
+        qkv_bias: True
+        epsilon: 1e-6
+        num_seg: 8
+        attention_type: 'divided_space_time'
+    head:
+        name: "TimeSformerHead" #Mandatory, indicate the type of head, associate to the 'paddlevideo/modeling/heads'
+        num_classes: 400 #Optional, the number of classes to be classified.
+        in_channels: 768 #input channel of the extracted feature.
+        std: 0.02 #std value in params initialization
+    runtime_cfg: # configuration used when the model is train or test.
+        test: # test config
+            num_seg: 8
+            avg_type: 'score' # 'score' or 'prob'
+
+DATASET: #DATASET field
+    batch_size: 1 #Mandatory, bacth size
+    num_workers: 4 #Mandatory, XXX the number of subprocess on each GPU.
+    test_batch_size: 8
+    train:
+        format: "VideoDataset" #Mandatory, indicate the type of dataset, associate to the 'paddlevidel/loader/dateset'
+        data_prefix: "data/k400/videos" #Mandatory, train data root path
+        file_path: "data/k400/train.list" #Mandatory, train data index file path
+    valid:
+        format: "VideoDataset" #Mandatory, indicate the type of dataset, associate to the 'paddlevidel/loader/dateset'
+        data_prefix: "data/k400/videos" #Mandatory, train data root path
+        file_path: "data/k400/val.list" #Mandatory, valid data index file path
+    test:
+        format: "VideoDataset" #Mandatory, indicate the type of dataset, associate to the 'paddlevidel/loader/dateset'
+        data_prefix: "data/k400/videos" #Mandatory, train data root path
+        file_path: "data/k400/val.list" #Mandatory, valid data index file path
+
+PIPELINE: #PIPELINE field TODO.....
+    train: #Mandotary, indicate the pipeline to deal with the training data, associate to the 'paddlevideo/loader/pipelines/'
+        decode:
+            name: "VideoDecoder"
+            backend: 'pyav'
+            mode: 'train'
+            num_seg: 8
+        sample:
+            name: "Sampler"
+            num_seg: 8
+            seg_len: 1
+            valid_mode: False
+            linspace_sample: True
+        transform: #Mandotary, image transform operator.
+            - Normalization:
+                mean: [0.45, 0.45, 0.45]
+                std: [0.225, 0.225, 0.225]
+                tensor_shape: [1, 1, 1, 3]
+            - Image2Array:
+                data_format: 'cthw'
+            - JitterScale:
+                min_size: 256
+                max_size: 320
+            - RandomCrop:
+                target_size: 224
+            - RandomFlip:
+
+    valid: #Mandatory, indicate the pipeline to deal with the validing data. associate to the 'paddlevideo/loader/pipelines/'
+        decode:
+            name: "VideoDecoder"
+            backend: 'pyav'
+            mode: 'valid'
+            num_seg: 8
+        sample:
+            name: "Sampler"
+            num_seg: 8
+            seg_len: 1
+            valid_mode: False # It is indeed False when verifying
+            linspace_sample: True
+        transform:
+            - Normalization:
+                mean: [0.45, 0.45, 0.45]
+                std: [0.225, 0.225, 0.225]
+                tensor_shape: [1, 1, 1, 3]
+            - Image2Array:
+                data_format: 'cthw'
+            - JitterScale:
+                min_size: 256
+                max_size: 320
+            - RandomCrop:
+                target_size: 224
+            - RandomFlip:
+    test:
+        decode:
+            name: "VideoDecoder"
+            backend: 'pyav'
+            mode: 'test'
+            num_seg: 8
+        sample:
+            name: "Sampler"
+            num_seg: 8
+            seg_len: 1
+            valid_mode: True
+            linspace_sample: True
+        transform:
+            - Normalization:
+                mean: [0.45, 0.45, 0.45]
+                std: [0.225, 0.225, 0.225]
+                tensor_shape: [1, 1, 1, 3]
+            - Image2Array:
+                data_format: 'cthw'
+            - JitterScale:
+                min_size: 224
+                max_size: 224
+            - UniformCrop:
+                target_size: 224
+
+OPTIMIZER: #OPTIMIZER field
+    name: 'Momentum' #Mandatory, the type of optimizer, associate to the 'paddlevideo/solver/'
+    momentum: 0.9
+    learning_rate: #Mandatory, the type of learning rate scheduler, associate to the 'paddlevideo/solver/'
+        learning_rate: 0.005 # Applicable when global batch size=64
+        name: 'MultiStepDecay'
+        milestones: [11, 14]
+        gamma: 0.1
+    weight_decay:
+        name: 'L2'
+        value: 0.0001
+    use_nesterov: True
+
+GRADIENT_ACCUMULATION:
+    global_batch_size: 64 # Specify the sum of batches to be calculated by all GPUs
+
+METRIC:
+    name: 'CenterCropMetric'
+
+INFERENCE:
+    name: 'TimeSformer_Inference_helper'
+    num_seg: 8
+    target_size: 224
+
+model_name: "TimeSformer"
+log_interval: 20 #Optional, the interal of logger, default:10
+save_interval: 3
+epochs: 15 #Mandatory, total epoch
+log_level: "INFO" #Optional, the logger level. default: "INFO"

@@ -1,0 +1,961 @@
+{
+    "fps": 5,
+    "gts": [
+        {
+            "url": "mp4/football.mp4",
+            "total_frames": 6189,
+            "root_actions": [
+                {
+                    "before_id": 0,
+                    "after_id": 458,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                2
+                            ],
+                            "label_names": [
+                                "\u89d2\u7403"
+                            ],
+                            "start_id": 393,
+                            "end_id": 399
+                        }
+                    ]
+                },
+                {
+                    "before_id": 399,
+                    "after_id": 592,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                7
+                            ],
+                            "label_names": [
+                                "\u754c\u5916\u7403"
+                            ],
+                            "start_id": 458,
+                            "end_id": 461
+                        },
+                        {
+                            "label_ids": [
+                                7
+                            ],
+                            "label_names": [
+                                "\u754c\u5916\u7403"
+                            ],
+                            "start_id": 473,
+                            "end_id": 475
+                        }
+                    ]
+                },
+                {
+                    "before_id": 475,
+                    "after_id": 649,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                7
+                            ],
+                            "label_names": [
+                                "\u754c\u5916\u7403"
+                            ],
+                            "start_id": 592,
+                            "end_id": 597
+                        }
+                    ]
+                },
+                {
+                    "before_id": 597,
+                    "after_id": 814,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                7
+                            ],
+                            "label_names": [
+                                "\u754c\u5916\u7403"
+                            ],
+                            "start_id": 649,
+                            "end_id": 651
+                        },
+                        {
+                            "label_ids": [
+                                7
+                            ],
+                            "label_names": [
+                                "\u754c\u5916\u7403"
+                            ],
+                            "start_id": 673,
+                            "end_id": 675
+                        }
+                    ]
+                },
+                {
+                    "before_id": 675,
+                    "after_id": 864,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                7
+                            ],
+                            "label_names": [
+                                "\u754c\u5916\u7403"
+                            ],
+                            "start_id": 814,
+                            "end_id": 817
+                        }
+                    ]
+                },
+                {
+                    "before_id": 817,
+                    "after_id": 911,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                7
+                            ],
+                            "label_names": [
+                                "\u754c\u5916\u7403"
+                            ],
+                            "start_id": 864,
+                            "end_id": 868
+                        },
+                        {
+                            "label_ids": [
+                                7
+                            ],
+                            "label_names": [
+                                "\u754c\u5916\u7403"
+                            ],
+                            "start_id": 880,
+                            "end_id": 883
+                        },
+                        {
+                            "label_ids": [
+                                7
+                            ],
+                            "label_names": [
+                                "\u754c\u5916\u7403"
+                            ],
+                            "start_id": 886,
+                            "end_id": 888
+                        }
+                    ]
+                },
+                {
+                    "before_id": 888,
+                    "after_id": 1161,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                1
+                            ],
+                            "label_names": [
+                                "\u8fdb\u7403"
+                            ],
+                            "start_id": 911,
+                            "end_id": 945
+                        }
+                    ]
+                },
+                {
+                    "before_id": 945,
+                    "after_id": 1210,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                7
+                            ],
+                            "label_names": [
+                                "\u754c\u5916\u7403"
+                            ],
+                            "start_id": 1161,
+                            "end_id": 1165
+                        },
+                        {
+                            "label_ids": [
+                                7
+                            ],
+                            "label_names": [
+                                "\u754c\u5916\u7403"
+                            ],
+                            "start_id": 1191,
+                            "end_id": 1194
+                        }
+                    ]
+                },
+                {
+                    "before_id": 1194,
+                    "after_id": 1316,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                7
+                            ],
+                            "label_names": [
+                                "\u754c\u5916\u7403"
+                            ],
+                            "start_id": 1210,
+                            "end_id": 1212
+                        }
+                    ]
+                },
+                {
+                    "before_id": 1212,
+                    "after_id": 1366,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                2
+                            ],
+                            "label_names": [
+                                "\u89d2\u7403"
+                            ],
+                            "start_id": 1316,
+                            "end_id": 1323
+                        }
+                    ]
+                },
+                {
+                    "before_id": 1323,
+                    "after_id": 1680,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                7
+                            ],
+                            "label_names": [
+                                "\u754c\u5916\u7403"
+                            ],
+                            "start_id": 1366,
+                            "end_id": 1368
+                        }
+                    ]
+                },
+                {
+                    "before_id": 1368,
+                    "after_id": 1747,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                3
+                            ],
+                            "label_names": [
+                                "\u4efb\u610f\u7403"
+                            ],
+                            "start_id": 1680,
+                            "end_id": 1686
+                        }
+                    ]
+                },
+                {
+                    "before_id": 1686,
+                    "after_id": 1843,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                7
+                            ],
+                            "label_names": [
+                                "\u754c\u5916\u7403"
+                            ],
+                            "start_id": 1747,
+                            "end_id": 1749
+                        },
+                        {
+                            "label_ids": [
+                                2
+                            ],
+                            "label_names": [
+                                "\u89d2\u7403"
+                            ],
+                            "start_id": 1772,
+                            "end_id": 1779
+                        }
+                    ]
+                },
+                {
+                    "before_id": 1779,
+                    "after_id": 2003,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                7
+                            ],
+                            "label_names": [
+                                "\u754c\u5916\u7403"
+                            ],
+                            "start_id": 1843,
+                            "end_id": 1845
+                        },
+                        {
+                            "label_ids": [
+                                7
+                            ],
+                            "label_names": [
+                                "\u754c\u5916\u7403"
+                            ],
+                            "start_id": 1876,
+                            "end_id": 1879
+                        }
+                    ]
+                },
+                {
+                    "before_id": 1879,
+                    "after_id": 2096,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                3
+                            ],
+                            "label_names": [
+                                "\u4efb\u610f\u7403"
+                            ],
+                            "start_id": 2003,
+                            "end_id": 2016
+                        }
+                    ]
+                },
+                {
+                    "before_id": 2016,
+                    "after_id": 2150,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                7
+                            ],
+                            "label_names": [
+                                "\u754c\u5916\u7403"
+                            ],
+                            "start_id": 2096,
+                            "end_id": 2100
+                        }
+                    ]
+                },
+                {
+                    "before_id": 2100,
+                    "after_id": 2365,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                7
+                            ],
+                            "label_names": [
+                                "\u754c\u5916\u7403"
+                            ],
+                            "start_id": 2150,
+                            "end_id": 2153
+                        }
+                    ]
+                },
+                {
+                    "before_id": 2153,
+                    "after_id": 2393,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                7
+                            ],
+                            "label_names": [
+                                "\u754c\u5916\u7403"
+                            ],
+                            "start_id": 2365,
+                            "end_id": 2368
+                        }
+                    ]
+                },
+                {
+                    "before_id": 2368,
+                    "after_id": 2439,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                4
+                            ],
+                            "label_names": [
+                                "\u9ec4\u724c"
+                            ],
+                            "start_id": 2393,
+                            "end_id": 2408
+                        }
+                    ]
+                },
+                {
+                    "before_id": 2408,
+                    "after_id": 2479,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                3
+                            ],
+                            "label_names": [
+                                "\u4efb\u610f\u7403"
+                            ],
+                            "start_id": 2439,
+                            "end_id": 2446
+                        },
+                        {
+                            "label_ids": [
+                                7
+                            ],
+                            "label_names": [
+                                "\u754c\u5916\u7403"
+                            ],
+                            "start_id": 2453,
+                            "end_id": 2457
+                        }
+                    ]
+                },
+                {
+                    "before_id": 2457,
+                    "after_id": 2605,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                7
+                            ],
+                            "label_names": [
+                                "\u754c\u5916\u7403"
+                            ],
+                            "start_id": 2479,
+                            "end_id": 2481
+                        },
+                        {
+                            "label_ids": [
+                                4
+                            ],
+                            "label_names": [
+                                "\u9ec4\u724c"
+                            ],
+                            "start_id": 2494,
+                            "end_id": 2505
+                        }
+                    ]
+                },
+                {
+                    "before_id": 2505,
+                    "after_id": 2653,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                2
+                            ],
+                            "label_names": [
+                                "\u89d2\u7403"
+                            ],
+                            "start_id": 2605,
+                            "end_id": 2610
+                        },
+                        {
+                            "label_ids": [
+                                7
+                            ],
+                            "label_names": [
+                                "\u754c\u5916\u7403"
+                            ],
+                            "start_id": 2629,
+                            "end_id": 2636
+                        }
+                    ]
+                },
+                {
+                    "before_id": 2636,
+                    "after_id": 2789,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                4
+                            ],
+                            "label_names": [
+                                "\u9ec4\u724c"
+                            ],
+                            "start_id": 2653,
+                            "end_id": 2670
+                        }
+                    ]
+                },
+                {
+                    "before_id": 2670,
+                    "after_id": 3015,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                3
+                            ],
+                            "label_names": [
+                                "\u4efb\u610f\u7403"
+                            ],
+                            "start_id": 2789,
+                            "end_id": 2803
+                        }
+                    ]
+                },
+                {
+                    "before_id": 2803,
+                    "after_id": 3072,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                7
+                            ],
+                            "label_names": [
+                                "\u754c\u5916\u7403"
+                            ],
+                            "start_id": 3015,
+                            "end_id": 3018
+                        }
+                    ]
+                },
+                {
+                    "before_id": 3018,
+                    "after_id": 3374,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                2
+                            ],
+                            "label_names": [
+                                "\u89d2\u7403"
+                            ],
+                            "start_id": 3072,
+                            "end_id": 3082
+                        }
+                    ]
+                },
+                {
+                    "before_id": 3082,
+                    "after_id": 3466,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                7
+                            ],
+                            "label_names": [
+                                "\u754c\u5916\u7403"
+                            ],
+                            "start_id": 3374,
+                            "end_id": 3377
+                        },
+                        {
+                            "label_ids": [
+                                4
+                            ],
+                            "label_names": [
+                                "\u9ec4\u724c"
+                            ],
+                            "start_id": 3394,
+                            "end_id": 3413
+                        }
+                    ]
+                },
+                {
+                    "before_id": 3413,
+                    "after_id": 3686,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                3
+                            ],
+                            "label_names": [
+                                "\u4efb\u610f\u7403"
+                            ],
+                            "start_id": 3466,
+                            "end_id": 3474
+                        }
+                    ]
+                },
+                {
+                    "before_id": 3474,
+                    "after_id": 3863,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                2
+                            ],
+                            "label_names": [
+                                "\u89d2\u7403"
+                            ],
+                            "start_id": 3686,
+                            "end_id": 3692
+                        },
+                        {
+                            "label_ids": [
+                                7
+                            ],
+                            "label_names": [
+                                "\u754c\u5916\u7403"
+                            ],
+                            "start_id": 3697,
+                            "end_id": 3700
+                        }
+                    ]
+                },
+                {
+                    "before_id": 3700,
+                    "after_id": 3919,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                2
+                            ],
+                            "label_names": [
+                                "\u89d2\u7403"
+                            ],
+                            "start_id": 3863,
+                            "end_id": 3873
+                        },
+                        {
+                            "label_ids": [
+                                6
+                            ],
+                            "label_names": [
+                                "\u6362\u4eba"
+                            ],
+                            "start_id": 3874,
+                            "end_id": 3880
+                        }
+                    ]
+                },
+                {
+                    "before_id": 3880,
+                    "after_id": 4037,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                7
+                            ],
+                            "label_names": [
+                                "\u754c\u5916\u7403"
+                            ],
+                            "start_id": 3919,
+                            "end_id": 3923
+                        }
+                    ]
+                },
+                {
+                    "before_id": 3923,
+                    "after_id": 4136,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                6
+                            ],
+                            "label_names": [
+                                "\u6362\u4eba"
+                            ],
+                            "start_id": 4037,
+                            "end_id": 4077
+                        }
+                    ]
+                },
+                {
+                    "before_id": 4077,
+                    "after_id": 4173,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                7
+                            ],
+                            "label_names": [
+                                "\u754c\u5916\u7403"
+                            ],
+                            "start_id": 4136,
+                            "end_id": 4143
+                        }
+                    ]
+                },
+                {
+                    "before_id": 4143,
+                    "after_id": 4554,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                2
+                            ],
+                            "label_names": [
+                                "\u89d2\u7403"
+                            ],
+                            "start_id": 4173,
+                            "end_id": 4181
+                        }
+                    ]
+                },
+                {
+                    "before_id": 4181,
+                    "after_id": 4581,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                3
+                            ],
+                            "label_names": [
+                                "\u4efb\u610f\u7403"
+                            ],
+                            "start_id": 4554,
+                            "end_id": 4563
+                        }
+                    ]
+                },
+                {
+                    "before_id": 4563,
+                    "after_id": 4676,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                6
+                            ],
+                            "label_names": [
+                                "\u6362\u4eba"
+                            ],
+                            "start_id": 4581,
+                            "end_id": 4596
+                        }
+                    ]
+                },
+                {
+                    "before_id": 4596,
+                    "after_id": 4772,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                6
+                            ],
+                            "label_names": [
+                                "\u6362\u4eba"
+                            ],
+                            "start_id": 4676,
+                            "end_id": 4687
+                        }
+                    ]
+                },
+                {
+                    "before_id": 4687,
+                    "after_id": 5121,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                7
+                            ],
+                            "label_names": [
+                                "\u754c\u5916\u7403"
+                            ],
+                            "start_id": 4772,
+                            "end_id": 4775
+                        }
+                    ]
+                },
+                {
+                    "before_id": 4775,
+                    "after_id": 5197,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                2
+                            ],
+                            "label_names": [
+                                "\u89d2\u7403"
+                            ],
+                            "start_id": 5121,
+                            "end_id": 5129
+                        }
+                    ]
+                },
+                {
+                    "before_id": 5129,
+                    "after_id": 5326,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                3
+                            ],
+                            "label_names": [
+                                "\u4efb\u610f\u7403"
+                            ],
+                            "start_id": 5197,
+                            "end_id": 5204
+                        },
+                        {
+                            "label_ids": [
+                                7
+                            ],
+                            "label_names": [
+                                "\u754c\u5916\u7403"
+                            ],
+                            "start_id": 5233,
+                            "end_id": 5237
+                        }
+                    ]
+                },
+                {
+                    "before_id": 5237,
+                    "after_id": 5387,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                7
+                            ],
+                            "label_names": [
+                                "\u754c\u5916\u7403"
+                            ],
+                            "start_id": 5326,
+                            "end_id": 5329
+                        }
+                    ]
+                },
+                {
+                    "before_id": 5329,
+                    "after_id": 5471,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                2
+                            ],
+                            "label_names": [
+                                "\u89d2\u7403"
+                            ],
+                            "start_id": 5387,
+                            "end_id": 5401
+                        }
+                    ]
+                },
+                {
+                    "before_id": 5401,
+                    "after_id": 5531,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                7
+                            ],
+                            "label_names": [
+                                "\u754c\u5916\u7403"
+                            ],
+                            "start_id": 5471,
+                            "end_id": 5474
+                        }
+                    ]
+                },
+                {
+                    "before_id": 5474,
+                    "after_id": 5654,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                2
+                            ],
+                            "label_names": [
+                                "\u89d2\u7403"
+                            ],
+                            "start_id": 5531,
+                            "end_id": 5538
+                        }
+                    ]
+                },
+                {
+                    "before_id": 5538,
+                    "after_id": 5727,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                7
+                            ],
+                            "label_names": [
+                                "\u754c\u5916\u7403"
+                            ],
+                            "start_id": 5654,
+                            "end_id": 5660
+                        },
+                        {
+                            "label_ids": [
+                                4
+                            ],
+                            "label_names": [
+                                "\u9ec4\u724c"
+                            ],
+                            "start_id": 5667,
+                            "end_id": 5683
+                        }
+                    ]
+                },
+                {
+                    "before_id": 5683,
+                    "after_id": 5813,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                3
+                            ],
+                            "label_names": [
+                                "\u4efb\u610f\u7403"
+                            ],
+                            "start_id": 5727,
+                            "end_id": 5734
+                        }
+                    ]
+                },
+                {
+                    "before_id": 5734,
+                    "after_id": 5839,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                6
+                            ],
+                            "label_names": [
+                                "\u6362\u4eba"
+                            ],
+                            "start_id": 5813,
+                            "end_id": 5825
+                        }
+                    ]
+                },
+                {
+                    "before_id": 5825,
+                    "after_id": 5982,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                6
+                            ],
+                            "label_names": [
+                                "\u6362\u4eba"
+                            ],
+                            "start_id": 5839,
+                            "end_id": 5864
+                        }
+                    ]
+                },
+                {
+                    "before_id": 5864,
+                    "after_id": 6064,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                3
+                            ],
+                            "label_names": [
+                                "\u4efb\u610f\u7403"
+                            ],
+                            "start_id": 5982,
+                            "end_id": 5996
+                        }
+                    ]
+                },
+                {
+                    "before_id": 5996,
+                    "after_id": 6189,
+                    "actions": [
+                        {
+                            "label_ids": [
+                                7
+                            ],
+                            "label_names": [
+                                "\u754c\u5916\u7403"
+                            ],
+                            "start_id": 6064,
+                            "end_id": 6069
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

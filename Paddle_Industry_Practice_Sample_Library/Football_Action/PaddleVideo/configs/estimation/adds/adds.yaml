@@ -1,0 +1,135 @@
+MODEL: #MODEL field
+    framework: "DepthEstimator" #Mandatory, indicate the type of network, associate to the 'paddlevideo/modeling/framework/' .
+    backbone: #Mandatory, indicate the type of backbone, associate to the 'paddlevideo/modeling/backbones/' .
+        name: 'ADDS_DepthNet'
+        pretrained: "data/Resnet18_Imagenet.pdparams"
+        num_layers: 18
+        height: 256
+        width: 512
+        batch_size: 6
+        frame_ids: [0, -1, 1]
+        pose_model_input: "pairs"
+        use_stereo: False
+        only_depth_encoder: False
+        scales: [0,1,2,3]
+        pose_model_type: 'separate_resnet'
+        min_depth: 0.1
+        max_depth: 100.0
+        v1_multiscale: False
+        predictive_mask: False
+        disable_automasking: False
+    head:
+        name: 'AddsHead'
+        avg_reprojection: False
+        disparity_smoothness: 0.001
+        no_ssim: False
+        pred_depth_scale_factor: 1
+        max_gt_depth: 40
+
+
+DATASET: #DATASET field
+    batch_size: 6 #Mandatory, bacth size
+    valid_batch_size: 1
+    test_batch_size: 1
+    num_workers: 2 #Mandatory, XXX the number of subprocess on each GPU.
+    train:
+        format: "MonoDataset"
+        file_path: "data/oxford/splits/oxford_day/train_files.txt"
+        data_prefix: "data/oxford/oxford_processing_forADDS"
+    valid:
+        format: "MonoDataset"
+        file_path: "data/oxford/splits/oxford_day/val_day_files.txt"
+        data_prefix: "data/oxford/oxford_processing_forADDS"
+    test:
+        format: "MonoDataset"
+        file_path: "data/oxford/splits/oxford_day/val_night_files.txt"
+        data_prefix: "data/oxford/oxford_processing_forADDS"
+
+PIPELINE: #PIPELINE field TODO.....
+    train: #Mandotary, indicate the pipeline to deal with the training data, associate to the 'paddlevideo/loader/pipelines/'
+        decode:
+            name: "ImageDecoder"
+            backend: 'pil'
+            dataset: 'kitti'
+            frame_idxs: [0, -1, 1]
+            num_scales: 4
+            side_map: {"2": 2, "3": 3, "l": 2, "r": 3}
+            full_res_shape: (640, 1280)
+            img_ext: ".png"
+        transform:
+            - GroupRandomFlip:
+            - GroupResize:
+                  height: 256
+                  width: 512
+                  scale: 4
+                  K: [[0.768, 0, 0.5, 0], [0, 1.024, 0.5, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+            - ColorJitter:
+                brightness: 0.2
+                contrast: 0.2
+                saturation: 0.2
+                hue: 0.1
+                mode: "train"
+            - ToArray:
+    valid:
+        decode:
+            name: "ImageDecoder"
+            backend: 'pil'
+            dataset: 'kitti'
+            frame_idxs: [0]
+            num_scales: 4
+            side_map: { "2": 2, "3": 3, "l": 2, "r": 3 }
+            full_res_shape: (1280, 640)
+            img_ext: ".png"
+        transform:
+            - GroupResize:
+                  height: 256
+                  width: 512
+                  scale: 4
+                  K: [ [ 0.768, 0, 0.5, 0 ],[ 0, 1.024, 0.5, 0 ],[ 0, 0, 1, 0 ],[ 0, 0, 0, 1 ] ]
+            - ToArray:
+    test:
+        decode:
+            name: "ImageDecoder"
+            backend: 'pil'
+            dataset: 'kitti'
+            frame_idxs: [0]
+            num_scales: 4
+            side_map: { "2": 2, "3": 3, "l": 2, "r": 3 }
+            full_res_shape: (1280, 640)
+            img_ext: ".png"
+        transform:
+            - GroupResize:
+                  height: 256
+                  width: 512
+                  scale: 4
+                  K: [ [ 0.768, 0, 0.5, 0 ],[ 0, 1.024, 0.5, 0 ],[ 0, 0, 1, 0 ],[ 0, 0, 0, 1 ] ]
+            - ToArray:
+
+OPTIMIZER: #OPTIMIZER field
+    name: 'Adam' #Mandatory, the type of optimizer, associate to the 'paddlevideo/solver/'
+    learning_rate:
+        name : 'StepDecay'
+        learning_rate: 0.0001
+        step_size: 14
+        gamma: 0.1
+
+METRIC:
+    name: 'DepthMetric'
+
+INFERENCE:
+    name: 'ADDS_Inference_helper'
+    frame_idxs: [0]
+    num_scales: 4
+    side_map: { "2": 2, "3": 3, "l": 2, "r": 3 }
+    full_res_shape: (1280, 640)
+    img_ext: ".png"
+    height: 256
+    width: 512
+    num_channels: 3
+    K: [[0.768, 0, 0.5, 0], [0, 1.024, 0.5, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+
+model_name: "ADDS"
+log_interval: 20 #Optional, the interal of logger, default:10
+save_interval: 1
+epochs: 20 #Mandatory, total epoch
+log_level: "INFO" #Optional, the logger level. default: "INFO"
