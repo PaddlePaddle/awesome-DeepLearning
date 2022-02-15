@@ -239,20 +239,20 @@ print('label: ', record['label'])
 
 | 模型                                                         | Hit@1 | Hit@2 |
 | ------------------------------------------------------------ | ----- | ----- |
-| 图像+音频                    | 71.07 | 83.72 |
+| 图像+音频                    | 63 | 78 |
 | 图像+音频+文本分支ERNIE 不finetune +self-attention                     | 71.07 | 83.72 |
 | 图像+音频+文本分支ERNIE 不finetune +textcnn finetune + self-attention  | 72.66 | 85.01 |
 | 图像+音频+文本分支ERNIE 不finetune +textcnn finetune + text-guide-attention | 73.29 | 85.59 |
-</center>
+|</center>|||
 
 这里对多模融合方式进行实验，可以看到在同样没有拼接文本特征的情况下，使用文本进行指导video 和 audio 的 pooling 过程，仅仅只是贡献了LSTM pooling 的attention 权重，显著提升了模型效果+2.6%， 证明文本还是可以和图像，音频产生语义对齐的关系。下图为 attention 权重在时间上分布。
 <center>
 
 | 模型                                                         | Hit@1 | Hit@2 |
 | ------------------------------------------------------------ | ----- | ----- |
-| 图像+音频                    | 66 | 80.5 |
+| 图像+音频                    | 63 | 78 |
 | 图像+音频+text-guide-attention                    | 66 | 80.5 |
-</center>
+|</center>|||
 
 <center><img src='https://ai-studio-static-online.cdn.bcebos.com/075ad24a578c42f0bbcaad705c88547489fcbaade0a9408788e95c0277227555' width='700'></center>
 
