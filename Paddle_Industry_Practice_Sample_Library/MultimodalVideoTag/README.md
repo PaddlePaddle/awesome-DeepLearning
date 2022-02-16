@@ -20,9 +20,7 @@
 
 * [参考论文](#参考论文)
 
-* [资源](#资源)
-
-<a name="项目说明"></a>
+  <a name="项目说明"></a>
 
 ## 1 项目说明
 
@@ -314,8 +312,6 @@ print('label: ', record['label'])
 * [Attention Clusters: Purely Attention Based Local Feature Integration for Video Classification](https://arxiv.org/abs/1711.09550), Xiang Long, Chuang Gan, Gerard de Melo, Jiajun Wu, Xiao Liu, Shilei Wen
 * [YouTube-8M: A Large-Scale Video Classification Benchmark](https://arxiv.org/abs/1609.08675), Sami Abu-El-Haija, Nisarg Kothari, Joonseok Lee, Paul Natsev, George Toderici, Balakrishnan Varadarajan, Sudheendra Vijayanarasimhan
 * [Ernie: Enhanced representation through knowledge integration](https://arxiv.org/abs/1904.09223), Sun, Yu and Wang, Shuohuan and Li, Yukun and Feng, Shikun and Chen, Xuyi and Zhang, Han and Tian, Xin and Zhu, Danxiang and Tian, Hao and Wu, Hua
-
-<a name="资源"></a>
 
 # 资源
 更多资源请参考：
