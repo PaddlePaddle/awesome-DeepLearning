@@ -697,6 +697,6 @@ FSD-10: https://paperswithcode.com/paper/fsd-10-a-dataset-for-competitive-sports
 
 * 更多深度学习知识、产业案例，请参考：[awesome-DeepLearning](https://github.com/paddlepaddle/awesome-DeepLearning)
 
-* 更多目标检测模型，请参考：[PaddleDetection](https://github.com/PaddlePaddle/PaddleDetection)
+* 更多视频模型，请参考：[PaddleVideo](https://github.com/PaddlePaddle/PaddleVideo)
 
 * 更多学习资料请参阅[飞桨深度学习平台](https://www.paddlepaddle.org.cn/?fr=paddleEdu_aistudio)
