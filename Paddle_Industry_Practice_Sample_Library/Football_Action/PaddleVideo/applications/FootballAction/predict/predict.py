@@ -7,7 +7,7 @@ sys.path.append('action_detect')
 from action import ActionDetection
 
 if __name__ == '__main__':
-    dataset_dir = "PaddleVideo/applications/FootballAction/datasets/EuroCup2016"
+    dataset_dir = "/home/PaddleVideo/applications/FootballAction/datasets/EuroCup2016"
     
     model_predict = ActionDetection(cfg_file="./configs/configs.yaml")
     model_predict.load_model()

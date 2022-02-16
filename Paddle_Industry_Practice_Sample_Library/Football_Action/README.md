@@ -36,7 +36,7 @@
 ## 4.1 数据集介绍
 数据集由EuroCup2012, EuroCup2016, WorldCup2014, WorldCup2018四个赛事的比赛视频组成，共计272个训练集、25个测试集，支持15种足球精彩动作定位与识别，动作类别分别为：射门、进球、进球有欢呼、角球、任意球、黄牌、红牌、点球、换人、界外球、球门球、开球、越位挥旗、回放空中对抗和回放进球。
 
-下载数据集：
+我们只提供部分数据集的下载，提供EuroCup2016比赛的44个训练集和5个测试集，类别标注支持8分类。通过以下命令下载数据集：
 ```
 cd PaddleVideo/applications/FootballAction/datasets/EuroCup2016
 sh download_dataset.sh
@@ -99,8 +99,9 @@ python -m pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/s
 ```
 
 ```bash
+# 注意将文件中dataset路径按真实路径配置
 cd PaddleVideo/applications/FootballAction
-python3.7 datasets/script/get_frames_pcm.py
+python datasets/script/get_frames_pcm.py
 ```
 
 数据预处理后得到的文件夹格式如下：
@@ -124,6 +125,7 @@ PP-TSM模型是一个视频理解模型，它可以用于包含单动作的视�
 `get_instance_for_pptsm.py` 文件用于生成训练所需的正负样本。正样本为标注后的运动区间，该区间内的所有图像帧会生成一个pkl文件；负样本为标注后的非运动区间，因为足球赛事中无特殊动作的时间较长，负样本以随机取N个区间生成N个pkl的方式生成。
 
 ```bash
+# 注意将文件中dataset路径按真实路径配置
 python datasets/script/get_instance_for_pptsm.py
 ```
 
@@ -139,11 +141,12 @@ python datasets/script/get_instance_for_pptsm.py
 在训练开始前，需要先下载图像蒸馏预训练模型ResNet50_vd_ssld_v2.pdparams 作为模型 backbone 初始化参数，通过如下命令下载：
 
 ```bash
+
 wget https://videotag.bj.bcebos.com/PaddleVideo/PretrainModel/ResNet50_vd_ssld_v2_pretrained.pdparams
 mv ResNet50_vd_ssld_v2_pretrained.pdparams pretrain/ResNet50_vd_ssld_v2_pretrained.pdparams
 ```
 
-启动训练，可以在 `pptsm_football_v2.0.yaml` 中调节训练参数。
+启动训练，可以在 `pptsm_football_v2.0.yaml` 中修改数据文件路径，调节训练参数。
 
 ```bash
 # 启动训练
@@ -178,12 +181,13 @@ python tools/export_model.py -c applications/FootballAction/train_proposal/confi
 wget https://videotag.bj.bcebos.com/PaddleVideo-release2.1/FootballAction/audio.tar
 tar -xvf audio.tar
 rm audio.tar
-mv AUDIO/ PaddleVideo/applications/FootballAction/checkpoints/
+mv AUDIO/ applications/FootballAction/checkpoints/
 ```
 
 提取视频图像和音频特征：
 
 ```bash
+# 注意将文件中dataset路径按真实路径配置
 cd PaddleVideo/applications/FootballAction/extractor
 python extract_feat.py
 ```
@@ -205,6 +209,7 @@ python extract_feat.py
 
 ```bash
 cd PaddleVideo/applications/FootballAction
+# 注意将文件中dataset路径按真实路径配置
 python datasets/script/get_instance_for_bmn.py
 ```
 
@@ -244,7 +249,7 @@ duration_second 代表视频片段时长，duration_frame 代表涵盖多少帧�
 
 ### 5.2.2 BMN模型训练
 
-该步骤训练与PP-TSM模型训练类似，可以调整 bmn_football_v2.0.yaml 文件，修改训练参数。
+该步骤训练与PP-TSM模型训练类似，可以调整 bmn_football_v2.0.yaml 文件，指定数据文件路径，修改训练参数。
 
 ```bash
 cd PaddleVideo/
@@ -293,6 +298,7 @@ python extract_bmn.py
 按照BMN预测到的proposal截断视频特征，生成训练AttentionLSTM所需数据集。
 
 ```bash
+# 注意将文件中dataset路径按真实路径配置
 cd PaddleVideo/applications/FootballAction/datasets/script/
 python get_instance_for_lstm.py
 ```
@@ -314,7 +320,7 @@ python -u scenario_lib/train.py  \
 ```bash
 cd PaddleVideo/applications/FootballAction/train_lstm/
 
-python inference_model.py --config=conf/conf.yaml --weights=../football_lstm/ActionNet_epoch15_acc77.84016927083333.pdparams --save_dir=../checkpoints/LSTM
+python inference_model.py --config=conf/conf.yaml --weights=../football_lstm/ActionNet.pdparams --save_dir=../checkpoints/LSTM
 ```
 
 # 6. 模型推理
@@ -441,3 +447,14 @@ python get_instance_for_lstm_long_proposal.py
 
 欢迎报名直播课加入交流群，如需更多技术交流与合作可点击以下[链接](https://paddleqiyeban.wjx.cn/vj/Qlb0uS3.aspx?udsid=531417
 
+# 参考文献
+* Tianwei Lin, Xiao Liu, Xin Li, Errui Ding, Shilei Wen,2019. BMN: Boundary-Matching Network for Temporal Action Proposal Generation. https://arxiv.org/pdf/1907.09702.pdf
+
+# 资源
+更多资源请参考：
+
+* 更多深度学习知识、产业案例，请参考：[awesome-DeepLearning](https://github.com/paddlepaddle/awesome-DeepLearning)
+
+* 更多动作识别、动作检测、多模态、视频目标分割、单目深度估计模型，请参考：[PaddleVideo](https://github.com/PaddlePaddle/PaddleVideo)
+
+* 更多学习资料请参阅：[飞桨深度学习平台](https://www.paddlepaddle.org.cn/?fr=paddleEdu_aistudio)

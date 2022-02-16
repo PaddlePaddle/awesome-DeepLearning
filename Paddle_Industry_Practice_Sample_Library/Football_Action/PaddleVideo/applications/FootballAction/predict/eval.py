@@ -12,12 +12,12 @@ import numpy as np
 import io
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding = 'utf-8')
 
-dataset = "PaddleVideo/applications/FootballAction/datasets"
+dataset = "/home/PaddleVideo/applications/FootballAction/datasets"
 
 label_index_file = './configs/index_label_football_8.json'
 eval_datasets = ['EuroCup2016']
-label_files = {'train': 'label_train.json',
-               'validation': 'label_val.json'}
+label_files = {'train': 'label_cls8_train.json',
+               'validation': 'label_cls8_val.json'}
 
 global fps, mode
 label_index = json.load(open(label_index_file, 'rb'))

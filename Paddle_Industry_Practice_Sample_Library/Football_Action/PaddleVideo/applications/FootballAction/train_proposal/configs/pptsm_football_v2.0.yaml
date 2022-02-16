@@ -2,7 +2,7 @@ MODEL:                                      #MODEL field
     framework: "Recognizer2D"               #Mandatory, indicate the type of network.
     backbone:                               #Mandatory, indicate the type of backbone.
         name: "ResNetTweaksTSM"             #Mandatory, The name of backbone.
-        pretrained: "PaddleVideo/applications/FootballAction/pretrain/ResNet50_vd_ssld_v2_pretrained.pdparams"
+        pretrained: "/home/PaddleVideo/applications/FootballAction/pretrain/ResNet50_vd_ssld_v2_pretrained.pdparams"
         num_seg: 8
         depth: 50                           #Optional, the depth of backbone architecture.
     head:
@@ -20,17 +20,17 @@ DATASET:                                    #DATASET field
     train:
         format: "FrameDataset_Sport"              #Mandatory, indicate the type of dataset
         data_prefix: ""                     #Mandatory, train data root path
-        file_path: "PaddleVideo/applications/FootballAction/datasets/EuroCup2016/input_for_pptsm/train.list"     #Mandatory, train data index file path
+        file_path: "/home/PaddleVideo/applications/FootballAction/datasets/EuroCup2016/input_for_pptsm/train.list"     #Mandatory, train data index file path
         suffix: 'img_{:05}.jpg'
     valid:
         format: "FrameDataset_Sport"              #Mandatory, indicate the type of dataset
         data_prefix: ""                     #Mandatory, valid data root path
-        file_path: "PaddleVideo/applications/FootballAction/datasets/EuroCup2016/input_for_pptsm/val.list"       #Mandatory, valid data index file path
+        file_path: "/home/PaddleVideo/applications/FootballAction/datasets/EuroCup2016/input_for_pptsm/val.list"       #Mandatory, valid data index file path
         suffix: 'img_{:05}.jpg'
     test:
         format: "FrameDataset_Sport"              #Mandatory, indicate the type of dataset
         data_prefix: ""                     #Mandatory, valid data root path
-        file_path: "PaddleVideo/applications/FootballAction/datasets/EuroCup2016/input_for_pptsm/val.list"       #Mandatory, valid data index file path
+        file_path: "/home/PaddleVideo/applications/FootballAction/datasets/EuroCup2016/input_for_pptsm/val.list"       #Mandatory, valid data index file path
         suffix: 'img_{:05}.jpg'
 
 
