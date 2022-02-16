@@ -1,5 +1,29 @@
 # 足球精彩时刻剪辑
 
+## 内容
+
+* [项目概述](#项目概述)
+
+* [技术难点](#技术难点)
+
+* [解决方案](#解决方案)
+
+* [数据准备](#数据准备)
+
+* [模型训练](#模型训练)
+
+* [模型推理](#模型推理)
+
+* [模型评估](#模型评估)
+
+* [模型优化](#模型优化)
+
+* [参考文献](#参考文献)
+
+* [资源](#资源)
+
+<a name="项目概述"></a>
+
 # 1.项目概述
 近期的全民热点话题离不开正在举办的冬奥会，每天都有赛场上的喜讯传来，谷爱凌夺中国第三金、武大靖和任子威的亮眼表现、苏翊鸣的“飞檐走壁”，可喜可贺！
 
@@ -13,11 +37,14 @@
 
 欢迎报名直播课加入交流群，如需更多技术交流与合作可点击以下[链接](https://paddleqiyeban.wjx.cn/vj/Qlb0uS3.aspx?udsid=531417)
 
+<a name="技术难点"></a>
 
 # 2.技术难点
 目前精彩视频剪辑虽然需求量大应用广泛，但人工剪辑需要浏览整个比赛视频，工作量大、成本高，又要求剪辑人员同时具有一定的体育专业知识，专业需求高。如果用AI技术来实现会存在以下两个难点问题：
 1. 动作检测任务复杂度高：视频精彩片段剪辑任务的实现要点在于准确找到该类动作发生的起止点。但体育类视频内经常包含大量冗余的背景信息，动作类别多样且持续时长相对较短，要精准的判断出动作的起始点和对应的类别，任务难度高。
 2. 视频中的信息具有多样性，如何有效利用这些特征信息也是值得我们去考虑的。
+
+<a name="解决方案"></a>
 
 # 3.解决方案
 
@@ -31,6 +58,8 @@
 1. 使用飞桨特色的高精度视频理解模型PP-TSM提取视频图像特征；使用VGGish网络提取音频特征；
 2. 将获得的音视频特征输入BMN网络，得到由动作开始时间和结束时间组合成的时序片段（proposal）；
 3. 得到时序片段提名后，根据动作开始和结束时间截断视频和音频特征，通过AttentionLSTM输出动作类别。
+
+<a name="数据准备"></a>
 
 # 4.数据准备
 ## 4.1 数据集介绍
@@ -81,8 +110,6 @@ sh download_dataset.sh
     "7": "界外球"
 ```
 
-
-
 ## 4.2 视频采样
 
 输入视频为mp4文件，我们提供的视频样本 football.mp4 时长1h43min。训练时如果使用全部视频文件，会消耗大量计算资源，一般预先做一些采样处理。
@@ -116,6 +143,8 @@ python datasets/script/get_frames_pcm.py
             |--  label.json       # 视频原始gts
 
 ```
+
+<a name="模型训练"></a>
 
 # 5. 模型训练
 ## 5.1 PP-TSM训练
@@ -322,6 +351,7 @@ cd PaddleVideo/applications/FootballAction/train_lstm/
 
 python inference_model.py --config=conf/conf.yaml --weights=../football_lstm/ActionNet.pdparams --save_dir=../checkpoints/LSTM
 ```
+<a name="模型推理"></a>
 
 # 6. 模型推理
 输入一条视频数据，以该网络结构进行推理。
@@ -330,6 +360,7 @@ python inference_model.py --config=conf/conf.yaml --weights=../football_lstm/Act
 cd PaddleVideo/applications/FootballAction/predict
 python predict.py
 ```
+<a name="模型评估"></a>
 
 # 7. 模型评估
 通过如下命令开始模型评估。
@@ -339,6 +370,8 @@ python predict.py
 cd PaddleVideo/applications/FootballAction/predict
 python eval.py results.json
 ```
+
+<a name="模型优化"></a>
 
 # 8. 模型优化
 本案例中展示的PP-TSM+BMN+AttentionLSTM的实现方案是经过多次优化实验得来的。在实验的初始阶段，我们最先选取的是TSN+BMN+AttentionLSTM的实现方案。后续经过三个方面的大量优化处理，才在模型效果提升方面有了显著成果。可以通过阅读本节获得在模型效果提升方面的宝贵经验。
@@ -447,8 +480,12 @@ python get_instance_for_lstm_long_proposal.py
 
 欢迎报名直播课加入交流群，如需更多技术交流与合作可点击以下[链接](https://paddleqiyeban.wjx.cn/vj/Qlb0uS3.aspx?udsid=531417
 
+<a name="参考文献"></a>
+
 # 参考文献
 * Tianwei Lin, Xiao Liu, Xin Li, Errui Ding, Shilei Wen,2019. BMN: Boundary-Matching Network for Temporal Action Proposal Generation. https://arxiv.org/pdf/1907.09702.pdf
+
+<a name="资源"></a>
 
 # 资源
 更多资源请参考：
