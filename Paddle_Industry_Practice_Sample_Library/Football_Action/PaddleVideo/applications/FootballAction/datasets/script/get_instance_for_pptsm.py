@@ -10,9 +10,9 @@ import random
 import pickle
 from concurrent import futures
 
-dataset = "PaddleVideo/applications/FootballAction/datasets/EuroCup2016"
+dataset = "/home/PaddleVideo/applications/FootballAction/datasets/EuroCup2016"
 frames_dir = dataset + '/frames'
-label_files = {'train': 'label_train.json', 'val': 'label_val.json'}
+label_files = {'train': 'label_cls8_train.json', 'val': 'label_cls8_val.json'}
 
 
 def process(item, fps, save_folder):
@@ -88,7 +88,7 @@ if __name__ == "__main__":
         gen_instance_pkl(label_data, save_folder)
 
     # gen train val list
-    data_dir = 'PaddleVideo/applications/FootballAction/datasets/EuroCup2016/input_for_pptsm/'
+    data_dir = '/home/PaddleVideo/applications/FootballAction/datasets/EuroCup2016/input_for_pptsm/'
     os.system('find ' + data_dir + 'train -name "*.pkl" > ' + data_dir +
               'train.list')
     os.system('find ' + data_dir + 'val -name "*.pkl" > ' + data_dir +

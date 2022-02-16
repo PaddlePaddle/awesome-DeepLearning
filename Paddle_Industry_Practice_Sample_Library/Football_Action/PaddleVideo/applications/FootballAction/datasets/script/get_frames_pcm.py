@@ -4,7 +4,7 @@ get frames and pcm from video
 import os
 from concurrent import futures
 
-dataset = "PaddleVideo/applications/FootballAction/datasets/EuroCup2016/"
+dataset = "/home/PaddleVideo/applications/FootballAction/datasets/EuroCup2016/"
 url_list = os.path.join(dataset, 'url.list')
 dst_frames = os.path.join(dataset, 'frames')
 dst_pcm = os.path.join(dataset, 'pcm')

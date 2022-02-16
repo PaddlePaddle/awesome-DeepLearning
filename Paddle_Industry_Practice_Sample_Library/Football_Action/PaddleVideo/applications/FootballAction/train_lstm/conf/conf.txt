@@ -24,9 +24,9 @@ batch_size = 600
 droplast = False
 use_gpu = True
 num_gpus = 2
-filelist = "PaddleVideo/applications/FootballAction/datasets/EuroCup2016/input_for_lstm/train.txt"
+filelist = "/home/PaddleVideo/applications/FootballAction/datasets/EuroCup2016/input_for_lstm/train.txt"
 [VALID]
 batch_size = 16
 num_samples = 34487
 droplast = True
-filelist = "PaddleVideo/applications/FootballAction/datasets/EuroCup2016/input_for_lstm/val.txt"
+filelist = "/home/PaddleVideo/applications/FootballAction/datasets/EuroCup2016/input_for_lstm/val.txt"

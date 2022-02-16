@@ -9,13 +9,13 @@ import random
 import pickle
 import numpy as np
 
-dataset = "/home/aistudio/PaddleVideo/applications/FootballAction/datasets/EuroCup2016"
+dataset = "/home/PaddleVideo/applications/FootballAction/datasets/EuroCup2016"
 feat_dir = dataset + '/features'
 prop_file = dataset + '/feature_bmn/prop.json'
 out_dir = dataset + '/input_for_lstm'
 label_files = {
-    'train': 'label.json',
-    'validation': 'label.json'
+    'train': 'label_cls8_train.json',
+    'validation': 'label_cls8_val.json'
 }
 
 

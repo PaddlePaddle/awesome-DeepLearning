@@ -80,7 +80,7 @@ def video_classify(video_name):
 
 
 if __name__ == '__main__':
-    dataset_dir = "PaddleVideo/applications/FootballAction/datasets/EuroCup2016"
+    dataset_dir = "/home/PaddleVideo/applications/FootballAction/datasets/EuroCup2016"
     if not os.path.exists(dataset_dir + '/features'):
         os.mkdir(dataset_dir + '/features')
 

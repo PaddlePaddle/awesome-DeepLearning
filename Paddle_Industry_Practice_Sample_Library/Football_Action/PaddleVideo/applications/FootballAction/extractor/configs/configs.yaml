@@ -35,8 +35,8 @@ AUDIO:
 
 BMN:
     name: "BMN"
-    model_file: "PaddleVideo/applications/FootballAction/checkpoints/BMN/__model__"
-    params_file: "PaddleVideo/applications/FootballAction/checkpoints/BMN/__param__"
+    model_file: "PaddleVideo/applications/FootballAction/checkpoints/BMN/BMN.pdmodel"
+    params_file: "PaddleVideo/applications/FootballAction/checkpoints/BMN/BMN.pdiparams"
     gpu_mem: 8000
     device_id: 0
     window_step: 200        # 200

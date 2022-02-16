@@ -33,10 +33,6 @@ def gen_gts_for_bmn(gts_data):
         url = sub_item['url']
 
         max_length = sub_item['total_frames']
-        # 特征提取没有获取所有帧特征，这里load feature获取准确max_length
-        #feat_path = feat_dir + '/' + os.path.basename(url).replace('.mp4', '.pkl')
-        #feature_video = pickle.load(open(feat_path, 'rb'))['features']
-        #max_length = int(len(feature_video) * 1.0 / fps)
 
         gts_bmn['gts'].append({
             'url': url,
@@ -80,10 +76,6 @@ def gen_gts_for_bmn(gts_data):
                     'actions':
                     root_actions
                 })
-    with open('temp.json', 'w', encoding='utf-8') as f:
-       data = json.dumps(gts_bmn, indent=4)
-       f.write(data)
-
     return gts_bmn
 
 
@@ -188,12 +180,8 @@ def save_feature_to_numpy(gts_bmn, folder):
         image_feature = image_feature[:min_length, :]
         pcm_feature = pcm_feature[:min_length, :]
         feature_video = np.concatenate((image_feature, pcm_feature), axis=1)
-        #feature_video = pickle.load(open(feat_path, 'rb'))['features']
-        #feature_video = pickle.load(open(feat_path, 'rb'))['image_feature']
         for value in values:
             save_cut_name = os.path.join(folder, value['name'])
-            #start_frame = (value['start'] - 1) * fps
-            #end_frame = (value['end'] - 1) * fps
             start_frame = (value['start']) * fps
             end_frame = (value['end']) * fps
             if end_frame > len(feature_video):
