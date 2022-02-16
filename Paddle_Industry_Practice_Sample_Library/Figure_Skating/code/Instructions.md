@@ -11,4 +11,4 @@
 #!git clone -b release/2.1.1 https://hub.fastgit.org/PaddlePaddle/PaddleVideo.git
 ```
 
-**也可从AI studio中直接打开案例运行：[基于ST-GCN实现花样滑冰动作分类]()**
+**也可从AI studio中直接打开案例运行：[基于ST-GCN实现花样滑冰动作分类](https://aistudio.baidu.com/aistudio/projectdetail/3435853?alertTip=&shared=1&ticket=45a7d87010724e1fb4054e5673aec373)**
