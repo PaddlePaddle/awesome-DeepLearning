@@ -1,4 +1,28 @@
-# 1 项目说明
+# 多模态视频分类
+
+## 内容
+
+* [项目说明](#项目说明)
+
+* [安装说明](#安装说明)
+
+* [数据准备](#数据准备)
+
+* [模型训练](#模型训练)
+
+* [模型评估](#模型评估)
+
+* [模型推理](#模型推理)
+
+* [模型优化](#模型优化)
+
+* [模型部署](#模型部署)
+
+* [参考论文](#参考论文)
+
+  <a name="项目说明"></a>
+
+## 1 项目说明
 
 随着UGC视频的爆炸增长，短视频人均使用时长及头部短视频平台日均活跃用户均持续增长，内容消费的诉求越来越受到人们的重视。同时对视频内容的理解丰富度要求也越来越高，需要对视频所带文本、音频、图像多模态数据多角度理解，才能提炼出用户真实的兴趣点和高层次语义信息。目前存在以下挑战：
 
@@ -11,7 +35,11 @@
 <center><img src='https://ai-studio-static-online.cdn.bcebos.com/a1a6b7ace28a4e999a2630ea0b776ef5123fec36ec7b414b8cff6fc1cc74bb8e' width='700'></center>
 <center>图1 MutimodalVideoTag 多模态视频分类模型示意图</center>
 
-# 2 安装说明
+**欢迎报名直播课加入交流群，如需更多技术交流与合作可点击[报名链接](https://paddleqiyeban.wjx.cn/vj/Qlb0uS3.aspx?udsid=531417)**
+
+<a name="安装说明"></a>
+
+## 2 安装说明
 
 环境要求
 * PaddlePaddle>=2.0.0
@@ -19,19 +47,19 @@
 
 下载PaddleVideo源码，**下载一次**即可：
 
-
-
 ```python
 !git clone https://github.com/PaddlePaddle/PaddleVideo.git
 ```
 
 * 注：更多安装教程请参考[安装教程](https://github.com/PaddlePaddle/PaddleVideo/blob/develop/docs/zh-CN/install.md)
 
-# 3 数据准备
+<a name="数据准备"></a>
+
+## 3 数据准备
 
 数据源来自UGC用户制作上传客户视频和视频标题，分别对视频三个模态的数据进行处理，对视频进行抽帧，获得图像序列；抽取视频的音频pcm文件；收集视频标题，简单进行文本长度截断，一般取50个字。
 
-本项目提供已经抽取好图像、音频特征的特征文件，以及标题和标签信息，模型方面提供训练好checkpoint 文件，可进行finetune、模型评估、预测。执行如下命令即可下载，**数据下载一次即可**。
+本项目提供已经抽取好图像、音频特征的特征文件，以及标题和标签信息，模型方面提供训练好checkpoint 文 件，可进行finetune、模型评估、预测。执行如下命令即可下载，**数据下载一次即可**。
 
 
 ```python
@@ -69,8 +97,6 @@ print('label: ', record['label'])
 ```
 我们可以通过`head`命令展示几条数据。
 
-
-
 ```python
 !head -n 10 datasets/val.txt
 ```
@@ -85,8 +111,6 @@ print('label: ', record['label'])
     533b586f5426425f979ccabc68cfda77.mp4	这都是谁呢	拍人-萌娃
     a96197ffe31a810012eb83881ab3856f.mp4	比起扎头发女生披肩散发更让男生心动	拍人-美女
     2cd7fe0e846ac246eaad54cfaaaf2715.mp4	和平精英和平精英搞笑视频太难了	游戏-射击
-
-
 
 ```python
 # 标签文件
@@ -104,14 +128,15 @@ print('label: ', record['label'])
     游戏-休闲益智类游戏
     游戏-游戏周边
 
+<a name="模型训练"></a>
 
-# 4 模型训练
+## 4 模型训练
 
 模型训练整体流程如 **图2** 所示，
 
 <center><img src='https://ai-studio-static-online.cdn.bcebos.com/b637280a4ece4518be7ad6258a95339b398035cf9a30440aad1baf36e75486ad' width='700'></center>
  <center>图2 模型训练流程图</center>
-    
+
 包含以下几个步骤：
 * 特征抽取：使用预训练的 ResNet 对图像抽取高层语义特征；使用预训练的VGGish网络抽取音频特征；文本方面使用[ERNIE 1.0](https://github.com/PaddlePaddle/ERNIE)抽取文本特征，无需预先抽取，支持视频分类模型finetune
 * 序列学习：分别使用独立的LSTM 对图像特征和音频特征进行序列学习，文本方面预训练模型对字符序列进行建模，在ernie 后接入一个textcnn 网络做下游任务的迁移学习。
@@ -161,7 +186,9 @@ print('label: ', record['label'])
 !sh train.sh
 ```
 
-# 5 模型评估
+<a name="模型评估"></a>
+
+## 5 模型评估
 
 模型对测试集进行评估，同时支持将checkpoint 模型转为inference 模型， 可用参数'save_only' 选项控制，设置即只用于做模型转换，得到inference 模型，输出结果第一行表示loss，第二行表示Hit@1 acc指标。
 
@@ -201,8 +228,9 @@ print('label: ', record['label'])
     4.129207887649536
     100.0
 
+<a name="模型推理"></a>
 
-# 6 模型推理
+## 6 模型推理
 
 通过上一步得到的inference 模型进行预测，结果默认阈值为0.5，存储到json 文件中，在conf/conf.txt 文件 threshold 参数进行控制多标签输出的阈值。
 
@@ -229,8 +257,9 @@ print('label: ', record['label'])
             ]
         },
 
+**<a name="模型优化"></a>**
 
-# 7 模型优化
+## 7 模型优化
 
 
 主要在文本分支进行了实验，首先加入文本对模型效果有明显提升，实验结果显示ERNIE 在多分支下不 微调，而是使用后置网络进行微调，训练速度快，且稳定，同时attention 方面使用文本信息增强图像、 音频的attention 学习能一定程度提升模型效果。
@@ -238,26 +267,26 @@ print('label: ', record['label'])
 
 | 模型                                                         | Hit@1 | Hit@2 |
 | ------------------------------------------------------------ | ----- | ----- |
-| 图像+音频                    | 71.07 | 83.72 |
+| 图像+音频                    | 63 | 78 |
 | 图像+音频+文本分支ERNIE 不finetune +self-attention                     | 71.07 | 83.72 |
 | 图像+音频+文本分支ERNIE 不finetune +textcnn finetune + self-attention  | 72.66 | 85.01 |
 | 图像+音频+文本分支ERNIE 不finetune +textcnn finetune + text-guide-attention | 73.29 | 85.59 |
-</center>
+|</center>|||
 
 这里对多模融合方式进行实验，可以看到在同样没有拼接文本特征的情况下，使用文本进行指导video 和 audio 的 pooling 过程，仅仅只是贡献了LSTM pooling 的attention 权重，显著提升了模型效果+2.6%， 证明文本还是可以和图像，音频产生语义对齐的关系。下图为 attention 权重在时间上分布。
 <center>
-    
+
 | 模型                                                         | Hit@1 | Hit@2 |
 | ------------------------------------------------------------ | ----- | ----- |
-| 图像+音频                    | 66 | 80.5 |
+| 图像+音频                    | 63 | 78 |
 | 图像+音频+text-guide-attention                    | 66 | 80.5 |
-</center>
+|</center>|||
 
 <center><img src='https://ai-studio-static-online.cdn.bcebos.com/075ad24a578c42f0bbcaad705c88547489fcbaade0a9408788e95c0277227555' width='700'></center>
 
 模型鲁棒性，标题信息是不可控的，为了应对标题缺失的情况，这里的目标是不带标题信息，起 码应该达到video + audio 的效果，实验发现以整体概率置空效果较好，实验阈值整体概率值为 0.4时达到最佳。
 <center>
-    
+
 |  模型 |  预测不带标题Hit@1 |  带标题Hit@1 |  带标题Hit@2 |
 | -------- | -------- | -------- |-------- |
 |   图像+音频   |   63   |    63  |    78  |
@@ -265,17 +294,20 @@ print('label: ', record['label'])
 |   图像+音频+随机0.4 drop   |   62   |    72.4  |    85.1  |
 </center>
 
+<a name="模型部署"></a>
 
-
-
-# 8 模型部署
+## 8 模型部署
 
 在项目中为用户提供了基于paddle inference C++ 接口部署的方案，效果如下所示。用户可根据实际情况自行参考。
 
 <center><img src="https://ai-studio-static-online.cdn.bcebos.com/c9b31158d77047eeb32c9ab979ead46d294b49d2522b47bc8e404a103503fe61" width="700"/>
 </div>
 
-# 参考论文
+**欢迎报名直播课加入交流群，如需更多技术交流与合作可点击[报名链接](https://paddleqiyeban.wjx.cn/vj/Qlb0uS3.aspx?udsid=531417)**
+
+<a name="参考论文"></a>
+
+## 参考论文
 
 * [Attention Clusters: Purely Attention Based Local Feature Integration for Video Classification](https://arxiv.org/abs/1711.09550), Xiang Long, Chuang Gan, Gerard de Melo, Jiajun Wu, Xiao Liu, Shilei Wen
 * [YouTube-8M: A Large-Scale Video Classification Benchmark](https://arxiv.org/abs/1609.08675), Sami Abu-El-Haija, Nisarg Kothari, Joonseok Lee, Paul Natsev, George Toderici, Balakrishnan Varadarajan, Sudheendra Vijayanarasimhan
