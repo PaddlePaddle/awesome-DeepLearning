@@ -1,5 +1,27 @@
 # 多模态视频分类
 
+## 内容
+
+* [项目说明](#项目说明)
+
+* [安装说明](#安装说明)
+
+* [数据准备](#数据准备)
+
+* [模型训练](#模型训练)
+
+* [模型评估](#模型评估)
+
+* [模型推理](#模型推理)
+
+* [模型优化](#模型优化)
+
+* [模型部署](#模型部署)
+
+* [参考论文](#参考论文)
+
+  <a name="项目说明"></a>
+
 ## 1 项目说明
 
 随着UGC视频的爆炸增长，短视频人均使用时长及头部短视频平台日均活跃用户均持续增长，内容消费的诉求越来越受到人们的重视。同时对视频内容的理解丰富度要求也越来越高，需要对视频所带文本、音频、图像多模态数据多角度理解，才能提炼出用户真实的兴趣点和高层次语义信息。目前存在以下挑战：
@@ -15,6 +37,8 @@
 
 **欢迎报名直播课加入交流群，如需更多技术交流与合作可点击[报名链接](https://paddleqiyeban.wjx.cn/vj/Qlb0uS3.aspx?udsid=531417)**
 
+<a name="安装说明"></a>
+
 ## 2 安装说明
 
 环境要求
@@ -23,13 +47,13 @@
 
 下载PaddleVideo源码，**下载一次**即可：
 
-
-
 ```python
 !git clone https://github.com/PaddlePaddle/PaddleVideo.git
 ```
 
 * 注：更多安装教程请参考[安装教程](https://github.com/PaddlePaddle/PaddleVideo/blob/develop/docs/zh-CN/install.md)
+
+<a name="数据准备"></a>
 
 ## 3 数据准备
 
@@ -73,8 +97,6 @@ print('label: ', record['label'])
 ```
 我们可以通过`head`命令展示几条数据。
 
-
-
 ```python
 !head -n 10 datasets/val.txt
 ```
@@ -89,8 +111,6 @@ print('label: ', record['label'])
     533b586f5426425f979ccabc68cfda77.mp4	这都是谁呢	拍人-萌娃
     a96197ffe31a810012eb83881ab3856f.mp4	比起扎头发女生披肩散发更让男生心动	拍人-美女
     2cd7fe0e846ac246eaad54cfaaaf2715.mp4	和平精英和平精英搞笑视频太难了	游戏-射击
-
-
 
 ```python
 # 标签文件
@@ -107,6 +127,8 @@ print('label: ', record['label'])
     拍人-秀拍摄技巧
     游戏-休闲益智类游戏
     游戏-游戏周边
+
+<a name="模型训练"></a>
 
 ## 4 模型训练
 
@@ -164,6 +186,8 @@ print('label: ', record['label'])
 !sh train.sh
 ```
 
+<a name="模型评估"></a>
+
 ## 5 模型评估
 
 模型对测试集进行评估，同时支持将checkpoint 模型转为inference 模型， 可用参数'save_only' 选项控制，设置即只用于做模型转换，得到inference 模型，输出结果第一行表示loss，第二行表示Hit@1 acc指标。
@@ -204,6 +228,8 @@ print('label: ', record['label'])
     4.129207887649536
     100.0
 
+<a name="模型推理"></a>
+
 ## 6 模型推理
 
 通过上一步得到的inference 模型进行预测，结果默认阈值为0.5，存储到json 文件中，在conf/conf.txt 文件 threshold 参数进行控制多标签输出的阈值。
@@ -231,6 +257,8 @@ print('label: ', record['label'])
             ]
         },
 
+**<a name="模型优化"></a>**
+
 ## 7 模型优化
 
 
@@ -239,20 +267,20 @@ print('label: ', record['label'])
 
 | 模型                                                         | Hit@1 | Hit@2 |
 | ------------------------------------------------------------ | ----- | ----- |
-| 图像+音频                    | 71.07 | 83.72 |
+| 图像+音频                    | 63 | 78 |
 | 图像+音频+文本分支ERNIE 不finetune +self-attention                     | 71.07 | 83.72 |
 | 图像+音频+文本分支ERNIE 不finetune +textcnn finetune + self-attention  | 72.66 | 85.01 |
 | 图像+音频+文本分支ERNIE 不finetune +textcnn finetune + text-guide-attention | 73.29 | 85.59 |
-</center>
+|</center>|||
 
 这里对多模融合方式进行实验，可以看到在同样没有拼接文本特征的情况下，使用文本进行指导video 和 audio 的 pooling 过程，仅仅只是贡献了LSTM pooling 的attention 权重，显著提升了模型效果+2.6%， 证明文本还是可以和图像，音频产生语义对齐的关系。下图为 attention 权重在时间上分布。
 <center>
 
 | 模型                                                         | Hit@1 | Hit@2 |
 | ------------------------------------------------------------ | ----- | ----- |
-| 图像+音频                    | 66 | 80.5 |
+| 图像+音频                    | 63 | 78 |
 | 图像+音频+text-guide-attention                    | 66 | 80.5 |
-</center>
+|</center>|||
 
 <center><img src='https://ai-studio-static-online.cdn.bcebos.com/075ad24a578c42f0bbcaad705c88547489fcbaade0a9408788e95c0277227555' width='700'></center>
 
@@ -266,6 +294,8 @@ print('label: ', record['label'])
 |   图像+音频+随机0.4 drop   |   62   |    72.4  |    85.1  |
 </center>
 
+<a name="模型部署"></a>
+
 ## 8 模型部署
 
 在项目中为用户提供了基于paddle inference C++ 接口部署的方案，效果如下所示。用户可根据实际情况自行参考。
@@ -275,17 +305,10 @@ print('label: ', record['label'])
 
 **欢迎报名直播课加入交流群，如需更多技术交流与合作可点击[报名链接](https://paddleqiyeban.wjx.cn/vj/Qlb0uS3.aspx?udsid=531417)**
 
+<a name="参考论文"></a>
+
 ## 参考论文
 
 * [Attention Clusters: Purely Attention Based Local Feature Integration for Video Classification](https://arxiv.org/abs/1711.09550), Xiang Long, Chuang Gan, Gerard de Melo, Jiajun Wu, Xiao Liu, Shilei Wen
 * [YouTube-8M: A Large-Scale Video Classification Benchmark](https://arxiv.org/abs/1609.08675), Sami Abu-El-Haija, Nisarg Kothari, Joonseok Lee, Paul Natsev, George Toderici, Balakrishnan Varadarajan, Sudheendra Vijayanarasimhan
 * [Ernie: Enhanced representation through knowledge integration](https://arxiv.org/abs/1904.09223), Sun, Yu and Wang, Shuohuan and Li, Yukun and Feng, Shikun and Chen, Xuyi and Zhang, Han and Tian, Xin and Zhu, Danxiang and Tian, Hao and Wu, Hua
-
-## 资源
-
-更多资源请参考:
-
-- 更多深度学习知识、产业案例、面试宝典等，请参考：[awesome-DeepLearning](https://github.com/paddlepaddle/awesome-DeepLearning)
-- 更多PaddleVideo使用教程，请参考：[PaddleVideo](https://github.com/PaddlePaddle/PaddleVideo)
-- 飞桨框架相关资料，请参考：[飞桨深度学习平台](https://www.paddlepaddle.org.cn/?fr=paddleEdu_aistudio)
-
