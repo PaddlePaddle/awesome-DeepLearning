@@ -27,7 +27,7 @@ import math
 import paddle
 from paddle import nn
 
-from paddle.optimizer.lr import MultiStepDecay
+from paddle.optimizer import lr as lr_scheduler
 from d2l import paddle as d2l
 
 
@@ -77,13 +77,12 @@ def train(net, train_iter, test_iter, num_epochs, loss, trainer, device,
         animator.add(epoch+1, (None, None, test_acc))
 
         if scheduler:
-            if scheduler.__module__ == MultiStepDecay.__name__:
+            if scheduler.__module__ == lr_scheduler.__name__:
                 # UsingPaddleIn-Builtscheduler
                 scheduler.step()
             else:
                 # Usingcustomdefinedscheduler
-                for param_group in trainer.state_dict():
-                    trainer.state_dict()[param_group]['last_lr'] = scheduler.state_dict()['last_epoch']
+                trainer.set_lr(scheduler(epoch))
     print(f'train loss {train_loss:.3f}, train acc {train_acc:.3f}, 'f'test acc {test_acc:.3f}')
 ```
 
@@ -110,10 +109,8 @@ train(net, train_iter, test_iter, num_epochs, loss, trainer, device)
 
 ```python
 lr = 0.1
-scheduler1 =paddle.optimizer.lr.MultiStepDecay(learning_rate = lr, milestones = [15,30], gamma=0.5)
-trainer = paddle.optimizer.SGD(learning_rate = scheduler1, parameters=net.parameters())
-trainer.state_dict()['LR_Scheduler']['last_lr']
-print(f'learning rate is now {lr:.2f}')
+trainer.set_lr(lr)
+print(f'learning rate is now {trainer.get_lr():.2f}')
 ```
 
 更通常而言，我们应该定义一个调度器。
