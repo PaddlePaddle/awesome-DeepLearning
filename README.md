@@ -16,9 +16,9 @@
 * 智慧城市
   * [电瓶车进电梯检测]()
   
-  * [异常行为识别](https://github.com/tngt/awesome-DeepLearning/tree/awe/Paddle_Industry_Practice_Sample_Library/Abnormal_Action_Detection) 
+  * [异常行为识别](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Abnormal_Action_Detection) 
   
-  * [多类别车辆跟踪](https://github.com/tngt/awesome-DeepLearning/tree/awe/Paddle_Industry_Practice_Sample_Library/Multi-Class_Vehicle_Tracking)
+  * [多类别车辆跟踪](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Multi-Class_Vehicle_Tracking)
   
     
 
