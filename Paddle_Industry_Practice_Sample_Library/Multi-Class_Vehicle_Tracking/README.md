@@ -36,8 +36,8 @@ git clone https://github.com/PaddlePaddle/PaddleDetection.git -b develop
 
 ```python
 # 安装环境
-%cd PaddleDetection
-!pip install -r requirements.txt
+cd PaddleDetection
+pip install -r requirements.txt
 ```
 
 
@@ -215,7 +215,7 @@ EvalMOTDataset:
 
 
 ```python
-!CUDA_VISIBLE_DEVICES=0 python tools/infer_mot.py -c configs/mot/mcfairmot/mcfairmot_dla34_30e_1088x608_visdrone_vehicle.yml -o weights=output/mcfairmot_dla34_30e_1088x608_visdrone_vehicle/model_final.pdparams --video_file=visdrone_demo.mp4 --frame_rate=20 --save_videos
+CUDA_VISIBLE_DEVICES=0 python tools/infer_mot.py -c configs/mot/mcfairmot/mcfairmot_dla34_30e_1088x608_visdrone_vehicle.yml -o weights=output/mcfairmot_dla34_30e_1088x608_visdrone_vehicle/model_final.pdparams --video_file=visdrone_demo.mp4 --frame_rate=20 --save_videos
 ```
 
 **注意：**
