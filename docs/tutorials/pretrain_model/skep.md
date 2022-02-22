@@ -89,4 +89,4 @@ $$
 ## 6. 相关资料
 
 1. [SKEP: Sentiment Knowledge Enhanced Pre-training for Sentiment Analysis](https://arxiv.org/abs/2005.05635)
-2. [SKEP Github](https://github.com/baidu/Senta.)
+2. [SKEP Github](https://github.com/baidu/Senta)
