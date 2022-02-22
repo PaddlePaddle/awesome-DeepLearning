@@ -10,8 +10,8 @@
 | 冬奥背后的黑科技 | [多模态视频打标签](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/MultimodalVideoTag) |
 | 冬奥背后的黑科技 | [视频精彩时刻剪辑](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Football_Action) |
 | 智慧城市         | 电瓶车进电梯检测 （coming soon）                             |
-| 智慧城市         | 异常行为识别 （coming soon）                                 |
-| 智慧城市         | AR导航车道线分割 （coming soon）                             |
+| 智慧城市         | [异常行为识别](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Abnormal_Action_Detection) |
+| 智慧城市         | [多类别车辆跟踪](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Multi-Class_Vehicle_Tracking) |
 | ......           | ......                                                       |
 
 **此外，还有交通、能源、金融、通信、互联网、零售及教育等等各个行业的精彩范例，大家拭目以待～**
@@ -19,4 +19,35 @@
 欢迎报名直播课加入交流群，如需更多技术交流与合作可点击以下链接:
 
 [https://paddleqiyeban.wjx.cn/vj/Qlb0uS3.aspx?udsid=531417](https://paddleqiyeban.wjx.cn/vj/Qlb0uS3.aspx?udsid=531417)
+
+
+
+## 往期案例详情：
+
+| 行业     | 案例                                                         |
+| -------- | ------------------------------------------------------------ |
+| 智慧城市 | [人流量统计](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Pedestrian_Detection_and_Tracking) |
+| 智慧城市 | [车流量统计](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Vehicle_Detection_and_Tracking) |
+| 智慧城市 | [安全帽检测](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Hemtle%20Detection) |
+| 智慧城市 | [火灾/烟雾检测](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Fire_and_Smoke_Detection) |
+| 智慧城市 | [快递单信息抽取](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Waybill_Information_Extraction) |
+| 智慧城市 | [人摔倒检测](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Fall_Identify) |
+| 智慧城市 | [车牌识别]()                                                 |
+| 智能制造 | [钢板表面缺陷检测](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/paddlex_steel_defect_seg-master) |
+| 智能制造 | [表计读数](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/meter_reader) |
+| 智能制造 | [钢筋计数](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/rebar_count) |
+| 智能制造 | [视觉辅助抓取定位](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/robot_grab) |
+| 智能制造 | [PCB瑕疵检测](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/PCB_Fault_Detection) |
+| 智慧金融 | [财报识别与关键字抽取](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Report_Recognition_and_Analysis) |
+| 智慧金融 | [事件抽取](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/nlp_projects/event_extraction/ernie) |
+| 互联网   | [人像分割](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/HumanSeg) |
+| 互联网   | [对话意图识别](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/nlp_projects/nlu/ernie) |
+| 互联网   | 中英文翻译系统                                               |
+| 互联网   | 机器阅读理解                                                 |
+| 智慧农业 | [桃子分类](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Peach_Classify) |
+| 智慧农业 | 中草药分类                                                   |
+| 文娱传媒 | [人脸表情迁移](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Motion_Driving) |
+| 文娱传媒 | [精准唇形合成](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Lip-syncing) |
+
+
 
