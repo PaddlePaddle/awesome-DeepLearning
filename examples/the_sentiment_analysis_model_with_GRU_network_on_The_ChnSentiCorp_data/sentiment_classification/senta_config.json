@@ -1,0 +1,4 @@
+{
+    "model_type": "gru_net",
+    "vocab_size": 1256606
+}
