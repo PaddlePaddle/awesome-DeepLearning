@@ -31,7 +31,7 @@
 
 本案例中picodet的模型数据集为VOC格式(使用labelimg制成)，包括21903张电梯中的图片，其中训练集17522张，测试集4381张，皆来自日常的电梯场景中，共有14715个摩托车的框，23058个人的框，3750个自行车的框，由于picodet使用的是coco格式，所以需要将VOC格式转换成coco格式。 生成VOC数据集：使用python的labelimg图像标注工具为原始图片生成对应的标注xml文件作为原始的VOC格式数据集，生成的xml文件格式如下图所示，其中每个object代表框出的每一个对象，object中的name表明对象的名字而bndbox中包含框的具体坐标（左上角以及右下角）。
 
-![label_img][docs/images/label_img.png]
+![label_img](docs/images/label_img.png)
 
 ![xml_content](docs/images/xml_content.png)
 
