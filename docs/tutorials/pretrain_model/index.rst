@@ -14,8 +14,11 @@
    GPT <GPT>
    XLNet <XLNet>
    BERT <bert>
+   SpanBERT <SpanBERT>
    RoBERTa <RoBERTa>
    ERINE <erine>
+   ERNIE 3.0 <ERNIE3>
+   ERNIE-Gram <ERNIE-Gram>
    THU-ERNIE <THU-ERNIE>
    KBERT <KBERT>
    ALBERT <ALBERT>  

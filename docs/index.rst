@@ -22,7 +22,7 @@
    对抗神经网络 <tutorials/generative_adversarial_network/index>
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: 深度学习应用篇
 
    计算机视觉 <tutorials/computer_vision/index>
