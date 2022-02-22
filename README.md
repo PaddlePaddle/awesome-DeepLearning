@@ -21,7 +21,7 @@
 | 特色系列课程[:arrow_heading_down:](#3)       | 经典深度学习案例集[:arrow_heading_down:](#4) |
 | 深度学习百问[:arrow_heading_down:](#2)       | 面试宝典[:arrow_heading_down:](#6)           |
 
-
+### **如果本项目对您有帮忙，欢迎点击页面右上方star，方便访问**
 
 # <span id = '1'>二、零基础实践深度学习</span>
 
@@ -251,6 +251,7 @@
      2. [图像分类](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/classification/index.html)（包括LeNet、AlexNet、VGG、GoogleNet、DarkNet、ResNet、ViT等7个知识点）  
      3. [目标检测](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/object_detection/index.html)（包括目标检测综述、边界框、锚框、交并比、NMS等5个知识点）  
      4. [OCR](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/OCR/index.html)（包括OCR综述、OCR常用检测方法(CTPN、EAST、DBNet)、OCR常用识别方法(CRNN)等5个知识点）
+     5. [视频分类](https://paddlepedia.readthedocs.io/en/latest/tutorials/computer_vision/video_understanding/index.html)（包括TSM、TimeSformer详解）
   2. [自然语言处理](https://paddlepedia.readthedocs.io/en/latest/tutorials/natural_language_processing/index.html)  
      1. [命名实体识别](https://paddlepedia.readthedocs.io/en/latest/tutorials/natural_language_processing/ner/index.html) (包括bilstm+CRF架构剖析、CRF原理等8个知识点)  
   3. [推荐系统](https://paddlepedia.readthedocs.io/en/latest/tutorials/recommendation_system/index.html)  
@@ -377,7 +378,8 @@
 |预训练模型在长序列建模方面的改进| [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2166197) |[Python实现](./transformer_courses/sentiment_analysis_based_on_xlnet)|Transformer-xl， xlnet， longformer等，分析BERT和transformer的长度局限，并讨论这些方法的改进点。|
 | BERT蒸馏 |  [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2177549)|  [Python实现](./transformer_courses/BERT_distillation) | 本章节为大家详细介绍了针对BERT模型的蒸馏算法，包括：Patient-KD、DistilBERT、TinyBERT、DynaBERT等模型，同时以代码的形式为大家展现了如何使用DynaBERT的训练策略对TinyBERT进行蒸馏。   |
 | 预训练模型的瘦身策略 – – 高效结构 |  [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2138857)|  [Python实现](./transformer_courses/Transformer_Punctuation_Restoration) | 本章节将为大家>详细介绍NLP领域，基于Transformer模型的瘦身技巧。包括 Electra，AlBERT 以及 performer。还会介绍代码实现案例：基于Electra的语音识别后处理中文标点符号预测   |
-| transformer在图像分类中的应用 | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2154618) | [Python实现](./transformer_courses/Application_of_transformer_in_image_classification) | 本章>节将为大家详细介绍 Transformer 在 CV 领域中的两个经典算法：ViT 以及 DeiT。带领大家一起学习Transformer 结构在图像分类领域的具体应用。 |
+| transformer在图像分类中的应用（上） | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2154618) | [Python实现](./transformer_courses/Application_of_transformer_in_image_classification) | 本章节将为大家详细介绍 Transformer 在 CV 领域中的两个经典算法：ViT 以及 DeiT。带领大家一起学习Transformer 结构在图像分类领域的具体应用。 |
+| transformer在图像分类中的应用（下） | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2271352) | [Python实现](./transformer_courses/Application_of_transformer_in_image_classification_Swin) | 本章节将为大家详细介绍 Transformer 在 CV 领域中的经典算法：Swin Transformer。带领大家一起学习Transformer 结构在图像分类领域的具体应用。 |
 |                               |                                                              |                                                              |                                                              |
 
 [返回快速跳转:arrow_heading_up:](#0) 
@@ -390,23 +392,27 @@
 
 # <span id ='5'>六、 飞桨产业实践</span>
 
-| 领域         | 产业案例                   | 链接                                                         |
+| 领域         | 产业案例                   | 介绍                                                        |
 | ------------ | -------------------------- | ------------------------------------------------------------ |
-| **智能工业** | 厂区传统仪表统计监测       | https://paddlex.readthedocs.io/zh_CN/develop/examples/meter_reader.html |
-| **智能工业** | 新能源汽车锂电池隔膜质检   | https://www.paddlepaddle.org.cn/support/news?action=detail&id=2104 |
-| **智能工业** | 天池铝材表面缺陷检测       | https://paddlex.readthedocs.io/zh_CN/develop/examples/industrial_quality_inspection/README.html |
-| **智能工业** | 安全帽检测                 | https://github.com/PaddleCV-FAQ/PaddleDetection-FAQ/blob/main/Lite%E9%83%A8%E7%BD%B2/yolov3_for_raspi.md |
-| **智慧城市** | 高尔夫球场遥感监测         | https://www.paddlepaddle.org.cn/support/news?action=detail&id=2103 |
-| **智慧城市** | 积雪语义分割               | https://paddlex.readthedocs.io/zh_CN/develop/examples/multi-channel_remote_sensing/README.html |
-| **智慧城市** | 戴口罩的人脸识别           | https://aistudio.baidu.com/aistudio/projectdetail/267322?channelType=0&channel=0 |
-| **智慧交通** | 车道线分割和红绿灯安全检测 | https://github.com/PaddlePaddle/PaddleDetection/blob/release/2.1/configs/vehicle/README_cn.md |
-| **智慧农林** | 耕地地块识别               | https://mp.weixin.qq.com/s/JlDVmYlhN7sF0hpRlncDNw            |
-| **智慧农林** | AI识虫                     | https://aistudio.baidu.com/aistudio/projectdetail/439888     |
-| **智慧医疗** | 医学常见中草药分类         | https://aistudio.baidu.com/aistudio/projectdetail/1434738?channelType=0&channel=0 |
-| **智慧医疗** | 眼疾识别                   | https://www.paddlepaddle.org.cn/tutorials/projectdetail/1630501 |
-| **其他**     | 人摔倒检测                 |                                                              |
-| **其他**     | 足球比赛动作定位           | https://github.com/PaddlePaddle/PaddleVideo/tree/application/FootballAction |
-| **其他**     | 基于强化学习的飞行器仿真   |  https://github.com/PaddlePaddle/PARL/tree/develop/examples/tutorials/homework/lesson5/ddpg_quadrotor |
+| **智能工业** | [厂区传统仪表统计监测](https://paddlex.readthedocs.io/zh_CN/develop/examples/meter_reader.html)       |  -|
+| **智能工业** | [新能源汽车锂电池隔膜质检](https://www.paddlepaddle.org.cn/support/news?action=detail&id=2104)   | - |
+| **智能工业** | [天池铝材表面缺陷检测](https://paddlex.readthedocs.io/zh_CN/develop/examples/industrial_quality_inspection/README.html)       | - |
+| **智能工业** | [安全帽检测](https://github.com/PaddleCV-FAQ/PaddleDetection-FAQ/blob/main/Lite%E9%83%A8%E7%BD%B2/yolov3_for_raspi.md)                 | - |
+| **智慧城市** | [高尔夫球场遥感监测](https://www.paddlepaddle.org.cn/support/news?action=detail&id=2103)         | - |
+| **智慧城市** | [积雪语义分割](https://paddlex.readthedocs.io/zh_CN/develop/examples/multi-channel_remote_sensing/README.html)               | - |
+| **智慧城市** | [戴口罩的人脸识别](https://aistudio.baidu.com/aistudio/projectdetail/267322?channelType=0&channel=0)           | - |
+| **智慧交通** | [车道线分割和红绿灯安全检测](https://github.com/PaddlePaddle/PaddleDetection/blob/release/2.1/configs/vehicle/README_cn.md) | - |
+| **智慧农林** | [耕地地块识别](https://mp.weixin.qq.com/s/JlDVmYlhN7sF0hpRlncDNw)               |             |
+| **智慧农林** | [AI识虫](https://aistudio.baidu.com/aistudio/projectdetail/439888)                     |   -   |
+| **智慧医疗** | [医学常见中草药分类](https://aistudio.baidu.com/aistudio/projectdetail/1434738?channelType=0&channel=0)         | - |
+| **智慧医疗** | [眼疾识别](https://www.paddlepaddle.org.cn/tutorials/projectdetail/1630501)                   | - |
+| **其他**     | [人摔倒检测](https://aistudio.baidu.com/aistudio/projectdetail/2071768)          |    -   |
+| **其他**     | [足球比赛动作定位](https://github.com/PaddlePaddle/PaddleVideo/tree/application/FootballAction)           | - |
+| **其他**     | [基于强化学习的飞行器仿真](https://github.com/PaddlePaddle/PARL/tree/develop/examples/tutorials/homework/lesson5/ddpg_quadrotor)   | -  |
+| **其他**     | [基于ERNIE-Gram实现语义匹配](https://aistudio.baidu.com/aistudio/projectdetail/2247755)   | -  |
+| **其他**     | [基于PaddleDetection的PCB瑕疵检测](https://aistudio.baidu.com/aistudio/projectdetail/2240725)   |  - |
+| **其他**     | [中文语音识别](https://aistudio.baidu.com/aistudio/projectdetail/2280562)   |  - |
+
 
 [返回快速跳转:arrow_heading_up:](#0) 
 
@@ -426,6 +432,7 @@
 
 本项目欢迎任何贡献和建议，大多数贡献都需要你同意参与者许可协议（CLA），来声明你有权，并实际上授予我们有权使用你的贡献。
 
+
 ### 代码贡献规范
 
 > pip install pre-commit
@@ -433,3 +440,7 @@
 > pre-commit install
 
 添加修改的代码后，对修改的文件进行代码规范，pre-commit 会自动调整代码格式，执行一次即可，后续commit不需要再执行。提交pr流程，详见：[awesome-DeepLearning 提交 pull request 流程](./examples/awesome-DeepLearning_pr_procedure.md)
+
+## 贡献者
+以下是越来越多的awesome-DeepLearning贡献者列表：
+[youngzhou](https://youngzhou1999.github.io/cv/)

@@ -1,10 +1,17 @@
 # ELMo
 ## 1.介绍
-Deep contextualized word representations获得了NAACL 2018的outstanding paper award，其方法有很大的启发意义。近几年来，预训练的word representation在NLP任务中表现出了很好的性能，已经是很多NLP任务不可或缺的一部分，论文作者认为一个好的word representation需要能建模以下两部分信息：单词的特征，如语义，语法；单词在不同语境下的变化，即一词多义。基于这样的动机，作者提出了ELMo模型，下面的章节会详细介绍ELMo。
+Deep contextualized word representations获得了NAACL 2018的outstanding paper award，其方法有很大的启发意义。近几年来，预训练的word representation在NLP任务中表现出了很好的性能，已经是很多NLP任务不可或缺的一部分，论文作者认为一个好的word representation需要能建模以下两部分信息：单词的特征，如语义，语法；单词在不同语境下的变化，即一词多义。基于这样的动机，作者提出了ELMo模型。ELMo能够训练出来每个词的embedding，可以作为上下文相关的词的向量。其他几个贡献：
+
++ 使用字符级别的CNN表示。由于单词级别考虑数据可能稀疏，出现OOV问题，拆成字符后稀疏性没有那么强了，刻画的会更好。
++ 训练了从左到右或从右到左的语言模型。用这个语言模型输出的结果，直接作为词的向量。
++ contextualized：这是一个语言模型，其双向LSTM产生的词向量会包含左侧上文信息和右侧下文信息，所以称之为contextualized
++ deep：句子中每个单词都能得到对应的三个Embedding: 最底层是单词的Word Embedding，往上走是第一层双向LSTM中对应单词位置的Embedding，这层编码单词的句法信息更多一些；再往上走是第二层LSTM中对应单词位置的Embedding，这层编码单词的语义信息更多一些。
+
+下面的章节会详细介绍ELMo。
 
 ### 1.1从Word Embedding到ELMo
 
-Word Embedding：词嵌入。最简单粗劣的理解就是：将词进行向量化表示，实体的抽象成了数学描述，就可以进行建模，应用到很多任务中。之前用语言模型做Word Embedding比较火的是word2vec和glove。使用Word2Vec或者Glove，通过做语言模型任务，就可以获得每个单词的Word Embedding，但是Word Embedding无法解决多义词的问题，同一个词在不同的上下文中表示不同的意思，但是在Word Embedding中一个词只有一个表示，这导致两种不同的上下文信息都会编码到相同的word embedding空间里去。如何根据句子上下文来进行单词的Word Embedding表示。ELMO提供了解决方案。
+Word Embedding：词嵌入。最简单的理解就是：将词进行向量化表示，实体的抽象成了数学描述，就可以进行建模，应用到很多任务中。之前用语言模型做Word Embedding比较火的是word2vec和glove。使用Word2Vec或者Glove，通过做语言模型任务，就可以获得每个单词的Word Embedding，但是Word Embedding无法解决多义词的问题，同一个词在不同的上下文中表示不同的意思，但是在Word Embedding中一个词只有一个表示，这导致两种不同的上下文信息都会编码到相同的word embedding空间里去。如何根据句子上下文来进行单词的Word Embedding表示。ELMO提供了解决方案。
 
 我们有以下两个句子：
 
@@ -34,16 +41,17 @@ ELMO 基于语言模型的，确切的来说是一个 Bidirectional language mod
 2. 第二步：送入双向LSTM模型中，即上图中的Lstm；
 3. 第三步：将LSTM的输出$h_{k}$，与上下文矩阵$W'$相乘，再将该列向量经过Softmax归一化。其中，假定数据集有V个单词，$W'$是$|V|*m$的矩阵，$h_{k}$是$m*1$的列向量，于是最终结果是$|V|*1$的归一化后向量，即从输入单词得到的针对每个单词的概率。
 
-### 2.2 公式解析
-前向表示：
+### 2.2 双向语言模型
+
+假定一个序列有N个token，即$(t_{1},t_{2},...,t_{N})$，对于前向语言模型（forward LM），我们基于$(t_{1},..,t_{k-1})$来预测$t_{k}$，前向公式表示为：
 
 $$p(t_{1},t_{2},...,t_{N})=\prod_{k=1}^{N}p(t_{k}|t_{1},t_{2},...,t_{k-1})$$
 
-后向表示:
+向后语言模型（backword LM）与向前语言模型类似，除了计算的时候倒置输入序列，用后面的上下文预测前面的词:
 
 $$p(t_{1},t_{2},...,t_{N})=\prod_{k=1}^{N}p(t_{k}|t_{k+1},t_{k+2},...,t_{N})$$
 
-Bi-LM训练过程中的目标就是最大化:
+一个双向语言模型包含前向和后向语言模型，训练的目标就是联合前向和后向的最大似然：
 
 $$\sum_{k=1}^N (log p(t_{k}|t_{1},...,t_{k-1};\Theta_{x},\overrightarrow\Theta_{LSTM},\Theta_{s})+log p(t_{k}|t_{k+1},...,t_{N};\overleftarrow\Theta_{LSTM},\Theta_{s}))$$
 
@@ -51,7 +59,9 @@ $$\sum_{k=1}^N (log p(t_{k}|t_{1},...,t_{k-1};\Theta_{x},\overrightarrow\Theta_{
 
 其中$\Theta_{x}$表示映射层的共享，表示第一步中，将单词映射为word embedding的共享，就是说同一个单词，映射为同一个word embedding。
 
-$\Theta_{s}$表示第三步中的上下文矩阵的参数，这个参数在前向和后向lstm中是相同的。
+$\Theta_{s}$表示第三步中的上下文矩阵的参数，这个参数在前向和后向LSTM中是相同的。
+
+### 2.3 ELMo
 
 ELMo对于每个token $t_{k}$, 通过一个L层的biLM计算2L+1个表征（representations），这是输入第二阶段的初始值:
 
@@ -84,9 +94,11 @@ ELMo采用了典型的两阶段过程，第一个阶段是利用语言模型进�
 
 ### 3.2第二阶段 接入下游NLP任务
 
-ELMO的第一阶段：预训练阶段。那么预训练好网络结构后，如何给下游任务使用呢？下图展示了下游任务的使用过程，比如我们的下游任务仍然是QA问题，此时对于问句X，我们可以先将句子X作为预训练好的ELMo网络的输入，这样句子X中每个单词在ELMO网络中都能获得对应的三个Embedding，之后给予这三个Embedding中的每一个Embedding一个权重a，这个权重可以学习得来，根据各自权重累加求和，将三个Embedding整合成一个。然后将整合后的这个Embedding作为X句在自己任务的那个网络结构中对应单词的输入，以此作为补充的新特征给下游任务使用。对于下图所示下游任务QA中的回答句子Y来说也是如此处理。因为ELMO给下游提供的是每个单词的特征形式，所以这一类预训练的方法被称为“Feature-based Pre-Training”。
-
+下图展示了下游任务的使用过程，比如我们的下游任务仍然是QA问题，此时对于问句X，我们可以先将句子X作为预训练好的ELMo网络的输入，这样句子X中每个单词在ELMO网络中都能获得对应的三个Embedding，之后给予这三个Embedding中的每一个Embedding一个权重a，这个权重可以学习得来，根据各自权重累加求和，将三个Embedding整合成一个。然后将整合后的这个Embedding作为X句在自己任务的那个网络结构中对应单词的输入，以此作为补充的新特征给下游任务使用。
 ![](../../images/pretrain_model/ELMo/elmo_finetune.png)
+
+对于上图所示下游任务QA中的回答句子Y来说也是如此处理。因为ELMO给下游提供的是每个单词的特征形式，所以这一类预训练的方法被称为“Feature-based Pre-Training”。
+
 
 最后，作者发现给ELMo模型增加一定数量的Dropout，在某些情况下给损失函数加入正则项$\lambda ||w||^2_{2}$，这等于给ELMo模型加了一个归纳偏置，使得权重接近BiLM所有层的平均权重。
 
@@ -97,7 +109,6 @@ ELMO的使用主要有三步：
 1. 在大的语料库上预训练 biLM 模型。模型由两层biLSTM 组成，模型之间用残差连接起来。而且作者认为低层的biLSTM层能提取语料中的句法信息，高层的biLSTM能提取语料中的语义信息。
 2. 在我们的训练语料（去除标签），fine-tuning 预训练好的biLM 模型。这一步可以看作是biLM的domain transfer。
 3. 利用ELMo产生的word embedding来作为任务的输入，有时也可以即在输入时加入，也在输出时加入。
-
 
 
 ## 5. 优缺点

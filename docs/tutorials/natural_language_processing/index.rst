@@ -5,4 +5,6 @@
    :maxdepth: 2
 
    命名实体识别 <ner/index>
+   N-Gram <N-Gram>
+
 
