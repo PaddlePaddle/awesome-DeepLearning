@@ -54,8 +54,8 @@ def predict(trigger_model, role_model, tokenizer, trigger_id2tag, role_id2tag,
             max_seq_len=args.max_seq_len,
             return_length=True)
         input_ids = paddle.to_tensor(features["input_ids"]).unsqueeze(0)
-        token_type_ids = paddle.to_tensor(features["token_type_ids"]).unsqueeze(
-            0)
+        token_type_ids = paddle.to_tensor(features[
+            "token_type_ids"]).unsqueeze(0)
         seq_len = features["seq_len"]
 
         trigger_logits = trigger_model(input_ids, token_type_ids)

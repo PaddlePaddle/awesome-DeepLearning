@@ -127,7 +127,9 @@ class Convert:
                     'stride', 'padding', 'dilation', 'groups', 'bias_attr'
                 ]
                 if pd_ver == 185:
-                    new_attr_name += ['param_attr', 'use_cudnn', 'act', 'dtype']
+                    new_attr_name += [
+                        'param_attr', 'use_cudnn', 'act', 'dtype'
+                    ]
                 else:
                     new_attr_name += [
                         'weight_attr', 'data_format', 'padding_mode'
@@ -241,10 +243,10 @@ class Convert:
                     layer = Block(SuperGroupConv2D(**new_attr_dict), key=key)
                 model[idx] = layer
 
-            elif isinstance(layer,
-                            getattr(nn, 'BatchNorm2D', nn.BatchNorm)) and (
-                                getattr(self.context, 'expand', None) != None or
-                                getattr(self.context, 'channel', None) != None):
+            elif isinstance(
+                    layer, getattr(nn, 'BatchNorm2D', nn.BatchNorm)) and (
+                        getattr(self.context, 'expand', None) != None or
+                        getattr(self.context, 'channel', None) != None):
                 # num_features in BatchNorm don't change after last weight operators
                 if idx > last_weight_layer_idx:
                     continue
@@ -254,8 +256,9 @@ class Convert:
 
                 if pd_ver == 185:
                     new_attr_name += [
-                        'param_attr', 'act', 'dtype', 'in_place', 'data_layout',
-                        'is_test', 'use_global_stats', 'trainable_statistics'
+                        'param_attr', 'act', 'dtype', 'in_place',
+                        'data_layout', 'is_test', 'use_global_stats',
+                        'trainable_statistics'
                     ]
                 else:
                     new_attr_name += ['weight_attr', 'data_format', 'name']
@@ -286,7 +289,8 @@ class Convert:
 
                 layer = layers.SuperBatchNorm(
                     **new_attr_dict
-                ) if pd_ver == 185 else layers.SuperBatchNorm2D(**new_attr_dict)
+                ) if pd_ver == 185 else layers.SuperBatchNorm2D(**
+                                                                new_attr_dict)
                 model[idx] = layer
 
             elif isinstance(layer, SyncBatchNorm) and (
@@ -342,7 +346,8 @@ class Convert:
 
                 if pd_ver == 185:
                     new_attr_name += [
-                        'output_size', 'param_attr', 'use_cudnn', 'act', 'dtype'
+                        'output_size', 'param_attr', 'use_cudnn', 'act',
+                        'dtype'
                     ]
                 else:
                     new_attr_name += [
@@ -456,7 +461,8 @@ class Convert:
                             'channel'] = cur_channel
                     new_attr_dict['groups'] = new_attr_dict[in_key[1:]]
                     layer = Block(
-                        SuperDepthwiseConv2DTranspose(**new_attr_dict), key=key)
+                        SuperDepthwiseConv2DTranspose(**new_attr_dict),
+                        key=key)
                 else:
                     ### group conv_transpose
                     layer = Block(
@@ -533,10 +539,11 @@ class Convert:
 
             elif isinstance(
                     layer,
-                    getattr(nn, 'InstanceNorm2D',
-                            paddle.fluid.dygraph.nn.InstanceNorm)) and (
-                                getattr(self.context, 'expand', None) != None or
-                                getattr(self.context, 'channel', None) != None):
+                    getattr(
+                        nn, 'InstanceNorm2D',
+                        paddle.fluid.dygraph.nn.InstanceNorm)) and (
+                            getattr(self.context, 'expand', None) != None or
+                            getattr(self.context, 'channel', None) != None):
                 # num_features in InstanceNorm don't change after last weight operators
                 if idx > last_weight_layer_idx:
                     continue
@@ -558,8 +565,8 @@ class Convert:
                 new_key = '_num_channels' if '_num_channels' in new_attr_dict.keys(
                 ) else '_num_features'
                 ### 10 is a default channel in the case of weight_attr=False, in this condition, num of channels if useless, so give it arbitrarily.
-                attr_dict[new_key] = layer._parameters['scale'].shape[0] if len(
-                    layer._parameters) != 0 else 10
+                attr_dict[new_key] = layer._parameters['scale'].shape[
+                    0] if len(layer._parameters) != 0 else 10
 
                 if self.context.expand:
                     new_attr_dict[new_key[1:]] = int(self.context.expand *
@@ -601,7 +608,8 @@ class Convert:
                 new_attr_dict['normalized_shape'] = None
                 if self.context.expand:
                     new_attr_dict['normalized_shape'] = int(
-                        self.context.expand * attr_dict['_normalized_shape'][0])
+                        self.context.expand *
+                        attr_dict['_normalized_shape'][0])
                 elif self.context.channel:
                     new_attr_dict['normalized_shape'] = max(cur_channel)
                 else:

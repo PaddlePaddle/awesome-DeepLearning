@@ -37,7 +37,8 @@ class Pruner():
 
     """
 
-    def __init__(self, criterion="l1_norm",
+    def __init__(self,
+                 criterion="l1_norm",
                  idx_selector="default_idx_selector"):
         if isinstance(criterion, str):
             self.criterion = CRITERION.get(criterion)

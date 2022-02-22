@@ -31,7 +31,8 @@ class AssignResult():
         self.gt_inds = paddle.concat([self_inds, gt_inds_squeeze])
         gt_label_ones = paddle.full((len(gt_labels), ), 1, dtype='float32')
         max_overlaps_squeeze = paddle.squeeze(self.max_overlaps, axis=0)
-        self.max_overlaps = paddle.concat([gt_label_ones, max_overlaps_squeeze])
+        self.max_overlaps = paddle.concat(
+            [gt_label_ones, max_overlaps_squeeze])
         if self.labels is not None:
             self.labels = paddle.concat([gt_labels, self.labels])
 
@@ -76,7 +77,8 @@ class MaxIoUAssignerAVA():
         max_overlaps, argmax_overlaps = paddle.topk(overlaps, k=1, axis=0)
         # for each gt, which anchor best overlaps with it
         # for each gt, the max iou of all proposals
-        gt_max_overlaps, gt_argmax_overlaps = paddle.topk(overlaps, k=1, axis=1)
+        gt_max_overlaps, gt_argmax_overlaps = paddle.topk(
+            overlaps, k=1, axis=1)
 
         # 2. assign negative: below the negative inds are set to be 0
         match_labels = paddle.full(argmax_overlaps.shape, -1, dtype='int32')

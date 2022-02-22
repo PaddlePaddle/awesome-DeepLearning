@@ -121,7 +121,8 @@ def dygraph2program(layer,
         # And should not create new varibles in 'extract_vars'.
         out_var_list = extract_outputs_fn(original_outputs)
         program_desc, feed_names, fetch_names, parameters = tracer.create_program_desc(
-            input_var_list, feed_prefix, out_var_list, fetch_prefix, tmp_prefix)
+            input_var_list, feed_prefix, out_var_list, fetch_prefix,
+            tmp_prefix)
         tracer.reset()
 
     with _dygraph_guard(None):

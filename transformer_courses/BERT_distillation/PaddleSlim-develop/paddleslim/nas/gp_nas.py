@@ -131,8 +131,9 @@ class GPNAS(object):
         mat_train = self._get_cor_mat(X_train)
         mat_joint = self._get_cor_mat_joint(X, X_train)
 
-        return m_X + mat_joint * np.linalg.inv(mat_train + self.hp_mat * np.eye(
-            X_train.shape[0])) * (Y_train.T - m_X_train)
+        return m_X + mat_joint * np.linalg.inv(
+            mat_train + self.hp_mat * np.eye(X_train.shape[0])) * (Y_train.T -
+                                                                   m_X_train)
 
     def get_initial_mean(self, X, Y):
         """
@@ -174,9 +175,9 @@ class GPNAS(object):
                     Y.T - X * self.w)
         else:
             self.w = np.linalg.inv(X.T * np.linalg.inv(
-                cov_mat + self.hp_mat * np.eye(X.shape[0])) * X + np.linalg.inv(
-                    self.cov_w + self.hp_mat * np.eye(X.shape[
-                        1])) + self.hp_mat * np.eye(X.shape[1])) * (
+                cov_mat + self.hp_mat * np.eye(X.shape[
+                    0])) * X + np.linalg.inv(self.cov_w + self.hp_mat * np.eye(
+                        X.shape[1])) + self.hp_mat * np.eye(X.shape[1])) * (
                             X.T * np.linalg.inv(cov_mat + self.hp_mat * np.eye(
                                 X.shape[0])) * Y.T +
                             np.linalg.inv(self.cov_w + self.hp_mat * np.eye(

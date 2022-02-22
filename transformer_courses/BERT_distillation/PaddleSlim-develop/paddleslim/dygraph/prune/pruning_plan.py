@@ -131,7 +131,8 @@ class PruningPlan():
             backup_name = var_tmp.name.replace(".", "_") + "_backup"
             if backup_name not in sub_layer._buffers:
                 sub_layer.register_buffer(
-                    backup_name, paddle.to_tensor(var_tmp.value().get_tensor()))
+                    backup_name,
+                    paddle.to_tensor(var_tmp.value().get_tensor()))
                 _logger.debug("Backup values of {} into buffers.".format(
                     var_tmp.name))
 
@@ -227,8 +228,9 @@ class PruningPlan():
                             new_groups = int(except_num / filter_size)
                             sub_layer._origin_groups = sub_layer._groups
                             sub_layer._groups = new_groups
-                            _logger.info("change groups from {} to {} for {}.".
-                                         format(groups, new_groups, param.name))
+                            _logger.info(
+                                "change groups from {} to {} for {}.".format(
+                                    groups, new_groups, param.name))
                             continue
 
                         # The name of buffer can not contains "."
@@ -265,7 +267,8 @@ class PruningPlan():
             for param in sub_layer.parameters(include_sublayers=False):
                 # restore optimizer accumulators from layer buffer
                 self._restore_opt(param.name, sub_layer, opt)
-                backup_name = "_".join([param.name.replace(".", "_"), "backup"])
+                backup_name = "_".join(
+                    [param.name.replace(".", "_"), "backup"])
                 if backup_name in sub_layer._buffers:
                     _logger.debug("Restore values of variable: {}".format(
                         param.name))

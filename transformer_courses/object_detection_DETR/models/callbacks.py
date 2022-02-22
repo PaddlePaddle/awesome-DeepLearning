@@ -69,8 +69,7 @@ class LogPrinter(Callback):
                 logs = training_staus.log()
                 space_fmt = ':' + str(len(str(steps_per_epoch))) + 'd'
                 if step_id % 20 == 0:
-                    eta_steps = (epoches - epoch_id
-                                 ) * steps_per_epoch - step_id
+                    eta_steps = (epoches - epoch_id) * steps_per_epoch - step_id
                     eta_sec = eta_steps * batch_time.global_avg
                     eta_str = str(datetime.timedelta(seconds=int(eta_sec)))
                     ips = float(batch_size) / batch_time.avg
@@ -135,8 +134,7 @@ class Checkpointer(Callback):
                 if (epoch_id + 1) % 1 == 0 or epoch_id == end_epoch - 1:
 
                     save_name = str(
-                        epoch_id
-                    ) if epoch_id != end_epoch - 1 else "model_final"
+                        epoch_id) if epoch_id != end_epoch - 1 else "model_final"
                     weight = self.weight
             if weight:
                 save_model(weight, self.optimizers, self.save_dir, save_name,

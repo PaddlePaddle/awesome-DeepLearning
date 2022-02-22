@@ -41,8 +41,7 @@ def read(src_path, tgt_path, is_predict=False):
         with open(
                 src_path, 'r', encoding='utf8') as src_f, open(
                     tgt_path, 'r', encoding='utf8') as tgt_f:
-            for src_line, tgt_line in zip(src_f.readlines(),
-                                          tgt_f.readlines()):
+            for src_line, tgt_line in zip(src_f.readlines(), tgt_f.readlines()):
                 src_line = src_line.strip()
                 if not src_line:
                     continue

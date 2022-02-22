@@ -239,18 +239,20 @@ class DataProcessor(object):
         ids_0 = ids[((sids == 0) & (ids != 0))]
         seqlen_0 = ((sids == 0) & (ids != 0)).astype(np.int64).sum(1)
         y_0 = np.concatenate([np.arange(s) for s in seqlen_0])
-        x_0 = np.concatenate(
-            [np.ones(
-                [s], dtype=np.int64) * i for i, s in enumerate(seqlen_0)])
+        x_0 = np.concatenate([
+            np.ones(
+                [s], dtype=np.int64) * i for i, s in enumerate(seqlen_0)
+        ])
         ids0 = np.zeros([batchsize, seqlen_0.max()], dtype=np.int64)
         ids0[(x_0, y_0)] = ids_0
 
         ids_1 = ids[(sids == 1) & (ids != 0)]
         seqlen_1 = ((sids == 1) & (ids != 0)).astype(np.int64).sum(1)
         y_1 = np.concatenate([np.arange(s) for s in seqlen_1])
-        x_1 = np.concatenate(
-            [np.ones(
-                [s], dtype=np.int64) * i for i, s in enumerate(seqlen_1)])
+        x_1 = np.concatenate([
+            np.ones(
+                [s], dtype=np.int64) * i for i, s in enumerate(seqlen_1)
+        ])
         ids1 = np.zeros([batchsize, seqlen_1.max()], dtype=np.int64)
         ids1[(x_1, y_1)] = ids_1
 

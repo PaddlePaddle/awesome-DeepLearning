@@ -220,8 +220,7 @@ class MovieLen(object):
 
                     mov_id_arr = np.array(mov_id_list)
                     mov_cat_arr = np.reshape(
-                        np.array(mov_cat_list),
-                        [BATCHSIZE, 6]).astype(np.int64)
+                        np.array(mov_cat_list), [BATCHSIZE, 6]).astype(np.int64)
                     mov_tit_arr = np.reshape(
                         np.array(mov_tit_list),
                         [BATCHSIZE, 1, 15]).astype(np.int64)
@@ -272,8 +271,7 @@ class MovModel(paddle.nn.Layer):
         """ define network layer for embedding usr info """
         # 对电影ID信息做映射，并紧接着一个Linear层
         MOV_DICT_SIZE = Dataset.max_mov_id + 1
-        self.mov_emb = Embedding(
-            num_embeddings=MOV_DICT_SIZE, embedding_dim=32)
+        self.mov_emb = Embedding(num_embeddings=MOV_DICT_SIZE, embedding_dim=32)
         self.mov_fc = Linear(32, 32)
 
         # 对电影类别做映射

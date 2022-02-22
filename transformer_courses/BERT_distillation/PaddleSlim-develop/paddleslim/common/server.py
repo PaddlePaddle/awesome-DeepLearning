@@ -158,8 +158,8 @@ class Server(object):
                             self._client.append(client_name)
                             self._lock.release()
 
-                            if len(self._client) == len(self._client_dict.items(
-                            )):
+                            if len(self._client) == len(
+                                    self._client_dict.items()):
                                 self._done = True
                                 self._params_dict = sum_params_dict
                                 del sum_params_dict

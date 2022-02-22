@@ -53,7 +53,8 @@ class ActBertLoss(BaseWeightedLoss):
             image_target  #8,36,1601
         )
         masked_img_loss = paddle.sum(
-            img_loss * (image_label == 1).unsqueeze(2).astype('float32')) / max(
+            img_loss *
+            (image_label == 1).unsqueeze(2).astype('float32')) / max(
                 paddle.sum((image_label == 1).astype('float32')), 1e-6)
 
         masked_text_loss = self.loss_fct(
@@ -72,6 +73,6 @@ class ActBertLoss(BaseWeightedLoss):
         )
 
         total_loss = masked_text_loss.unsqueeze(0) + masked_img_loss.unsqueeze(
-            0) + masked_action_loss.unsqueeze(0) + next_sentence_loss.unsqueeze(
-                0)
+            0) + masked_action_loss.unsqueeze(
+                0) + next_sentence_loss.unsqueeze(0)
         return total_loss

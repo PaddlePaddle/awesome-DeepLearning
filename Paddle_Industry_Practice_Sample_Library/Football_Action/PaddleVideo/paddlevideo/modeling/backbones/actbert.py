@@ -510,8 +510,8 @@ class BertConnectionLayer(nn.Layer):
             input_tensor3, attention_mask3)
 
         attention_output1, attention_output2, attention_output3 = self.ent_output(
-            ent_output1, input_tensor1, ent_output2, input_tensor2, ent_output3,
-            input_tensor3)
+            ent_output1, input_tensor1, ent_output2, input_tensor2,
+            ent_output3, input_tensor3)
 
         intermediate_output1 = self.v_intermediate(attention_output1)
         layer_output1 = self.v_output(intermediate_output1, attention_output1)
@@ -797,8 +797,9 @@ class BertModel(nn.Layer):
         if token_type_ids is None:
             token_type_ids = paddle.zeros_like(text_ids)
         if image_mask is None:
-            image_mask = paddle.ones(image_feat.shape[0],
-                                     image_feat.shape[1]).astype(text_ids.dtype)
+            image_mask = paddle.ones(
+                image_feat.shape[0],
+                image_feat.shape[1]).astype(text_ids.dtype)
         if action_mask is None:
             action_mask = paddle.ones(
                 action_feat.shape[0],
@@ -817,7 +818,8 @@ class BertModel(nn.Layer):
         # Since we are adding it to the raw scores before the softmax, this is
         # effectively the same as removing these entirely.
         def set_mask(extended_attention_mask):
-            extended_attention_mask = (1.0 - extended_attention_mask) * -10000.0
+            extended_attention_mask = (
+                1.0 - extended_attention_mask) * -10000.0
             return extended_attention_mask
 
         extended_text_mask = set_mask(extended_text_mask)

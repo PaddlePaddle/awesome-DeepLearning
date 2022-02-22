@@ -90,8 +90,7 @@ def main():
     seed = args.seed
     if seed is not None:
         assert isinstance(
-            seed,
-            int), f"seed must be a integer when specified, but got {seed}"
+            seed, int), f"seed must be a integer when specified, but got {seed}"
         random.seed(seed)
         np.random.seed(seed)
         paddle.seed(seed)

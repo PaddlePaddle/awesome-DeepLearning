@@ -35,8 +35,7 @@ class JointModel(paddle.nn.Layer):
                                   self.ernie.config["hidden_dropout_prob"])
 
         if self.use_history:
-            self.intent_hidden = nn.Linear(2 *
-                                           self.ernie.config["hidden_size"],
+            self.intent_hidden = nn.Linear(2 * self.ernie.config["hidden_size"],
                                            self.ernie.config["hidden_size"])
             self.slot_hidden = nn.Linear(2 * self.ernie.config["hidden_size"],
                                          self.ernie.config["hidden_size"])

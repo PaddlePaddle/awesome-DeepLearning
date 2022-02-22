@@ -104,7 +104,8 @@ class Transfer2COCO:
         annotation['id'] = self.ann_id
         annotation['image_id'] = self.img_id
         annotation['category_id'] = label
-        annotation['segmentation'] = []  # np.asarray(points).flatten().tolist()
+        annotation['segmentation'] = [
+        ]  # np.asarray(points).flatten().tolist()
         annotation['bbox'] = self._get_box(points)
         annotation['iscrowd'] = 0
         annotation["ignore"] = 0

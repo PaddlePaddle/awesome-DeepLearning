@@ -106,7 +106,8 @@ print("ID为 {} 的用户，评分过的电影数量是: ".format(usr_a), len(mo
 #####################################
 ## 选出ID为usr_a评分最高的前topk个电影 ##
 #####################################
-ratings_topk = sorted(usr_rating_info.items(), key=lambda item: item[1])[-topk:]
+ratings_topk = sorted(
+    usr_rating_info.items(), key=lambda item: item[1])[-topk:]
 
 movie_info_path = "./ml-1m/movies.dat"
 # 打开文件，编码方式选择ISO-8859-1，读取所有数据到data中

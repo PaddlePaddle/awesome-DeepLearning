@@ -83,11 +83,11 @@ class Scale(object):
                 else:
                     scale_factor = self.short_size / w
                     oh = int(h * float(scale_factor) +
-                             0.5) if self.do_round else int(
-                                 h * self.short_size / w)
+                             0.5) if self.do_round else int(h *
+                                                            self.short_size / w)
                     ow = int(w * float(scale_factor) +
-                             0.5) if self.do_round else int(
-                                 w * self.short_size / h)
+                             0.5) if self.do_round else int(w *
+                                                            self.short_size / h)
             else:
                 oh = self.short_size
                 if self.fixed_ratio:
@@ -97,11 +97,11 @@ class Scale(object):
                 else:
                     scale_factor = self.short_size / h
                     oh = int(h * float(scale_factor) +
-                             0.5) if self.do_round else int(
-                                 h * self.short_size / w)
+                             0.5) if self.do_round else int(h *
+                                                            self.short_size / w)
                     ow = int(w * float(scale_factor) +
-                             0.5) if self.do_round else int(
-                                 w * self.short_size / h)
+                             0.5) if self.do_round else int(w *
+                                                            self.short_size / h)
             if self.backend == 'pillow':
                 resized_imgs.append(img.resize((ow, oh), Image.BILINEAR))
             elif self.backend == 'cv2' and (self.keep_ratio is not None):
@@ -403,8 +403,7 @@ class MultiScaleCrop(object):
 
         crop_w, crop_h, offset_w, offset_h = _sample_crop_size(im_size)
         crop_img_group = [
-            img.crop(
-                (offset_w, offset_h, offset_w + crop_w, offset_h + crop_h))
+            img.crop((offset_w, offset_h, offset_w + crop_w, offset_h + crop_h))
             for img in imgs
         ]
         if self.backend == 'pillow':
@@ -1035,9 +1034,8 @@ class ToArray(object):
         for k in list(imgs):
             if "color" in k or "color_n" in k or "color_aug" in k or "color_n_aug" in k:
                 n, im, i = k
-                imgs[(
-                    n, im,
-                    i)] = np.array(imgs[(n, im, i)]).astype('float32') / 255.0
+                imgs[(n, im,
+                      i)] = np.array(imgs[(n, im, i)]).astype('float32') / 255.0
                 imgs[(n, im, i)] = imgs[(n, im, i)].transpose((2, 0, 1))
         if "depth_gt" in imgs:
             imgs['depth_gt'] = np.array(imgs['depth_gt']).astype('float32')

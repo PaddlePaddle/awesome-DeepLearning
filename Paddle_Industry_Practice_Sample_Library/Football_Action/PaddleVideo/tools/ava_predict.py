@@ -277,7 +277,8 @@ def detection_inference(frame_paths, output_dir, model_name, weights_path):
 
     print('Performing Human Detection for each frame')
 
-    detection_trainer.predict(frame_paths, output_dir=output_dir, save_txt=True)
+    detection_trainer.predict(
+        frame_paths, output_dir=output_dir, save_txt=True)
 
     print("finish object detection")
 
@@ -360,7 +361,8 @@ def main(args):
     assert clip_len % 2 == 0, 'We would like to have an even clip_len'
     frame_interval = config.PIPELINE.test.sample['frame_interval']
     window_size = clip_len * frame_interval
-    timestamps = np.arange(window_size // 2, (num_frame + 1 - window_size // 2),
+    timestamps = np.arange(window_size // 2,
+                           (num_frame + 1 - window_size // 2),
                            args.predict_stepsize)
     print("timetamps number:", len(timestamps))
 

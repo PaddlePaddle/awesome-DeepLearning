@@ -64,8 +64,7 @@ class Bottleneck(nn.Layer):
                  downsample=None,
                  BatchNorm=None):
         super(Bottleneck, self).__init__()
-        self.conv1 = nn.Conv2D(
-            inplanes, planes, kernel_size=1, bias_attr=False)
+        self.conv1 = nn.Conv2D(inplanes, planes, kernel_size=1, bias_attr=False)
         self.bn1 = BatchNorm(planes)
         self.conv2 = nn.Conv2D(
             planes,

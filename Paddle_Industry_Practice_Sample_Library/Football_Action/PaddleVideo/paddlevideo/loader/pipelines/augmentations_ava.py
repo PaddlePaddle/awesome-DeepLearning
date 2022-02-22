@@ -216,10 +216,8 @@ class EntityBoxCrop:
 
         assert gt_bboxes.shape[-1] == 4
         gt_bboxes_ = gt_bboxes.copy()
-        gt_bboxes_[..., 0::2] = np.clip(gt_bboxes[..., 0::2] - x1, 0,
-                                        img_w - 1)
-        gt_bboxes_[..., 1::2] = np.clip(gt_bboxes[..., 1::2] - y1, 0,
-                                        img_h - 1)
+        gt_bboxes_[..., 0::2] = np.clip(gt_bboxes[..., 0::2] - x1, 0, img_w - 1)
+        gt_bboxes_[..., 1::2] = np.clip(gt_bboxes[..., 1::2] - y1, 0, img_h - 1)
         results['gt_bboxes'] = gt_bboxes_
 
         if proposals is not None:

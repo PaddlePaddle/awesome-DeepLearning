@@ -141,8 +141,8 @@ def train():
     model = ErnieForTokenClassification(ernie, num_classes=len(label2id))
 
     num_training_steps = len(train_loader) * args.num_epoch
-    lr_scheduler = LinearDecayWithWarmup(args.learning_rate, num_training_steps,
-                                         args.warmup_proportion)
+    lr_scheduler = LinearDecayWithWarmup(
+        args.learning_rate, num_training_steps, args.warmup_proportion)
     decay_params = [
         p.name for n, p in model.named_parameters()
         if not any(nd in n for nd in ["bias", "norm"])

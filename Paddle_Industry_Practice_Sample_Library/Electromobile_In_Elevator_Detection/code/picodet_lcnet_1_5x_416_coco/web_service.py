@@ -89,8 +89,11 @@ class PPYoloMbvOp(Op):
             self.feed_dict['scale_factor'],
             [8, 16, 32, 64],
             0.5)
-        np_boxes, np_boxes_num = post_process(np_score_list, np_boxes_list)
         res_dict = {}
+        np_boxes, np_boxes_num = post_process(np_score_list, np_boxes_list)
+        if len(np_boxes) == 0:
+            return res_dict, None, ""
+        
         d = []
         for b in range(np_boxes.shape[0]):
             c = {}

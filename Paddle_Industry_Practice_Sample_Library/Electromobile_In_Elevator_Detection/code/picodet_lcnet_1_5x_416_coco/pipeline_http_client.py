@@ -42,6 +42,7 @@ category_dict={0.0:"person",1.0:"bicycle",2.0:"motorcycle"}
 data = {"key": ["image"], "value": [image]}
 r = requests.post(url=url, data=json.dumps(data))
 print(r.json())
+'''
 results = eval(r.json()['value'][0])
 img = cv2.imread("test.jpg")
 for result in results:
@@ -52,6 +53,7 @@ for result in results:
         print(category_dict[result["category_id"]])
         cv2.putText(img,category_dict[result["category_id"]],(left,top+20), cv2.FONT_HERSHEY_SIMPLEX,1.2,(0,255,0),2)
 cv2.imwrite("./result.jpg",img)
+'''
     
         
 

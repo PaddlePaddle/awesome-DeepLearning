@@ -73,8 +73,7 @@ class DistributedShortSampler(BatchSampler):
 
         self.drop_last = drop_last
         self.epoch = 0
-        self.num_samples = int(
-            math.ceil(len(self.dataset) * 1.0 / self.nranks))
+        self.num_samples = int(math.ceil(len(self.dataset) * 1.0 / self.nranks))
         self.total_size = self.num_samples * self.nranks
 
     def __iter__(self):

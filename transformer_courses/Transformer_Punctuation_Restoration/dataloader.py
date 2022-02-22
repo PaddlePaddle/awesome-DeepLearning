@@ -93,7 +93,9 @@ def load_dataset(path_or_read_func,
     return datasets
 
 
-def tokenize_and_align_labels(example, tokenizer, no_entity_id,
+def tokenize_and_align_labels(example,
+                              tokenizer,
+                              no_entity_id,
                               max_seq_len=512):
     labels = example['labels']
     example = example['tokens']

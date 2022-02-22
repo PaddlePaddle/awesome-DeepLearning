@@ -133,7 +133,8 @@ class VarCollector(object):
             program = paddle.static.CompiledProgram(
                 self.program).with_data_parallel(loss_name=loss_name)
         for idx, data in enumerate(reader):
-            vars_np = exe.run(program=program, feed=data, fetch_list=fetch_list)
+            vars_np = exe.run(
+                program=program, feed=data, fetch_list=fetch_list)
             vars_np = [np.max(var) for var in vars_np]
             mapped_vars_np = dict(zip(self.real_names, vars_np))
             values = self.update(mapped_vars_np)

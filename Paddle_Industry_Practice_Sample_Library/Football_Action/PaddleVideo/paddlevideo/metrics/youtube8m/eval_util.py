@@ -93,8 +93,7 @@ def calculate_gap(predictions, actuals, top_k=20):
     sparse_predictions, sparse_labels, num_positives = top_k_by_class(
         predictions, actuals, top_k)
     gap_calculator.accumulate(
-        flatten(sparse_predictions),
-        flatten(sparse_labels), sum(num_positives))
+        flatten(sparse_predictions), flatten(sparse_labels), sum(num_positives))
     return gap_calculator.peek_ap_at_n()
 
 
@@ -149,11 +148,7 @@ def top_k_triplets(predictions, labels, k=20):
 class HitOneMetric(BaseMetric):
     """A class to store the evaluation metrics."""
 
-    def __init__(self,
-                 num_class,
-                 top_k,
-                 data_size,
-                 batch_size,
+    def __init__(self, num_class, top_k, data_size, batch_size,
                  log_interval=20):
         """Construct an HitOneMetric object to store the evaluation metrics."""
         self.hit_at_one = []

@@ -64,8 +64,7 @@ class CFF(nn.Layer):
             in_channel_right, 256, kernel_size=3, stride=1, padding=1)
         self.bn2 = nn.BatchNorm2D(256)
 
-        self.conv3 = nn.Conv2D(
-            256 * 3, 256, kernel_size=3, stride=1, padding=1)
+        self.conv3 = nn.Conv2D(256 * 3, 256, kernel_size=3, stride=1, padding=1)
         self.bn3 = nn.BatchNorm2D(256)
 
     def forward(self, left, down, right):

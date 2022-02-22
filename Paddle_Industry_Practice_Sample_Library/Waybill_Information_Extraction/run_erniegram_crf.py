@@ -33,7 +33,8 @@ def convert_to_features(example, tokenizer, label_vocab):
     labels = ['O'] + labels + ['O']
     tokenized_input['labels'] = [label_vocab[x] for x in labels]
     return tokenized_input['input_ids'], tokenized_input[
-        'token_type_ids'], tokenized_input['seq_len'], tokenized_input['labels']
+        'token_type_ids'], tokenized_input['seq_len'], tokenized_input[
+            'labels']
 
 
 @paddle.no_grad()

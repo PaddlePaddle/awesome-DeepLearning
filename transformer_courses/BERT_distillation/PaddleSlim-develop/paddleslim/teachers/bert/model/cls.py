@@ -78,8 +78,8 @@ class ClsModelLayer(Layer):
         input_mask = data_ids[3]
         labels = data_ids[4]
 
-        enc_outputs, next_sent_feats = self.bert_layer(src_ids, position_ids,
-                                                       sentence_ids, input_mask)
+        enc_outputs, next_sent_feats = self.bert_layer(
+            src_ids, position_ids, sentence_ids, input_mask)
 
         if not self.return_pooled_out:
             cls_feat = fluid.layers.dropout(

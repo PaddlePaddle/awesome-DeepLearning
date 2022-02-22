@@ -107,8 +107,8 @@ def train():
     event_model = paddle.DataParallel(event_model)
 
     num_training_steps = len(train_loader) * args.num_epoch
-    lr_scheduler = LinearDecayWithWarmup(args.learning_rate, num_training_steps,
-                                         args.warmup_proportion)
+    lr_scheduler = LinearDecayWithWarmup(
+        args.learning_rate, num_training_steps, args.warmup_proportion)
     decay_params = [
         p.name for n, p in event_model.named_parameters()
         if not any(nd in n for nd in ["bias", "norm"])

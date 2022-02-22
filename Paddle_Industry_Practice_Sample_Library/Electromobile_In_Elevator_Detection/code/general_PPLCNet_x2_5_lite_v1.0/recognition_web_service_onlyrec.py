@@ -186,7 +186,7 @@ class RecOp(Op):
 
     def postprocess(self, input_dicts, fetch_dict, log_id,data_id = 0):
         #print("fetch_dict",fetch_dict)
-        batch_features = fetch_dict["feature"]
+        batch_features = fetch_dict["save_infer_model/scale_0.tmp_1"]
 
         if self.feature_normalize:
             feas_norm = np.sqrt(

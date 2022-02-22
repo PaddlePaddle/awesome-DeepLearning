@@ -27,10 +27,10 @@ from .samplers import RandomSampler
 from .weight_init import kaiming_normal_, trunc_normal_, weight_init_
 
 __all__ = [
-    'BACKBONES', 'HEADS', 'RECOGNIZERS', 'LOCALIZERS', 'PARTITIONERS',
-    'LOSSES', 'build_recognizer', 'build_localizer', 'build_head',
-    'build_backbone', 'build_loss', 'ResNet', 'TSNHead', 'BaseHead',
-    'BaseRecognizer', 'Recognizer2d', 'CrossEntropyLoss', 'ROI_EXTRACTORS',
+    'BACKBONES', 'HEADS', 'RECOGNIZERS', 'LOCALIZERS', 'PARTITIONERS', 'LOSSES',
+    'build_recognizer', 'build_localizer', 'build_head', 'build_backbone',
+    'build_loss', 'ResNet', 'TSNHead', 'BaseHead', 'BaseRecognizer',
+    'Recognizer2d', 'CrossEntropyLoss', 'ROI_EXTRACTORS',
     'SingleRoIExtractor3D', 'AVARoIHead', 'BBoxHeadAVA', 'MaxIoUAssignerAVA',
     'RandomSampler', 'DETECTORS', 'kaiming_normal_', 'trunc_normal_',
     'weight_init_'

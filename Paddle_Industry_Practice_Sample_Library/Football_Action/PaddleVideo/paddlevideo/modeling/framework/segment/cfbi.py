@@ -156,14 +156,16 @@ class CFBI(BaseSegment):
                     dis_bias = paddle.concat(
                         [
                             paddle.unsqueeze(
-                                self.bg_bias[scale_idx], axis=0), paddle.expand(
-                                    paddle.unsqueeze(
-                                        self.fg_bias[scale_idx], axis=0),
-                                    [np.array(gt_ids)[n], -1, -1, -1])
+                                self.bg_bias[scale_idx], axis=0),
+                            paddle.expand(
+                                paddle.unsqueeze(
+                                    self.fg_bias[scale_idx], axis=0),
+                                [np.array(gt_ids)[n], -1, -1, -1])
                         ],
                         axis=0)
                 else:
-                    dis_bias = paddle.unsqueeze(self.bg_bias[scale_idx], axis=0)
+                    dis_bias = paddle.unsqueeze(
+                        self.bg_bias[scale_idx], axis=0)
                 #Global FG map
                 matching_dim = MODEL_SEMANTIC_MATCHING_DIM[scale_idx]
                 seq_current_frame_embedding_for_matching = paddle.transpose(

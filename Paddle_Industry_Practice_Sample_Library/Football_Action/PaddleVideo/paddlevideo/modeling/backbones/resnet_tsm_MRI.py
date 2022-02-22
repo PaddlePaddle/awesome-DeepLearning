@@ -270,7 +270,8 @@ class ResNetTSM_MRI(nn.Layer):
                         conv_name = "res" + str(block + 2) + chr(97 + i)
                     bottleneck_block = self.add_sublayer(
                         'bb_%d_%d' %
-                        (block, i),  #same with PaddleClas, for loading pretrain
+                        (block,
+                         i),  #same with PaddleClas, for loading pretrain
                         BottleneckBlock(
                             in_channels=in_channels
                             if i == 0 else out_channels[block] * 4,

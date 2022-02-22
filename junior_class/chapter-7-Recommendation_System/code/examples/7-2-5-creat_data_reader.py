@@ -215,7 +215,8 @@ def load_data(dataset=None, mode='train'):
                 mov_cat_arr = np.reshape(
                     np.array(mov_cat_list), [BATCHSIZE, 6]).astype(np.int64)
                 mov_tit_arr = np.reshape(
-                    np.array(mov_tit_list), [BATCHSIZE, 1, 15]).astype(np.int64)
+                    np.array(mov_tit_list),
+                    [BATCHSIZE, 1, 15]).astype(np.int64)
 
                 if use_poster:
                     mov_poster_arr = np.reshape(

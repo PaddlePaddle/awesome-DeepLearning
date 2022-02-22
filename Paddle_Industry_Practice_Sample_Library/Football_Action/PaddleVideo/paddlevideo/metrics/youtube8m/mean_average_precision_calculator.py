@@ -97,8 +97,8 @@ class MeanAveragePrecisionCalculator(object):
             calculator.clear()
 
     def is_empty(self):
-        return ([calculator.heap_size for calculator in self._ap_calculators] ==
-                [0 for _ in range(self._num_class)])
+        return ([calculator.heap_size for calculator in self._ap_calculators]
+                == [0 for _ in range(self._num_class)])
 
     def peek_map_at_n(self):
         """Peek the non-interpolated mean average precision at n.

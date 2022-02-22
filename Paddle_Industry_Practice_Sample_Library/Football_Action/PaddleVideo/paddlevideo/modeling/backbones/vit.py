@@ -400,8 +400,7 @@ class VisionTransformer(nn.Layer):
         # B = x.shape[0]
         B = paddle.shape(x)[0]
         x, T, W = self.patch_embed(x)  # [BT,nH*nW,F]
-        cls_tokens = self.cls_token.expand(
-            (B * T, -1, -1))  # [1,1,F]->[BT,1,F]
+        cls_tokens = self.cls_token.expand((B * T, -1, -1))  # [1,1,F]->[BT,1,F]
         x = paddle.concat((cls_tokens, x), axis=1)
         pos_interp = (x.shape[1] != self.pos_embed.shape[1])
         if pos_interp:

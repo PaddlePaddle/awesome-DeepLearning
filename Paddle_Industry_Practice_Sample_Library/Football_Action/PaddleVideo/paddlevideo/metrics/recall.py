@@ -76,8 +76,7 @@ def eval_recalls(gts, proposals, proposal_nums=None, iou_thrs=None):
             ious = np.zeros((0, img_proposal.shape[0]), dtype=np.float32)
         else:
             ious = bbox_overlaps(
-                torch.tensor(gts[i]),
-                torch.tensor(img_proposal[:prop_num, :4]))
+                torch.tensor(gts[i]), torch.tensor(img_proposal[:prop_num, :4]))
             ious = ious.data.numpy()
         all_ious.append(ious)
     all_ious = np.array(all_ious)

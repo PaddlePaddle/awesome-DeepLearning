@@ -1,0 +1,66 @@
+feed_var {
+  name: "image"
+  alias_name: "image"
+  is_lod_tensor: false
+  feed_type: 1
+  shape: 1
+  shape: 3
+  shape: 640
+  shape: 640
+}
+fetch_var {
+  name: "transpose_0.tmp_0"
+  alias_name: "transpose_0.tmp_0"
+  is_lod_tensor: true
+  fetch_type: 1
+  shape: -1
+}
+fetch_var {
+  name: "transpose_1.tmp_0"
+  alias_name: "transpose_1.tmp_0"
+  is_lod_tensor: true
+  fetch_type: 1
+  shape: -1
+}
+fetch_var {
+  name: "transpose_2.tmp_0"
+  alias_name: "transpose_2.tmp_0"
+  is_lod_tensor: true
+  fetch_type: 1
+  shape: -1
+}
+fetch_var {
+  name: "transpose_3.tmp_0"
+  alias_name: "transpose_3.tmp_0"
+  is_lod_tensor: true
+  fetch_type: 1
+  shape: -1
+}
+fetch_var {
+  name: "transpose_4.tmp_0"
+  alias_name: "transpose_4.tmp_0"
+  is_lod_tensor: true
+  fetch_type: 1
+  shape: -1
+}
+fetch_var {
+  name: "transpose_5.tmp_0"
+  alias_name: "transpose_5.tmp_0"
+  is_lod_tensor: true
+  fetch_type: 1
+  shape: -1
+}
+fetch_var {
+  name: "transpose_6.tmp_0"
+  alias_name: "transpose_6.tmp_0"
+  is_lod_tensor: true
+  fetch_type: 1
+  shape: -1
+}
+fetch_var {
+  name: "transpose_7.tmp_0"
+  alias_name: "transpose_7.tmp_0"
+  is_lod_tensor: true
+  fetch_type: 1
+  shape: -1
+}

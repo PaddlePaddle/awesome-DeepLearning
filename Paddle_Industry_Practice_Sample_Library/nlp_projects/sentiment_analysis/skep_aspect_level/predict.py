@@ -35,7 +35,8 @@ def predict(text, text_pair, model, tokenizer, id2label, max_seq_len=256):
     label_id = paddle.argmax(logits, axis=1).numpy()[0]
 
     # print predict result
-    print(f"text: {text} \ntext_pair:{text_pair} \nlabel: {id2label[label_id]}")
+    print(
+        f"text: {text} \ntext_pair:{text_pair} \nlabel: {id2label[label_id]}")
 
 
 if __name__ == "__main__":

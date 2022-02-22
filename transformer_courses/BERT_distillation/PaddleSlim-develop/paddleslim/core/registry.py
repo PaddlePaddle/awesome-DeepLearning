@@ -27,8 +27,8 @@ class Registry(object):
     def _register_module(self, module_class):
         module_name = module_class.__name__
         if module_name in self._module_dict:
-            raise KeyError('{} is already registered in {}.'.format(module_name,
-                                                                    self.name))
+            raise KeyError('{} is already registered in {}.'.format(
+                module_name, self.name))
         self._module_dict[module_name] = module_class
 
     def register(self, cls):

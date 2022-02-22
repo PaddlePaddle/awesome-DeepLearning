@@ -50,8 +50,8 @@ class SeqEntityScore(object):
         real_total_count = len(self.real_entities)
         pred_total_count = len(self.pred_entities)
         correct_total_count = len(self.correct_entities)
-        recall, precision, f1 = self.compute(real_total_count, pred_total_count,
-                                             correct_total_count)
+        recall, precision, f1 = self.compute(
+            real_total_count, pred_total_count, correct_total_count)
         result["Total"] = {
             "Precision": round(precision, 4),
             'Recall': round(recall, 4),

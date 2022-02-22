@@ -32,7 +32,8 @@ def train(model, train_loader, Epoches):
     # 获得数据读取器
     data_loader = train_loader
     # 使用adam优化器，学习率使用0.01
-    opt = paddle.optimizer.Adam(learning_rate=lr, parameters=model.parameters())
+    opt = paddle.optimizer.Adam(
+        learning_rate=lr, parameters=model.parameters())
 
     for epoch in range(0, Epoches):
         for idx, data in enumerate(data_loader()):
@@ -109,8 +110,8 @@ if __name__ == "__main__":
         dataset=trainset, mode='train', batch_size=BATCHSIZE)
     valid_loader = Dataset.load_data(
         dataset=valset, mode='valid', batch_size=BATCHSIZE)
-    model = Model(use_poster, use_mov_title, use_mov_cat, use_age_job, fc_sizes,
-                  Dataset)
+    model = Model(use_poster, use_mov_title, use_mov_cat, use_age_job,
+                  fc_sizes, Dataset)
     # train(model,train_loader,Epoches)
 
     param_path = "./checkpoint/epoch"

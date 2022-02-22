@@ -88,8 +88,7 @@ class VOS_Test(Dataset):
         current_img = np.array(current_img)
         height, width, channels = current_img.shape
         if self.resolution is not None:
-            width = int(
-                np.ceil(float(width) * self.resolution / float(height)))
+            width = int(np.ceil(float(width) * self.resolution / float(height)))
             height = int(self.resolution)
 
         current_label_name = img_name.split('.')[0] + '.png'

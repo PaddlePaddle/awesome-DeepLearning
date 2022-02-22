@@ -116,8 +116,8 @@ def init_from_static_model(dir_path, cls_model, bert_config):
 
     _param0 = load_numpy_weight("pre_encoder_layer_norm_scale")
     _param1 = load_numpy_weight("pre_encoder_layer_norm_bias")
-    cls_model.bert_layer.pre_process_layer._sub_layers["layer_norm_0"].set_dict(
-        {
+    cls_model.bert_layer.pre_process_layer._sub_layers[
+        "layer_norm_0"].set_dict({
             "weight": _param0,
             "bias": _param1
         })

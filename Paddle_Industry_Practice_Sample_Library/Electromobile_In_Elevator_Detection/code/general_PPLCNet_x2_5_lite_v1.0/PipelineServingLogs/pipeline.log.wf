@@ -464,3 +464,98 @@ WARNING 2022-02-17 14:26:17,698 [pipeline_server.py:509] [CONF] precision not se
 WARNING 2022-02-17 14:26:17,698 [pipeline_server.py:509] [CONF] use_calib not set, use default: False
 WARNING 2022-02-17 14:26:17,698 [pipeline_server.py:509] [CONF] use_mkldnn not set, use default: False
 WARNING 2022-02-17 14:26:17,698 [pipeline_server.py:509] [CONF] mkldnn_cache_capacity not set, use default: 0
+WARNING 2022-02-22 13:20:19,068 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-22 13:20:19,068 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2022-02-22 13:20:19,069 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-22 13:20:19,069 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2022-02-22 13:20:19,069 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-22 13:20:19,069 [pipeline_server.py:496] [CONF] tracer not set, use default: {}
+WARNING 2022-02-22 13:20:19,069 [pipeline_server.py:496] [CONF] interval_s not set, use default: -1
+WARNING 2022-02-22 13:20:19,069 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2022-02-22 13:20:19,069 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2022-02-22 13:20:19,069 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-22 13:20:19,069 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-22 13:20:19,069 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2022-02-22 13:20:19,069 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-22 13:20:19,069 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-22 13:20:19,069 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-22 13:20:19,069 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2022-02-22 13:20:19,069 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2022-02-22 13:20:19,069 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-22 13:20:19,069 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2022-02-22 13:20:54,941 [operator.py:838] (data_id=0 log_id=0) [rec|0] Failed to process(batch: [0]): Fetch names should not be empty or out of saved fetch list.                    log_id:0
+Traceback (most recent call last):
+  File "/opt/conda/envs/python35-paddle120-env/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 827, in _run_process
+    midped_batch = self.process(feed_batch, typical_logid)
+  File "/opt/conda/envs/python35-paddle120-env/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 480, in process
+    log_id=typical_logid)
+  File "/opt/conda/envs/python35-paddle120-env/lib/python3.7/site-packages/paddle_serving_app/local_predict.py", line 241, in predict
+    log_id:{}".format(log_id))
+ValueError: Fetch names should not be empty or out of saved fetch list.                    log_id:0
+ERROR 2022-02-22 13:20:54,942 [operator.py:883] (log_id=0) rec failed to predict.
+ERROR 2022-02-22 13:20:54,944 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (log_id=0) rec failed to predict.
+WARNING 2022-02-22 13:22:05,964 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-22 13:22:05,964 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2022-02-22 13:22:05,964 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-22 13:22:05,964 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2022-02-22 13:22:05,964 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-22 13:22:05,964 [pipeline_server.py:496] [CONF] tracer not set, use default: {}
+WARNING 2022-02-22 13:22:05,964 [pipeline_server.py:496] [CONF] interval_s not set, use default: -1
+WARNING 2022-02-22 13:22:05,964 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2022-02-22 13:22:05,964 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2022-02-22 13:22:05,964 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-22 13:22:05,965 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-22 13:22:05,965 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2022-02-22 13:22:05,965 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-22 13:22:05,965 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-22 13:22:05,965 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-22 13:22:05,965 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2022-02-22 13:22:05,965 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2022-02-22 13:22:05,965 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-22 13:22:05,965 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2022-02-22 13:22:14,591 [operator.py:968] (data_id=0 log_id=0) [rec|0] Failed to postprocess: 'feature'
+Traceback (most recent call last):
+  File "/opt/conda/envs/python35-paddle120-env/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 964, in _run_postprocess
+    logid_dict.get(data_id))
+  File "recognition_web_service_onlyrec.py", line 189, in postprocess
+    batch_features = fetch_dict["feature"]
+KeyError: 'feature'
+ERROR 2022-02-22 13:22:14,594 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [rec|0] Failed to postprocess: 'feature'
+WARNING 2022-02-22 13:23:16,051 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-22 13:23:16,052 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2022-02-22 13:23:16,052 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-22 13:23:16,052 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2022-02-22 13:23:16,052 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-22 13:23:16,052 [pipeline_server.py:496] [CONF] tracer not set, use default: {}
+WARNING 2022-02-22 13:23:16,052 [pipeline_server.py:496] [CONF] interval_s not set, use default: -1
+WARNING 2022-02-22 13:23:16,052 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2022-02-22 13:23:16,052 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2022-02-22 13:23:16,052 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-22 13:23:16,052 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-22 13:23:16,052 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2022-02-22 13:23:16,052 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-22 13:23:16,052 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-22 13:23:16,052 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-22 13:23:16,052 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2022-02-22 13:23:16,052 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2022-02-22 13:23:16,052 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-22 13:23:16,052 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+WARNING 2022-02-22 13:28:11,345 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-22 13:28:11,345 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2022-02-22 13:28:11,345 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-22 13:28:11,345 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2022-02-22 13:28:11,345 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-22 13:28:11,345 [pipeline_server.py:496] [CONF] tracer not set, use default: {}
+WARNING 2022-02-22 13:28:11,345 [pipeline_server.py:496] [CONF] interval_s not set, use default: -1
+WARNING 2022-02-22 13:28:11,345 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2022-02-22 13:28:11,345 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2022-02-22 13:28:11,346 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-22 13:28:11,346 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-22 13:28:11,346 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2022-02-22 13:28:11,346 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-22 13:28:11,346 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-22 13:28:11,346 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-22 13:28:11,346 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2022-02-22 13:28:11,346 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2022-02-22 13:28:11,346 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-22 13:28:11,346 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0

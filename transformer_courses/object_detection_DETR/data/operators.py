@@ -310,7 +310,8 @@ class RandomFlip(BaseOperator):
         for segm in segms:
             if is_poly(segm):
                 # Polygon format
-                flipped_segms.append([_flip_poly(poly, width) for poly in segm])
+                flipped_segms.append(
+                    [_flip_poly(poly, width) for poly in segm])
             else:
                 # RLE format
                 import pycocotools.mask as mask_util
@@ -378,8 +379,8 @@ class RandomFlip(BaseOperator):
                 sample['gt_segm'] = sample['gt_segm'][:, :, ::-1]
 
             if 'gt_rbox2poly' in sample and sample['gt_rbox2poly'].any():
-                sample['gt_rbox2poly'] = self.apply_rbox(sample['gt_rbox2poly'],
-                                                         width)
+                sample['gt_rbox2poly'] = self.apply_rbox(
+                    sample['gt_rbox2poly'], width)
 
             sample['flipped'] = True
             sample['image'] = im
@@ -468,8 +469,8 @@ class RandomShortSideResize(BaseOperator):
         if len(im.shape) != 3:
             raise ImageError('{}: image is not 3-dimensional.'.format(self))
 
-        target_size = self.get_size_with_aspect_ratio(im.shape[:2], target_size,
-                                                      max_size)
+        target_size = self.get_size_with_aspect_ratio(im.shape[:2],
+                                                      target_size, max_size)
         im_scale_y, im_scale_x = target_size[1] / im.shape[0], target_size[
             0] / im.shape[1]
 
@@ -490,8 +491,8 @@ class RandomShortSideResize(BaseOperator):
                 sample['gt_bbox'], [im_scale_x, im_scale_y], target_size)
         # apply polygon
         if 'gt_poly' in sample and len(sample['gt_poly']) > 0:
-            sample['gt_poly'] = self.apply_segm(sample['gt_poly'], im.shape[:2],
-                                                [im_scale_x, im_scale_y])
+            sample['gt_poly'] = self.apply_segm(
+                sample['gt_poly'], im.shape[:2], [im_scale_x, im_scale_y])
         # apply semantic
         if 'semantic' in sample and sample['semantic']:
             semantic = sample['semantic']
@@ -684,14 +685,15 @@ class RandomSizeCrop(BaseOperator):
                             if not isinstance(part, Polygon):
                                 continue
                             part = np.squeeze(
-                                np.array(part.exterior.coords[:-1]).reshape(1,
-                                                                            -1))
+                                np.array(part.exterior.coords[:-1]).reshape(
+                                    1, -1))
                             part[0::2] -= xmin
                             part[1::2] -= ymin
                             crop_segm.append(part.tolist())
                     elif isinstance(inter, Polygon):
                         crop_poly = np.squeeze(
-                            np.array(inter.exterior.coords[:-1]).reshape(1, -1))
+                            np.array(inter.exterior.coords[:-1]).reshape(1,
+                                                                         -1))
                         crop_poly[0::2] -= xmin
                         crop_poly[1::2] -= ymin
                         crop_segm.append(crop_poly.tolist())
@@ -735,7 +737,9 @@ class RandomSizeCrop(BaseOperator):
 
 
 class NormalizeImage(BaseOperator):
-    def __init__(self, mean=[0.485, 0.456, 0.406], std=[1, 1, 1],
+    def __init__(self,
+                 mean=[0.485, 0.456, 0.406],
+                 std=[1, 1, 1],
                  is_scale=True):
         """
         Args:
@@ -978,8 +982,8 @@ class Resize(BaseOperator):
 
         # apply polygon
         if 'gt_poly' in sample and len(sample['gt_poly']) > 0:
-            sample['gt_poly'] = self.apply_segm(sample['gt_poly'], im_shape[:2],
-                                                [im_scale_x, im_scale_y])
+            sample['gt_poly'] = self.apply_segm(
+                sample['gt_poly'], im_shape[:2], [im_scale_x, im_scale_y])
 
         # apply semantic
         if 'semantic' in sample and sample['semantic']:

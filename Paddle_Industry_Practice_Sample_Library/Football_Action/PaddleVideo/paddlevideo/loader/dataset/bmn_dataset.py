@@ -52,8 +52,8 @@ class BMNDataset(BaseDataset):
         #add video_idx to info
         for idx, elem in enumerate(info):
             info[idx]['video_idx'] = idx
-        logger.info("{} subset video numbers: {}".format(self.subset, len(
-            info)))
+        logger.info("{} subset video numbers: {}".format(self.subset,
+                                                         len(info)))
         return info
 
     def prepare_train(self, idx):

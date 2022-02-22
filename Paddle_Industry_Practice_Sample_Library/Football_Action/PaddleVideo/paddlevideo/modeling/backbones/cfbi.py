@@ -75,7 +75,8 @@ class CFBI(nn.Layer):
                  model_semantic_embedding_dim=256):  #,epsilon=1e-05):
         super(CFBI, self).__init__()
         #self.epsilon = epsilon
-        self.feature_extracter = DeepLab(backbone=backbone, freeze_bn=freeze_bn)
+        self.feature_extracter = DeepLab(
+            backbone=backbone, freeze_bn=freeze_bn)
         self.fpn = FPN(in_dim_4x=model_aspp_outdim,
                        in_dim_8x=in_dim_8x,
                        in_dim_16x=model_aspp_outdim,

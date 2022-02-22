@@ -122,8 +122,7 @@ def term_mp(sig_num, frame):
     """
     pid = os.getpid()
     pgid = os.getpgid(os.getpid())
-    logger.info("main proc {} exit, kill process group "
-                "{}".format(pid, pgid))
+    logger.info("main proc {} exit, kill process group " "{}".format(pid, pgid))
     os.killpg(pgid, signal.SIGKILL)
     return
 

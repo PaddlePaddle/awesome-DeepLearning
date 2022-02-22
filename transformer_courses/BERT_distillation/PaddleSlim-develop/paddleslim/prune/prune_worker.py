@@ -134,8 +134,9 @@ class PruneWorker(object):
                 raise UnsupportOpError("Unsupported operator named {}".format(
                     op.type()))
 
-        _logger.debug("\nfrom: {}\nto: {}\npruned_axis: {}; var: {}\ntrans: {}".
-                      format(self.op, op, pruned_axis, var.name(), pruned_idx))
+        _logger.debug(
+            "\nfrom: {}\nto: {}\npruned_axis: {}; var: {}\ntrans: {}".format(
+                self.op, op, pruned_axis, var.name(), pruned_idx))
         _logger.debug(
             f"visit {op.type()} by var [{var.name()}] on axis [{pruned_axis}];\t visited={self.visited}\n"
         )

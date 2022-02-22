@@ -10,8 +10,7 @@ def bbox_cxcywh_to_xyxy(x):
 
 def sigmoid_focal_loss(logit, label, normalizer=1.0, alpha=0.25, gamma=2.0):
     prob = F.sigmoid(logit)
-    ce_loss = F.binary_cross_entropy_with_logits(
-        logit, label, reduction="none")
+    ce_loss = F.binary_cross_entropy_with_logits(logit, label, reduction="none")
     p_t = prob * label + (1 - prob) * (1 - label)
     loss = ce_loss * ((1 - p_t)**gamma)
 

@@ -43,8 +43,8 @@ def predict(model, tokenizer, reverse_schemas, id2label):
             max_seq_len=args.max_seq_len,
             return_length=True)
         input_ids = paddle.to_tensor(features["input_ids"]).unsqueeze(0)
-        token_type_ids = paddle.to_tensor(features["token_type_ids"]).unsqueeze(
-            0)
+        token_type_ids = paddle.to_tensor(features[
+            "token_type_ids"]).unsqueeze(0)
         seq_lens = paddle.to_tensor([features["seq_len"]])
 
         # predict by model and decoding result 

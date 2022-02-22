@@ -42,7 +42,8 @@ class VideoDataset(BaseDataset):
            **kwargs: Keyword arguments for ```BaseDataset```.
     """
 
-    def __init__(self, file_path, pipeline, num_retries=5, suffix='', **kwargs):
+    def __init__(self, file_path, pipeline, num_retries=5, suffix='',
+                 **kwargs):
         self.num_retries = num_retries
         self.suffix = suffix
         super().__init__(file_path, pipeline, **kwargs)

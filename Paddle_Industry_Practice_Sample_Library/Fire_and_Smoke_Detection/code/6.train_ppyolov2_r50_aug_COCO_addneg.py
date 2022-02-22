@@ -43,7 +43,8 @@ eval_dataset = pdx.datasets.VOCDetection(
     shuffle=False)
 
 # 把背景图片加入训练集中
-train_dataset.add_negative_samples(image_dir='/home/aistudio/dataset/train_neg')
+train_dataset.add_negative_samples(
+    image_dir='/home/aistudio/dataset/train_neg')
 
 # 初始化模型，并进行训练
 # API说明: https://paddlex.readthedocs.io/zh_CN/develop/apis/models/detection.html#paddlex-det-yolov3

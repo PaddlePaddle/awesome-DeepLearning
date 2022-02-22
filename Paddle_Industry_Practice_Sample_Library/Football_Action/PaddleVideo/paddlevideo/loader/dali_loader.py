@@ -187,7 +187,8 @@ class VideoPipe(Pipeline):
                 num_seg, seg_length * 3, crop_target_size, crop_target_size
             ],
             layout='FCHW')
-        self.cast_label = ops.Cast(device="gpu", dtype=types.DALIDataType.INT64)
+        self.cast_label = ops.Cast(
+            device="gpu", dtype=types.DALIDataType.INT64)
 
     def define_graph(self):
         output, label = self.input(name="Reader")

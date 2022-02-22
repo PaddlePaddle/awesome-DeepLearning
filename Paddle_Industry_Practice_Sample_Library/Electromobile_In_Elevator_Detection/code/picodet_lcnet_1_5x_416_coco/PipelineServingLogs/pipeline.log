@@ -8072,3 +8072,201 @@ INFO 2022-02-16 17:25:12,386 [pipeline_server.py:56] (log_id=0) inference reques
 INFO 2022-02-16 17:25:12,386 [operator.py:1723] RequestOp unpack one request. log_id:0, clientip:             name:ppyolo_mbv3, method:prediction, time:1645003512.3868122
 INFO 2022-02-16 17:25:12,387 [dag.py:369] (data_id=12 log_id=0) Succ Generate ID 
 INFO 2022-02-16 17:25:12,455 [dag.py:405] (data_id=12 log_id=0) Succ predict
+WARNING 2022-02-22 13:07:32,971 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-22 13:07:32,971 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2022-02-22 13:07:32,971 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-22 13:07:32,971 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2022-02-22 13:07:32,972 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-22 13:07:32,972 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2022-02-22 13:07:32,972 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2022-02-22 13:07:32,972 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-22 13:07:32,972 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-22 13:07:32,972 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2022-02-22 13:07:32,972 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-22 13:07:32,972 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-22 13:07:32,972 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-22 13:07:32,972 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2022-02-22 13:07:32,972 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2022-02-22 13:07:32,972 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-22 13:07:32,972 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+INFO 2022-02-22 13:07:32,973 [operator.py:163] local_service_conf: {'client_type': 'local_predictor', 'device_type': 2, 'devices': '0', 'fetch_list': ['transpose_1.tmp_0', 'transpose_2.tmp_0', 'transpose_3.tmp_0', 'transpose_4.tmp_0', 'transpose_5.tmp_0', 'transpose_6.tmp_0', 'transpose_7.tmp_0', 'transpose_0.tmp_0'], 'model_config': 'serving_server/', 'workdir': '', 'thread_num': 2, 'mem_optim': True, 'ir_optim': False, 'precision': 'fp32', 'use_calib': False, 'use_mkldnn': False, 'mkldnn_cache_capacity': 0}
+INFO 2022-02-22 13:07:32,973 [local_service_handler.py:172] Models(serving_server/) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:['transpose_1.tmp_0', 'transpose_2.tmp_0', 'transpose_3.tmp_0', 'transpose_4.tmp_0', 'transpose_5.tmp_0', 'transpose_6.tmp_0', 'transpose_7.tmp_0', 'transpose_0.tmp_0'], precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-22 13:07:32,973 [operator.py:267] ppyolo_mbv3 
+	input_ops: @DAGExecutor,
+	server_endpoints: None
+	fetch_list: ['transpose_1.tmp_0', 'transpose_2.tmp_0', 'transpose_3.tmp_0', 'transpose_4.tmp_0', 'transpose_5.tmp_0', 'transpose_6.tmp_0', 'transpose_7.tmp_0', 'transpose_0.tmp_0']
+	client_config: serving_server/serving_server_conf.prototxt
+	concurrency: 1,
+	timeout(s): -1,
+	retry: 1,
+	batch_size: 1,
+	auto_batching_timeout(s): None
+INFO 2022-02-22 13:07:32,973 [pipeline_server.py:204] ============= PIPELINE SERVER =============
+INFO 2022-02-22 13:07:32,973 [pipeline_server.py:207] 
+{
+    "dag":{
+        "is_thread_op":false,
+        "tracer":{
+            "interval_s":30
+        },
+        "retry":1,
+        "client_type":"brpc",
+        "use_profile":false,
+        "channel_size":0
+    },
+    "http_port":2009,
+    "op":{
+        "ppyolo_mbv3":{
+            "concurrency":1,
+            "local_service_conf":{
+                "client_type":"local_predictor",
+                "device_type":2,
+                "devices":"0",
+                "fetch_list":[
+                    "transpose_1.tmp_0",
+                    "transpose_2.tmp_0",
+                    "transpose_3.tmp_0",
+                    "transpose_4.tmp_0",
+                    "transpose_5.tmp_0",
+                    "transpose_6.tmp_0",
+                    "transpose_7.tmp_0",
+                    "transpose_0.tmp_0"
+                ],
+                "model_config":"serving_server/",
+                "workdir":"",
+                "thread_num":2,
+                "mem_optim":true,
+                "ir_optim":false,
+                "precision":"fp32",
+                "use_calib":false,
+                "use_mkldnn":false,
+                "mkldnn_cache_capacity":0
+            },
+            "timeout":-1,
+            "retry":1,
+            "batch_size":1,
+            "auto_batching_timeout":-1
+        }
+    },
+    "rpc_port":9999,
+    "worker_num":20,
+    "build_dag_each_worker":false
+}
+INFO 2022-02-22 13:07:32,973 [pipeline_server.py:212] -------------------------------------------
+INFO 2022-02-22 13:07:32,973 [operator.py:290] Op(ppyolo_mbv3) use local rpc service at port: []
+INFO 2022-02-22 13:07:33,002 [dag.py:493] [DAG] Succ init
+INFO 2022-02-22 13:07:33,003 [dag.py:651] ================= USED OP =================
+INFO 2022-02-22 13:07:33,003 [dag.py:654] ppyolo_mbv3
+INFO 2022-02-22 13:07:33,003 [dag.py:655] -------------------------------------------
+INFO 2022-02-22 13:07:33,032 [dag.py:784] [DAG] Succ build DAG
+INFO 2022-02-22 13:07:33,038 [dag.py:816] [DAG] start
+INFO 2022-02-22 13:07:33,039 [dag.py:181] [DAG] set in channel succ, name [@DAGExecutor]
+INFO 2022-02-22 13:07:33,046 [pipeline_server.py:47] [PipelineServicer] succ init
+INFO 2022-02-22 13:07:33,051 [local_service_handler.py:172] Models(serving_server/) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:None, precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-22 13:07:33,052 [operator.py:1162] Init cuda env in process 0
+INFO 2022-02-22 13:07:33,052 [local_service_handler.py:208] GET_CLIENT : concurrency_idx=0, device_num=1
+INFO 2022-02-22 13:07:34,092 [local_predict.py:115] LocalPredictor load_model_config params: model_path:serving_server/, use_gpu:True, gpu_id:0, use_profile:False, thread_num:2, mem_optim:True, ir_optim:False, use_trt:True, use_lite:False, use_xpu:False, precision:fp32, use_calib:False, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None, use_feed_fetch_ops:False, 
+INFO 2022-02-22 13:07:35,740 [operator.py:1173] [ppyolo_mbv3|0] Succ init
+WARNING 2022-02-22 13:08:48,079 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-22 13:08:48,079 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2022-02-22 13:08:48,079 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-22 13:08:48,079 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2022-02-22 13:08:48,079 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-22 13:08:48,079 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2022-02-22 13:08:48,080 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2022-02-22 13:08:48,080 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-22 13:08:48,080 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-22 13:08:48,080 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2022-02-22 13:08:48,080 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-22 13:08:48,080 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-22 13:08:48,080 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-22 13:08:48,080 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2022-02-22 13:08:48,080 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2022-02-22 13:08:48,080 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-22 13:08:48,080 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+INFO 2022-02-22 13:08:48,080 [operator.py:163] local_service_conf: {'client_type': 'local_predictor', 'device_type': 2, 'devices': '0', 'fetch_list': ['transpose_1.tmp_0', 'transpose_2.tmp_0', 'transpose_3.tmp_0', 'transpose_4.tmp_0', 'transpose_5.tmp_0', 'transpose_6.tmp_0', 'transpose_7.tmp_0', 'transpose_0.tmp_0'], 'model_config': 'serving_server/', 'workdir': '', 'thread_num': 2, 'mem_optim': True, 'ir_optim': False, 'precision': 'fp32', 'use_calib': False, 'use_mkldnn': False, 'mkldnn_cache_capacity': 0}
+INFO 2022-02-22 13:08:48,081 [local_service_handler.py:172] Models(serving_server/) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:['transpose_1.tmp_0', 'transpose_2.tmp_0', 'transpose_3.tmp_0', 'transpose_4.tmp_0', 'transpose_5.tmp_0', 'transpose_6.tmp_0', 'transpose_7.tmp_0', 'transpose_0.tmp_0'], precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-22 13:08:48,081 [operator.py:267] ppyolo_mbv3 
+	input_ops: @DAGExecutor,
+	server_endpoints: None
+	fetch_list: ['transpose_1.tmp_0', 'transpose_2.tmp_0', 'transpose_3.tmp_0', 'transpose_4.tmp_0', 'transpose_5.tmp_0', 'transpose_6.tmp_0', 'transpose_7.tmp_0', 'transpose_0.tmp_0']
+	client_config: serving_server/serving_server_conf.prototxt
+	concurrency: 1,
+	timeout(s): -1,
+	retry: 1,
+	batch_size: 1,
+	auto_batching_timeout(s): None
+INFO 2022-02-22 13:08:48,081 [pipeline_server.py:204] ============= PIPELINE SERVER =============
+INFO 2022-02-22 13:08:48,081 [pipeline_server.py:207] 
+{
+    "dag":{
+        "is_thread_op":false,
+        "tracer":{
+            "interval_s":30
+        },
+        "retry":1,
+        "client_type":"brpc",
+        "use_profile":false,
+        "channel_size":0
+    },
+    "http_port":2009,
+    "op":{
+        "ppyolo_mbv3":{
+            "concurrency":1,
+            "local_service_conf":{
+                "client_type":"local_predictor",
+                "device_type":2,
+                "devices":"0",
+                "fetch_list":[
+                    "transpose_1.tmp_0",
+                    "transpose_2.tmp_0",
+                    "transpose_3.tmp_0",
+                    "transpose_4.tmp_0",
+                    "transpose_5.tmp_0",
+                    "transpose_6.tmp_0",
+                    "transpose_7.tmp_0",
+                    "transpose_0.tmp_0"
+                ],
+                "model_config":"serving_server/",
+                "workdir":"",
+                "thread_num":2,
+                "mem_optim":true,
+                "ir_optim":false,
+                "precision":"fp32",
+                "use_calib":false,
+                "use_mkldnn":false,
+                "mkldnn_cache_capacity":0
+            },
+            "timeout":-1,
+            "retry":1,
+            "batch_size":1,
+            "auto_batching_timeout":-1
+        }
+    },
+    "rpc_port":9999,
+    "worker_num":20,
+    "build_dag_each_worker":false
+}
+INFO 2022-02-22 13:08:48,081 [pipeline_server.py:212] -------------------------------------------
+INFO 2022-02-22 13:08:48,081 [operator.py:290] Op(ppyolo_mbv3) use local rpc service at port: []
+INFO 2022-02-22 13:08:48,110 [dag.py:493] [DAG] Succ init
+INFO 2022-02-22 13:08:48,111 [dag.py:651] ================= USED OP =================
+INFO 2022-02-22 13:08:48,111 [dag.py:654] ppyolo_mbv3
+INFO 2022-02-22 13:08:48,111 [dag.py:655] -------------------------------------------
+INFO 2022-02-22 13:08:48,144 [dag.py:784] [DAG] Succ build DAG
+INFO 2022-02-22 13:08:48,151 [dag.py:816] [DAG] start
+INFO 2022-02-22 13:08:48,152 [dag.py:181] [DAG] set in channel succ, name [@DAGExecutor]
+INFO 2022-02-22 13:08:48,160 [pipeline_server.py:47] [PipelineServicer] succ init
+INFO 2022-02-22 13:08:48,162 [local_service_handler.py:172] Models(serving_server/) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:None, precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-22 13:08:48,163 [operator.py:1162] Init cuda env in process 0
+INFO 2022-02-22 13:08:48,163 [local_service_handler.py:208] GET_CLIENT : concurrency_idx=0, device_num=1
+INFO 2022-02-22 13:08:49,254 [local_predict.py:115] LocalPredictor load_model_config params: model_path:serving_server/, use_gpu:True, gpu_id:0, use_profile:False, thread_num:2, mem_optim:True, ir_optim:False, use_trt:True, use_lite:False, use_xpu:False, precision:fp32, use_calib:False, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None, use_feed_fetch_ops:False, 
+INFO 2022-02-22 13:08:50,979 [operator.py:1173] [ppyolo_mbv3|0] Succ init
+INFO 2022-02-22 13:08:55,147 [pipeline_server.py:51] (log_id=0) inference request name:ppyolo_mbv3 self.name:ppyolo_mbv3
+INFO 2022-02-22 13:08:55,148 [operator.py:1421] RequestOp unpack one request. log_id:0, clientip:             name:ppyolo_mbv3, method:prediction
+INFO 2022-02-22 13:08:55,149 [dag.py:368] (data_id=0 log_id=0) Succ Generate ID 
+INFO 2022-02-22 13:08:57,113 [dag.py:404] (data_id=0 log_id=0) Succ predict
+INFO 2022-02-22 13:09:14,543 [pipeline_server.py:51] (log_id=0) inference request name:ppyolo_mbv3 self.name:ppyolo_mbv3
+INFO 2022-02-22 13:09:14,544 [operator.py:1421] RequestOp unpack one request. log_id:0, clientip:             name:ppyolo_mbv3, method:prediction
+INFO 2022-02-22 13:09:14,544 [dag.py:368] (data_id=1 log_id=0) Succ Generate ID 
+INFO 2022-02-22 13:09:14,608 [dag.py:404] (data_id=1 log_id=0) Succ predict

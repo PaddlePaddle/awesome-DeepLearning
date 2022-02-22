@@ -165,7 +165,12 @@ def set_seed(args):
     paddle.seed(args.seed + paddle.distributed.get_rank())
 
 
-def evaluate(model, criterion, metric, data_loader, epoch, step,
+def evaluate(model,
+             criterion,
+             metric,
+             data_loader,
+             epoch,
+             step,
              width_mult=1.0):
     with paddle.no_grad():
         model.eval()
@@ -180,8 +185,8 @@ def evaluate(model, criterion, metric, data_loader, epoch, step,
             metric.update(correct)
         results = metric.accumulate()
         print("epoch: %d, batch: %d, width_mult: %s, eval loss: %f, %s: %s\n" %
-              (epoch, step, 'teacher' if width_mult == 100 else str(width_mult),
-               loss.numpy(), metric.name(), results))
+              (epoch, step, 'teacher' if width_mult == 100 else
+               str(width_mult), loss.numpy(), metric.name(), results))
         model.train()
 
 
@@ -195,7 +200,8 @@ def bert_forward(self,
         self.pooler.dense, 'fn') else self.pooler.dense.weight.dtype
     if attention_mask[0] is None:
         attention_mask[0] = paddle.unsqueeze(
-            (input_ids == self.pad_token_id).astype(wtype) * -1e9, axis=[1, 2])
+            (input_ids == self.pad_token_id).astype(wtype) * -1e9,
+            axis=[1, 2])
     embedding_output = self.embeddings(
         input_ids=input_ids,
         position_ids=position_ids,
@@ -264,7 +270,8 @@ def convert_example(example,
         if isinstance(seq_mask, int):
             seq_mask = [[seq_mask] * len(seq) for seq in seqs]
         if isinstance(separator_mask, int):
-            separator_mask = [[separator_mask] * len(sep) for sep in separators]
+            separator_mask = [[separator_mask] * len(sep)
+                              for sep in separators]
         p_mask = sum((s_mask + mask
                       for sep, seq, s_mask, mask in zip(
                           separators, seqs, seq_mask, separator_mask)), [])
@@ -290,8 +297,8 @@ def convert_example(example,
     tokens_trun = _truncate_seqs(tokens_raw, max_seq_length)
     # concate the sequences with special tokens
     tokens_trun[0] = [tokenizer.cls_token] + tokens_trun[0]
-    tokens, segment_ids, _ = _concat_seqs(tokens_trun, [[tokenizer.sep_token]] *
-                                          len(tokens_trun))
+    tokens, segment_ids, _ = _concat_seqs(
+        tokens_trun, [[tokenizer.sep_token]] * len(tokens_trun))
     # convert the token to ids
     input_ids = tokenizer.convert_tokens_to_ids(tokens)
     valid_length = len(input_ids)
@@ -534,7 +541,8 @@ def do_train(args):
                               (time.time() - tic_eval))
                     else:
                         acc = evaluate(ofa_model, criterion, metric,
-                                       dev_data_loader, epoch, step, width_mult)
+                                       dev_data_loader, epoch, step,
+                                       width_mult)
                         print("eval done total : %s s" %
                               (time.time() - tic_eval))
 

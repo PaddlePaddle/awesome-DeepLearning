@@ -167,7 +167,8 @@ class WindowAttention(nn.Layer):
         relative_coords[:, :, 1] += self.window_size[1] - 1
         relative_coords[:, :, 0] *= 2 * self.window_size[1] - 1
         relative_position_index = relative_coords.sum(-1)  # Wh*Ww, Wh*Ww
-        self.register_buffer("relative_position_index", relative_position_index)
+        self.register_buffer("relative_position_index",
+                             relative_position_index)
 
         self.qkv = nn.Linear(dim, dim * 3, bias_attr=qkv_bias)
         self.attn_drop = nn.Dropout(attn_drop)
@@ -587,8 +588,8 @@ class PatchEmbed(nn.Layer):
 
     def flops(self):
         Ho, Wo = self.patches_resolution
-        flops = Ho * Wo * self.embed_dim * self.in_chans * (self.patch_size[0] *
-                                                            self.patch_size[1])
+        flops = Ho * Wo * self.embed_dim * self.in_chans * (
+            self.patch_size[0] * self.patch_size[1])
         if self.norm is not None:
             flops += Ho * Wo * self.embed_dim
         return flops
@@ -778,7 +779,8 @@ def get_path_from_url(url,
     # Mainly used to solve the problem of downloading data from different 
     # machines in the case of multiple machines. Different ips will download 
     # data, and the same ip will only download data once.
-    unique_endpoints = _get_unique_endpoints(ParallelEnv().trainer_endpoints[:])
+    unique_endpoints = _get_unique_endpoints(ParallelEnv()
+                                             .trainer_endpoints[:])
     if osp.exists(fullpath) and check_exist and _md5check(fullpath, md5sum):
         logger.info("Found {}".format(fullpath))
     else:

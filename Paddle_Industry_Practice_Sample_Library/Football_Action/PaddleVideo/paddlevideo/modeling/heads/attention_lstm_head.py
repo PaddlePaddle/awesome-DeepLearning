@@ -153,7 +153,7 @@ class AttentionLstmHead(BaseHead):
         pred = lstm_output.numpy()
         label = labels.numpy()
         hit_at_one = youtube8m_metrics.calculate_hit_at_one(pred, label)
-        perr = youtube8m_metrics.calculate_precision_at_equal_recall_rate(
-            pred, label)
+        perr = youtube8m_metrics.calculate_precision_at_equal_recall_rate(pred,
+                                                                          label)
         gap = youtube8m_metrics.calculate_gap(pred, label)
         return hit_at_one, perr, gap

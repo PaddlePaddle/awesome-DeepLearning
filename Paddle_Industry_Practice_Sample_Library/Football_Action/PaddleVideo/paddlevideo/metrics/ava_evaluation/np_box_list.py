@@ -76,8 +76,7 @@ class BoxList:
         """
         if self.has_field(field):
             raise ValueError('Field ' + field + 'already exists')
-        if len(field_data.shape) < 1 or field_data.shape[0] != self.num_boxes(
-        ):
+        if len(field_data.shape) < 1 or field_data.shape[0] != self.num_boxes():
             raise ValueError('Invalid dimensions for field data')
         self.data[field] = field_data
 

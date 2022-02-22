@@ -23,8 +23,8 @@ from ..modeling.builder import build_model
 from ..solver import build_lr, build_optimizer
 from ..utils import do_preciseBN
 from paddlevideo.utils import get_logger, coloring
-from paddlevideo.utils import (AverageMeter, build_record, log_batch,
-                               log_epoch, save, load, mkdir)
+from paddlevideo.utils import (AverageMeter, build_record, log_batch, log_epoch,
+                               save, load, mkdir)
 from paddlevideo.utils.multigrid import MultigridSchedule, aggregate_sub_bn_stats, subn_load, subn_save, is_eval_epoch
 
 
@@ -247,8 +247,7 @@ def train_model_multigrid(cfg, world_size=1, validate=True):
             if i % cfg.get("log_interval", 10) == 0:
                 ips = "ips: {:.5f} instance/sec.".format(
                     batch_size / record_list["batch_time"].val)
-                log_batch(record_list, i, epoch + 1, total_epochs, "train",
-                          ips)
+                log_batch(record_list, i, epoch + 1, total_epochs, "train", ips)
 
             # learning rate iter step
             if cfg.OPTIMIZER.learning_rate.get("iter_step"):
@@ -326,7 +325,7 @@ def train_model_multigrid(cfg, world_size=1, validate=True):
                 multigrid.schedule) or epoch % cfg.get(
                     "save_interval", 10) == 0 or epoch in multi_save_epoch:
             logger.info("[Save parameters] ======")
-            subn_save(output_dir, model_name + str(local_rank) + '_',
-                      epoch + 1, model, optimizer)
+            subn_save(output_dir, model_name + str(local_rank) + '_', epoch + 1,
+                      model, optimizer)
 
     logger.info(f'training {model_name} finished')

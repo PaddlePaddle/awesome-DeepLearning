@@ -36,7 +36,8 @@ def collate_fn(batch, token_pad_val=0, tag_pad_val=0):
     for i in range(len(token_list)):
         token_list[i] = token_list[i] + [token_pad_val] * (max_len -
                                                            len(token_list[i]))
-        tag_list[i] = tag_list[i] + [tag_pad_val] * (max_len - len(tag_list[i]))
+        tag_list[i] = tag_list[i] + [tag_pad_val] * (max_len - len(tag_list[i])
+                                                     )
 
     return paddle.to_tensor(token_list), paddle.to_tensor(
         tag_list), paddle.to_tensor(intent_list), paddle.to_tensor(len_list)

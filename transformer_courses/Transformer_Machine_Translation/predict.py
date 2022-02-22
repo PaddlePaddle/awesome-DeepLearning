@@ -45,7 +45,8 @@ def read(src_path, tgt_path, is_predict=False):
         with open(
                 src_path, 'r', encoding='utf8') as src_f, open(
                     tgt_path, 'r', encoding='utf8') as tgt_f:
-            for src_line, tgt_line in zip(src_f.readlines(), tgt_f.readlines()):
+            for src_line, tgt_line in zip(src_f.readlines(),
+                                          tgt_f.readlines()):
                 src_line = src_line.strip()
                 if not src_line:
                     continue
@@ -118,7 +119,8 @@ def prepare_infer_input(insts, bos_idx, eos_idx, pad_idx):
     return [src_word, ]
 
 
-def post_process_seq(seq, bos_idx, eos_idx, output_bos=False, output_eos=False):
+def post_process_seq(seq, bos_idx, eos_idx, output_bos=False,
+                     output_eos=False):
     """
     Post-process the decoded sequence.
     """
@@ -188,7 +190,8 @@ def do_predict(args):
                 for beam_idx, beam in enumerate(ins):
                     if beam_idx >= args.n_best:
                         break
-                    id_list = post_process_seq(beam, args.bos_idx, args.eos_idx)
+                    id_list = post_process_seq(beam, args.bos_idx,
+                                               args.eos_idx)
                     word_list = to_tokens(id_list)
                     sequence = " ".join(word_list) + "\n"
                     f.write(sequence)

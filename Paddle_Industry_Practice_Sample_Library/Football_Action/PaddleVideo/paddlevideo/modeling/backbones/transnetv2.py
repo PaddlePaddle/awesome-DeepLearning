@@ -175,29 +175,13 @@ class DilatedDCNNV2(nn.Layer):
         assert not (octave_conv and batch_norm)
 
         self.Conv3D_1 = Conv3DConfigurable(
-            in_filters,
-            filters,
-            1,
-            use_bias=not batch_norm,
-            octave=octave_conv)
+            in_filters, filters, 1, use_bias=not batch_norm, octave=octave_conv)
         self.Conv3D_2 = Conv3DConfigurable(
-            in_filters,
-            filters,
-            2,
-            use_bias=not batch_norm,
-            octave=octave_conv)
+            in_filters, filters, 2, use_bias=not batch_norm, octave=octave_conv)
         self.Conv3D_4 = Conv3DConfigurable(
-            in_filters,
-            filters,
-            4,
-            use_bias=not batch_norm,
-            octave=octave_conv)
+            in_filters, filters, 4, use_bias=not batch_norm, octave=octave_conv)
         self.Conv3D_8 = Conv3DConfigurable(
-            in_filters,
-            filters,
-            8,
-            use_bias=not batch_norm,
-            octave=octave_conv)
+            in_filters, filters, 8, use_bias=not batch_norm, octave=octave_conv)
         self.octave = octave_conv
 
         self.bn = nn.BatchNorm3D(
@@ -264,8 +248,8 @@ class StackedDDCNNV2(nn.Layer):
             for i in range(1, n_blocks + 1)
         ])
         self.pool = nn.MaxPool3D(kernel_size=(
-            1, 2, 2)) if pool_type == "max" else nn.AvgPool3D(kernel_size=(
-                1, 2, 2))
+            1, 2, 2)) if pool_type == "max" else nn.AvgPool3D(kernel_size=(1, 2,
+                                                                           2))
         self.octave = use_octave_conv
         self.stochastic_depth_drop_prob = stochastic_depth_drop_prob
 
@@ -379,8 +363,8 @@ class ResNetFeatures(nn.Layer):
 
     def forward(self, inputs):
         shape = inputs.shape
-        x = paddle.reshape(
-            inputs, [shape[0] * shape[2], shape[1], shape[3], shape[4]])
+        x = paddle.reshape(inputs,
+                           [shape[0] * shape[2], shape[1], shape[3], shape[4]])
         x = (x - self.mean) / self.std
 
         x = self.conv1(x)
@@ -421,9 +405,7 @@ class FrameSimilarity(nn.Layer):
         assert lookup_window % 2 == 1, "`lookup_window` must be odd integer"
 
     def forward(self, inputs):
-        x = paddle.concat(
-            [paddle.mean(
-                x, axis=[3, 4]) for x in inputs], axis=1)
+        x = paddle.concat([paddle.mean(x, axis=[3, 4]) for x in inputs], axis=1)
         x = paddle.transpose(x, (0, 2, 1))
 
         if self.stop_gradient:
@@ -443,8 +425,7 @@ class FrameSimilarity(nn.Layer):
             [(self.lookup_window - 1) // 2, (self.lookup_window - 1) // 2],
             data_format='NCL')
 
-        batch_indices = paddle.arange(0, batch_size).reshape(
-            [batch_size, 1, 1])
+        batch_indices = paddle.arange(0, batch_size).reshape([batch_size, 1, 1])
         batch_indices = paddle.tile(batch_indices,
                                     [1, time_window, self.lookup_window])
         time_indices = paddle.arange(0, time_window).reshape(
@@ -587,8 +568,7 @@ class ColorHistograms(nn.Layer):
             [(self.lookup_window - 1) // 2, (self.lookup_window - 1) // 2],
             data_format='NCL')
 
-        batch_indices = paddle.arange(0, batch_size).reshape(
-            [batch_size, 1, 1])
+        batch_indices = paddle.arange(0, batch_size).reshape([batch_size, 1, 1])
         batch_indices = paddle.tile(batch_indices,
                                     [1, time_window, self.lookup_window])
         time_indices = paddle.arange(0, time_window).reshape(
@@ -687,8 +667,7 @@ class TransNetV2(nn.Layer):
             similarity_dim=128,
             use_bias=True) if use_frame_similarity else None
         self.color_hist_layer = ColorHistograms(
-            lookup_window=101,
-            output_dim=128) if use_color_histograms else None
+            lookup_window=101, output_dim=128) if use_color_histograms else None
 
         self.dropout = nn.Dropout(
             dropout_rate) if dropout_rate is not None else None
@@ -753,9 +732,8 @@ class TransNetV2(nn.Layer):
             x = x.transpose([0, 2, 1])
         else:
             x = x.transpose([0, 2, 3, 4, 1])
-            x = x.reshape([
-                x.shape[0], x.shape[1], x.shape[2] * x.shape[3] * x.shape[4]
-            ])
+            x = x.reshape(
+                [x.shape[0], x.shape[1], x.shape[2] * x.shape[3] * x.shape[4]])
         if self.frame_sim_layer is not None:
             x = paddle.concat([self.frame_sim_layer(block_features), x], 2)
         if self.color_hist_layer is not None:

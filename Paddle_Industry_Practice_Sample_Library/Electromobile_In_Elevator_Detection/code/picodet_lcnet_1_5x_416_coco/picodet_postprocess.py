@@ -159,7 +159,8 @@ class PicoDetPostProcess(object):
                 box_distance = box_distance * np.expand_dims(reg_range, axis=0)
                 box_distance = np.sum(box_distance, axis=1).reshape((-1, 4))
                 box_distance = box_distance * stride
-
+                if np.mean(box_distance) == 0:
+                    continue
                 # top K candidate
                 topk_idx = np.argsort(score.max(axis=1))[::-1]
                 topk_idx = topk_idx[:self.nms_top_k]
@@ -174,6 +175,8 @@ class PicoDetPostProcess(object):
                 decode_boxes.append(decode_box)
 
             # nms
+            if len(decode_boxes) == 0:
+                return [],[]
             bboxes = np.concatenate(decode_boxes, axis=0)
             confidences = np.concatenate(select_scores, axis=0)
             picked_box_probs = []

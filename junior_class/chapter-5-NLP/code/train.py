@@ -27,7 +27,8 @@ def get_dataset(data_path, corpus_rate=1.0, subsampling=True):
     corpus = data_processor.data_preprocess(corpus)
     corpus = corpus[:int(len(corpus) * corpus_rate)]
     # 根据语料构造字典，统计每个词的频率，并根据频率将每个词转换为一个整数id
-    word2id_freq, word2id_dict, id2word_dict = data_processor.build_dict(corpus)
+    word2id_freq, word2id_dict, id2word_dict = data_processor.build_dict(
+        corpus)
     # 将语料转换为ID序列
     corpus = data_processor.convert_corpus_to_id(corpus, word2id_dict)
     # 使用二次采样算法处理语料，强化训练效果

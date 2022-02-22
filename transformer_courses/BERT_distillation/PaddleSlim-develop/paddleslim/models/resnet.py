@@ -138,7 +138,8 @@ class ResNet():
                 bn_name = "bn" + name[3:]
         else:
             if name.split("_")[1] == "conv1":
-                bn_name = name.split("_", 1)[0] + "_bn_" + name.split("_", 1)[1]
+                bn_name = name.split("_", 1)[0] + "_bn_" + name.split("_",
+                                                                      1)[1]
             else:
                 bn_name = name.split("_", 1)[0] + "_bn" + name.split("_",
                                                                      1)[1][3:]

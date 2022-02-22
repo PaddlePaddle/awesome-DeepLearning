@@ -92,7 +92,8 @@ def save_inference_model(args):
 
     if args.weights:
         assert os.path.exists(
-            args.weights), "Given weight dir {} not exist.".format(args.weights)
+            args.weights), "Given weight dir {} not exist.".format(
+                args.weights)
     # if no weight files specified, download weights from paddle
     weights = args.weights or infer_model.get_weights()
 

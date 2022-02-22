@@ -1,0 +1,16 @@
+feed_var {
+  name: "x"
+  alias_name: "x"
+  is_lod_tensor: false
+  feed_type: 1
+  shape: 3
+  shape: 224
+  shape: 224
+}
+fetch_var {
+  name: "save_infer_model/scale_0.tmp_1"
+  alias_name: "save_infer_model/scale_0.tmp_1"
+  is_lod_tensor: true
+  fetch_type: 1
+  shape: -1
+}

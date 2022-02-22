@@ -24,8 +24,7 @@ from Detection_basis import multiclass_nms
 # 将 list形式的batch数据 转化成多个array构成的tuple
 def make_test_array(batch_data):
     img_name_array = np.array([item[0] for item in batch_data])
-    img_data_array = np.array(
-        [item[1] for item in batch_data], dtype='float32')
+    img_data_array = np.array([item[1] for item in batch_data], dtype='float32')
     img_scale_array = np.array([item[2] for item in batch_data], dtype='int32')
     return img_name_array, img_data_array, img_scale_array
 
@@ -68,8 +67,7 @@ def test_data_loader(datadir, batch_size=10, test_image_size=608, mode='test'):
 
 
 ANCHORS = [
-    10, 13, 16, 30, 33, 23, 30, 61, 62, 45, 59, 119, 116, 90, 156, 198, 373,
-    326
+    10, 13, 16, 30, 33, 23, 30, 61, 62, 45, 59, 119, 116, 90, 156, 198, 373, 326
 ]
 ANCHOR_MASKS = [[6, 7, 8], [3, 4, 5], [0, 1, 2]]
 VALID_THRESH = 0.01

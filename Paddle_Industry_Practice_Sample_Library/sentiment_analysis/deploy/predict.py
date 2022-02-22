@@ -50,7 +50,8 @@ class Predictor(object):
         if not os.path.exists(model_file):
             raise ValueError("not find model file path {}".format(model_file))
         if not os.path.exists(params_file):
-            raise ValueError("not find params file path {}".format(params_file))
+            raise ValueError("not find params file path {}".format(
+                params_file))
         config = paddle.inference.Config(model_file, params_file)
 
         if self.args.device == "gpu":
@@ -88,8 +89,8 @@ class Predictor(object):
             predictor.get_input_handle(name)
             for name in predictor.get_input_names()
         ]
-        output_handle = predictor.get_output_handle(predictor.get_output_names()
-                                                    [0])
+        output_handle = predictor.get_output_handle(predictor.get_output_names(
+        )[0])
 
         return predictor, input_handles, output_handle
 
@@ -126,14 +127,15 @@ class Predictor(object):
                       prediction) in enumerate(zip(seq_lens, predictions)):
                 idx = bid * args.batch_size + eid
                 tag_seq = [
-                    self.ext_id2label[idx] for idx in prediction[:seq_len][1:-1]
+                    self.ext_id2label[idx]
+                    for idx in prediction[:seq_len][1:-1]
                 ]
                 text = ori_test_ds[idx]["text"]
                 aps = decoding(text[:args.ext_max_seq_len - 2], tag_seq)
                 for aid, ap in enumerate(aps):
                     aspect, opinions = ap[0], list(set(ap[1:]))
-                    aspect_text = self._concate_aspect_and_opinion(text, aspect,
-                                                                   opinions)
+                    aspect_text = self._concate_aspect_and_opinion(
+                        text, aspect, opinions)
                     results.append({
                         "id": str(idx) + "_" + str(aid),
                         "aspect": aspect,
@@ -201,7 +203,9 @@ class Predictor(object):
 
         with open(args.save_path, "w", encoding="utf-8") as f:
             for sentiment_result in sentiment_results:
-                f.write(json.dumps(sentiment_result, ensure_ascii=False) + "\n")
+                f.write(
+                    json.dumps(
+                        sentiment_result, ensure_ascii=False) + "\n")
         print(
             f"sentiment analysis results has been saved to path: {args.save_path}"
         )

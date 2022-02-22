@@ -125,8 +125,8 @@ if __name__ == '__main__':
 
         # 根据状态得到动作
         action = (policy.select_action(np.array(state)) + np.random.normal(
-            0, max_action * args.expl_noise, size=action_dim)).clip(
-                -max_action, max_action)
+            0, max_action * args.expl_noise, size=action_dim)).clip(-max_action,
+                                                                    max_action)
         action[0] *= 3
         print('action', action)
 

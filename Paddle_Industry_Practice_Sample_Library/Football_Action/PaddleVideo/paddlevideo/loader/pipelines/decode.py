@@ -148,7 +148,9 @@ class VideoDecoder(object):
 
                 container.close()
 
-                frames = [frame.to_rgb().to_ndarray() for frame in video_frames]
+                frames = [
+                    frame.to_rgb().to_ndarray() for frame in video_frames
+                ]
                 clip_sz = self.sampling_rate * self.num_seg / self.target_fps * fps
 
                 start_idx, end_idx = get_start_end_idx(
@@ -252,7 +254,8 @@ class FeatureDecoder(object):
             results[prefix + 'len'] = feat.shape[0]
             #feat pad step 1. padding
             feat_add = np.zeros(
-                (self.max_len - feat.shape[0], feat.shape[1]), dtype=np.float32)
+                (self.max_len - feat.shape[0], feat.shape[1]),
+                dtype=np.float32)
             feat_pad = np.concatenate((feat, feat_add), axis=0)
             results[prefix + 'data'] = feat_pad.astype("float32")
             #feat pad step 2. mask

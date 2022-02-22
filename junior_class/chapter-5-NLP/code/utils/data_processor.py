@@ -125,8 +125,8 @@ def build_data(corpus, word2id_dict, max_window_size=3, negative_sample_num=4):
             min(len(corpus) - 1, center_word_idx + window_size))
         positive_word_candidates = [
             corpus[idx]
-            for idx in range(positive_word_range[0], positive_word_range[1] + 1)
-            if idx != center_word_idx
+            for idx in range(positive_word_range[0], positive_word_range[1] +
+                             1) if idx != center_word_idx
         ]
 
         # 对于每个正样本来说，随机采样negative_sample_num个负样本，用于训练

@@ -42,8 +42,8 @@ from paddlevideo.metrics.bmn_metric import boundary_choose, soft_nms
 from paddlevideo.utils import Registry, build, get_config
 
 from ava_predict import (detection_inference, frame_extraction,
-                         get_detection_result, get_timestep_result,
-                         pack_result, visualize)
+                         get_detection_result, get_timestep_result, pack_result,
+                         visualize)
 
 INFERENCE = Registry('inference')
 
@@ -191,8 +191,8 @@ class ppTSM_Inference_helper(Base_Inference_helper):
         ops = [
             VideoDecoder(), Sampler(
                 self.num_seg, self.seg_len, valid_mode=True),
-            Scale(self.short_size), CenterCrop(self.target_size),
-            Image2Array(), Normalization(img_mean, img_std)
+            Scale(self.short_size), CenterCrop(self.target_size), Image2Array(),
+            Normalization(img_mean, img_std)
         ]
         for op in ops:
             results = op(results)
@@ -539,8 +539,8 @@ class VideoSwin_TableTennis_Inference_helper(Base_Inference_helper):
                         240, 135)))[:, :, ::-1].astype('uint8')
             else:
                 _, frame = videoCapture.read()
-            frame = cv2.putText(frame, text, (30, 30),
-                                cv2.FONT_HERSHEY_COMPLEX, 1.0, (0, 0, 255), 2)
+            frame = cv2.putText(frame, text, (30, 30), cv2.FONT_HERSHEY_COMPLEX,
+                                1.0, (0, 0, 255), 2)
             frames_rgb_list.append(frame[:, :, ::-1])  # bgr to rgb
         if not video_path.endswith('.pkl'):
             videoCapture.release()
@@ -820,8 +820,7 @@ class TransNetV2_Inference_helper():
         predictions = [np.pad(x, (0, pad_with)) for x in predictions]
         height = len(frames) // width
 
-        img = frames.reshape(
-            [height, width, ih + 1, iw + len(predictions), ic])
+        img = frames.reshape([height, width, ih + 1, iw + len(predictions), ic])
         img = np.concatenate(
             np.split(
                 np.concatenate(
@@ -856,8 +855,7 @@ class TransNetV2_Inference_helper():
         predictions = []
         for output in outputs:
             single_frame_logits, all_frames_logits = output
-            single_frame_pred = F.sigmoid(
-                paddle.to_tensor(single_frame_logits))
+            single_frame_pred = F.sigmoid(paddle.to_tensor(single_frame_logits))
             all_frames_pred = F.sigmoid(paddle.to_tensor(all_frames_logits))
             predictions.append((single_frame_pred.numpy()[0, 25:75, 0],
                                 all_frames_pred.numpy()[0, 25:75, 0]))
@@ -982,8 +980,7 @@ class ADDS_Inference_helper(Base_Inference_helper):
         disp_resized = cv2.resize(image_numpy, (1280, 640))
         disp_resized_np = disp_resized
         vmax = np.percentile(disp_resized_np, 95)
-        normalizer = mpl.colors.Normalize(
-            vmin=disp_resized_np.min(), vmax=vmax)
+        normalizer = mpl.colors.Normalize(vmin=disp_resized_np.min(), vmax=vmax)
         mapper = cm.ScalarMappable(norm=normalizer, cmap='magma')
         colormapped_im = (mapper.to_rgba(disp_resized_np)[:, :, :3] *
                           255).astype(np.uint8)
@@ -1171,9 +1168,9 @@ class AVA_SlowFast_FastRCNN_Inference_helper(Base_Inference_helper):
                     continue
                 for j in range(person_num):
                     if result[i][j, 4] > self.config.MODEL.head['action_thr']:
-                        prediction[j].append((
-                            self.label_map[i + 1], result[i][j, 4]
-                        ))  # label_map is a dict, label index start from 1
+                        prediction[j].append(
+                            (self.label_map[i + 1], result[i][j, 4]
+                             ))  # label_map is a dict, label index start from 1
             predictions.append(prediction)
 
         results = []

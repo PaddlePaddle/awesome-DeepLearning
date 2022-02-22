@@ -127,14 +127,15 @@ def train_with_pyreader(exe, train_prog, compiled_train_prog, train_pyreader, \
                 pred_iou = np.array(train_outs[2])
                 label = np.array(train_outs[-2])
                 iou = np.array(train_outs[-1])
-                train_metrics.accumulate(loss, pred_label, label, pred_iou, iou)
+                train_metrics.accumulate(loss, pred_label, label, pred_iou,
+                                         iou)
                 if log_interval > 0 and (train_iter % log_interval == 0):
                     train_metrics.finalize_and_log_out( \
                         info='[TRAIN] Epoch {}, iter {} average: '.format(epoch, train_iter))
             except Exception as e:
                 logger.info(
-                    "[TRAIN] Epoch {}, iter {} data training failed: {}".format(
-                        epoch, train_iter, str(e)))
+                    "[TRAIN] Epoch {}, iter {} data training failed: {}".
+                    format(epoch, train_iter, str(e)))
             train_iter += 1
 
         if len(epoch_periods) < 1:
@@ -158,8 +159,9 @@ def train_with_pyreader(exe, train_prog, compiled_train_prog, train_pyreader, \
                 test_metrics, epoch, log_interval, save_model_name)
             global best_test_acc1
             global min_test_loss
-            if test_status and (test_acc1 > best_test_acc1 or (
-                    test_acc1 == best_test_acc1 and test_loss < min_test_loss)):
+            if test_status and (test_acc1 > best_test_acc1 or
+                                (test_acc1 == best_test_acc1 and
+                                 test_loss < min_test_loss)):
                 best_test_acc1 = test_acc1
                 min_test_loss = test_loss
                 save_postfix = "_epoch{}_acc{}".format(epoch, best_test_acc1)

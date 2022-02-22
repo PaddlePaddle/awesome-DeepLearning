@@ -36,8 +36,8 @@ __all__ = [
     'AutoPadding', 'Normalization', 'Mixup', 'Image2Array', 'Scale',
     'GroupResize', 'VideoDecoder', 'FrameDecoder', 'PackOutput',
     'GetVideoLabel', 'Cutmix', 'CenterCrop', 'RandomCrop', 'LoadFeat',
-    'RandomCap', 'JitterScale', 'Iden', 'VideoMix', 'ColorJitter', 'RandomFlip',
-    'ToArray', 'FeaturePadding', 'GetMatchMap', 'GroupRandomFlip', 'MultiCrop',
-    'SFMRI_DecodeSampler', 'MultiRestrictSize', 'MultiNorm',
-    'RandomResizedCrop', 'SamplerPkl'
+    'RandomCap', 'JitterScale', 'Iden', 'VideoMix', 'ColorJitter',
+    'RandomFlip', 'ToArray', 'FeaturePadding', 'GetMatchMap',
+    'GroupRandomFlip', 'MultiCrop', 'SFMRI_DecodeSampler', 'MultiRestrictSize',
+    'MultiNorm', 'RandomResizedCrop', 'SamplerPkl'
 ]

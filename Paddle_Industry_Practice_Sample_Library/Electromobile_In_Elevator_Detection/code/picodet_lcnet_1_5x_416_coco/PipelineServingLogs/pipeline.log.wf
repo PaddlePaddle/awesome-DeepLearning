@@ -1998,3 +1998,37 @@ WARNING 2022-02-16 17:09:22,048 [pipeline_server.py:509] [CONF] precision not se
 WARNING 2022-02-16 17:09:22,048 [pipeline_server.py:509] [CONF] use_calib not set, use default: False
 WARNING 2022-02-16 17:09:22,048 [pipeline_server.py:509] [CONF] use_mkldnn not set, use default: False
 WARNING 2022-02-16 17:09:22,048 [pipeline_server.py:509] [CONF] mkldnn_cache_capacity not set, use default: 0
+WARNING 2022-02-22 13:07:32,971 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-22 13:07:32,971 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2022-02-22 13:07:32,971 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-22 13:07:32,971 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2022-02-22 13:07:32,972 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-22 13:07:32,972 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2022-02-22 13:07:32,972 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2022-02-22 13:07:32,972 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-22 13:07:32,972 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-22 13:07:32,972 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2022-02-22 13:07:32,972 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-22 13:07:32,972 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-22 13:07:32,972 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-22 13:07:32,972 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2022-02-22 13:07:32,972 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2022-02-22 13:07:32,972 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-22 13:07:32,972 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+WARNING 2022-02-22 13:08:48,079 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-22 13:08:48,079 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2022-02-22 13:08:48,079 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-22 13:08:48,079 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2022-02-22 13:08:48,079 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-22 13:08:48,079 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2022-02-22 13:08:48,080 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2022-02-22 13:08:48,080 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-22 13:08:48,080 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-22 13:08:48,080 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2022-02-22 13:08:48,080 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-22 13:08:48,080 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-22 13:08:48,080 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-22 13:08:48,080 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2022-02-22 13:08:48,080 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2022-02-22 13:08:48,080 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-22 13:08:48,080 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0

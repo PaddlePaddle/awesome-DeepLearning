@@ -40,7 +40,8 @@ class lstm_cell(RNNCell):
         bias_attr = ParamAttr(initializer=uniform_initializer(
             1.0 / math.sqrt(hidden_size)))
         for i in range(num_layers):
-            self.lstm_cells.append(LSTMCell(hidden_size, param_attr, bias_attr))
+            self.lstm_cells.append(
+                LSTMCell(hidden_size, param_attr, bias_attr))
 
     def call(self, inputs, states):
         new_states = []
@@ -172,10 +173,12 @@ class LSTM(RLBaseController):
                 default_initializer=uniform_initializer(1.0))
 
             paddle.assign(
-                fluid.layers.uniform_random(shape=self.g_emb.shape), self.g_emb)
+                fluid.layers.uniform_random(shape=self.g_emb.shape),
+                self.g_emb)
             hidden = fluid.data(name='hidden', shape=[None, self.hidden_size])
             cell = fluid.data(name='cell', shape=[None, self.hidden_size])
-            self.tokens = self._network(hidden, cell, is_inference=is_inference)
+            self.tokens = self._network(
+                hidden, cell, is_inference=is_inference)
 
         with paddle.static.program_guard(self.learn_program):
             hidden = fluid.data(name='hidden', shape=[None, self.hidden_size])

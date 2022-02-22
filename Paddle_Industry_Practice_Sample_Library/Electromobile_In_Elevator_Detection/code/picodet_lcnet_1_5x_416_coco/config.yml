@@ -12,14 +12,14 @@ op:
       device_type: 2
       devices: '0'
       fetch_list:
-      - save_infer_model/scale_0.tmp_1
-      - save_infer_model/scale_1.tmp_1
-      - save_infer_model/scale_2.tmp_1
-      - save_infer_model/scale_3.tmp_1
-      - save_infer_model/scale_4.tmp_1
-      - save_infer_model/scale_5.tmp_1
-      - save_infer_model/scale_6.tmp_1
-      - save_infer_model/scale_7.tmp_1
+      - transpose_1.tmp_0
+      - transpose_2.tmp_0
+      - transpose_3.tmp_0
+      - transpose_4.tmp_0
+      - transpose_5.tmp_0
+      - transpose_6.tmp_0
+      - transpose_7.tmp_0
+      - transpose_0.tmp_0
       model_config: serving_server/
 rpc_port: 9999
 worker_num: 20

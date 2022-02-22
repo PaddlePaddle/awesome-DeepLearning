@@ -121,8 +121,9 @@ def train(Dataset, Network, savepath):
                 print(msg)
 
         if epoch % cag.save_iter == 0:
-            paddle.save(net.state_dict(),
-                        cfg.savepath + '/model-' + str(epoch + 1) + '.pdparams')
+            paddle.save(
+                net.state_dict(),
+                cfg.savepath + '/model-' + str(epoch + 1) + '.pdparams')
 
         end = datetime.datetime.now()
         spend = int((end - start).seconds)

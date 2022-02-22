@@ -40,7 +40,6 @@ with open(os.path.join(".", "test.jpg"), 'rb') as file:
 image = cv2_to_base64(image_data1)
 
 for i in range(1):
-    print(i)
     data = {"key": ["image"], "value": [image]}
     r = requests.post(url=url, data=json.dumps(data))
     print(r.json())

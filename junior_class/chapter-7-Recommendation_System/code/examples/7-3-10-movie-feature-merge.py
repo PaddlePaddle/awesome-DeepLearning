@@ -56,7 +56,11 @@ mov_title_data = np.array(((1, 2, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 MOV_TITLE_DICT_SIZE = 1000 + 1
 mov_title_emb = Embedding(num_embeddings=MOV_TITLE_DICT_SIZE, embedding_dim=32)
 mov_title_conv = Conv2D(
-    in_channels=1, out_channels=1, kernel_size=(3, 1), stride=(2, 1), padding=0)
+    in_channels=1,
+    out_channels=1,
+    kernel_size=(3, 1),
+    stride=(2, 1),
+    padding=0)
 # 使用 3 * 3卷积层代替全连接层
 mov_title_conv2 = Conv2D(
     in_channels=1, out_channels=1, kernel_size=(3, 1), stride=1, padding=0)

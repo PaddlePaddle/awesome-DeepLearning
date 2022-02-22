@@ -19,5 +19,4 @@ def convert_example_to_feature(example, tokenizer, max_seq_len=512):
     encoded_inputs = tokenizer(example["text"], max_seq_len=max_seq_len)
     labels = np.array(example["label"], dtype="int64")
 
-    return encoded_inputs["input_ids"], encoded_inputs[
-        "token_type_ids"], labels
+    return encoded_inputs["input_ids"], encoded_inputs["token_type_ids"], labels
