@@ -11,13 +11,13 @@ Transformer改进了RNN被人诟病的训练慢的特点，利用self-attention�
 ## 2.Transformer直观认识
 Transformer主要由encoder和decoder两部分组成。在Transformer的论文中，encoder和decoder均由6个encoder layer和decoder layer组成，通常我们称之为encoder block。
 
-<center><img src="https://ai-studio-static-online.cdn.bcebos.com/739aa8a15ec043f8920843fa142754276c10b5b082d64b39a7d0f795241ace82"  width="600px" /></center> 
+<center><img src="https://ai-studio-static-online.cdn.bcebos.com/739aa8a15ec043f8920843fa142754276c10b5b082d64b39a7d0f795241ace82"  width="600px" /></center>
 <center><br>transformer结构 </br></center>
 <br></br>
 
 每一个encoder和decoder的内部简版结构如下图
 
-<center><img src="https://ai-studio-static-online.cdn.bcebos.com/175551e7b2f44de6948732de030723aa258fc317dd78472dbcb2d25570b92c9d"  width="600px" /></center> 
+<center><img src="https://ai-studio-static-online.cdn.bcebos.com/175551e7b2f44de6948732de030723aa258fc317dd78472dbcb2d25570b92c9d"  width="600px" /></center>
 <center><br>transformer的encoder或者decoder的内部结构 </br></center>
 <br></br>
 
@@ -30,7 +30,7 @@ decoder也包含encoder提到的两层网络，但是在这两层中间还有一
 首先，模型需要对输入的数据进行一个embedding操作，enmbedding结束之后，输入到encoder层，self-attention处理完数据后把数据送给前馈神经网络，前馈神经网络的计算可以并行，得到的输出会输入到下一个encoder。
 
 
-<center><img src="https://ai-studio-static-online.cdn.bcebos.com/fa7dd09419ca4b9d972aa3b8f99926ccc41a60588cc34ae5aa730ce89e267cf0"  width="600px" /></center> 
+<center><img src="https://ai-studio-static-online.cdn.bcebos.com/fa7dd09419ca4b9d972aa3b8f99926ccc41a60588cc34ae5aa730ce89e267cf0"  width="600px" /></center>
 <center><br>embedding和self-attention </br></center>
 <br></br>
 
@@ -95,30 +95,30 @@ $$X_{hidden}=LayerNorm(X_{hidden})$$
 ### 3.2.1 自注意力机制
 - 首先，自注意力机制（self-attention）会计算出三个新的向量，在论文中，向量的维度是512维，我们把这三个向量分别称为Query、Key、Value，这三个向量是用embedding向量与一个矩阵相乘得到的结果，这个矩阵是随机初始化的，维度为（64，512）注意第二个维度需要和embedding的维度一样，其值在反向传播的过程中会一直进行更新，得到的这三个向量的维度是64低于embedding维度的。
 
-<center><img src="https://ai-studio-static-online.cdn.bcebos.com/8f322d81d9c3491d9b714e39986e482926755e9c86dd4266805cceb4add145c7"  width="600px" /></center> 
+<center><img src="https://ai-studio-static-online.cdn.bcebos.com/8f322d81d9c3491d9b714e39986e482926755e9c86dd4266805cceb4add145c7"  width="600px" /></center>
 <center><br>Query Key Value </br></center>
 <br></br>
 
 2、计算self-attention的分数值，该分数值决定了当我们在某个位置encode一个词时，对输入句子的其他部分的关注程度。这个分数值的计算方法是Query与Key做点乘，以下图为例，首先我们需要针对Thinking这个词，计算出其他词对于该词的一个分数值，首先是针对于自己本身即q1·k1，然后是针对于第二个词即q1·k2
 
-<center><img src="https://ai-studio-static-online.cdn.bcebos.com/04a8c9a33598465c80e63736e54c70b2c480a4feec9141dcb3487cf5a1f90f7a"  width="600px" /></center> 
+<center><img src="https://ai-studio-static-online.cdn.bcebos.com/04a8c9a33598465c80e63736e54c70b2c480a4feec9141dcb3487cf5a1f90f7a"  width="600px" /></center>
 <center><br>Query Key Value</br></center>
 <br></br>
 
 3、接下来，把点乘的结果除以一个常数，这里我们除以8，这个值一般是采用上文提到的矩阵的第一个维度的开方即64的开方8，当然也可以选择其他的值，然后把得到的结果做一个softmax的计算。得到的结果即是每个词对于当前位置的词的相关性大小，当然，当前位置的词相关性肯定会会很大
 
-<center><img src="https://ai-studio-static-online.cdn.bcebos.com/ed1176ae195145fa8abf6635d4d6aaeb938d2d803b6d458b9cc41a9ea7e1914f"  width="600px" /></center> 
+<center><img src="https://ai-studio-static-online.cdn.bcebos.com/ed1176ae195145fa8abf6635d4d6aaeb938d2d803b6d458b9cc41a9ea7e1914f"  width="600px" /></center>
 <center><br>softmax </br></center>
 <br></br>
 
 4、下一步就是把Value和softmax得到的值进行相乘，并相加，得到的结果即是self-attetion在当前节点的值。
-<center><img src="https://ai-studio-static-online.cdn.bcebos.com/5be4009ebf3f43ce9a9947785bb6058ba7289b9adf9b4aba8f6682d949cd4b4f"  width="600px" /></center> 
+<center><img src="https://ai-studio-static-online.cdn.bcebos.com/5be4009ebf3f43ce9a9947785bb6058ba7289b9adf9b4aba8f6682d949cd4b4f"  width="600px" /></center>
 <center><br>dot product </br></center>
 <br></br>
 
 在实际的应用场景，为了提高计算速度，我们采用的是矩阵的方式，直接计算出Query, Key, Value的矩阵，然后把embedding的值与三个矩阵直接相乘，把得到的新矩阵Q与K相乘，乘以一个常数，做softmax操作，最后乘上V矩阵
 
-<center><img src="https://ai-studio-static-online.cdn.bcebos.com/82e73917080f4f64917ae7a45bfa39596c2229f3dd0e4e489ff76e78fa627c93"  width="600px" /></center> 
+<center><img src="https://ai-studio-static-online.cdn.bcebos.com/82e73917080f4f64917ae7a45bfa39596c2229f3dd0e4e489ff76e78fa627c93"  width="600px" /></center>
 <center><br> scaled dot product attention </br></center>
 <br></br>
 
@@ -151,12 +151,12 @@ softmax就是直接计算了，时间复杂度为: $O(n^2)$
 
 不仅仅只初始化一组Q、K、V的矩阵，而是初始化多组，tranformer是使用了8组，所以最后得到的结果是8个矩阵。
 
-<center><img src="https://ai-studio-static-online.cdn.bcebos.com/11e365dd4a4145b79e6258c0d77ec77cac1a1f9a5dab4b31830459b2b7cb347a"  width="600px" /></center> 
+<center><img src="https://ai-studio-static-online.cdn.bcebos.com/11e365dd4a4145b79e6258c0d77ec77cac1a1f9a5dab4b31830459b2b7cb347a"  width="600px" /></center>
 <center><br> multi-head attention </br></center>
 <br></br>
 
 multi-head注意力的全过程如下，首先输入句子，“Thinking Machines”,在embedding模块把句子中的每个单词变成向量X，在encoder层中，除了第0层有embedding操作外，其他的层没有embedding操作；接着把X分成8个head，
-<center><img src="https://ai-studio-static-online.cdn.bcebos.com/4d634e35dea1472d9d6946b75c14f121fd274ec19e474f86bc4a903620d87f65"  width="600px" /></center> 
+<center><img src="https://ai-studio-static-online.cdn.bcebos.com/4d634e35dea1472d9d6946b75c14f121fd274ec19e474f86bc4a903620d87f65"  width="600px" /></center>
 <center><br> multi-head attention总体结构 </br></center>
 <br></br>
 
@@ -222,7 +222,7 @@ $$FFN(x)=ReLU(W_{1}x+b_{1})W_{2}+b_{2}$$
 
 和 Encoder 一样，上面三个部分的每一个部分，都有一个残差连接，后接一个 Layer Normalization。Decoder 的中间部件并不复杂，大部分在前面 Encoder 里我们已经介绍过了，但是 Decoder 由于其特殊的功能，因此在训练时会涉及到一些细节，下面会介绍Decoder的Masked Self-Attention和Encoder-Decoder Attention两部分，其结构图如下图所示
 
-<center><img src="https://ai-studio-static-online.cdn.bcebos.com/08f1c94cb40f4d76aba52e7d026897177f7b6f5f69804560bbed9e576094679f"  width="600px" /></center> 
+<center><img src="https://ai-studio-static-online.cdn.bcebos.com/08f1c94cb40f4d76aba52e7d026897177f7b6f5f69804560bbed9e576094679f"  width="600px" /></center>
 <center><br> decoder self attention </br></center>
 <br></br>
 
@@ -237,7 +237,7 @@ Mask 非常简单，首先生成一个下三角全 0，上三角全为负无穷�
 ### 3.3.2 Masked Encoder-Decoder Attention
 其实这一部分的计算流程和前面 Masked Self-Attention 很相似，结构也一摸一样，唯一不同的是这里的K,V为 Encoder 的输出，Q为 Decoder 中 Masked Self-Attention 的输出
 
-<center><img src="https://ai-studio-static-online.cdn.bcebos.com/eeb0db3260814772afdc9c1566a4afaa7133168766f34670bdecb26875edcd3f"  width="600px" /></center> 
+<center><img src="https://ai-studio-static-online.cdn.bcebos.com/eeb0db3260814772afdc9c1566a4afaa7133168766f34670bdecb26875edcd3f"  width="600px" /></center>
 <center><br> Masked Encoder-Decoder Attention </br></center>
 <br></br>
 
@@ -284,6 +284,3 @@ Embedding层可以说是通过onehot去取到对应的embedding向量，FC层可
 
 ## 5. 参考文献
 [Attention Is All You Need](https://arxiv.org/abs/1706.03762)
-
-
-

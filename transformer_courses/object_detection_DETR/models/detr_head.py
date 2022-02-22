@@ -2,7 +2,8 @@ import pycocotools.mask as mask_util
 import paddle.nn as nn
 import paddle.nn.functional as F
 
-from . initializer import linear_init_
+from .initializer import linear_init_
+
 
 class MLP(nn.Layer):
     def __init__(self, input_dim, hidden_dim, output_dim, num_layers):
@@ -13,7 +14,7 @@ class MLP(nn.Layer):
             nn.Linear(n, k) for n, k in zip([input_dim] + h, h + [output_dim]))
 
         self._reset_parameters()
-        
+
     def _reset_parameters(self):
         for l in self.layers:
             linear_init_(l)
@@ -177,6 +178,7 @@ class DETRHead(nn.Layer):
             self.mask_head = MaskHeadFPNConv(hidden_dim + nhead, fpn_dims,
                                              hidden_dim)
         self._reset_parameters()
+
     def _reset_parameters(self):
         linear_init_(self.score_head)
 

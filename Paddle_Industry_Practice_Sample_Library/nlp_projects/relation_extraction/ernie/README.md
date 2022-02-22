@@ -90,7 +90,7 @@ sh run_train.sh
 使用如下命令，进行模型测试。
 
 ```shell
-sh run_evaluate.sh 
+sh run_evaluate.sh
 ```
 
 ### 3.3 模型推理

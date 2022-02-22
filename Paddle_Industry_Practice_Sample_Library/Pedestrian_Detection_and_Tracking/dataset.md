@@ -2,7 +2,7 @@
 
 **Caltech Pedestrian**
 
-Caltech Pedestrain 数据集由加州理工提供、由固定在城市环境中常规行驶的车辆上的摄像头采集得到。数据集包含约10小时的 640x480 30Hz 视频，其中标注了约250,000帧（约137分钟的片段）中的350,000个边界框和2300个行人。更多信息可参考：[Caltech Pedestrain Detection Benchmark](http://www.vision.caltech.edu/Image_Datasets/CaltechPedestrians/) 
+Caltech Pedestrain 数据集由加州理工提供、由固定在城市环境中常规行驶的车辆上的摄像头采集得到。数据集包含约10小时的 640x480 30Hz 视频，其中标注了约250,000帧（约137分钟的片段）中的350,000个边界框和2300个行人。更多信息可参考：[Caltech Pedestrain Detection Benchmark](http://www.vision.caltech.edu/Image_Datasets/CaltechPedestrians/)
 
 ![caltech dataset](./images/dataset/caltech.png)
 
@@ -80,4 +80,3 @@ MOT17与MOT16数据集相同，但标注更为准确。更多信息可参考：[
 6. MOT16: https://motchallenge.net/data/MOT16/
 7. MOT17: https://motchallenge.net/data/MOT17/
 8. Head Tracking 21: https://motchallenge.net/data/Head_Tracking_21
-

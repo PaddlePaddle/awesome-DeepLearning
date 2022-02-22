@@ -32,22 +32,22 @@ logger = get_logger("paddlevideo")
 class ActBertDataset(BaseDataset):
     """ActBert dataset.
     """
+
     def __init__(
-        self,
-        file_path,
-        pipeline,
-        bert_model="bert-base-uncased",
-        data_prefix=None,
-        test_mode=False,
-    ):
+            self,
+            file_path,
+            pipeline,
+            bert_model="bert-base-uncased",
+            data_prefix=None,
+            test_mode=False, ):
         self.bert_model = bert_model
         super().__init__(file_path, pipeline, data_prefix, test_mode)
 
     def load_file(self):
         """Load index file to get video information."""
         feature_data = np.load(self.file_path, allow_pickle=True)
-        self.tokenizer = BertTokenizer.from_pretrained(self.bert_model,
-                                                       do_lower_case=True)
+        self.tokenizer = BertTokenizer.from_pretrained(
+            self.bert_model, do_lower_case=True)
         self.info = []
         for item in feature_data:
             self.info.append(dict(feature=item, tokenizer=self.tokenizer))

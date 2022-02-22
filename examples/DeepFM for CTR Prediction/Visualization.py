@@ -2,7 +2,7 @@
 import matplotlib.pyplot as plt
 import xlrd
 #plt的字体选择中文四黑
-plt.rcParams['font.sans-serif']=['SimHei']
+plt.rcParams['font.sans-serif'] = ['SimHei']
 plt.rcParams['axes.unicode_minus'] = False
 
 # 打开一个workbook
@@ -19,10 +19,9 @@ mySheet = workbook.sheet_by_name(u'Sheet1')
 loss = mySheet.col_values(1)
 print(loss)
 time = mySheet.col(0)
-print('time1',time)
+print('time1', time)
 time = [x.value for x in time]
-print('time2',time)
-
+print('time2', time)
 
 #去掉标题行
 loss.pop(0)
@@ -32,9 +31,9 @@ time.pop(0)
 fig = plt.figure(1)
 
 # plot loss
-plt.plot(time,loss)
+plt.plot(time, loss)
 
 plt.title('损失度loss随训练完成度变化曲线')
 plt.ylabel('loss')
-plt.xticks(range(0,1))
+plt.xticks(range(0, 1))
 plt.show()

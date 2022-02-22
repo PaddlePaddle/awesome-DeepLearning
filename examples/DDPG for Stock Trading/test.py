@@ -4,12 +4,10 @@ import argparse
 import os
 from visualdl import LogWriter
 
-
 import model
 import ReplayBuffer
 import StockEnv
 import pandas as pd
-
 
 # 导入数据
 df = pd.read_csv('data/data102715/test.csv')
@@ -19,6 +17,7 @@ writer = LogWriter('./log/test')
 # 测试环境使用的随机种子
 eval_seed = [53, 47, 99, 107, 1, 17, 57, 97, 179, 777]
 
+
 # 评估模型的函数
 def eval_policy(policy, df, seed, eval_episodes=10):
     avg_reward = 0.
@@ -26,7 +25,7 @@ def eval_policy(policy, df, seed, eval_episodes=10):
         # 初始化评估环境并设定随机种子
         eval_env = StockEnv.StockTradingEnv(df)
         eval_env.seed(seed + eval_seed[epi])
-        
+
         # 初始化评估环境
         state, done = eval_env.reset(), False
         t = 0
@@ -35,16 +34,16 @@ def eval_policy(policy, df, seed, eval_episodes=10):
         # 模型与环境交互
         while not done:
             action = policy.select_action(state)
-            action[0] *=3
+            action[0] *= 3
             state, reward, done, _ = eval_env.step(action)
             writer.add_scalar(tag='reward', step=t, value=reward)
             t += 1
             epi_reward += reward
             avg_reward += reward
-        
+
         # 可视化整个幕的奖励
         writer.add_scalar(tag='episode_reward', step=epi, value=epi_reward)
-    
+
     # 计算得到平均奖励
     avg_reward /= eval_episodes
 
@@ -53,6 +52,7 @@ def eval_policy(policy, df, seed, eval_episodes=10):
     print('-----------------------------------------')
 
     return avg_reward
+
 
 # 默认的超参数
 default_seed = 123
@@ -90,5 +90,3 @@ if __name__ == '__main__':
 
     # 做评估
     evaluations = [eval_policy(policy, df, args.seed)]
-
-    

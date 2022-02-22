@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 import paddle
 from model import sentiment_classifier
 from utils import data_processor
@@ -89,12 +88,15 @@ if __name__ == '__main__':
     model_save_path = "./data/sentiment_classifiter.pdparams"
 
     # 加载数据集
-    dataset, word2id_dict = get_dataset(dataset_save_path, dict_save_path, is_training=False)
-    data_loader = data_processor.build_batch(word2id_dict, dataset, batch_size, epoch_num, max_seq_len)
+    dataset, word2id_dict = get_dataset(
+        dataset_save_path, dict_save_path, is_training=False)
+    data_loader = data_processor.build_batch(word2id_dict, dataset, batch_size,
+                                             epoch_num, max_seq_len)
 
     # 初始化并加载训练好的模型
     vocab_size = len(word2id_dict.keys())
-    sentiment_classifier = sentiment_classifier.SentimentClassifier(embedding_size, vocab_size, num_steps=max_seq_len, num_layers=1)
+    sentiment_classifier = sentiment_classifier.SentimentClassifier(
+        embedding_size, vocab_size, num_steps=max_seq_len, num_layers=1)
     saved_state = paddle.load(model_save_path)
     sentiment_classifier.load_dict(saved_state)
 

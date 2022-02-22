@@ -87,7 +87,7 @@ $$L_{2}(C)=\sum_{x,y}log P(y|x^1,..,x^m)$$
 
 正常来说，我们应该调整参数使得$L_{2}$最大，但是为了提高训练速度和模型的泛化能力，我们使用 Multi-Task Learning，GPT 在微调的时候也考虑预训练的损失函数，同时让它最大似然$L_{1}$和$L_{2}$
 
-$$L_{3}(C)=L_{2}(C)+\lambda \times L_{1}(C) $$ 
+$$L_{3}(C)=L_{2}(C)+\lambda \times L_{1}(C) $$
 
 这里使用的$L_{1}$还是之前语言模型的损失（似然），但是使用的数据不是前面无监督的数据$U$，而是使用当前任务的数据$C$，而且只使用其中的$X$，而不需要标签y。
 
@@ -100,7 +100,7 @@ $$L_{3}(C)=L_{2}(C)+\lambda \times L_{1}(C) $$
 + Classification：对于分类问题，不需要做什么修改
 + Entailment：对于推理问题，可以将先验与假设使用一个分隔符分开
 + Similarity：对于相似度问题，由于模型是单向的，但相似度与顺序无关，所以要将两个句子顺序颠倒后，把两次输入的结果相加来做最后的推测
-+ Multiple-Choice：对于问答问题，则是将上下文、问题放在一起与答案分隔开，然后进行预测 
++ Multiple-Choice：对于问答问题，则是将上下文、问题放在一起与答案分隔开，然后进行预测
 
 
 ## 4. GPT特点
@@ -123,6 +123,3 @@ GPT 与 ELMo 有两个主要的区别：
 
 ## 参考文献
 [Improving Language Understanding by Generative Pre-Training](https://www.semanticscholar.org/paper/Improving-Language-Understanding-by-Generative-Radford-Narasimhan/cd18800a0fe0b668a1cc19f2ec95b5003d0a5035)
-
-
-

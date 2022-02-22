@@ -6,17 +6,17 @@ import gym
 from gym import spaces
 
 # 默认的一些数据，用于归一化属性值
-MAX_ACCOUNT_BALANCE = 214748        # 组大的账户财产
-MAX_NUM_SHARES = 214748             # 最大的手数
-MAX_SHARE_PRICE = 5000              # 最大的单手价格
-MAX_VOLUME = 1000e6                 # 最大的成交量
-MAX_AMOUNT = 3e5                    # 最大的成交额
-MAX_OPEN_POSITIONS = 5              # 最大的持仓头寸
-MAX_STEPS = 500                     # 最大的交互次数
-MAX_DAY_CHANGE = 1                  # 最大的日期改变
-max_loss =-50000                    # 最大的损失
-max_predict_rate = 4                # 最大的预测率
-INITIAL_ACCOUNT_BALANCE = 10000     # 初始的金钱
+MAX_ACCOUNT_BALANCE = 214748  # 组大的账户财产
+MAX_NUM_SHARES = 214748  # 最大的手数
+MAX_SHARE_PRICE = 5000  # 最大的单手价格
+MAX_VOLUME = 1000e6  # 最大的成交量
+MAX_AMOUNT = 3e5  # 最大的成交额
+MAX_OPEN_POSITIONS = 5  # 最大的持仓头寸
+MAX_STEPS = 500  # 最大的交互次数
+MAX_DAY_CHANGE = 1  # 最大的日期改变
+max_loss = -50000  # 最大的损失
+max_predict_rate = 4  # 最大的预测率
+INITIAL_ACCOUNT_BALANCE = 10000  # 初始的金钱
 
 
 class StockTradingEnv(gym.Env):
@@ -30,26 +30,27 @@ class StockTradingEnv(gym.Env):
         self.reward_range = (0, MAX_ACCOUNT_BALANCE)
 
         # 动作的可能情况：买入x%, 卖出x%, 观望
-        self.action_space = spaces.Box(
-            low=np.array([-3, 0]), high=np.array([3, 1]), dtype=np.float32)
+        self.action_space = spaces.Box(low=np.array([-3, 0]),
+                                       high=np.array([3, 1]),
+                                       dtype=np.float32)
 
         # 环境状态的维度
-        self.observation_space = spaces.Box(
-            low=0, high=1, shape=(19,), dtype=np.float32)
+        self.observation_space = spaces.Box(low=0,
+                                            high=1,
+                                            shape=(19, ),
+                                            dtype=np.float32)
 
-    
     def seed(self, seed):
         random.seed(seed)
         np.random.seed(seed)
 
-    
     # 处理状态
     def _next_observation(self):
         # 有些股票数据缺失一些数据，处理一下
         d10 = self.df.loc[self.current_step, 'peTTM'] / 1e4
         d11 = self.df.loc[self.current_step, 'pbMRQ'] / 100
         d12 = self.df.loc[self.current_step, 'psTTM'] / 100
-        if np.isnan(d10):       # 某些数据是0.00000000e+00，如果是nan会报错
+        if np.isnan(d10):  # 某些数据是0.00000000e+00，如果是nan会报错
             d10 = d11 = d12 = 0.00000000e+00
         obs = np.array([
             self.df.loc[self.current_step, 'open'] / MAX_SHARE_PRICE,
@@ -74,23 +75,22 @@ class StockTradingEnv(gym.Env):
         ])
         return obs
 
-
     # 执行当前动作，并计算出当前的数据（如：资产等）
     def _take_action(self, action):
         # 随机设置当前的价格，其范围上界为当前时间点的价格
-        current_price = random.uniform(
-            self.df.loc[self.current_step, "open"], self.df.loc[self.current_step, "close"])
+        current_price = random.uniform(self.df.loc[self.current_step, "open"],
+                                       self.df.loc[self.current_step, "close"])
         action_type = action[0]
         amount = action[1]
-        if action_type > 1:     # 买入amount%
+        if action_type > 1:  # 买入amount%
             total_possible = int(self.balance / current_price)
             shares_bought = int(total_possible * amount)
             prev_cost = self.cost_basis * self.shares_held
             additional_cost = shares_bought * current_price
 
             self.balance -= additional_cost
-            self.cost_basis = (
-                prev_cost + additional_cost) / (self.shares_held + shares_bought)
+            self.cost_basis = (prev_cost + additional_cost) / (
+                self.shares_held + shares_bought)
             self.shares_held += shares_bought
 
         elif action_type < -1:  # 卖出amount%
@@ -108,7 +108,6 @@ class StockTradingEnv(gym.Env):
 
         if self.shares_held == 0:
             self.cost_basis = 0
-
 
     # 与环境交互
     def step(self, action):
@@ -130,18 +129,17 @@ class StockTradingEnv(gym.Env):
         # 计算相对收益比，并据此来计算奖励
         profit = self.net_worth - INITIAL_ACCOUNT_BALANCE
         profit_percent = profit / INITIAL_ACCOUNT_BALANCE
-        if profit_percent>=0:
-            reward = max(1,profit_percent/0.001)
+        if profit_percent >= 0:
+            reward = max(1, profit_percent / 0.001)
         else:
             reward = -100
 
-        if self.net_worth <= 0 :
+        if self.net_worth <= 0:
             done = True
 
         obs = self._next_observation()
 
         return obs, reward, done, {}
-
 
     # 重置环境
     def reset(self, new_df=None):
@@ -164,16 +162,20 @@ class StockTradingEnv(gym.Env):
 
         return self._next_observation()
 
-
     # 显示环境至屏幕
     def render(self, mode='human'):
         # 打印环境信息
         profit = self.net_worth - INITIAL_ACCOUNT_BALANCE
-        print('-'*30)
+        print('-' * 30)
         print(f'Step: {self.current_step}')
         print(f'Balance: {self.balance}')
-        print(f'Shares held: {self.shares_held} (Total sold: {self.total_shares_sold})')
-        print(f'Avg cost for held shares: {self.cost_basis} (Total sales value: {self.total_sales_value})')
-        print(f'Net worth: {self.net_worth} (Max net worth: {self.max_net_worth})')
+        print(
+            f'Shares held: {self.shares_held} (Total sold: {self.total_shares_sold})'
+        )
+        print(
+            f'Avg cost for held shares: {self.cost_basis} (Total sales value: {self.total_sales_value})'
+        )
+        print(
+            f'Net worth: {self.net_worth} (Max net worth: {self.max_net_worth})')
         print(f'Profit: {profit}')
         return profit

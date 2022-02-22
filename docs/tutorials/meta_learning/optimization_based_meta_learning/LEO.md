@@ -12,10 +12,10 @@ LEO 结构如图1所示。
 
 ![LEO Structure](../../../images/meta_learning/optimization_based_meta_learning/LEO/LEOStructure.png)
 
-图1	LEO 结构图。$D^{\mathrm{tr}}$ 是任务 $\varepsilon$ 的 support set，
+图1    LEO 结构图。$D^{\mathrm{tr}}$ 是任务 $\varepsilon$ 的 support set，
 $D^{\mathrm{val}}$ 是任务 $\varepsilon$ 的 query set，
-$z$ 是通过编码器计算的 $N$ 个类别的类别特征，$f_{\theta}$ 是基学习器， 
-$\theta$ 是基学习器参数， 
+$z$ 是通过编码器计算的 $N$ 个类别的类别特征，$f_{\theta}$ 是基学习器，
+$\theta$ 是基学习器参数，
 $L^{\mathrm{tr}}=f_{\theta}\left( D^{\mathrm{tr}}\right)$, $L^{\mathrm{val}}=f_{\theta}\left( D^{\mathrm{val}}\right)$。
 
 LEO 包括基础学习器和元学习器，还包括编码器和解码器。
@@ -60,7 +60,7 @@ $$
 \end{aligned}
 $$
 
-其中，$N$ 是类别总数， $K$ 是每个类别的图片总数， 
+其中，$N$ 是类别总数， $K$ 是每个类别的图片总数，
 ${D}_{n}^{\mathrm{tr}}$ 是第 $n$ 个类别的训练数据集。
 对于每个类别的输入数据，每个类别下有 $K$ 张图片，
 计算这 $K$ 张图片和所有已知图片之间的距离。
@@ -69,7 +69,7 @@ ${D}_{n}^{\mathrm{tr}}$ 是第 $n$ 个类别的训练数据集。
 
 ### 2.2 解码器
 解码器 $g_{\phi_{d}}$ ，其中 $\phi_{d}$ 是解码器的可训练参数，
-其功能是将每个类别输入数据的特征向量 $z_{n}$ 
+其功能是将每个类别输入数据的特征向量 $z_{n}$
 映射成属于每个类别的概率值 $\boldsymbol{w}_{n}$：
 
 $$
@@ -87,7 +87,7 @@ $g_{\phi_{d}}$ 是从特征向量到基础学习器参数的映射。
 
 ![LEO Schematic](../../../images/meta_learning/optimization_based_meta_learning/LEO/LEOSchematic.png)
 <center>
-图2	LEO 基础学习器工作原理图。
+图2    LEO 基础学习器工作原理图。
 </center>
 
 ### 2.3  基础学习器更新过程
@@ -109,7 +109,7 @@ $$
 其中，$\boldsymbol{z}_{n}^{\prime}$ 是更新后的特征向量，
 对应的是更新后的任务专属参数 $\boldsymbol{\theta}_{\varepsilon}^{\prime}$。
 基础学习器使用 $\theta_{\varepsilon}^{\prime}$ 来预测任务验证集数据的标注，
-将任务 $\varepsilon$ 的验证集 $\mathrm{D}_{\varepsilon}^{\mathrm{val}}$ 
+将任务 $\varepsilon$ 的验证集 $\mathrm{D}_{\varepsilon}^{\mathrm{val}}$
 损失函数 $L_{\varepsilon}^{\mathrm{val}}\left(f_{\theta_{\varepsilon}^{\prime}}\right)$ 、
 更新后的特征向量 $z_{n}^{\prime}$、
 更新后的任务专属参数 $\theta_{\varepsilon}^{\prime}$ 输入元学习器，
@@ -124,7 +124,7 @@ $$
 $$
 
 其中， $L_{\varepsilon}^{\mathrm{val}}\left(f_{\theta_{\varepsilon}^{\prime}}\right)$ 是任务 $\varepsilon$ 验证集的损失函数，
-衡量了基础学习器模型的泛化误差，损失函数越小，模型的泛化能力越好。 
+衡量了基础学习器模型的泛化误差，损失函数越小，模型的泛化能力越好。
 $p\left(z_{n}\right)=N(0, I)$ 是高斯分布，$D_{\mathrm{KL}}\left\{q\left(z_{n} \mid {D}_{n}^{\mathrm{tr}}\right) \| p\left(z_{n}\right)\right\}$ 是近似后验分布 $q\left(z_{n} \mid D_{n}^{\text {tr }}\right)$ 与先验分布 $p\left(z_{n}\right)$ 之间的 KL 距离 (KL-Divergence)，
 最小化 $\mathrm{KL}$ 距离可使后验分布 $q\left(z_{n} \mid {D}_{n}^{\text {tr}}\right)$ 的估计尽可能准确。
 最小化距离 $\left\|s\left(z_{n}^{\prime}\right)-z_{n}\right\|$ 使得参数初始值 $z_{n}$ 和训练完成后的参数更新值 $z_{n}^{\prime}$ 距离最小，
@@ -137,7 +137,7 @@ $$
 
 其中， $\left\|\phi_{r}\right\|_{2}^{2}$ 指的是调控元参数的个数和大小，
  ${C}_{d}$ 是参数 $\phi_{d}$ 的行和行之间的相关性矩阵，
- 超参数 $\lambda_{1},\lambda_{2}>0$， 
+ 超参数 $\lambda_{1},\lambda_{2}>0$，
  $\left\|C_{d}-\mathbb{I}\right\|_{2}$ 使得 $C_{d}$ 接近单位矩阵，
  使得参数 $\phi_{d}$ 的行和行之间的相关性不能太大，
  每个类别的特征向量之间的相关性不能太大，
@@ -154,24 +154,24 @@ $$
 >         1. sample task instance $\mathcal{T}_{i} \sim \mathcal{S}^{t r}$
 >         2. let $\left(\mathcal{D}^{t r}, \mathcal{D}^{v a l}\right)=\mathcal{T}_{i}$
 >         3. encode $\mathcal{D}^{t r}$ to z using $g_{\phi_{e}}$ and $g_{\phi_{r}}$
->         4. decode $\mathbf{z}$ to initial params $\theta_{i}$ using $g_{\phi_{d}}$ 
+>         4. decode $\mathbf{z}$ to initial params $\theta_{i}$ using $g_{\phi_{d}}$
 >         5. initialize $\mathbf{z}^{\prime}=\mathbf{z}, \theta_{i}^{\prime}=\theta_{i}$
 >         6. for number of adaptation steps do:
 >            1. compute training loss $\mathcal{L}_{\mathcal{T}_{i}}^{t r}\left(f_{\theta_{i}^{\prime}}\right)$
 >            2. perform gradient step w.r.t. $\mathbf{z}^{\prime}$:
 >            3. $\mathbf{z}^{\prime} \leftarrow \mathbf{z}^{\prime}-\alpha \nabla_{\mathbf{z}^{\prime}} \mathcal{L}_{\mathcal{T}_{i}}^{t r}\left(f_{\theta_{i}^{\prime}}\right)$
->            4. decode $\mathbf{z}^{\prime}$ to obtain $\theta_{i}^{\prime}$ using $g_{\phi_{d}}$ 
+>            4. decode $\mathbf{z}^{\prime}$ to obtain $\theta_{i}^{\prime}$ using $g_{\phi_{d}}$
 >          7. end for
->          8. compute validation loss $\mathcal{L}_{\mathcal{T}_{i}}^{v a l}\left(f_{\theta_{i}^{\prime}}\right)$ 
+>          8. compute validation loss $\mathcal{L}_{\mathcal{T}_{i}}^{v a l}\left(f_{\theta_{i}^{\prime}}\right)$
 >      2. end for
->      3. perform gradient step w.r.t $\phi$：$\phi \leftarrow \phi-\eta \nabla_{\phi} \sum_{\mathcal{T}_{i}} \mathcal{L}_{\mathcal{T}_{i}}^{v a l}\left(f_{\theta_{i}^{\prime}}\right)$ 
+>      3. perform gradient step w.r.t $\phi$：$\phi \leftarrow \phi-\eta \nabla_{\phi} \sum_{\mathcal{T}_{i}} \mathcal{L}_{\mathcal{T}_{i}}^{v a l}\left(f_{\theta_{i}^{\prime}}\right)$
 > 4. end while
 
-(1) 初始化元参数：编码器参数 $\phi_{e}$、关系网络参数 $\phi_{r}$、解码器参数 $\phi_{d}$, 
+(1) 初始化元参数：编码器参数 $\phi_{e}$、关系网络参数 $\phi_{r}$、解码器参数 $\phi_{d}$,
 在元学习器中更新的元参数包括 $\phi=\left\{\phi_e, \phi_r,\phi_d \right\}$。
 
 (2) 使用片段式训练模式，
-随机抽取任务 $\varepsilon$, ${D}_{\varepsilon}^{\mathrm{tr}}$ 是任务 $\varepsilon$ 的训练集， 
+随机抽取任务 $\varepsilon$, ${D}_{\varepsilon}^{\mathrm{tr}}$ 是任务 $\varepsilon$ 的训练集，
 ${D}_{\varepsilon}^{\mathrm{val}}$ 是任务 $\varepsilon$ 的验证集。
 
 (3) 使用编码器 $g_{\phi_{e}}$ 和关系网络 $g_{\phi_{r}}$ 将任务 $\varepsilon$ 的训练集 $D_{\varepsilon}^{\mathrm{tr}}$ 编码成特征向量 $z$，
@@ -197,7 +197,7 @@ $$
 
 LEO 是一种与模型无关的元学习，[1] 中给出的各部分模型结构及参数如表1所示。
 <center>
-表1	LEO 各部分模型结构及参数。
+表1    LEO 各部分模型结构及参数。
 </center>
 
 | Part of the model | Architecture | Hiddenlayer | Shape of the output |
@@ -211,7 +211,7 @@ LEO 是一种与模型无关的元学习，[1] 中给出的各部分模型结构
 ## 6 LEO 分类结果
 
 <center>
-表1	LEO 在 miniImageNet 上的分类结果。
+表1    LEO 在 miniImageNet 上的分类结果。
 </center>
 
 | Model | 5-way 1-shot | 5-way 5-shot |
@@ -233,7 +233,7 @@ LEO 是一种与模型无关的元学习，[1] 中给出的各部分模型结构
 | LEO | **61.76 $\pm$ 0.08** $\%$ | **77.59 $\pm$ 0.12** $\%$ |
 
 <center>
-表1	LEO 在 tieredImageNet 上的分类结果。
+表1    LEO 在 tieredImageNet 上的分类结果。
 </center>
 
 | Model | 5-way 1-shot | 5-way 5-shot |
@@ -257,5 +257,3 @@ LEO 是一种与模型无关的元学习，[1] 中给出的各部分模型结构
 
 ## 参考文献
 [1] [Meta-Learning with Latent Embedding Optimization](https://openreview.net/forum?id=BJgklhAcK7)
-
-

@@ -33,6 +33,7 @@ class TSNHead(BaseHead):
         kwargs (dict, optional): Any keyword argument to initialize.
 
     """
+
     def __init__(self,
                  num_classes,
                  in_channels,
@@ -59,12 +60,8 @@ class TSNHead(BaseHead):
     def init_weights(self):
         """Initiate the FC layer parameters"""
 
-        weight_init_(self.fc,
-                     'Normal',
-                     'fc_0.w_0',
-                     'fc_0.b_0',
-                     mean=0.,
-                     std=self.std)
+        weight_init_(
+            self.fc, 'Normal', 'fc_0.w_0', 'fc_0.b_0', mean=0., std=self.std)
 
     def forward(self, x, num_seg):
         """Define how the head is going to run.

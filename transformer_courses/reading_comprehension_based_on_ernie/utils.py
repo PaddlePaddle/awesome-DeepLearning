@@ -1,11 +1,12 @@
 import paddle
 
+
 class CrossEntropyLossForRobust(paddle.nn.Layer):
     def __init__(self):
         super(CrossEntropyLossForRobust, self).__init__()
 
     def forward(self, y, label):
-        start_logits, end_logits = y   # both shape are [batch_size, seq_len]
+        start_logits, end_logits = y  # both shape are [batch_size, seq_len]
         start_position, end_position = label
         start_position = paddle.unsqueeze(start_position, axis=-1)
         end_position = paddle.unsqueeze(end_position, axis=-1)
@@ -18,6 +19,3 @@ class CrossEntropyLossForRobust(paddle.nn.Layer):
 
         loss = (start_loss + end_loss) / 2
         return loss
-
-
-

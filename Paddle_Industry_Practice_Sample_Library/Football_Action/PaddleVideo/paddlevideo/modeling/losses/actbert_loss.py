@@ -25,6 +25,7 @@ from .base import BaseWeightedLoss
 class ActBertLoss(BaseWeightedLoss):
     """Loss for ActBert model
     """
+
     def __init__(self, vocab_size=30522, a_target_size=700):
         super().__init__()
         self.vocab_size = vocab_size
@@ -47,7 +48,8 @@ class ActBertLoss(BaseWeightedLoss):
                                                   1:]  #8,37,1601 --> 8,36,1601
 
         img_loss = self.vis_criterion(
-            F.log_softmax(prediction_scores_v, axis=2),
+            F.log_softmax(
+                prediction_scores_v, axis=2),
             image_target  #8,36,1601
         )
         masked_img_loss = paddle.sum(

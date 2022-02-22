@@ -12,24 +12,32 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 import paddle
 from paddle import nn
 import paddle.nn.functional as F
 
 
 class ErnieForTokenClassification(paddle.nn.Layer):
-
     def __init__(self, ernie, num_classes, dropout=None):
         super(ErnieForTokenClassification, self).__init__()
         self.num_classes = num_classes
         self.ernie = ernie
-        self.dropout = nn.Dropout(dropout if dropout is not None else self.ernie.config["hidden_dropout_prob"])
-        self.classifier = nn.Linear(self.ernie.config["hidden_size"], num_classes)
+        self.dropout = nn.Dropout(dropout if dropout is not None else
+                                  self.ernie.config["hidden_dropout_prob"])
+        self.classifier = nn.Linear(self.ernie.config["hidden_size"],
+                                    num_classes)
 
-    def forward(self, input_ids, token_type_ids=None, position_ids=None, attention_mask=None):
-        sequence_output, _ = self.ernie(input_ids, token_type_ids=token_type_ids, position_ids=position_ids, attention_mask=attention_mask)
+    def forward(self,
+                input_ids,
+                token_type_ids=None,
+                position_ids=None,
+                attention_mask=None):
+        sequence_output, _ = self.ernie(
+            input_ids,
+            token_type_ids=token_type_ids,
+            position_ids=position_ids,
+            attention_mask=attention_mask)
         sequence_output = self.dropout(sequence_output)
         logits = self.classifier(sequence_output)
-        
+
         return logits

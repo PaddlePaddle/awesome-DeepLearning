@@ -32,7 +32,10 @@ def get_data_res(label_map, data, topk):
             labelid_top = data[i][2][k]
             label_iou = data[i][3]
             labelname_top = label_map[str(labelid_top)]
-            video_result.append([feature_start_id, feature_end_id, labelid_top, labelname_top, score_top, label_iou])
+            video_result.append([
+                feature_start_id, feature_end_id, labelid_top, labelname_top,
+                score_top, label_iou
+            ])
     return video_result
 
 
@@ -63,14 +66,18 @@ def base_nms(bboxes, thresh, delta=0, nms_id=2):
         tt1 = np.maximum(t1[i], t1[order[1:]])
         tt2 = np.minimum(t2[i], t2[order[1:]])
         intersection = tt2 - tt1
-        IoU = intersection / (durations[i] + durations[order[1:]] - intersection).astype(float)
+        IoU = intersection / (
+            durations[i] + durations[order[1:]] - intersection).astype(float)
 
         inds = np.where(IoU <= thresh)[0]
         order = order[inds + 1]
     return [bboxes[i] for i in keep]
 
 
-def process_proposal(source_prop_box, min_frame_thread=5, nms_thresh=0.7, score_thresh=0.01):
+def process_proposal(source_prop_box,
+                     min_frame_thread=5,
+                     nms_thresh=0.7,
+                     score_thresh=0.01):
     """process_video_prop"""
     prop_box = []
     for items in source_prop_box:
@@ -122,12 +129,14 @@ def process_video_classify(video_prop, fps, score_thread, iou_thread, \
         label_classify_score = item[4]
         label_iou_score = item[5]
         if label_classify_score > score_thread and label_iou_score > iou_thread:
-            video_results.append({"start_time": start_time,
-                                  "end_time": end_time,
-                                  "label_id": label_id,
-                                  "label_name": label_name,
-                                  "classify_score": label_classify_score,
-                                  "iou_score": label_iou_score})
+            video_results.append({
+                "start_time": start_time,
+                "end_time": end_time,
+                "label_id": label_id,
+                "label_name": label_name,
+                "classify_score": label_classify_score,
+                "iou_score": label_iou_score
+            })
 
     return video_results
 
@@ -139,6 +148,8 @@ def get_action_result(result_info, label_map_file, fps, score_thread=0, \
     label_map = json.load(open(label_map_file, 'r', encoding='utf-8'))
 
     org_result = get_data_res(label_map, result_info, topk)
-    nms_result = process_video_classify(org_result, fps, score_thread, iou_thread, nms_id, nms_thread, frame_offset)
+    nms_result = process_video_classify(org_result, fps, score_thread,
+                                        iou_thread, nms_id, nms_thread,
+                                        frame_offset)
 
     return nms_result

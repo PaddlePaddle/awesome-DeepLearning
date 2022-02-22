@@ -10,6 +10,7 @@ from functools import partial
 from utils import CrossEntropyLossForRobust
 from data_processor import prepare_train_features, prepare_validation_features
 
+
 def evaluate(model, data_loader, is_test=False):
     model.eval()
 
@@ -51,41 +52,48 @@ def evaluate(model, data_loader, is_test=False):
     for example in data_loader.dataset.data:
         count += 1
         print()
-        print('问题：',example['question'])
-        print('原文：',''.join(example['context']))
-        print('答案：',all_predictions[example['id']])
+        print('问题：', example['question'])
+        print('原文：', ''.join(example['context']))
+        print('答案：', all_predictions[example['id']])
         if count >= 5:
             break
 
     model.train()
 
+
 def train(args):
-    
+
     # 加载数据集
-    train_ds, dev_ds, test_ds = load_dataset('dureader_robust', splits=('train', 'dev', 'test'))
+    train_ds, dev_ds, test_ds = load_dataset(
+        'dureader_robust', splits=('train', 'dev', 'test'))
 
-    tokenizer = paddlenlp.transformers.ErnieTokenizer.from_pretrained(args.model_name)
+    tokenizer = paddlenlp.transformers.ErnieTokenizer.from_pretrained(
+        args.model_name)
 
-    train_trans_func = partial(prepare_train_features, 
-                           max_seq_length=args.max_seq_length, 
-                           doc_stride=args.doc_stride,
-                           tokenizer=tokenizer)
+    train_trans_func = partial(
+        prepare_train_features,
+        max_seq_length=args.max_seq_length,
+        doc_stride=args.doc_stride,
+        tokenizer=tokenizer)
 
     train_ds.map(train_trans_func, batched=True, num_workers=4)
 
-    dev_trans_func = partial(prepare_validation_features, 
-                           max_seq_length=args.max_seq_length, 
-                           doc_stride=args.doc_stride,
-                           tokenizer=tokenizer)
-                           
+    dev_trans_func = partial(
+        prepare_validation_features,
+        max_seq_length=args.max_seq_length,
+        doc_stride=args.doc_stride,
+        tokenizer=tokenizer)
+
     dev_ds.map(dev_trans_func, batched=True, num_workers=4)
     test_ds.map(dev_trans_func, batched=True, num_workers=4)
 
-
     # 定义BatchSampler
-    train_batch_sampler = paddle.io.DistributedBatchSampler(train_ds, batch_size=args.batch_size, shuffle=True)
-    dev_batch_sampler = paddle.io.BatchSampler(dev_ds, batch_size=args.batch_size, shuffle=False)
-    test_batch_sampler = paddle.io.BatchSampler(test_ds, batch_size=args.batch_size, shuffle=False)
+    train_batch_sampler = paddle.io.DistributedBatchSampler(
+        train_ds, batch_size=args.batch_size, shuffle=True)
+    dev_batch_sampler = paddle.io.BatchSampler(
+        dev_ds, batch_size=args.batch_size, shuffle=False)
+    test_batch_sampler = paddle.io.BatchSampler(
+        test_ds, batch_size=args.batch_size, shuffle=False)
 
     # 定义batchify_fn
     train_batchify_fn = lambda samples, fn=Dict({
@@ -119,16 +127,15 @@ def train(args):
         collate_fn=dev_batchify_fn,
         return_list=True)
 
-
-
     # 训练配置相关
     num_training_steps = len(train_data_loader) * args.epochs
     use_gpu = True if paddle.get_device().startswith("gpu") else False
     if use_gpu:
-        paddle.set_device('gpu:0')    
+        paddle.set_device('gpu:0')
 
-    lr_scheduler = paddlenlp.transformers.LinearDecayWithWarmup(args.learning_rate, num_training_steps, args.warmup_proportion)
-    
+    lr_scheduler = paddlenlp.transformers.LinearDecayWithWarmup(
+        args.learning_rate, num_training_steps, args.warmup_proportion)
+
     model = ErnieForQuestionAnswering.from_pretrained(args.model_name)
     decay_params = [
         p.name for n, p in model.named_parameters()
@@ -139,7 +146,6 @@ def train(args):
         parameters=model.parameters(),
         weight_decay=args.weight_decay,
         apply_decay_param_fun=lambda x: x in decay_params)
-
 
     # 训练代码
     model.train()
@@ -152,8 +158,9 @@ def train(args):
             logits = model(input_ids=input_ids, token_type_ids=segment_ids)
             loss = criterion(logits, (start_positions, end_positions))
 
-            if global_step % 100 == 0 :
-                print("global step %d, epoch: %d, batch: %d, loss: %.5f" % (global_step, epoch, step, loss))
+            if global_step % 100 == 0:
+                print("global step %d, epoch: %d, batch: %d, loss: %.5f" %
+                      (global_step, epoch, step, loss))
 
             loss.backward()
             optimizer.step()
@@ -163,22 +170,59 @@ def train(args):
         paddle.save(model.state_dict(), args.save_model_path)
         paddle.save(model.state_dict(), args.save_opt_path)
         evaluate(model=model, data_loader=dev_data_loader)
-        
 
-if __name__=="__main__":
-    parser = argparse.ArgumentParser(description="Reading Comprehension based on ERNIE.")
-    parser.add_argument("--model_name", type=str, default="ernie-1.0", help="the model you want to load.")
-    parser.add_argument("--epochs", type=int, default=2, help="the epochs of model training.")
-    parser.add_argument("--max_seq_length", type=int, default=512, help="the max_seq_length of input sequence.")
-    parser.add_argument("--doc_stride", type=int, default=128, help="doc_stride when processing data.")
-    parser.add_argument("--batch_size", type=int, default=12, help="batch_size when model training.")
-    parser.add_argument("--learning_rate", type=float, default=3e-5, help="learning_rate for model training.")
-    parser.add_argument("--warmup_proportion", type=float, default=0.1, help="the proportion of performing warmup in all training steps.")
-    parser.add_argument("--weight_decay", type=float, default=0.01, help="the weight_decay of model parameters.")   
-    parser.add_argument("--save_model_path", type=str, default="./ernie_rc.pdparams", help="the path of saving model.") 
-    parser.add_argument("--save_opt_path", type=str, default="./ernie_rc.pdopt", help="the path of saving optimizer")
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description="Reading Comprehension based on ERNIE.")
+    parser.add_argument(
+        "--model_name",
+        type=str,
+        default="ernie-1.0",
+        help="the model you want to load.")
+    parser.add_argument(
+        "--epochs", type=int, default=2, help="the epochs of model training.")
+    parser.add_argument(
+        "--max_seq_length",
+        type=int,
+        default=512,
+        help="the max_seq_length of input sequence.")
+    parser.add_argument(
+        "--doc_stride",
+        type=int,
+        default=128,
+        help="doc_stride when processing data.")
+    parser.add_argument(
+        "--batch_size",
+        type=int,
+        default=12,
+        help="batch_size when model training.")
+    parser.add_argument(
+        "--learning_rate",
+        type=float,
+        default=3e-5,
+        help="learning_rate for model training.")
+    parser.add_argument(
+        "--warmup_proportion",
+        type=float,
+        default=0.1,
+        help="the proportion of performing warmup in all training steps.")
+    parser.add_argument(
+        "--weight_decay",
+        type=float,
+        default=0.01,
+        help="the weight_decay of model parameters.")
+    parser.add_argument(
+        "--save_model_path",
+        type=str,
+        default="./ernie_rc.pdparams",
+        help="the path of saving model.")
+    parser.add_argument(
+        "--save_opt_path",
+        type=str,
+        default="./ernie_rc.pdopt",
+        help="the path of saving optimizer")
 
     args = parser.parse_args()
 
-    
     train(args)

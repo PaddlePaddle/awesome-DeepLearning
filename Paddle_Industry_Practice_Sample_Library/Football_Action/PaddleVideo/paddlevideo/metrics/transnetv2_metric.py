@@ -67,8 +67,10 @@ def evaluate_scenes(gt_scenes, pred_scenes, n_frames_miss_tolerance=2):
     """
 
     shift = n_frames_miss_tolerance / 2
-    gt_scenes = gt_scenes.astype(np.float32) + np.array([[-0.5 + shift, 0.5 - shift]])
-    pred_scenes = pred_scenes.astype(np.float32) + np.array([[-0.5 + shift, 0.5 - shift]])
+    gt_scenes = gt_scenes.astype(np.float32) + np.array(
+        [[-0.5 + shift, 0.5 - shift]])
+    pred_scenes = pred_scenes.astype(np.float32) + np.array(
+        [[-0.5 + shift, 0.5 - shift]])
 
     gt_trans = np.stack([gt_scenes[:-1, 1], gt_scenes[1:, 0]], 1)
     pred_trans = np.stack([pred_scenes[:-1, 1], pred_scenes[1:, 0]], 1)
@@ -110,19 +112,18 @@ def evaluate_scenes(gt_scenes, pred_scenes, n_frames_miss_tolerance=2):
 
 
 def create_scene_based_summaries(one_hot_pred, one_hot_gt):
-    thresholds = np.array([
-        0.02, 0.06, 0.1, 0.15, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9
-    ])
+    thresholds = np.array(
+        [0.02, 0.06, 0.1, 0.15, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9])
     precision, recall, f1, tp, fp, fn = np.zeros_like(thresholds), np.zeros_like(thresholds),\
                                         np.zeros_like(thresholds), np.zeros_like(thresholds),\
                                         np.zeros_like(thresholds), np.zeros_like(thresholds)
 
     gt_scenes = predictions_to_scenes(one_hot_gt)
     for i in range(len(thresholds)):
-        pred_scenes = predictions_to_scenes(
-            (one_hot_pred > thresholds[i]).astype(np.uint8)
-        )
-        precision[i], recall[i], f1[i], (tp[i], fp[i], fn[i]) = evaluate_scenes(gt_scenes, pred_scenes)
+        pred_scenes = predictions_to_scenes((one_hot_pred > thresholds[i]
+                                             ).astype(np.uint8))
+        precision[i], recall[i], f1[i], (
+            tp[i], fp[i], fn[i]) = evaluate_scenes(gt_scenes, pred_scenes)
 
     best_idx = np.argmax(f1)
 
@@ -152,13 +153,14 @@ class TransNetV2Metric(BaseMetric):
         # preds ensemble
         if batch_id % self.log_interval == 0:
             logger.info("[TEST] Processing batch {}/{} ...".format(
-                batch_id,
-                self.data_size // (self.batch_size * self.world_size)))
+                batch_id, self.data_size // (self.batch_size * self.world_size
+                                             )))
 
     def compute(self, gt_scenes):
         predictions = np.concatenate(self.predictions, 0)[:len(frames)]
         _, _, _, (tp, fp, fn), fp_mistakes, fn_mistakes = evaluate_scenes(
-            gt_scenes, predictions_to_scenes((predictions >= args.thr).astype(np.uint8)))
+            gt_scenes,
+            predictions_to_scenes((predictions >= args.thr).astype(np.uint8)))
 
         self.total_stats["tp"] += tp
         self.total_stats["fp"] += fp
@@ -167,8 +169,11 @@ class TransNetV2Metric(BaseMetric):
     def accumulate(self):
         """accumulate metrics when finished all iters.
         """
-        p = self.total_stats["tp"] / (self.total_stats["tp"] + self.total_stats["fp"])
-        r = self.total_stats["tp"] / (self.total_stats["tp"] + self.total_stats["fn"])
+        p = self.total_stats["tp"] / (
+            self.total_stats["tp"] + self.total_stats["fp"])
+        r = self.total_stats["tp"] / (
+            self.total_stats["tp"] + self.total_stats["fn"])
         f1 = (p * r * 2) / (p + r)
-        logger.info('[TEST] finished, Precision= {:5.2f}, Recall= {:5.2f} , F1 Score= {:5.2f} '.format(
-            p * 100, r * 100, f1 * 100))
+        logger.info(
+            '[TEST] finished, Precision= {:5.2f}, Recall= {:5.2f} , F1 Score= {:5.2f} '.
+            format(p * 100, r * 100, f1 * 100))

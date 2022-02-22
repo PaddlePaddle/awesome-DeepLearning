@@ -11,8 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-
 """Functions for computing metrics like precision, recall, CorLoc and etc."""
 
 import numpy as np
@@ -36,8 +34,8 @@ def compute_precision_recall(scores, labels, num_gt):
             instances. This value is None if no ground truth labels are
             present.
     """
-    if (not isinstance(labels, np.ndarray) or labels.dtype != np.bool
-            or len(labels.shape) != 1):
+    if (not isinstance(labels, np.ndarray) or labels.dtype != np.bool or
+            len(labels.shape) != 1):
         raise ValueError('labels must be single dimension bool numpy array')
 
     if not isinstance(scores, np.ndarray) or len(scores.shape) != 1:
@@ -88,8 +86,8 @@ def compute_average_precision(precision, recall):
             raise ValueError('If precision is None, recall must also be None')
         return np.NAN
 
-    if not isinstance(precision, np.ndarray) or not isinstance(
-            recall, np.ndarray):
+    if not isinstance(precision, np.ndarray) or not isinstance(recall,
+                                                               np.ndarray):
         raise ValueError('precision and recall must be numpy array')
     if precision.dtype != np.float or recall.dtype != np.float:
         raise ValueError('input must be float numpy array.')
@@ -138,6 +136,6 @@ def compute_cor_loc(num_gt_imgs_per_class,
     """
     # Divide by zero expected for classes with no gt examples.
     with np.errstate(divide='ignore', invalid='ignore'):
-        return np.where(
-            num_gt_imgs_per_class == 0, np.nan,
-            num_images_correctly_detected_per_class / num_gt_imgs_per_class)
+        return np.where(num_gt_imgs_per_class == 0, np.nan,
+                        num_images_correctly_detected_per_class /
+                        num_gt_imgs_per_class)

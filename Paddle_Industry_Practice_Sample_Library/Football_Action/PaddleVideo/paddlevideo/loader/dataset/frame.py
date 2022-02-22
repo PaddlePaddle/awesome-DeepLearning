@@ -46,6 +46,7 @@ class FrameDataset(BaseDataset):
         suffix (str): suffix of file. Default: 'img_{:05}.jpg'.
 
     """
+
     def __init__(self,
                  file_path,
                  pipeline,
@@ -67,10 +68,11 @@ class FrameDataset(BaseDataset):
                 if self.data_prefix is not None:
                     frame_dir = osp.join(self.data_prefix, frame_dir)
                 info.append(
-                    dict(frame_dir=frame_dir,
-                         suffix=self.suffix,
-                         frames_len=frames_len,
-                         labels=int(labels)))
+                    dict(
+                        frame_dir=frame_dir,
+                        suffix=self.suffix,
+                        frames_len=frames_len,
+                        labels=int(labels)))
         return info
 
     def prepare_train(self, idx):
@@ -125,7 +127,9 @@ class FrameDataset_Sport(BaseDataset):
            pipeline(XXX): A sequence of data transforms.
            **kwargs: Keyword arguments for ```BaseDataset```.
     """
-    def __init__(self, file_path, pipeline, num_retries=5, suffix='', **kwargs):
+
+    def __init__(self, file_path, pipeline, num_retries=5, suffix='',
+                 **kwargs):
         self.num_retries = num_retries
         self.suffix = suffix
         super().__init__(file_path, pipeline, **kwargs)

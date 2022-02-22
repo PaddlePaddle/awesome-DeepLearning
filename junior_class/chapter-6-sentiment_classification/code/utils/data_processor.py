@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 import os
 import re
 import tarfile
@@ -22,7 +21,9 @@ import numpy as np
 
 
 # 下载语料用来训练word2vec
-def download(save_path, corpus_url="https://dataset.bj.bcebos.com/imdb%2FaclImdb_v1.tar.gz"):
+def download(
+        save_path,
+        corpus_url="https://dataset.bj.bcebos.com/imdb%2FaclImdb_v1.tar.gz"):
     # 通过python的requests类，下载数据集
     web_request = requests.get(corpus_url)
     corpus = web_request.content
@@ -84,7 +85,8 @@ def build_dict(corpus):
                 word_freq_dict[word] = 0
             word_freq_dict[word] += 1
 
-    word_freq_dict = sorted(word_freq_dict.items(), key=lambda x: x[1], reverse=True)
+    word_freq_dict = sorted(
+        word_freq_dict.items(), key=lambda x: x[1], reverse=True)
 
     word2id_dict = dict()
     word2id_freq = dict()
@@ -110,13 +112,23 @@ def convert_corpus_to_id(corpus, word2id_dict):
         # 将句子中的词逐个替换成id，如果句子中的词不在词表内，则替换成oov
         # 这里需要注意，一般来说我们可能需要查看一下test-set中，句子oov的比例，
         # 如果存在过多oov的情况，那就说明我们的训练数据不足或者切分存在巨大偏差，需要调整
-        sentence = [word2id_dict[word] if word in word2id_dict else word2id_dict['[oov]'] for word in sentence]
+        sentence = [
+            word2id_dict[word]
+            if word in word2id_dict else word2id_dict['[oov]']
+            for word in sentence
+        ]
         data_set.append((sentence, sentence_label))
     return data_set
 
 
 # 编写一个迭代器，每次调用这个迭代器都会返回一个新的batch，用于训练或者预测
-def build_batch(word2id_dict, corpus, batch_size, epoch_num, max_seq_len, shuffle=True, drop_last=True):
+def build_batch(word2id_dict,
+                corpus,
+                batch_size,
+                epoch_num,
+                max_seq_len,
+                shuffle=True,
+                drop_last=True):
     # 模型将会接受的两个输入：
     # 1. 一个形状为[batch_size, max_seq_len]的张量，sentence_batch，代表了一个mini-batch的句子。
     # 2. 一个形状为[batch_size, 1]的张量，sentence_label_batch，每个元素都是非0即1，代表了每个句子的情感类别（正向或者负向）
@@ -142,11 +154,13 @@ def build_batch(word2id_dict, corpus, batch_size, epoch_num, max_seq_len, shuffl
             sentence_label_batch.append([sentence_label])
 
             if len(sentence_batch) == batch_size:
-                yield np.array(sentence_batch).astype("int64"), np.array(sentence_label_batch).astype("int64")
+                yield np.array(sentence_batch).astype("int64"), np.array(
+                    sentence_label_batch).astype("int64")
                 sentence_batch = []
                 sentence_label_batch = []
         if not drop_last and len(sentence_batch) > 0:
-            yield np.array(sentence_batch).astype("int64"), np.array(sentence_label_batch).astype("int64")
+            yield np.array(sentence_batch).astype("int64"), np.array(
+                sentence_label_batch).astype("int64")
 
 
 # 加载词典

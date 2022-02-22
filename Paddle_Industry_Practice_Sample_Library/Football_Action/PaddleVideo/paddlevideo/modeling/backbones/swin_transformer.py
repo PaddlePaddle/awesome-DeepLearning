@@ -49,6 +49,7 @@ def drop_path(x, drop_prob=0., training=False):
 class DropPath(nn.Layer):
     """Drop paths (Stochastic Depth) per sample  (when applied in main path of residual blocks).
     """
+
     def __init__(self, drop_prob=None):
         super(DropPath, self).__init__()
         self.drop_prob = drop_prob
@@ -59,6 +60,7 @@ class DropPath(nn.Layer):
 
 class Mlp(nn.Layer):
     """ Multilayer perceptron."""
+
     def __init__(self,
                  in_features,
                  hidden_features=None,
@@ -156,6 +158,7 @@ class WindowAttention3D(nn.Layer):
         attn_drop (float, optional): Dropout ratio of attention weight. Default: 0.0
         proj_drop (float, optional): Dropout ratio of output. Default: 0.0
     """
+
     def __init__(self,
                  dim,
                  window_size,
@@ -176,8 +179,7 @@ class WindowAttention3D(nn.Layer):
         self.relative_position_bias_table = self.create_parameter(
             shape=((2 * window_size[0] - 1) * (2 * window_size[1] - 1) *
                    (2 * window_size[2] - 1), num_heads),
-            default_initializer=zeros_,
-        )  # 2*Wd-1 * 2*Wh-1 * 2*Ww-1, nH
+            default_initializer=zeros_, )  # 2*Wd-1 * 2*Wh-1 * 2*Ww-1, nH
         self.add_parameter("relative_position_bias_table",
                            self.relative_position_bias_table)
         # get pair-wise relative position index for each token inside the window
@@ -192,15 +194,15 @@ class WindowAttention3D(nn.Layer):
             axis=2) - coords_flatten.unsqueeze(axis=1)  # 3, Wd*Wh*Ww, Wd*Wh*Ww
 
         # relative_coords = coords_flatten.unsqueeze(2) - coords_flatten.unsqueeze(1)  # 3, Wd*Wh*Ww, Wd*Wh*Ww
-        relative_coords = relative_coords.transpose([1, 2, 0
-                                                     ])  # Wd*Wh*Ww, Wd*Wh*Ww, 3
-        relative_coords[:, :,
-                        0] += self.window_size[0] - 1  # shift to start from 0
+        relative_coords = relative_coords.transpose(
+            [1, 2, 0])  # Wd*Wh*Ww, Wd*Wh*Ww, 3
+        relative_coords[:, :, 0] += self.window_size[
+            0] - 1  # shift to start from 0
         relative_coords[:, :, 1] += self.window_size[1] - 1
         relative_coords[:, :, 2] += self.window_size[2] - 1
 
-        relative_coords[:, :, 0] *= (2 * self.window_size[1] -
-                                     1) * (2 * self.window_size[2] - 1)
+        relative_coords[:, :, 0] *= (
+            2 * self.window_size[1] - 1) * (2 * self.window_size[2] - 1)
         relative_coords[:, :, 1] *= (2 * self.window_size[2] - 1)
         relative_position_index = relative_coords.sum(
             axis=-1)  # Wd*Wh*Ww, Wd*Wh*Ww
@@ -227,7 +229,7 @@ class WindowAttention3D(nn.Layer):
         q, k, v = qkv[0], qkv[1], qkv[2]  # B_, nH, N, C
 
         q = q * self.scale
-        attn = q @ k.transpose([0, 1, 3, 2])
+        attn = q @k.transpose([0, 1, 3, 2])
 
         relative_position_bias = self.relative_position_bias_table[
             self.relative_position_index[:N, :N].reshape([-1])].reshape(
@@ -247,7 +249,7 @@ class WindowAttention3D(nn.Layer):
 
         attn = self.attn_drop(attn)
 
-        x = (attn @ v).transpose([0, 2, 1, 3]).reshape([B_, N, C])
+        x = (attn @v).transpose([0, 2, 1, 3]).reshape([B_, N, C])
         x = self.proj(x)
         x = self.proj_drop(x)
         return x
@@ -270,6 +272,7 @@ class SwinTransformerBlock3D(nn.Layer):
         act_layer (nn.Layer, optional): Activation layer. Default: nn.GELU
         norm_layer (nn.Layer, optional): Normalization layer.  Default: nn.LayerNorm
     """
+
     def __init__(self,
                  dim,
                  num_heads,
@@ -300,13 +303,14 @@ class SwinTransformerBlock3D(nn.Layer):
             2], "shift_size must in 0-window_size"
 
         self.norm1 = norm_layer(dim)
-        self.attn = WindowAttention3D(dim,
-                                      window_size=self.window_size,
-                                      num_heads=num_heads,
-                                      qkv_bias=qkv_bias,
-                                      qk_scale=qk_scale,
-                                      attn_drop=attn_drop,
-                                      proj_drop=drop)
+        self.attn = WindowAttention3D(
+            dim,
+            window_size=self.window_size,
+            num_heads=num_heads,
+            qkv_bias=qkv_bias,
+            qk_scale=qk_scale,
+            attn_drop=attn_drop,
+            proj_drop=drop)
 
         self.drop_path = DropPath(drop_path) if drop_path > 0. else Identity()
         self.norm2 = norm_layer(dim)
@@ -333,10 +337,10 @@ class SwinTransformerBlock3D(nn.Layer):
         _, Dp, Hp, Wp, _ = x.shape
         # cyclic shift
         if any(i > 0 for i in shift_size):
-            shifted_x = paddle.roll(x,
-                                    shifts=(-shift_size[0], -shift_size[1],
-                                            -shift_size[2]),
-                                    axis=(1, 2, 3))
+            shifted_x = paddle.roll(
+                x,
+                shifts=(-shift_size[0], -shift_size[1], -shift_size[2]),
+                axis=(1, 2, 3))
             attn_mask = mask_matrix
         else:
             shifted_x = x
@@ -352,10 +356,10 @@ class SwinTransformerBlock3D(nn.Layer):
                                    Wp)  # B D' H' W' C
         # reverse cyclic shift
         if any(i > 0 for i in shift_size):
-            x = paddle.roll(shifted_x,
-                            shifts=(shift_size[0], shift_size[1],
-                                    shift_size[2]),
-                            axis=(1, 2, 3))
+            x = paddle.roll(
+                shifted_x,
+                shifts=(shift_size[0], shift_size[1], shift_size[2]),
+                axis=(1, 2, 3))
         else:
             x = shifted_x
 
@@ -389,6 +393,7 @@ class PatchMerging(nn.Layer):
         dim (int): Number of input channels.
         norm_layer (nn.Layer, optional): Normalization layer.  Default: nn.LayerNorm
     """
+
     def __init__(self, dim, norm_layer=nn.LayerNorm):
         super().__init__()
         self.dim = dim
@@ -425,15 +430,13 @@ class PatchMerging(nn.Layer):
 def compute_mask(D, H, W, window_size, shift_size):
     img_mask = paddle.zeros((1, D, H, W, 1))  # 1 Dp Hp Wp 1
     cnt = 0
-    for d in slice(-window_size[0]), slice(-window_size[0],
-                                           -shift_size[0]), slice(
-                                               -shift_size[0], None):
-        for h in slice(-window_size[1]), slice(-window_size[1],
-                                               -shift_size[1]), slice(
-                                                   -shift_size[1], None):
-            for w in slice(-window_size[2]), slice(-window_size[2],
-                                                   -shift_size[2]), slice(
-                                                       -shift_size[2], None):
+    for d in slice(-window_size[0]), slice(
+            -window_size[0], -shift_size[0]), slice(-shift_size[0], None):
+        for h in slice(-window_size[1]), slice(
+                -window_size[1], -shift_size[1]), slice(-shift_size[1], None):
+            for w in slice(-window_size[2]), slice(
+                    -window_size[2], -shift_size[2]), slice(-shift_size[2],
+                                                            None):
                 img_mask[:, d, h, w, :] = cnt
                 cnt += 1
     mask_windows = window_partition(img_mask,
@@ -463,6 +466,7 @@ class BasicLayer(nn.Layer):
         norm_layer (nn.Layer, optional): Normalization layer. Default: nn.LayerNorm
         downsample (nn.Layer | None, optional): Downsample layer at the end of the layer. Default: None
     """
+
     def __init__(self,
                  dim,
                  depth,
@@ -498,8 +502,7 @@ class BasicLayer(nn.Layer):
                 drop_path=drop_path[i]
                 if isinstance(drop_path, list) else drop_path,
                 norm_layer=norm_layer,
-                use_checkpoint=use_checkpoint,
-            ) for i in range(depth)
+                use_checkpoint=use_checkpoint, ) for i in range(depth)
         ])
 
         self.downsample = downsample
@@ -542,6 +545,7 @@ class PatchEmbed3D(nn.Layer):
         embed_dim (int): Number of linear projection output channels. Default: 96.
         norm_layer (nn.Layer, optional): Normalization layer. Default: None
     """
+
     def __init__(self,
                  patch_size=(2, 4, 4),
                  in_chans=3,
@@ -553,10 +557,8 @@ class PatchEmbed3D(nn.Layer):
         self.in_chans = in_chans
         self.embed_dim = embed_dim
 
-        self.proj = nn.Conv3D(in_chans,
-                              embed_dim,
-                              kernel_size=patch_size,
-                              stride=patch_size)
+        self.proj = nn.Conv3D(
+            in_chans, embed_dim, kernel_size=patch_size, stride=patch_size)
         if norm_layer is not None:
             self.norm = norm_layer(embed_dim)
         else:
@@ -611,6 +613,7 @@ class SwinTransformer3D(nn.Layer):
         frozen_stages (int): Stages to be frozen (stop grad and set eval mode).
             -1 means not freezing any parameters.
     """
+
     def __init__(self,
                  pretrained=None,
                  patch_size=(4, 4, 4),
@@ -714,9 +717,8 @@ class SwinTransformer3D(nn.Layer):
 
         self.apply(self._init_fn)
         """Second, if provide pretrained ckpt, load it"""
-        if isinstance(
-                self.pretrained, str
-        ) and self.pretrained.strip() != "":  # load pretrained weights
+        if isinstance(self.pretrained, str) and self.pretrained.strip(
+        ) != "":  # load pretrained weights
             load_ckpt(self, self.pretrained)
         elif self.pretrained is None or self.pretrained.strip() == "":
             pass

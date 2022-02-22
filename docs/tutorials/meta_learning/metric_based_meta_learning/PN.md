@@ -9,8 +9,8 @@ Prototypical Network (PN) 利用支持集中每个类别提供的少量样本，
 
 在 few-shot 分类任务中，
 假设有 $N$ 个标记的样本 $S=\left(x_{1}, y_{1}\right), \ldots,\left(x_{N}, y_{N}\right)$ ，
-其中， $x_{i} \in$ $\mathbb{R}^{D}$ 是 $D$ 维的样本特征向量， 
-$y \in 1, \ldots, K$ 是相应的标签。 
+其中， $x_{i} \in$ $\mathbb{R}^{D}$ 是 $D$ 维的样本特征向量，
+$y \in 1, \ldots, K$ 是相应的标签。
 $S_{K}$ 表示第 $k$ 类样本的集合。
 
 PN 计算每个类的 $M$ 维原型向量 $c_{k} \in \mathbb{R}^{M}$ ，
@@ -46,7 +46,7 @@ PN 示意图如图1所示。
 
 ![PN](../../../images/meta_learning/metric_based_meta_learning/PN/PN.png)
 <center>
-图1	PN 示意图。
+图1    PN 示意图。
 </center>
 
 ## 2 PN 算法流程
@@ -79,7 +79,7 @@ PN 示意图如图1所示。
 ## 3 PN 分类结果
 
 <center>
-表1	PN 在 Omniglot 上的分类结果。
+表1    PN 在 Omniglot 上的分类结果。
 </center>
 
 | Model | Dist. | Fine Tune | 5-way 1-shot | 5-way 5-shot | 20-way 1-shot | 20-way 5-shot |  
@@ -91,10 +91,10 @@ PN 示意图如图1所示。
 | PROTOTYPICAL NETWORKS | Euclid. | N | **98.8** $\%$ |  99.7 $\%$ | **96.0** $\%$  | **98.9** $\%$ |
 
 <center>
-表1	PN 在 miniImageNet 上的分类结果。
+表1    PN 在 miniImageNet 上的分类结果。
 </center>
 
-| Model | Dist. | Fine Tune | 5-way 1-shot | 5-way 5-shot | 
+| Model | Dist. | Fine Tune | 5-way 1-shot | 5-way 5-shot |
 | :----: | :----: | :----: | :----: | :----: |
 | BASELINE NEAREST NEIGHBORS | Cosine | N | 28.86 $\pm$ 0.54 $\%$ | 49.79 $\pm$ 0.79 $\%$ |
 | MATCHING NETWORKS | Cosine | N | 43.40 $\pm$ 0.78 $\%$ | 51.09 $\pm$ 0.71 $\%$ |

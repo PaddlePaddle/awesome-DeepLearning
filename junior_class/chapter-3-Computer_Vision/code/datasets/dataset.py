@@ -64,8 +64,8 @@ def data_loader(datadir, batch_size=10, mode='train'):
                 # 当数据列表的长度等于batch_size的时候，
                 # 把这些数据当作一个mini-batch，并作为数据生成器的一个输出
                 imgs_array = np.array(batch_imgs).astype('float32')
-                labels_array = np.array(batch_labels).astype(
-                    'float32').reshape(-1, 1)
+                labels_array = np.array(batch_labels).astype('float32').reshape(
+                    -1, 1)
                 yield imgs_array, labels_array
                 batch_imgs = []
                 batch_labels = []
@@ -111,8 +111,8 @@ def valid_data_loader(datadir, csvfile, batch_size=10, mode='valid'):
                 # 当数据列表的长度等于batch_size的时候，
                 # 把这些数据当作一个mini-batch，并作为数据生成器的一个输出
                 imgs_array = np.array(batch_imgs).astype('float32')
-                labels_array = np.array(batch_labels).astype(
-                    'float32').reshape(-1, 1)
+                labels_array = np.array(batch_labels).astype('float32').reshape(
+                    -1, 1)
                 yield imgs_array, labels_array
                 batch_imgs = []
                 batch_labels = []

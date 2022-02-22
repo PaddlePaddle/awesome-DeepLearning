@@ -17,7 +17,6 @@ class ReplayBuffer(object):
 
         self.device = paddle.get_device()
 
-    
     # 存入数据
     def add(self, state, action, next_state, reward, done):
         self.states[self.cur] = state
@@ -30,18 +29,22 @@ class ReplayBuffer(object):
         self.cur = (self.cur + 1) % self.max_size
         self.size = min(self.size + 1, self.max_size)
 
-    
     # 采样
     def sample(self, batch):
         ids = np.random.randint(0, self.size, size=batch)
 
         # 返回paddle张量
-        return (
-            paddle.to_tensor(self.states[ids], dtype='float32', place=self.device),
-            paddle.to_tensor(self.actions[ids], dtype='float32', place=self.device),
-            paddle.to_tensor(self.next_states[ids], dtype='float32', place=self.device),
-            paddle.to_tensor(self.rewards[ids], dtype='float32', place=self.device),
-            paddle.to_tensor(self.dones[ids], dtype='float32', place=self.device)
-        )
-
-    
+        return (paddle.to_tensor(
+            self.states[ids], dtype='float32', place=self.device),
+                paddle.to_tensor(
+                    self.actions[ids], dtype='float32',
+                    place=self.device), paddle.to_tensor(
+                        self.next_states[ids],
+                        dtype='float32',
+                        place=self.device), paddle.to_tensor(
+                            self.rewards[ids],
+                            dtype='float32',
+                            place=self.device), paddle.to_tensor(
+                                self.dones[ids],
+                                dtype='float32',
+                                place=self.device))

@@ -57,8 +57,8 @@ class PatchEmbed(nn.Layer):
 
     def forward(self, x):
         B, C, H, W = x.shape
-        
-        x = self.proj(x) # B, 96, H/4, W4 
+
+        x = self.proj(x) # B, 96, H/4, W4
 
         x = x.flatten(2).transpose([0, 2, 1])  # B Ph*Pw 96
         if self.norm is not None:
@@ -85,7 +85,7 @@ class PatchMerging(nn.Layer):
         self.dim = dim
         self.reduction = nn.Linear(4 * dim, 2 * dim, bias_attr=False)
         self.norm = norm_layer(4 * dim)
-    
+
     def forward(self, x):
         """
         x: B, H*W, C
@@ -104,7 +104,7 @@ class PatchMerging(nn.Layer):
         x3 = x[:, 1::2, 1::2, :]  # B H/2 W/2 C
         # 拼接在一起作为一整个张量，展开。通道维度会变成原先的4倍（因为H,W各缩小2倍）
         x = paddle.concat([x0, x1, x2, x3], -1)  # B H/2 W/2 4*C
-        x = x.reshape([B, H * W // 4, 4 * C])  # B H/2*W/2 4*C 
+        x = x.reshape([B, H * W // 4, 4 * C])  # B H/2*W/2 4*C
 
         x = self.norm(x)
         # 通过一个全连接层再调整通道维度为原来的两倍

@@ -14,10 +14,7 @@ bmn_window = 40
 dataset = "datasets/EuroCup2016"
 feat_dir = dataset + '/features'
 out_dir = dataset + '/input_for_bmn'
-label_files = {
-    'train': 'label.json',
-    'validation': 'label.json'
-}
+label_files = {'train': 'label.json', 'validation': 'label.json'}
 
 global fps
 
@@ -55,12 +52,9 @@ def gen_gts_for_bmn(gts_data):
             if duration > bmn_window:
                 after_id = cur_action['start_id']
                 gts_bmn['gts'][-1]['root_actions'].append({
-                    'before_id':
-                    before_id,
-                    'after_id':
-                    after_id,
-                    'actions':
-                    root_actions
+                    'before_id': before_id,
+                    'after_id': after_id,
+                    'actions': root_actions
                 })
                 before_id = root_actions[-1]['end_id']
                 root_actions = [cur_action]
@@ -69,12 +63,9 @@ def gen_gts_for_bmn(gts_data):
             if idx == len(sub_actions) - 1:
                 after_id = max_length
                 gts_bmn['gts'][-1]['root_actions'].append({
-                    'before_id':
-                    before_id,
-                    'after_id':
-                    after_id,
-                    'actions':
-                    root_actions
+                    'before_id': before_id,
+                    'after_id': after_id,
+                    'actions': root_actions
                 })
     return gts_bmn
 
@@ -105,18 +96,14 @@ def combile_gts(gts_bmn, gts_process, mode):
                 # first action
                 segments.append({
                     'actions': [root_action['actions'][0]],
-                    'before_id':
-                    root_action['before_id'],
-                    'after_id':
-                    root_action['actions'][1]['start_id']
+                    'before_id': root_action['before_id'],
+                    'after_id': root_action['actions'][1]['start_id']
                 })
                 # last action
                 segments.append({
                     'actions': [root_action['actions'][-1]],
-                    'before_id':
-                    root_action['actions'][-2]['end_id'],
-                    'after_id':
-                    root_action['after_id']
+                    'before_id': root_action['actions'][-2]['end_id'],
+                    'after_id': root_action['after_id']
                 })
             for segment in segments:
                 before_id = segment['before_id']
@@ -204,7 +191,7 @@ if __name__ == "__main__":
         gts_data = json.load(open(label_file, 'rb'))
         gts_process = gen_gts_for_bmn(gts_data)
         gts_bmn = combile_gts(gts_bmn, gts_process, item)
-    
+
     gts_bmn = save_feature_to_numpy(gts_bmn, out_dir + '/feature')
 
     with open(out_dir + '/label.json', 'w', encoding='utf-8') as f:

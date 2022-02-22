@@ -80,8 +80,8 @@ def get_annotations(cname2cid, datadir):
             x2 = min(im_w - 1, x2)
             y2 = min(im_h - 1, y2)
             # 这里使用xywh格式来表示目标物体真实框
-            gt_bbox[i] = [(x1 + x2) / 2.0, (y1 + y2) / 2.0, x2 - x1 + 1., y2 -
-                          y1 + 1.]
+            gt_bbox[i] = [(x1 + x2) / 2.0, (y1 + y2) / 2.0, x2 - x1 + 1.,
+                          y2 - y1 + 1.]
             is_crowd[i] = 0
             difficult[i] = _difficult
 

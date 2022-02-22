@@ -82,8 +82,9 @@ class Student(object):
                 "<IP address>:<IP port>" (e.g. "127.0.0.1:8080"). Default None.
         """
         if self._started:
-            raise ValueError("The student has been started and cannot register "
-                             "teacher no longer!")
+            raise ValueError(
+                "The student has been started and cannot register "
+                "teacher no longer!")
         if in_path and in_address:
             raise ValueError("Input path and input address should not "
                              "be given at the same time!")
@@ -247,7 +248,8 @@ class Student(object):
             knowledge_queue = Queue.Queue(100)
             cmd_queue = Queue.Queue(5)
             p = Thread(
-                target=read_offline, args=(in_path, cmd_queue, knowledge_queue))
+                target=read_offline,
+                args=(in_path, cmd_queue, knowledge_queue))
             p.daemon = True
             p.start()
 
@@ -373,7 +375,8 @@ class Student(object):
                         "teachers not in the merge_strategy.".format(idx))
                 knowledge_desc.update(desc)
 
-            print("Knowledge merging strategy: {}".format(self._merge_strategy))
+            print("Knowledge merging strategy: {}".format(
+                self._merge_strategy))
             print("Knowledge description after merging:")
             for schema, desc in list(knowledge_desc.items()):
                 print("{}: {}".format(schema, desc))

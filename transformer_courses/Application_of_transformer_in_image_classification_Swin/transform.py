@@ -17,6 +17,7 @@ import cv2
 from PIL import Image
 import six
 
+
 class DecodeImage(object):
     """ decode image """
 
@@ -43,6 +44,7 @@ class DecodeImage(object):
             img = img.transpose((2, 0, 1))
 
         return img
+
 
 class ResizeImage(object):
     """ resize image """
@@ -75,6 +77,7 @@ class ResizeImage(object):
         else:
             return cv2.resize(img, (w, h), interpolation=self.interpolation)
 
+
 class CropImage(object):
     """ crop image """
 
@@ -93,6 +96,7 @@ class CropImage(object):
         w_end = w_start + w
         h_end = h_start + h
         return img[h_start:h_end, w_start:w_end, :]
+
 
 class NormalizeImage(object):
     """ normalize image such as substract mean, divide std
@@ -118,6 +122,7 @@ class NormalizeImage(object):
                           np.ndarray), "invalid input 'img' in NormalizeImage"
         return (img.astype('float32') * self.scale - self.mean) / self.std
 
+
 class ToCHWImage(object):
     """ convert hwc image to chw image
     """
@@ -132,6 +137,7 @@ class ToCHWImage(object):
 
         return img.transpose((2, 0, 1))
 
+
 # 图像预处理方法汇总
 def transform(data, mode='eval'):
 
@@ -139,13 +145,17 @@ def transform(data, mode='eval'):
     decode_image = DecodeImage()
     data = decode_image(data)
     # 图像缩放
-    resize_image = ResizeImage( resize_short=256)
+    resize_image = ResizeImage(resize_short=256)
     data = resize_image(data)
     # 图像裁剪
     crop_image = CropImage(size=224)
     data = crop_image(data)
     # 标准化
-    normalize_image = NormalizeImage(scale=1.0/255.0, mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225],order='')
+    normalize_image = NormalizeImage(
+        scale=1.0 / 255.0,
+        mean=[0.485, 0.456, 0.406],
+        std=[0.229, 0.224, 0.225],
+        order='')
     data = normalize_image(data)
     # 通道变换
     to_CHW_image = ToCHWImage()

@@ -92,7 +92,7 @@ xml文件中包含以下字段：
 
 ```
  ├── dataset
-	├── annotations
+    ├── annotations
   │   ├── fire_000001.xml
   │   ├── fire_000002.xml
   │   ├── fire_000003.xml
@@ -317,7 +317,7 @@ python infer.py
 
 **说明：** 从表1的实验结论中可以发现，有些优化策略在精度优化上起到了正向结果，有些策略则相反。这些结论在不同的模型和不同的数据集上并不是相通的，还需根据具体情况验证。
 
-​			本实验未提供"背景图"数据集(包含5116张图片)，大家自行选择不包含的烟雾和火灾的数据作为负样本即可。
+​            本实验未提供"背景图"数据集(包含5116张图片)，大家自行选择不包含的烟雾和火灾的数据作为负样本即可。
 
 **模型优化思路**：
 
@@ -347,6 +347,3 @@ python infer.py
 ## 开源数据
 
 * 非常感谢[gengyanlei](https://github.com/gengyanlei/fire-smoke-detect-yolov4)和[Thomas-yanxin](https://aistudio.baidu.com/aistudio/datasetdetail/90352/0)开源的火灾和烟雾数据集
-
-  
-

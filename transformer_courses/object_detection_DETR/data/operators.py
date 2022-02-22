@@ -16,12 +16,16 @@ from paddle.fluid.dataloader.collate import default_collate_fn
 from utils import bbox_utils
 
 SIZE_UNIT = ['K', 'M', 'G', 'T']
+
+
 def _parse_size_in_M(size_str):
     num, unit = size_str[:-1], size_str[-1]
     assert unit in SIZE_UNIT, \
             "unknown shm size unit {}".format(unit)
     return float(num) * \
             (1024 ** (SIZE_UNIT.index(unit) - 1))
+
+
 class Compose(object):
     def __init__(self, transforms, num_classes=80):
         self.transforms = transforms
@@ -42,8 +46,8 @@ class Compose(object):
             except Exception as e:
                 stack_info = traceback.format_exc()
                 print("fail to map sample transform [{}] "
-                               "with error: {} and stack:\n{}".format(
-                                   f, e, str(stack_info)))
+                      "with error: {} and stack:\n{}".format(f, e,
+                                                             str(stack_info)))
                 raise e
         return data
 
@@ -60,8 +64,8 @@ class BatchCompose(Compose):
             except Exception as e:
                 stack_info = traceback.format_exc()
                 print("fail to map batch transform [{}] "
-                               "with error: {} and stack:\n{}".format(
-                                   f, e, str(stack_info)))
+                      "with error: {} and stack:\n{}".format(f, e,
+                                                             str(stack_info)))
                 raise e
 
         # remove keys which is not needed by model
@@ -131,7 +135,7 @@ class BaseDataLoader(object):
             sample_transforms, num_classes=num_classes)
         # batch transfrom 
         self._batch_transforms = BatchCompose(batch_transforms, num_classes,
-                                              collate_batch)                                           
+                                              collate_batch)
         self.batch_size = batch_size
         self.shuffle = shuffle
         self.drop_last = drop_last
@@ -169,7 +173,7 @@ class BaseDataLoader(object):
             shm_size = _get_shared_memory_size_in_M()
             if shm_size is not None and shm_size < 1024.:
                 print("Shared memory size is less than 1G, "
-                               "disable shared_memory in DataLoader")
+                      "disable shared_memory in DataLoader")
                 use_shared_memory = False
         self.dataloader = DataLoader(
             dataset=self.dataset,
@@ -197,7 +201,6 @@ class BaseDataLoader(object):
     def next(self):
         # python2 compatibility
         return self.__next__()
-        
 
 
 class BaseOperator(object):
@@ -233,6 +236,7 @@ class BaseOperator(object):
 
     def __str__(self):
         return str(self._id)
+
 
 class Decode(BaseOperator):
     def __init__(self):
@@ -275,6 +279,7 @@ class Decode(BaseOperator):
         sample['im_shape'] = np.array(im.shape[:2], dtype=np.float32)
         sample['scale_factor'] = np.array([1., 1.], dtype=np.float32)
         return sample
+
 
 class RandomFlip(BaseOperator):
     def __init__(self, prob=0.5):
@@ -380,6 +385,7 @@ class RandomFlip(BaseOperator):
             sample['image'] = im
         return sample
 
+
 class RandomSelect(BaseOperator):
     """
     Randomly choose a transformation between transforms1 and transforms2,
@@ -396,6 +402,7 @@ class RandomSelect(BaseOperator):
         if random.random() < self.p:
             return self.transforms1(sample)
         return self.transforms2(sample)
+
 
 class RandomShortSideResize(BaseOperator):
     def __init__(self,
@@ -726,6 +733,7 @@ class RandomSizeCrop(BaseOperator):
         region = self.get_crop_params(sample['image'].shape[:2], [h, w])
         return self.crop(sample, region)
 
+
 class NormalizeImage(BaseOperator):
     def __init__(self, mean=[0.485, 0.456, 0.406], std=[1, 1, 1],
                  is_scale=True):
@@ -795,6 +803,7 @@ class NormalizeBox(BaseOperator):
 
         return sample
 
+
 class BboxXYXY2XYWH(BaseOperator):
     """
     Convert bbox XYXY format to XYWH format.
@@ -824,6 +833,7 @@ class Permute(BaseOperator):
         im = im.transpose((2, 0, 1))
         sample['image'] = im
         return sample
+
 
 class Resize(BaseOperator):
     def __init__(self, target_size, keep_ratio, interp=cv2.INTER_LINEAR):
@@ -1001,6 +1011,7 @@ class Resize(BaseOperator):
 
         return sample
 
+
 class PadMaskBatch(BaseOperator):
     """
     Pad a batch of samples so they can be divisible by a stride.
@@ -1022,7 +1033,7 @@ class PadMaskBatch(BaseOperator):
         Args:
             samples (list): a batch of sample, each is dict.
         """
-        
+
         coarsest_stride = self.pad_to_stride
 
         max_shape = np.array([data['image'].shape for data in samples]).max(

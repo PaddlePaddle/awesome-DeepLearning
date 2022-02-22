@@ -57,14 +57,14 @@ def bbox2result(bboxes, labels, num_classes, img_shape, thr=0.01):
 
             result.append(
                 #对于step1中得分大于阈值的bbox(可能为空), 将bbox及在该类的score放入result列表.
-                paddle.concat((bboxes_select, scores_select), axis=1))
+                paddle.concat(
+                    (bboxes_select, scores_select), axis=1))
 
         return result
 
 
 @HEADS.register()
 class AVARoIHead(nn.Layer):
-
     def __init__(self,
                  assigner,
                  sampler,
@@ -101,9 +101,8 @@ class AVARoIHead(nn.Layer):
         cls_score, bbox_pred = self.bbox_head(
             bbox_feat, rois, rois_num
         )  #deal with: when roi's width or height = 0 , roi_align is wrong
-        bbox_results = dict(cls_score=cls_score,
-                            bbox_pred=bbox_pred,
-                            bbox_feats=bbox_feat)
+        bbox_results = dict(
+            cls_score=cls_score, bbox_pred=bbox_pred, bbox_feats=bbox_feat)
         return bbox_results
 
     def _bbox_forward_train(self, x, sampling_results, gt_bboxes, gt_labels):
@@ -122,13 +121,10 @@ class AVARoIHead(nn.Layer):
         num_imgs = len(img_metas[0])
         sampling_results = []
         for i in range(num_imgs):
-            assign_result = self.bbox_assigner.assign(proposal_list[i],
-                                                      gt_bboxes[i],
-                                                      gt_labels[i])
-            sampling_result = self.bbox_sampler.sample(assign_result,
-                                                       proposal_list[i],
-                                                       gt_bboxes[i],
-                                                       gt_labels[i])
+            assign_result = self.bbox_assigner.assign(
+                proposal_list[i], gt_bboxes[i], gt_labels[i])
+            sampling_result = self.bbox_sampler.sample(
+                assign_result, proposal_list[i], gt_bboxes[i], gt_labels[i])
             sampling_results.append(sampling_result)
 
         #2. forward and loss
@@ -143,11 +139,8 @@ class AVARoIHead(nn.Layer):
         x_shape = x[0].shape
         #assert x_shape[0] == 1, 'only accept 1 sample at test mode'
 
-        det_bboxes, det_labels = self.simple_test_bboxes(x,
-                                                         img_shape,
-                                                         proposal_list,
-                                                         self.action_thr,
-                                                         rescale=rescale)
+        det_bboxes, det_labels = self.simple_test_bboxes(
+            x, img_shape, proposal_list, self.action_thr, rescale=rescale)
 
         bbox_results = bbox2result(det_bboxes, det_labels,
                                    self.bbox_head.num_classes, img_shape,

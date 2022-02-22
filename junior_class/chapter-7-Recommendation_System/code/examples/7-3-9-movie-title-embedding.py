@@ -18,14 +18,21 @@ import numpy as np
 import paddle.nn.functional as F
 
 # 自定义两个电影名称数据
-mov_title_data = np.array(((1, 2, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), 
-                            (2, 3, 4, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0))).reshape(2, 1, 15).astype('int64')
+mov_title_data = np.array(((1, 2, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+                           (2, 3, 4, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                            0))).reshape(2, 1, 15).astype('int64')
 # 对电影名称做映射，紧接着FC和pool层
 MOV_TITLE_DICT_SIZE = 1000 + 1
 mov_title_emb = Embedding(num_embeddings=MOV_TITLE_DICT_SIZE, embedding_dim=32)
-mov_title_conv = Conv2D(in_channels=1, out_channels=1, kernel_size=(3, 1), stride=(2, 1), padding=0)
+mov_title_conv = Conv2D(
+    in_channels=1,
+    out_channels=1,
+    kernel_size=(3, 1),
+    stride=(2, 1),
+    padding=0)
 # 使用 3 * 3卷积层代替全连接层
-mov_title_conv2 = Conv2D(in_channels=1, out_channels=1, kernel_size=(3, 1), stride=1, padding=0)
+mov_title_conv2 = Conv2D(
+    in_channels=1, out_channels=1, kernel_size=(3, 1), stride=1, padding=0)
 
 mov_title_data = paddle.to_tensor(mov_title_data)
 print("电影名称数据的输入形状: ", mov_title_data.shape)
@@ -48,5 +55,7 @@ mov_title_feat = paddle.reshape(mov_title_feat, [batch_size, -1])
 print("电影名称特征的最终特征输出形状：", mov_title_feat.shape)
 
 print("\n计算的电影名称的特征是", mov_title_feat.numpy(), "\n其形状是：", mov_title_feat.shape)
-print("\n电影名称为 {} 计算得到的特征是：{}".format(mov_title_data.numpy()[0,:, 0], mov_title_feat.numpy()[0]))
-print("\n电影名称为 {} 计算得到的特征是：{}".format(mov_title_data.numpy()[1,:, 0], mov_title_feat.numpy()[1]))
+print("\n电影名称为 {} 计算得到的特征是：{}".format(mov_title_data.numpy()[0, :, 0],
+                                      mov_title_feat.numpy()[0]))
+print("\n电影名称为 {} 计算得到的特征是：{}".format(mov_title_data.numpy()[1, :, 0],
+                                      mov_title_feat.numpy()[1]))

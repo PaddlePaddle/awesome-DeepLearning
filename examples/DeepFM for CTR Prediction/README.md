@@ -71,7 +71,7 @@ DNN深度神经网络层结构如下图所示：
   26个分类离散特征形式如下图所示：
  ![](https://ai-studio-static-online.cdn.bcebos.com/87f580fa92fd456b892954fc8f1ec069f2bcb8b13de945beaa758090da9228d1)
 
-  
+
 
 ```python
 # 查看数据格式
@@ -118,7 +118,7 @@ def predata(rawLine):
         else:continue
         if fea not in output.keys():output[fea]=[val]#连续特征缺失，添加新特征
         else:output[fea].append(val)#末尾添加
-    
+
     #填充
     if len(output.keys()) != slots:
         for fea in slots_fea:
@@ -149,7 +149,7 @@ class DeepFM_Dataset():
         batchData=[]
         cnt=0
         #从所有的文件中一行一行读取
-        for dataFile in self.dataFiles: 
+        for dataFile in self.dataFiles:
             with open(self.dataFileDir.strip('/')+'/'+dataFile,'r') as lines:
                 for line in lines:
                     batchData.append(predata(line))
@@ -165,7 +165,7 @@ class DeepFM_Dataset():
                         batchData=[]
 
     def getNextBatchData(self):
-        return next(self.next_batch_reader)# [[label,sparse fea,dense fea],...]   shape:[batchsize,1+26+13] 
+        return next(self.next_batch_reader)# [[label,sparse fea,dense fea],...]   shape:[batchsize,1+26+13]
 ```
 
 
@@ -216,17 +216,17 @@ class DeepFMLayer(nn.Layer):
 class FM(nn.Layer):
     #FM层，负责抽取low-order特征
     def __init__(self,
-            sparse_feature_number = 1000001, 
+            sparse_feature_number = 1000001,
             sparse_feature_dim = 9,
             dense_feature_dim = 13,
             sparse_num_field = 26):
         super(FM, self).__init__()
-        self.sparse_feature_number = sparse_feature_number # 1000001 
+        self.sparse_feature_number = sparse_feature_number # 1000001
         self.sparse_feature_dim = sparse_feature_dim# 9
         self.dense_feature_dim = dense_feature_dim#13
         self.sparse_num_field = sparse_num_field# sparse_inputs_slots-1==>26
         self.layer_sizes = layer_sizes#  fc_sizes: [512, 256, 128, 32]
-        
+
         # 一阶稀疏特征
         self.sparse_feature_oneOrderWeight=paddle.nn.Embedding(
             sparse_feature_number,
@@ -252,7 +252,7 @@ class FM(nn.Layer):
         )
 
     def forward(self,sparse_feature,dense_feature):
-        # 一阶特征   
+        # 一阶特征  
 
         '''
         计算一阶特征: y_1order = 0 + w*x
@@ -267,25 +267,25 @@ class FM(nn.Layer):
         dense_wx=paddle.unsqueeze(dense_wx, axis=2)# [batchsize,dense_feature_dim,1]
 
         y_pred_first_order=paddle.sum(sparse_wx,axis=1)+paddle.sum(dense_wx,axis=1)# [batchsize,dense_feature_dim,1]---> [batchsize,1]
-        
+
         # 二阶特征交叉
         '''
         y_2order=\sum{<Vi,Vj>xi xj}
         优化后计算公式为：
-        vi,j * xi的平方和 减去 vi,j * vi 的和的平方，再取1/2   
+        vi,j * xi的平方和 减去 vi,j * vi 的和的平方，再取1/2  
         '''
         #稀疏特征查表: vij*xi<-vij *1
         sparse_vx= self.sparse_latent_vecs(sparse_feature) # [batchsize,sparse_field_num,embed_dim]
         '''
         连续特征矩阵乘法：
-        
+
         dense_fea: [batchsize,dense_fea_dim,1]
         dense_latent_vecs:[1,dense_fea_dim,embed_dim]
         vij*xi <-  广播逐元素乘法（dense_fea，dense_latent_vecs）  #[batchsize,dense_fea_dim,embed_dim]
         '''
         dense_x=paddle.unsqueeze(dense_feature,axis=2) # [batchsize,dense_fea_dim]->[batchsize,dense_fea_dim,1]
         dense_vx=paddle.multiply(dense_x,self.dense_latent_vecs)#[batchsize,dense_fea_dim,embed_dim]
-        
+
         concat_vx=paddle.concat([sparse_vx,dense_vx],axis=1)#[batchsize,sparse_field_num+dense_fea_dim,embed_dim]
         embedding=concat_vx
         #平方的和
@@ -398,7 +398,7 @@ def train(
                 print("processing:{}%".format(100*batchidx/batchnum))
                 print("label data 0-num: {0}  1-num:{1}".format( np.sum(data[0]<0.5),np.sum(data[0]>0.5) ) )
                 print("epoch: {}, batch_id: {}, loss : {}, auc: {}".format(epoch, batchidx, loss.numpy(),auc.accumulate()))
-                
+
             adam.step()
             adam.clear_grad()
 
@@ -522,7 +522,7 @@ def predict(deepFM_model,deepFM_Dataset,batchnum):
         auc = paddle.metric.Auc()
         auc.update(preds=predicts,labels=label_data)
         loss = F.binary_cross_entropy(predicts1, label_data)
-        
+
         if batchidx % (batchnum//20)==0:
             print(paddle.concat([predicts[:4,],label_data[:4,]],axis=1).numpy())
             print("batchidx:{} loss:{} auc:{}".format(batchidx,loss.numpy(),auc.accumulate()))

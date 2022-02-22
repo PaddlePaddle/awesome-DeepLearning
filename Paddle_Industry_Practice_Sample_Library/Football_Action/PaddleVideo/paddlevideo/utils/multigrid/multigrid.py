@@ -7,6 +7,7 @@ class MultigridSchedule(object):
     """
     This class defines multigrid training schedule and update cfg accordingly.
     """
+
     def init_multigrid(self, cfg):
         """
         Update cfg based on multigrid settings.
@@ -68,8 +69,8 @@ class MultigridSchedule(object):
             cfg (configs): the updated cfg.
             changed (bool): whether to change long cycle shape at this epoch
         """
-        base_b, base_t, base_s = get_current_long_cycle_shape(
-            self.schedule, cur_epoch)
+        base_b, base_t, base_s = get_current_long_cycle_shape(self.schedule,
+                                                              cur_epoch)
         if base_s != cfg.PIPELINE.train.transform[1]['MultiCrop'][
                 'target_size'] or base_t != cfg.PIPELINE.train.decode_sampler.num_frames:
             #NOTE Modify
@@ -77,7 +78,8 @@ class MultigridSchedule(object):
             # cfg.MODEL.head.num_frames = base_t
             # cfg.MODEL.head.crop_size  = base_s
             cfg.PIPELINE.train.decode_sampler.num_frames = base_t
-            cfg.PIPELINE.train.transform[1]['MultiCrop']['target_size'] = base_s
+            cfg.PIPELINE.train.transform[1]['MultiCrop'][
+                'target_size'] = base_s
             cfg.DATASET.batch_size = base_b * cfg.MULTIGRID.default_batch_size  #change bs
 
             bs_factor = (float(cfg.DATASET.batch_size) /
@@ -122,8 +124,8 @@ class MultigridSchedule(object):
 
         default_size = float(
             cfg.PIPELINE.train.decode_sampler.num_frames *
-            cfg.PIPELINE.train.transform[1]['MultiCrop']['target_size']**
-            2)  # 32 * 224 * 224  C*H*W
+            cfg.PIPELINE.train.transform[1]['MultiCrop']['target_size']
+            **2)  # 32 * 224 * 224  C*H*W
         default_iters = steps[-1]  # 196
 
         # Get shapes and average batch size for each long cycle shape.
@@ -135,9 +137,8 @@ class MultigridSchedule(object):
             base_t = int(
                 round(cfg.PIPELINE.train.decode_sampler.num_frames * t_factor))
             base_s = int(
-                round(
-                    cfg.PIPELINE.train.transform[1]['MultiCrop']['target_size']
-                    * s_factor))
+                round(cfg.PIPELINE.train.transform[1]['MultiCrop'][
+                    'target_size'] * s_factor))
             if cfg.MULTIGRID.SHORT_CYCLE:
                 shapes = [
                     [

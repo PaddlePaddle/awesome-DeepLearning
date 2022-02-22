@@ -53,9 +53,9 @@ TrainReader:
     - LetterBoxResize: {target_size: [608, 1088]}
     - MOTRandomAffine: {reject_outside: False}
     - RandomFlip: {}
-    
+
     - Cutmix: {}
-    
+
     - BboxXYXY2XYWH: {}
     - NormalizeBox: {}
     - NormalizeImage: {mean: [0, 0, 0], std: [1, 1, 1]}
@@ -207,7 +207,7 @@ class DLA(nn.Layer):
     """
 
     def __init__(self, depth=34, residual_root=False):
-      
+
 ```
 
 
@@ -231,7 +231,7 @@ GIoU提出一种计算方式，对于两个框A和B，先计算出A、B的最小
 $$
 GIoU = IoU - \frac{C-(A \cup B)}{C}
 $$
-GIoU Loss = 1 - GIoU. 如想尝试增加GIoU Loss，可用 `code/centernet_head_iou_head.py` 替换 `ppdet/modeling/heads/centernet_head.py` 中的代码，并且修改 `ppdet/modeling/architectures/fairmot.py` 文件，在第84行增加 `'iou_loss': det_outs['iou_loss'],` : 
+GIoU Loss = 1 - GIoU. 如想尝试增加GIoU Loss，可用 `code/centernet_head_iou_head.py` 替换 `ppdet/modeling/heads/centernet_head.py` 中的代码，并且修改 `ppdet/modeling/architectures/fairmot.py` 文件，在第84行增加 `'iou_loss': det_outs['iou_loss'],` :
 
 ```python
 det_loss = det_outs['det_loss']
@@ -275,4 +275,3 @@ return loss
 | dla46c 4gpu bs8 momentum + imagenet_pretrain                 | 61.2 | 16.863                   |
 | dla60 4gpu bs8 momentum + imagenet_pretrain                  | 58.8 | 12.531                   |
 | dla102 4gpu bs8 momentum + imagenet_pretrain                 | 54.8 | 12.469                   |
-

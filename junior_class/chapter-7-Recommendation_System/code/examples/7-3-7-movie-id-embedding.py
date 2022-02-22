@@ -1,4 +1,3 @@
-
 # copyright (c) 2021 PaddlePaddle Authors. All Rights Reserve.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,11 +24,12 @@ MOV_DICT_SIZE = 3952 + 1
 mov_emb = Embedding(num_embeddings=MOV_DICT_SIZE, embedding_dim=32)
 mov_fc = Linear(32, 32)
 
-
 print("输入的电影ID是:", mov_id_data)
 mov_id_data = paddle.to_tensor(mov_id_data)
 mov_id_feat = mov_fc(mov_emb(mov_id_data))
 mov_id_feat = F.relu(mov_id_feat)
 print("计算的电影ID的特征是", mov_id_feat.numpy(), "\n其形状是：", mov_id_feat.shape)
-print("\n电影ID为 {} 计算得到的特征是：{}".format(mov_id_data.numpy()[0], mov_id_feat.numpy()[0]))
-print("电影ID为 {} 计算得到的特征是：{}".format(mov_id_data.numpy()[1], mov_id_feat.numpy()[1]))
+print("\n电影ID为 {} 计算得到的特征是：{}".format(mov_id_data.numpy()[0],
+                                      mov_id_feat.numpy()[0]))
+print("电影ID为 {} 计算得到的特征是：{}".format(mov_id_data.numpy()[1],
+                                    mov_id_feat.numpy()[1]))

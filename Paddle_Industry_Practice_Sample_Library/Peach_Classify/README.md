@@ -16,7 +16,7 @@
 <br/>
 
 
-**如果您觉得本案例对您有帮助，欢迎Star收藏一下，不易走丢哦~，链接指路：** 
+**如果您觉得本案例对您有帮助，欢迎Star收藏一下，不易走丢哦~，链接指路：**
 [https://github.com/PaddlePaddle/awesome-DeepLearning](http://https://github.com/PaddlePaddle/awesome-DeepLearning)
 
 # 1. 方案设计
@@ -26,7 +26,7 @@
 <center><img src="./imgs/2.png" width=800></center>
 
 
-# 2. 环境搭建与准备	
+# 2. 环境搭建与准备
 
 安装PaddlePaddle: 参考[快速安装](https://www.paddlepaddle.org.cn/install/quick),aistudio已经预先安装好了PaddlePaddle。
 
@@ -54,26 +54,26 @@ pip install paddlehub==2.0.4 -i https://pypi.tuna.tsinghua.edu.cn/simple
 数据分为训练集、验证集和测试集，训练集为每种桃子各1500张，验证集每种桃子各100张，测试集每种桃子为15张。
 
 ```
-├─data: 数据目录	
-  ├─train_list.txt：训练集数据列表	
-  ├─test_list.txt：测试集数据列表	
-  ├─validate_list.txt：验证集数据列表	
-  ├─label_list.txt：标签列表	
-  └─……	
+├─data: 数据目录
+  ├─train_list.txt：训练集数据列表
+  ├─test_list.txt：测试集数据列表
+  ├─validate_list.txt：验证集数据列表
+  ├─label_list.txt：标签列表
+  └─……
 ```
 训练集、验证集和测试集的数据列表文件的格式如下，列与列之间以空格键分隔。
 
 ```
-图片1路径 图片1标签	
-图片2路径 图片2标签	
+图片1路径 图片1标签
+图片2路径 图片2标签
 ...
 ```
 
 label_list.txt的格式如下：
 
 ```
-分类1名称	
-分类2名称	
+分类1名称
+分类2名称
 ...
 ```
 
@@ -96,7 +96,7 @@ import paddlehub as hub
 
 
 class DemoDataset(paddle.io.Dataset):
-    def __init__(self, transforms, num_classes=4, mode='train'):	
+    def __init__(self, transforms, num_classes=4, mode='train'):
         # 数据集存放位置
         self.dataset_dir = "./work/peach-classification"  #dataset_dir为数据集实际路径，需要填写全路径
         self.transforms = transforms
@@ -109,16 +109,16 @@ class DemoDataset(paddle.io.Dataset):
             self.file = 'test_list.txt'
         else:
             self.file = 'validate_list.txt'
-        
+
         self.file = os.path.join(self.dataset_dir , self.file)
         self.data = []
-        
+
         with open(self.file, 'r') as f:
             for line in f.readlines():
                 line = line.strip()
                 if line != '':
                     self.data.append(line)
-            
+
     def __getitem__(self, idx):
         img_path, grt = self.data[idx].split(' ')
         img_path = os.path.join(self.dataset_dir, img_path)
@@ -183,7 +183,7 @@ import paddlehub as hub
 model = hub.Module(name='resnet50_vd_imagenet_ssld', label_list=["R0", "B1", "M2", "S3"])
 ```
 
-# **5. 模型训练** 
+# **5. 模型训练**
 完整的训练过程包括：构建训练集，指定优化器，使用Resnet50模型进行Fine-tune。命令如下：
 
 

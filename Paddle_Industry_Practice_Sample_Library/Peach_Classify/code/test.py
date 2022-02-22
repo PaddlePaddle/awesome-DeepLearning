@@ -5,7 +5,8 @@ import matplotlib.pyplot as plt
 
 
 def predict():
-    model = hub.Module(name='resnet50_vd_imagenet_ssld', label_list=["R0", "B1", "M2", "S3"])
+    model = hub.Module(
+        name='resnet50_vd_imagenet_ssld', label_list=["R0", "B1", "M2", "S3"])
     img_path = './dataset/test.jpg'
     img = Image.open(img_path)
     plt.imshow(img)

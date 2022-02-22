@@ -23,21 +23,22 @@ from model import SkepForSquenceClassification
 def predict(text, text_pair, model, tokenizer, id2label, max_seq_len=256):
 
     model.eval()
-        
+
     # processing input text
-    encoded_inputs = tokenizer(text=text, text_pair=text_pair, max_seq_len=max_seq_len)
+    encoded_inputs = tokenizer(
+        text=text, text_pair=text_pair, max_seq_len=max_seq_len)
     input_ids = paddle.to_tensor([encoded_inputs["input_ids"]])
     token_type_ids = paddle.to_tensor([encoded_inputs["token_type_ids"]])
 
     # predict by model and decoding result 
     logits = model(input_ids, token_type_ids=token_type_ids)
-    label_id =  paddle.argmax(logits, axis=1).numpy()[0]
+    label_id = paddle.argmax(logits, axis=1).numpy()[0]
 
     # print predict result
     print(f"text: {text} \ntext_pair:{text_pair} \nlabel: {id2label[label_id]}")
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     # yapf: disable
     parser = argparse.ArgumentParser()
     parser.add_argument("--model_path", type=str, default=None, help="model path that you saved")
@@ -54,11 +55,10 @@ if __name__=="__main__":
     # load model
     loaded_state_dict = paddle.load(args.model_path)
     ernie = SkepModel.from_pretrained(model_name)
-    model = SkepForSquenceClassification(ernie, num_classes=2)    
+    model = SkepForSquenceClassification(ernie, num_classes=2)
     model.load_dict(loaded_state_dict)
- 
+
     # predict with model
     text = "display#quality"
     text_pair = "mk16i用后的体验感觉不错，就是有点厚，屏幕分辨率高，运行流畅，就是不知道能不能刷4.0的系统啊"
     predict(text, text_pair, model, tokenizer, id2label, max_seq_len=args.max_seq_len)
-    

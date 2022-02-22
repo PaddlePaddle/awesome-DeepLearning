@@ -14,40 +14,32 @@
 
 import jieba
 
+
 # 中文Jieba分词
-def jieba_cut(in_file,out_file):
-    out_f = open(out_file,'w',encoding='utf8')
-    with open(in_file,'r',encoding='utf8') as f:
+def jieba_cut(in_file, out_file):
+    out_f = open(out_file, 'w', encoding='utf8')
+    with open(in_file, 'r', encoding='utf8') as f:
         for line in f.readlines():
             line = line.strip()
             if not line:
                 continue
             cut_line = ' '.join(jieba.cut(line))
-            out_f.write(cut_line+'\n')
+            out_f.write(cut_line + '\n')
     out_f.close()
 
 
-zn_dir='zh-en/train.tags.zh-en.zh.txt'
-cut_zn_dir='zh-en/train.tags.zh-en.zh.cut.txt'
-jieba_cut(zn_dir,cut_zn_dir)
+zn_dir = 'zh-en/train.tags.zh-en.zh.txt'
+cut_zn_dir = 'zh-en/train.tags.zh-en.zh.cut.txt'
+jieba_cut(zn_dir, cut_zn_dir)
 
-zn_dir='dev_cn.txt'
-cut_zn_dir='dev_cn.cut.txt'
-jieba_cut(zn_dir,cut_zn_dir)
+zn_dir = 'dev_cn.txt'
+cut_zn_dir = 'dev_cn.cut.txt'
+jieba_cut(zn_dir, cut_zn_dir)
 
-zn_dir='dev_cn.txt'
-cut_zn_dir='dev_cn.cut.txt'
-jieba_cut(zn_dir,cut_zn_dir)
+zn_dir = 'dev_cn.txt'
+cut_zn_dir = 'dev_cn.cut.txt'
+jieba_cut(zn_dir, cut_zn_dir)
 
-zn_dir='test_cn.txt'
-cut_zn_dir='test_cn.cut.txt'
-jieba_cut(zn_dir,cut_zn_dir)
-
-
-
-
-
-
-
-
-
+zn_dir = 'test_cn.txt'
+cut_zn_dir = 'test_cn.cut.txt'
+jieba_cut(zn_dir, cut_zn_dir)

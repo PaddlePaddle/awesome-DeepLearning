@@ -19,8 +19,6 @@ import datetime
 
 from paddle.distributed import ParallelEnv
 
-
-
 Color = {
     'RED': '\033[31m',
     'HEADER': '\033[35m',  # deep purple
@@ -55,15 +53,17 @@ def setup_logger(output=None, name="paddlevideo", level="INFO"):
     Returns:
         logging.Logger: a logger
     """
+
     def time_zone(sec, fmt):
         real_time = datetime.datetime.now()
         return real_time.timetuple()
+
     logging.Formatter.converter = time_zone
 
     logger = logging.getLogger(name)
     if level == "INFO":
         logger.setLevel(logging.INFO)
-    elif level=="DEBUG":
+    elif level == "DEBUG":
         logger.setLevel(logging.DEBUG)
     logger.propagate = False
 
@@ -73,8 +73,7 @@ def setup_logger(output=None, name="paddlevideo", level="INFO"):
             datefmt="%m/%d %H:%M:%S")
     else:
         plain_formatter = logging.Formatter(
-            "[%(asctime)s] %(message)s",
-            datefmt="%m/%d %H:%M:%S")
+            "[%(asctime)s] %(message)s", datefmt="%m/%d %H:%M:%S")
     # stdout logging: master only
     local_rank = ParallelEnv().local_rank
     if local_rank == 0:

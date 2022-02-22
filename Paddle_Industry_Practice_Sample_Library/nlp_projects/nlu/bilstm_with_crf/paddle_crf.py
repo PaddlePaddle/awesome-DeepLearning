@@ -351,11 +351,11 @@ class ViterbiDecoder(nn.Layer):
         lengths_np = lengths.numpy()
         batch_path = []
         max_len = 0
-        
+
         for batch_id in range(batch_size):
             best_last_tag = last_ids[batch_id]
             path = [best_last_tag]
-            for hist in reversed(historys[:(lengths_np[batch_id]-1)]):
+            for hist in reversed(historys[:(lengths_np[batch_id] - 1)]):
                 best_last_tag = hist[batch_id][best_last_tag]
                 path.append(best_last_tag)
 
@@ -373,4 +373,3 @@ class ViterbiDecoder(nn.Layer):
                 0]:
             self._batch_index = paddle.arange(end=batch_size, dtype="int64")
         return self._batch_index
-

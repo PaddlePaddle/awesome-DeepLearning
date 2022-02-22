@@ -1,6 +1,7 @@
 import paddle
 import paddle.nn as nn
 
+
 class DETR(nn.Layer):
     def __init__(self,
                  backbone,
@@ -49,7 +50,7 @@ class DETR(nn.Layer):
         for i, k in enumerate(input_def):
             inputs[k] = data[i]
         return inputs
-    
+
     def model_arch(self, ):
         pass
 

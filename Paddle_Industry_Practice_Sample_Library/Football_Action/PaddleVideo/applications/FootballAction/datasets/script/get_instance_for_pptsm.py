@@ -60,8 +60,8 @@ def process(item, fps, save_folder):
                 data = f.read()
             frames.append(data)
         # print(label_str)
-        outname = '%s/%s_%08d_%08d_%s.pkl' % (save_folder, basename, start, end,
-                                              label_str)
+        outname = '%s/%s_%08d_%08d_%s.pkl' % (save_folder, basename, start,
+                                              end, label_str)
         with open(outname, 'wb') as f:
             pickle.dump((basename, label, frames), f, -1)
 

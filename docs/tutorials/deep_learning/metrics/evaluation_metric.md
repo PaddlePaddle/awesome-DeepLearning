@@ -84,4 +84,3 @@ $$sensitivity =\frac{TP}{TP + FN}$$
 $$specificity =\frac{TN}{TN + FP}$$
 
 即无病（阴性）人群中，检测出阴性的几率。（检测出确实没病的能力）
-

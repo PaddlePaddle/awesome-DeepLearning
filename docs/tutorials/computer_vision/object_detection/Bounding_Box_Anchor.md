@@ -64,7 +64,7 @@ import matplotlib.patches as patches
 from matplotlib.image import imread
 import math
 
-# 定义画矩形框的程序    
+# 定义画矩形框的程序  
 def draw_rectangle(currentAxis, bbox, edgecolor = 'k', facecolor = 'y', fill=False, linestyle='-'):
     # currentAxis，坐标轴，通过plt.gca()获取
     # bbox，边界框，包含四个数值的list， [x1, y1, x2, y2]
@@ -79,7 +79,7 @@ def draw_rectangle(currentAxis, bbox, edgecolor = 'k', facecolor = 'y', fill=Fal
                            edgecolor=edgecolor,facecolor=facecolor,fill=fill, linestyle=linestyle)
     currentAxis.add_patch(rect)
 
-    
+
 plt.figure(figsize=(10, 10))
 # 传入图片路径
 filename = '/home/aistudio/work/images/section3/000000086956.jpg'
@@ -110,7 +110,7 @@ def draw_anchor_box(center, length, scales, ratios, img_height, img_width):
     for scale in scales:
         for ratio in ratios:
             h = length*scale*math.sqrt(ratio)
-            w = length*scale/math.sqrt(ratio) 
+            w = length*scale/math.sqrt(ratio)
             x1 = max(center[0] - w/2., 0.)
             y1 = max(center[1] - h/2., 0.)
             x2 = min(center[0] + w/2. - 1.0, img_width - 1.0)
@@ -122,7 +122,7 @@ def draw_anchor_box(center, length, scales, ratios, img_height, img_width):
         draw_rectangle(currentAxis, bbox, edgecolor = 'b')
 
 img_height = im.shape[0]
-img_width = im.shape[1] 
+img_width = im.shape[1]
 # 绘制锚框
 draw_anchor_box([300., 500.], 100., [2.0], [0.5, 1.0, 2.0], img_height, img_width)
 
@@ -153,4 +153,3 @@ plt.show()
 [2] [YOLO9000: Better, Faster, Stronger](https://arxiv.org/pdf/1612.08242v1.pdf)
 
 [3] [You Only Look Once: Unified, Real-Time Object Detection](https://arxiv.org/pdf/1506.02640.pdf)
-

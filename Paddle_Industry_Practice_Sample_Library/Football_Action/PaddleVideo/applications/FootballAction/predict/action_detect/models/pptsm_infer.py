@@ -16,13 +16,14 @@ from paddle.inference import create_predictor
 
 class InferModel(object):
     """pptsm infer"""
-    def __init__(self, cfg, name='PPTSM'): 
+
+    def __init__(self, cfg, name='PPTSM'):
         name = name.upper()
-        self.name           = name
-        model_file          = cfg[name]['model_file']
-        params_file         = cfg[name]['params_file']
-        gpu_mem             = cfg[name]['gpu_mem']
-        device_id           = cfg[name]['device_id']
+        self.name = name
+        model_file = cfg[name]['model_file']
+        params_file = cfg[name]['params_file']
+        gpu_mem = cfg[name]['gpu_mem']
+        device_id = cfg[name]['device_id']
 
         # model init
         config = Config(model_file, params_file)
@@ -40,14 +41,12 @@ class InferModel(object):
         output_names = self.predictor.get_output_names()
         self.output_tensor = self.predictor.get_output_handle(output_names[0])
 
-
     def infer(self, input):
         """infer"""
         self.input_tensor.copy_from_cpu(input)
         self.predictor.run()
         output = self.output_tensor.copy_to_cpu()
         return output
-
 
     def predict(self, infer_config):
         """predict"""
@@ -63,11 +62,11 @@ class InferModel(object):
 
 
 if __name__ == "__main__":
-    cfg_file = '/home/work/inference/configs/configs.yaml' 
+    cfg_file = '/home/work/inference/configs/configs.yaml'
     cfg = parse_config(cfg_file)
     model = InferModel(cfg)
 
-    imgs_path = '/home/work/datasets/WorldCup2018/frames/6e577252c4004961ac7caa738a52c238/' 
+    imgs_path = '/home/work/datasets/WorldCup2018/frames/6e577252c4004961ac7caa738a52c238/'
     imgs_list = get_images(imgs_path)
     t0 = time.time()
     cfg['PPTSM']['frame_list'] = imgs_list

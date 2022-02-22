@@ -26,7 +26,7 @@ item = data[0]
 print(item)
 
 item = item.strip().split("::")
-usr_id,movie_id,score = item[0],item[1],item[2]
+usr_id, movie_id, score = item[0], item[1], item[2]
 print("评分数据条数：", len(data))
 print("用户ID：", usr_id)
 print("电影ID：", movie_id)
@@ -42,16 +42,15 @@ def get_rating_info(path):
     for item in data:
         item = item.strip().split("::")
         # 处理每行数据，分别得到用户ID，电影ID，和评分
-        usr_id,movie_id,score = item[0],item[1],item[2]
+        usr_id, movie_id, score = item[0], item[1], item[2]
         if usr_id not in rating_info.keys():
-            rating_info[usr_id] = {movie_id:float(score)}
+            rating_info[usr_id] = {movie_id: float(score)}
         else:
             rating_info[usr_id][movie_id] = float(score)
     return rating_info
+
 
 # 获得评分数据
 #rating_path = "./work/ml-1m/ratings.dat"
 rating_info = get_rating_info(rating_path)
 print("ID为1的用户一共评价了{}个电影".format(len(rating_info['1'])))
-
-

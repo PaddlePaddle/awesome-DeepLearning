@@ -23,8 +23,8 @@ from ..modeling.builder import build_model
 from ..solver import build_lr, build_optimizer
 from ..utils import do_preciseBN
 from paddlevideo.utils import get_logger, coloring
-from paddlevideo.utils import (AverageMeter, build_record, log_batch, log_epoch,
-                               save, load, mkdir)
+from paddlevideo.utils import (AverageMeter, build_record, log_batch,
+                               log_epoch, save, load, mkdir)
 from paddlevideo.utils.multigrid import MultigridSchedule, aggregate_sub_bn_stats, subn_load, subn_save, is_eval_epoch
 
 
@@ -35,8 +35,7 @@ def construct_loader(cfg, places, validate, precise_bn, num_iters_precise_bn,
     precise_bn_dataloader_setting = dict(
         batch_size=batch_size,
         num_workers=cfg.DATASET.get('num_workers', 0),
-        places=places,
-    )
+        places=places, )
     if precise_bn:
         cfg.DATASET.train.num_samples_precise_bn = num_iters_precise_bn * batch_size * world_size
         precise_bn_dataset = build_dataset(
@@ -51,10 +50,9 @@ def construct_loader(cfg, places, validate, precise_bn, num_iters_precise_bn,
         # get batch size list in short cycle schedule
         bs_factor = [
             int(
-                round((float(
-                    cfg.PIPELINE.train.transform[1]['MultiCrop']['target_size'])
-                       / (s * cfg.MULTIGRID.default_crop_size))**2))
-            for s in cfg.MULTIGRID.short_cycle_factors
+                round((float(cfg.PIPELINE.train.transform[1]['MultiCrop'][
+                    'target_size']) / (s * cfg.MULTIGRID.default_crop_size))**
+                      2)) for s in cfg.MULTIGRID.short_cycle_factors
         ]
         batch_sizes = [
             batch_size * bs_factor[0],
@@ -65,20 +63,19 @@ def construct_loader(cfg, places, validate, precise_bn, num_iters_precise_bn,
             batch_size=batch_sizes,
             multigrid=True,
             num_workers=cfg.DATASET.get('num_workers', 0),
-            places=places,
-        )
+            places=places, )
     else:
         train_dataloader_setting = precise_bn_dataloader_setting
 
     train_loader = build_dataloader(train_dataset, **train_dataloader_setting)
     if validate:
         valid_dataset = build_dataset((cfg.DATASET.valid, cfg.PIPELINE.valid))
-        validate_dataloader_setting = dict(batch_size=batch_size,
-                                           num_workers=cfg.DATASET.get(
-                                               'num_workers', 0),
-                                           places=places,
-                                           drop_last=False,
-                                           shuffle=False)
+        validate_dataloader_setting = dict(
+            batch_size=batch_size,
+            num_workers=cfg.DATASET.get('num_workers', 0),
+            places=places,
+            drop_last=False,
+            shuffle=False)
         valid_loader = build_dataloader(valid_dataset,
                                         **validate_dataloader_setting)
     else:
@@ -116,9 +113,8 @@ def build_trainer(cfg, places, parallel, validate, precise_bn,
                          )
 
     lr = build_lr(cfg.OPTIMIZER.learning_rate, len(train_loader))
-    optimizer = build_optimizer(cfg.OPTIMIZER,
-                                lr,
-                                parameter_list=model.parameters())
+    optimizer = build_optimizer(
+        cfg.OPTIMIZER, lr, parameter_list=model.parameters())
 
     return (
         model,
@@ -126,8 +122,7 @@ def build_trainer(cfg, places, parallel, validate, precise_bn,
         optimizer,
         train_loader,
         valid_loader,
-        precise_bn_loader,
-    )
+        precise_bn_loader, )
 
 
 def train_model_multigrid(cfg, world_size=1, validate=True):
@@ -156,7 +151,7 @@ def train_model_multigrid(cfg, world_size=1, validate=True):
         places = paddle.set_device('npu')
     else:
         places = paddle.set_device('gpu')
-    
+
     model_name = cfg.model_name
     output_dir = cfg.get("output_dir", f"./output/{model_name}")
     mkdir(output_dir)
@@ -181,9 +176,8 @@ def train_model_multigrid(cfg, world_size=1, validate=True):
 
     # 3. Construct optimizer
     lr = build_lr(cfg.OPTIMIZER.learning_rate, len(train_loader))
-    optimizer = build_optimizer(cfg.OPTIMIZER,
-                                lr,
-                                parameter_list=model.parameters())
+    optimizer = build_optimizer(
+        cfg.OPTIMIZER, lr, parameter_list=model.parameters())
 
     # Resume
     resume_epoch = cfg.get("resume_epoch", 0)
@@ -213,9 +207,9 @@ def train_model_multigrid(cfg, world_size=1, validate=True):
                     optimizer,
                     train_loader,
                     valid_loader,
-                    precise_bn_loader,
-                ) = build_trainer(cfg, places, parallel, validate, precise_bn,
-                                  num_iters_precise_bn, world_size)
+                    precise_bn_loader, ) = build_trainer(
+                        cfg, places, parallel, validate, precise_bn,
+                        num_iters_precise_bn, world_size)
 
                 #load checkpoint after re-build model
                 if epoch != 0:
@@ -253,7 +247,8 @@ def train_model_multigrid(cfg, world_size=1, validate=True):
             if i % cfg.get("log_interval", 10) == 0:
                 ips = "ips: {:.5f} instance/sec.".format(
                     batch_size / record_list["batch_time"].val)
-                log_batch(record_list, i, epoch + 1, total_epochs, "train", ips)
+                log_batch(record_list, i, epoch + 1, total_epochs, "train",
+                          ips)
 
             # learning rate iter step
             if cfg.OPTIMIZER.learning_rate.get("iter_step"):
@@ -327,11 +322,11 @@ def train_model_multigrid(cfg, world_size=1, validate=True):
 
         # 6. Save model and optimizer
         if is_eval_epoch(
-                cfg, epoch,
-                total_epochs, multigrid.schedule) or epoch % cfg.get(
+                cfg, epoch, total_epochs,
+                multigrid.schedule) or epoch % cfg.get(
                     "save_interval", 10) == 0 or epoch in multi_save_epoch:
             logger.info("[Save parameters] ======")
-            subn_save(output_dir, model_name + str(local_rank) + '_', epoch + 1,
-                      model, optimizer)
+            subn_save(output_dir, model_name + str(local_rank) + '_',
+                      epoch + 1, model, optimizer)
 
     logger.info(f'training {model_name} finished')

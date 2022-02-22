@@ -6,7 +6,6 @@ import paddle
 import paddle.nn as nn
 from paddle.nn.initializer import TruncatedNormal, Constant, Normal
 
-
 trunc_normal_ = TruncatedNormal(std=.02)
 normal_ = Normal
 zeros_ = Constant(value=0.)
@@ -25,7 +24,7 @@ def drop_path(x, drop_prob=0., training=False):
     if drop_prob == 0. or not training:
         return x
     keep_prob = paddle.to_tensor(1 - drop_prob)
-    shape = (paddle.shape(x)[0],) + (1,) * (x.ndim - 1)
+    shape = (paddle.shape(x)[0], ) + (1, ) * (x.ndim - 1)
     random_tensor = keep_prob + paddle.rand(shape, dtype=x.dtype)
     random_tensor = paddle.floor(random_tensor)  # binarize
     output = x.divide(keep_prob) * random_tensor
@@ -63,7 +62,7 @@ class Attention(nn.Layer):
         super().__init__()
         self.num_heads = num_heads
         head_dim = dim // num_heads
-        self.scale = qk_scale or head_dim ** -0.5
+        self.scale = qk_scale or head_dim**-0.5
 
         self.qkv = nn.Linear(dim, dim * 3, bias_attr=qkv_bias)
         self.attn_drop = nn.Dropout(attn_drop)
@@ -313,7 +312,7 @@ class WindowAttention(nn.Layer):
         self.window_size = window_size  # Wh, Ww
         self.num_heads = num_heads
         head_dim = dim // num_heads
-        self.scale = qk_scale or head_dim ** -0.5
+        self.scale = qk_scale or head_dim**-0.5
 
         # define a parameter table of relative position bias
         # 2*Wh-1 * 2*Ww-1, nH
@@ -338,7 +337,7 @@ class WindowAttention(nn.Layer):
         relative_coords = relative_coords.transpose(
             [1, 2, 0])  # Wh*Ww, Wh*Ww, 2
         relative_coords[:, :, 0] += self.window_size[
-                                        0] - 1  # shift to start from 0
+            0] - 1  # shift to start from 0
         relative_coords[:, :, 1] += self.window_size[1] - 1
         relative_coords[:, :, 0] *= 2 * self.window_size[1] - 1
         relative_position_index = relative_coords.sum(-1)  # Wh*Ww, Wh*Ww
@@ -362,7 +361,7 @@ class WindowAttention(nn.Layer):
         B_, N, C = x.shape
         qkv = self.qkv(x).reshape(
             [B_, N, 3, self.num_heads, C // self.num_heads]).transpose(
-            [2, 0, 3, 1, 4])
+                [2, 0, 3, 1, 4])
         q, k, v = qkv[0], qkv[1], qkv[2]
 
         q = q * self.scale
@@ -764,7 +763,7 @@ class PatchEmbed(nn.Layer):
     def flops(self):
         Ho, Wo = self.patches_resolution
         flops = Ho * Wo * self.embed_dim * self.in_chans * (
-                self.patch_size[0] * self.patch_size[1])
+            self.patch_size[0] * self.patch_size[1])
         if self.norm is not None:
             flops += Ho * Wo * self.embed_dim
         return flops
@@ -822,7 +821,7 @@ class SwinTransformer_large_patch4_window12_384(nn.Layer):
         self.embed_dim = embed_dim
         self.ape = ape
         self.patch_norm = patch_norm
-        self.num_features = int(embed_dim * 2 ** (self.num_layers - 1))
+        self.num_features = int(embed_dim * 2**(self.num_layers - 1))
         self.mlp_ratio = mlp_ratio
         self.pretrained = pretrained
 
@@ -854,9 +853,9 @@ class SwinTransformer_large_patch4_window12_384(nn.Layer):
         self.layers = nn.LayerList()
         for i_layer in range(self.num_layers):
             layer = BasicLayer(
-                dim=int(embed_dim * 2 ** i_layer),
-                input_resolution=(patches_resolution[0] // (2 ** i_layer),
-                                  patches_resolution[1] // (2 ** i_layer)),
+                dim=int(embed_dim * 2**i_layer),
+                input_resolution=(patches_resolution[0] // (2**i_layer),
+                                  patches_resolution[1] // (2**i_layer)),
                 depth=depths[i_layer],
                 num_heads=num_heads[i_layer],
                 window_size=window_size,
@@ -880,7 +879,10 @@ class SwinTransformer_large_patch4_window12_384(nn.Layer):
 
         self.apply(self._init_weights)
         if pretrained:
-            utils.load_entire_model(self, 'https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/SwinTransformer_large_patch4_window12_384_22kto1k_pretrained.pdparams')
+            utils.load_entire_model(
+                self,
+                'https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/SwinTransformer_large_patch4_window12_384_22kto1k_pretrained.pdparams'
+            )
 
     def _init_weights(self, m):
         if isinstance(m, nn.Linear):
@@ -928,7 +930,6 @@ class SwinTransformer_large_patch4_window12_384(nn.Layer):
         for _, layer in enumerate(self.layers):
             flops += layer.flops()
         flops += self.num_features * self.patches_resolution[
-            0] * self.patches_resolution[1] // (2 ** self.num_layers)
+            0] * self.patches_resolution[1] // (2**self.num_layers)
         flops += self.num_features * self.num_classes
         return flops
-

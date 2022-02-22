@@ -3,14 +3,18 @@
 # !cd slot_test_data_full/ && ls -lha && head part-220
 import os
 import subprocess
+
+
 def wc_count(file_name):
     out = subprocess.getoutput("wc -l %s" % file_name)
     return int(out.split()[0])
-def wc_count_dir(dirPath):#统计最终一共有多少行数据
-    cnt=0
-    fileList=os.listdir(dirPath)
+
+
+def wc_count_dir(dirPath):  #统计最终一共有多少行数据
+    cnt = 0
+    fileList = os.listdir(dirPath)
     for fileName in fileList:
-        cnt+=wc_count(dirPath.strip('/')+'/'+fileName)
+        cnt += wc_count(dirPath.strip('/') + '/' + fileName)
     return cnt
 
 
@@ -47,7 +51,9 @@ def predata(rawLine):
             elif fea not in output.keys():  # 连续特征完全缺失
                 output[fea] = [padding] * dense_fea_dim  # 连续特征部分缺失
             elif len(output[fea]) < dense_fea_dim:
-                output[fea].extend([padding] * (dense_fea_dim - len(output[fea])))
+                output[fea].extend([padding] *
+                                   (dense_fea_dim - len(output[fea])))
     data = []
-    for fea in slots_fea: data.extend(output[fea])
+    for fea in slots_fea:
+        data.extend(output[fea])
     return data

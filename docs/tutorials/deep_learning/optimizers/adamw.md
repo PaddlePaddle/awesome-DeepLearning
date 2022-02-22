@@ -27,4 +27,3 @@ $$v_{t}=\beta_{2}v_{t-1}+(1-\beta_{2})(\nabla L(\theta_{t-1}))^2$$
 $$\theta_{t}=\theta_{t-1}-\eta(\frac{1}{\sqrt{\hat v_{t}}+\epsilon}\hat m_{t}-\gamma\theta_{t-1})$$
 
 从上面的公式可以看出，AdamW本质上就是在损失函数里面加入了L2正则项，然后计算梯度和更新参数的时候都需要考虑这个正则项。AdamW使用在hugging face版的transformer中,BERT,XLNET,ELECTRA等主流的NLP模型，都是用了AdamW优化器
-

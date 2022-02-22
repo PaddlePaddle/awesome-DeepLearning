@@ -26,12 +26,10 @@ def get_smooth_loss(disp, img):
     grad_disp_x = paddle.abs(disp[:, :, :, :-1] - disp[:, :, :, 1:])
     grad_disp_y = paddle.abs(disp[:, :, :-1, :] - disp[:, :, 1:, :])
 
-    grad_img_x = paddle.mean(paddle.abs(img[:, :, :, :-1] - img[:, :, :, 1:]),
-                             1,
-                             keepdim=True)
-    grad_img_y = paddle.mean(paddle.abs(img[:, :, :-1, :] - img[:, :, 1:, :]),
-                             1,
-                             keepdim=True)
+    grad_img_x = paddle.mean(
+        paddle.abs(img[:, :, :, :-1] - img[:, :, :, 1:]), 1, keepdim=True)
+    grad_img_y = paddle.mean(
+        paddle.abs(img[:, :, :-1, :] - img[:, :, 1:, :]), 1, keepdim=True)
 
     grad_disp_x *= paddle.exp(-grad_img_x)
     grad_disp_y *= paddle.exp(-grad_img_y)
@@ -54,9 +52,9 @@ class DiffLoss(nn.Layer):
         diff_loss = 0
         dim = input1.shape[1]
         for i in range(input1.shape[0]):
-            diff_loss = diff_loss + paddle.mean(
-                ((input1_l2[i:i + 1, :].mm(input2_l2[i:i + 1, :].T)).pow(2)) /
-                dim)
+            diff_loss = diff_loss + paddle.mean((
+                (input1_l2[i:i + 1, :].mm(input2_l2[i:i + 1, :].T)).pow(2)) /
+                                                dim)
 
         diff_loss = diff_loss / input1.shape[0]
 
@@ -90,6 +88,7 @@ class SIMSE(nn.Layer):
 class SSIM(nn.Layer):
     """Layer to compute the SSIM loss between a pair of images
     """
+
     def __init__(self):
         super(SSIM, self).__init__()
         self.mu_x_pool = nn.AvgPool2D(3, 1, exclusive=False)

@@ -269,4 +269,3 @@ d2l.show_heatmaps(attention.attention_weights.reshape((1, 1, 2, 10)),
 
 
 [Discussions](https://discuss.d2l.ai/t/5752)
-

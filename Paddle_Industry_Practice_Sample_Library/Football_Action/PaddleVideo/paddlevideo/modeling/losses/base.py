@@ -12,9 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from abc import  abstractmethod
+from abc import abstractmethod
 import paddle
 import paddle.nn as nn
+
 
 #XXX use _forward?? or forward??
 class BaseWeightedLoss(nn.Layer):

@@ -12,10 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 from collections import Counter
 import numpy as np
 import paddle
+
 
 class SeqEntityScore(object):
     def __init__(self, id2tag):
@@ -23,7 +23,7 @@ class SeqEntityScore(object):
         self.real_entities = []
         self.pred_entities = []
         self.correct_entities = []
-        
+
     def reset(self):
         self.real_entities.clear()
         self.pred_entities.clear()
@@ -32,7 +32,8 @@ class SeqEntityScore(object):
     def compute(self, real_count, pred_count, correct_count):
         recall = 0 if real_count == 0 else (correct_count / real_count)
         precision = 0 if pred_count == 0 else (correct_count / pred_count)
-        f1 = 0. if recall + precision == 0 else (2 * precision * recall) / (precision + recall)
+        f1 = 0. if recall + precision == 0 else (2 * precision * recall) / (
+            precision + recall)
         return recall, precision, f1
 
     def get_result(self):
@@ -44,16 +45,26 @@ class SeqEntityScore(object):
             real_count = count
             pred_count = pred_counter.get(label, 0)
             correct_count = correct_counter.get(label, 0)
-            recall, precision, f1 = self.compute(real_count, pred_count, correct_count)
-            result[label] = {"Precision": round(precision, 4), 'Recall': round(recall, 4), 'F1': round(f1, 4)}
+            recall, precision, f1 = self.compute(real_count, pred_count,
+                                                 correct_count)
+            result[label] = {
+                "Precision": round(precision, 4),
+                'Recall': round(recall, 4),
+                'F1': round(f1, 4)
+            }
         real_total_count = len(self.real_entities)
         pred_total_count = len(self.pred_entities)
         correct_total_count = len(self.correct_entities)
-        recall, precision, f1 = self.compute(real_total_count, pred_total_count, correct_total_count)
-        result["Total"] = {"Precision": round(precision, 4), 'Recall': round(recall, 4), 'F1': round(f1, 4)}
+        recall, precision, f1 = self.compute(
+            real_total_count, pred_total_count, correct_total_count)
+        result["Total"] = {
+            "Precision": round(precision, 4),
+            'Recall': round(recall, 4),
+            'F1': round(f1, 4)
+        }
 
         return result
-    
+
     def get_entities_bios(self, seq):
         entities = []
         entity = [-1, -1, -1]
@@ -96,7 +107,7 @@ class SeqEntityScore(object):
         for indx, tag in enumerate(seq):
             if not isinstance(tag, str):
                 tag = self.id2tag[tag]
-                
+
             if tag.startswith("B+"):
                 if entity[2] != -1:
                     entities.append(entity)
@@ -119,7 +130,7 @@ class SeqEntityScore(object):
         return entities
 
     def update(self, real_paths, pred_paths):
-        
+
         if isinstance(real_paths, paddle.Tensor):
             real_paths = real_paths.numpy()
         if isinstance(pred_paths, paddle.Tensor):
@@ -130,14 +141,19 @@ class SeqEntityScore(object):
             pred_ents = self.get_entities_bio(pred_path)
             self.real_entities.extend(real_ents)
             self.pred_entities.extend(pred_ents)
-            self.correct_entities.extend([pred_ent for pred_ent in pred_ents if pred_ent in real_ents])
+            self.correct_entities.extend(
+                [pred_ent for pred_ent in pred_ents if pred_ent in real_ents])
 
     def format_print(self, result, print_detail=False):
         def print_item(entity, metric):
             if entity != "Total":
-                print(f"Entity: {entity} - Precision: {metric['Precision']} - Recall: {metric['Recall']} - F1: {metric['F1']}")
+                print(
+                    f"Entity: {entity} - Precision: {metric['Precision']} - Recall: {metric['Recall']} - F1: {metric['F1']}"
+                )
             else:
-                print(f"Total: Precision: {metric['Precision']} - Recall: {metric['Recall']} - F1: {metric['F1']}")
+                print(
+                    f"Total: Precision: {metric['Precision']} - Recall: {metric['Recall']} - F1: {metric['F1']}"
+                )
 
         print_item("Total", result["Total"])
         if print_detail:
@@ -153,13 +169,13 @@ class MultiLabelClassificationScore(object):
         self.id2label = id2label
         self.all_pred_labels = []
         self.all_real_labels = []
-        self.all_correct_labels = []        
-    
+        self.all_correct_labels = []
+
     def reset(self):
         self.all_pred_labels.clear()
         self.all_real_labels.clear()
         self.all_correct_labels.clear()
-     
+
     def update(self, pred_labels, real_labels):
         if not isinstance(pred_labels, list):
             pred_labels = pred_labels.numpy().tolist()
@@ -168,17 +184,18 @@ class MultiLabelClassificationScore(object):
 
         for i in range(len(real_labels)):
             for j in range(len(real_labels[0])):
-                if real_labels[i][j] == 1 and  pred_labels[i][j] > 0:
+                if real_labels[i][j] == 1 and pred_labels[i][j] > 0:
                     self.all_correct_labels.append(self.id2label[j])
                 if real_labels[i][j] == 1:
                     self.all_real_labels.append(self.id2label[j])
                 if pred_labels[i][j] > 0:
                     self.all_pred_labels.append(self.id2label[j])
 
-    def compute(self, pred_count , real_count, correct_count):
-        recall  = 0. if real_count == 0 else (correct_count / real_count)
+    def compute(self, pred_count, real_count, correct_count):
+        recall = 0. if real_count == 0 else (correct_count / real_count)
         precision = 0. if pred_count == 0 else (correct_count / pred_count)
-        f1 = 0. if recall + precision == 0 else (2 * precision * recall) / (precision + recall)
+        f1 = 0. if recall + precision == 0 else (2 * precision * recall) / (
+            precision + recall)
         return precision, recall, f1
 
     def get_result(self):
@@ -190,22 +207,36 @@ class MultiLabelClassificationScore(object):
             real_count = count
             pred_count = pred_counter[label]
             correct_count = correct_counter[label]
-            precision, recall, f1 = self.compute(pred_count, real_count, correct_count)
-            result[label] = {"Precision": round(precision, 4), 'Recall': round(recall, 4), 'F1': round(f1, 4)}
+            precision, recall, f1 = self.compute(pred_count, real_count,
+                                                 correct_count)
+            result[label] = {
+                "Precision": round(precision, 4),
+                'Recall': round(recall, 4),
+                'F1': round(f1, 4)
+            }
         real_total_count = len(self.all_real_labels)
         pred_total_count = len(self.all_pred_labels)
         correct_total_count = len(self.all_correct_labels)
-        recall, precision, f1 = self.compute(real_total_count, pred_total_count, correct_total_count)
-        result["Total"] = {"Precision": round(precision, 4), 'Recall': round(recall, 4), 'F1': round(f1, 4)}
+        recall, precision, f1 = self.compute(
+            real_total_count, pred_total_count, correct_total_count)
+        result["Total"] = {
+            "Precision": round(precision, 4),
+            'Recall': round(recall, 4),
+            'F1': round(f1, 4)
+        }
 
-        return result         
+        return result
 
     def format_print(self, result, print_detail=False):
         def print_item(entity, metric):
             if entity != "Total":
-                print(f"Entity: {entity} - Precision: {metric['Precision']} - Recall: {metric['Recall']} - F1: {metric['F1']}")
+                print(
+                    f"Entity: {entity} - Precision: {metric['Precision']} - Recall: {metric['Recall']} - F1: {metric['F1']}"
+                )
             else:
-                print(f"Total: Precision: {metric['Precision']} - Recall: {metric['Recall']} - F1: {metric['F1']}")
+                print(
+                    f"Total: Precision: {metric['Precision']} - Recall: {metric['Recall']} - F1: {metric['F1']}"
+                )
 
         print_item("Total", result["Total"])
         if print_detail:
@@ -213,6 +244,4 @@ class MultiLabelClassificationScore(object):
                 if key == "Total":
                     continue
                 print_item(key, result[key])
-            print("\n") 
-  
-
+            print("\n")

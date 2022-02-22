@@ -14,7 +14,7 @@
 👀 **报名链接**: https://paddleqiyeban.wjx.cn/vj/QIValIZ.aspx?udsid=419689
 **课程回放链接**:  https://aistudio.baidu.com/aistudio/course/introduce/6742
 
-​																	  💖 **欢迎大家扫码入群讨论** 💖
+​                                                                      💖 **欢迎大家扫码入群讨论** 💖
 <div align="center">
   <img src="docs/images/user_group.png" width=250/></div>
 

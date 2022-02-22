@@ -46,7 +46,7 @@ $$
 \begin{align}
 \hat{H} &= \left[  \hat{H}_{1:T}^{1} \circ \hat{H}_{1:T}^{2} \cdot \cdot \cdot \circ \; \hat{H}_{1:T}^N \right], \quad \text{(skimming phase)} \\
 \hat{H}_{1:T}^{i} &= \left[ \hat{h}_1^i \circ \hat{h}_2^i \cdot \cdot \cdot \circ \;\hat{h}_T^i \right] , \quad \text{(skimming phase)}  \\
-\tilde{h}_{\tau+1}^{n-1} &= \left[{SG}(\hat{H }\circ h_{\tau}^{n-1}) \circ h_{\tau+1}^{n-1}   \right], \quad \text{(retrospective phase)} 
+\tilde{h}_{\tau+1}^{n-1} &= \left[{SG}(\hat{H }\circ h_{\tau}^{n-1}) \circ h_{\tau+1}^{n-1}   \right], \quad \text{(retrospective phase)}
 \end{align}
 $$
 

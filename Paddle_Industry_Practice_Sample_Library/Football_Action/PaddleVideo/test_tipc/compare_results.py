@@ -23,10 +23,8 @@ def parse_args():
 
 
 def run_shell_command(cmd):
-    p = subprocess.Popen(cmd,
-                         stdout=subprocess.PIPE,
-                         stderr=subprocess.PIPE,
-                         shell=True)
+    p = subprocess.Popen(
+        cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
     out, err = p.communicate()
 
     if p.returncode == 0:
@@ -128,10 +126,8 @@ def collect_predict_from_logs(log_path, key_list):
 
 def testing_assert_allclose(dict_x, dict_y, atol=1e-7, rtol=1e-7):
     for k in dict_x:
-        np.testing.assert_allclose(np.array(dict_x[k]),
-                                   np.array(dict_y[k]),
-                                   atol=atol,
-                                   rtol=rtol)
+        np.testing.assert_allclose(
+            np.array(dict_x[k]), np.array(dict_y[k]), atol=atol, rtol=rtol)
 
 
 if __name__ == "__main__":
@@ -157,10 +153,8 @@ if __name__ == "__main__":
             continue
         pred_dict = pred_collection[filename]
         try:
-            testing_assert_allclose(gt_dict,
-                                    pred_dict,
-                                    atol=args.atol,
-                                    rtol=args.rtol)
+            testing_assert_allclose(
+                gt_dict, pred_dict, atol=args.atol, rtol=args.rtol)
             print(
                 "Assert allclose passed! The results of {} and {} are consistent!"
                 .format(filename, gt_filename))

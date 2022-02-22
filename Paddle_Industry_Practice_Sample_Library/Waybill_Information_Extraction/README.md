@@ -21,21 +21,21 @@
 
 从物流信息中抽取想要的关键信息，实际上是NLP中的实体抽取任务。实体信息抽取技术业务难点如下：
 
-* **实体类别多，任务复杂度高**    
-同一名词可能对应多个实体类别，如“蜗牛”。    
-不少实体词与普通用语相同，尤其作品名。     
+* **实体类别多，任务复杂度高**  
+同一名词可能对应多个实体类别，如“蜗牛”。  
+不少实体词与普通用语相同，尤其作品名。  
 此外，实体类别多，任务复杂度较高，如下所示实体示例：
 
 <div align="center"><img src="images/entity.png" width = "330" height = "158"  align=center /></div>  
 
 <div align="center">图1：实体示例</div>  
 
-* **实体词往往稀疏低频**    
+* **实体词往往稀疏低频**  
 人名在语料出现频次高，但不同人名出现频次有限。大多垂类实体词在通用语料出现频次低。
 
 * **特定业务场景中标注数据集较少，需要一定的成本标注，如果数据集质量差或样本量过少，精度会比较低。**  
 
-  
+
 
 <a name="安装说明"></a>
 
@@ -234,4 +234,3 @@ python run_erniegram_crf.py
 <div align="center">图8：使用推理库进行预测</div>  
 
 Paddle Inference 采用 Predictor 进行预测。Predictor 是一个高性能预测引擎，该引擎通过对计算图的分析，完成对计算图的一系列的优化（如OP的融合、内存/显存的优化、 MKLDNN，TensorRT 等底层加速库的支持等），能够大大提升预测性能。另外Paddle Inference提供了Python、C++、GO等多语言的API，可以根据实际环境需要进行选择，例如使用 Paddle Inference 开发 Python 预测程序可参考[示例](https://github.com/PaddlePaddle/PaddleNLP/blob/develop/examples/information_extraction/waybill_ie/deploy/python/predict.py)，相关API已安装在Paddle包，直接使用即可。
-

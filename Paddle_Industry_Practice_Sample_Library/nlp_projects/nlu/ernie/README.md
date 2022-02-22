@@ -15,7 +15,7 @@
 <br/>
 
 ## 2. 数据说明
-CrossWOZ 是第一个大规模的中国跨域任务导向的数据集。 它包含5个领域，共计6K对话和102K语句，包括酒店、餐厅、景点、地铁和出租车。 此外，语料库包含丰富的用户和系统端对话状态和对话行为的注释。 
+CrossWOZ 是第一个大规模的中国跨域任务导向的数据集。 它包含5个领域，共计6K对话和102K语句，包括酒店、餐厅、景点、地铁和出租车。 此外，语料库包含丰富的用户和系统端对话状态和对话行为的注释。
 
 关于数据集的更多信息请参考论文[ CrossWOZ: A Large-Scale Chinese Cross-Domain Task-Oriented Dialogue Dataset ](https://arxiv.org/abs/2002.11893) 。
 
@@ -31,7 +31,7 @@ sh run_train.sh
 可按如下方式，使用测试集进行模型测试。
 
 ```shell
-sh run_evaluate.sh 
+sh run_evaluate.sh
 ```
 
 ### 3.3 模型推理

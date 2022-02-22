@@ -1,4 +1,3 @@
-
 # copyright (c) 2021 PaddlePaddle Authors. All Rights Reserve.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +18,8 @@ import numpy as np
 import paddle.nn.functional as F
 
 # 自定义一个电影类别数据
-mov_cat_data = np.array(((1, 2, 3, 0, 0, 0), (2, 3, 4, 0, 0, 0))).reshape(2, -1).astype('int64')
+mov_cat_data = np.array(((1, 2, 3, 0, 0, 0),
+                         (2, 3, 4, 0, 0, 0))).reshape(2, -1).astype('int64')
 # 对电影ID信息做映射，并紧接着一个Linear层
 MOV_DICT_SIZE = 6 + 1
 mov_emb = Embedding(num_embeddings=MOV_DICT_SIZE, embedding_dim=32)
@@ -36,5 +36,7 @@ mov_cat_feat = paddle.sum(mov_cat_feat, axis=1, keepdim=False)
 mov_cat_feat = mov_fc(mov_cat_feat)
 mov_cat_feat = F.relu(mov_cat_feat)
 print("计算的电影类别的特征是", mov_cat_feat.numpy(), "\n其形状是：", mov_cat_feat.shape)
-print("\n电影类别为 {} 计算得到的特征是：{}".format(mov_cat_data.numpy()[0, :], mov_cat_feat.numpy()[0]))
-print("\n电影类别为 {} 计算得到的特征是：{}".format(mov_cat_data.numpy()[1, :], mov_cat_feat.numpy()[1]))
+print("\n电影类别为 {} 计算得到的特征是：{}".format(mov_cat_data.numpy()[0, :],
+                                      mov_cat_feat.numpy()[0]))
+print("\n电影类别为 {} 计算得到的特征是：{}".format(mov_cat_data.numpy()[1, :],
+                                      mov_cat_feat.numpy()[1]))

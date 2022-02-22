@@ -326,7 +326,7 @@ Deeplab v3在原有基础上的改动是：
 
 <center>图24 CamVid数据集示例</center><br></br>
 
-#### 3.1.9. **KITTI** 
+#### 3.1.9. **KITTI**
 
 ​		该数据集是用于移动机器人及自动驾驶研究的最受欢迎的数据集之一，包含了由多种形式的传感器得出的数小时的交通场景数据，包括高分辨率RGB、灰度立体摄像机以及三维激光扫描器。尽管很受欢迎，该数据集本身并没有包含真实语义分割标注，但是，众多的研究者手工地为该数据集的部分数据添加标注以满足其问题的需求。有人为道路检测竞赛中的323张图片生成了真实标注，包含三个类别：道路、垂直面和天空。还有人标注了252张图片，其中140张训练、112张测试，其选自追踪竞赛中的RGB和Velodyne扫描数据，共十个类。有学者在视觉测距数据集中标注了170个训练图片和46个测试图片，共11个类。
 
@@ -502,4 +502,3 @@ Deeplab v3在原有基础上的改动是：
 ​		[8] [A survey on indoor RGB-D semantic segmentation: from hand-crafted features to deep convolutional neural networks](https://link.springer.com/article/10.1007%2Fs11042-019-7684-3)
 
 ​		[9] [A Review on Deep Learning Techniques Applied to Semantic Segmentation](https://arxiv.org/abs/1704.06857)
-

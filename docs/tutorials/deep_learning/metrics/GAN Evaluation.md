@@ -32,7 +32,7 @@ $$\begin{equation} IS(G) = exp(E_{x\sim p_g}D_{KL}(p(y|x)||\widehat{p}(y)))\end{
 
 其中，$x\sim p$：表示从生成器生成的图片；p(y|x)：把生成的图片 x 输入到 Inception V3，得到一个 1000 维的向量 y ，即图片x属于各个类别的概率分布；
 
-$\widehat{p}(y)$：N 个生成的图片（N 通常取 5000），每个生成图片都输入到 Inception V3 中，各自得到一个的概率分布向量，然后求这些向量的平均，得到生成的图片在所有类别上的边缘分布，具体公式如下： 
+$\widehat{p}(y)$：N 个生成的图片（N 通常取 5000），每个生成图片都输入到 Inception V3 中，各自得到一个的概率分布向量，然后求这些向量的平均，得到生成的图片在所有类别上的边缘分布，具体公式如下：
 
 $$\begin{equation} \widehat{p}(y)=\frac{1}{N}\sum\limits_{i=1}^N p\left(y|x^\left(i\right)\right)\end{equation} \tag{2}$$
 
@@ -52,7 +52,7 @@ $$FID\left(P_r,P_g\right) = ||\mu_r-\mu_g|| + T_r\left(C_r+C_g-2\left(C_rC_g\rig
 
 其中Tr 指的是被称为「迹」的线性代数运算（即方阵主对角线上的元素之和）。
 
-FID方法比较鲁棒，且计算高效。 
+FID方法比较鲁棒，且计算高效。
 
 ### 其他评价方法
 

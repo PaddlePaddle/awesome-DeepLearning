@@ -33,7 +33,7 @@ ERNIE-Gram指出一种观点：这种连续的粗粒度Masking策略会忽略信
 
 - $z_{\text{\\}M}=\{x_1,\text{[M]} , \text{[M]}, x_4, \text{[M]}, x_6\}$
 
-  
+
 
 Contiguously MLM 可通过如下方式进行优化:
 
@@ -118,4 +118,3 @@ $$
 
 1. [ERNIE-Gram: Pre-training with Explicitly N-Gram Masked language Modeling for Natural Language Understanding](https://arxiv.org/pdf/2010.12148.pdf)
 2. [ERNIE-Gram github](https://github.com/PaddlePaddle/ERNIE/tree/develop/ernie-gram)
-

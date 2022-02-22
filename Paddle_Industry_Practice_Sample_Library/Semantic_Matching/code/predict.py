@@ -6,14 +6,15 @@ import paddle
 import paddle.nn.functional as F
 import paddle.nn as nn
 
-
 from paddlenlp.datasets import load_dataset
 import paddlenlp
 from paddlenlp.data import Stack, Pad, Tuple
 from paddlenlp.transformers import LinearDecayWithWarmup
 from functools import partial
 
-tokenizer = paddlenlp.transformers.ErnieGramTokenizer.from_pretrained('ernie-gram-zh')
+tokenizer = paddlenlp.transformers.ErnieGramTokenizer.from_pretrained(
+    'ernie-gram-zh')
+
 
 def convert_example(example, tokenizer, max_seq_length=512, is_test=False):
 
@@ -34,7 +35,7 @@ def convert_example(example, tokenizer, max_seq_length=512, is_test=False):
 
 
 class PointwiseMatching(nn.Layer):
-   
+
     # 此处的 pretained_model 在本例中会被 ERNIE-Gram 预训练模型初始化
     def __init__(self, pretrained_model, dropout=None):
         super().__init__()
@@ -64,8 +65,9 @@ class PointwiseMatching(nn.Layer):
 
         return probs
 
+
 def predict(model, data_loader):
-    
+
     batch_probs = []
 
     # 预测阶段打开 eval 模式，模型中的 dropout 等操作会关掉
@@ -76,7 +78,7 @@ def predict(model, data_loader):
             input_ids, token_type_ids = batch_data
             input_ids = paddle.to_tensor(input_ids)
             token_type_ids = paddle.to_tensor(token_type_ids)
-            
+
             # 获取每个样本的预测概率: [batch_size, 2] 的矩阵
             batch_prob = model(
                 input_ids=input_ids, token_type_ids=token_type_ids).numpy()
@@ -90,10 +92,7 @@ def predict(model, data_loader):
 # 预测数据的转换函数
 # predict 数据没有 label, 因此 convert_exmaple 的 is_test 参数设为 True
 trans_func = partial(
-    convert_example,
-    tokenizer=tokenizer,
-    max_seq_length=512,
-    is_test=True)
+    convert_example, tokenizer=tokenizer, max_seq_length=512, is_test=True)
 
 # 预测数据的组 batch 操作
 # predict 数据只返回 input_ids 和 token_type_ids，因此只需要 2 个 Pad 对象作为 batchify_fn
@@ -108,17 +107,19 @@ test_ds = load_dataset("lcqmc", splits=["test"])
 batch_sampler = paddle.io.BatchSampler(test_ds, batch_size=32, shuffle=False)
 
 # 生成预测数据 data_loader
-predict_data_loader =paddle.io.DataLoader(
-        dataset=test_ds.map(trans_func),
-        batch_sampler=batch_sampler,
-        collate_fn=batchify_fn,
-        return_list=True)
+predict_data_loader = paddle.io.DataLoader(
+    dataset=test_ds.map(trans_func),
+    batch_sampler=batch_sampler,
+    collate_fn=batchify_fn,
+    return_list=True)
 
-pretrained_model = paddlenlp.transformers.ErnieGramModel.from_pretrained('ernie-gram-zh')
+pretrained_model = paddlenlp.transformers.ErnieGramModel.from_pretrained(
+    'ernie-gram-zh')
 
 model = PointwiseMatching(pretrained_model)
 
-state_dict = paddle.load("./ernie_gram_zh_pointwise_matching_model/model_state.pdparams")
+state_dict = paddle.load(
+    "./ernie_gram_zh_pointwise_matching_model/model_state.pdparams")
 
 model.set_dict(state_dict)
 
@@ -132,12 +133,11 @@ y_probs = predict(model, predict_data_loader)
 y_preds = np.argmax(y_probs, axis=1)
 
 with open("lcqmc.tsv", 'w', encoding="utf-8") as f:
-    f.write("index\tprediction\n")    
+    f.write("index\tprediction\n")
     for idx, y_pred in enumerate(y_preds):
         f.write("{}\t{}\n".format(idx, y_pred))
         text_pair = test_ds[idx]
         text_pair["label"] = y_pred
         # print(text_pair)
-# 打印其中的一条内容
+    # 打印其中的一条内容
 print(text_pair)
-

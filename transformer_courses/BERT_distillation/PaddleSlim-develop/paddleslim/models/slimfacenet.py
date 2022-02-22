@@ -297,7 +297,8 @@ class SlimFaceNet():
         else:
             return bn
 
-    def arc_margin_product(self, input, label, out_dim, s=32.0, m=0.50, mode=2):
+    def arc_margin_product(self, input, label, out_dim, s=32.0, m=0.50,
+                           mode=2):
         input_norm = fluid.layers.sqrt(
             fluid.layers.reduce_sum(
                 fluid.layers.square(input), dim=1))

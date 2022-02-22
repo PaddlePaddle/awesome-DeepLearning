@@ -1,4 +1,3 @@
-
 import paddle
 from paddleseg.utils import utils
 from paddle import ParamAttr
@@ -203,7 +202,10 @@ class Res2Net200_vd_26w_4s_ssld(nn.Layer):
                 self.block_list.append(bottleneck_block)
                 shortcut = True
         if pretrained:
-            utils.load_entire_model(self, 'https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/Res2Net200_vd_26w_4s_pretrained.pdparams')
+            utils.load_entire_model(
+                self,
+                'https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/Res2Net200_vd_26w_4s_pretrained.pdparams'
+            )
 
     def forward(self, inputs):
         y = self.conv1_1(inputs)
@@ -215,14 +217,12 @@ class Res2Net200_vd_26w_4s_ssld(nn.Layer):
         for block in self.block_list:
             y = block(y)
             n += 1
-            if n==3:
+            if n == 3:
                 y2 = y
-            elif n==3+12:
+            elif n == 3 + 12:
                 y3 = y
-            elif n==3+12+48:
+            elif n == 3 + 12 + 48:
                 y4 = y
         y5 = y
 
         return y2, y3, y4, y5
-
-

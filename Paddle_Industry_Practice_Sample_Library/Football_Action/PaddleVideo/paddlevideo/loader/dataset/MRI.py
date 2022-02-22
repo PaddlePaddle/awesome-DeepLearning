@@ -46,6 +46,7 @@ class MRIDataset(BaseDataset):
         suffix (str): suffix of file. Default: 'img_{:05}.jpg'.
 
     """
+
     def __init__(self,
                  file_path,
                  pipeline,

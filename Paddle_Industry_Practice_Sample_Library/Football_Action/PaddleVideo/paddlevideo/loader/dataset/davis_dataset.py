@@ -32,6 +32,7 @@ logger = get_logger("paddlevideo")
 class VOS_Test(Dataset):
     """process frames in each video
     """
+
     def __init__(self,
                  image_root,
                  label_root,
@@ -59,8 +60,8 @@ class VOS_Test(Dataset):
             current_label_name = img_name.split('.')[0] + '.png'
             if current_label_name in self.labels:
                 current_label = self.read_label(current_label_name)
-                if temp_obj_num < np.unique(
-                        current_label)[-1]:  #get object number from label_id
+                if temp_obj_num < np.unique(current_label)[
+                        -1]:  #get object number from label_id
                     temp_obj_num = np.unique(current_label)[-1]
 
     def __len__(self):
@@ -87,7 +88,8 @@ class VOS_Test(Dataset):
         current_img = np.array(current_img)
         height, width, channels = current_img.shape
         if self.resolution is not None:
-            width = int(np.ceil(float(width) * self.resolution / float(height)))
+            width = int(
+                np.ceil(float(width) * self.resolution / float(height)))
             height = int(self.resolution)
 
         current_label_name = img_name.split('.')[0] + '.png'
@@ -127,17 +129,17 @@ class VOS_Test(Dataset):
 class DavisDataset(BaseDataset):
     """Davis 2017 dataset.
     """
+
     def __init__(
-        self,
-        file_path,
-        result_root,
-        pipeline,
-        data_prefix=None,
-        test_mode=False,
-        year=2017,
-        rgb=False,
-        resolution='480p',
-    ):
+            self,
+            file_path,
+            result_root,
+            pipeline,
+            data_prefix=None,
+            test_mode=False,
+            year=2017,
+            rgb=False,
+            resolution='480p', ):
         self.rgb = rgb
         self.result_root = result_root
         self.resolution = resolution
@@ -152,8 +154,8 @@ class DavisDataset(BaseDataset):
                                        self.resolution)
         seq_names = []
         with open(
-                os.path.join(self.file_path, 'ImageSets', str(self.year),
-                             self.spt + '.txt')) as f:
+                os.path.join(self.file_path, 'ImageSets',
+                             str(self.year), self.spt + '.txt')) as f:
             seqs_tmp = f.readlines()
         seqs_tmp = list(map(lambda elem: elem.strip(), seqs_tmp))
         seq_names.extend(seqs_tmp)
@@ -178,12 +180,13 @@ class DavisDataset(BaseDataset):
 
             shutil.copy(source_label_path, result_label_path)
 
-        seq_dataset = VOS_Test(self.image_root,
-                               self.label_root,
-                               seq_name,
-                               images,
-                               labels,
-                               self.pipeline,
-                               rgb=self.rgb,
-                               resolution=480)
+        seq_dataset = VOS_Test(
+            self.image_root,
+            self.label_root,
+            seq_name,
+            images,
+            labels,
+            self.pipeline,
+            rgb=self.rgb,
+            resolution=480)
         return seq_dataset

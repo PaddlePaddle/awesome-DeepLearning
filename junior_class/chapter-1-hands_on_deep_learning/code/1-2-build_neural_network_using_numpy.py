@@ -20,6 +20,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
+
 def load_data():
     # 从文件导入数据
     datafile = './work/housing.data'
@@ -41,7 +42,8 @@ def load_data():
     training_data = data[:offset]
 
     # 计算训练集的最大值，最小值，平均值
-    maximums, minimums, avgs = training_data.max(axis=0), training_data.min(axis=0), training_data.sum(axis=0) / training_data.shape[0]
+    maximums, minimums, avgs = training_data.max(axis=0), training_data.min(
+        axis=0), training_data.sum(axis=0) / training_data.shape[0]
 
     # 对数据进行归一化处理
     for i in range(feature_num):
@@ -53,6 +55,7 @@ def load_data():
     test_data = data[offset:]
     return training_data, test_data
 
+
 class Network(object):
     def __init__(self, num_of_weights):
         # 随机产生w的初始值
@@ -60,31 +63,30 @@ class Network(object):
         #np.random.seed(0)
         self.w = np.random.randn(num_of_weights, 1)
         self.b = 0.
-        
+
     def forward(self, x):
         z = np.dot(x, self.w) + self.b
         return z
-    
+
     def loss(self, z, y):
         error = z - y
         num_samples = error.shape[0]
         cost = error * error
         cost = np.sum(cost) / num_samples
         return cost
-    
+
     def gradient(self, x, y):
         z = self.forward(x)
         N = x.shape[0]
-        gradient_w = 1. / N * np.sum((z-y) * x, axis=0)
+        gradient_w = 1. / N * np.sum((z - y) * x, axis=0)
         gradient_w = gradient_w[:, np.newaxis]
-        gradient_b = 1. / N * np.sum(z-y)
+        gradient_b = 1. / N * np.sum(z - y)
         return gradient_w, gradient_b
-    
-    def update(self, gradient_w, gradient_b, eta = 0.01):
+
+    def update(self, gradient_w, gradient_b, eta=0.01):
         self.w = self.w - eta * gradient_w
         self.b = self.b - eta * gradient_b
-            
-                
+
     def train(self, training_data, num_epochs, batch_size=10, eta=0.01):
         n = len(training_data)
         losses = []
@@ -93,7 +95,10 @@ class Network(object):
             # 然后再按每次取batch_size条数据的方式取出
             np.random.shuffle(training_data)
             # 将训练数据进行拆分，每个mini_batch包含batch_size条的数据
-            mini_batches = [training_data[k:k+batch_size] for k in range(0, n, batch_size)]
+            mini_batches = [
+                training_data[k:k + batch_size]
+                for k in range(0, n, batch_size)
+            ]
             for iter_id, mini_batch in enumerate(mini_batches):
                 #print(self.w.shape)
                 #print(self.b)
@@ -104,10 +109,12 @@ class Network(object):
                 gradient_w, gradient_b = self.gradient(x, y)
                 self.update(gradient_w, gradient_b, eta)
                 losses.append(loss)
-                print('Epoch {:3d} / iter {:3d}, loss = {:.4f}'.
-                                 format(epoch_id, iter_id, loss))
-        
+                print('Epoch {:3d} / iter {:3d}, loss = {:.4f}'.format(
+                    epoch_id, iter_id, loss))
+
         return losses
+
+
 def train():
     # 获取数据
     train_data, test_data = load_data()
@@ -122,6 +129,7 @@ def train():
     plot_y = np.array(losses)
     plt.plot(plot_x, plot_y)
     plt.show()
+
 
 def plot_3D_neural_work_weight():
     # 获取数据
@@ -153,6 +161,7 @@ def plot_3D_neural_work_weight():
 
     ax.plot_surface(w5, w9, losses, rstride=1, cstride=1, cmap='rainbow')
     plt.show()
+
 
 if __name__ == '__main__':
     plot_3D_neural_work_weight()

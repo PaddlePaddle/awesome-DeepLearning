@@ -29,6 +29,7 @@ from paddle.vision.ops import DeformConv2D
 from .initializer import xavier_uniform_, constant_
 from utils.bbox_utils import delta2bbox
 
+
 def _to_list(l):
     if isinstance(l, (list, tuple)):
         return list(l)
@@ -287,8 +288,6 @@ class DropBlock(nn.Layer):
             return y
 
 
-
-
 class AnchorGeneratorSSD(object):
     def __init__(self,
                  steps=[8, 16, 32, 64, 100, 300],
@@ -422,8 +421,6 @@ class RCNNBox(object):
         return bboxes, scores
 
 
-
-
 class MultiClassNMS(object):
     def __init__(self,
                  score_threshold=.05,
@@ -467,8 +464,6 @@ class MultiClassNMS(object):
         return ops.multiclass_nms(bboxes, score, **kwargs)
 
 
-
-
 class MatrixNMS(object):
     __append_doc__ = True
 
@@ -503,8 +498,6 @@ class MatrixNMS(object):
             gaussian_sigma=self.gaussian_sigma,
             background_label=self.background_label,
             normalized=self.normalized)
-
-
 
 
 class YOLOBox(object):
@@ -542,8 +535,6 @@ class YOLOBox(object):
         yolo_boxes = paddle.concat(boxes_list, axis=1)
         yolo_scores = paddle.concat(scores_list, axis=2)
         return yolo_boxes, yolo_scores
-
-
 
 
 class SSDBox(object):
@@ -592,8 +583,6 @@ class SSDBox(object):
         scores = paddle.transpose(scores, [0, 2, 1])
 
         return boxes, scores
-
-
 
 
 class AnchorGrid(object):
@@ -680,8 +669,6 @@ class AnchorGrid(object):
             self._anchor_vars = anchor_vars
 
         return self._anchor_vars
-
-
 
 
 class FCOSBox(object):
@@ -772,7 +759,6 @@ class FCOSBox(object):
         pred_boxes = paddle.concat(pred_boxes_, axis=1)
         pred_scores = paddle.concat(pred_scores_, axis=2)
         return pred_boxes, pred_scores
-
 
 
 class TTFBox(object):
@@ -875,8 +861,6 @@ class TTFBox(object):
         return results, results_num
 
 
-
-
 class JDEBox(object):
     __shared__ = ['num_classes']
 
@@ -971,8 +955,6 @@ class JDEBox(object):
         boxes_idx_over_conf_thr.stop_gradient = True
 
         return boxes_idx_over_conf_thr, yolo_boxes_scores
-
-
 
 
 class MaskMatrixNMS(object):

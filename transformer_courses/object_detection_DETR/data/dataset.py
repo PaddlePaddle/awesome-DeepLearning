@@ -5,6 +5,7 @@ import copy
 from collections.abc import Sequence
 from paddle.io import Dataset
 
+
 class COCODataSet(Dataset):
     """
     Load dataset with COCO format.
@@ -39,7 +40,7 @@ class COCODataSet(Dataset):
         self.anno_path = anno_path
         self.image_dir = image_dir if image_dir is not None else ''
         self.data_fields = data_fields
-        self.sample_num = sample_num        
+        self.sample_num = sample_num
         self.load_image_only = False
         self.load_semantic = False
         self.load_crowd = load_crowd
@@ -112,7 +113,7 @@ class COCODataSet(Dataset):
         if 'annotations' not in coco.dataset:
             self.load_image_only = True
             print('Annotation file: {} does not contains ground truth '
-                           'and load image information only.'.format(anno_path))
+                  'and load image information only.'.format(anno_path))
 
         for img_id in img_ids:
             img_anno = coco.loadImgs([img_id])[0]
@@ -125,13 +126,13 @@ class COCODataSet(Dataset):
             is_empty = False
             if not os.path.exists(im_path):
                 print('Illegal image file: {}, and it will be '
-                               'ignored'.format(im_path))
+                      'ignored'.format(im_path))
                 continue
 
             if im_w < 0 or im_h < 0:
                 print('Illegal width: {} or height: {} in annotation, '
-                               'and im_id: {} will be ignored'.format(
-                                   im_w, im_h, img_id))
+                      'and im_id: {} will be ignored'.format(im_w, im_h,
+                                                             img_id))
                 continue
 
             coco_rec = {
@@ -143,7 +144,8 @@ class COCODataSet(Dataset):
 
             if not self.load_image_only:
                 ins_anno_ids = coco.getAnnIds(
-                    imgIds=[img_id], iscrowd=None if self.load_crowd else False)
+                    imgIds=[img_id],
+                    iscrowd=None if self.load_crowd else False)
                 instances = coco.loadAnns(ins_anno_ids)
 
                 bboxes = []
@@ -264,7 +266,6 @@ class COCODataSet(Dataset):
             empty_records = self._sample_empty(empty_records, len(records))
             records += empty_records
         self.roidbs = records
-
 
     def set_kwargs(self, **kwargs):
         self.mixup_epoch = kwargs.get('mixup_epoch', -1)

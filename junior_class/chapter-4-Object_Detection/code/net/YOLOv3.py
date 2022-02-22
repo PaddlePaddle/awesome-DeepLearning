@@ -85,11 +85,7 @@ class BasicBlock(paddle.nn.Layer):
         self.conv1 = ConvBNLayer(
             ch_in=ch_in, ch_out=ch_out, kernel_size=1, stride=1, padding=0)
         self.conv2 = ConvBNLayer(
-            ch_in=ch_out,
-            ch_out=ch_out * 2,
-            kernel_size=3,
-            stride=1,
-            padding=1)
+            ch_in=ch_out, ch_out=ch_out * 2, kernel_size=3, stride=1, padding=1)
 
     def forward(self, inputs):
         conv1 = self.conv1(inputs)
@@ -181,35 +177,15 @@ class YoloDetectionBlock(paddle.nn.Layer):
         self.conv0 = ConvBNLayer(
             ch_in=ch_in, ch_out=ch_out, kernel_size=1, stride=1, padding=0)
         self.conv1 = ConvBNLayer(
-            ch_in=ch_out,
-            ch_out=ch_out * 2,
-            kernel_size=3,
-            stride=1,
-            padding=1)
+            ch_in=ch_out, ch_out=ch_out * 2, kernel_size=3, stride=1, padding=1)
         self.conv2 = ConvBNLayer(
-            ch_in=ch_out * 2,
-            ch_out=ch_out,
-            kernel_size=1,
-            stride=1,
-            padding=0)
+            ch_in=ch_out * 2, ch_out=ch_out, kernel_size=1, stride=1, padding=0)
         self.conv3 = ConvBNLayer(
-            ch_in=ch_out,
-            ch_out=ch_out * 2,
-            kernel_size=3,
-            stride=1,
-            padding=1)
+            ch_in=ch_out, ch_out=ch_out * 2, kernel_size=3, stride=1, padding=1)
         self.route = ConvBNLayer(
-            ch_in=ch_out * 2,
-            ch_out=ch_out,
-            kernel_size=1,
-            stride=1,
-            padding=0)
+            ch_in=ch_out * 2, ch_out=ch_out, kernel_size=1, stride=1, padding=0)
         self.tip = ConvBNLayer(
-            ch_in=ch_out,
-            ch_out=ch_out * 2,
-            kernel_size=3,
-            stride=1,
-            padding=1)
+            ch_in=ch_out, ch_out=ch_out * 2, kernel_size=3, stride=1, padding=1)
 
     def forward(self, inputs):
         out = self.conv0(inputs)

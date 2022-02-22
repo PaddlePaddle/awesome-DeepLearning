@@ -114,7 +114,11 @@ class ResNet(fluid.dygraph.Layer):
         num_filters = [64, 128, 256, 512]
 
         self.conv = ConvBNLayer(
-            num_channels=3, num_filters=64, filter_size=7, stride=1, act='relu')
+            num_channels=3,
+            num_filters=64,
+            filter_size=7,
+            stride=1,
+            act='relu')
         self.pool2d_max = Pool2D(
             pool_size=3, pool_stride=2, pool_padding=1, pool_type='max')
 

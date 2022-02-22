@@ -1,6 +1,6 @@
 # Learning to Learn
 
-Learning to Learn by Gradient Descent by Gradient Descent 
+Learning to Learn by Gradient Descent by Gradient Descent
 提出了一种全新的优化策略，
 用 LSTM 替代传统优化方法学习一个针对特定任务的优化器。
 
@@ -46,7 +46,7 @@ optimizer $g$ 的更新则由 $f$, $\nabla f$ 及 $\phi$ 决定。
 
 ![LearningToLearn](../../../images/meta_learning/model_based_meta_learning/Learning_to_Learn/LearningToLearnOptimizerOptimizee.png)
 
-图1	Learning to Learn 中 optimizer 和 optimizee 工作原理。
+图1    Learning to Learn 中 optimizer 和 optimizee 工作原理。
 optimizer 为 optimizee 提供更新策略，
 optimizee 将损失信息反馈给 optimizer，协助 optimizer 更新。
 
@@ -72,7 +72,7 @@ $\nabla_{t}=\nabla_{\theta} f\left(\theta_{t}\right)$ 。
 
 ![LearningToLearn](../../../images/meta_learning/model_based_meta_learning/Learning_to_Learn/LearningToLearnComputationalGraph.png)
 
-图1	Learning to Learn 计算图。
+图1    Learning to Learn 计算图。
 梯度只沿实线传递，不沿虚线传递（因为 optimizee 的梯度不依赖于 optimizer 的参数，即
 $\partial \nabla_{t} / \partial \phi = 0$ ），这样可以避免计算 $f$ 的二阶导。
 
@@ -101,7 +101,7 @@ optimizer 的参数 $\phi$ 共享，隐层状态 $h_{i}$ 不共享。
 
 ![Learning2Learn](../../../images/meta_learning/model_based_meta_learning/Learning_to_Learn/LearningToLearnLSTMOptimizer.png)
 
-图3	LSTM 优化器的一步更新过程。所有 LSTM 的 $\phi$ 共享，$h_{i}$ 不共享。
+图3    LSTM 优化器的一步更新过程。所有 LSTM 的 $\phi$ 共享，$h_{i}$ 不共享。
 
 ### 2.3 预处理和后处理
 
@@ -115,7 +115,7 @@ $$
 
 其中， $p>0$ 为任意一个参数（[1] 取 $p=10$），用来裁剪梯度。
 如果第一个参数的取值大于 $-1$ ，
-那么它就代表梯度的 $\log$ ，第二个参数则是它的符号。 
+那么它就代表梯度的 $\log$ ，第二个参数则是它的符号。
 如果第一个参数的取值等于 $-1$ ，
 那么它将作为一个标记指引神经网络寻找第二个参数，此时第二个参数就是对梯度的缩放。
 

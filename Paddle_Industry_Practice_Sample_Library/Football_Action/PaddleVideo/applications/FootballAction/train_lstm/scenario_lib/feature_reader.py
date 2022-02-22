@@ -40,6 +40,7 @@ class FeatureReader:
                  list
                  NextVlad only: eigen_file
     """
+
     def __init__(self, name, mode, cfg, bs_denominator):
         self.name = name
         self.mode = mode

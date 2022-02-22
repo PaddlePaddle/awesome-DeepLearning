@@ -4,9 +4,11 @@ logger
 import os
 import logging
 
+
 class Logger(logging.Logger):
     """Customized logger for news stripper
     """
+
     def __init__(self):
         super(Logger, self).__init__(self)
         if not os.path.exists('logs'):
@@ -21,4 +23,3 @@ class Logger(logging.Logger):
         formatter = logging.Formatter(format, datefmt)
         handler.setFormatter(formatter)
         self.addHandler(handler)
-

@@ -63,4 +63,3 @@ $$
 
 1. [Longformer: The Long-Document Transformer](https://arxiv.org/pdf/2004.05150.pdf)
 2. [Longformer Github](https://github.com/allenai/longformer)
-

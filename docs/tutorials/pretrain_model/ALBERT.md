@@ -31,7 +31,7 @@ ALBERT 架构的主干和 BERT 类似，都使用了基于 GELU 的非线性激�
 
 ![](https://raw.githubusercontent.com/w5688414/paddleImage/main/bert_family_img/token_embedding_v1.png)
 
-之所以可以这样做是因为每次反向传播时都只会更新一个 Token 相关参数，其他参数都不会变。而且在第一次投影的过程中，词与词之间是不会进行交互的，只有在后面的 Attention 过程中才会做交互，我们称为 Sparsely updated。如果词不做交互的话，完全没有必要用一个很高维度的向量去表示，所以就引入一个小的隐藏层。 
+之所以可以这样做是因为每次反向传播时都只会更新一个 Token 相关参数，其他参数都不会变。而且在第一次投影的过程中，词与词之间是不会进行交互的，只有在后面的 Attention 过程中才会做交互，我们称为 Sparsely updated。如果词不做交互的话，完全没有必要用一个很高维度的向量去表示，所以就引入一个小的隐藏层。
 
 ### Cross-layer parameter sharing
 
@@ -72,5 +72,3 @@ SOP的正例选取方式与BERT一致（来自同一文档的两个连续段）�
 ## No Dropout
 
 RoBERTA 指出 BERT 一系列模型都是” 欠拟合” 的，所以干脆直接关掉 dropout, 那么在 ALBERT 中也是去掉 Dropout 层可以显著减少临时变量对内存的占用。同时论文发现，Dropout 会损害大型 Transformer-based 模型的性能。
-
-

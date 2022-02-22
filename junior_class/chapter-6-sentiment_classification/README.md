@@ -7,4 +7,3 @@
 本章内容同时为大家提供了notebook和code文件，读者可按需选择学习：
 - notebook 给大家提供本章的学习教程，有完整的文字说明内容；为了有更好的阅读方式大家也可以访问 AIStudio 平台上的 [notebook文档](https://aistudio.baidu.com/aistudio/education/group/info/1297/content) 。
 - code 给大家提供了本章内容的完整学习代码，具体使用教程参考 code 部分的 [README](./code/README.md)。
-

@@ -24,6 +24,7 @@ class Mixup(object):
     Args:
         alpha(float): alpha value.
     """
+
     def __init__(self, alpha=0.2):
         assert alpha > 0., \
                 'parameter alpha[%f] should > 0.0' % (alpha)
@@ -47,6 +48,7 @@ class Cutmix(object):
     Args:
         alpha(float): alpha value.
     """
+
     def __init__(self, alpha=0.2):
         assert alpha > 0., \
                 'parameter alpha[%f] should > 0.0' % (alpha)
@@ -98,6 +100,7 @@ class VideoMix(object):
         mixup_alpha(float): alpha for mixup aug
         cutmix_alpha(float): alpha for cutmix aug
     """
+
     def __init__(self, cutmix_prob=0.5, mixup_alpha=0.2, cutmix_alpha=1.0):
         assert cutmix_prob > 0., \
                 'parameter cutmix_prob[%f] should > 0.0' % (cutmix_prob)

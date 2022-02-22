@@ -59,7 +59,7 @@ Swin Transformer是一种新的视觉领域的Transformer模型，来自论文�
 可以通过以下方式开始模型评估过程
 
 ```bash
-python3 eval.py 
+python3 eval.py
     --model SwinTransformer  \
     --data data/ILSVRC2012_val
 ```

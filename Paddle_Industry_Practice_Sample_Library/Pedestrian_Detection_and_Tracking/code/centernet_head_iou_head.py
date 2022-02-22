@@ -143,11 +143,17 @@ class CenterNetHead(nn.Layer):
         iou = self.iou(feat)
         offset = self.offset(feat)
         if self.training:
-            loss = self.get_loss(heatmap, size, iou, offset, self.weights, inputs)
+            loss = self.get_loss(heatmap, size, iou, offset, self.weights,
+                                 inputs)
             return loss
         else:
             heatmap = F.sigmoid(heatmap)
-            return {'heatmap': heatmap, 'size': size, 'iou':iou, 'offset': offset}
+            return {
+                'heatmap': heatmap,
+                'size': size,
+                'iou': iou,
+                'offset': offset
+            }
 
     def get_loss(self, heatmap, size, iou, offset, weights, inputs):
         heatmap_target = inputs['heatmap']
@@ -191,14 +197,14 @@ class CenterNetHead(nn.Layer):
         iou_mask.stop_gradient = True
         gt_bbox_xys = inputs['bbox_xys']
         gt_bbox_xys.stop_gradient = True
-        centers_x = (gt_bbox_xys[:,:,0:1] + gt_bbox_xys[:,:,2:3]) / 2.0
-        centers_y = (gt_bbox_xys[:,:,1:2] + gt_bbox_xys[:,:,3:4]) / 2.0
-        x1 = centers_x - pos_size[:,:,0:1]
-        y1 = centers_y - pos_size[:,:,1:2]
-        x2 = centers_x + pos_size[:,:,2:3]
-        y2 = centers_y + pos_size[:,:,3:4]
+        centers_x = (gt_bbox_xys[:, :, 0:1] + gt_bbox_xys[:, :, 2:3]) / 2.0
+        centers_y = (gt_bbox_xys[:, :, 1:2] + gt_bbox_xys[:, :, 3:4]) / 2.0
+        x1 = centers_x - pos_size[:, :, 0:1]
+        y1 = centers_y - pos_size[:, :, 1:2]
+        x2 = centers_x + pos_size[:, :, 2:3]
+        y2 = centers_y + pos_size[:, :, 3:4]
         pred_boxes = paddle.concat([x1, y1, x2, y2], axis=-1)
-        
+
         iou_loss = self.iou_loss(
             pred_boxes * iou_mask,
             gt_bbox_xys * iou_mask,
@@ -221,7 +227,9 @@ class CenterNetHead(nn.Layer):
             reduction='sum')
         offset_loss = offset_loss / (pos_num + 1e-4)
 
-        det_loss = weights['heatmap'] * heatmap_loss + weights['size'] * size_loss + weights['offset'] * offset_loss + weights['iou'] * iou_loss
+        det_loss = weights['heatmap'] * heatmap_loss + weights[
+            'size'] * size_loss + weights['offset'] * offset_loss + weights[
+                'iou'] * iou_loss
 
         return {
             'det_loss': det_loss,

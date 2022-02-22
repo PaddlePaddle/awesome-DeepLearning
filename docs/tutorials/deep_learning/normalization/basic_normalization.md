@@ -14,7 +14,7 @@
 
 2. 数据归一化后，寻求最优解的过程会变得平缓，可以更快速的收敛到最优解。详解请参见`3.为什么归一化能提高求解最优解的速度`。
 
-   
+
 
 ## 3. 为什么归一化能提高求解最优解的速度
 
@@ -57,26 +57,26 @@ $$
 ## 4. 归一化有哪些类型
 
 1. Min-max normalization (Rescaling)：
-   
-   
+
+
    $$
    x^{'} = \frac{x - min(x)}{max(x) - min(x)}
    $$
    归一化后的数据范围为 [0, 1]，其中 $min(x)、 max(x)$ 分别求样本数据的最小值和最大值。
-   
+
 2. Mean normalization：
 
-   
+
    $$
    x^{'} = \frac{x - mean(x)}{max(x) - min(x)}
    $$
    归一化后的数据范围为 [-1, 1]，其中 $mean(x)$ 为样本数据的平均值。
 
-   
+
 
 3. Z-score normalization (Standardization)：
 
-   
+
    $$
    x^{'} = \frac{x - \mu}{\sigma}
    $$
@@ -86,29 +86,29 @@ $$
 
    * 对数归一化：
 
-     
+
 
    $$
    x^{'} = \frac{\lg x}{\lg max(x)}
    $$
 
    * 反正切函数归一化：
-     
-     
+
+
      $$
      x^{'} = \arctan(x) * \frac{2}{\pi}
      $$
      归一化后的数据范围为 [-1, 1]
-     
+
     * 小数定标标准化（Demical Point Normalization）:
-      
-      
+
+
       $$
       x^{'} = \frac{x}{10^j}
       $$
       归一化后的数据范围为 [-1, 1]，$j$ 为使$max(|x^{'}|) < 1$的最小整数。
 
-   
+
 
 
 ## 5. 不同归一化的使用条件
@@ -119,7 +119,7 @@ $$
 
 3. 非线性归一化通常被用在数据分化程度较大的场景，有时需要通过一些数学函数对原始值进行映射，如对数、反正切等。
 
-   
+
 
 ***
 
@@ -155,12 +155,3 @@ $$
 ## References
 
 <span name = "ref1">【1】Comparative Analysis of KNN Algorithm using Various Normalization Techniques；Amit Pandey，Achin Jain.</span>
-
-
-
-
-
-
-
-
-

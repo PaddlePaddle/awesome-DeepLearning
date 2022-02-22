@@ -18,11 +18,13 @@ import numpy as np
 import paddle.nn.functional as F
 
 # unzip -o data/save_feature_v1.zip -d /home/aistudio/
-import pickle 
+import pickle
 import numpy as np
 
+
 # 定义根据用户兴趣推荐电影
-def recommend_mov_for_usr(usr_id, top_k, pick_num, usr_feat_dir, mov_feat_dir, mov_info_path):
+def recommend_mov_for_usr(usr_id, top_k, pick_num, usr_feat_dir, mov_feat_dir,
+                          mov_info_path):
     assert pick_num <= top_k
     # 读取电影和用户的特征
     usr_feats = pickle.load(open(usr_feat_dir, 'rb'))
@@ -40,7 +42,7 @@ def recommend_mov_for_usr(usr_id, top_k, pick_num, usr_feat_dir, mov_feat_dir, m
         mov_feat = paddle.to_tensor(mov_feat)
         # 计算余弦相似度
         sim = paddle.nn.functional.common.cosine_similarity(usr_feat, mov_feat)
-        
+
         cos_sims.append(sim.numpy()[0])
     # 对相似度排序
     index = np.argsort(cos_sims)[-top_k:]
@@ -52,12 +54,12 @@ def recommend_mov_for_usr(usr_id, top_k, pick_num, usr_feat_dir, mov_feat_dir, m
         for item in data:
             item = item.strip().split("::")
             mov_info[str(item[0])] = item
-            
+
     print("当前的用户是：")
     print("usr_id:", usr_id)
     print("推荐可能喜欢的电影是：")
     res = []
-    
+
     # 加入随机选择因素，确保每次推荐的都不一样
     while len(res) < pick_num:
         val = np.random.choice(len(index), 1)[0]
@@ -69,12 +71,12 @@ def recommend_mov_for_usr(usr_id, top_k, pick_num, usr_feat_dir, mov_feat_dir, m
     for id in res:
         print("mov_id:", id, mov_info[str(id)])
 
+
 movie_data_path = "./ml-1m/movies.dat"
 top_k, pick_num = 10, 6
 usr_id = 2
-recommend_mov_for_usr(usr_id, top_k, pick_num, 'usr_feat.pkl', 'mov_feat.pkl', movie_data_path)
-
-
+recommend_mov_for_usr(usr_id, top_k, pick_num, 'usr_feat.pkl', 'mov_feat.pkl',
+                      movie_data_path)
 
 # 给定一个用户ID，找到评分最高的topk个电影
 
@@ -88,12 +90,12 @@ rating_path = "./ml-1m/ratings.dat"
 # 打开文件，ratings_data
 with open(rating_path, 'r') as f:
     ratings_data = f.readlines()
-    
+
 usr_rating_info = {}
 for item in ratings_data:
     item = item.strip().split("::")
     # 处理每行数据，分别得到用户ID，电影ID，和评分
-    usr_id,movie_id,score = item[0],item[1],item[2]
+    usr_id, movie_id, score = item[0], item[1], item[2]
     if usr_id == str(usr_a):
         usr_rating_info[movie_id] = float(score)
 
@@ -104,13 +106,13 @@ print("ID为 {} 的用户，评分过的电影数量是: ".format(usr_a), len(mo
 #####################################
 ## 选出ID为usr_a评分最高的前topk个电影 ##
 #####################################
-ratings_topk = sorted(usr_rating_info.items(), key=lambda item:item[1])[-topk:]
+ratings_topk = sorted(usr_rating_info.items(), key=lambda item: item[1])[-topk:]
 
 movie_info_path = "./ml-1m/movies.dat"
 # 打开文件，编码方式选择ISO-8859-1，读取所有数据到data中
 with open(movie_info_path, 'r', encoding="ISO-8859-1") as f:
     data = f.readlines()
-    
+
 movie_info = {}
 for item in data:
     item = item.strip().split("::")

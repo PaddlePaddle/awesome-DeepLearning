@@ -120,4 +120,3 @@ VGG 在 2014 年的 ImageNet 比赛上取得了亚军的好成绩，具体指标
 ## 参考文献
 
 [1] [Very deep convolutional networks for large-scale image recognition.](https://arxiv.org/pdf/1409.1556.pdf)
-

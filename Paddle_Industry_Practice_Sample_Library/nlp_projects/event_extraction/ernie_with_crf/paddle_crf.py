@@ -145,8 +145,9 @@ class LinearChainCrf(nn.Layer):
         offsets += paddle.unsqueeze(self._get_seq_index(seq_len) * n_labels, 0)
         flattened_tag_indices = paddle.reshape(offsets + labels, [-1])
 
-        scores = paddle.gather(flattened_inputs, flattened_tag_indices).reshape(
-            [batch_size, seq_len])
+        scores = paddle.gather(flattened_inputs,
+                               flattened_tag_indices).reshape(
+                                   [batch_size, seq_len])
 
         mask = paddle.cast(
             sequence_mask(
@@ -351,11 +352,11 @@ class ViterbiDecoder(nn.Layer):
         lengths_np = lengths.numpy()
         batch_path = []
         max_len = 0
-        
+
         for batch_id in range(batch_size):
             best_last_tag = last_ids[batch_id]
             path = [best_last_tag]
-            for hist in reversed(historys[:(lengths_np[batch_id]-1)]):
+            for hist in reversed(historys[:(lengths_np[batch_id] - 1)]):
                 best_last_tag = hist[batch_id][best_last_tag]
                 path.append(best_last_tag)
 
@@ -364,7 +365,9 @@ class ViterbiDecoder(nn.Layer):
             # Pad to the max sequence length, so that the ChunkEvaluator can compute it
             batch_path.append(path)
         # padding to the same length
-        batch_path = [path + [0] * (max_len - len(path)) for path in batch_path]
+        batch_path = [
+            path + [0] * (max_len - len(path)) for path in batch_path
+        ]
         batch_path = paddle.to_tensor(batch_path)
         return scores, batch_path
 

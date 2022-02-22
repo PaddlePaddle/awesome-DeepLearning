@@ -26,6 +26,7 @@ logger = get_logger("paddlevideo")
 @SEGMENT.register()
 class CFBI(BaseSegment):
     """CFBI model framework."""
+
     def __init__(self, backbone=None, head=None, loss=None):
         super().__init__(backbone, head, loss)
         x1 = paddle.zeros([3, 1, 1, 1])
@@ -64,16 +65,16 @@ class CFBI(BaseSegment):
                 ref_masks,
                 prev_mask,
                 gt_ids,
-                current_low_level=current_low_level,
-            )
+                current_low_level=current_low_level, )
             all_pred = []
             for i in range(bs):
                 pred = tmp_dic[i]
 
-                pred = F.interpolate(pred,
-                                     size=[pred_size[0], pred_size[1]],
-                                     mode='bilinear',
-                                     align_corners=True)
+                pred = F.interpolate(
+                    pred,
+                    size=[pred_size[0], pred_size[1]],
+                    mode='bilinear',
+                    align_corners=True)
                 all_pred.append(pred)
             all_pred = paddle.concat(all_pred, axis=0)
             all_pred = F.softmax(all_pred, axis=1)
@@ -113,24 +114,28 @@ class CFBI(BaseSegment):
                 ref_frame_embeddings = list(zip(*ref_frame_embeddings))
                 all_scale_ref_frame_label = []
                 for ref_frame_label in ref_frame_labels:
-                    scale_ref_frame_label = paddle.cast(F.interpolate(
-                        paddle.cast(ref_frame_label, dtype="float32"),
-                        size=(h, w),
-                        mode='nearest'),
-                                                        dtype="int32")
+                    scale_ref_frame_label = paddle.cast(
+                        F.interpolate(
+                            paddle.cast(
+                                ref_frame_label, dtype="float32"),
+                            size=(h, w),
+                            mode='nearest'),
+                        dtype="int32")
                     all_scale_ref_frame_label.append(scale_ref_frame_label)
                 scale_ref_frame_labels.append(all_scale_ref_frame_label)
-            scale_previous_frame_label = paddle.cast(F.interpolate(
-                paddle.cast(previous_frame_mask, dtype="float32"),
-                size=(h, w),
-                mode='nearest'),
-                                                     dtype="int32")
+            scale_previous_frame_label = paddle.cast(
+                F.interpolate(
+                    paddle.cast(
+                        previous_frame_mask, dtype="float32"),
+                    size=(h, w),
+                    mode='nearest'),
+                dtype="int32")
             scale_previous_frame_labels.append(scale_previous_frame_label)
         for n in range(bs):
             ref_obj_ids = paddle.reshape(
-                paddle.cast(paddle.arange(0,
-                                          np.array(gt_ids)[n] + 1),
-                            dtype="int32"), [-1, 1, 1, 1])
+                paddle.cast(
+                    paddle.arange(0, np.array(gt_ids)[n] + 1), dtype="int32"),
+                [-1, 1, 1, 1])
             obj_num = ref_obj_ids.shape[0]
             low_level_feat = paddle.unsqueeze(current_low_level[n], axis=0)
             all_CE_input = []
@@ -143,17 +148,20 @@ class CFBI(BaseSegment):
                 seq_current_frame_embedding = current_frame_embedding[n]
                 seq_prev_frame_embedding = previous_frame_embedding[n]
                 seq_previous_frame_label = paddle.cast(
-                    (paddle.cast(scale_previous_frame_label[n], dtype="int32")
-                     == ref_obj_ids),
+                    (paddle.cast(
+                        scale_previous_frame_label[n], dtype="int32") ==
+                     ref_obj_ids),
                     dtype="float32")
                 if np.array(gt_ids)[n] > 0:
-                    dis_bias = paddle.concat([
-                        paddle.unsqueeze(self.bg_bias[scale_idx], axis=0),
-                        paddle.expand(
-                            paddle.unsqueeze(self.fg_bias[scale_idx], axis=0),
-                            [np.array(gt_ids)[n], -1, -1, -1])
-                    ],
-                                             axis=0)
+                    dis_bias = paddle.concat(
+                        [
+                            paddle.unsqueeze(
+                                self.bg_bias[scale_idx], axis=0), paddle.expand(
+                                    paddle.unsqueeze(
+                                        self.fg_bias[scale_idx], axis=0),
+                                    [np.array(gt_ids)[n], -1, -1, -1])
+                        ],
+                        axis=0)
                 else:
                     dis_bias = paddle.unsqueeze(self.bg_bias[scale_idx], axis=0)
                 #Global FG map
@@ -179,20 +187,20 @@ class CFBI(BaseSegment):
                         seq_ref_frame_embedding = paddle.transpose(
                             seq_ref_frame_embedding, [1, 2, 0])
                         seq_ref_frame_label = paddle.cast(
-                            (paddle.cast(scale_ref_frame_label[n],
-                                         dtype="int32") == ref_obj_ids),
+                            (paddle.cast(
+                                scale_ref_frame_label[n], dtype="int32") ==
+                             ref_obj_ids),
                             dtype="float32")
                         seq_ref_frame_labels.append(seq_ref_frame_label)
                         seq_ref_frame_label = paddle.transpose(
-                            paddle.squeeze(seq_ref_frame_label, axis=1),
-                            [1, 2, 0])
+                            paddle.squeeze(
+                                seq_ref_frame_label, axis=1), [1, 2, 0])
                         all_reference_embeddings.append(
                             seq_ref_frame_embedding[:, :, :matching_dim])
                         all_reference_labels.append(seq_ref_frame_label)
                     global_matching_fg = global_matching_for_eval(
                         all_reference_embeddings=all_reference_embeddings,
-                        query_embeddings=
-                        seq_current_frame_embedding_for_matching,
+                        query_embeddings=seq_current_frame_embedding_for_matching,
                         all_reference_labels=all_reference_labels,
                         n_chunks=TEST_GLOBAL_MATCHING_CHUNK[scale_idx],
                         dis_bias=dis_bias,
@@ -204,7 +212,8 @@ class CFBI(BaseSegment):
                 seq_prev_frame_embedding_for_matching = paddle.transpose(
                     seq_prev_frame_embedding[:matching_dim], [1, 2, 0])
                 seq_previous_frame_label_for_matching = paddle.transpose(
-                    paddle.squeeze(seq_previous_frame_label, axis=1), [1, 2, 0])
+                    paddle.squeeze(
+                        seq_previous_frame_label, axis=1), [1, 2, 0])
                 local_matching_fg = local_matching(
                     prev_frame_embedding=seq_prev_frame_embedding_for_matching,
                     query_embedding=seq_current_frame_embedding_for_matching,
@@ -220,9 +229,11 @@ class CFBI(BaseSegment):
 
                 #Aggregate Pixel-level Matching
                 to_cat_global_matching_fg = paddle.transpose(
-                    paddle.squeeze(global_matching_fg, axis=0), [2, 3, 0, 1])
+                    paddle.squeeze(
+                        global_matching_fg, axis=0), [2, 3, 0, 1])
                 to_cat_local_matching_fg = paddle.transpose(
-                    paddle.squeeze(local_matching_fg, axis=0), [2, 3, 0, 1])
+                    paddle.squeeze(
+                        local_matching_fg, axis=0), [2, 3, 0, 1])
                 all_to_cat = [
                     to_cat_global_matching_fg, to_cat_local_matching_fg,
                     seq_previous_frame_label
@@ -231,27 +242,28 @@ class CFBI(BaseSegment):
                 #Global and Local BG map
                 if MODEL_MATCHING_BACKGROUND:
                     to_cat_global_matching_bg = foreground2background(
-                        to_cat_global_matching_fg,
-                        np.array(gt_ids)[n] + 1)
+                        to_cat_global_matching_fg, np.array(gt_ids)[n] + 1)
                     reshaped_prev_nn_feature_n = paddle.unsqueeze(
                         paddle.transpose(to_cat_local_matching_fg,
                                          [0, 2, 3, 1]),
                         axis=1)
                     to_cat_local_matching_bg = foreground2background(
-                        reshaped_prev_nn_feature_n,
-                        np.array(gt_ids)[n] + 1)
-                    to_cat_local_matching_bg = paddle.squeeze(paddle.transpose(
-                        to_cat_local_matching_bg, [0, 4, 2, 3, 1]),
-                                                              axis=-1)
+                        reshaped_prev_nn_feature_n, np.array(gt_ids)[n] + 1)
+                    to_cat_local_matching_bg = paddle.squeeze(
+                        paddle.transpose(to_cat_local_matching_bg,
+                                         [0, 4, 2, 3, 1]),
+                        axis=-1)
                     all_to_cat += [
                         to_cat_local_matching_bg, to_cat_global_matching_bg
                     ]
 
                 to_cat_current_frame_embedding = paddle.expand(
-                    paddle.unsqueeze(current_frame_embedding[n], axis=0),
+                    paddle.unsqueeze(
+                        current_frame_embedding[n], axis=0),
                     [obj_num, -1, -1, -1])
                 to_cat_prev_frame_embedding = paddle.expand(
-                    paddle.unsqueeze(previous_frame_embedding[n], axis=0),
+                    paddle.unsqueeze(
+                        previous_frame_embedding[n], axis=0),
                     [obj_num, -1, -1, -1])
                 to_cat_prev_frame_embedding_fg = to_cat_prev_frame_embedding * seq_previous_frame_label
                 to_cat_prev_frame_embedding_bg = to_cat_prev_frame_embedding * (
@@ -271,8 +283,9 @@ class CFBI(BaseSegment):
                         all_ref_frame_embedding,
                         seq_ref_frame_labels,
                         paddle.expand(
-                            paddle.unsqueeze(previous_frame_embedding[n],
-                                             axis=0), [obj_num, -1, -1, -1]),
+                            paddle.unsqueeze(
+                                previous_frame_embedding[n], axis=0),
+                            [obj_num, -1, -1, -1]),
                         seq_previous_frame_label,
                         epsilon=self.epsilon)
 

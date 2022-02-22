@@ -25,11 +25,7 @@ class AlexNet(paddle.nn.Layer):
         # AlexNet与LeNet一样也会同时使用卷积和池化层提取图像特征
         # 与LeNet不同的是激活函数换成了‘relu’
         self.conv1 = Conv2D(
-            in_channels=3,
-            out_channels=96,
-            kernel_size=11,
-            stride=4,
-            padding=5)
+            in_channels=3, out_channels=96, kernel_size=11, stride=4, padding=5)
         self.max_pool1 = MaxPool2D(kernel_size=2, stride=2)
         self.conv2 = Conv2D(
             in_channels=96,

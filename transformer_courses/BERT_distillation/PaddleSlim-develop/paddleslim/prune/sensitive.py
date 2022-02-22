@@ -26,7 +26,8 @@ from ..prune import Pruner
 _logger = get_logger(__name__, level=logging.INFO)
 
 __all__ = [
-    "sensitivity", "load_sensitivities", "merge_sensitive", "get_ratios_by_loss"
+    "sensitivity", "load_sensitivities", "merge_sensitive",
+    "get_ratios_by_loss"
 ]
 
 

@@ -160,7 +160,8 @@ class DartsSpace(SearchSpaceBase):
         if reduction_prev:
             s0 = self._factorized_reduce(s0, filter_num, name=name + '/s-2')
         else:
-            s0 = self._relu_conv_bn(s0, filter_num, 1, 1, 0, name=name + '/s-2')
+            s0 = self._relu_conv_bn(
+                s0, filter_num, 1, 1, 0, name=name + '/s-2')
         s1 = self._relu_conv_bn(s1, filter_num, 1, 1, 0, name=name + '/s-1')
 
         if stride == 1:

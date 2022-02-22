@@ -36,6 +36,7 @@ class ppTSNHead(BaseHead):
         kwargs (dict, optional): Any keyword argument to initialize.
 
     """
+
     def __init__(self,
                  num_classes,
                  in_channels,
@@ -60,19 +61,17 @@ class ppTSNHead(BaseHead):
         self.fc = Linear(
             self.in_channels,
             self.num_classes,
-            weight_attr=ParamAttr(learning_rate=5.0 if fclr5 else 1.0,
-                                  regularizer=L2Decay(1e-4)),
-            bias_attr=ParamAttr(learning_rate=10.0 if fclr5 else 1.0,
-                                regularizer=L2Decay(0.0)))
+            weight_attr=ParamAttr(
+                learning_rate=5.0
+                if fclr5 else 1.0, regularizer=L2Decay(1e-4)),
+            bias_attr=ParamAttr(
+                learning_rate=10.0
+                if fclr5 else 1.0, regularizer=L2Decay(0.0)))
 
     def init_weights(self):
         """Initiate the FC layer parameters"""
-        weight_init_(self.fc,
-                     'Normal',
-                     'fc_0.w_0',
-                     'fc_0.b_0',
-                     mean=0.,
-                     std=self.std)
+        weight_init_(
+            self.fc, 'Normal', 'fc_0.w_0', 'fc_0.b_0', mean=0., std=self.std)
 
     def forward(self, x, num_seg):
         """Define how the head is going to run.

@@ -70,7 +70,7 @@ def box_iou_xyxy(box1, box2):
     x2min, y2min, x2max, y2max = box2[0], box2[1], box2[2], box2[3]
     # 计算box2的面积
     s2 = (y2max - y2min + 1.) * (x2max - x2min + 1.)
-    
+
     # 计算相交矩形框的坐标
     xmin = np.maximum(x1min, x2min)
     ymin = np.maximum(y1min, y2min)
@@ -136,11 +136,10 @@ print('IoU is {}'.format(iou))
 
 **问题：**
 
-1. 什么情况下两个矩形框的IoU等于1？ 
+1. 什么情况下两个矩形框的IoU等于1？
 
    答案：两个矩形框完全重合。
 
 1. 什么情况下两个矩形框的IoU等于0？
 
    答案：两个矩形框完全不相交。
-

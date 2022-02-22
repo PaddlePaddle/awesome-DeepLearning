@@ -133,14 +133,15 @@ class ControllerServer(object):
 
                     for key_client in self._client.keys():
                         ### if a client not request token in double train one tokens' time, we think this client was stoped.
-                        if (
-                                time.time() - self._client[key_client]
-                        ) > self._compare_time and len(self._client.keys()) > 1:
+                        if (time.time() - self._client[key_client]
+                            ) > self._compare_time and len(self._client.keys(
+                            )) > 1:
                             self._client.pop(key_client)
                             self._client_num -= 1
                     _logger.debug(
                         "client: {}, client_num: {}, compare_time: {}".format(
-                            self._client, self._client_num, self._compare_time))
+                            self._client, self._client_num,
+                            self._compare_time))
                     tokens = [int(token) for token in tokens.split(",")]
                     self._controller.update(tokens,
                                             float(reward),

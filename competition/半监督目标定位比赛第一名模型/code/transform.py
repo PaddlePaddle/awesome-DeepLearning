@@ -42,8 +42,10 @@ class Resize(object):
         self.W = W
 
     def __call__(self, image, mask):
-        image = cv2.resize(image, dsize=(self.W, self.H), interpolation=cv2.INTER_LINEAR)
-        mask = cv2.resize(mask, dsize=(self.W, self.H), interpolation=cv2.INTER_LINEAR)
+        image = cv2.resize(
+            image, dsize=(self.W, self.H), interpolation=cv2.INTER_LINEAR)
+        mask = cv2.resize(
+            mask, dsize=(self.W, self.H), interpolation=cv2.INTER_LINEAR)
         return image, mask
 
 
@@ -59,13 +61,13 @@ class RandomBrightness(object):
 # 随机裁剪
 class RandomCrop(object):
     def __call__(self, image, mask):
-        H,W,_   = image.shape
-        randw   = np.random.randint(W/8)
-        randh   = np.random.randint(H/8)
+        H, W, _ = image.shape
+        randw = np.random.randint(W / 8)
+        randh = np.random.randint(H / 8)
         offseth = 0 if randh == 0 else np.random.randint(randh)
         offsetw = 0 if randw == 0 else np.random.randint(randw)
-        p0, p1, p2, p3 = offseth, H+offseth-randh, offsetw, W+offsetw-randw
-        return image[p0:p1,p2:p3, :], mask[p0:p1,p2:p3, :]
+        p0, p1, p2, p3 = offseth, H + offseth - randh, offsetw, W + offsetw - randw
+        return image[p0:p1, p2:p3, :], mask[p0:p1, p2:p3, :]
 
 
 # 随机高斯模糊
@@ -99,6 +101,3 @@ class ToTensor(object):
         image, mask = image.astype(np.float32), mask.astype(np.float32)
         mask = mask.mean(axis=0, keepdims=True)
         return image, mask
-
-
-

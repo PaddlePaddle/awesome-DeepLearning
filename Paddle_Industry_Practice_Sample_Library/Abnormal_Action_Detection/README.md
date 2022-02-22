@@ -151,7 +151,7 @@ def generate_proposal_file(detection_result_dir,proposal_file_path):
             width = sp[1]#width(colums) of image
 
             file_name=txt_file.split("/")[-1].split("_")[-1].replace(".txt","")
-            
+
             key = sub_dir+","+file_name
             #print(file_name,key)
             person_list = []
@@ -177,13 +177,13 @@ def generate_proposal_file(detection_result_dir,proposal_file_path):
                     person_proposal = [x1,y1,x2,y2,score]
 
                     person_list.append(person_proposal)
-            
+
             proposals[key] = person_list
-    
+
     #for key,value in proposals.items():
     #    if '00001' in key:
     #        print(key,value)
-   
+
     with open(proposal_file_path, 'wb') as handle:
         pickle.dump(proposals, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
@@ -334,23 +334,23 @@ Paddle Inference 是飞桨的原生推理库， 作用于服务器端和云端�
 (1) 引用 paddle inference 预测库
       import paddle.inference as paddle_infer
 (2) 创建配置对象，并根据需求配置
-     # 创建 config，并设置预测模型路径 
+     # 创建 config，并设置预测模型路径
      config = paddle_infer.Config(args.model_file, args.params_file)
 (3) 根据Config创建预测对象
      predictor = paddle_infer.create_predictor(config)
 (4) 设置模型输入 Tensor
-     # 获取输入的名称 
-     input_names = predictor.get_input_names() 
-     input_handle = predictor.get_input_handle(input_names[0]) 
-     # 设置输入 
-     fake_input = np.random.randn(args.batch_size, 3, 318, 318).astype("float32") 
-     input_handle.reshape([args.batch_size, 3, 318, 318]) 
+     # 获取输入的名称
+     input_names = predictor.get_input_names()
+     input_handle = predictor.get_input_handle(input_names[0])
+     # 设置输入
+     fake_input = np.random.randn(args.batch_size, 3, 318, 318).astype("float32")
+     input_handle.reshape([args.batch_size, 3, 318, 318])
      input_handle.copy_from_cpu(fake_input)
 (5) 执行预测
      predictor.run()
 (6) 获得预测结果
-     output_names = predictor.get_output_names() 
-     output_handle = predictor.get_output_handle(output_names[0]) 
+     output_names = predictor.get_output_names()
+     output_handle = predictor.get_output_handle(output_names[0])
      output_data = output_handle.copy_to_cpu() # numpy.ndarray类型
 ```
 

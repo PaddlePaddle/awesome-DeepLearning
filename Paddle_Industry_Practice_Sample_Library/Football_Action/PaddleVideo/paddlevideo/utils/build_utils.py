@@ -30,6 +30,6 @@ def build(cfg, registry, key='name'):
 
     obj_cls = registry.get(obj_type)
     if obj_cls is None:
-        raise KeyError('{} is not in the {} registry'.format(
-                obj_type, registry.name))
+        raise KeyError('{} is not in the {} registry'.format(obj_type,
+                                                             registry.name))
     return obj_cls(**cfg_copy)

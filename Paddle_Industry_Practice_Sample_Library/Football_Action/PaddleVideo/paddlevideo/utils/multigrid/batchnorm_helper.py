@@ -15,8 +15,8 @@ def get_norm(bn_norm_type, bn_num_splits):
     elif bn_norm_type == "sub_batchnorm":
         return partial(SubBatchNorm3D, num_splits=bn_num_splits)
     else:
-        raise NotImplementedError(
-            "Norm type {} is not supported".format(bn_norm_type))
+        raise NotImplementedError("Norm type {} is not supported".format(
+            bn_norm_type))
 
 
 def aggregate_sub_bn_stats(model):
@@ -47,6 +47,7 @@ class SubBatchNorm3D(paddle.nn.Layer):
     examples (1/N of batch) independently. During evaluation, it aggregates
     the stats from all splits into one BN.
     """
+
     def __init__(self, num_splits, **args):
         """
         Args:
@@ -75,14 +76,12 @@ class SubBatchNorm3D(paddle.nn.Layer):
                                         and self.weight_attr.learning_rate == 0.
 
         if self.bias_attr == False:
-            self.bias = self.create_parameter(attr=None,
-                                              shape=[self.num_features],
-                                              is_bias=True)
+            self.bias = self.create_parameter(
+                attr=None, shape=[self.num_features], is_bias=True)
             self.bias.stop_gradient = True
         else:
-            self.bias = self.create_parameter(attr=self.bias_attr,
-                                              shape=[self.num_features],
-                                              is_bias=True)
+            self.bias = self.create_parameter(
+                attr=self.bias_attr, shape=[self.num_features], is_bias=True)
             self.bias.stop_gradient = self.bias_attr is not None \
                                       and self.bias_attr.learning_rate == 0.
 
@@ -123,8 +122,7 @@ class SubBatchNorm3D(paddle.nn.Layer):
             bn_mean_tensor, bn_variance_tensor = self._get_aggregated_mean_std(
                 self.split_bn._mean,
                 self.split_bn._variance,
-                self.num_splits,
-            )
+                self.num_splits, )
             self.bn._mean.set_value(bn_mean_tensor)
             self.bn._variance.set_value(bn_variance_tensor)
 

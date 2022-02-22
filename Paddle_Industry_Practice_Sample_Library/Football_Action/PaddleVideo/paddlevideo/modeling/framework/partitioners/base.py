@@ -25,6 +25,7 @@ class BasePartitioner(nn.Layer):
     - Methods:``valid_step``, define your valid step, always the same as train_step.
     - Methods:``test_step``, define your test step.
     """
+
     def __init__(self, backbone=None, head=None):
         super().__init__()
         if backbone is not None:

@@ -3,13 +3,13 @@
 ## Dependent packages
 
 - python3
-- paddlenlp==2.0.0rc22 
+- paddlenlp==2.0.0rc22
 - paddlepaddle==2.1.1
 - pandas
 - attrdict==2.0.1
 - ujson
 - tqdm
-- paddlepaddle-gpu 
+- paddlepaddle-gpu
 
 
 ## Project Introduction
@@ -47,12 +47,12 @@ This experiment uses Discriminator to do the punctuation restoration task. Punct
 
 - Download [IWSLT12.zip data set](https://aistudio.baidu.com/aistudio/datasetdetail/98318) and unzip it to the `data` directory
 
-  ``` 
+  ```
   mkdir data && cd data
   unzip IWSLT12.zip
   cd ../
   ```
-- Please organize the data set in the following format 
+- Please organize the data set in the following format
 
   ```
   data

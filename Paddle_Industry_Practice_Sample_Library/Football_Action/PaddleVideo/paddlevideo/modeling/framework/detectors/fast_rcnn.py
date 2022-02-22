@@ -15,9 +15,9 @@
 from .two_stage import TwoStageDetector
 from ...registry import DETECTORS
 
+
 @DETECTORS.register()
 class FastRCNN(TwoStageDetector):
-
     def __init__(self,
                  backbone,
                  head=None,

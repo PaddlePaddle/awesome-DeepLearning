@@ -89,7 +89,8 @@ class DDPG(RLBaseController):
         self.obs_dim = kwargs.get('obs_dim')
         self.model = kwargs.get(
             'model') if 'model' in kwargs else default_ddpg_model
-        self.actor_lr = kwargs.get('actor_lr') if 'actor_lr' in kwargs else 1e-4
+        self.actor_lr = kwargs.get(
+            'actor_lr') if 'actor_lr' in kwargs else 1e-4
         self.critic_lr = kwargs.get(
             'critic_lr') if 'critic_lr' in kwargs else 1e-3
         self.gamma = kwargs.get('gamma') if 'gamma' in kwargs else 0.99

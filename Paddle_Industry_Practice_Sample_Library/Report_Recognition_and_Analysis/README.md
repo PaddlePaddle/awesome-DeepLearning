@@ -91,8 +91,8 @@ cd ./pretrain_models/ && tar xf ch_ppocr_mobile_v2.0_det_train.tar
 
 ```
 ./pretrain_models/ch_ppocr_mobile_v2.0_det_train/
-  └─ best_accuracy.pdopt       
-  └─ best_accuracy.pdparams           
+  └─ best_accuracy.pdopt  
+  └─ best_accuracy.pdparams  
   └─ best_accuracy.states
 ```
 
@@ -102,15 +102,15 @@ cd ./pretrain_models/ && tar xf ch_ppocr_mobile_v2.0_det_train.tar
 
 ```
 Global:
-	└─pretrained_model:./pretrain_models/ch_ppocr_mobile_v2.0_det_train/best_accuracy
+    └─pretrained_model:./pretrain_models/ch_ppocr_mobile_v2.0_det_train/best_accuracy
 Train:
-	└─dataset
-		└─data_dir:path/to/your/dataset
-		└─label_file_list:path/to/your/dataset/label.txt
+    └─dataset
+        └─data_dir:path/to/your/dataset
+        └─label_file_list:path/to/your/dataset/label.txt
 Eval:
-	└─dataset
-		└─data_dir:path/to/your/dataset
-		└─label_file_list:path/to/your/dataset/label.txt
+    └─dataset
+        └─data_dir:path/to/your/dataset
+        └─label_file_list:path/to/your/dataset/label.txt
 ```
 
 **注意：**
@@ -259,5 +259,3 @@ python DocRec.py
 <div align="center">
   <img src="./imgs/img.png" width="1000"/>
 </div>  
-
-

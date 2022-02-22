@@ -24,7 +24,7 @@ print("输入的用户职业是:", usr_job_data)
 # 对用户职业信息做映射，并紧接着一个Linear层
 # 用户职业的最大ID是20，所以Embedding层size的第一个参数设置为20 + 1 = 21
 USR_JOB_DICT_SIZE = 20 + 1
-usr_job_emb = Embedding(num_embeddings=USR_JOB_DICT_SIZE,embedding_dim=16)
+usr_job_emb = Embedding(num_embeddings=USR_JOB_DICT_SIZE, embedding_dim=16)
 usr_job_fc = Linear(in_features=16, out_features=16)
 
 usr_job = paddle.to_tensor(usr_job_data)

@@ -1,4 +1,3 @@
-
 # Copyright (c) 2020 PaddlePaddle Authors. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,6 +21,7 @@ from paddlenlp.data import Vocab, Pad
 from paddlenlp.data.sampler import SamplerHelper
 from paddlenlp.datasets import load_dataset
 
+
 def min_max_filer(data, max_len, min_len=0):
     # 1 for special tokens.
     data_min_len = min(len(data[0]), len(data[1])) + 1
@@ -36,17 +36,21 @@ def read(src_path, tgt_path, is_predict=False):
                 src_line = src_line.strip()
                 if not src_line:
                     continue
-                yield {'src':src_line, 'tgt':''}
+                yield {'src': src_line, 'tgt': ''}
     else:
-        with open(src_path, 'r', encoding='utf8') as src_f, open(tgt_path, 'r', encoding='utf8') as tgt_f:
-            for src_line, tgt_line in zip(src_f.readlines(), tgt_f.readlines()):
+        with open(
+                src_path, 'r', encoding='utf8') as src_f, open(
+                    tgt_path, 'r', encoding='utf8') as tgt_f:
+            for src_line, tgt_line in zip(src_f.readlines(),
+                                          tgt_f.readlines()):
                 src_line = src_line.strip()
                 if not src_line:
                     continue
                 tgt_line = tgt_line.strip()
                 if not tgt_line:
                     continue
-                yield {'src':src_line, 'tgt':tgt_line}
+                yield {'src': src_line, 'tgt': tgt_line}
+
 
 def prepare_train_input(insts, bos_idx, eos_idx, pad_idx):
     """
@@ -65,10 +69,18 @@ def prepare_train_input(insts, bos_idx, eos_idx, pad_idx):
 
 # 创建训练集、验证集的dataloader
 def create_data_loader(args):
-    train_dataset = load_dataset(read, src_path=args.training_file.split(',')[0], tgt_path=args.training_file.split(',')[1], lazy=False)
-    dev_dataset = load_dataset(read, src_path=args.training_file.split(',')[0], tgt_path=args.training_file.split(',')[1], lazy=False)
+    train_dataset = load_dataset(
+        read,
+        src_path=args.training_file.split(',')[0],
+        tgt_path=args.training_file.split(',')[1],
+        lazy=False)
+    dev_dataset = load_dataset(
+        read,
+        src_path=args.training_file.split(',')[0],
+        tgt_path=args.training_file.split(',')[1],
+        lazy=False)
     print('load src vocab')
-    print( args.src_vocab_fpath)
+    print(args.src_vocab_fpath)
     src_vocab = Vocab.load_vocabulary(
         args.src_vocab_fpath,
         bos_token=args.special_token[0],
@@ -88,6 +100,7 @@ def create_data_loader(args):
     args.src_vocab_size = padding_vocab(len(src_vocab))
     args.trg_vocab_size = padding_vocab(len(trg_vocab))
     print('convert example')
+
     def convert_samples(sample):
         source = sample['src'].split()
         target = sample['tgt'].split()
@@ -144,6 +157,7 @@ def create_data_loader(args):
             return_list=True)
         data_loaders[i] = (data_loader)
     return data_loaders
+
 
 class SortType(object):
     GLOBAL = 'global'

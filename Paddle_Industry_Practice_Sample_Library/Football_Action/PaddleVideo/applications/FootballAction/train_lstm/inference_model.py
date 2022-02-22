@@ -79,9 +79,8 @@ def save_inference_model(args):
     infer_config = merge_configs(config, 'infer', vars(args))
     print_configs(infer_config, "Infer")
     #infer_model = models.get_model(args.model_name, infer_config, mode='infer')
-    infer_model = action_net.ActionNet(args.model_name,
-                                       infer_config,
-                                       mode='infer')
+    infer_model = action_net.ActionNet(
+        args.model_name, infer_config, mode='infer')
     infer_model.build_input(use_pyreader=False)
     infer_model.build_model()
     infer_feeds = infer_model.feeds()
@@ -98,7 +97,7 @@ def save_inference_model(args):
     weights = args.weights or infer_model.get_weights()
 
     infer_model.load_test_weights_file(exe, weights,
-                                  fluid.default_main_program(), place)
+                                       fluid.default_main_program(), place)
 
     if not os.path.isdir(args.save_dir):
         os.makedirs(args.save_dir)

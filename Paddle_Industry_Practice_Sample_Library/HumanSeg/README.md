@@ -9,14 +9,14 @@
 </p>
 
 
-**如果您觉得本案例对您有帮助，欢迎Star收藏一下，不易走丢哦~，链接指路：** 
+**如果您觉得本案例对您有帮助，欢迎Star收藏一下，不易走丢哦~，链接指路：**
 [https://github.com/PaddlePaddle/awesome-DeepLearning](http://https://github.com/PaddlePaddle/awesome-DeepLearning)
 
 # 1. 方案设计
 
 本教程中，将用户上传的图片或视频作为输入，使用基于Supervisely Persons数据集训练的人像分割模型或预先准备好的Inference Model进行人像分割实验，实时返回分割结果显示给用户。
 
-# 2. 环境搭建与准备	
+# 2. 环境搭建与准备
 
 1. 安装PaddlePaddle
 

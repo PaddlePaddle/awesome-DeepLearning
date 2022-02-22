@@ -76,4 +76,3 @@ $$
 <center>图4:Comparison of #parameters, FLOPs, latency on GPU and CPU between DynaBERT and DynaRoBERTa and other methods.</center><br></br>
 
  可以看到论文中提出的DynaBERT和DynaRoBERTa可以达到和 $BERT_{BASE}$ 及 $DynaRoBERTa$ 相当的精度，但是通常包含更少的参数，FLOPs或更低的延迟。在相同效率的约束下，从DynaBERT中提取的子网性能优于DistilBERT和TinyBERT。
-

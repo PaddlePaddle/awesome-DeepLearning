@@ -22,8 +22,7 @@ def decode_image(img, to_rgb=True):
     data = np.frombuffer(img, dtype='uint8')
     img = cv2.imdecode(data, 1)
     if to_rgb:
-        assert img.shape[2] == 3, 'invalid shape of image[%s]' % (
-            img.shape)
+        assert img.shape[2] == 3, 'invalid shape of image[%s]' % (img.shape)
         img = img[:, :, ::-1]
 
     return img
@@ -76,7 +75,7 @@ def crop_image(img, size):
 
 
 # 定义normalize_image函数，对图片进行归一化
-def normalize_image(img, scale=None, mean=None, std=None, order= ''):
+def normalize_image(img, scale=None, mean=None, std=None, order=''):
     if isinstance(scale, str):
         scale = eval(scale)
     scale = np.float32(scale if scale is not None else 1.0 / 255.0)
@@ -112,8 +111,8 @@ def transform(data, mode='train'):
     # 图像裁剪
     data = crop_image(data, size=384)
     # 标准化
-    data = normalize_image(data, scale=1./255., mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])
+    data = normalize_image(
+        data, scale=1. / 255., mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])
     # 通道变换
     data = to_CHW_image(data)
     return data
-

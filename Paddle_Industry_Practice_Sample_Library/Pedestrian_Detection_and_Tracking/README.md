@@ -17,7 +17,7 @@
 
 
 
-## 2.技术难点 
+## 2.技术难点
 
 * **人流密度过高时，容易造成漏检：** 在人流密度较高的场合，人与人之间存在遮挡，会导致模型误检、漏检问题。
 * **在动态场景下，容易造成重识别问题：** 模型需要对遮挡后重新出现的行人进行准确的重识别，否则对一段时间内的人流统计会有较大的影响。
@@ -26,9 +26,9 @@
 
 ## 3. 解决方案
 
-人流量统计任务需要在检测到目标的类别和位置信息的同时，识别出帧与帧间的关联信息，确保视频中的同一个人不会被多次识别并计数。本案例选取PaddleDetection目标跟踪算法中的FairMOT模型来解决人流量统计问题。 
+人流量统计任务需要在检测到目标的类别和位置信息的同时，识别出帧与帧间的关联信息，确保视频中的同一个人不会被多次识别并计数。本案例选取PaddleDetection目标跟踪算法中的FairMOT模型来解决人流量统计问题。
 
-FairMOT以Anchor Free的CenterNet检测器为基础，深浅层特征融合使得检测和ReID任务各自获得所需要的特征，实现了两个任务之间的公平性，并获得了更高水平的实时多目标跟踪精度。 
+FairMOT以Anchor Free的CenterNet检测器为基础，深浅层特征融合使得检测和ReID任务各自获得所需要的特征，实现了两个任务之间的公平性，并获得了更高水平的实时多目标跟踪精度。
 
 针对拍摄角度不同（平角或俯角）以及人员疏密程度，在本案例设计了不同的训练方法：
 
@@ -345,24 +345,24 @@ python deploy/python/mot_jde_infer.py --model_dir=output_inference/fairmot_dla34
 
 * 更多学习资料请参阅[飞桨深度学习平台](https://www.paddlepaddle.org.cn/?fr=paddleEdu_aistudio)
 
-  
+
 
 ## 13. 引用
 
 ```
 @article{zhang2020fair,
-	title={FairMOT: On the Fairness of Detection and Re-Identification in Multiple Object Tracking},
-	author={Zhang, Yifu and Wang, Chunyu and Wang, Xinggang and Zeng, Wenjun and Liu, Wenyu},
-	journal={arXiv preprint arXiv:2004.01888},
-	year={2020}
+    title={FairMOT: On the Fairness of Detection and Re-Identification in Multiple Object Tracking},
+    author={Zhang, Yifu and Wang, Chunyu and Wang, Xinggang and Zeng, Wenjun and Liu, Wenyu},
+    journal={arXiv preprint arXiv:2004.01888},
+    year={2020}
 }
 
 @InProceedings{Sundararaman_2021_CVPR,
-	author={Sundararaman, Ramana and De Almeida Braga, Cedric and Marchand, Eric and Pettre, Julien},
-	title={Tracking Pedestrian Heads in Dense Crowd},
-	booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
-	month={June},
-	year={2021},
-	pages={3865-3875}
+    author={Sundararaman, Ramana and De Almeida Braga, Cedric and Marchand, Eric and Pettre, Julien},
+    title={Tracking Pedestrian Heads in Dense Crowd},
+    booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month={June},
+    year={2021},
+    pages={3865-3875}
 }
 ```

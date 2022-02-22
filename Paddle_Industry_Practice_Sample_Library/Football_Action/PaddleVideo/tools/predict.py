@@ -29,11 +29,12 @@ def parse_args():
 
     # general params
     parser = argparse.ArgumentParser("PaddleVideo Inference model script")
-    parser.add_argument('-c',
-                        '--config',
-                        type=str,
-                        default='configs/example.yaml',
-                        help='config file path')
+    parser.add_argument(
+        '-c',
+        '--config',
+        type=str,
+        default='configs/example.yaml',
+        help='config file path')
     parser.add_argument("-i", "--input_file", type=str, help="input file path")
     parser.add_argument("--model_file", type=str)
     parser.add_argument("--params_file", type=str)
@@ -98,8 +99,8 @@ def create_paddle_predictor(args, cfg):
             elif 'videoswin' in cfg.model_name.lower():
                 num_views = 3  # UniformCrop
             max_batch_size = args.batch_size * num_views * num_seg * seg_len
-        config.enable_tensorrt_engine(precision_mode=precision,
-                                      max_batch_size=max_batch_size)
+        config.enable_tensorrt_engine(
+            precision_mode=precision, max_batch_size=max_batch_size)
 
     config.enable_memory_optim()
     # use zero copy
@@ -115,9 +116,7 @@ def create_paddle_predictor(args, cfg):
 
 def parse_file_paths(input_path: str) -> list:
     if osp.isfile(input_path):
-        files = [
-            input_path,
-        ]
+        files = [input_path, ]
     else:
         files = os.listdir(input_path)
         files = [
@@ -198,21 +197,20 @@ def main():
             # instantiate auto log
             import auto_log
             pid = os.getpid()
-            autolog = auto_log.AutoLogger(model_name=cfg.model_name,
-                                          model_precision=args.precision,
-                                          batch_size=args.batch_size,
-                                          data_shape="dynamic",
-                                          save_path="./output/auto_log.lpg",
-                                          inference_config=inference_config,
-                                          pids=pid,
-                                          process_name=None,
-                                          gpu_ids=0 if args.use_gpu else None,
-                                          time_keys=[
-                                              'preprocess_time',
-                                              'inference_time',
-                                              'postprocess_time'
-                                          ],
-                                          warmup=num_warmup)
+            autolog = auto_log.AutoLogger(
+                model_name=cfg.model_name,
+                model_precision=args.precision,
+                batch_size=args.batch_size,
+                data_shape="dynamic",
+                save_path="./output/auto_log.lpg",
+                inference_config=inference_config,
+                pids=pid,
+                process_name=None,
+                gpu_ids=0 if args.use_gpu else None,
+                time_keys=[
+                    'preprocess_time', 'inference_time', 'postprocess_time'
+                ],
+                warmup=num_warmup)
             files = [
                 args.input_file for _ in range(test_video_num + num_warmup)
             ]
@@ -227,8 +225,8 @@ def main():
                 autolog.times.start()
 
             # Pre process batched input
-            batched_inputs = InferenceHelper.preprocess_batch(
-                files[st_idx:ed_idx])
+            batched_inputs = InferenceHelper.preprocess_batch(files[st_idx:
+                                                                    ed_idx])
 
             # get pre process time cost
             if args.enable_benchmark:
@@ -256,7 +254,7 @@ def main():
 
             # time.sleep(0.01)  # sleep for T4 GPU
 
-    # report benchmark log if enabled
+            # report benchmark log if enabled
     if args.enable_benchmark:
         autolog.report()
 

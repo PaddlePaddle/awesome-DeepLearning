@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 import os
 import yaml
 import paddle
@@ -23,6 +22,7 @@ from model import JointModel
 from data import ATISDataset
 
 parser = argparse.ArgumentParser(description="processing input prams.")
+
 
 def collate_fn(batch, token_pad_val=0, tag_pad_val=0):
     token_list, tag_list, intent_list, len_list = [], [], [], []
@@ -35,30 +35,44 @@ def collate_fn(batch, token_pad_val=0, tag_pad_val=0):
     # padding sequence
     max_len = max(map(len, token_list))
     for i in range(len(token_list)):
-        token_list[i] = token_list[i] + [token_pad_val] * (max_len-len(token_list[i]))
+        token_list[i] = token_list[i] + [token_pad_val] * (max_len -
+                                                           len(token_list[i]))
         tag_list[i] = tag_list[i] + [tag_pad_val] * (max_len - len(tag_list[i]))
 
-    return paddle.to_tensor(token_list), paddle.to_tensor(tag_list), paddle.to_tensor(intent_list), paddle.to_tensor(len_list)
+    return paddle.to_tensor(token_list), paddle.to_tensor(
+        tag_list), paddle.to_tensor(intent_list), paddle.to_tensor(len_list)
+
 
 def evaluate(jointModel=None, test_set=None, args=None):
     jointModel.eval()
 
-    test_loader = DataLoader(test_set, batch_size=args["batch_size"], shuffle=False, drop_last=False, collate_fn=collate_fn)
+    test_loader = DataLoader(
+        test_set,
+        batch_size=args["batch_size"],
+        shuffle=False,
+        drop_last=False,
+        collate_fn=collate_fn)
     slot_metric = SeqEntityScore(test_set.id2slot)
     intent_metric = SingleClassificationScore(test_set.id2intent)
-    
+
     for step, batch in enumerate(test_loader()):
         batch_tokens, batch_tags, batch_intents, batch_lens = batch
         emissions, intent_logits = jointModel(batch_tokens, batch_lens)
         _, pred_paths = jointModel.viterbi_decoder(emissions, batch_lens)
-        
+
         pred_paths = pred_paths.numpy().tolist()
-        pred_paths = [tag_seq[:tag_len] for tag_seq, tag_len in zip(pred_paths, batch_lens)]
-        
+        pred_paths = [
+            tag_seq[:tag_len]
+            for tag_seq, tag_len in zip(pred_paths, batch_lens)
+        ]
+
         batch_tags = batch_tags.numpy().tolist()
-        real_paths = [tag_seq[:tag_len] for tag_seq, tag_len in zip(batch_tags, batch_lens)]
+        real_paths = [
+            tag_seq[:tag_len]
+            for tag_seq, tag_len in zip(batch_tags, batch_lens)
+        ]
         slot_metric.update(pred_paths=pred_paths, real_paths=real_paths)
-         
+
         pred_intents = paddle.argmax(intent_logits, axis=1)
         intent_metric.update(pred_intents, batch_intents)
 
@@ -70,8 +84,12 @@ def evaluate(jointModel=None, test_set=None, args=None):
     print("\n")
 
 
-if __name__=="__main__":
-    parser.add_argument("--model_path", type=str, default="", help="the path of the saved model that you would like to verify")
+if __name__ == "__main__":
+    parser.add_argument(
+        "--model_path",
+        type=str,
+        default="",
+        help="the path of the saved model that you would like to verify")
     model_path = parser.parse_args().model_path
 
     # configuring model training
@@ -79,14 +97,22 @@ if __name__=="__main__":
         args = yaml.load(f.read())
 
     # loading testset
-    test_set = ATISDataset(args["test_path"], args["vocab_path"], args["intent_path"], args["slot_path"])
+    test_set = ATISDataset(args["test_path"], args["vocab_path"],
+                           args["intent_path"], args["slot_path"])
     args["vocab_size"] = test_set.vocab_size
     args["num_intents"] = test_set.num_intents
     args["num_slots"] = test_set.num_slots
 
     # loading model
     loaded_state_dict = paddle.load(model_path)
-    jointModel = JointModel(args["vocab_size"], args["embedding_size"], args["lstm_hidden_size"], args["num_intents"], args["num_slots"], num_layers=args["lstm_layers"], drop_p=args["dropout_rate"])
+    jointModel = JointModel(
+        args["vocab_size"],
+        args["embedding_size"],
+        args["lstm_hidden_size"],
+        args["num_intents"],
+        args["num_slots"],
+        num_layers=args["lstm_layers"],
+        drop_p=args["dropout_rate"])
     jointModel.load_dict(loaded_state_dict)
 
     # evaluate model

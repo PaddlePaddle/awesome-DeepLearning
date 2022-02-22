@@ -22,7 +22,8 @@ from ...common import get_logger
 _logger = get_logger(__name__, level=logging.INFO)
 
 WEIGHT_QUANTIZATION_TYPES = [
-    'abs_max', 'channel_wise_abs_max', 'range_abs_max', 'moving_average_abs_max'
+    'abs_max', 'channel_wise_abs_max', 'range_abs_max',
+    'moving_average_abs_max'
 ]
 
 ACTIVATION_QUANTIZATION_TYPES = [

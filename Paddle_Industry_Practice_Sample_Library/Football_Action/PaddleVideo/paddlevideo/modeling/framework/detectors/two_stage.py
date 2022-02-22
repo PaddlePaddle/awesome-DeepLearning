@@ -102,10 +102,8 @@ class TwoStageDetector(BaseDetector):
         img_metas = scores, entity_ids
         x = self.extract_feat(img=[img_slow, img_fast])
 
-        return self.roi_head.simple_test(x,
-                                         proposals[0],
-                                         img_shape,
-                                         rescale=rescale)
+        return self.roi_head.simple_test(
+            x, proposals[0], img_shape, rescale=rescale)
 
     def test_step(self, data, rescale=False):
         return self.val_step(data, rescale)
@@ -121,10 +119,8 @@ class TwoStageDetector(BaseDetector):
         # using slowfast model to extract spatio-temporal features
         x = self.extract_feat(img=[img_slow, img_fast])
 
-        ret = self.roi_head.simple_test(x,
-                                        proposals[0],
-                                        img_shape,
-                                        rescale=rescale)
+        ret = self.roi_head.simple_test(
+            x, proposals[0], img_shape, rescale=rescale)
         return ret
 
     def get_unpad_datas(self, data):
@@ -148,25 +144,22 @@ class TwoStageDetector(BaseDetector):
             pad_proposal = pad_proposals[bi]
             len_proposal = len_proposals[bi]
             index_proposal = paddle.arange(len_proposal)
-            proposal = paddle.index_select(x=pad_proposal,
-                                           index=index_proposal,
-                                           axis=0)
+            proposal = paddle.index_select(
+                x=pad_proposal, index=index_proposal, axis=0)
             proposals.append(proposal)
 
             pad_gt_bbox = pad_gt_bboxes[bi]
             len_gt_bbox = len_gt_bboxes[bi]
             index_gt_bbox = paddle.arange(len_gt_bbox)
-            gt_bbox = paddle.index_select(x=pad_gt_bbox,
-                                          index=index_gt_bbox,
-                                          axis=0)
+            gt_bbox = paddle.index_select(
+                x=pad_gt_bbox, index=index_gt_bbox, axis=0)
             gt_bboxes.append(gt_bbox)
 
             pad_gt_label = pad_gt_labels[bi]
             len_gt_label = len_gt_labels[bi]
             index_gt_label = paddle.arange(len_gt_label)
-            gt_label = paddle.index_select(x=pad_gt_label,
-                                           index=index_gt_label,
-                                           axis=0)
+            gt_label = paddle.index_select(
+                x=pad_gt_label, index=index_gt_label, axis=0)
             gt_labels.append(gt_label)
 
             pad_score = pad_scores[bi]
@@ -178,9 +171,8 @@ class TwoStageDetector(BaseDetector):
             pad_entity_id = pad_entity_ids[bi]
             len_entity_id = len_entity_ids[bi]
             index_entity_id = paddle.arange(len_entity_id)
-            entity_id = paddle.index_select(x=pad_entity_id,
-                                            index=index_entity_id,
-                                            axis=0)
+            entity_id = paddle.index_select(
+                x=pad_entity_id, index=index_entity_id, axis=0)
             entity_ids.append(entity_id)
 
         return proposals, gt_bboxes, gt_labels, scores, entity_ids

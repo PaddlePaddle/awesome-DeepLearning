@@ -20,6 +20,7 @@ import paddle
 class BMNLocalizer(BaseLocalizer):
     """BMN Localization framework
     """
+
     def forward_net(self, imgs):
         """Call backbone forward.
         """

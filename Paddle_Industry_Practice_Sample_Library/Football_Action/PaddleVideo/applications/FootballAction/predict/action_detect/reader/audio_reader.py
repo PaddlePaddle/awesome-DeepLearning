@@ -32,6 +32,7 @@ import code
 from .reader_utils import DataReader
 import mfcc.feature_extractor as feature_extractor
 
+
 class AudioReader(DataReader):
     """
     Data reader for youtube-8M dataset, which was stored as features extracted by prior networks
@@ -58,14 +59,16 @@ class AudioReader(DataReader):
         with open(self.pcm_file, "rb") as f:
             pcm_data = f.read()
         audio_data = np.fromstring(pcm_data, dtype=np.int16)
-        examples = feature_extractor.wav_to_example(audio_data, self.sample_rate)
+        examples = feature_extractor.wav_to_example(audio_data,
+                                                    self.sample_rate)
+
         # print(examples.shape)
 
         def reader():
             """reader"""
             batch_out = []
             batch_out_pre = []
-        
+
             for audio in examples:
                 # batch_out.append([audio])
                 batch_out.append(audio)
@@ -74,5 +77,5 @@ class AudioReader(DataReader):
                     batch_out = []
             if len(batch_out) > 0:
                 yield batch_out
-            
+
         return reader

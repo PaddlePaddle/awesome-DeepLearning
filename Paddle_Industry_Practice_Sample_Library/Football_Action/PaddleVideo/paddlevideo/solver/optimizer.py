@@ -64,12 +64,12 @@ def build_optimizer(cfg, lr_scheduler, model=None):
         if isinstance(cfg_copy.get('weight_decay'),
                       float):  # just an float factor
             cfg_copy['weight_decay'] = cfg_copy.get('weight_decay')
-        elif 'L1' in cfg_copy.get('weight_decay').get(
-                'name').upper():  # specify L2 wd and it's float factor
+        elif 'L1' in cfg_copy.get('weight_decay').get('name').upper(
+        ):  # specify L2 wd and it's float factor
             cfg_copy['weight_decay'] = L1Decay(
                 cfg_copy.get('weight_decay').get('value'))
-        elif 'L2' in cfg_copy.get('weight_decay').get(
-                'name').upper():  # specify L1 wd and it's float factor
+        elif 'L2' in cfg_copy.get('weight_decay').get('name').upper(
+        ):  # specify L1 wd and it's float factor
             cfg_copy['weight_decay'] = L2Decay(
                 cfg_copy.get('weight_decay').get('value'))
         else:

@@ -1,6 +1,7 @@
 # pdf切分
 import os, fitz, time
 
+
 def pdf2png(pdfPath, imgPath, zoom_x=2, zoom_y=2, rotation_angle=0):
     '''
     # 将PDF转化为图片
@@ -21,22 +22,24 @@ def pdf2png(pdfPath, imgPath, zoom_x=2, zoom_y=2, rotation_angle=0):
     for pg in range(0, pdf.pageCount):
         page = pdf[pg]
         # 设置缩放和旋转系数
-        trans = fitz.Matrix(zoom_x, zoom_y) #.preRotate(rotation_angle)
+        trans = fitz.Matrix(zoom_x, zoom_y)  #.preRotate(rotation_angle)
         pm = page.getPixmap(matrix=trans, alpha=False)
 
-        if pm.width>2000 or pm.height>2000:
+        if pm.width > 2000 or pm.height > 2000:
             pm = page.getPixmap(matrix=fitz.Matrix(1, 1), alpha=False)
         pm.writePNG(imgPath + str(pg) + ".jpeg")
     pdf.close()
     time_end = time.time()
     time_cost = time_end - time_start
-    print('totally cost: {}, page: {}, each page cost: {}'.format(time_cost, pg+1, time_cost/(pg+1)))
+    print('totally cost: {}, page: {}, each page cost: {}'.format(
+        time_cost, pg + 1, time_cost / (pg + 1)))
+
 
 if __name__ == '__main__':
     pdfFolder = 'ResearchReport'
     for p in os.listdir(pdfFolder):
-        pdfPath = pdfFolder+'/'+p
-        imgPath = pdfFolder+'/'+os.path.basename(p)[:-4]+'/'
+        pdfPath = pdfFolder + '/' + p
+        imgPath = pdfFolder + '/' + os.path.basename(p)[:-4] + '/'
         print(imgPath)
         os.mkdir(imgPath)
         pdf2png(pdfPath, imgPath)

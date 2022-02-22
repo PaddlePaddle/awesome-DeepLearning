@@ -5,7 +5,7 @@ import paddle
 from paddlenlp.metrics.squad import squad_evaluate, compute_prediction
 
 
-def prepare_train_features(examples,tokenizer,doc_stride,max_seq_length):
+def prepare_train_features(examples, tokenizer, doc_stride, max_seq_length):
     # Tokenize our examples with truncation and maybe padding, but keep the overflows using a stride. This results
     # in one example possible giving several features when a context is long, each of those features having a
     # context that overlaps a bit the context of the previous feature.
@@ -13,10 +13,7 @@ def prepare_train_features(examples,tokenizer,doc_stride,max_seq_length):
     questions = [examples[i]['question'] for i in range(len(examples))]
 
     tokenized_examples = tokenizer(
-        questions,
-        contexts,
-        stride=doc_stride,
-        max_seq_len=max_seq_length)
+        questions, contexts, stride=doc_stride, max_seq_len=max_seq_length)
 
     # Let's label those examples!
     for i, tokenized_example in enumerate(tokenized_examples):
@@ -70,7 +67,9 @@ def prepare_train_features(examples,tokenizer,doc_stride,max_seq_length):
 
     return tokenized_examples
 
-def prepare_validation_features(examples,tokenizer,doc_stride,max_seq_length):
+
+def prepare_validation_features(examples, tokenizer, doc_stride,
+                                max_seq_length):
     # Tokenize our examples with truncation and maybe padding, but keep the overflows using a stride. This results
     # in one example possible giving several features when a context is long, each of those features having a
     # context that overlaps a bit the context of the previous feature.
@@ -78,10 +77,7 @@ def prepare_validation_features(examples,tokenizer,doc_stride,max_seq_length):
     questions = [examples[i]['question'] for i in range(len(examples))]
 
     tokenized_examples = tokenizer(
-        questions,
-        contexts,
-        stride=doc_stride,
-        max_seq_len=max_seq_length)
+        questions, contexts, stride=doc_stride, max_seq_len=max_seq_length)
 
     # For validation, there is no need to compute start and end positions
     for i, tokenized_example in enumerate(tokenized_examples):
@@ -100,4 +96,3 @@ def prepare_validation_features(examples,tokenizer,doc_stride,max_seq_length):
         ]
 
     return tokenized_examples
-

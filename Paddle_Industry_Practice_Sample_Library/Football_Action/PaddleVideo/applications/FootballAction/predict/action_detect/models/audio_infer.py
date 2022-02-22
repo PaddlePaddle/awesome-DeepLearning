@@ -16,13 +16,14 @@ from paddle.inference import create_predictor
 
 class InferModel(object):
     """audio infer"""
-    def __init__(self, cfg, name='AUDIO'): 
+
+    def __init__(self, cfg, name='AUDIO'):
         name = name.upper()
-        self.name           = name
-        model_file          = cfg[name]['model_file']
-        params_file         = cfg[name]['params_file']
-        gpu_mem             = cfg[name]['gpu_mem']
-        device_id           = cfg[name]['device_id']
+        self.name = name
+        model_file = cfg[name]['model_file']
+        params_file = cfg[name]['params_file']
+        gpu_mem = cfg[name]['gpu_mem']
+        device_id = cfg[name]['device_id']
 
         # model init
         config = Config(model_file, params_file)
@@ -39,7 +40,6 @@ class InferModel(object):
         output_names = self.predictor.get_output_names()
         self.output_tensor = self.predictor.get_output_handle(output_names[0])
 
-
     def infer(self, input):
         """infer"""
         self.input_tensor.copy_from_cpu(input)
@@ -47,14 +47,13 @@ class InferModel(object):
         output = self.output_tensor.copy_to_cpu()
         return output
 
-
     def predict(self, infer_config):
         """predict"""
         infer_reader = reader.get_reader(self.name, 'infer', infer_config)
         feature_list = []
         pcm_list = []
         for infer_iter, data in enumerate(infer_reader()):
-            inputs = np.array(data, dtype = 'float32')
+            inputs = np.array(data, dtype='float32')
             output = self.infer(inputs)
             feature_list.append(np.squeeze(output))
             pcm_list.append(inputs)
@@ -64,7 +63,7 @@ class InferModel(object):
 
 
 if __name__ == "__main__":
-    cfg_file = '/home/work/inference/configs/configs.yaml' 
+    cfg_file = '/home/work/inference/configs/configs.yaml'
     cfg = parse_config(cfg_file)
     model = InferModel(cfg)
 

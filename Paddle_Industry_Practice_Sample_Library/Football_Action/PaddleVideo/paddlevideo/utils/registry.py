@@ -40,6 +40,7 @@ class Registry(object):
         b = BACKBONES.get(backbone_name)()
 
     """
+
     def __init__(self, name):
         """
         Args:
@@ -89,8 +90,7 @@ class Registry(object):
         """
         ret = self._obj_map.get(name)
         if ret is None:
-            raise KeyError(
-                "No object named '{}' found in '{}' registry!".format(
-                    name, self._name))
+            raise KeyError("No object named '{}' found in '{}' registry!".
+                           format(name, self._name))
 
         return ret

@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 
 import matplotlib, os
 
-
 # 命名实体识别与词频统计
+
 
 def deletaNum(doc):
     return [i for i in doc if len(i) > 1]
@@ -39,7 +39,8 @@ def PlotHist(counter):
             cnt[key] = counter[key]
     print(cnt)
     plt.figure(figsize=(10, 5))
-    plt.bar(range(len(cnt)), cnt.values(), tick_label=list(cnt.keys()))  # , orientation="horizontal"
+    plt.bar(range(len(cnt)), cnt.values(),
+            tick_label=list(cnt.keys()))  # , orientation="horizontal"
     # for a, b in zip(x_list, y_list):
     #     plt.text(a, b + 0.05, '%.0f' % b, ha='center', va='bottom', fontsize=10)
     plt.xticks(rotation=45)
@@ -49,8 +50,9 @@ def PlotHist(counter):
 
 if __name__ == '__main__':
     # 模型路径下必须含有model和params文件
-    ocr = PaddleOCR(det_model_dir='./PaddleOCR/output/ch_db_mv3_inference/inference',
-                    use_angle_cls=True)
+    ocr = PaddleOCR(
+        det_model_dir='./PaddleOCR/output/ch_db_mv3_inference/inference',
+        use_angle_cls=True)
     lac = Taskflow("pos_tagging")
 
     enti_list = []
@@ -72,4 +74,3 @@ if __name__ == '__main__':
     print('Entity results:', counter)
 
     PlotHist(counter)
-

@@ -23,4 +23,4 @@
 这是比较有趣的一个应用，通过词语义上的一些关系来进行推理一些词，例如下面几个例子。
 
 * King - Man + Woman = Queen
-* China - Beijing + Washington = America 
+* China - Beijing + Washington = America

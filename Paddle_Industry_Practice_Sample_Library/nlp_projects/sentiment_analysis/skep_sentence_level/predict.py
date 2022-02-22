@@ -29,7 +29,7 @@ def predict(model, tokenizer, id2label, max_seq_len=256):
             continue
         if input_text == "quit":
             break
-        
+
         # processing input text
         encoded_inputs = tokenizer(input_text, max_seq_len=max_seq_len)
         input_ids = paddle.to_tensor([encoded_inputs["input_ids"]])
@@ -37,12 +37,12 @@ def predict(model, tokenizer, id2label, max_seq_len=256):
 
         # predict by model and decoding result 
         logits = model(input_ids, token_type_ids=token_type_ids)
-        label_id =  paddle.argmax(logits, axis=1).numpy()[0]
+        label_id = paddle.argmax(logits, axis=1).numpy()[0]
 
         print(f"label: {id2label[label_id]}")
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     # yapf: disable
     parser = argparse.ArgumentParser()
     parser.add_argument("--model_path", type=str, default=None, help="model path that you saved")
@@ -59,9 +59,8 @@ if __name__=="__main__":
     # load model
     loaded_state_dict = paddle.load(args.model_path)
     ernie = SkepModel.from_pretrained(model_name)
-    model = SkepForSquenceClassification(ernie, num_classes=2)    
+    model = SkepForSquenceClassification(ernie, num_classes=2)
     model.load_dict(loaded_state_dict)
- 
+
     # predict with model
     predict(model, tokenizer, id2label, max_seq_len=args.max_seq_len)
-    

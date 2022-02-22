@@ -13,8 +13,10 @@ ones_ = Constant(value=1.)
 
 WEIGHTS_HOME = './weights'
 
+
 def to_2tuple(x):
     return tuple([x] * 2)
+
 
 class Identity(nn.Layer):
     def __init__(self):
@@ -22,6 +24,7 @@ class Identity(nn.Layer):
 
     def forward(self, input):
         return input
+
 
 def drop_path(x, drop_prob=0., training=False):
     """Drop paths (Stochastic Depth) per sample (when applied in main path of residual blocks).
@@ -37,6 +40,7 @@ def drop_path(x, drop_prob=0., training=False):
     output = x.divide(keep_prob) * random_tensor
     return output
 
+
 class DropPath(nn.Layer):
     """Drop paths (Stochastic Depth) per sample  (when applied in main path of residual blocks).
     """
@@ -47,6 +51,7 @@ class DropPath(nn.Layer):
 
     def forward(self, x):
         return drop_path(x, self.drop_prob, self.training)
+
 
 # 多层感知机
 class Mlp(nn.Layer):
@@ -72,6 +77,7 @@ class Mlp(nn.Layer):
         x = self.drop(x)
         return x
 
+
 # 窗口划分
 def window_partition(x, window_size):
     """
@@ -81,12 +87,13 @@ def window_partition(x, window_size):
     Returns:
         windows: (num_windows*B, window_size, window_size, C)
     """
-    B, H, W, C = x.shape # batch,Height,Width,Channel
+    B, H, W, C = x.shape  # batch,Height,Width,Channel
     x = x.reshape(
         [B, H // window_size, window_size, W // window_size, window_size, C])
     windows = x.transpose([0, 1, 3, 2, 4, 5]).reshape(
         [-1, window_size, window_size, C])
     return windows
+
 
 # 变换
 def window_reverse(windows, window_size, H, W, C):
@@ -103,6 +110,7 @@ def window_reverse(windows, window_size, H, W, C):
         [-1, H // window_size, W // window_size, window_size, window_size, C])
     x = x.transpose([0, 1, 3, 2, 4, 5]).reshape([-1, H, W, C])
     return x
+
 
 class WindowAttention(nn.Layer):
     r""" Window based multi-head self attention (W-MSA) module with relative position bias.
@@ -159,8 +167,7 @@ class WindowAttention(nn.Layer):
         relative_coords[:, :, 1] += self.window_size[1] - 1
         relative_coords[:, :, 0] *= 2 * self.window_size[1] - 1
         relative_position_index = relative_coords.sum(-1)  # Wh*Ww, Wh*Ww
-        self.register_buffer("relative_position_index",
-                             relative_position_index)
+        self.register_buffer("relative_position_index", relative_position_index)
 
         self.qkv = nn.Linear(dim, dim * 3, bias_attr=qkv_bias)
         self.attn_drop = nn.Dropout(attn_drop)
@@ -231,6 +238,7 @@ class WindowAttention(nn.Layer):
         # x = self.proj(x)
         flops += N * self.dim * self.dim
         return flops
+
 
 class SwinTransformerBlock(nn.Layer):
     r""" Swin Transformer Block.
@@ -392,6 +400,7 @@ class SwinTransformerBlock(nn.Layer):
         flops += self.dim * H * W
         return flops
 
+
 class PatchMerging(nn.Layer):
     r""" Patch Merging Layer.
     Args:
@@ -406,7 +415,7 @@ class PatchMerging(nn.Layer):
         self.dim = dim
         self.reduction = nn.Linear(4 * dim, 2 * dim, bias_attr=False)
         self.norm = norm_layer(4 * dim)
-    
+
     def forward(self, x):
         """
         x: B, H*W, C
@@ -430,7 +439,7 @@ class PatchMerging(nn.Layer):
         x = self.reduction(x)
 
         return x
-    
+
     def extra_repr(self):
         return "input_resolution={}, dim={}".format(self.input_resolution,
                                                     self.dim)
@@ -440,6 +449,7 @@ class PatchMerging(nn.Layer):
         flops = H * W * self.dim
         flops += (H // 2) * (W // 2) * 4 * self.dim * 2 * self.dim
         return flops
+
 
 class BasicLayer(nn.Layer):
     """ A basic Swin Transformer layer for one stage.
@@ -517,7 +527,7 @@ class BasicLayer(nn.Layer):
     def extra_repr(self):
         return "dim={}, input_resolution={}, depth={}".format(
             self.dim, self.input_resolution, self.depth)
-    
+
     def flops(self):
         flops = 0
         for blk in self.blocks:
@@ -525,6 +535,7 @@ class BasicLayer(nn.Layer):
         if self.downsample is not None:
             flops += self.downsample.flops()
         return flops
+
 
 class PatchEmbed(nn.Layer):
     """ Image to Patch Embedding
@@ -576,11 +587,12 @@ class PatchEmbed(nn.Layer):
 
     def flops(self):
         Ho, Wo = self.patches_resolution
-        flops = Ho * Wo * self.embed_dim * self.in_chans * (
-            self.patch_size[0] * self.patch_size[1])
+        flops = Ho * Wo * self.embed_dim * self.in_chans * (self.patch_size[0] *
+                                                            self.patch_size[1])
         if self.norm is not None:
             flops += Ho * Wo * self.embed_dim
         return flops
+
 
 class SwinTransformer(nn.Layer):
     """ Swin Transformer
@@ -699,7 +711,6 @@ class SwinTransformer(nn.Layer):
         elif isinstance(m, nn.LayerNorm):
             zeros_(m.bias)
             ones_(m.weight)
-    
 
     def forward_features(self, x):
         x = self.patch_embed(x)
@@ -730,6 +741,7 @@ class SwinTransformer(nn.Layer):
         flops += self.num_features * self.num_classes
         return flops
 
+
 def is_url(path):
     """
     Whether path is URL.
@@ -737,6 +749,7 @@ def is_url(path):
         path (string): URL string or not.
     """
     return str(path).startswith('http://') or str(path).startswith('https://')
+
 
 def get_path_from_url(url,
                       root_dir,
@@ -765,8 +778,7 @@ def get_path_from_url(url,
     # Mainly used to solve the problem of downloading data from different 
     # machines in the case of multiple machines. Different ips will download 
     # data, and the same ip will only download data once.
-    unique_endpoints = _get_unique_endpoints(ParallelEnv()
-                                             .trainer_endpoints[:])
+    unique_endpoints = _get_unique_endpoints(ParallelEnv().trainer_endpoints[:])
     if osp.exists(fullpath) and check_exist and _md5check(fullpath, md5sum):
         logger.info("Found {}".format(fullpath))
     else:
@@ -782,6 +794,7 @@ def get_path_from_url(url,
             fullpath = _decompress(fullpath)
 
     return fullpath
+
 
 def get_weights_path_from_url(url, md5sum=None):
     """Get weights path from WEIGHT_HOME, if not exists,
@@ -801,6 +814,7 @@ def get_weights_path_from_url(url, md5sum=None):
     path = get_path_from_url(url, WEIGHTS_HOME, md5sum)
     return path
 
+
 def load_dygraph_pretrain_from_url(model, pretrained_url, use_ssld):
     if use_ssld:
         pretrained_url = pretrained_url.replace("_pretrained",
@@ -809,6 +823,7 @@ def load_dygraph_pretrain_from_url(model, pretrained_url, use_ssld):
         ".pdparams", "")
     load_dygraph_pretrain(model, path=local_weight_path)
     return
+
 
 def _load_pretrained(pretrained, model, model_url, use_ssld=False):
     if pretrained is False:
@@ -822,6 +837,7 @@ def _load_pretrained(pretrained, model, model_url, use_ssld=False):
             "pretrained type is not available. Please use `string` or `boolean` type."
         )
 
+
 def SwinTransformer_tiny_patch4_window7_224(pretrained=False,
                                             use_ssld=False,
                                             **kwargs):
@@ -832,12 +848,9 @@ def SwinTransformer_tiny_patch4_window7_224(pretrained=False,
         window_size=7,
         drop_path_rate=0.2,
         **kwargs)
-    _load_pretrained(
-        pretrained,
-        model,
-        pretrained,
-        use_ssld=use_ssld)
+    _load_pretrained(pretrained, model, pretrained, use_ssld=use_ssld)
     return model
+
 
 def SwinTransformer_small_patch4_window7_224(pretrained=False,
                                              use_ssld=False,
@@ -848,12 +861,9 @@ def SwinTransformer_small_patch4_window7_224(pretrained=False,
         num_heads=[3, 6, 12, 24],
         window_size=7,
         **kwargs)
-    _load_pretrained(
-        pretrained,
-        model,
-        pretrained,
-        use_ssld=use_ssld)
+    _load_pretrained(pretrained, model, pretrained, use_ssld=use_ssld)
     return model
+
 
 def SwinTransformer_base_patch4_window7_224(pretrained=False,
                                             use_ssld=False,
@@ -865,12 +875,9 @@ def SwinTransformer_base_patch4_window7_224(pretrained=False,
         window_size=7,
         drop_path_rate=0.5,
         **kwargs)
-    _load_pretrained(
-        pretrained,
-        model,
-        pretrained,
-        use_ssld=use_ssld)
+    _load_pretrained(pretrained, model, pretrained, use_ssld=use_ssld)
     return model
+
 
 def SwinTransformer_base_patch4_window12_384(pretrained=False,
                                              use_ssld=False,
@@ -883,12 +890,9 @@ def SwinTransformer_base_patch4_window12_384(pretrained=False,
         window_size=12,
         drop_path_rate=0.5,  # NOTE: do not appear in offical code
         **kwargs)
-    _load_pretrained(
-        pretrained,
-        model,
-        pretrained,
-        use_ssld=use_ssld)
+    _load_pretrained(pretrained, model, pretrained, use_ssld=use_ssld)
     return model
+
 
 def SwinTransformer_large_patch4_window7_224(pretrained=False,
                                              use_ssld=False,
@@ -899,12 +903,9 @@ def SwinTransformer_large_patch4_window7_224(pretrained=False,
         num_heads=[6, 12, 24, 48],
         window_size=7,
         **kwargs)
-    _load_pretrained(
-        pretrained,
-        model,
-        pretrained,
-        use_ssld=use_ssld)
+    _load_pretrained(pretrained, model, pretrained, use_ssld=use_ssld)
     return model
+
 
 def SwinTransformer_large_patch4_window12_384(pretrained=False,
                                               use_ssld=False,
@@ -916,13 +917,8 @@ def SwinTransformer_large_patch4_window12_384(pretrained=False,
         num_heads=[6, 12, 24, 48],
         window_size=12,
         **kwargs)
-    _load_pretrained(
-        pretrained,
-        model,
-        pretrained,
-        use_ssld=use_ssld)
+    _load_pretrained(pretrained, model, pretrained, use_ssld=use_ssld)
     return model
 
- # global configs
 
-
+# global configs

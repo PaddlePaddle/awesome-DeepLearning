@@ -1,4 +1,3 @@
-
 # Copyright (c) 2020 PaddlePaddle Authors. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,7 +27,7 @@ from dataloader import create_data_loader
 import paddle.distributed as dist
 
 
-def do_train(args,train_loader,eval_loader):
+def do_train(args, train_loader, eval_loader):
     if args.use_gpu:
         rank = dist.get_rank()
         trainer_count = dist.get_world_size()
@@ -44,8 +43,6 @@ def do_train(args,train_loader,eval_loader):
     random_seed = eval(str(args.random_seed))
     if random_seed is not None:
         paddle.seed(random_seed)
-
-
 
     # Define model
     transformer = TransformerModel(
@@ -198,6 +195,7 @@ def do_train(args,train_loader,eval_loader):
         paddle.save(optimizer.state_dict(),
                     os.path.join(model_dir, "transformer.pdopt"))
 
+
 if __name__ == '__main__':
     # 读入参数
     yaml_file = './transformer.base.yaml'
@@ -209,4 +207,4 @@ if __name__ == '__main__':
     (train_loader), (eval_loader) = create_data_loader(args)
 
     print('training the model')
-    do_train(args,train_loader,eval_loader)
+    do_train(args, train_loader, eval_loader)

@@ -31,6 +31,7 @@ class TimeSformerHead(BaseHead):
         kwargs (dict, optional): Any keyword argument to initialize.
 
     """
+
     def __init__(self,
                  num_classes,
                  in_channels,
@@ -45,12 +46,13 @@ class TimeSformerHead(BaseHead):
     def init_weights(self):
         """Initiate the FC layer parameters"""
 
-        weight_init_(self.fc,
-                     'TruncatedNormal',
-                     'fc_0.w_0',
-                     'fc_0.b_0',
-                     mean=0.0,
-                     std=self.std)
+        weight_init_(
+            self.fc,
+            'TruncatedNormal',
+            'fc_0.w_0',
+            'fc_0.b_0',
+            mean=0.0,
+            std=self.std)
         # NOTE: Temporarily use trunc_normal_ instead of TruncatedNormal
         trunc_normal_(self.fc.weight, std=self.std)
 

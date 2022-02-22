@@ -17,21 +17,24 @@ from ..registry import HEADS
 from ..losses import TransNetV2Loss
 from ...metrics.transnetv2_metric import create_scene_based_summaries
 
+
 @HEADS.register()
 class TransNetV2Head(BaseHead):
     """TransNetV2 Head.
     """
+
     def __init__(self,
                  num_classes,
                  in_channels,
-                 loss_cfg=dict(name="TransNetV2Loss")
-                 ):
-        super().__init__(num_classes,
-                         in_channels,
-                         loss_cfg)
+                 loss_cfg=dict(name="TransNetV2Loss")):
+        super().__init__(num_classes, in_channels, loss_cfg)
 
-    def loss(self, one_hot_pred, one_hot_gt,
-                many_hot_pred=None, many_hot_gt=None, reg_losses=None):
+    def loss(self,
+             one_hot_pred,
+             one_hot_gt,
+             many_hot_pred=None,
+             many_hot_gt=None,
+             reg_losses=None):
         losses = dict()
         loss = self.loss_func(scores, labels, **kwargs)
 

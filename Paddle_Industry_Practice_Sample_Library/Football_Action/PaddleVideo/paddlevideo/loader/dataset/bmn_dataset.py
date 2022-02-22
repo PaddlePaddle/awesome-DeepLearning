@@ -25,13 +25,13 @@ logger = get_logger("paddlevideo")
 class BMNDataset(BaseDataset):
     """Video dataset for action localization.
     """
+
     def __init__(
-        self,
-        file_path,
-        pipeline,
-        subset,
-        **kwargs,
-    ):
+            self,
+            file_path,
+            pipeline,
+            subset,
+            **kwargs, ):
         self.subset = subset
         super().__init__(file_path, pipeline, **kwargs)
 
@@ -45,16 +45,15 @@ class BMNDataset(BaseDataset):
                 info.append(
                     dict(
                         video_name=video_name,
-                        video_info=annos[video_name],
-                    ))
+                        video_info=annos[video_name], ))
         #sort by video_name
         sort_f = lambda elem: elem['video_name']
         info.sort(key=sort_f)
         #add video_idx to info
         for idx, elem in enumerate(info):
             info[idx]['video_idx'] = idx
-        logger.info("{} subset video numbers: {}".format(
-            self.subset, len(info)))
+        logger.info("{} subset video numbers: {}".format(self.subset, len(
+            info)))
         return info
 
     def prepare_train(self, idx):

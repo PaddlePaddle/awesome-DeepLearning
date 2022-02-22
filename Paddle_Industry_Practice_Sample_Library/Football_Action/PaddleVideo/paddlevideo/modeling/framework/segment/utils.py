@@ -98,17 +98,16 @@ def _nn_features_per_object_for_chunk(reference_embeddings, ref_square,
     query_embeddings_key = query_embeddings
     dists = _flattened_pairwise_distances(reference_embeddings_key, ref_square,
                                           query_embeddings_key, query_square)
-    dists = (paddle.unsqueeze(dists, axis=1) +
-             paddle.unsqueeze(wrong_label_mask, axis=0) *
-             WRONG_LABEL_PADDING_DISTANCE)
+    dists = (paddle.unsqueeze(
+        dists, axis=1) + paddle.unsqueeze(
+            wrong_label_mask, axis=0) * WRONG_LABEL_PADDING_DISTANCE)
     features = paddle.min(dists, axis=2, keepdim=True)
     return features
 
 
-def _nearest_neighbor_features_per_object_in_chunks(reference_embeddings_flat,
-                                                    query_embeddings_flat,
-                                                    reference_labels_flat,
-                                                    n_chunks):
+def _nearest_neighbor_features_per_object_in_chunks(
+        reference_embeddings_flat, query_embeddings_flat,
+        reference_labels_flat, n_chunks):
     """Calculates the nearest neighbor features per object in chunks to save mem.
     Uses chunking to bound the memory use.
     Args:
@@ -144,8 +143,8 @@ def _nearest_neighbor_features_per_object_in_chunks(reference_embeddings_flat,
             query_square_chunk = query_square[chunk_start:chunk_end]
             if query_square_chunk.shape[0] == 0:
                 continue
-            query_embeddings_flat_chunk = query_embeddings_flat[
-                chunk_start:chunk_end]
+            query_embeddings_flat_chunk = query_embeddings_flat[chunk_start:
+                                                                chunk_end]
         features = _nn_features_per_object_for_chunk(
             reference_embeddings_flat, ref_square, query_embeddings_flat_chunk,
             query_square_chunk, wrong_label_mask)
@@ -192,8 +191,8 @@ def global_matching(reference_embeddings,
     assert (reference_embeddings.shape[:2] == reference_labels.shape[:2])
     if use_float16:
         query_embeddings = paddle.cast(query_embeddings, dtype="float16")
-        reference_embeddings = paddle.cast(reference_embeddings,
-                                           dtype="float16")
+        reference_embeddings = paddle.cast(
+            reference_embeddings, dtype="float16")
     h, w, embedding_dim = query_embeddings.shape
     obj_nums = reference_labels.shape[2]
 
@@ -202,14 +201,13 @@ def global_matching(reference_embeddings,
         w_pad = (atrous_rate - w % atrous_rate) % atrous_rate
         selected_points = paddle.zeros([h + h_pad, w + w_pad])
         selected_points = selected_points.view(
-            (h + h_pad) // atrous_rate, atrous_rate, (w + w_pad) // atrous_rate,
-            atrous_rate)
+            (h + h_pad) // atrous_rate, atrous_rate,
+            (w + w_pad) // atrous_rate, atrous_rate)
         selected_points[:, 0, :, 0] = 1.
         selected_points = paddle.reshape(selected_points,
                                          [h + h_pad, w + w_pad, 1])[:h, :w]
-        is_big_obj = (paddle.sum(
-            reference_labels,
-            axis=(0, 1))) > (atrous_obj_pixel_num * atrous_rate**2)
+        is_big_obj = (paddle.sum(reference_labels, axis=(0, 1))) > (
+            atrous_obj_pixel_num * atrous_rate**2)
         reference_labels[:, :,
                          is_big_obj] = reference_labels[:, :,
                                                         is_big_obj] * selected_points
@@ -233,13 +231,12 @@ def global_matching(reference_embeddings,
         [-1, embedding_dim])
 
     nn_features = _nearest_neighbor_features_per_object_in_chunks(
-        reference_embeddings_flat, query_embeddings_flat, reference_labels_flat,
-        n_chunks)
+        reference_embeddings_flat, query_embeddings_flat,
+        reference_labels_flat, n_chunks)
 
     nn_features_reshape = paddle.reshape(nn_features, [1, h, w, obj_nums, 1])
-    nn_features_reshape = (
-        F.sigmoid(nn_features_reshape +
-                  paddle.reshape(dis_bias, [1, 1, 1, -1, 1])) - 0.5) * 2
+    nn_features_reshape = (F.sigmoid(nn_features_reshape + paddle.reshape(
+        dis_bias, [1, 1, 1, -1, 1])) - 0.5) * 2
 
     #TODO: ori_size is not None
 
@@ -300,11 +297,11 @@ def global_matching_for_eval(all_reference_embeddings,
                                              [h + h_pad, w + w_pad, 1])[:h, :w]
 
         for reference_embeddings, reference_labels, idx in zip(
-                all_reference_embeddings, all_reference_labels, range(ref_num)):
+                all_reference_embeddings, all_reference_labels,
+                range(ref_num)):
             if atrous_rate > 1:
-                is_big_obj = paddle.sum(
-                    reference_labels,
-                    axis=(0, 1)) > (atrous_obj_pixel_num * atrous_rate**2)
+                is_big_obj = paddle.sum(reference_labels, axis=(0, 1)) > (
+                    atrous_obj_pixel_num * atrous_rate**2)
                 is_big_obj = list(np.array(is_big_obj))
                 for j in range(len(is_big_obj)):
                     if is_big_obj[j] == True:
@@ -322,8 +319,8 @@ def global_matching_for_eval(all_reference_embeddings,
 
         reference_embeddings_flat = paddle.concat(
             x=all_reference_embeddings_flat, axis=0)
-        reference_labels_flat = paddle.concat(x=all_reference_labels_flat,
-                                              axis=0)
+        reference_labels_flat = paddle.concat(
+            x=all_reference_labels_flat, axis=0)
     else:
         if ref_num == 1:
             reference_embeddings, reference_labels = all_reference_embeddings[
@@ -341,9 +338,9 @@ def global_matching_for_eval(all_reference_embeddings,
                     [(h + h_pad) // atrous_rate, atrous_rate,
                      (w + w_pad) // atrous_rate, atrous_rate, 32])
                 reference_labels = paddle.reshape(
-                    reference_labels,
-                    [(h + h_pad) // atrous_rate, atrous_rate,
-                     (w + w_pad) // atrous_rate, atrous_rate, -1])
+                    reference_labels, [(h + h_pad) // atrous_rate, atrous_rate,
+                                       (w + w_pad) // atrous_rate, atrous_rate,
+                                       -1])
                 reference_embeddings = paddle.reshape(
                     reference_embeddings[:, 0, :, 0, :],
                     reference_embeddings[:, 0, :, 0, :].shape)
@@ -362,8 +359,8 @@ def global_matching_for_eval(all_reference_embeddings,
                     h_pad = (atrous_rate - h % atrous_rate) % atrous_rate
                     w_pad = (atrous_rate - w % atrous_rate) % atrous_rate
                     if h_pad > 0 or w_pad > 0:
-                        reference_embeddings = F.pad(reference_embeddings,
-                                                     [0, h_pad, 0, w_pad, 0, 0])
+                        reference_embeddings = F.pad(
+                            reference_embeddings, [0, h_pad, 0, w_pad, 0, 0])
                         reference_labels = F.pad(reference_labels,
                                                  [0, h_pad, 0, w_pad, 0, 0])
 
@@ -392,8 +389,8 @@ def global_matching_for_eval(all_reference_embeddings,
 
             reference_embeddings_flat = paddle.concat(
                 all_reference_embeddings_flat, axis=0)
-            reference_labels_flat = paddle.concat(all_reference_labels_flat,
-                                                  axis=0)
+            reference_labels_flat = paddle.concat(
+                all_reference_labels_flat, axis=0)
 
     query_embeddings_flat = paddle.reshape(query_embeddings,
                                            [-1, embedding_dim])
@@ -410,18 +407,17 @@ def global_matching_for_eval(all_reference_embeddings,
                              paddle.expand(all_ref_fg, [-1, embedding_dim])),
         [-1, embedding_dim])
     if use_float16:
-        query_embeddings_flat = paddle.cast(query_embeddings_flat,
-                                            dtype="float16")
-        reference_embeddings_flat = paddle.cast(reference_embeddings_flat,
-                                                dtype="float16")
+        query_embeddings_flat = paddle.cast(
+            query_embeddings_flat, dtype="float16")
+        reference_embeddings_flat = paddle.cast(
+            reference_embeddings_flat, dtype="float16")
     nn_features = _nearest_neighbor_features_per_object_in_chunks(
-        reference_embeddings_flat, query_embeddings_flat, reference_labels_flat,
-        n_chunks)
+        reference_embeddings_flat, query_embeddings_flat,
+        reference_labels_flat, n_chunks)
 
     nn_features_reshape = paddle.reshape(nn_features, [1, h, w, obj_nums, 1])
-    nn_features_reshape = (
-        F.sigmoid(nn_features_reshape +
-                  paddle.reshape(dis_bias, [1, 1, 1, -1, 1])) - 0.5) * 2
+    nn_features_reshape = (F.sigmoid(nn_features_reshape + paddle.reshape(
+        dis_bias, [1, 1, 1, -1, 1])) - 0.5) * 2
 
     # TODO: ori_size is not None
 
@@ -455,14 +451,10 @@ def local_pairwise_distances(x,
         x = paddle.unsqueeze(paddle.transpose(x, [2, 0, 1]), axis=0)
         y = paddle.unsqueeze(paddle.transpose(y, [2, 0, 1]), axis=0)
         down_size = (int(ori_height / 2) + 1, int(ori_width / 2) + 1)
-        x = F.interpolate(x,
-                          size=down_size,
-                          mode='bilinear',
-                          align_corners=True)
-        y = F.interpolate(y,
-                          size=down_size,
-                          mode='bilinear',
-                          align_corners=True)
+        x = F.interpolate(
+            x, size=down_size, mode='bilinear', align_corners=True)
+        y = F.interpolate(
+            y, size=down_size, mode='bilinear', align_corners=True)
         x = paddle.unsqueeze(paddle.transpose(x, [1, 2, 0]), axis=0)
         y = paddle.unsqueeze(paddle.transpose(y, [1, 2, 0]), axis=0)
 
@@ -512,45 +504,43 @@ def local_pairwise_distances_parallel(x,
     y = paddle.unsqueeze(paddle.transpose(y, [2, 0, 1]), axis=0)
     if allow_downsample:
         down_size = (int(ori_height / 2) + 1, int(ori_width / 2) + 1)
-        x = F.interpolate(x,
-                          size=down_size,
-                          mode='bilinear',
-                          align_corners=True)
-        y = F.interpolate(y,
-                          size=down_size,
-                          mode='bilinear',
-                          align_corners=True)
+        x = F.interpolate(
+            x, size=down_size, mode='bilinear', align_corners=True)
+        y = F.interpolate(
+            y, size=down_size, mode='bilinear', align_corners=True)
 
     _, channels, height, width = x.shape
 
-    x2 = paddle.reshape(paddle.sum(paddle.pow(x, 2), axis=1),
-                        [height, width, 1])
-    y2 = paddle.reshape(paddle.sum(paddle.pow(y, 2), axis=1),
-                        [1, 1, height, width])
+    x2 = paddle.reshape(
+        paddle.sum(paddle.pow(x, 2), axis=1), [height, width, 1])
+    y2 = paddle.reshape(
+        paddle.sum(paddle.pow(y, 2), axis=1), [1, 1, height, width])
 
     pad_max_distance = max_distance - max_distance % atrous_rate
     # no change pad
     padded_y = F.pad(y, (pad_max_distance, pad_max_distance, pad_max_distance,
                          pad_max_distance))
-    padded_y2 = F.pad(y2, (pad_max_distance, pad_max_distance, pad_max_distance,
-                           pad_max_distance),
+    padded_y2 = F.pad(y2, (pad_max_distance, pad_max_distance,
+                           pad_max_distance, pad_max_distance),
                       value=WRONG_LABEL_PADDING_DISTANCE)
 
     offset_y = paddle.transpose(
         paddle.reshape(
-            F.unfold(x=padded_y,
-                     kernel_sizes=[height, width],
-                     strides=[atrous_rate, atrous_rate]),
+            F.unfold(
+                x=padded_y,
+                kernel_sizes=[height, width],
+                strides=[atrous_rate, atrous_rate]),
             [channels, height * width, -1]), [1, 0, 2])
     offset_y2 = paddle.reshape(
-        F.unfold(padded_y2,
-                 kernel_sizes=[height, width],
-                 strides=[atrous_rate, atrous_rate]), [height, width, -1])
-    x = paddle.transpose(paddle.reshape(x, [channels, height * width, -1]),
-                         [1, 2, 0])
+        F.unfold(
+            padded_y2,
+            kernel_sizes=[height, width],
+            strides=[atrous_rate, atrous_rate]), [height, width, -1])
+    x = paddle.transpose(
+        paddle.reshape(x, [channels, height * width, -1]), [1, 2, 0])
 
-    dists = x2 + offset_y2 - 2. * paddle.reshape(paddle.matmul(x, offset_y),
-                                                 [height, width, -1])
+    dists = x2 + offset_y2 - 2. * paddle.reshape(
+        paddle.matmul(x, offset_y), [height, width, -1])
 
     return dists
 
@@ -597,28 +587,31 @@ def local_matching(prev_frame_embedding,
     pad = paddle.ones([1]) * WRONG_LABEL_PADDING_DISTANCE
     if use_float16:
         query_embedding = paddle.cast(query_embedding, dtype="float16")
-        prev_frame_embedding = paddle.cast(prev_frame_embedding,
-                                           dtype="float16")
+        prev_frame_embedding = paddle.cast(
+            prev_frame_embedding, dtype="float16")
         pad = paddle.cast(pad, dtype="float16")
 
     if allow_parallel:
-        d = local_pairwise_distances_parallel(query_embedding,
-                                              prev_frame_embedding,
-                                              max_distance=max_distance,
-                                              atrous_rate=atrous_rate,
-                                              allow_downsample=allow_downsample)
+        d = local_pairwise_distances_parallel(
+            query_embedding,
+            prev_frame_embedding,
+            max_distance=max_distance,
+            atrous_rate=atrous_rate,
+            allow_downsample=allow_downsample)
     else:
-        d = local_pairwise_distances(query_embedding,
-                                     prev_frame_embedding,
-                                     max_distance=max_distance,
-                                     atrous_rate=atrous_rate,
-                                     allow_downsample=allow_downsample)
+        d = local_pairwise_distances(
+            query_embedding,
+            prev_frame_embedding,
+            max_distance=max_distance,
+            atrous_rate=atrous_rate,
+            allow_downsample=allow_downsample)
 
     height, width = d.shape[:2]
 
-    labels = paddle.unsqueeze(paddle.transpose(prev_frame_labels, [2, 0, 1]), 1)
-    labels = paddle.unsqueeze(paddle.transpose(prev_frame_labels, [2, 0, 1]),
-                              axis=1)
+    labels = paddle.unsqueeze(
+        paddle.transpose(prev_frame_labels, [2, 0, 1]), 1)
+    labels = paddle.unsqueeze(
+        paddle.transpose(prev_frame_labels, [2, 0, 1]), axis=1)
     if (height, width) != ori_size:
         labels = F.interpolate(labels, size=(height, width), mode='nearest')
 
@@ -629,30 +622,32 @@ def local_matching(prev_frame_embedding,
         pad_max_distance,
         pad_max_distance,
         pad_max_distance,
-        pad_max_distance,
-    ),
+        pad_max_distance, ),
                           mode='constant',
                           value=0)
 
     offset_masks = paddle.transpose(
         paddle.reshape(
-            F.unfold(padded_labels,
-                     kernel_sizes=[height, width],
-                     strides=[atrous_rate, atrous_rate]),
+            F.unfold(
+                padded_labels,
+                kernel_sizes=[height, width],
+                strides=[atrous_rate, atrous_rate]),
             [obj_num, height, width, -1]), [1, 2, 3, 0]) > 0.9
 
-    d_tiled = paddle.expand(paddle.unsqueeze(
-        d, axis=-1), [-1, -1, -1, obj_num])  # h, w, num_local_pos, obj_num
+    d_tiled = paddle.expand(
+        paddle.unsqueeze(
+            d, axis=-1), [-1, -1, -1, obj_num])  # h, w, num_local_pos, obj_num
 
     d_masked = paddle.where(offset_masks, d_tiled, pad)
     dists = paddle.min(d_masked, axis=2)
     multi_dists = [
-        paddle.unsqueeze(paddle.transpose(dists, [2, 0, 1]), axis=1)
+        paddle.unsqueeze(
+            paddle.transpose(dists, [2, 0, 1]), axis=1)
     ]  # n_objects, num_multi_local, h, w
 
     reshaped_d_masked = paddle.reshape(d_masked, [
-        height, width, 2 * atrous_max_distance + 1, 2 * atrous_max_distance + 1,
-        obj_num
+        height, width, 2 * atrous_max_distance + 1,
+        2 * atrous_max_distance + 1, obj_num
     ])
     for local_dis in multi_local_distance[:-1]:
         local_dis = local_dis // atrous_rate
@@ -660,27 +655,26 @@ def local_matching(prev_frame_embedding,
         end_idx = atrous_max_distance + local_dis + 1
         new_d_masked = paddle.reshape(
             reshaped_d_masked[:, :, start_idx:end_idx, start_idx:end_idx, :],
-            reshaped_d_masked[:, :, start_idx:end_idx,
-                              start_idx:end_idx, :].shape)
+            reshaped_d_masked[:, :, start_idx:end_idx, start_idx:
+                              end_idx, :].shape)
         new_d_masked = paddle.reshape(new_d_masked,
                                       [height, width, -1, obj_num])
         new_dists = paddle.min(new_d_masked, axis=2)
-        new_dists = paddle.unsqueeze(paddle.transpose(new_dists, [2, 0, 1]),
-                                     axis=1)
+        new_dists = paddle.unsqueeze(
+            paddle.transpose(new_dists, [2, 0, 1]), axis=1)
         multi_dists.append(new_dists)
 
     multi_dists = paddle.concat(multi_dists, axis=1)
-    multi_dists = (F.sigmoid(multi_dists +
-                             paddle.reshape(dis_bias, [-1, 1, 1, 1])) - 0.5) * 2
+    multi_dists = (
+        F.sigmoid(multi_dists + paddle.reshape(dis_bias, [-1, 1, 1, 1])) - 0.5
+    ) * 2
 
     if use_float16:
         multi_dists = paddle.cast(multi_dists, dtype="float32")
 
     if (height, width) != ori_size:
-        multi_dists = F.interpolate(multi_dists,
-                                    size=ori_size,
-                                    mode='bilinear',
-                                    align_corners=True)
+        multi_dists = F.interpolate(
+            multi_dists, size=ori_size, mode='bilinear', align_corners=True)
     multi_dists = paddle.transpose(multi_dists, perm=[2, 3, 0, 1])
     multi_dists = paddle.reshape(multi_dists,
                                  [1, ori_size[0], ori_size[1], obj_num, -1])

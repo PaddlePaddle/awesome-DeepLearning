@@ -165,9 +165,9 @@ PaddleVideo模型部署。
     ```
     inference/
     └── ppTSM/
-    	├── ppTSM.pdiparams
-    	├── ppTSM.pdiparamsinfo
-    	└── ppTSM.pdmodel
+        ├── ppTSM.pdiparams
+        ├── ppTSM.pdiparamsinfo
+        └── ppTSM.pdmodel
     ```
 
 
@@ -264,7 +264,7 @@ PaddleVideo模型部署。
     | rec_batch_num  | int    | 1                                             | 模型预测时的batch size               |
     | char_list_file | str    | "../../data/k400/Kinetics-400_label_list.txt" | 存放所有类别标号和对应名字的文本路径 |
 
-​	以example_video_dir下的样例视频`example01.avi`为输入视频为例，最终屏幕上会输出检测结果如下。
+​    以example_video_dir下的样例视频`example01.avi`为输入视频为例，最终屏幕上会输出检测结果如下。
 
 ```bash
 [./inference/ppTSM]

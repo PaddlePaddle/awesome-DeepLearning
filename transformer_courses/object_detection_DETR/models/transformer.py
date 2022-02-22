@@ -5,10 +5,12 @@ import paddle.nn.functional as F
 
 from .positional_encoding import PositionEmbedding
 from .layers import MultiHeadAttention, _convert_attention_mask
-from . initializer import linear_init_, conv_init_, xavier_uniform_, normal_
+from .initializer import linear_init_, conv_init_, xavier_uniform_, normal_
+
 
 def _get_clones(module, N):
     return nn.LayerList([copy.deepcopy(module) for _ in range(N)])
+
 
 # 先定义单个Encoder模块
 class TransformerEncoderLayer(nn.Layer):
@@ -69,6 +71,7 @@ class TransformerEncoderLayer(nn.Layer):
             src = self.norm2(src)
         return src
 
+
 # DETR编码器由多个Encoder模块组成
 class TransformerEncoder(nn.Layer):
     def __init__(self, encoder_layer, num_layers, norm=None):
@@ -88,6 +91,7 @@ class TransformerEncoder(nn.Layer):
             output = self.norm(output)
 
         return output
+
 
 # 先定义单个Decoder模块
 class TransformerDecoderLayer(nn.Layer):
@@ -167,6 +171,7 @@ class TransformerDecoderLayer(nn.Layer):
             tgt = self.norm3(tgt)
         return tgt
 
+
 # DETR解码器由多个Decoder模块组成
 class TransformerDecoder(nn.Layer):
     def __init__(self,
@@ -210,6 +215,7 @@ class TransformerDecoder(nn.Layer):
             return paddle.stack(intermediate)
 
         return output.unsqueeze(0)
+
 
 # 编码器和解码器组成DETR的transformer部分
 class DETRTransformer(nn.Layer):

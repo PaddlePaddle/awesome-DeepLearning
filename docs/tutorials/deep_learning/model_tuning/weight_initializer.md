@@ -96,7 +96,7 @@ $$
 
    假设在一个神经网络中，对于一层线性网络，其表示为：
 
-   
+
 
    $$
    y = f(z_1W_1 + z_2W_2 + z_3W_3 + ... + z_iW_i + b)
@@ -105,21 +105,21 @@ $$
 
    对于其中的每个 $z_iW_i$，其方差为：
 
-   
+
 
    $$
    Var(z_iW_i) = E(z_i)^2Var(W_i) + E(W_i)^2Var(z_i)+Var(z_i)Var(W_i)
    $$
    由于 $W_i$ 和 $z_i$ 的均值都为0，因此可以得到：
 
-   
+
 
    $$
    Var(z_iW_i) = Var(z_i)Var(W_i)
    $$
    又因为 $z$ 和 $W$ 相互独立，则有：
 
-   
+
 
    $$
    Var(y) = n_i * Var(z_i)Var(W_i)
@@ -128,7 +128,7 @@ $$
 
    通过上面的公式我们可以发现，输入 $z_i$ 的方差和输出 $y$ 方差相差 $n * Var(W_i)$ 倍，也就是说输入信号在经过神经元后会被放大或缩小 $n * Var(W_i)$ 倍。为保证经过多层网络后，信号不被过分的放大或缩小，我们需要尽可能保证前向传播和反向传播时每层方差保持一致，则有：
 
-   
+
 
    $$
    {\forall}i, \quad n_i * Var(W_i) = 1\\
@@ -136,14 +136,14 @@ $$
    $$
    权衡上述两个限制，提出一个折中的办法：
 
-   
+
 
    $$
    {\forall}i, \quad Var(W_i) = \frac{2}{n_i + n_{i+1}}
    $$
    根据计算出的理想方差，可选择通过高斯分布或均匀分布来随机初始化参数。若采用高斯分布，则权重可按照 $N(0, \frac{2}{n_i + n_{i+1}})$ 的高斯分布来进行初始化。若采用在区间 $[-r, r]$ 的均匀分布进行初始化，则初始化分布有：
 
-   
+
 
    $$
    W \sim U[- \frac{\sqrt 6}{\sqrt{n_i + n_{i+1}}}, \frac{\sqrt 6}{\sqrt{n_i + n_{i+1}}}]
@@ -158,28 +158,28 @@ $$
 
    kaiming初始化是一种针对ReLU的初始化方法，假定使用ReLU激活函数时，网络每一层都中有一半的神经元被激活，另一半为0，因此其分布的方差也近似为恒等函数的一半。这样在考虑前向传播和反向传播时则有：
 
-   
-   
+
+
    $$
    {\forall}i, \quad \frac12 n_i * Var(W_i) = 1\\
    {\forall}i, \quad \frac12 n_{i+1} * Var(W_i) = 1
    $$
    $W_i$ 的理想方差为：
-   
-   
-   
+
+
+
    $$
    {\forall}i, \quad Var(W_i) = \frac{2}{n_i}
    $$
-   
+
    当采用高斯分布时，则权重可按照 $N(0, \frac{2}{n_i})$ 的高斯分布来进行初始化。若采用在区间 $[-r, r]$ 的均匀分布进行初始化，则初始化分布有：
-   
-   
+
+
    $$
    W \sim U[- \frac{\sqrt 6}{\sqrt{n_i}}, \frac{\sqrt 6}{\sqrt{n_i}}]
    $$
-   
-   
+
+
    具体论文参见：[Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification](https://arxiv.org/pdf/1502.01852.pdf)
 
 
@@ -187,6 +187,3 @@ $$
 ## References
 
 1. Bradley, D. (2009). *Learning in modular systems.* Doctoral dissertation, The Robotics Institute, Carnegie Mellon University.
-
-
-

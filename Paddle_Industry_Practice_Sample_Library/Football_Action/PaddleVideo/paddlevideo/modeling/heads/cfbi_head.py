@@ -62,12 +62,12 @@ class GCT(nn.Layer):
     def forward(self, x):
 
         if self.mode == 'l2':
-            embedding = paddle.pow(
-                paddle.sum(paddle.pow(x, 2), axis=[2, 3], keepdim=True) +
-                self.epsilon, 0.5) * self.alpha
-            norm = self.gamma / paddle.pow(
-                (paddle.mean(paddle.pow(embedding, 2), axis=1, keepdim=True) +
-                 self.epsilon), 0.5)
+            embedding = paddle.pow(paddle.sum(
+                paddle.pow(x, 2), axis=[2, 3], keepdim=True) + self.epsilon,
+                                   0.5) * self.alpha
+            norm = self.gamma / paddle.pow((paddle.mean(
+                paddle.pow(embedding, 2), axis=1, keepdim=True) + self.epsilon),
+                                           0.5)
         elif self.mode == 'l1':
             if not self.after_relu:
                 _x = paddle.abs(x)
@@ -95,30 +95,30 @@ class Bottleneck(nn.Layer):
         self.conv1 = nn.Conv2D(inplanes, planes, kernel_size=1, bias_attr=False)
         self.bn1 = nn.GroupNorm(num_groups=32, num_channels=planes)
 
-        self.conv2 = nn.Conv2D(planes,
-                               planes,
-                               kernel_size=3,
-                               stride=stride,
-                               dilation=dilation,
-                               padding=dilation,
-                               bias_attr=False)
+        self.conv2 = nn.Conv2D(
+            planes,
+            planes,
+            kernel_size=3,
+            stride=stride,
+            dilation=dilation,
+            padding=dilation,
+            bias_attr=False)
         self.bn2 = nn.GroupNorm(num_groups=32, num_channels=planes)
 
-        self.conv3 = nn.Conv2D(planes,
-                               planes * expansion,
-                               kernel_size=1,
-                               bias_attr=False)
+        self.conv3 = nn.Conv2D(
+            planes, planes * expansion, kernel_size=1, bias_attr=False)
         self.bn3 = nn.GroupNorm(num_groups=32, num_channels=planes * expansion)
         self.relu = nn.ReLU()
         if stride != 1 or inplanes != planes * expansion:
             downsample = nn.Sequential(
-                nn.Conv2D(inplanes,
-                          planes * expansion,
-                          kernel_size=1,
-                          stride=stride,
-                          bias_attr=False),
-                nn.GroupNorm(num_groups=32, num_channels=planes * expansion),
-            )
+                nn.Conv2D(
+                    inplanes,
+                    planes * expansion,
+                    kernel_size=1,
+                    stride=stride,
+                    bias_attr=False),
+                nn.GroupNorm(
+                    num_groups=32, num_channels=planes * expansion), )
         else:
             downsample = None
         self.downsample = downsample
@@ -157,13 +157,14 @@ class _ASPPModule(nn.Layer):
     def __init__(self, inplanes, planes, kernel_size, padding, dilation):
         super(_ASPPModule, self).__init__()
         self.GCT = GCT(inplanes)
-        self.atrous_conv = nn.Conv2D(inplanes,
-                                     planes,
-                                     kernel_size=kernel_size,
-                                     stride=1,
-                                     padding=padding,
-                                     dilation=dilation,
-                                     bias_attr=False)
+        self.atrous_conv = nn.Conv2D(
+            inplanes,
+            planes,
+            kernel_size=kernel_size,
+            stride=1,
+            padding=padding,
+            dilation=dilation,
+            bias_attr=False)
         self.bn = nn.GroupNorm(num_groups=int(planes / 4), num_channels=planes)
         self.relu = nn.ReLU()
 
@@ -192,30 +193,20 @@ class ASPP(nn.Layer):
         inplanes = 512
         dilations = [1, 6, 12, 18]
 
-        self.aspp1 = _ASPPModule(inplanes,
-                                 128,
-                                 1,
-                                 padding=0,
-                                 dilation=dilations[0])
-        self.aspp2 = _ASPPModule(inplanes,
-                                 128,
-                                 3,
-                                 padding=dilations[1],
-                                 dilation=dilations[1])
-        self.aspp3 = _ASPPModule(inplanes,
-                                 128,
-                                 3,
-                                 padding=dilations[2],
-                                 dilation=dilations[2])
-        self.aspp4 = _ASPPModule(inplanes,
-                                 128,
-                                 3,
-                                 padding=dilations[3],
-                                 dilation=dilations[3])
+        self.aspp1 = _ASPPModule(
+            inplanes, 128, 1, padding=0, dilation=dilations[0])
+        self.aspp2 = _ASPPModule(
+            inplanes, 128, 3, padding=dilations[1], dilation=dilations[1])
+        self.aspp3 = _ASPPModule(
+            inplanes, 128, 3, padding=dilations[2], dilation=dilations[2])
+        self.aspp4 = _ASPPModule(
+            inplanes, 128, 3, padding=dilations[3], dilation=dilations[3])
 
         self.global_avg_pool = nn.Sequential(
             nn.AdaptiveAvgPool2D((1, 1)),
-            nn.Conv2D(inplanes, 128, 1, stride=1, bias_attr=False), nn.ReLU())
+            nn.Conv2D(
+                inplanes, 128, 1, stride=1, bias_attr=False),
+            nn.ReLU())
 
         self.GCT = GCT(640)
         self.conv1 = nn.Conv2D(640, 256, 1, bias_attr=False)
@@ -229,10 +220,8 @@ class ASPP(nn.Layer):
         x3 = self.aspp3(x)
         x4 = self.aspp4(x)
         x5 = self.global_avg_pool(x)
-        x5 = F.interpolate(x5,
-                           size=x4.shape[2:],
-                           mode='bilinear',
-                           align_corners=True)
+        x5 = F.interpolate(
+            x5, size=x4.shape[2:], mode='bilinear', align_corners=True)
         x = paddle.concat([x1, x2, x3, x4, x5], axis=1)
 
         x = self.GCT(x)
@@ -254,14 +243,13 @@ class ASPP(nn.Layer):
 @HEADS.register()
 class CollaborativeEnsemblerMS(nn.Layer):
     def __init__(
-        self,
-        model_semantic_embedding_dim=256,
-        model_multi_local_distance=[[4, 8, 12, 16, 20, 24],
-                                    [2, 4, 6, 8, 10, 12], [2, 4, 6, 8, 10]],
-        model_head_embedding_dim=256,
-        model_refine_channels=64,
-        model_low_level_inplanes=256,
-    ):
+            self,
+            model_semantic_embedding_dim=256,
+            model_multi_local_distance=[[4, 8, 12, 16, 20, 24],
+                                        [2, 4, 6, 8, 10, 12], [2, 4, 6, 8, 10]],
+            model_head_embedding_dim=256,
+            model_refine_channels=64,
+            model_low_level_inplanes=256, ):
         super(CollaborativeEnsemblerMS, self).__init__()
         in_dim_4x = model_semantic_embedding_dim * 3 + 3 + 2 * len(
             model_multi_local_distance[0])
@@ -313,28 +301,28 @@ class CollaborativeEnsemblerMS(nn.Layer):
 
         # Decoder
         self.GCT_sc = GCT(low_level_dim + embed_dim)
-        self.conv_sc = nn.Conv2D(low_level_dim + embed_dim,
-                                 refine_dim,
-                                 1,
-                                 bias_attr=False)
-        self.bn_sc = nn.GroupNorm(num_groups=int(refine_dim / 4),
-                                  num_channels=refine_dim)
+        self.conv_sc = nn.Conv2D(
+            low_level_dim + embed_dim, refine_dim, 1, bias_attr=False)
+        self.bn_sc = nn.GroupNorm(
+            num_groups=int(refine_dim / 4), num_channels=refine_dim)
         self.relu = nn.ReLU()
 
         self.IA10 = IA_gate(IA_in_dim, embed_dim + refine_dim)
-        self.conv1 = nn.Conv2D(embed_dim + refine_dim,
-                               int(embed_dim / 2),
-                               kernel_size=3,
-                               padding=1,
-                               bias_attr=False)
+        self.conv1 = nn.Conv2D(
+            embed_dim + refine_dim,
+            int(embed_dim / 2),
+            kernel_size=3,
+            padding=1,
+            bias_attr=False)
         self.bn1 = nn.GroupNorm(num_groups=32, num_channels=int(embed_dim / 2))
 
         self.IA11 = IA_gate(IA_in_dim, int(embed_dim / 2))
-        self.conv2 = nn.Conv2D(int(embed_dim / 2),
-                               int(embed_dim / 2),
-                               kernel_size=3,
-                               padding=1,
-                               bias_attr=False)
+        self.conv2 = nn.Conv2D(
+            int(embed_dim / 2),
+            int(embed_dim / 2),
+            kernel_size=3,
+            padding=1,
+            bias_attr=False)
         self.bn2 = nn.GroupNorm(num_groups=32, num_channels=int(embed_dim / 2))
 
         # Output
@@ -405,14 +393,16 @@ class CollaborativeEnsemblerMS(nn.Layer):
 
         IA_bias = paddle.reshape(IA_bias, [-1])
         logit = paddle.reshape(
-            F.conv2d(x, weight=IA_weight, bias=IA_bias, groups=n), [n, 1, h, w])
+            F.conv2d(
+                x, weight=IA_weight, bias=IA_bias, groups=n), [n, 1, h, w])
         return logit
 
     def decoder(self, x, low_level_feat, IA_head):
-        x = F.interpolate(x,
-                          size=low_level_feat.shape[2:],
-                          mode='bicubic',
-                          align_corners=True)
+        x = F.interpolate(
+            x,
+            size=low_level_feat.shape[2:],
+            mode='bicubic',
+            align_corners=True)
 
         low_level_feat = self.GCT_sc(low_level_feat)
         low_level_feat = self.conv_sc(low_level_feat)
@@ -440,8 +430,8 @@ class CollaborativeEnsemblerMS(nn.Layer):
         if obj_num > 1:
             bg_logit = bg_logit[1:obj_num, :, :, :]
             aug_bg_logit = paddle.min(bg_logit, axis=0, keepdim=True)
-            pad = paddle.expand(paddle.zeros(aug_bg_logit.shape),
-                                [obj_num - 1, -1, -1, -1])
+            pad = paddle.expand(
+                paddle.zeros(aug_bg_logit.shape), [obj_num - 1, -1, -1, -1])
             aug_bg_logit = paddle.concat([aug_bg_logit, pad], axis=0)
             pred = pred + aug_bg_logit
         pred = paddle.transpose(pred, [1, 0, 2, 3])

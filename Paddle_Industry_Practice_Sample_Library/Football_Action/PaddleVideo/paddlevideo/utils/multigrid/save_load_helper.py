@@ -62,9 +62,9 @@ def normal_to_sub_bn(checkpoint_sd, model_sd):
             model_blob_shape = model_sd[key].shape  #bn.split_bn
             c2_blob_shape = checkpoint_sd[key].shape  #bn.bn
 
-            if (len(model_blob_shape) == 1 and len(c2_blob_shape) == 1
-                    and model_blob_shape[0] > c2_blob_shape[0]
-                    and model_blob_shape[0] % c2_blob_shape[0] == 0):
+            if (len(model_blob_shape) == 1 and len(c2_blob_shape) == 1 and
+                    model_blob_shape[0] > c2_blob_shape[0] and
+                    model_blob_shape[0] % c2_blob_shape[0] == 0):
                 before_shape = checkpoint_sd[key].shape
                 checkpoint_sd[key] = np.concatenate(
                     [checkpoint_sd[key]] *
@@ -88,6 +88,7 @@ def mapping_opt_dict(opt_dict, model_key_list):
         model_key_list: the parameters name list of re-build model.
     Return: optimizer state dict with modified keys
     """
+
     def get_name_info(PNAME, PN_key_list, key_list):
         min_index = float('inf')
         max_index = 0
@@ -157,12 +158,12 @@ def mapping_opt_dict(opt_dict, model_key_list):
     for key in pd_key_list:
         for name in PN_key_list[1:]:
             if key.startswith(name):
-                start = change_dict[name] if (
-                    change_name and "batch_norm" in name) else name
+                start = change_dict[name] if (change_name and
+                                              "batch_norm" in name) else name
                 str_index = key.split('.')[0].split(name)[-1]
                 index = int(str_index)
-                new_index = str(index +
-                                (PNAME[start][1][0] - PNAME[name][0][0]))
+                new_index = str(index + (PNAME[start][1][0] - PNAME[name][0][0]
+                                         ))
                 end = key.split('.')[-1]
                 update_key = start + new_index + '.' + end
                 opt_dict[update_key] = opt_dict.pop(key)

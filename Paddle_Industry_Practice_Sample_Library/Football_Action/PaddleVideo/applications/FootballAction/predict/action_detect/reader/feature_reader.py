@@ -27,6 +27,7 @@ import code
 
 from .reader_utils import DataReader
 
+
 class FeatureReader(DataReader):
     """
     Data reader for youtube-8M dataset, which was stored as features extracted by prior networks
@@ -54,7 +55,8 @@ class FeatureReader(DataReader):
         image_feature_list = self.feature['image_feature']
         audio_feature_list = self.feature['audio_feature']
         pcm_feature_list = self.feature['pcm_feature']
-        pcm_feature_list = pcm_feature_list.reshape((pcm_feature_list.shape[0] * 5, 640))
+        pcm_feature_list = pcm_feature_list.reshape(
+            (pcm_feature_list.shape[0] * 5, 640))
 
         fl = self.proposal
 
@@ -71,17 +73,19 @@ class FeatureReader(DataReader):
                 end_id = int(prop_info['end'])
                 bmn_score = float(prop_info['score'])
                 try:
-                    image_feature = image_feature_list[start_id: end_id]
-                    audio_feature = audio_feature_list[int(start_id / self.fps): int(end_id / self.fps)]
-                    pcm_feature = pcm_feature_list[start_id: end_id]
+                    image_feature = image_feature_list[start_id:end_id]
+                    audio_feature = audio_feature_list[int(
+                        start_id / self.fps):int(end_id / self.fps)]
+                    pcm_feature = pcm_feature_list[start_id:end_id]
 
                     # image_feature = np.concatenate((image_feature, pcm_feature), axis=1)
-                    
-                    batch_out.append((image_feature, audio_feature, 0, prop_info))
+
+                    batch_out.append(
+                        (image_feature, audio_feature, 0, prop_info))
                     if len(batch_out) == self.batch_size:
                         yield batch_out
                         batch_out = []
                 except Exception as e:
                     continue
-        return reader
 
+        return reader

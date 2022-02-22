@@ -41,6 +41,7 @@ class VideoDataset(BaseDataset):
            pipeline(XXX): A sequence of data transforms.
            **kwargs: Keyword arguments for ```BaseDataset```.
     """
+
     def __init__(self, file_path, pipeline, num_retries=5, suffix='', **kwargs):
         self.num_retries = num_retries
         self.suffix = suffix

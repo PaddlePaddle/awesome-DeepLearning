@@ -23,6 +23,7 @@ logger = get_logger("paddlevideo")
 @RECOGNIZERS.register()
 class RecognizerTransformer(BaseRecognizer):
     """Transformer's recognizer model framework."""
+
     def forward_net(self, imgs):
         # imgs.shape=[N,C,T,H,W], for transformer case
         if self.backbone is not None:
@@ -92,7 +93,7 @@ class RecognizerTransformer(BaseRecognizer):
             return paddle.add_n(cls_score) / len(cls_score)
         elif avg_type == 'prob':
             return paddle.add_n(
-                [F.softmax(score, axis=-1)
-                 for score in cls_score]) / len(cls_score)
+                [F.softmax(
+                    score, axis=-1) for score in cls_score]) / len(cls_score)
         else:
             raise NotImplementedError

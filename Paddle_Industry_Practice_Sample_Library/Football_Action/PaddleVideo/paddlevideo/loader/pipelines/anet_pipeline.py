@@ -108,9 +108,8 @@ class GetVideoLabel(object):
             tmp_start = max(min(1, gt["segment"][0] / video_second), 0)
             tmp_end = max(min(1, gt["segment"][1] / video_second), 0)
             gt_bbox.append([tmp_start, tmp_end])
-            tmp_gt_iou_map = self.iou_with_anchors(match_map[:, 0],
-                                                   match_map[:, 1], tmp_start,
-                                                   tmp_end)
+            tmp_gt_iou_map = self.iou_with_anchors(
+                match_map[:, 0], match_map[:, 1], tmp_start, tmp_end)
             tmp_gt_iou_map = np.reshape(tmp_gt_iou_map,
                                         [self.dscale, self.tscale])
             gt_iou_map.append(tmp_gt_iou_map)
@@ -130,16 +129,14 @@ class GetVideoLabel(object):
         for jdx in range(len(anchor_xmin)):
             match_score_start.append(
                 np.max(
-                    self.ioa_with_anchors(anchor_xmin[jdx], anchor_xmax[jdx],
-                                          gt_start_bboxs[:, 0],
-                                          gt_start_bboxs[:, 1])))
+                    self.ioa_with_anchors(anchor_xmin[jdx], anchor_xmax[
+                        jdx], gt_start_bboxs[:, 0], gt_start_bboxs[:, 1])))
         match_score_end = []
         for jdx in range(len(anchor_xmin)):
             match_score_end.append(
                 np.max(
-                    self.ioa_with_anchors(anchor_xmin[jdx], anchor_xmax[jdx],
-                                          gt_end_bboxs[:, 0], gt_end_bboxs[:,
-                                                                           1])))
+                    self.ioa_with_anchors(anchor_xmin[jdx], anchor_xmax[
+                        jdx], gt_end_bboxs[:, 0], gt_end_bboxs[:, 1])))
 
         gt_start = np.array(match_score_start)
         gt_end = np.array(match_score_end)

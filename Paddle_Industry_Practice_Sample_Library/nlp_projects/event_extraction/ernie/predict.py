@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 import argparse
 import paddle
 from functools import partial
@@ -25,15 +24,21 @@ from data import read, load_dict, load_schema, convert_example_to_features
 from paddlenlp.data import Stack, Pad, Tuple
 from seqeval.metrics.sequence_labeling import get_entities
 
+
 def format_print(events):
     for idx, event in enumerate(events):
-        print(f"event{idx} - event_type:{event['event_type']}, trigger:{event['trigger']}")
+        print(
+            f"event{idx} - event_type:{event['event_type']}, trigger:{event['trigger']}"
+        )
         for argument in event["arguments"]:
-            print(f"role_type:{argument['role']}, argument:{argument['argument']} ")
+            print(
+                f"role_type:{argument['role']}, argument:{argument['argument']} "
+            )
         print()
 
 
-def predict(trigger_model, role_model, tokenizer, trigger_id2tag, role_id2tag, schema):
+def predict(trigger_model, role_model, tokenizer, trigger_id2tag, role_id2tag,
+            schema):
 
     trigger_model.eval()
     role_model.eval()
@@ -43,18 +48,25 @@ def predict(trigger_model, role_model, tokenizer, trigger_id2tag, role_id2tag, s
         if input_text == "quit":
             break
         splited_input_text = list(input_text.strip())
-        features = tokenizer(splited_input_text, is_split_into_words=True, max_seq_len=args.max_seq_len, return_length=True)
+        features = tokenizer(
+            splited_input_text,
+            is_split_into_words=True,
+            max_seq_len=args.max_seq_len,
+            return_length=True)
         input_ids = paddle.to_tensor(features["input_ids"]).unsqueeze(0)
-        token_type_ids = paddle.to_tensor(features["token_type_ids"]).unsqueeze(0)
+        token_type_ids = paddle.to_tensor(features[
+            "token_type_ids"]).unsqueeze(0)
         seq_len = features["seq_len"]
-        
+
         trigger_logits = trigger_model(input_ids, token_type_ids)
-        trigger_preds = paddle.argmax(trigger_logits, axis=-1).numpy()[0][1:(seq_len-1)]
+        trigger_preds = paddle.argmax(
+            trigger_logits, axis=-1).numpy()[0][1:(seq_len - 1)]
         trigger_preds = [trigger_id2tag[idx] for idx in trigger_preds]
         trigger_entities = get_entities(trigger_preds, suffix=False)
-        
+
         role_logits = role_model(input_ids, token_type_ids)
-        role_preds = paddle.argmax(role_logits, axis=-1).numpy()[0][1:(seq_len-1)]
+        role_preds = paddle.argmax(
+            role_logits, axis=-1).numpy()[0][1:(seq_len - 1)]
         role_preds = [role_id2tag[idx] for idx in role_preds]
         role_entities = get_entities(role_preds, suffix=False)
 
@@ -65,26 +77,27 @@ def predict(trigger_model, role_model, tokenizer, trigger_id2tag, role_id2tag, s
             if event_type in visited:
                 continue
             visited.add(event_type)
-            events.append({"event_type":event_type, "trigger":"".join(splited_input_text[start:end+1]), "arguments":[]})
-        
+            events.append({
+                "event_type": event_type,
+                "trigger": "".join(splited_input_text[start:end + 1]),
+                "arguments": []
+            })
+
         for event in events:
             role_list = schema[event["event_type"]]
             for role_entity in role_entities:
                 role_type, start, end = role_entity
                 if role_type not in role_list:
                     continue
-                event["arguments"].append({"role":role_type, "argument":"".join(splited_input_text[start:end+1])})
-        
-        format_print(events)    
+                event["arguments"].append({
+                    "role": role_type,
+                    "argument": "".join(splited_input_text[start:end + 1])
+                })
+
+        format_print(events)
 
 
-
-
-
-
-
-
-if __name__=="__main__":
+if __name__ == "__main__":
     # yapf: disable
     parser = argparse.ArgumentParser()
     parser.add_argument("--trigger_model_path", type=str, default=None, help="trigger model path that you saved")
@@ -93,13 +106,13 @@ if __name__=="__main__":
     parser.add_argument("--role_tag_path", type=str, default=None, help="role dict path")
     parser.add_argument("--schema_path", type=str, default=None, help="event schema path")
     parser.add_argument("--max_seq_len", type=int, default=512, help="max seq length")
-    
+
     args = parser.parse_args()
     # yapf: enbale
 
     # load schema
     schema = load_schema(args.schema_path)
-    
+
     # load dict
     model_name = "ernie-1.0"
     trigger_tag2id, trigger_id2tag = load_dict(args.trigger_tag_path)
@@ -116,4 +129,3 @@ if __name__=="__main__":
 
     # predict
     predict(trigger_model, role_model, tokenizer, trigger_id2tag, role_id2tag, schema)
-

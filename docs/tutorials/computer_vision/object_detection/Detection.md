@@ -6,7 +6,7 @@
 
 图1 图像分类和目标检测示意图
 
-* 图1(a)是图像分类任务，只需对这张图片进行类别识别。 
+* 图1(a)是图像分类任务，只需对这张图片进行类别识别。
 * 图1(b)是目标检测任务，不仅要识别出这一张图片中的类别为斑马，还要标出图中斑马的位置。
 
 ## 应用场景
@@ -112,13 +112,13 @@ Anchor-base和Anchor-free的算法也各具优势，下表为大家简单对比�
 
 ## 参考文献
 
-[1] [Rich feature hierarchies for accurate object detection and semantic segmentation](https://arxiv.org/abs/1311.2524) 
+[1] [Rich feature hierarchies for accurate object detection and semantic segmentation](https://arxiv.org/abs/1311.2524)
 
-[2] [Fast R-CNN](https://arxiv.org/abs/1504.08083) 
+[2] [Fast R-CNN](https://arxiv.org/abs/1504.08083)
 
-[3] [Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks](https://arxiv.org/abs/1506.01497) 
+[3] [Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks](https://arxiv.org/abs/1506.01497)
 
-[4] [Mask R-CNN](https://arxiv.org/abs/1703.06870) 
+[4] [Mask R-CNN](https://arxiv.org/abs/1703.06870)
 
 [5] [SSD: Single Shot MultiBox Detector](https://arxiv.org/abs/1512.02325)
 
@@ -143,4 +143,3 @@ Anchor-base和Anchor-free的算法也各具优势，下表为大家简单对比�
 [15] [Object365](http://www.objects365.org/download.html)
 
 [16] [OpenImages](http://storage.googleapis.com/openimages/web/download.html)
-

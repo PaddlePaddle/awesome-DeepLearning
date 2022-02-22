@@ -53,15 +53,16 @@ def test_model(cfg, weights, parallel=True):
     # default num worker: 0, which means no subprocess will be created
     num_workers = cfg.DATASET.get('num_workers', 0)
     num_workers = cfg.DATASET.get('test_num_workers', num_workers)
-    dataloader_setting = dict(batch_size=batch_size,
-                              num_workers=num_workers,
-                              places=places,
-                              drop_last=False,
-                              shuffle=False)
+    dataloader_setting = dict(
+        batch_size=batch_size,
+        num_workers=num_workers,
+        places=places,
+        drop_last=False,
+        shuffle=False)
 
     data_loader = build_dataloader(
-        dataset, **dataloader_setting) if cfg.model_name not in ['CFBI'
-                                                                 ] else dataset
+        dataset,
+        **dataloader_setting) if cfg.model_name not in ['CFBI'] else dataset
 
     model.eval()
 

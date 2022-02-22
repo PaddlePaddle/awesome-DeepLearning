@@ -16,13 +16,12 @@ from paddle.metric import Accuracy
 class IMDBDataset(Dataset):
     def __init__(self, is_training=True):
         self.data = self.load_imdb(is_training)
-    
+
     def __getitem__(self, idx):
         return self.data[idx]
 
     def __len__(self):
         return len(self.data)
-
 
     def load_imdb(self, is_training):
         # 将读取的数据放到列表data_set里
@@ -39,7 +38,10 @@ class IMDBDataset(Dataset):
                     if bool(path_pattern.match(tf.name)):
                         sentence = tarf.extractfile(tf).read().decode()
                         sentence_label = 0 if label == 'neg' else 1
-                        data_set.append({"sentence":sentence, "label":sentence_label}) 
+                        data_set.append({
+                            "sentence": sentence,
+                            "label": sentence_label
+                        })
                     tf = tarf.next()
 
         return data_set
@@ -75,4 +77,3 @@ def convert_example(example,
     else:
         return example['input_ids'], example['token_type_ids'], example[
             'attention_mask']
-

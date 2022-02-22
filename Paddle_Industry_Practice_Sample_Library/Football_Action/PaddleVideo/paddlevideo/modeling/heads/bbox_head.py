@@ -12,13 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import paddle 
+import paddle
 import paddle.nn as nn
 import paddle.nn.functional as F
 import numpy as np
 from .. import builder
 
 from ..registry import HEADS
+
 
 @HEADS.register()
 class BBoxHeadAVA(nn.Layer):
@@ -30,7 +31,7 @@ class BBoxHeadAVA(nn.Layer):
             temporal_pool_type='avg',
             spatial_pool_type='max',
             in_channels=2048,
-            num_classes=81,# The first class is reserved, to classify bbox as pos / neg
+            num_classes=81,  # The first class is reserved, to classify bbox as pos / neg
             dropout_ratio=0,
             dropout_before_pool=True,
             topk=(3, 5),
@@ -77,16 +78,22 @@ class BBoxHeadAVA(nn.Layer):
         if dropout_ratio > 0:
             self.dropout = nn.Dropout(dropout_ratio)
 
-        weight_attr = paddle.framework.ParamAttr(name="weight",
-                                                 initializer=paddle.nn.initializer.Normal(mean=0.0, std=0.01))
-        bias_attr = paddle.ParamAttr(name="bias",
-                                     initializer=paddle.nn.initializer.Constant(value=0.0))
+        weight_attr = paddle.framework.ParamAttr(
+            name="weight",
+            initializer=paddle.nn.initializer.Normal(
+                mean=0.0, std=0.01))
+        bias_attr = paddle.ParamAttr(
+            name="bias", initializer=paddle.nn.initializer.Constant(value=0.0))
 
-        self.fc_cls = nn.Linear(in_channels, num_classes, weight_attr=weight_attr, bias_attr=bias_attr)
+        self.fc_cls = nn.Linear(
+            in_channels,
+            num_classes,
+            weight_attr=weight_attr,
+            bias_attr=bias_attr)
 
         self.debug_imgs = None
 
-    def forward(self, x,rois, rois_num):
+    def forward(self, x, rois, rois_num):
         roi = paddle.concat(rois)
         roi_x1 = paddle.index_select(roi, index=paddle.to_tensor(0), axis=1)
         roi_x2 = paddle.index_select(roi, index=paddle.to_tensor(2), axis=1)
@@ -100,14 +107,14 @@ class BBoxHeadAVA(nn.Layer):
         A2 = paddle.where(A == 0, paddle.zeros_like(A1), A1)
         AE = paddle.expand(A2, [A.shape[0], x.shape[1]])
         rois_num = paddle.to_tensor(rois_num, dtype='int32')
-        if self.dropout_before_pool and self.dropout_ratio > 0 :
+        if self.dropout_before_pool and self.dropout_ratio > 0:
             x = self.dropout(x)
         x = self.temporal_pool(x)
         x = self.spatial_pool(x)
-        if not self.dropout_before_pool and self.dropout_ratio > 0 :
+        if not self.dropout_before_pool and self.dropout_ratio > 0:
             x = self.dropout(x)
         x = paddle.reshape(x, [x.shape[0], -1])
-        x = paddle.multiply(x, paddle.cast(AE,"float32"))
+        x = paddle.multiply(x, paddle.cast(AE, "float32"))
         cls_score = self.fc_cls(x)
         # We do not predict bbox, so return None
         return cls_score, None
@@ -117,17 +124,18 @@ class BBoxHeadAVA(nn.Layer):
         neg_proposals = [res.neg_bboxes for res in sampling_results]
         pos_gt_labels = [res.pos_gt_labels for res in sampling_results]
         cls_reg_targets = self.bbox_target(pos_proposals, neg_proposals,
-                                      pos_gt_labels, pos_weight)
+                                           pos_gt_labels, pos_weight)
         return cls_reg_targets
 
-    def bbox_target(self, pos_bboxes_list, neg_bboxes_list, gt_labels, pos_weight):
+    def bbox_target(self, pos_bboxes_list, neg_bboxes_list, gt_labels,
+                    pos_weight):
         """Generate classification targets for bboxes.  """
         labels, label_weights = [], []
         pos_weight = 1.0 if pos_weight <= 0 else pos_weight
-    
+
         assert len(pos_bboxes_list) == len(neg_bboxes_list) == len(gt_labels)
         length = len(pos_bboxes_list)
-    
+
         for i in range(length):
             pos_bboxes = pos_bboxes_list[i]
             neg_bboxes = neg_bboxes_list[i]
@@ -139,27 +147,38 @@ class BBoxHeadAVA(nn.Layer):
                 num_neg = 0
             num_samples = num_pos + num_neg
             neg_label = paddle.zeros([num_neg, gt_label.shape[1]])
-            label = paddle.concat([gt_label,neg_label])
+            label = paddle.concat([gt_label, neg_label])
             labels.append(label)
-    
+
         labels = paddle.concat(labels, 0)
         return labels
 
     def recall_prec(self, pred_vec, target_vec):
-        correct = paddle.to_tensor(np.logical_and(pred_vec.numpy(), target_vec.numpy()))
-        correct = paddle.where(correct, 
-                                    paddle.full(correct.shape,1,dtype='int32'),
-                                    paddle.full(correct.shape,0,dtype='int32'))
+        correct = paddle.to_tensor(
+            np.logical_and(pred_vec.numpy(), target_vec.numpy()))
+        correct = paddle.where(
+            correct,
+            paddle.full(
+                correct.shape, 1, dtype='int32'),
+            paddle.full(
+                correct.shape, 0, dtype='int32'))
         recall_correct = paddle.cast(paddle.sum(correct, axis=1), 'float32')
-        target_vec = paddle.where(target_vec, 
-                                    paddle.full(target_vec.shape,1,dtype='int32'),
-                                    paddle.full(target_vec.shape,0,dtype='int32'))
-        recall_target = paddle.cast(paddle.sum(target_vec, axis=1),'float32')
+        target_vec = paddle.where(
+            target_vec,
+            paddle.full(
+                target_vec.shape, 1, dtype='int32'),
+            paddle.full(
+                target_vec.shape, 0, dtype='int32'))
+        recall_target = paddle.cast(paddle.sum(target_vec, axis=1), 'float32')
         recall = recall_correct / recall_target
-        pred_vec = paddle.where(pred_vec, 
-                                    paddle.full(pred_vec.shape,1,dtype='int32'),
-                                    paddle.full(pred_vec.shape,0,dtype='int32'))
-        prec_target = paddle.cast(paddle.sum(pred_vec, axis=1) + 1e-6, 'float32')
+        pred_vec = paddle.where(
+            pred_vec,
+            paddle.full(
+                pred_vec.shape, 1, dtype='int32'),
+            paddle.full(
+                pred_vec.shape, 0, dtype='int32'))
+        prec_target = paddle.cast(
+            paddle.sum(pred_vec, axis=1) + 1e-6, 'float32')
         prec = recall_correct / prec_target
         recall_mean = paddle.mean(recall)
         prec_mean = paddle.mean(prec)
@@ -173,29 +192,30 @@ class BBoxHeadAVA(nn.Layer):
         recalls, precs = [], []
         for k in self.topk:
             _, pred_label = paddle.topk(pred, k, 1, True, True)
-            pred_vec = paddle.full(pred.shape,0,dtype='bool')
+            pred_vec = paddle.full(pred.shape, 0, dtype='bool')
             num_sample = pred.shape[0]
             for i in range(num_sample):
-                pred_vec[i, pred_label[i].numpy()] = 1  
+                pred_vec[i, pred_label[i].numpy()] = 1
             recall_k, prec_k = self.recall_prec(pred_vec, target_vec)
             recalls.append(recall_k)
             precs.append(prec_k)
         return recall_thr, prec_thr, recalls, precs
 
-    def loss(self,
-             cls_score,
-             labels):
+    def loss(self, cls_score, labels):
         losses = dict()
         if cls_score is not None:
             # Only use the cls_score
             labels = labels[:, 1:]
             pos_inds_bool = paddle.sum(labels, axis=-1) > 0
-            pos_inds = paddle.where(paddle.sum(labels, axis=-1) > 0,
-                                    paddle.full([labels.shape[0]],1,dtype='int32'),
-                                    paddle.full([labels.shape[0]],0,dtype='int32'))
+            pos_inds = paddle.where(
+                paddle.sum(labels, axis=-1) > 0,
+                paddle.full(
+                    [labels.shape[0]], 1, dtype='int32'),
+                paddle.full(
+                    [labels.shape[0]], 0, dtype='int32'))
             pos_inds = paddle.nonzero(pos_inds, as_tuple=False)
             cls_score = paddle.index_select(cls_score, pos_inds, axis=0)
-            cls_score = cls_score[:, 1:] 
+            cls_score = cls_score[:, 1:]
             labels = paddle.index_select(labels, pos_inds, axis=0)
             bce_loss = F.binary_cross_entropy_with_logits
             loss = bce_loss(cls_score, labels, reduction='none')

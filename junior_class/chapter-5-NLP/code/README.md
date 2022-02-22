@@ -9,7 +9,7 @@
 
 其中paddle请安装2.0版本，具体安装方式请参考
   [飞桨官网->快速安装](https://www.paddlepaddle.org.cn/install/quick?docurl=/documentation/docs/zh/2.0/install/pip/windows-pip.html) 。
-    
+
 ## 项目介绍
 ```buildoutcfg
 |-data: 存放下载后的数据

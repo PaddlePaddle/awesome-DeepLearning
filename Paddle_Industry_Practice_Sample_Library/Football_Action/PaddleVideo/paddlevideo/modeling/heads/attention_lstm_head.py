@@ -28,6 +28,7 @@ class AttentionLstmHead(BaseHead):
     """AttentionLstmHead.
     Args: TODO
     """
+
     def __init__(self,
                  num_classes=3862,
                  feature_num=2,
@@ -44,39 +45,41 @@ class AttentionLstmHead(BaseHead):
         self.lstm_size = lstm_size
         self.feature_num = len(self.feature_dims)
         for i in range(self.feature_num):  # 0:rgb, 1:audio
-            fc_feature = paddle.nn.Linear(in_features=self.feature_dims[i],
-                                          out_features=self.embedding_size)
+            fc_feature = paddle.nn.Linear(
+                in_features=self.feature_dims[i],
+                out_features=self.embedding_size)
             self.add_sublayer("fc_feature{}".format(i), fc_feature)
 
-            bi_lstm = paddle.nn.LSTM(input_size=self.embedding_size,
-                                     hidden_size=self.lstm_size,
-                                     direction="bidirectional")
+            bi_lstm = paddle.nn.LSTM(
+                input_size=self.embedding_size,
+                hidden_size=self.lstm_size,
+                direction="bidirectional")
             self.add_sublayer("bi_lstm{}".format(i), bi_lstm)
 
             drop_rate = 0.5
             self.dropout = paddle.nn.Dropout(drop_rate)
 
-            att_fc = paddle.nn.Linear(in_features=self.lstm_size * 2,
-                                      out_features=1)
+            att_fc = paddle.nn.Linear(
+                in_features=self.lstm_size * 2, out_features=1)
             self.add_sublayer("att_fc{}".format(i), att_fc)
             self.softmax = paddle.nn.Softmax()
 
-        self.fc_out1 = paddle.nn.Linear(in_features=self.lstm_size * 4,
-                                        out_features=8192,
-                                        bias_attr=ParamAttr(
-                                            regularizer=L2Decay(0.0),
-                                            initializer=Normal()))
+        self.fc_out1 = paddle.nn.Linear(
+            in_features=self.lstm_size * 4,
+            out_features=8192,
+            bias_attr=ParamAttr(
+                regularizer=L2Decay(0.0), initializer=Normal()))
         self.relu = paddle.nn.ReLU()
-        self.fc_out2 = paddle.nn.Linear(in_features=8192,
-                                        out_features=4096,
-                                        bias_attr=ParamAttr(
-                                            regularizer=L2Decay(0.0),
-                                            initializer=Normal()))
-        self.fc_logit = paddle.nn.Linear(in_features=4096,
-                                         out_features=self.num_classes,
-                                         bias_attr=ParamAttr(
-                                             regularizer=L2Decay(0.0),
-                                             initializer=Normal()))
+        self.fc_out2 = paddle.nn.Linear(
+            in_features=8192,
+            out_features=4096,
+            bias_attr=ParamAttr(
+                regularizer=L2Decay(0.0), initializer=Normal()))
+        self.fc_logit = paddle.nn.Linear(
+            in_features=4096,
+            out_features=self.num_classes,
+            bias_attr=ParamAttr(
+                regularizer=L2Decay(0.0), initializer=Normal()))
         self.sigmoid = paddle.nn.Sigmoid()
 
     def init_weights(self):
@@ -88,9 +91,9 @@ class AttentionLstmHead(BaseHead):
         # 1. padding to same lenght, make a tensor
         # 2. make a mask tensor with the same shpae with 1
         # 3. compute output using mask tensor, s.t. output is nothing todo with padding
-        assert (len(inputs) == self.feature_num
-                ), "Input tensor does not contain {} features".format(
-                    self.feature_num)
+        assert (
+            len(inputs) == self.feature_num
+        ), "Input tensor does not contain {} features".format(self.feature_num)
         att_outs = []
         for i in range(len(inputs)):
             # 1. fc

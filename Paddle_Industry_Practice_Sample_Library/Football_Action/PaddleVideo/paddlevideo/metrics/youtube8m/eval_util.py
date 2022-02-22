@@ -92,8 +92,9 @@ def calculate_gap(predictions, actuals, top_k=20):
     gap_calculator = ap_calculator.AveragePrecisionCalculator()
     sparse_predictions, sparse_labels, num_positives = top_k_by_class(
         predictions, actuals, top_k)
-    gap_calculator.accumulate(flatten(sparse_predictions),
-                              flatten(sparse_labels), sum(num_positives))
+    gap_calculator.accumulate(
+        flatten(sparse_predictions),
+        flatten(sparse_labels), sum(num_positives))
     return gap_calculator.peek_ap_at_n()
 
 
@@ -147,6 +148,7 @@ def top_k_triplets(predictions, labels, k=20):
 @METRIC.register
 class HitOneMetric(BaseMetric):
     """A class to store the evaluation metrics."""
+
     def __init__(self,
                  num_class,
                  top_k,
@@ -162,8 +164,9 @@ class HitOneMetric(BaseMetric):
     def accumulate(self):
         logger.info(
             '[TEST] finished, hit_at_one = {:.5f}, perr = {:.5f}, gap = {:.5f}'.
-            format(np.mean(np.array(self.hit_at_one)),
-                   np.mean(np.array(self.perr)), np.mean(np.array(self.gap))))
+            format(
+                np.mean(np.array(self.hit_at_one)),
+                np.mean(np.array(self.perr)), np.mean(np.array(self.gap))))
 
     def clear(self):
         """Clear the evaluation metrics and reset the HitOneMetric object."""
@@ -194,5 +197,4 @@ class HitOneMetric(BaseMetric):
         if batch_id % self.log_interval == 0:
             logger.info("[TEST] Processing batch {}/{}...".format(
                 batch_id,
-                self.data_size // (self.batch_size * self.world_size),
-            ))
+                self.data_size // (self.batch_size * self.world_size), ))

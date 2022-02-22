@@ -31,22 +31,22 @@ logger = get_logger("paddlevideo")
 class MSRVTTDataset(BaseDataset):
     """MSR-VTT dataset for text-video clip retrieval.
     """
+
     def __init__(
-        self,
-        file_path,
-        pipeline,
-        features_path,
-        bert_model="bert-base-uncased",
-        padding_index=0,
-        max_seq_length=36,
-        max_region_num=36,
-        max_action_num=5,
-        vision_feature_dim=2048,
-        action_feature_dim=2048,
-        spatials_dim=5,
-        data_prefix=None,
-        test_mode=False,
-    ):
+            self,
+            file_path,
+            pipeline,
+            features_path,
+            bert_model="bert-base-uncased",
+            padding_index=0,
+            max_seq_length=36,
+            max_region_num=36,
+            max_action_num=5,
+            vision_feature_dim=2048,
+            action_feature_dim=2048,
+            spatials_dim=5,
+            data_prefix=None,
+            test_mode=False, ):
         self.features_path = features_path
         self.bert_model = bert_model
         self.padding_index = padding_index
@@ -56,8 +56,8 @@ class MSRVTTDataset(BaseDataset):
         self.vision_feature_dim = vision_feature_dim
         self.action_feature_dim = action_feature_dim
         self.spatials_dim = spatials_dim
-        self._tokenizer = BertTokenizer.from_pretrained(bert_model,
-                                                        do_lower_case=True)
+        self._tokenizer = BertTokenizer.from_pretrained(
+            bert_model, do_lower_case=True)
         super().__init__(file_path, pipeline, data_prefix, test_mode)
         self.tokenize()
         self.gen_feature()
@@ -115,18 +115,19 @@ class MSRVTTDataset(BaseDataset):
             g_feat = np.sum(features, axis=0) / num_boxes
             num_boxes = num_boxes + 1
             features = np.concatenate(
-                [np.expand_dims(g_feat, axis=0), features], axis=0)
+                [np.expand_dims(
+                    g_feat, axis=0), features], axis=0)
 
             action_features = item["action_features"].reshape(
                 -1, self.action_feature_dim)
 
-            image_location = np.zeros((boxes.shape[0], self.spatials_dim),
-                                      dtype=np.float32)
+            image_location = np.zeros(
+                (boxes.shape[0], self.spatials_dim), dtype=np.float32)
             image_location[:, :4] = boxes
-            image_location[:,
-                           4] = ((image_location[:, 3] - image_location[:, 1]) *
-                                 (image_location[:, 2] - image_location[:, 0]) /
-                                 (float(image_w) * float(image_h)))
+            image_location[:, 4] = (
+                (image_location[:, 3] - image_location[:, 1]) *
+                (image_location[:, 2] - image_location[:, 0]) /
+                (float(image_w) * float(image_h)))
 
             image_location[:, 0] = image_location[:, 0] / float(image_w)
             image_location[:, 1] = image_location[:, 1] / float(image_h)
@@ -135,7 +136,8 @@ class MSRVTTDataset(BaseDataset):
 
             g_location = np.array([0, 0, 1, 1, 1])
             image_location = np.concatenate(
-                [np.expand_dims(g_location, axis=0), image_location], axis=0)
+                [np.expand_dims(
+                    g_location, axis=0), image_location], axis=0)
         return features, num_boxes, image_location, action_features
 
     def gen_feature(self):
@@ -204,8 +206,7 @@ class MSRVTTDataset(BaseDataset):
             input_mask,
             self.image_mask_all,
             self.action_mask_all,
-            target_all,
-        )
+            target_all, )
 
     def __len__(self):
         return len(self.caption_entries)

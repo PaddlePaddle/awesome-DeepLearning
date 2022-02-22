@@ -31,6 +31,7 @@ class SkeletonMetric(BaseMetric):
     Args:
         out_file: str, file to save test results.
     """
+
     def __init__(self,
                  data_size,
                  batch_size,
@@ -66,8 +67,8 @@ class SkeletonMetric(BaseMetric):
         # preds ensemble
         if batch_id % self.log_interval == 0:
             logger.info("[TEST] Processing batch {}/{} ...".format(
-                batch_id,
-                self.data_size // (self.batch_size * self.world_size)))
+                batch_id, self.data_size // (self.batch_size * self.world_size
+                                             )))
 
     def accumulate(self):
         """accumulate metrics when finished all iters.
@@ -79,8 +80,7 @@ class SkeletonMetric(BaseMetric):
             headers = ['sample_index', 'predict_category']
             with open(
                     self.out_file,
-                    'w',
-            ) as fp:
+                    'w', ) as fp:
                 writer = csv.writer(fp)
                 writer.writerow(headers)
                 writer.writerows(self.values)

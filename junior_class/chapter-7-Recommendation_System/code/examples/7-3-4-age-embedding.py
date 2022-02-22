@@ -1,4 +1,3 @@
-
 # copyright (c) 2021 PaddlePaddle Authors. All Rights Reserve.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,7 +17,6 @@ from paddle.nn import Linear, Embedding, Conv2D
 import numpy as np
 import paddle.nn.functional as F
 
-
 # 自定义一个用户年龄数据
 usr_age_data = np.array((1, 18)).reshape(-1).astype('int64')
 print("输入的用户年龄是:", usr_age_data)
@@ -27,8 +25,7 @@ print("输入的用户年龄是:", usr_age_data)
 # 年龄的最大ID是56，所以Embedding层size的第一个参数设置为56 + 1 = 57
 USR_AGE_DICT_SIZE = 56 + 1
 
-usr_age_emb = Embedding(num_embeddings=USR_AGE_DICT_SIZE,
-                            embedding_dim=16)
+usr_age_emb = Embedding(num_embeddings=USR_AGE_DICT_SIZE, embedding_dim=16)
 usr_age_fc = Linear(in_features=16, out_features=16)
 
 usr_age = paddle.to_tensor(usr_age_data)

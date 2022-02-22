@@ -166,12 +166,11 @@ class ANETproposal(object):
             print('[RESULTS] Performance on ActivityNet proposal task.')
             with open("data/bmn/BMN_Test_results/auc_result.txt",
                       "a") as text_file:
-                text_file.write(
-                    '\tArea Under the AR vs AN curve: {}% \n'.format(
-                        100. * float(area_under_curve) /
-                        proposals_per_video[-1]))
-            print('\tArea Under the AR vs AN curve: {}%'.format(
-                100. * float(area_under_curve) / proposals_per_video[-1]))
+                text_file.write('\tArea Under the AR vs AN curve: {}% \n'.
+                                format(100. * float(area_under_curve) /
+                                       proposals_per_video[-1]))
+            print('\tArea Under the AR vs AN curve: {}%'.format(100. * float(
+                area_under_curve) / proposals_per_video[-1]))
 
         self.recall = recall
         self.avg_recall = avg_recall
@@ -206,11 +205,11 @@ class ANETproposal(object):
         video_lst = ground_truth['video-id'].unique()
 
         if not max_avg_nr_proposals:
-            max_avg_nr_proposals = float(
-                proposals.shape[0]) / video_lst.shape[0]
+            max_avg_nr_proposals = float(proposals.shape[0]) / video_lst.shape[
+                0]
 
-        ratio = max_avg_nr_proposals * float(
-            video_lst.shape[0]) / proposals.shape[0]
+        ratio = max_avg_nr_proposals * float(video_lst.shape[
+            0]) / proposals.shape[0]
 
         # Adaptation to query faster
         ground_truth_gbvn = ground_truth.groupby('video-id')
@@ -234,9 +233,9 @@ class ANETproposal(object):
                 score_lst.append(np.zeros((n, 1)))
                 continue
 
-            this_video_proposals = proposals_videoid.loc[:,
-                                                         ['t-start', 't-end'
-                                                          ]].values
+            this_video_proposals = proposals_videoid.loc[:, [
+                't-start', 't-end'
+            ]].values
 
             if this_video_proposals.shape[0] == 0:
                 n = this_video_ground_truth.shape[0]
@@ -248,8 +247,8 @@ class ANETproposal(object):
             this_video_proposals = this_video_proposals[sort_idx, :]
 
             if this_video_proposals.ndim != 2:
-                this_video_proposals = np.expand_dims(this_video_proposals,
-                                                      axis=0)
+                this_video_proposals = np.expand_dims(
+                    this_video_proposals, axis=0)
             if this_video_ground_truth.ndim != 2:
                 this_video_ground_truth = np.expand_dims(
                     this_video_ground_truth, axis=0)
@@ -271,8 +270,9 @@ class ANETproposal(object):
         # retrieved per video.
 
         # Computes average recall.
-        pcn_lst = np.arange(1, 101) / 100.0 * (max_avg_nr_proposals * float(
-            video_lst.shape[0]) / total_nr_proposals)
+        pcn_lst = np.arange(1, 101) / 100.0 * (max_avg_nr_proposals *
+                                               float(video_lst.shape[0]) /
+                                               total_nr_proposals)
         matches = np.empty((video_lst.shape[0], pcn_lst.shape[0]))
         positives = np.empty(video_lst.shape[0])
         recall = np.empty((tiou_thresholds.shape[0], pcn_lst.shape[0]))
@@ -292,8 +292,8 @@ class ANETproposal(object):
 
                 for j, nr_proposals in enumerate(pcn_proposals):
                     # Compute the number of matches for each percentage of the proposals
-                    matches[i, j] = np.count_nonzero(
-                        (true_positives_tiou[:, :nr_proposals]).sum(axis=1))
+                    matches[i, j] = np.count_nonzero((
+                        true_positives_tiou[:, :nr_proposals]).sum(axis=1))
 
             # Computes recall given the set of matches per video.
             recall[ridx, :] = matches.sum(axis=0) / positives.sum()

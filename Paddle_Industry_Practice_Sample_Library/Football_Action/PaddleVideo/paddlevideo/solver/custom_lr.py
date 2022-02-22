@@ -36,6 +36,7 @@ class CustomWarmupCosineDecay(LRScheduler):
     Returns:
         ``CosineAnnealingDecay`` instance to schedule learning rate.
     """
+
     def __init__(self,
                  warmup_start_lr,
                  warmup_epochs,
@@ -50,8 +51,8 @@ class CustomWarmupCosineDecay(LRScheduler):
         self.max_epoch = max_epoch
         self.num_iters = num_iters
         #call step() in base class, last_lr/last_epoch/base_lr will be update
-        super(CustomWarmupCosineDecay, self).__init__(last_epoch=last_epoch,
-                                                      verbose=verbose)
+        super(CustomWarmupCosineDecay, self).__init__(
+            last_epoch=last_epoch, verbose=verbose)
 
     def step(self, epoch=None):
         """
@@ -76,8 +77,8 @@ class CustomWarmupCosineDecay(LRScheduler):
                 self.last_epoch, self.__class__.__name__, self.last_lr))
 
     def _lr_func_cosine(self, cur_epoch, cosine_base_lr, max_epoch):
-        return cosine_base_lr * (math.cos(math.pi * cur_epoch / max_epoch) +
-                                 1.0) * 0.5
+        return cosine_base_lr * (
+            math.cos(math.pi * cur_epoch / max_epoch) + 1.0) * 0.5
 
     def get_lr(self):
         """Define lr policy"""
@@ -109,6 +110,7 @@ class CustomWarmupPiecewiseDecay(LRScheduler):
     Returns:
         ``CustomWarmupPiecewiseDecay`` instance to schedule learning rate.
     """
+
     def __init__(self,
                  warmup_start_lr,
                  warmup_epochs,
@@ -177,15 +179,13 @@ class CustomWarmupPiecewiseDecay(LRScheduler):
             self.lrs,
             self.step_base_lr,
             self.steps,
-            self.max_epoch,
-        )
+            self.max_epoch, )
         lr_end = self._lr_func_steps_with_relative_lrs(
             self.warmup_epochs,
             self.lrs,
             self.step_base_lr,
             self.steps,
-            self.max_epoch,
-        )
+            self.max_epoch, )
 
         # Perform warm up.
         if self.last_epoch < self.warmup_epochs:
@@ -251,8 +251,8 @@ class CustomWarmupCosineStepDecay(LRScheduler):
     def step(self, epoch=None):
         self.regular_lr = self.get_regular_lr()
         self.last_lr = self.get_lr()
-        self.cnt_epoch = (self.cnt_iters +
-                          1) // self.num_iters  # update step with iters
+        self.cnt_epoch = (
+            self.cnt_iters + 1) // self.num_iters  # update step with iters
         self.cnt_iters += 1
 
         if self.verbose:

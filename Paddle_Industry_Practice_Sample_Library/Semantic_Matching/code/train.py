@@ -6,7 +6,6 @@ import paddle
 import paddle.nn.functional as F
 import paddle.nn as nn
 
-
 from paddlenlp.datasets import load_dataset
 import paddlenlp
 from paddlenlp.data import Stack, Pad, Tuple
@@ -15,7 +14,9 @@ from functools import partial
 
 train_ds, dev_ds = load_dataset("lcqmc", splits=["train", "dev"])
 
-tokenizer = paddlenlp.transformers.ErnieGramTokenizer.from_pretrained('ernie-gram-zh')
+tokenizer = paddlenlp.transformers.ErnieGramTokenizer.from_pretrained(
+    'ernie-gram-zh')
+
 
 def convert_example(example, tokenizer, max_seq_length=512, is_test=False):
 
@@ -35,12 +36,8 @@ def convert_example(example, tokenizer, max_seq_length=512, is_test=False):
         return input_ids, token_type_ids
 
 
-
 # 训练集和验证集的样本转换函数
-trans_func = partial(
-    convert_example,
-    tokenizer=tokenizer,
-    max_seq_length=512)
+trans_func = partial(convert_example, tokenizer=tokenizer, max_seq_length=512)
 
 batchify_fn = lambda samples, fn=Tuple(
     Pad(axis=0, pad_val=tokenizer.pad_token_id),  # input_ids
@@ -48,30 +45,30 @@ batchify_fn = lambda samples, fn=Tuple(
     Stack(dtype="int64")  # label
 ): [data for data in fn(samples)]
 
-
-
 # 定义分布式 Sampler: 自动对训练数据进行切分，支持多卡并行训练
-batch_sampler = paddle.io.DistributedBatchSampler(train_ds, batch_size=32, shuffle=True)
+batch_sampler = paddle.io.DistributedBatchSampler(
+    train_ds, batch_size=32, shuffle=True)
 
 # 基于 train_ds 定义 train_data_loader
 # 因为我们使用了分布式的 DistributedBatchSampler, train_data_loader 会自动对训练数据进行切分
 train_data_loader = paddle.io.DataLoader(
-        dataset=train_ds.map(trans_func),
-        batch_sampler=batch_sampler,
-        collate_fn=batchify_fn,
-        return_list=True)
+    dataset=train_ds.map(trans_func),
+    batch_sampler=batch_sampler,
+    collate_fn=batchify_fn,
+    return_list=True)
 
 # 针对验证集数据加载，我们使用单卡进行评估，所以采用 paddle.io.BatchSampler 即可
 # 定义 dev_data_loader
 batch_sampler = paddle.io.BatchSampler(dev_ds, batch_size=32, shuffle=False)
 dev_data_loader = paddle.io.DataLoader(
-        dataset=dev_ds.map(trans_func),
-        batch_sampler=batch_sampler,
-        collate_fn=batchify_fn,
-        return_list=True)
+    dataset=dev_ds.map(trans_func),
+    batch_sampler=batch_sampler,
+    collate_fn=batchify_fn,
+    return_list=True)
+
 
 class PointwiseMatching(nn.Layer):
-   
+
     # 此处的 pretained_model 在本例中会被 ERNIE-Gram 预训练模型初始化
     def __init__(self, pretrained_model, dropout=None):
         super().__init__()
@@ -101,13 +98,14 @@ class PointwiseMatching(nn.Layer):
 
         return probs
 
+
 # 我们基于 ERNIE-Gram 模型结构搭建 Point-wise 语义匹配网络
 # 所以此处先定义 ERNIE-Gram 的 pretrained_model
-pretrained_model = paddlenlp.transformers.ErnieGramModel.from_pretrained('ernie-gram-zh')
+pretrained_model = paddlenlp.transformers.ErnieGramModel.from_pretrained(
+    'ernie-gram-zh')
 #pretrained_model = paddlenlp.transformers.ErnieModel.from_pretrained('ernie-1.0')
 # 定义 Point-wise 语义匹配网络
 model = PointwiseMatching(pretrained_model)
-
 
 epochs = 1
 num_training_steps = len(train_data_loader) * epochs
@@ -154,8 +152,9 @@ def evaluate(model, criterion, metric, data_loader, phase="dev"):
     model.train()
     metric.reset()
 
+
 # 接下来，开始正式训练模型，训练时间较长，可注释掉这部分
-def do_train(model,train_data_loader,dev_data_loader):
+def do_train(model, train_data_loader, dev_data_loader):
     global_step = 0
     tic_train = time.time()
 
@@ -170,13 +169,13 @@ def do_train(model,train_data_loader,dev_data_loader):
             acc = metric.accumulate()
 
             global_step += 1
-            
+
             # 每间隔 10 step 输出训练指标
             if global_step % 10 == 0:
                 print(
                     "global step %d, epoch: %d, batch: %d, loss: %.5f, accu: %.5f, speed: %.2f step/s"
                     % (global_step, epoch, step, loss, acc,
-                        10 / (time.time() - tic_train)))
+                       10 / (time.time() - tic_train)))
                 tic_train = time.time()
             loss.backward()
             optimizer.step()
@@ -186,7 +185,7 @@ def do_train(model,train_data_loader,dev_data_loader):
             # 每间隔 100 step 在验证集和测试集上进行评估
             if global_step % 100 == 0:
                 evaluate(model, criterion, metric, dev_data_loader, "dev")
-                
+
     # 训练结束后，存储模型参数
     save_dir = os.path.join("checkpoint", "model_%d" % global_step)
     os.makedirs(save_dir)
@@ -195,5 +194,5 @@ def do_train(model,train_data_loader,dev_data_loader):
     paddle.save(model.state_dict(), save_param_path)
     tokenizer.save_pretrained(save_dir)
 
-do_train(model,train_data_loader,dev_data_loader)
 
+do_train(model, train_data_loader, dev_data_loader)

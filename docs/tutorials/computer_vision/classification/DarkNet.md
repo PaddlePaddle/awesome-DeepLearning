@@ -49,9 +49,9 @@ class ConvBNLayer(nn.Layer):
                  stride,
                  padding,
                  name=None):
-      	# 初始化函数
+          # 初始化函数
         super(ConvBNLayer, self).__init__()
-				# 创建卷积层
+                # 创建卷积层
         self._conv = Conv2D(
             in_channels=input_channels,
             out_channels=output_channels,
@@ -60,7 +60,7 @@ class ConvBNLayer(nn.Layer):
             padding=padding,
             weight_attr=ParamAttr(name=name + ".conv.weights"),
             bias_attr=False)
-				# 创建批归一化层
+                # 创建批归一化层
         bn_name = name + ".bn"
         self._bn = BatchNorm(
             num_channels=output_channels,
@@ -71,7 +71,7 @@ class ConvBNLayer(nn.Layer):
             moving_variance_name=bn_name + ".var")
 
     def forward(self, inputs):
-      	# 前向计算
+          # 前向计算
         x = self._conv(inputs)
         x = self._bn(x)
         return x
@@ -79,16 +79,16 @@ class ConvBNLayer(nn.Layer):
 # 定义残差块
 class BasicBlock(nn.Layer):
     def __init__(self, input_channels, output_channels, name=None):
-      	# 初始化函数
+          # 初始化函数
         super(BasicBlock, self).__init__()
-				# 定义两个卷积层
+                # 定义两个卷积层
         self._conv1 = ConvBNLayer(
             input_channels, output_channels, 1, 1, 0, name=name + ".0")
         self._conv2 = ConvBNLayer(
             output_channels, output_channels * 2, 3, 1, 1, name=name + ".1")
 
     def forward(self, inputs):
-      	# 前向计算
+          # 前向计算
         x = self._conv1(inputs)
         x = self._conv2(x)
         # 将第二个卷积层的输出和最初的输入值相加
@@ -97,16 +97,16 @@ class BasicBlock(nn.Layer):
 
 class DarkNet53(nn.Layer):
     def __init__(self, class_dim=1000):
-      	# 初始化函数
+          # 初始化函数
         super(DarkNet, self).__init__()
-				# DarkNet 每组残差块的个数，来自DarkNet的网络结构图
+                # DarkNet 每组残差块的个数，来自DarkNet的网络结构图
         self.stages = [1, 2, 8, 8, 4]
         # 第一层卷积
         self._conv1 = ConvBNLayer(3, 32, 3, 1, 1, name="yolo_input")
         # 下采样，使用stride=2的卷积来实现
         self._conv2 = ConvBNLayer(
             32, 64, 3, 2, 1, name="yolo_input.downsample")
-				# 添加各个层级的实现
+                # 添加各个层级的实现
         self._basic_block_01 = BasicBlock(64, 32, name="stage.0.0")
         # 下采样，使用stride=2的卷积来实现
         self._downsample_0 = ConvBNLayer(
@@ -146,7 +146,7 @@ class DarkNet53(nn.Layer):
         self._basic_block_42 = BasicBlock(1024, 512, name="stage.4.1")
         self._basic_block_43 = BasicBlock(1024, 512, name="stage.4.2")
         self._basic_block_44 = BasicBlock(1024, 512, name="stage.4.3")
-				# 自适应平均池化
+                # 自适应平均池化
         self._pool = AdaptiveAvgPool2D(1)
 
         stdv = 1.0 / math.sqrt(1024.0)
@@ -219,4 +219,3 @@ class DarkNet53(nn.Layer):
 [1] [YOLO9000: Better, Faster, Stronger](https://arxiv.org/abs/1612.08242)
 
 [2] [YOLOv3: An Incremental Improvement](https://pjreddie.com/media/files/papers/YOLOv3.pdf)
-

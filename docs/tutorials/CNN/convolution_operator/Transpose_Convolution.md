@@ -52,7 +52,7 @@ input=\left[\begin{array}{ccc}
 x_1 & x_2 & x_3 & x_4 \\
 x_6 & x_7 & x_8 & x_9 \\
 x_{10} & x_{11} & x_{12} & x_{13} \\
-x_{14} & x_{15} & x_{16} & x_{17} 
+x_{14} & x_{15} & x_{16} & x_{17}
 \end{array}\right]
 $$
 一个尺寸为$3\times{3}$ 的标准卷积核 $kernel$:
@@ -84,7 +84,7 @@ X=\left[\begin{array}{ccc}
 x_1 \\ x_2 \\ x_3 \\ x_4 \\
 x_6 \\ x_7 \\ x_8 \\ x_9 \\
 x_{10} \\ x_{11} \\ x_{12} \\ x_{13} \\
-x_{14} \\ x_{15} \\ x_{16} \\ x_{17} 
+x_{14} \\ x_{15} \\ x_{16} \\ x_{17}
 \end{array}\right]
 $$
 
@@ -254,4 +254,3 @@ $$
 [3] [U-Net: Convolutional Networks for Biomedical Image Segmentation](https://arxiv.org/pdf/1505.04597.pdf)
 
 [4] [Visualizing and Understanding Convolutional Networks](https://arxiv.org/pdf/1311.2901v2.pdf)
-

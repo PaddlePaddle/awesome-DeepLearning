@@ -28,6 +28,7 @@ class BaseSegment(nn.Layer):
         head (dict): Head to process feature.
         loss(dict): Loss function.
     """
+
     def __init__(self, backbone=None, head=None, loss=None):
         super().__init__()
         if backbone is not None:

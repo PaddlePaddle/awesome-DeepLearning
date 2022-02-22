@@ -44,10 +44,11 @@ class MonoDataset(BaseDataset):
                 folder = osp.dirname(filename)
                 frame_index = line.strip().split('/')[1]
                 info.append(
-                    dict(data_path=self.data_prefix,
-                         filename=filename,
-                         folder=folder,
-                         frame_index=int(frame_index)))
+                    dict(
+                        data_path=self.data_prefix,
+                        filename=filename,
+                        folder=folder,
+                        frame_index=int(frame_index)))
         return info
 
     def prepare_train(self, idx):

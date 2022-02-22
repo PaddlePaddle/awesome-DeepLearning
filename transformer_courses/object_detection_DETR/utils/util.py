@@ -1,14 +1,17 @@
 import paddle
 import paddle.nn.functional as F
 
+
 def bbox_cxcywh_to_xyxy(x):
     x_c, y_c, w, h = x.unbind(-1)
     b = [(x_c - 0.5 * w), (y_c - 0.5 * h), (x_c + 0.5 * w), (y_c + 0.5 * h)]
     return paddle.stack(b, axis=-1)
 
+
 def sigmoid_focal_loss(logit, label, normalizer=1.0, alpha=0.25, gamma=2.0):
     prob = F.sigmoid(logit)
-    ce_loss = F.binary_cross_entropy_with_logits(logit, label, reduction="none")
+    ce_loss = F.binary_cross_entropy_with_logits(
+        logit, label, reduction="none")
     p_t = prob * label + (1 - prob) * (1 - label)
     loss = ce_loss * ((1 - p_t)**gamma)
 
@@ -22,6 +25,7 @@ def sigmoid_focal_loss(logit, label, normalizer=1.0, alpha=0.25, gamma=2.0):
 def inverse_sigmoid(x, eps=1e-6):
     x = x.clip(min=0., max=1.)
     return paddle.log(x / (1 - x + eps) + eps)
+
 
 class GIoULoss(object):
     """

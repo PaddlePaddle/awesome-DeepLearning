@@ -22,6 +22,7 @@ logger = get_logger("paddlevideo")
 class Recognizer3DMRI(BaseRecognizer):
     """3D Recognizer model framework.
     """
+
     def forward_net(self, imgs):
         """Define how the model is going to run, from input to output.
         """
@@ -56,10 +57,8 @@ class Recognizer3DMRI(BaseRecognizer):
         # call forward
         cls_score = self.forward_net(imgs)
         cls_score = paddle.nn.functional.sigmoid(cls_score)
-        loss_metrics = self.head.loss(cls_score,
-                                      labels,
-                                      valid_mode=True,
-                                      if_top5=False)
+        loss_metrics = self.head.loss(
+            cls_score, labels, valid_mode=True, if_top5=False)
         return loss_metrics
 
     def test_step(self, data_batch):

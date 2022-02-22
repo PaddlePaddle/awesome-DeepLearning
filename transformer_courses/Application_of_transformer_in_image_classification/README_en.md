@@ -37,7 +37,7 @@ DeiT(Data-efficient Image Transformers) series models were proposed by Facebook 
   tar -xvf ILSVRC2012_val.tar
   cd ../
   ```
-  
+
 - Please organize data dir as below
 
   ```
@@ -62,7 +62,7 @@ DeiT(Data-efficient Image Transformers) series models were proposed by Facebook 
 The model evaluation process can be started as follows
 
 ```bash
-python3 eval.py 
+python3 eval.py
     --model ViT  \
     --data data/ILSVRC2012_val
 ```
@@ -71,4 +71,3 @@ Among them:
 
 + `model`: Model name, The default value is `ViT`, which can be changed to `DeiT`;
 + `data`: The directory to save the ImageNet verification set, the default value is `data/ILSVRC2012_val`.
-

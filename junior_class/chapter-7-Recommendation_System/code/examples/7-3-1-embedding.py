@@ -12,8 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-
 import paddle
 from paddle.nn import Linear, Embedding, Conv2D
 import numpy as np
@@ -22,9 +20,7 @@ import paddle.nn.functional as F
 # 声明用户的最大ID，在此基础上加1（算上数字0）
 USR_ID_NUM = 6040 + 1
 # 声明Embedding 层，将ID映射为32长度的向量
-usr_emb = Embedding(num_embeddings=USR_ID_NUM,
-                    embedding_dim=32,
-                    sparse=False)
+usr_emb = Embedding(num_embeddings=USR_ID_NUM, embedding_dim=32, sparse=False)
 # 声明输入数据，将其转成tensor
 arr_1 = np.array([1], dtype="int64").reshape((-1))
 print(arr_1)
@@ -35,13 +31,10 @@ emb_res = usr_emb(arr_pd1)
 # 打印结果
 print("数字 1 的embedding结果是： ", emb_res.numpy(), "\n形状是：", emb_res.shape)
 
-
 # 声明用户的最大ID，在此基础上加1（算上数字0）
 USR_ID_NUM = 10
 # 声明Embedding 层，将ID映射为16长度的向量
-usr_emb = Embedding(num_embeddings=USR_ID_NUM,
-                    embedding_dim=16,
-                    sparse=False)
+usr_emb = Embedding(num_embeddings=USR_ID_NUM, embedding_dim=16, sparse=False)
 # 定义输入数据，输入数据为不超过10的整数，将其转成tensor
 arr = np.random.randint(0, 10, (3)).reshape((-1)).astype('int64')
 print("输入数据是：", arr)
@@ -60,9 +53,7 @@ print("\n查看embedding层的权重形状：", emb_weights['weight'].shape)
 init = paddle.nn.initializer.KaimingNormal()
 param_attr = paddle.ParamAttr(initializer=init)
 
-usr_emb2 = Embedding(num_embeddings=USR_ID_NUM,
-                    embedding_dim=16,
-                    weight_attr=param_attr)
+usr_emb2 = Embedding(
+    num_embeddings=USR_ID_NUM, embedding_dim=16, weight_attr=param_attr)
 emb_res = usr_emb2(arr_pd)
 print("\KaimingNormal初始化权重embedding层的映射结果是：", emb_res.numpy())
-

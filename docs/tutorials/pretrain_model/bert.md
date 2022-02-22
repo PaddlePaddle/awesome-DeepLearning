@@ -18,7 +18,7 @@ BERT是用了Transformer的encoder侧的网络，encoder中的Self-attention机�
 
 在它之前是GPT，GPT使用的是Transformer的decoder侧的网络，GPT是一个单向语言模型的预训练过程，更适用于文本生成，通过前文去预测当前的字。
 
- 
+
 ### Embedding
 
 Embedding由三种Embedding求和而成：
@@ -33,19 +33,19 @@ Embedding由三种Embedding求和而成：
 
 BERT在第一句前会加一个[CLS]标志，最后一层该位对应向量可以作为整句话的语义表示，从而用于下游的分类任务等。因为与文本中已有的其它词相比，这个无明显语义信息的符号会更“公平”地融合文本中各个词的语义信息，从而更好的表示整句话的语义。
  具体来说，self-attention是用文本中的其它词来增强目标词的语义表示，但是目标词本身的语义还是会占主要部分的，因此，经过BERT的12层（BERT-base为例），每次词的embedding融合了所有词的信息，可以去更好的表示自己的语义。而[CLS]位本身没有语义，经过12层，句子级别的向量，相比其他正常词，可以更好的表征句子语义。
- 
+
 ### Transformer Encoder
 
- 
+
  ![](https://raw.githubusercontent.com/w5688414/paddleImage/main/bert_img/transformer_encoder.png)
- 
+
   BERT是用了Transformer的encoder侧的网络，如上图的transformer的Encoder部分，关于transformer的encoder的详细介绍可以参考链接：https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/transformer.html
-  
+
  在Transformer中，模型的输入会被转换成512维的向量，然后分为8个head，每个head的维度是64维，但是BERT的维度是768维度，然后分成12个head，每个head的维度是64维，这是一个微小的差别。Transformer中position Embedding是用的三角函数，BERT中也有一个Postion Embedding是随机初始化，然后从数据中学出来的。
- 
+
  BERT模型分为24层和12层两种，其差别就是使用transformer encoder的层数的差异，BERT-base使用的是12层的Transformer Encoder结构，BERT-Large使用的是24层的Transformer Encoder结构。
- 
- 
+
+
 ## BERT可视化
 
 ![](https://raw.githubusercontent.com/w5688414/paddleImage/main/bert_img/bert_viz.gif)
@@ -171,16 +171,16 @@ BERT是一个多任务模型，它的预训练（Pre-training）任务是由两�
  | 输入 = [CLS] 我 喜欢 玩 [Mask] 联盟 [SEP] 今天 天气 很 [Mask] [SEP] |
  |----|
  | 类别 = NotNext |
- 
+
  **注意**
- 
+
 + 在此后的研究（论文《Crosslingual language model pretraining》等）中发现，NSP任务可能并不是必要的，消除NSP损失在下游任务的性能上能够与原始BERT持平或略有提高。这可能是由于Bert以单句子为单位输入，模型无法学习到词之间的远程依赖关系。针对这一点，后续的RoBERTa、ALBERT、spanBERT都移去了NSP任务。
 
 
 BERT预训练模型最多只能输入512个词，这是因为在BERT中，Token，Position，Segment Embeddings 都是通过学习来得到的。在直接使用Google 的BERT预训练模型时，输入最多512个词（还要除掉[CLS]和[SEP]），最多两个句子合成一句。这之外的词和句子会没有对应的embedding。
- 
+
  如果有足够的硬件资源自己重新训练BERT，可以更改 BERT config，设置更大max\_position\_embeddings 和 type\_vocab\_size值去满足自己的需求。
- 
+
 
 ## BERT的微调
 
@@ -202,7 +202,7 @@ BERT预训练模型最多只能输入512个词，这是因为在BERT中，Token�
 	+ SQuAD v1.1：给定一个句子（通常是一个问题）和一段描述文本，输出这个问题的答案，类似于做阅读理解的简答题。
 + 命名实体识别
 	+ CoNLL-2003 NER：判断一个句子中的单词是不是Person，Organization，Location，Miscellaneous或者other（无命名实体）。
-    
+
 <p align="center">
 <img src="https://ai-studio-static-online.cdn.bcebos.com/46789704fc834558b340e0328253108e66cac3ab7b784e31b01f393652d9ed55" width = "700"/> <br />
 </p><br><center>图3 BERT 用于不同的 NLP 任务</center></br>
@@ -237,4 +237,3 @@ BERT使用的是双向的Transformer，OpenAI GPT使用的是从左到右的Tran
 + 模型参数太多，而且模型太大，少量数据训练时，容易过拟合。
 + BERT的NSP任务效果不明显，MLM存在和下游任务mismathch的情况。
 + BERT对生成式任务和长序列建模支持不好。
-

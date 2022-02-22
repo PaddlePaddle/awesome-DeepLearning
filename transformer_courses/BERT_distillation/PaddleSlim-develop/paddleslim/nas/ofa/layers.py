@@ -190,7 +190,8 @@ class SuperConv2D(nn.Conv2D):
             'channel'] if 'channel' in candidate_config else None
         self.base_channel = self._out_channels
         if self.expand_ratio != None:
-            self.base_channel = int(self._out_channels / max(self.expand_ratio))
+            self.base_channel = int(self._out_channels /
+                                    max(self.expand_ratio))
 
         self.transform_kernel = transform_kernel
         if self.ks_set != None:
@@ -239,7 +240,8 @@ class SuperConv2D(nn.Conv2D):
                 _input_filter = paddle.reshape(
                     _input_filter,
                     shape=[
-                        filters.shape[0], filters.shape[1], target_ks, target_ks
+                        filters.shape[0], filters.shape[1], target_ks,
+                        target_ks
                     ])
                 start_filter = _input_filter
             filters = start_filter
@@ -265,7 +267,8 @@ class SuperConv2D(nn.Conv2D):
             in_nc = int(in_nc // groups)
             return groups, in_nc, out_nc
 
-    def forward(self, input, kernel_size=None, expand_ratio=None, channel=None):
+    def forward(self, input, kernel_size=None, expand_ratio=None,
+                channel=None):
         """
         Parameters:
             input(Tensor): Input tensor.
@@ -296,7 +299,8 @@ class SuperConv2D(nn.Conv2D):
 
         weight = self.get_active_filter(weight_in_nc, weight_out_nc, ks)
 
-        if kernel_size != None or 'kernel_size' in self.candidate_config.keys():
+        if kernel_size != None or 'kernel_size' in self.candidate_config.keys(
+        ):
             padding = convert_to_list(get_same_padding(ks), 2)
         else:
             padding = self._padding
@@ -493,7 +497,8 @@ class SuperConv2DTranspose(nn.Conv2DTranspose):
             'channel'] if 'channel' in candidate_config else None
         self.base_channel = self._out_channels
         if self.expand_ratio:
-            self.base_channel = int(self._out_channels / max(self.expand_ratio))
+            self.base_channel = int(self._out_channels /
+                                    max(self.expand_ratio))
 
         self.transform_kernel = transform_kernel
         if self.ks_set != None:
@@ -540,7 +545,8 @@ class SuperConv2DTranspose(nn.Conv2DTranspose):
                 _input_filter = paddle.reshape(
                     _input_filter,
                     shape=[
-                        filters.shape[0], filters.shape[1], target_ks, target_ks
+                        filters.shape[0], filters.shape[1], target_ks,
+                        target_ks
                     ])
                 start_filter = _input_filter
             filters = start_filter
@@ -604,7 +610,8 @@ class SuperConv2DTranspose(nn.Conv2DTranspose):
 
         weight = self.get_active_filter(weight_in_nc, weight_out_nc, ks)
 
-        if kernel_size != None or 'kernel_size' in self.candidate_config.keys():
+        if kernel_size != None or 'kernel_size' in self.candidate_config.keys(
+        ):
             padding = convert_to_list(get_same_padding(ks), 2)
         else:
             padding = self._padding
@@ -997,11 +1004,13 @@ class SuperSyncBatchNorm(nn.SyncBatchNorm):
         variance_out = variance
 
         attrs = ("momentum", self._momentum, "epsilon", self._epsilon,
-                 "is_test", not self.training, "data_layout", self._data_format,
-                 "use_mkldnn", False, "fuse_with_relu", False,
-                 "use_global_stats", False, 'trainable_statistics', False)
+                 "is_test", not self.training, "data_layout",
+                 self._data_format, "use_mkldnn", False, "fuse_with_relu",
+                 False, "use_global_stats", False, 'trainable_statistics',
+                 False)
         sync_batch_norm_out, _, _, _, _, _ = core.ops.sync_batch_norm(
-            input, weight, bias, mean, variance, mean_out, variance_out, *attrs)
+            input, weight, bias, mean, variance, mean_out, variance_out,
+            *attrs)
 
         return sync_batch_norm_out
 

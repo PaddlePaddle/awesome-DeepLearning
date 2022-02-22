@@ -24,14 +24,14 @@ class FeatureDataset(BaseDataset):
        Example:(TODO)
        Args:(TODO)
     """
+
     def __init__(
-        self,
-        file_path,
-        pipeline,
-        data_prefix=None,
-        test_mode=False,
-        suffix=None,
-    ):
+            self,
+            file_path,
+            pipeline,
+            data_prefix=None,
+            test_mode=False,
+            suffix=None, ):
         self.suffix = suffix
         super().__init__(file_path, pipeline, data_prefix, test_mode)
 

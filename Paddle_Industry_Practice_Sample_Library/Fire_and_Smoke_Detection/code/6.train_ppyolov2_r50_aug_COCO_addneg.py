@@ -6,18 +6,17 @@ os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 import paddlex as pdx
 from paddlex import transforms as T
 
-
 # 定义训练和验证时的transforms
 train_transforms = T.Compose([
-   T.MixupImage(mixup_epoch=-1), T.RandomDistort(),
-   T.RandomExpand(im_padding_value=[123.675, 116.28, 103.53]), T.RandomCrop(),
-   T.RandomHorizontalFlip(), T.BatchRandomResize(
-       target_sizes=[
-           320, 352, 384, 416, 448, 480, 512, 544, 576, 608, 640, 672, 704,
-           736, 768
-       ],
-       interp='RANDOM'), T.Normalize(
-           mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+    T.MixupImage(mixup_epoch=-1), T.RandomDistort(),
+    T.RandomExpand(im_padding_value=[123.675, 116.28, 103.53]), T.RandomCrop(),
+    T.RandomHorizontalFlip(), T.BatchRandomResize(
+        target_sizes=[
+            320, 352, 384, 416, 448, 480, 512, 544, 576, 608, 640, 672, 704,
+            736, 768
+        ],
+        interp='RANDOM'), T.Normalize(
+            mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
 ])
 
 eval_transforms = T.Compose([
@@ -45,7 +44,6 @@ eval_dataset = pdx.datasets.VOCDetection(
 
 # 把背景图片加入训练集中
 train_dataset.add_negative_samples(image_dir='/home/aistudio/dataset/train_neg')
-
 
 # 初始化模型，并进行训练
 # API说明: https://paddlex.readthedocs.io/zh_CN/develop/apis/models/detection.html#paddlex-det-yolov3

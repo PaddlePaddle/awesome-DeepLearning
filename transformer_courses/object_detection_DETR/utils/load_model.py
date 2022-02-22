@@ -2,6 +2,7 @@ import os
 import numpy as np
 import paddle
 
+
 def match_state_dict(model_state_dict, weight_state_dict):
     """
     Match between the model state dict and pretrained weight state dict.
@@ -47,11 +48,10 @@ def match_state_dict(model_state_dict, weight_state_dict):
         model_value_shape = list(model_state_dict[model_key].shape)
 
         if list(weight_value.shape) != model_value_shape:
-            print(
-                'The shape {} in pretrained weight {} is unmatched with '
-                'the shape {} in model {}. And the weight {} will not be '
-                'loaded'.format(weight_value.shape, weight_key,
-                                model_value_shape, model_key, weight_key))
+            print('The shape {} in pretrained weight {} is unmatched with '
+                  'the shape {} in model {}. And the weight {} will not be '
+                  'loaded'.format(weight_value.shape, weight_key,
+                                  model_value_shape, model_key, weight_key))
             continue
 
         assert model_key not in result_state_dict
@@ -64,11 +64,13 @@ def match_state_dict(model_state_dict, weight_state_dict):
         matched_keys[weight_key] = model_key
     return result_state_dict
 
+
 def _strip_postfix(path):
     path, ext = os.path.splitext(path)
     assert ext in ['', '.pdparams', '.pdopt', '.pdmodel'], \
             "Unknown postfix {} from weights".format(ext)
     return path
+
 
 def load_pretrain_weight(model, pretrain_weight):
     path = _strip_postfix(pretrain_weight)
@@ -87,6 +89,7 @@ def load_pretrain_weight(model, pretrain_weight):
 
     model.set_dict(param_state_dict)
     print('Finish loading model weights: {}'.format(weights_path))
+
 
 def load_weights(model, weights):
     start_epoch = 0

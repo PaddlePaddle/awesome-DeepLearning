@@ -38,37 +38,41 @@ def collate_fn(batch, pad_default_token_id=0):
     max_len = max(seq_len_list)
     for idx in range(len(input_ids_list)):
         pad_len = max_len - seq_len_list[idx]
-        input_ids_list[idx] = input_ids_list[idx] + [pad_default_token_id] * pad_len
+        input_ids_list[idx] = input_ids_list[idx] + [pad_default_token_id
+                                                     ] * pad_len
         token_type_ids_list[idx] = token_type_ids_list[idx] + [0] * pad_len
         attention_mask_list[idx] = attention_mask_list[idx] + [0] * pad_len
 
-        pad_label = labels_list[idx][0][:] # CLS label
+        pad_label = labels_list[idx][0][:]  # CLS label
         labels_list[idx] = labels_list[idx] + [pad_label] * pad_len
 
+    return paddle.to_tensor(input_ids_list), paddle.to_tensor(
+        token_type_ids_list), paddle.to_tensor(
+            attention_mask_list), paddle.to_tensor(
+                seq_len_list), paddle.to_tensor(labels_list)
 
-    return paddle.to_tensor(input_ids_list), paddle.to_tensor(token_type_ids_list), paddle.to_tensor(attention_mask_list), paddle.to_tensor(seq_len_list), paddle.to_tensor(labels_list)
 
-
-def evaluate(model, data_loader, metric, examples, reverse_schemas, id2label, batch_size):
+def evaluate(model, data_loader, metric, examples, reverse_schemas, id2label,
+             batch_size):
 
     model.eval()
     metric.reset()
     for idx, batch_data in tqdm(enumerate(data_loader)):
         input_ids, token_type_ids, attention_masks, seq_lens, labels = batch_data
-        logits = model(input_ids, token_type_ids=token_type_ids)        
+        logits = model(input_ids, token_type_ids=token_type_ids)
         # decoding logits into examples with spo_list
-        batch_examples = examples[idx*batch_size : (idx+1)*batch_size]
-        batch_pred_examples = decoding(batch_examples, reverse_schemas, logits, seq_lens, id2label)
+        batch_examples = examples[idx * batch_size:(idx + 1) * batch_size]
+        batch_pred_examples = decoding(batch_examples, reverse_schemas, logits,
+                                       seq_lens, id2label)
         # count metric
         metric.update(batch_examples, batch_pred_examples)
-
 
     precision, recall, f1 = metric.accumulate()
 
     return precision, recall, f1
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     # yapf: disable
     parser = argparse.ArgumentParser()
     parser.add_argument("--model_path", type=str, default=None, help="model path that you saved")
@@ -88,10 +92,10 @@ if __name__=="__main__":
     model_name = "ernie-1.0"
     label2id, id2label = load_dict(args.save_label_path)
     reverse_schema = load_reverse_schema(args.save_schema_path)
-    
+
     test_ds = load_dataset(read, data_path=args.test_path, lazy=False)
-    examples = copy.deepcopy(test_ds)    
-    
+    examples = copy.deepcopy(test_ds)
+
     tokenizer = ErnieTokenizer.from_pretrained(model_name)
     trans_func = partial(convert_example_to_feature, tokenizer=tokenizer, label2id=label2id,  pad_default_label="O", max_seq_len=args.max_seq_len)
     test_ds = test_ds.map(trans_func, lazy=False)
@@ -103,12 +107,11 @@ if __name__=="__main__":
     # load model
     loaded_state_dict = paddle.load(args.model_path)
     ernie = ErnieModel.from_pretrained(model_name)
-    model = ErnieForTokenClassification(ernie, num_classes=len(label2id))    
+    model = ErnieForTokenClassification(ernie, num_classes=len(label2id))
     model.load_dict(loaded_state_dict)
 
     metric = SPOMetric()
- 
+
     # evalute on dev data
     precision, recall, f1  = evaluate(model, test_loader,  metric, examples, reverse_schema, id2label, args.batch_size)
     print(f'evalution result: precision: {precision:.5f}, recall: {recall:.5f},  F1: {f1:.5f}')
-    

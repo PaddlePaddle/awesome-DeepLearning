@@ -73,8 +73,8 @@ def _no_grad_trunc_normal_(tensor, mean, std, a, b):
         u = norm_cdf((b - mean) / std)
 
         # Uniformly fill tensor with values from [l, u], then translate to [2l-1, 2u-1].
-        tmp = np.random.uniform(2 * l - 1, 2 * u - 1,
-                                size=list(tensor.shape)).astype(np.float32)
+        tmp = np.random.uniform(
+            2 * l - 1, 2 * u - 1, size=list(tensor.shape)).astype(np.float32)
 
         # Use inverse cdf transform for normal distribution to get truncated
         # standard normal
@@ -118,9 +118,8 @@ def kaiming_normal_(tensor, a=0., mode='fan_in', nonlinearity='leaky_relu'):
         mode = mode.lower()
         valid_modes = ['fan_in', 'fan_out']
         if mode not in valid_modes:
-            raise ValueError(
-                "Mode {} not supported, please use one of {}".format(
-                    mode, valid_modes))
+            raise ValueError("Mode {} not supported, please use one of {}".
+                             format(mode, valid_modes))
 
         fan_in, fan_out = _calculate_fan_in_and_fan_out(tensor)
         return fan_in if mode == 'fan_in' else fan_out
@@ -143,11 +142,12 @@ def kaiming_normal_(tensor, a=0., mode='fan_in', nonlinearity='leaky_relu'):
                     param, int) or isinstance(param, float):
                 negative_slope = param
             else:
-                raise ValueError(
-                    "negative_slope {} not a valid number".format(param))
+                raise ValueError("negative_slope {} not a valid number".format(
+                    param))
             return math.sqrt(2.0 / (1 + negative_slope**2))
         else:
-            raise ValueError("Unsupported nonlinearity {}".format(nonlinearity))
+            raise ValueError("Unsupported nonlinearity {}".format(
+                nonlinearity))
 
     fan = _calculate_correct_fan(tensor, mode)
     gain = calculate_gain(nonlinearity, a)

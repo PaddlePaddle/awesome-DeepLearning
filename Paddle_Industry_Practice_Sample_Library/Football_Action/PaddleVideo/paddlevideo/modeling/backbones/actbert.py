@@ -32,12 +32,12 @@ ACT2FN = {"gelu": F.gelu, "relu": F.relu, "swish": F.swish}
 class BertEmbeddings(nn.Layer):
     """Construct the embeddings from word, position and token_type embeddings.
     """
+
     def __init__(self, vocab_size, max_position_embeddings, type_vocab_size,
                  hidden_size, hidden_dropout_prob):
         super(BertEmbeddings, self).__init__()
-        self.word_embeddings = nn.Embedding(vocab_size,
-                                            hidden_size,
-                                            padding_idx=0)
+        self.word_embeddings = nn.Embedding(
+            vocab_size, hidden_size, padding_idx=0)
         self.position_embeddings = nn.Embedding(max_position_embeddings,
                                                 hidden_size)
         self.token_type_embeddings = nn.Embedding(type_vocab_size, hidden_size)
@@ -189,8 +189,8 @@ class BertIntermediate(nn.Layer):
     def __init__(self, hidden_size, intermediate_size, hidden_act):
         super(BertIntermediate, self).__init__()
         self.dense = nn.Linear(hidden_size, intermediate_size)
-        if isinstance(hidden_act, str) or (sys.version_info[0] == 2
-                                           and isinstance(hidden_act, str)):
+        if isinstance(hidden_act, str) or (sys.version_info[0] == 2 and
+                                           isinstance(hidden_act, str)):
             self.intermediate_act_fn = ACT2FN[hidden_act]
         else:
             self.intermediate_act_fn = hidden_act
@@ -218,19 +218,19 @@ class BertOutput(nn.Layer):
 class BertEntAttention(nn.Layer):
     """Core mudule of tangled transformer.
     """
+
     def __init__(
-        self,
-        hidden_size,
-        v_hidden_size,
-        a_hidden_size,
-        bi_hidden_size,
-        attention_probs_dropout_prob,
-        v_attention_probs_dropout_prob,
-        a_attention_probs_dropout_prob,
-        av_attention_probs_dropout_prob,
-        at_attention_probs_dropout_prob,
-        bi_num_attention_heads,
-    ):
+            self,
+            hidden_size,
+            v_hidden_size,
+            a_hidden_size,
+            bi_hidden_size,
+            attention_probs_dropout_prob,
+            v_attention_probs_dropout_prob,
+            a_attention_probs_dropout_prob,
+            av_attention_probs_dropout_prob,
+            at_attention_probs_dropout_prob,
+            bi_num_attention_heads, ):
         super(BertEntAttention, self).__init__()
         if bi_hidden_size % bi_num_attention_heads != 0:
             raise ValueError(
@@ -278,14 +278,13 @@ class BertEntAttention(nn.Layer):
         return x.transpose((0, 2, 1, 3))
 
     def forward(
-        self,
-        input_tensor1,
-        attention_mask1,
-        input_tensor2,
-        attention_mask2,
-        input_tensor3,
-        attention_mask3,
-    ):
+            self,
+            input_tensor1,
+            attention_mask1,
+            input_tensor2,
+            attention_mask2,
+            input_tensor3,
+            attention_mask3, ):
 
         # for vision input.
         mixed_query_layer1 = self.query1(input_tensor1)
@@ -345,33 +344,33 @@ class BertEntAttention(nn.Layer):
 
         context_key_av = self.key_av(context_av).transpose((0, 2, 1))
         # interpolate only support 4-D tensor now.
-        context_key_av = F.interpolate(context_key_av.unsqueeze(-1),
-                                       size=(key_layer2.shape[2],
-                                             1)).squeeze(-1)
+        context_key_av = F.interpolate(
+            context_key_av.unsqueeze(-1), size=(key_layer2.shape[2],
+                                                1)).squeeze(-1)
         context_key_av = self.transpose_for_scores(
             context_key_av.transpose((0, 2, 1)))
         key_layer2 = key_layer2 + context_key_av
 
         context_key_at = self.key_at(context_at).transpose((0, 2, 1))
-        context_key_at = F.interpolate(context_key_at.unsqueeze(-1),
-                                       size=(key_layer1.shape[2],
-                                             1)).squeeze(-1)
+        context_key_at = F.interpolate(
+            context_key_at.unsqueeze(-1), size=(key_layer1.shape[2],
+                                                1)).squeeze(-1)
         context_key_at = self.transpose_for_scores(
             context_key_at.transpose((0, 2, 1)))
         key_layer1 = key_layer1 + context_key_at
 
         context_val_av = self.value_at(context_av).transpose((0, 2, 1))
-        context_val_av = F.interpolate(context_val_av.unsqueeze(-1),
-                                       size=(value_layer2.shape[2],
-                                             1)).squeeze(-1)
+        context_val_av = F.interpolate(
+            context_val_av.unsqueeze(-1), size=(value_layer2.shape[2],
+                                                1)).squeeze(-1)
         context_val_av = self.transpose_for_scores(
             context_val_av.transpose((0, 2, 1)))
         value_layer2 = value_layer2 + context_val_av
 
         context_val_at = self.value_at(context_at).transpose((0, 2, 1))
-        context_val_at = F.interpolate(context_val_at.unsqueeze(-1),
-                                       size=(value_layer1.shape[2],
-                                             1)).squeeze(-1)
+        context_val_at = F.interpolate(
+            context_val_at.unsqueeze(-1), size=(value_layer1.shape[2],
+                                                1)).squeeze(-1)
         context_val_at = self.transpose_for_scores(
             context_val_at.transpose((0, 2, 1)))
         value_layer1 = value_layer1 + context_val_at
@@ -388,13 +387,12 @@ class BertEntAttention(nn.Layer):
 
 class BertEntOutput(nn.Layer):
     def __init__(
-        self,
-        bi_hidden_size,
-        hidden_size,
-        v_hidden_size,
-        v_hidden_dropout_prob,
-        hidden_dropout_prob,
-    ):
+            self,
+            bi_hidden_size,
+            hidden_size,
+            v_hidden_size,
+            v_hidden_dropout_prob,
+            hidden_dropout_prob, ):
         super(BertEntOutput, self).__init__()
 
         self.dense1 = nn.Linear(bi_hidden_size, v_hidden_size)
@@ -410,14 +408,13 @@ class BertEntOutput(nn.Layer):
         self.dropout3 = nn.Dropout(hidden_dropout_prob)
 
     def forward(
-        self,
-        hidden_states1,
-        input_tensor1,
-        hidden_states2,
-        input_tensor2,
-        hidden_states3,
-        input_tensor3,
-    ):
+            self,
+            hidden_states1,
+            input_tensor1,
+            hidden_states2,
+            input_tensor2,
+            hidden_states3,
+            input_tensor3, ):
         context_state1 = self.dense1(hidden_states1)
         context_state1 = self.dropout1(context_state1)
 
@@ -448,23 +445,22 @@ class BertLayer(nn.Layer):
                                  hidden_dropout_prob)
 
     def forward(self, hidden_states, attention_mask):
-        attention_output, attention_probs = self.attention(
-            hidden_states, attention_mask)
+        attention_output, attention_probs = self.attention(hidden_states,
+                                                           attention_mask)
         intermediate_output = self.intermediate(attention_output)
         layer_output = self.output(intermediate_output, attention_output)
         return layer_output, attention_probs
 
 
 class BertConnectionLayer(nn.Layer):
-    def __init__(self, hidden_size, v_hidden_size, a_hidden_size,
-                 bi_hidden_size, bi_num_attention_heads,
-                 attention_probs_dropout_prob, v_attention_probs_dropout_prob,
-                 a_attention_probs_dropout_prob,
-                 av_attention_probs_dropout_prob,
-                 at_attention_probs_dropout_prob, intermediate_size,
-                 v_intermediate_size, a_intermediate_size, hidden_act,
-                 v_hidden_act, a_hidden_act, hidden_dropout_prob,
-                 v_hidden_dropout_prob, a_hidden_dropout_prob):
+    def __init__(
+            self, hidden_size, v_hidden_size, a_hidden_size, bi_hidden_size,
+            bi_num_attention_heads, attention_probs_dropout_prob,
+            v_attention_probs_dropout_prob, a_attention_probs_dropout_prob,
+            av_attention_probs_dropout_prob, at_attention_probs_dropout_prob,
+            intermediate_size, v_intermediate_size, a_intermediate_size,
+            hidden_act, v_hidden_act, a_hidden_act, hidden_dropout_prob,
+            v_hidden_dropout_prob, a_hidden_dropout_prob):
         super(BertConnectionLayer, self).__init__()
         self.ent_attention = BertEntAttention(
             hidden_size,
@@ -476,20 +472,17 @@ class BertConnectionLayer(nn.Layer):
             a_attention_probs_dropout_prob,
             av_attention_probs_dropout_prob,
             at_attention_probs_dropout_prob,
-            bi_num_attention_heads,
-        )
+            bi_num_attention_heads, )
 
         self.ent_output = BertEntOutput(
             bi_hidden_size,
             hidden_size,
             v_hidden_size,
             v_hidden_dropout_prob,
-            hidden_dropout_prob,
-        )
+            hidden_dropout_prob, )
 
-        self.v_intermediate = BertIntermediate(v_hidden_size,
-                                               v_intermediate_size,
-                                               v_hidden_act)
+        self.v_intermediate = BertIntermediate(
+            v_hidden_size, v_intermediate_size, v_hidden_act)
         self.v_output = BertOutput(v_intermediate_size, v_hidden_size,
                                    v_hidden_dropout_prob)
 
@@ -498,21 +491,19 @@ class BertConnectionLayer(nn.Layer):
         self.t_output = BertOutput(intermediate_size, hidden_size,
                                    hidden_dropout_prob)
 
-        self.a_intermediate = BertIntermediate(a_hidden_size,
-                                               a_intermediate_size,
-                                               a_hidden_act)
+        self.a_intermediate = BertIntermediate(
+            a_hidden_size, a_intermediate_size, a_hidden_act)
         self.a_output = BertOutput(a_intermediate_size, a_hidden_size,
                                    a_hidden_dropout_prob)
 
     def forward(
-        self,
-        input_tensor1,
-        attention_mask1,
-        input_tensor2,
-        attention_mask2,
-        input_tensor3,
-        attention_mask3,
-    ):
+            self,
+            input_tensor1,
+            attention_mask1,
+            input_tensor2,
+            attention_mask2,
+            input_tensor3,
+            attention_mask3, ):
 
         ent_output1, ent_output2, ent_output3 = self.ent_attention(
             input_tensor1, attention_mask1, input_tensor2, attention_mask2,
@@ -538,39 +529,39 @@ class BertEncoder(nn.Layer):
     """
     ActBert Encoder, consists 3 pathway of multi-BertLayers and BertConnectionLayer.
     """
+
     def __init__(
-        self,
-        v_ent_attention_id,
-        t_ent_attention_id,
-        a_ent_attention_id,
-        fixed_t_layer,
-        fixed_v_layer,
-        hidden_size,
-        v_hidden_size,
-        a_hidden_size,
-        bi_hidden_size,
-        intermediate_size,
-        v_intermediate_size,
-        a_intermediate_size,
-        hidden_act,
-        v_hidden_act,
-        a_hidden_act,
-        hidden_dropout_prob,
-        v_hidden_dropout_prob,
-        a_hidden_dropout_prob,
-        attention_probs_dropout_prob,
-        v_attention_probs_dropout_prob,
-        a_attention_probs_dropout_prob,
-        av_attention_probs_dropout_prob,
-        at_attention_probs_dropout_prob,
-        num_attention_heads,
-        v_num_attention_heads,
-        a_num_attention_heads,
-        bi_num_attention_heads,
-        num_hidden_layers,
-        v_num_hidden_layers,
-        a_num_hidden_layers,
-    ):
+            self,
+            v_ent_attention_id,
+            t_ent_attention_id,
+            a_ent_attention_id,
+            fixed_t_layer,
+            fixed_v_layer,
+            hidden_size,
+            v_hidden_size,
+            a_hidden_size,
+            bi_hidden_size,
+            intermediate_size,
+            v_intermediate_size,
+            a_intermediate_size,
+            hidden_act,
+            v_hidden_act,
+            a_hidden_act,
+            hidden_dropout_prob,
+            v_hidden_dropout_prob,
+            a_hidden_dropout_prob,
+            attention_probs_dropout_prob,
+            v_attention_probs_dropout_prob,
+            a_attention_probs_dropout_prob,
+            av_attention_probs_dropout_prob,
+            at_attention_probs_dropout_prob,
+            num_attention_heads,
+            v_num_attention_heads,
+            a_num_attention_heads,
+            bi_num_attention_heads,
+            num_hidden_layers,
+            v_num_hidden_layers,
+            a_num_hidden_layers, ):
         super(BertEncoder, self).__init__()
         self.v_ent_attention_id = v_ent_attention_id
         self.t_ent_attention_id = t_ent_attention_id
@@ -603,20 +594,20 @@ class BertEncoder(nn.Layer):
         self.a_layer = nn.LayerList(
             [copy.deepcopy(a_layer) for _ in range(a_num_hidden_layers)])  #3
         self.c_layer = nn.LayerList([
-            copy.deepcopy(connect_layer) for _ in range(len(v_ent_attention_id))
+            copy.deepcopy(connect_layer)
+            for _ in range(len(v_ent_attention_id))
         ]  #2  [0,1]
                                     )
 
     def forward(
-        self,
-        txt_embedding,
-        image_embedding,
-        action_embedding,
-        txt_attention_mask,
-        image_attention_mask,
-        action_attention_mask,
-        output_all_encoded_layers=True,
-    ):
+            self,
+            txt_embedding,
+            image_embedding,
+            action_embedding,
+            txt_attention_mask,
+            image_attention_mask,
+            action_attention_mask,
+            output_all_encoded_layers=True, ):
         v_start, a_start, t_start = 0, 0, 0
         count = 0
         all_encoder_layers_t = []
@@ -699,6 +690,7 @@ class BertPooler(nn.Layer):
     """ "Pool" the model by simply taking the hidden state corresponding
         to the first token.
     """
+
     def __init__(self, hidden_size, bi_hidden_size):
         super(BertPooler, self).__init__()
         self.dense = nn.Linear(hidden_size, bi_hidden_size)
@@ -713,43 +705,42 @@ class BertPooler(nn.Layer):
 
 class BertModel(nn.Layer):
     def __init__(
-        self,
-        vocab_size,
-        max_position_embeddings,
-        type_vocab_size,
-        v_feature_size,
-        a_feature_size,
-        num_hidden_layers,
-        v_num_hidden_layers,
-        a_num_hidden_layers,
-        v_ent_attention_id,
-        t_ent_attention_id,
-        a_ent_attention_id,
-        fixed_t_layer,
-        fixed_v_layer,
-        hidden_size,
-        v_hidden_size,
-        a_hidden_size,
-        bi_hidden_size,
-        intermediate_size,
-        v_intermediate_size,
-        a_intermediate_size,
-        hidden_act,
-        v_hidden_act,
-        a_hidden_act,
-        hidden_dropout_prob,
-        v_hidden_dropout_prob,
-        a_hidden_dropout_prob,
-        attention_probs_dropout_prob,
-        v_attention_probs_dropout_prob,
-        a_attention_probs_dropout_prob,
-        av_attention_probs_dropout_prob,
-        at_attention_probs_dropout_prob,
-        num_attention_heads,
-        v_num_attention_heads,
-        a_num_attention_heads,
-        bi_num_attention_heads,
-    ):
+            self,
+            vocab_size,
+            max_position_embeddings,
+            type_vocab_size,
+            v_feature_size,
+            a_feature_size,
+            num_hidden_layers,
+            v_num_hidden_layers,
+            a_num_hidden_layers,
+            v_ent_attention_id,
+            t_ent_attention_id,
+            a_ent_attention_id,
+            fixed_t_layer,
+            fixed_v_layer,
+            hidden_size,
+            v_hidden_size,
+            a_hidden_size,
+            bi_hidden_size,
+            intermediate_size,
+            v_intermediate_size,
+            a_intermediate_size,
+            hidden_act,
+            v_hidden_act,
+            a_hidden_act,
+            hidden_dropout_prob,
+            v_hidden_dropout_prob,
+            a_hidden_dropout_prob,
+            attention_probs_dropout_prob,
+            v_attention_probs_dropout_prob,
+            a_attention_probs_dropout_prob,
+            av_attention_probs_dropout_prob,
+            at_attention_probs_dropout_prob,
+            num_attention_heads,
+            v_num_attention_heads,
+            a_num_attention_heads,
+            bi_num_attention_heads, ):
         super(BertModel, self).__init__()
         # initilize word embedding
         self.embeddings = BertEmbeddings(vocab_size, max_position_embeddings,
@@ -780,17 +771,16 @@ class BertModel(nn.Layer):
         self.a_pooler = BertPooler(a_hidden_size, bi_hidden_size)
 
     def forward(
-        self,
-        text_ids,
-        action_feat,
-        image_feat,
-        image_loc,
-        token_type_ids=None,
-        text_mask=None,
-        image_mask=None,
-        action_mask=None,
-        output_all_encoded_layers=False,
-    ):
+            self,
+            text_ids,
+            action_feat,
+            image_feat,
+            image_loc,
+            token_type_ids=None,
+            text_mask=None,
+            image_mask=None,
+            action_mask=None,
+            output_all_encoded_layers=False, ):
         """
         text_ids: input text ids. Shape: [batch_size, seqence_length]
         action_feat: input action feature. Shape: [batch_size, action_length, action_feature_dim]
@@ -810,9 +800,9 @@ class BertModel(nn.Layer):
             image_mask = paddle.ones(image_feat.shape[0],
                                      image_feat.shape[1]).astype(text_ids.dtype)
         if action_mask is None:
-            action_mask = paddle.ones(action_feat.shape[0],
-                                      action_feat.shape[1]).astype(
-                                          text_ids.dtype)
+            action_mask = paddle.ones(
+                action_feat.shape[0],
+                action_feat.shape[1]).astype(text_ids.dtype)
 
         # We create a 3D attention mask from a 2D tensor mask.
         # Sizes are [batch_size, 1, 1, to_seq_length]
@@ -850,8 +840,7 @@ class BertModel(nn.Layer):
             extended_text_mask,
             extended_image_mask,
             extended_action_mask,
-            output_all_encoded_layers=output_all_encoded_layers,
-        )
+            output_all_encoded_layers=output_all_encoded_layers, )
 
         sequence_output_t = encoded_layers_t[-1]  #get item from list
         sequence_output_v = encoded_layers_v[-1]
@@ -875,8 +864,8 @@ class BertPredictionHeadTransform(nn.Layer):
     def __init__(self, hidden_size, hidden_act):
         super(BertPredictionHeadTransform, self).__init__()
         self.dense = nn.Linear(hidden_size, hidden_size)
-        if isinstance(hidden_act, str) or (sys.version_info[0] == 2
-                                           and isinstance(hidden_act, str)):
+        if isinstance(hidden_act, str) or (sys.version_info[0] == 2 and
+                                           isinstance(hidden_act, str)):
             self.transform_act_fn = ACT2FN[hidden_act]
         else:
             self.transform_act_fn = hidden_act
@@ -975,48 +964,48 @@ class BertPreTrainingHeads(nn.Layer):
 class BertForMultiModalPreTraining(nn.Layer):
     """BERT model with multi modal pre-training heads.
     """
+
     def __init__(
-        self,
-        vocab_size=30522,
-        max_position_embeddings=512,
-        type_vocab_size=2,
-        v_target_size=1601,
-        a_target_size=700,
-        v_feature_size=2048,
-        a_feature_size=2048,
-        num_hidden_layers=12,
-        v_num_hidden_layers=2,
-        a_num_hidden_layers=3,
-        t_ent_attention_id=[10, 11],
-        v_ent_attention_id=[0, 1],
-        a_ent_attention_id=[0, 1],
-        fixed_t_layer=0,
-        fixed_v_layer=0,
-        hidden_size=768,
-        v_hidden_size=1024,
-        a_hidden_size=768,
-        bi_hidden_size=1024,
-        intermediate_size=3072,
-        v_intermediate_size=1024,
-        a_intermediate_size=3072,
-        hidden_act="gelu",
-        v_hidden_act="gelu",
-        a_hidden_act="gelu",
-        hidden_dropout_prob=0.1,
-        v_hidden_dropout_prob=0.1,
-        a_hidden_dropout_prob=0.1,
-        attention_probs_dropout_prob=0.1,
-        v_attention_probs_dropout_prob=0.1,
-        a_attention_probs_dropout_prob=0.1,
-        av_attention_probs_dropout_prob=0.1,
-        at_attention_probs_dropout_prob=0.1,
-        num_attention_heads=12,
-        v_num_attention_heads=8,
-        a_num_attention_heads=12,
-        bi_num_attention_heads=8,
-        fusion_method="mul",
-        pretrained=None,
-    ):
+            self,
+            vocab_size=30522,
+            max_position_embeddings=512,
+            type_vocab_size=2,
+            v_target_size=1601,
+            a_target_size=700,
+            v_feature_size=2048,
+            a_feature_size=2048,
+            num_hidden_layers=12,
+            v_num_hidden_layers=2,
+            a_num_hidden_layers=3,
+            t_ent_attention_id=[10, 11],
+            v_ent_attention_id=[0, 1],
+            a_ent_attention_id=[0, 1],
+            fixed_t_layer=0,
+            fixed_v_layer=0,
+            hidden_size=768,
+            v_hidden_size=1024,
+            a_hidden_size=768,
+            bi_hidden_size=1024,
+            intermediate_size=3072,
+            v_intermediate_size=1024,
+            a_intermediate_size=3072,
+            hidden_act="gelu",
+            v_hidden_act="gelu",
+            a_hidden_act="gelu",
+            hidden_dropout_prob=0.1,
+            v_hidden_dropout_prob=0.1,
+            a_hidden_dropout_prob=0.1,
+            attention_probs_dropout_prob=0.1,
+            v_attention_probs_dropout_prob=0.1,
+            a_attention_probs_dropout_prob=0.1,
+            av_attention_probs_dropout_prob=0.1,
+            at_attention_probs_dropout_prob=0.1,
+            num_attention_heads=12,
+            v_num_attention_heads=8,
+            a_num_attention_heads=12,
+            bi_num_attention_heads=8,
+            fusion_method="mul",
+            pretrained=None, ):
         """
         vocab_size: vocabulary size. Default: 30522.
         max_position_embeddings: max position id. Default: 512.
@@ -1097,8 +1086,7 @@ class BertForMultiModalPreTraining(nn.Layer):
             num_attention_heads,
             v_num_attention_heads,
             a_num_attention_heads,
-            bi_num_attention_heads,
-        )
+            bi_num_attention_heads, )
         self.cls = BertPreTrainingHeads(
             hidden_size, v_hidden_size, a_hidden_size, bi_hidden_size,
             hidden_act, v_hidden_act, a_hidden_act, v_target_size,

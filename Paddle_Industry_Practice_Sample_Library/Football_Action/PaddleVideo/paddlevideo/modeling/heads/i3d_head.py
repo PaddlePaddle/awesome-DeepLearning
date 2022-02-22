@@ -36,6 +36,7 @@ class I3DHead(BaseHead):
         kwargs (dict, optional): Any keyword argument to be used to initialize
             the head.
     """
+
     def __init__(self,
                  num_classes,
                  in_channels,
@@ -58,8 +59,7 @@ class I3DHead(BaseHead):
             self.in_channels,
             self.num_classes,
             weight_attr=ParamAttr(learning_rate=10.0),
-            bias_attr=ParamAttr(learning_rate=10.0),
-        )
+            bias_attr=ParamAttr(learning_rate=10.0), )
 
         if self.spatial_type == 'avg':
             # use `nn.AdaptiveAvgPool3d` to adaptively match the in_channels.

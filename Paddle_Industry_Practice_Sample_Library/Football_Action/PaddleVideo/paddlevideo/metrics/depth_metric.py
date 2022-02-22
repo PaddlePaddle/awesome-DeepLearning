@@ -60,18 +60,18 @@ class DepthMetric(BaseMetric):
         self.a3.append(a3)
         if batch_id % self.log_interval == 0:
             logger.info("[TEST] Processing batch {}/{} ...".format(
-                batch_id,
-                self.data_size // (self.batch_size * self.world_size)))
+                batch_id, self.data_size // (self.batch_size * self.world_size
+                                             )))
 
     def accumulate(self):
         """accumulate metrics when finished all iters.
         """
         logger.info(
             '[TEST] finished, abs_rel= {}, sq_rel= {} , rmse= {}, rmse_log= {},'
-            'a1= {}, a2= {}, a3= {}'.format(np.mean(np.array(self.abs_rel)),
-                                            np.mean(np.array(self.sq_rel)),
-                                            np.mean(np.array(self.rmse)),
-                                            np.mean(np.array(self.rmse_log)),
-                                            np.mean(np.array(self.a1)),
-                                            np.mean(np.array(self.a2)),
-                                            np.mean(np.array(self.a3))))
+            'a1= {}, a2= {}, a3= {}'.format(
+                np.mean(np.array(self.abs_rel)),
+                np.mean(np.array(self.sq_rel)),
+                np.mean(np.array(self.rmse)),
+                np.mean(np.array(self.rmse_log)),
+                np.mean(np.array(self.a1)),
+                np.mean(np.array(self.a2)), np.mean(np.array(self.a3))))

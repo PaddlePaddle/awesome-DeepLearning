@@ -4,7 +4,7 @@
 
 AlexNet<sup>[1]</sup>是2012年ImageNet竞赛的冠军模型，其作者是神经网络领域三巨头之一的Hinton和他的学生Alex Krizhevsky。
 
-AlexNet以极大的优势领先2012年ImageNet竞赛的第二名，也因此给当时的学术界和工业界带来了很大的冲击。此后，更多更深的神经网络相继被提出，比如优秀的VGG，GoogLeNet，ResNet等。 
+AlexNet以极大的优势领先2012年ImageNet竞赛的第二名，也因此给当时的学术界和工业界带来了很大的冲击。此后，更多更深的神经网络相继被提出，比如优秀的VGG，GoogLeNet，ResNet等。
 
 ## 模型结构
 
@@ -63,7 +63,7 @@ class AlexNet(paddle.nn.Layer):
         self.drop_ratio2 = 0.5
         self.drop2 = Dropout(self.drop_ratio2)
         self.fc3 = Linear(in_features=4096, out_features=num_classes)
-    
+
     def forward(self, x):
         x = self.conv1(x)
         x = F.relu(x)
@@ -116,4 +116,3 @@ AlexNet 作为 ImageNet 2012比赛的冠军算法，在 ImageNet 测试集上达
 ## 参考文献
 
 [1] [Imagenet classification with deep convolutional neural networks. ](https://www.nvidia.cn/content/tesla/pdf/machine-learning/imagenet-classification-with-deep-convolutional-nn.pdf)
-

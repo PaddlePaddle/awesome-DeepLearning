@@ -19,12 +19,12 @@ $$
 4 & 8 & 12 \\
 5 & 10 & 15
 \end{array}\right]
-=	
+=
 \left[\begin{array}{ccc}
 3 \\
 4 \\
 5
-\end{array}\right]	
+\end{array}\right]
 \times
 \left[\begin{array}{ccc}
 1 \quad 2 \quad 3
@@ -52,12 +52,12 @@ $$
 -2 & 0 & 2 \\
 -1 & 0 & 1
 \end{array}\right]
-=	
+=
 \left[\begin{array}{ccc}
 1 \\
 2 \\
 1
-\end{array}\right]	
+\end{array}\right]
 \times
 \left[\begin{array}{ccc}
 -1 \quad 0 \quad 1
@@ -151,4 +151,3 @@ MobileNetv1<sup>[1]</sup>中使用的深度可分离卷积如 **图7** 右侧所
 ### 参考文献
 
 [1] [MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications](https://arxiv.org/pdf/1704.04861.pdf)
-

@@ -12,14 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 import paddle
 import paddle.nn.functional as F
 from paddle.nn import LSTM, Embedding, Dropout, Linear
 import numpy as np
 
+
 class SentimentClassifier(paddle.nn.Layer):
-    def __init__(self, hidden_size, vocab_size, class_num=2, num_steps=128, num_layers=1, init_scale=0.1, dropout=None):
+    def __init__(self,
+                 hidden_size,
+                 vocab_size,
+                 class_num=2,
+                 num_steps=128,
+                 num_layers=1,
+                 init_scale=0.1,
+                 dropout=None):
 
         # 参数含义如下：
         # 1.hidden_size，表示embedding-size，hidden和cell向量的维度
@@ -41,11 +48,19 @@ class SentimentClassifier(paddle.nn.Layer):
         self.dropout = dropout
 
         # 声明一个LSTM模型，用来把每个句子抽象成向量
-        self.simple_lstm_rnn = LSTM(input_size=hidden_size, hidden_size=hidden_size, num_layers=num_layers)
+        self.simple_lstm_rnn = LSTM(
+            input_size=hidden_size,
+            hidden_size=hidden_size,
+            num_layers=num_layers)
 
         # 声明一个embedding层，用来把句子中的每个词转换为向量
-        self.embedding = Embedding(num_embeddings=vocab_size, embedding_dim=hidden_size, sparse=False,
-                                   weight_attr=paddle.ParamAttr(initializer=paddle.nn.initializer.Uniform(low=-init_scale, high=init_scale)))
+        self.embedding = Embedding(
+            num_embeddings=vocab_size,
+            embedding_dim=hidden_size,
+            sparse=False,
+            weight_attr=paddle.ParamAttr(
+                initializer=paddle.nn.initializer.Uniform(
+                    low=-init_scale, high=init_scale)))
 
         # 在得到一个句子的向量表示后，需要根据这个向量表示对这个句子进行分类
         # 一般来说，可以把这个句子的向量表示乘以一个大小为[self.hidden_size, self.class_num]的W参数，
@@ -53,8 +68,11 @@ class SentimentClassifier(paddle.nn.Layer):
 
         # 我们需要声明最终在使用句子向量映射到具体情感类别过程中所需要使用的参数
         # 这个参数的大小一般是[self.hidden_size, self.class_num]
-        self.cls_fc = Linear(in_features=self.hidden_size, out_features=self.class_num,
-                             weight_attr=None, bias_attr=None)
+        self.cls_fc = Linear(
+            in_features=self.hidden_size,
+            out_features=self.class_num,
+            weight_attr=None,
+            bias_attr=None)
         self.dropout_layer = Dropout(p=self.dropout, mode='upscale_in_train')
 
     def forward(self, input, label):
@@ -86,7 +104,8 @@ class SentimentClassifier(paddle.nn.Layer):
             x_emb = self.dropout_layer(x_emb)
 
         # 使用LSTM网络，把每个句子转换为向量表示
-        rnn_out, (last_hidden, last_cell) = self.simple_lstm_rnn(x_emb, (init_h, init_c))
+        rnn_out, (last_hidden, last_cell) = self.simple_lstm_rnn(x_emb, (
+            init_h, init_c))
         last_hidden = paddle.reshape(
             last_hidden[-1], shape=[-1, self.hidden_size])
 

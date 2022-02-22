@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 import os
 import copy
 import argparse
@@ -67,29 +66,32 @@ def collate_fn(batch, pad_default_token_id=0):
     max_len = max(seq_len_list)
     for idx in range(len(input_ids_list)):
         pad_len = max_len - seq_len_list[idx]
-        input_ids_list[idx] = input_ids_list[idx] + [pad_default_token_id] * pad_len
+        input_ids_list[idx] = input_ids_list[idx] + [pad_default_token_id
+                                                     ] * pad_len
         token_type_ids_list[idx] = token_type_ids_list[idx] + [0] * pad_len
-        attention_mask_list[idx] = attention_mask_list[idx] + [0] * pad_len   
-      
-        pad_label = labels_list[idx][0][:] # CLS label
+        attention_mask_list[idx] = attention_mask_list[idx] + [0] * pad_len
+
+        pad_label = labels_list[idx][0][:]  # CLS label
         labels_list[idx] = labels_list[idx] + [pad_label] * pad_len
 
-
-    return paddle.to_tensor(input_ids_list), paddle.to_tensor(token_type_ids_list), paddle.to_tensor(attention_mask_list), paddle.to_tensor(seq_len_list), paddle.to_tensor(labels_list)
+    return paddle.to_tensor(input_ids_list), paddle.to_tensor(
+        token_type_ids_list), paddle.to_tensor(
+            attention_mask_list), paddle.to_tensor(
+                seq_len_list), paddle.to_tensor(labels_list)
 
 
 class DuIELoss(paddle.nn.Layer):
     def __init__(self):
         super(DuIELoss, self).__init__()
         self.criterion = paddle.nn.BCEWithLogitsLoss(reduction="none")
-        
+
     def forward(self, logits, labels, masks):
         labels = paddle.cast(labels, "float32")
         loss = self.criterion(logits, labels)
         mask = paddle.cast(masks, "float32")
         loss = loss * mask.unsqueeze(-1)
         loss = paddle.sum(loss.mean(axis=2), axis=1) / paddle.sum(mask, axis=1)
-        
+
         return loss.mean()
 
 
@@ -112,33 +114,53 @@ def train():
     dev_examples = copy.deepcopy(dev_ds)
 
     tokenizer = ErnieTokenizer.from_pretrained(model_name)
-    trans_func = partial(convert_example_to_feature, tokenizer=tokenizer, label2id=label2id,  pad_default_label="O", max_seq_len=args.max_seq_len)
+    trans_func = partial(
+        convert_example_to_feature,
+        tokenizer=tokenizer,
+        label2id=label2id,
+        pad_default_label="O",
+        max_seq_len=args.max_seq_len)
 
     train_ds = train_ds.map(trans_func, lazy=False)
     dev_ds = dev_ds.map(trans_func, lazy=False)
-    
+
     # Warning: you should not set shuffle of dev_batch_sampler be True
-    train_batch_sampler = paddle.io.BatchSampler(train_ds, batch_size=args.batch_size, shuffle=True)
-    dev_batch_sampler = paddle.io.BatchSampler(dev_ds, batch_size=args.batch_size, shuffle=False)
-    train_loader = paddle.io.DataLoader(dataset=train_ds, batch_sampler=train_batch_sampler, collate_fn=collate_fn)
-    dev_loader = paddle.io.DataLoader(dataset=dev_ds, batch_sampler=dev_batch_sampler, collate_fn=collate_fn)
+    train_batch_sampler = paddle.io.BatchSampler(
+        train_ds, batch_size=args.batch_size, shuffle=True)
+    dev_batch_sampler = paddle.io.BatchSampler(
+        dev_ds, batch_size=args.batch_size, shuffle=False)
+    train_loader = paddle.io.DataLoader(
+        dataset=train_ds,
+        batch_sampler=train_batch_sampler,
+        collate_fn=collate_fn)
+    dev_loader = paddle.io.DataLoader(
+        dataset=dev_ds, batch_sampler=dev_batch_sampler, collate_fn=collate_fn)
 
     # configure model training
     ernie = ErnieModel.from_pretrained(model_name)
     model = ErnieForTokenClassification(ernie, num_classes=len(label2id))
 
     num_training_steps = len(train_loader) * args.num_epoch
-    lr_scheduler = LinearDecayWithWarmup(args.learning_rate, num_training_steps, args.warmup_proportion)
-    decay_params = [p.name for n, p in model.named_parameters() if not any(nd in n for nd in ["bias", "norm"])]
+    lr_scheduler = LinearDecayWithWarmup(args.learning_rate, num_training_steps,
+                                         args.warmup_proportion)
+    decay_params = [
+        p.name for n, p in model.named_parameters()
+        if not any(nd in n for nd in ["bias", "norm"])
+    ]
     grad_clip = paddle.nn.ClipGradByGlobalNorm(args.max_grad_norm)
-    optimizer = paddle.optimizer.AdamW(learning_rate=lr_scheduler, parameters=model.parameters(), weight_decay=args.weight_decay, apply_decay_param_fun=lambda x: x in decay_params, grad_clip=grad_clip)
+    optimizer = paddle.optimizer.AdamW(
+        learning_rate=lr_scheduler,
+        parameters=model.parameters(),
+        weight_decay=args.weight_decay,
+        apply_decay_param_fun=lambda x: x in decay_params,
+        grad_clip=grad_clip)
 
     criterion = DuIELoss()
     metric = SPOMetric()
     # start to train joint_model
     global_step, best_f1 = 0, 0.
     model.train()
-    for epoch in range(1, args.num_epoch+1):
+    for epoch in range(1, args.num_epoch + 1):
         for idx, batch_data in enumerate(train_loader()):
             input_ids, token_type_ids, attention_masks, seq_lens, labels = batch_data
             logits = model(input_ids, token_type_ids=token_type_ids)
@@ -151,25 +173,33 @@ def train():
             optimizer.clear_grad()
 
             if global_step > 0 and global_step % args.log_step == 0:
-                print(f"epoch: {epoch} - global_step: {global_step}/{num_training_steps} - loss:{loss.numpy().item():.6f}")
+                print(
+                    f"epoch: {epoch} - global_step: {global_step}/{num_training_steps} - loss:{loss.numpy().item():.6f}"
+                )
             if global_step > 0 and global_step % args.eval_step == 0:
-                precision, recall, f1  = evaluate(model, dev_loader,  metric, dev_examples, reverse_schema, id2label, args.batch_size)
+                precision, recall, f1 = evaluate(model, dev_loader, metric,
+                                                 dev_examples, reverse_schema,
+                                                 id2label, args.batch_size)
                 model.train()
                 if f1 > best_f1:
-                    print(f"best F1 performence has been updated: {best_f1:.5f} --> {f1:.5f}")
+                    print(
+                        f"best F1 performence has been updated: {best_f1:.5f} --> {f1:.5f}"
+                    )
                     best_f1 = f1
-                    paddle.save(model.state_dict(), f"{args.checkpoint}/best.pdparams")
-                print(f'evalution result: precision: {precision:.5f}, recall: {recall:.5f},  F1: {f1:.5f}')
+                    paddle.save(model.state_dict(),
+                                f"{args.checkpoint}/best.pdparams")
+                print(
+                    f'evalution result: precision: {precision:.5f}, recall: {recall:.5f},  F1: {f1:.5f}'
+                )
 
             global_step += 1
 
     paddle.save(model.state_dict(), f"{args.checkpoint}/final.pdparams")
 
- 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     # generate label and schema dict
-    generate_dict(args.ori_schema_path, args.save_label_path, args.save_schema_path)
+    generate_dict(args.ori_schema_path, args.save_label_path,
+                  args.save_schema_path)
     # train model
     train()
-
-

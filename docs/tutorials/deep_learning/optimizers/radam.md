@@ -27,4 +27,3 @@ $$\theta_{t}=\theta_{t-1}-\alpha_{t} r_{t}\hat m_{t} l_{t}$$
 如果方差不容易得到（tractable），我们采用下面的公式：
 
 $$\theta_{t}=\theta_{t-1}-\alpha_{t} \hat m_{t}$$
-

@@ -26,6 +26,7 @@ from ..registry import PIPELINES
 class ImageDecoder(object):
     """Decode Image
     """
+
     def __init__(self,
                  dataset,
                  frame_idxs,
@@ -58,10 +59,9 @@ class ImageDecoder(object):
             image_path = os.path.join(self.data_path, folder, f_str)
         elif dataset == "kitti_odom":
             f_str = "{:06d}{}".format(frame_index, self.img_ext)
-            image_path = os.path.join(self.data_path,
-                                      "sequences/{:02d}".format(int(folder)),
-                                      "image_{}".format(self.side_map[side]),
-                                      f_str)
+            image_path = os.path.join(
+                self.data_path, "sequences/{:02d}".format(int(folder)),
+                "image_{}".format(self.side_map[side]), f_str)
         elif dataset == "kitti_depth":
             f_str = "{:010d}{}".format(frame_index, self.img_ext)
             image_path = os.path.join(
@@ -97,11 +97,12 @@ class ImageDecoder(object):
 
             depth_gt = depth_gt[160:960 - 160, :]
 
-            depth_gt = skimage.transform.resize(depth_gt,
-                                                self.full_res_shape[::-1],
-                                                order=0,
-                                                preserve_range=True,
-                                                mode='constant')
+            depth_gt = skimage.transform.resize(
+                depth_gt,
+                self.full_res_shape[::-1],
+                order=0,
+                preserve_range=True,
+                mode='constant')
 
         return depth_gt
 
@@ -159,9 +160,8 @@ class ImageDecoder(object):
                     other_side = {"r": "l", "l": "r"}[side]
                     imgs[("color", i,
                           -1)] = self.get_color(folder, frame_index, other_side)
-                    imgs[("color_n", i,
-                          -1)] = self.get_color(folder2, frame_index,
-                                                other_side)
+                    imgs[("color_n", i, -1)] = self.get_color(
+                        folder2, frame_index, other_side)
                 else:
                     imgs[("color", i,
                           -1)] = self.get_color(folder, frame_index + i, side)

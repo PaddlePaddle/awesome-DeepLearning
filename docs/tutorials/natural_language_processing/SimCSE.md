@@ -66,13 +66,13 @@ $l_{i}=-\log\frac{e^{sim(h_{i}^{z_i},h_{i}^{^{z_i^{’}}})/\tau}}{\sum_{j=1}^{N}
 相似的问题对为正样本，如下：
 ```
 正样本
-How can I improve my communication and verbal skills? 
+How can I improve my communication and verbal skills?
 What should we do to improve communication skills?
 ```
 不相似的问题对为负样本，如下：
 ```
 负样本
-Why are you so sexy? 
+Why are you so sexy?
 How sexy are you?
 ```
 - Flickr30k：每个图像都有5个人进行描述，可以认为同一图像的任意两个描述为一对$(x_{i}, x_{i}^{+})$数据对；
@@ -101,17 +101,17 @@ A man with a yellow tie looks concerned.
 自然语言推理数据集，包含蕴含、矛盾和中立；蕴含表示第二句话可以推理出第一句话；矛盾表示第二句话不能推理出第一句话；中立表示两句话无关；举例如下：
 ```
 蕴含样本
-well you see that on television also 
+well you see that on television also
 You can see that on television, as well.
 ```
 ```
 矛盾样本
-but that takes too much planning 
+but that takes too much planning
 It doesn't take much planning.
 ```
 ```
 中立样本
-Conceptually cream skimming has two basic dimensions - product and geography. 
+Conceptually cream skimming has two basic dimensions - product and geography.
 Product and geography are what make cream skimming work.
 ```
 
@@ -163,6 +163,3 @@ SimCSE论文，在无监督句向量表征上，通过简单的dropout方式，�
 
 ## 8.参考文献
 - [SimCSE: Simple Contrastive Learning of Sentence Embeddings](https://aclanthology.org/2021.emnlp-main.552.pdf)
-
-
-

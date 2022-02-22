@@ -20,5 +20,3 @@ $$\eta_{t}=\hat \eta_{t}/\sqrt{t}$$
 $$\theta_{t+1}=\theta_{t}-\eta_{t} \odot m_{t}$$
 
 在这种设置下，AdaBound在最开始表现的像Adam，因为最开始学习率的边界对更新公式影响很小，渐渐的表现的像SGD+momentum，因为学习率逐渐被限制住了。
-
-

@@ -2,6 +2,7 @@ import math
 import paddle
 import paddle.nn as nn
 
+
 class PositionEmbedding(nn.Layer):
     def __init__(self,
                  num_pos_feats=128,
@@ -80,4 +81,3 @@ class PositionEmbedding(nn.Layer):
             return pos
         else:
             raise ValueError(f"not supported {self.embed_type}")
-

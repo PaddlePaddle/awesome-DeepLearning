@@ -21,9 +21,11 @@ trunc_normal_ = nn.initializer.TruncatedNormal(std=.02)
 zeros_ = nn.initializer.Constant(value=0.)
 ones_ = nn.initializer.Constant(value=1.)
 
+
 # 将输入 x 由 int 类型转为 tuple 类型
 def to_2tuple(x):
     return tuple([x] * 2)
+
 
 # 定义一个什么操作都不进行的网络层
 class Identity(nn.Layer):
@@ -144,6 +146,7 @@ def drop_path(x, drop_prob=0., training=False):
     output = x.divide(keep_prob) * random_tensor
     return output
 
+
 class DropPath(nn.Layer):
     def __init__(self, drop_prob=None):
         super(DropPath, self).__init__()
@@ -154,7 +157,8 @@ class DropPath(nn.Layer):
 
 
 class Block(nn.Layer):
-    def __init__(self, dim,
+    def __init__(self,
+                 dim,
                  num_heads,
                  mlp_ratio=4.,
                  qkv_bias=False,
@@ -257,6 +261,7 @@ class VisionTransformer(nn.Layer):
         trunc_normal_(self.pos_embed)
         trunc_normal_(self.cls_token)
         self.apply(self._init_weights)
+
     # 参数初始化
     def _init_weights(self, m):
         if isinstance(m, nn.Linear):
@@ -266,6 +271,7 @@ class VisionTransformer(nn.Layer):
         elif isinstance(m, nn.LayerNorm):
             zeros_(m.bias)
             ones_(m.weight)
+
     # 获取图像特征
     def forward_features(self, x):
         B = paddle.shape(x)[0]
@@ -337,6 +343,7 @@ class DistilledVisionTransformer(VisionTransformer):
         trunc_normal_(self.dist_token)
         trunc_normal_(self.pos_embed)
         self.head_dist.apply(self._init_weights)
+
     # 获取图像特征
     def forward_features(self, x):
         B = paddle.shape(x)[0]

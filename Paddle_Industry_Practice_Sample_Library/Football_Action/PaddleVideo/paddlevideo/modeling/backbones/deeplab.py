@@ -26,6 +26,7 @@ class FrozenBatchNorm2D(nn.Layer):
     BatchNorm2D where the batch statistics and the affine parameters
     are fixed
     """
+
     def __init__(self, n, epsilon=1e-5):
         super(FrozenBatchNorm2D, self).__init__()
         x1 = paddle.ones([n])
@@ -63,20 +64,20 @@ class Bottleneck(nn.Layer):
                  downsample=None,
                  BatchNorm=None):
         super(Bottleneck, self).__init__()
-        self.conv1 = nn.Conv2D(inplanes, planes, kernel_size=1, bias_attr=False)
+        self.conv1 = nn.Conv2D(
+            inplanes, planes, kernel_size=1, bias_attr=False)
         self.bn1 = BatchNorm(planes)
-        self.conv2 = nn.Conv2D(planes,
-                               planes,
-                               kernel_size=3,
-                               stride=stride,
-                               dilation=dilation,
-                               padding=dilation,
-                               bias_attr=False)
+        self.conv2 = nn.Conv2D(
+            planes,
+            planes,
+            kernel_size=3,
+            stride=stride,
+            dilation=dilation,
+            padding=dilation,
+            bias_attr=False)
         self.bn2 = BatchNorm(planes)
-        self.conv3 = nn.Conv2D(planes,
-                               planes * 4,
-                               kernel_size=1,
-                               bias_attr=False)
+        self.conv3 = nn.Conv2D(
+            planes, planes * 4, kernel_size=1, bias_attr=False)
         self.bn3 = BatchNorm(planes * 4)
         self.relu = nn.ReLU()
         self.downsample = downsample
@@ -126,40 +127,40 @@ class ResNet(nn.Layer):
             raise NotImplementedError
 
         # Modules
-        self.conv1 = nn.Conv2D(3,
-                               64,
-                               kernel_size=7,
-                               stride=2,
-                               padding=3,
-                               bias_attr=False)
+        self.conv1 = nn.Conv2D(
+            3, 64, kernel_size=7, stride=2, padding=3, bias_attr=False)
         self.bn1 = BatchNorm(64)
         self.relu = nn.ReLU()
         self.maxpool = nn.MaxPool2D(kernel_size=3, stride=2, padding=1)
 
-        self.layer1 = self._make_layer(block,
-                                       64,
-                                       layers[0],
-                                       stride=strides[0],
-                                       dilation=dilations[0],
-                                       BatchNorm=BatchNorm)
-        self.layer2 = self._make_layer(block,
-                                       128,
-                                       layers[1],
-                                       stride=strides[1],
-                                       dilation=dilations[1],
-                                       BatchNorm=BatchNorm)
-        self.layer3 = self._make_layer(block,
-                                       256,
-                                       layers[2],
-                                       stride=strides[2],
-                                       dilation=dilations[2],
-                                       BatchNorm=BatchNorm)
-        self.layer4 = self._make_MG_unit(block,
-                                         512,
-                                         blocks=blocks,
-                                         stride=strides[3],
-                                         dilation=dilations[3],
-                                         BatchNorm=BatchNorm)
+        self.layer1 = self._make_layer(
+            block,
+            64,
+            layers[0],
+            stride=strides[0],
+            dilation=dilations[0],
+            BatchNorm=BatchNorm)
+        self.layer2 = self._make_layer(
+            block,
+            128,
+            layers[1],
+            stride=strides[1],
+            dilation=dilations[1],
+            BatchNorm=BatchNorm)
+        self.layer3 = self._make_layer(
+            block,
+            256,
+            layers[2],
+            stride=strides[2],
+            dilation=dilations[2],
+            BatchNorm=BatchNorm)
+        self.layer4 = self._make_MG_unit(
+            block,
+            512,
+            blocks=blocks,
+            stride=strides[3],
+            dilation=dilations[3],
+            BatchNorm=BatchNorm)
         self._init_weight()
 
     def _make_layer(self,
@@ -172,13 +173,13 @@ class ResNet(nn.Layer):
         downsample = None
         if stride != 1 or self.inplanes != planes * block.expansion:
             downsample = nn.Sequential(
-                nn.Conv2D(self.inplanes,
-                          planes * block.expansion,
-                          kernel_size=1,
-                          stride=stride,
-                          bias_attr=False),
-                BatchNorm(planes * block.expansion),
-            )
+                nn.Conv2D(
+                    self.inplanes,
+                    planes * block.expansion,
+                    kernel_size=1,
+                    stride=stride,
+                    bias_attr=False),
+                BatchNorm(planes * block.expansion), )
 
         layers = []
         layers.append(
@@ -187,10 +188,11 @@ class ResNet(nn.Layer):
         self.inplanes = planes * block.expansion
         for i in range(1, blocks):
             layers.append(
-                block(self.inplanes,
-                      planes,
-                      dilation=dilation,
-                      BatchNorm=BatchNorm))
+                block(
+                    self.inplanes,
+                    planes,
+                    dilation=dilation,
+                    BatchNorm=BatchNorm))
 
         return nn.Sequential(*layers)
 
@@ -204,30 +206,32 @@ class ResNet(nn.Layer):
         downsample = None
         if stride != 1 or self.inplanes != planes * block.expansion:
             downsample = nn.Sequential(
-                nn.Conv2D(self.inplanes,
-                          planes * block.expansion,
-                          kernel_size=1,
-                          stride=stride,
-                          bias_attr=False),
-                BatchNorm(planes * block.expansion),
-            )
+                nn.Conv2D(
+                    self.inplanes,
+                    planes * block.expansion,
+                    kernel_size=1,
+                    stride=stride,
+                    bias_attr=False),
+                BatchNorm(planes * block.expansion), )
 
         layers = []
         layers.append(
-            block(self.inplanes,
-                  planes,
-                  stride,
-                  dilation=blocks[0] * dilation,
-                  downsample=downsample,
-                  BatchNorm=BatchNorm))
+            block(
+                self.inplanes,
+                planes,
+                stride,
+                dilation=blocks[0] * dilation,
+                downsample=downsample,
+                BatchNorm=BatchNorm))
         self.inplanes = planes * block.expansion
         for i in range(1, len(blocks)):
             layers.append(
-                block(self.inplanes,
-                      planes,
-                      stride=1,
-                      dilation=blocks[i] * dilation,
-                      BatchNorm=BatchNorm))
+                block(
+                    self.inplanes,
+                    planes,
+                    stride=1,
+                    dilation=blocks[i] * dilation,
+                    BatchNorm=BatchNorm))
 
         return nn.Sequential(*layers)
 
@@ -261,13 +265,14 @@ class _ASPPModule(nn.Layer):
     def __init__(self, inplanes, planes, kernel_size, padding, dilation,
                  BatchNorm):
         super(_ASPPModule, self).__init__()
-        self.atrous_conv = nn.Conv2D(inplanes,
-                                     planes,
-                                     kernel_size=kernel_size,
-                                     stride=1,
-                                     padding=padding,
-                                     dilation=dilation,
-                                     bias_attr=False)
+        self.atrous_conv = nn.Conv2D(
+            inplanes,
+            planes,
+            kernel_size=kernel_size,
+            stride=1,
+            padding=padding,
+            dilation=dilation,
+            bias_attr=False)
         self.bn = BatchNorm(planes)
         self.relu = nn.ReLU()
 
@@ -304,35 +309,41 @@ class ASPP(nn.Layer):
         else:
             raise NotImplementedError
 
-        self.aspp1 = _ASPPModule(inplanes,
-                                 256,
-                                 1,
-                                 padding=0,
-                                 dilation=dilations[0],
-                                 BatchNorm=BatchNorm)
-        self.aspp2 = _ASPPModule(inplanes,
-                                 256,
-                                 3,
-                                 padding=dilations[1],
-                                 dilation=dilations[1],
-                                 BatchNorm=BatchNorm)
-        self.aspp3 = _ASPPModule(inplanes,
-                                 256,
-                                 3,
-                                 padding=dilations[2],
-                                 dilation=dilations[2],
-                                 BatchNorm=BatchNorm)
-        self.aspp4 = _ASPPModule(inplanes,
-                                 256,
-                                 3,
-                                 padding=dilations[3],
-                                 dilation=dilations[3],
-                                 BatchNorm=BatchNorm)
+        self.aspp1 = _ASPPModule(
+            inplanes,
+            256,
+            1,
+            padding=0,
+            dilation=dilations[0],
+            BatchNorm=BatchNorm)
+        self.aspp2 = _ASPPModule(
+            inplanes,
+            256,
+            3,
+            padding=dilations[1],
+            dilation=dilations[1],
+            BatchNorm=BatchNorm)
+        self.aspp3 = _ASPPModule(
+            inplanes,
+            256,
+            3,
+            padding=dilations[2],
+            dilation=dilations[2],
+            BatchNorm=BatchNorm)
+        self.aspp4 = _ASPPModule(
+            inplanes,
+            256,
+            3,
+            padding=dilations[3],
+            dilation=dilations[3],
+            BatchNorm=BatchNorm)
 
         self.global_avg_pool = nn.Sequential(
             nn.AdaptiveAvgPool2D((1, 1)),
-            nn.Conv2D(inplanes, 256, 1, stride=1, bias_attr=False),
-            BatchNorm(256), nn.ReLU())
+            nn.Conv2D(
+                inplanes, 256, 1, stride=1, bias_attr=False),
+            BatchNorm(256),
+            nn.ReLU())
         self.conv1 = nn.Conv2D(1280, 256, 1, bias_attr=False)
         self.bn1 = BatchNorm(256)
         self.relu = nn.ReLU()
@@ -345,10 +356,8 @@ class ASPP(nn.Layer):
         x3 = self.aspp3(x)
         x4 = self.aspp4(x)
         x5 = self.global_avg_pool(x)
-        x5 = F.interpolate(x5,
-                           size=x4.shape[2:],
-                           mode='bilinear',
-                           align_corners=True)
+        x5 = F.interpolate(
+            x5, size=x4.shape[2:], mode='bilinear', align_corners=True)
         x = paddle.concat(x=[x1, x2, x3, x4, x5], axis=1)
 
         x = self.conv1(x)
@@ -381,19 +390,15 @@ class Decoder(nn.Layer):
         self.relu = nn.ReLU()
 
         self.last_conv = nn.Sequential(
-            nn.Conv2D(304,
-                      256,
-                      kernel_size=3,
-                      stride=1,
-                      padding=1,
-                      bias_attr=False), BatchNorm(256), nn.ReLU(),
+            nn.Conv2D(
+                304, 256, kernel_size=3, stride=1, padding=1, bias_attr=False),
+            BatchNorm(256),
+            nn.ReLU(),
             nn.Sequential(),
-            nn.Conv2D(256,
-                      256,
-                      kernel_size=3,
-                      stride=1,
-                      padding=1,
-                      bias_attr=False), BatchNorm(256), nn.ReLU(),
+            nn.Conv2D(
+                256, 256, kernel_size=3, stride=1, padding=1, bias_attr=False),
+            BatchNorm(256),
+            nn.ReLU(),
             nn.Sequential())
 
         self._init_weight()
@@ -403,10 +408,11 @@ class Decoder(nn.Layer):
         low_level_feat = self.bn1(low_level_feat)
         low_level_feat = self.relu(low_level_feat)
 
-        x = F.interpolate(x,
-                          size=low_level_feat.shape[2:],
-                          mode='bilinear',
-                          align_corners=True)
+        x = F.interpolate(
+            x,
+            size=low_level_feat.shape[2:],
+            mode='bilinear',
+            align_corners=True)
         x = paddle.concat(x=[x, low_level_feat], axis=1)
         x = self.last_conv(x)
 
@@ -423,6 +429,7 @@ class Decoder(nn.Layer):
 
 class DeepLab(nn.Layer):
     """DeepLab model for segmentation"""
+
     def __init__(self, backbone='resnet', output_stride=16, freeze_bn=True):
         super(DeepLab, self).__init__()
 
@@ -432,10 +439,11 @@ class DeepLab(nn.Layer):
         else:
             BatchNorm = nn.BatchNorm2D
 
-        self.backbone = ResNet(Bottleneck, [3, 4, 23, 3],
-                               output_stride,
-                               BatchNorm,
-                               pretrained=True)
+        self.backbone = ResNet(
+            Bottleneck, [3, 4, 23, 3],
+            output_stride,
+            BatchNorm,
+            pretrained=True)
         self.aspp = ASPP(backbone, output_stride, BatchNorm)
         self.decoder = Decoder(backbone, BatchNorm)
 

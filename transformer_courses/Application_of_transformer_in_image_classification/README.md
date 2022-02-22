@@ -64,7 +64,7 @@ DeiT（Data-efficient Image Transformers）系列模型是由FaceBook在2020年�
 可以通过以下方式开始模型评估过程
 
 ```bash
-python3 eval.py 
+python3 eval.py
     --model ViT  \
     --data data/ILSVRC2012_val
 ```

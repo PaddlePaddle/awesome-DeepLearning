@@ -58,18 +58,20 @@ def pretrain_swin_param_trans(model, state_dicts):
         k for k in state_dicts.keys() if "relative_position_bias_table" in k
     ]
     total_len = len(relative_position_bias_table_keys)
-    with tqdm(total=total_len,
-              position=1,
-              bar_format='{desc}',
-              desc="Loading weights") as desc:
-        for key in tqdm(relative_position_bias_table_keys,
-                        total=total_len,
-                        position=0):
+    with tqdm(
+            total=total_len,
+            position=1,
+            bar_format='{desc}',
+            desc="Loading weights") as desc:
+        for key in tqdm(
+                relative_position_bias_table_keys, total=total_len,
+                position=0):
             relative_position_bias_table_pretrained = state_dicts[key]
             relative_position_bias_table_current = model.state_dict()[key]
             L1, nH1 = relative_position_bias_table_pretrained.shape
             L2, nH2 = relative_position_bias_table_current.shape
-            L2 = (2 * model.window_size[1] - 1) * (2 * model.window_size[2] - 1)
+            L2 = (2 * model.window_size[1] - 1) * (
+                2 * model.window_size[2] - 1)
             wd = model.window_size[0]
             if nH1 != nH2:
                 desc.set_description(f"Error in loading {key}, skip")
@@ -108,13 +110,12 @@ def pretrain_vit_param_trans(model, state_dicts, num_patches, num_seg,
     if num_patches + 1 != state_dicts['pos_embed'].shape[1]:
         pos_embed = state_dicts['pos_embed']
         cls_pos_embed = pos_embed[0, 0, :].unsqueeze(0).unsqueeze(1)
-        other_pos_embed = pos_embed[0,
-                                    1:, :].unsqueeze(0).unsqueeze(1).transpose(
-                                        (0, 1, 3, 2))
-        new_pos_embed = F.interpolate(other_pos_embed,
-                                      size=(other_pos_embed.shape[-2],
-                                            num_patches),
-                                      mode='nearest')
+        other_pos_embed = pos_embed[0, 1:, :].unsqueeze(0).unsqueeze(
+            1).transpose((0, 1, 3, 2))
+        new_pos_embed = F.interpolate(
+            other_pos_embed,
+            size=(other_pos_embed.shape[-2], num_patches),
+            mode='nearest')
         new_pos_embed = new_pos_embed.squeeze(0).transpose((0, 2, 1))
         new_pos_embed = paddle.concat((cls_pos_embed, new_pos_embed), axis=1)
         state_dicts['pos_embed'] = new_pos_embed
@@ -122,17 +123,18 @@ def pretrain_vit_param_trans(model, state_dicts, num_patches, num_seg,
 
     if 'time_embed' in state_dicts and num_seg != state_dicts[
             'time_embed'].shape[1]:
-        time_embed = state_dicts['time_embed'].transpose((0, 2, 1)).unsqueeze(0)
-        new_time_embed = F.interpolate(time_embed,
-                                       size=(time_embed.shape[-2], num_seg),
-                                       mode='nearest')
+        time_embed = state_dicts['time_embed'].transpose(
+            (0, 2, 1)).unsqueeze(0)
+        new_time_embed = F.interpolate(
+            time_embed, size=(time_embed.shape[-2], num_seg), mode='nearest')
         state_dicts['time_embed'] = new_time_embed.squeeze(0).transpose(
             (0, 2, 1))
         time.sleep(0.01)
-    with tqdm(total=total_len,
-              position=1,
-              bar_format='{desc}',
-              desc="Loading weights") as desc:
+    with tqdm(
+            total=total_len,
+            position=1,
+            bar_format='{desc}',
+            desc="Loading weights") as desc:
         if attention_type == 'divided_space_time':
             new_state_dicts = state_dicts.copy()
             for key in tqdm(state_dicts):
@@ -164,13 +166,13 @@ def pretrain_resnet18_param_trans(model, loaded_dict):
     names = ['encoder.', 'encoder_day.', 'encoder_night.']
     for name in names:
         total_len = len(loaded_dict.items())
-        with tqdm(total=total_len,
-                  position=1,
-                  bar_format='{desc}',
-                  desc="Loading weights") as desc:
-            for key, value in tqdm(loaded_dict.items(),
-                                   total=total_len,
-                                   position=0):
+        with tqdm(
+                total=total_len,
+                position=1,
+                bar_format='{desc}',
+                desc="Loading weights") as desc:
+            for key, value in tqdm(
+                    loaded_dict.items(), total=total_len, position=0):
                 key = str(name + key)
                 if key in encoder_dict:
                     encoder_dict[key] = value
@@ -181,13 +183,13 @@ def pretrain_resnet18_param_trans(model, loaded_dict):
     loaded_dict['conv1.weight'] = paddle.concat(
         [loaded_dict['conv1.weight']] * num_input_images, 1) / num_input_images
     total_len = len(loaded_dict.items())
-    with tqdm(total=total_len,
-              position=1,
-              bar_format='{desc}',
-              desc="Loading weights") as desc:
-        for name, value in tqdm(loaded_dict.items(),
-                                total=total_len,
-                                position=0):
+    with tqdm(
+            total=total_len,
+            position=1,
+            bar_format='{desc}',
+            desc="Loading weights") as desc:
+        for name, value in tqdm(
+                loaded_dict.items(), total=total_len, position=0):
             name = str('encoder.' + name)
             if name in pose_encoder_dict:
                 pose_encoder_dict[name] = value
@@ -223,18 +225,19 @@ def load_ckpt(model, weight_path, **kargs):
         model.pose_encoder.load_dict(pose_encoder_dict)
         tmp = model.state_dict()
     elif "VisionTransformer" in str(model):  # For TimeSformer case
-        tmp = pretrain_vit_param_trans(model, state_dicts, kargs['num_patches'],
-                                       kargs['num_seg'],
+        tmp = pretrain_vit_param_trans(model, state_dicts,
+                                       kargs['num_patches'], kargs['num_seg'],
                                        kargs['attention_type'])
     elif 'SwinTransformer3D' in str(model):
         tmp = pretrain_swin_param_trans(model, state_dicts)
     else:
         tmp = {}
         total_len = len(model.state_dict())
-        with tqdm(total=total_len,
-                  position=1,
-                  bar_format='{desc}',
-                  desc="Loading weights") as desc:
+        with tqdm(
+                total=total_len,
+                position=1,
+                bar_format='{desc}',
+                desc="Loading weights") as desc:
             for item in tqdm(model.state_dict(), total=total_len, position=0):
                 name = item
                 desc.set_description('Loading %s' % name)

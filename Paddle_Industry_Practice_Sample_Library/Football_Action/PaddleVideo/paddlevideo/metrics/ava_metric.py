@@ -29,7 +29,6 @@ logger = get_logger("paddlevideo")
 
 @METRIC.register
 class AVAMetric(BaseMetric):
-
     def __init__(self,
                  data_size,
                  batch_size,

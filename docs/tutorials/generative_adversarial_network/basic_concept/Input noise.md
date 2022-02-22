@@ -9,4 +9,3 @@ GAN生成器Generator的输入是随机噪声，目的是每次生成不同的�
 引入随机噪声使得生成的图片具有多样性，比如下图不同的噪声z可以产生不同的数字：
 
 ![](../../../images/generative_adversarial_network/basic_concept/4_.png)
-

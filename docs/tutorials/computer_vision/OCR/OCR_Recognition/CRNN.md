@@ -43,4 +43,3 @@ CRNN的主要结构包括基于CNN的图像特征提取模块以及基于多层�
 ## 参考文献
 
 [1] [An End-to-End Trainable Neural Network for Image-based SequenceRecognition and Its Application to Scene Text Recognition](https://arxiv.org/pdf/1507.05717v1.pdf)
-

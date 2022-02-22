@@ -283,7 +283,8 @@ class OFA(OFABase):
                                         sublayer._out_channels),
                                 getattr(sublayer, '_num_filters',
                                         sublayer._out_channels), 1)
-                        elif self.distill_config.mapping_op.lower() == 'linear':
+                        elif self.distill_config.mapping_op.lower(
+                        ) == 'linear':
                             netA = SuperLinear(
                                 getattr(sublayer, '_output_dim',
                                         sublayer._out_features),
@@ -346,8 +347,8 @@ class OFA(OFABase):
             if isinstance(v, dict):
                 sample_cands[k] = self._sample_from_nestdict(
                     v, sample_type=sample_type, task=task, phase=phase)
-            elif isinstance(v, list) or isinstance(v, set) or isinstance(v,
-                                                                         tuple):
+            elif isinstance(v, list) or isinstance(v, set) or isinstance(
+                    v, tuple):
                 if sample_type == 'largest':
                     sample_cands[k] = v[-1]
                 elif sample_type == 'smallest':
@@ -486,7 +487,8 @@ class OFA(OFABase):
                 if name in config.keys():
                     origin_model_config[param.name] = config[name]
 
-        param_prune_config = get_prune_params_config(graph, origin_model_config)
+        param_prune_config = get_prune_params_config(graph,
+                                                     origin_model_config)
         return param_prune_config
 
     def export(self,
@@ -518,8 +520,8 @@ class OFA(OFABase):
             origin_model = self.model
         origin_model = origin_model._layers if isinstance(
             origin_model, DataParallel) else origin_model
-        param_config = self._export_sub_model_config(origin_model, config,
-                                                     input_shapes, input_dtypes)
+        param_config = self._export_sub_model_config(
+            origin_model, config, input_shapes, input_dtypes)
         prune_params(origin_model, param_config, super_sd)
         return origin_model
 

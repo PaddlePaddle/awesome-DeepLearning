@@ -263,7 +263,7 @@ More parameters are as follows:
     | rec_batch_num | int | 1 | Batch size during model prediction |
     | char_list_file | str | "../../data/k400/Kinetics-400_label_list.txt" | The text path for storing all category labels and corresponding names |
 
-​	Take the sample video `example01.avi` under example_video_dir as the input video as an example, the final 	screen will output the detection results as follows.
+​    Take the sample video `example01.avi` under example_video_dir as the input video as an example, the final     screen will output the detection results as follows.
 
 ```bash
 [./inference/ppTSM]

@@ -21,6 +21,7 @@ logger = get_logger("paddlevideo")
 @MULTIMODAL.register()
 class ActBert(BaseMultimodal):
     """ActBert model framework."""
+
     def forward_net(self, text_ids, action_feat, image_feat, image_loc,
                     token_type_ids, text_mask, image_mask, action_mask):
         pred = self.backbone(text_ids, action_feat, image_feat, image_loc,

@@ -54,6 +54,7 @@ def drop_path(x, drop_prob=0., training=False):
 class DropPath(nn.Layer):
     """Drop paths (Stochastic Depth) per sample  (when applied in main path of residual blocks).
     """
+
     def __init__(self, drop_prob=None):
         super(DropPath, self).__init__()
         self.drop_prob = drop_prob
@@ -155,12 +156,13 @@ class Block(nn.Layer):
             raise TypeError(
                 "The norm_layer must be str or paddle.nn.layer.Layer class")
 
-        self.attn = Attention(dim,
-                              num_heads=num_heads,
-                              qkv_bias=qkv_bias,
-                              qk_scale=qk_scale,
-                              attn_drop=attn_drop,
-                              proj_drop=drop)
+        self.attn = Attention(
+            dim,
+            num_heads=num_heads,
+            qkv_bias=qkv_bias,
+            qk_scale=qk_scale,
+            attn_drop=attn_drop,
+            proj_drop=drop)
 
         # Temporal Attention Parameters
         if self.attention_type == 'divided_space_time':
@@ -171,12 +173,13 @@ class Block(nn.Layer):
             else:
                 raise TypeError(
                     "The norm_layer must be str or paddle.nn.layer.Layer class")
-            self.temporal_attn = Attention(dim,
-                                           num_heads=num_heads,
-                                           qkv_bias=qkv_bias,
-                                           qk_scale=qk_scale,
-                                           attn_drop=attn_drop,
-                                           proj_drop=drop)
+            self.temporal_attn = Attention(
+                dim,
+                num_heads=num_heads,
+                qkv_bias=qkv_bias,
+                qk_scale=qk_scale,
+                attn_drop=attn_drop,
+                proj_drop=drop)
             self.temporal_fc = nn.Linear(dim, dim)
 
         # NOTE: drop path for stochastic depth, we shall see if this is better than dropout here
@@ -243,8 +246,9 @@ class Block(nn.Layer):
 
             res = res_spatial
             x = xt
-            x = paddle.concat((init_cls_token, x), axis=1) + paddle.concat(
-                (cls_token, res), axis=1)
+            x = paddle.concat(
+                (init_cls_token, x), axis=1) + paddle.concat(
+                    (cls_token, res), axis=1)
 
             # Mlp
             x = x + self.drop_path(self.mlp(self.norm2(x)))
@@ -256,6 +260,7 @@ class Block(nn.Layer):
 class PatchEmbed(nn.Layer):
     """ Image to Patch Embedding
     """
+
     def __init__(self,
                  img_size=224,
                  patch_size=16,
@@ -270,10 +275,8 @@ class PatchEmbed(nn.Layer):
         self.patch_size = patch_size
         self.num_patches = num_patches
 
-        self.proj = nn.Conv2D(in_channels,
-                              embed_dim,
-                              kernel_size=patch_size,
-                              stride=patch_size)
+        self.proj = nn.Conv2D(
+            in_channels, embed_dim, kernel_size=patch_size, stride=patch_size)
 
     def forward(self, x):
         B, C, T, H, W = x.shape
@@ -292,6 +295,7 @@ class PatchEmbed(nn.Layer):
 class VisionTransformer(nn.Layer):
     """ Vision Transformer with support for patch input
     """
+
     def __init__(self,
                  pretrained=None,
                  img_size=224,
@@ -317,24 +321,23 @@ class VisionTransformer(nn.Layer):
         self.attention_type = attention_type
         self.num_features = self.embed_dim = embed_dim
 
-        self.patch_embed = PatchEmbed(img_size=img_size,
-                                      patch_size=patch_size,
-                                      in_channels=in_channels,
-                                      embed_dim=embed_dim)
+        self.patch_embed = PatchEmbed(
+            img_size=img_size,
+            patch_size=patch_size,
+            in_channels=in_channels,
+            embed_dim=embed_dim)
         num_patches = self.patch_embed.num_patches
 
         # Positional Embeddings
-        self.cls_token = self.create_parameter(shape=(1, 1, embed_dim),
-                                               default_initializer=zeros_)
-        self.pos_embed = self.create_parameter(shape=(1, num_patches + 1,
-                                                      embed_dim),
-                                               default_initializer=zeros_)
+        self.cls_token = self.create_parameter(
+            shape=(1, 1, embed_dim), default_initializer=zeros_)
+        self.pos_embed = self.create_parameter(
+            shape=(1, num_patches + 1, embed_dim), default_initializer=zeros_)
         self.pos_drop = nn.Dropout(p=drop_rate)
 
         if self.attention_type != 'space_only':
-            self.time_embed = self.create_parameter(shape=(1, num_seg,
-                                                           embed_dim),
-                                                    default_initializer=zeros_)
+            self.time_embed = self.create_parameter(
+                shape=(1, num_seg, embed_dim), default_initializer=zeros_)
             self.time_drop = nn.Dropout(p=drop_rate)
 
         self.add_parameter("pos_embed", self.pos_embed)
@@ -343,17 +346,18 @@ class VisionTransformer(nn.Layer):
         dpr = np.linspace(0, drop_path_rate, depth)
 
         self.blocks = nn.LayerList([
-            Block(dim=embed_dim,
-                  num_heads=num_heads,
-                  mlp_ratio=mlp_ratio,
-                  qkv_bias=qkv_bias,
-                  qk_scale=qk_scale,
-                  drop=drop_rate,
-                  attn_drop=attn_drop_rate,
-                  drop_path=dpr[i],
-                  norm_layer=norm_layer,
-                  epsilon=epsilon,
-                  attention_type=self.attention_type) for i in range(depth)
+            Block(
+                dim=embed_dim,
+                num_heads=num_heads,
+                mlp_ratio=mlp_ratio,
+                qkv_bias=qkv_bias,
+                qk_scale=qk_scale,
+                drop=drop_rate,
+                attn_drop=attn_drop_rate,
+                drop_path=dpr[i],
+                norm_layer=norm_layer,
+                epsilon=epsilon,
+                attention_type=self.attention_type) for i in range(depth)
         ])
 
         self.norm = eval(norm_layer)(embed_dim, epsilon=epsilon)
@@ -374,14 +378,14 @@ class VisionTransformer(nn.Layer):
                         zeros_(m.temporal_fc.bias)
                     i += 1
         """Second, if provide pretrained ckpt, load it"""
-        if isinstance(
-                self.pretrained, str
-        ) and self.pretrained.strip() != "":  # load pretrained weights
-            load_ckpt(self,
-                      self.pretrained,
-                      num_patches=self.patch_embed.num_patches,
-                      num_seg=self.num_seg,
-                      attention_type=self.attention_type)
+        if isinstance(self.pretrained, str) and self.pretrained.strip(
+        ) != "":  # load pretrained weights
+            load_ckpt(
+                self,
+                self.pretrained,
+                num_patches=self.patch_embed.num_patches,
+                num_seg=self.num_seg,
+                attention_type=self.attention_type)
 
     def _init_fn(self, m):
         if isinstance(m, nn.Linear):
@@ -396,7 +400,8 @@ class VisionTransformer(nn.Layer):
         # B = x.shape[0]
         B = paddle.shape(x)[0]
         x, T, W = self.patch_embed(x)  # [BT,nH*nW,F]
-        cls_tokens = self.cls_token.expand((B * T, -1, -1))  # [1,1,F]->[BT,1,F]
+        cls_tokens = self.cls_token.expand(
+            (B * T, -1, -1))  # [1,1,F]->[BT,1,F]
         x = paddle.concat((cls_tokens, x), axis=1)
         pos_interp = (x.shape[1] != self.pos_embed.shape[1])
         if pos_interp:
@@ -407,13 +412,12 @@ class VisionTransformer(nn.Layer):
             P = int(other_pos_embed.shape[2]**0.5)
             H = x.shape[1] // W
             other_pos_embed = other_pos_embed.reshape([1, x.shape[2], P, P])
-            new_pos_embed = F.interpolate(other_pos_embed,
-                                          size=(H, W),
-                                          mode='nearest')
+            new_pos_embed = F.interpolate(
+                other_pos_embed, size=(H, W), mode='nearest')
             new_pos_embed = new_pos_embed.flatten(2)
             new_pos_embed = new_pos_embed.transpose((0, 2, 1))
-            new_pos_embed = paddle.concat((cls_pos_embed, new_pos_embed),
-                                          axis=1)
+            new_pos_embed = paddle.concat(
+                (cls_pos_embed, new_pos_embed), axis=1)
             x = x + new_pos_embed
         else:
             x = x + self.pos_embed
@@ -422,8 +426,9 @@ class VisionTransformer(nn.Layer):
 
         # Time Embeddings
         if self.attention_type != 'space_only':
-            cls_tokens = x[:B, 0, :].unsqueeze(1) if B > 0 else x.split(
-                T)[0].index_select(paddle.to_tensor([0]), axis=1)
+            cls_tokens = x[:B, 0, :].unsqueeze(1) if B > 0 else x.split(T)[
+                0].index_select(
+                    paddle.to_tensor([0]), axis=1)
             x = x[:, 1:]
             _, _n, _m = x.shape
             _t = T
@@ -433,9 +438,9 @@ class VisionTransformer(nn.Layer):
             time_interp = (T != self.time_embed.shape[1])
             if time_interp:  # T' != T
                 time_embed = self.time_embed.transpose((0, 2, 1)).unsqueeze(0)
-                new_time_embed = F.interpolate(time_embed,
-                                               size=(T, x.shape[-1]),
-                                               mode='nearest').squeeze(0)
+                new_time_embed = F.interpolate(
+                    time_embed, size=(T, x.shape[-1]),
+                    mode='nearest').squeeze(0)
                 new_time_embed = new_time_embed.transpose((0, 2, 1))
                 x = x + new_time_embed
             else:

@@ -5,7 +5,7 @@ from paddle import ParamAttr
 import paddle.nn as nn
 import paddle.nn.functional as F
 from paddle.nn import Conv2D, BatchNorm, Linear, Dropout
-from paddle.nn import  MaxPool2D
+from paddle.nn import MaxPool2D
 
 
 class ConvBNLayer(nn.Layer):
@@ -368,7 +368,10 @@ class ResNeXt101_32x16d_wsl(nn.Layer):
             name="layer4.2")
 
         if pretrained:
-            utils.load_entire_model(self, 'https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/ResNeXt101_32x16_wsl_pretrained.pdparams')
+            utils.load_entire_model(
+                self,
+                'https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/ResNeXt101_32x16_wsl_pretrained.pdparams'
+            )
 
     def forward(self, inputs):
         x = self._conv_stem(inputs)

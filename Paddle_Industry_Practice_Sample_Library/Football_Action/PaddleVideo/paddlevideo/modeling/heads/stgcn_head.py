@@ -28,11 +28,11 @@ class STGCNHead(BaseHead):
         in_channels: int, input feature channels. Default: 256.
         num_classes: int, number classes. Default: 10.
     """
+
     def __init__(self, in_channels=256, num_classes=10, **kwargs):
         super().__init__(num_classes, in_channels, **kwargs)
-        self.fcn = nn.Conv2D(in_channels=in_channels,
-                             out_channels=num_classes,
-                             kernel_size=1)
+        self.fcn = nn.Conv2D(
+            in_channels=in_channels, out_channels=num_classes, kernel_size=1)
 
     def init_weights(self):
         """Initiate the parameters.

@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 import copy
 import json
 import argparse
@@ -38,22 +37,27 @@ def predict(model, tokenizer, reverse_schemas, id2label):
 
         # processing input text
         splited_input_text = list(input_text)
-        features = tokenizer(splited_input_text, is_split_into_words=True, max_seq_len=args.max_seq_len, return_length=True)
+        features = tokenizer(
+            splited_input_text,
+            is_split_into_words=True,
+            max_seq_len=args.max_seq_len,
+            return_length=True)
         input_ids = paddle.to_tensor(features["input_ids"]).unsqueeze(0)
-        token_type_ids = paddle.to_tensor(features["token_type_ids"]).unsqueeze(0)
+        token_type_ids = paddle.to_tensor(features["token_type_ids"]).unsqueeze(
+            0)
         seq_lens = paddle.to_tensor([features["seq_len"]])
 
         # predict by model and decoding result 
         logits = model(input_ids, token_type_ids=token_type_ids)
-        examples = [{"text":input_text}]
-        pred_examples = decoding(examples, reverse_schema, logits, seq_lens, id2label)
+        examples = [{"text": input_text}]
+        pred_examples = decoding(examples, reverse_schema, logits, seq_lens,
+                                 id2label)
 
         # print pred_examples
         print(json.dumps(pred_examples, indent=4, ensure_ascii=False))
-    
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     # yapf: disable
     parser = argparse.ArgumentParser()
     parser.add_argument("--model_path", type=str, default=None, help="model path that you saved")
@@ -77,9 +81,8 @@ if __name__=="__main__":
     # load model
     loaded_state_dict = paddle.load(args.model_path)
     ernie = ErnieModel.from_pretrained(model_name)
-    model = ErnieForTokenClassification(ernie, num_classes=len(label2id))    
+    model = ErnieForTokenClassification(ernie, num_classes=len(label2id))
     model.load_dict(loaded_state_dict)
 
     # predicting
     predict(model, tokenizer, reverse_schema, id2label)
-    

@@ -20,7 +20,7 @@
 
 为了解决上述问题，引入卷积（Convolution）来对输入的图像进行特征提取。卷积的计算范围是在像素点的空间邻域内进行的，因此可以利用输入图像的空间信息；此外，由于卷积具有局部连接、权重共享等特性，卷积核参数的数目也远小于全连接层。
 
-## 二、卷积核 / 特征图 / 卷积计算 
+## 二、卷积核 / 特征图 / 卷积计算
 
 **卷积核（kernel）**：也被叫做滤波器（filter），假设卷积核的高和宽分别为$k_h$和$k_w$，则将称为$k_h\times k_w$卷积，比如$3\times5$卷积，就是指卷积核的高为3, 宽为5。卷积核中数值为对图像中与卷积核同样大小的子块像素点进行卷积计算时所采用的权重。
 
@@ -365,10 +365,10 @@ w = w.reshape([1, 1, 3, 3])
 w = np.repeat(w, 3, axis=1)
 # 创建卷积算子，输出通道数为1，卷积核大小为3x3，
 # 并使用上面的设置好的数值作为卷积核权重的初始化参数
-conv = Conv2D(in_channels=3, out_channels=1, kernel_size=[3, 3], 
+conv = Conv2D(in_channels=3, out_channels=1, kernel_size=[3, 3],
             weight_attr=paddle.ParamAttr(
               initializer=Assign(value=w)))
-    
+
 # 将读入的图片转化为float32类型的numpy.ndarray
 x = np.array(img).astype('float32')
 # 图片读入成ndarry时，形状是[H, W, 3]，
@@ -420,7 +420,7 @@ img = np.array(img)
 
 # 创建初始化参数
 w = np.ones([1, 1, 5, 5], dtype = 'float32')/25
-conv = Conv2D(in_channels=1, out_channels=1, kernel_size=[5, 5], 
+conv = Conv2D(in_channels=1, out_channels=1, kernel_size=[5, 5],
         weight_attr=paddle.ParamAttr(
          initializer=Assign(value=w)))
 x = img.astype('float32')
@@ -449,4 +449,3 @@ plt.show()
 ## 参考文献
 
 [1] [Visualizing and Understanding Convolutional Networks](https://arxiv.org/pdf/1311.2901.pdf)
-

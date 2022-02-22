@@ -44,7 +44,7 @@ def det2csv(info, dataset_len, results, custom_classes):
             for bbox in result[label]:
                 if type(bbox) == paddle.Tensor:
                     bbox = bbox.numpy()
-                
+
                 bbox_ = tuple(bbox.tolist())
                 if custom_classes is not None:
                     actual_label = custom_classes[label + 1]
@@ -52,8 +52,7 @@ def det2csv(info, dataset_len, results, custom_classes):
                     actual_label = label + 1
                 csv_results.append((
                     video_id,
-                    timestamp,
-                ) + bbox_[:4] + (actual_label, ) + bbox_[4:])
+                    timestamp, ) + bbox_[:4] + (actual_label, ) + bbox_[4:])
     return csv_results
 
 
@@ -222,23 +221,25 @@ def ava_eval(result_file,
 
     if result_type == 'proposal':
         gts = [
-            np.array(gt_boxes[image_key], dtype=float) for image_key in gt_boxes
+            np.array(
+                gt_boxes[image_key], dtype=float) for image_key in gt_boxes
         ]
         proposals = []
         for image_key in gt_boxes:
             if image_key in boxes:
                 proposals.append(
                     np.concatenate(
-                        (np.array(boxes[image_key], dtype=float),
-                         np.array(scores[image_key], dtype=float)[:, None]),
+                        (np.array(
+                            boxes[image_key], dtype=float), np.array(
+                                scores[image_key], dtype=float)[:, None]),
                         axis=1))
             else:
                 # if no corresponding proposal, add a fake one
                 proposals.append(np.array([0, 0, 1, 1, 1]))
 
         # Proposals used here are with scores
-        recalls = eval_recalls(gts, proposals, np.array(max_dets),
-                               np.arange(0.5, 0.96, 0.05))
+        recalls = eval_recalls(gts, proposals,
+                               np.array(max_dets), np.arange(0.5, 0.96, 0.05))
         ar = recalls.mean(axis=1)
         ret = {}
         for i, num in enumerate(max_dets):
@@ -254,18 +255,20 @@ def ava_eval(result_file,
         start = time.time()
         for image_key in gt_boxes:
             if verbose and image_key in excluded_keys:
-                logging.info(
-                    'Found excluded timestamp in detections: %s.'
-                    'It will be ignored.', image_key)
+                logging.info('Found excluded timestamp in detections: %s.'
+                             'It will be ignored.', image_key)
                 continue
             pascal_evaluator.add_single_ground_truth_image_info(
                 image_key, {
                     standard_fields.InputDataFields.groundtruth_boxes:
-                    np.array(gt_boxes[image_key], dtype=float),
+                    np.array(
+                        gt_boxes[image_key], dtype=float),
                     standard_fields.InputDataFields.groundtruth_classes:
-                    np.array(gt_labels[image_key], dtype=int),
+                    np.array(
+                        gt_labels[image_key], dtype=int),
                     standard_fields.InputDataFields.groundtruth_difficult:
-                    np.zeros(len(gt_boxes[image_key]), dtype=bool)
+                    np.zeros(
+                        len(gt_boxes[image_key]), dtype=bool)
                 })
         if verbose:
             print_time('Convert groundtruth', start)
@@ -273,18 +276,20 @@ def ava_eval(result_file,
         start = time.time()
         for image_key in boxes:
             if verbose and image_key in excluded_keys:
-                logging.info(
-                    'Found excluded timestamp in detections: %s.'
-                    'It will be ignored.', image_key)
+                logging.info('Found excluded timestamp in detections: %s.'
+                             'It will be ignored.', image_key)
                 continue
             pascal_evaluator.add_single_detected_image_info(
                 image_key, {
                     standard_fields.DetectionResultFields.detection_boxes:
-                    np.array(boxes[image_key], dtype=float),
+                    np.array(
+                        boxes[image_key], dtype=float),
                     standard_fields.DetectionResultFields.detection_classes:
-                    np.array(labels[image_key], dtype=int),
+                    np.array(
+                        labels[image_key], dtype=int),
                     standard_fields.DetectionResultFields.detection_scores:
-                    np.array(scores[image_key], dtype=float)
+                    np.array(
+                        scores[image_key], dtype=float)
                 })
         if verbose:
             print_time('convert detections', start)
@@ -372,8 +377,8 @@ def collect_results_cpu(result_part, size):
     return ordered_results
 
 
-def ava_evaluate_results(info, dataset_len, results, custom_classes, label_file,
-                         file_path, exclude_file):
+def ava_evaluate_results(info, dataset_len, results, custom_classes,
+                         label_file, file_path, exclude_file):
     # need to create a temp result file
     time_now = datetime.now().strftime('%Y%m%d_%H%M%S')
     temp_file = f'AVA_{time_now}_result.csv'

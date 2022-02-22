@@ -26,16 +26,16 @@ class Data(Dataset):
         super(Data, self).__init__()
         self.cfg = cfg
         # 下面是数据增强等
-        self.randombrig  = RandomBrightness()
-        self.normalize   = Normalize(mean=cfg.mean, std=cfg.std)
-        self.randomcrop  = RandomCrop()
-        self.blur        = RandomBlur()
+        self.randombrig = RandomBrightness()
+        self.normalize = Normalize(mean=cfg.mean, std=cfg.std)
+        self.randomcrop = RandomCrop()
+        self.blur = RandomBlur()
         self.randomvflip = RandomVorizontalFlip()
         self.randomhflip = RandomHorizontalFlip()
-        self.resize      = Resize(384, 384)
-        self.totensor    = ToTensor()
+        self.resize = Resize(384, 384)
+        self.totensor = ToTensor()
         # 读数据
-        with open(cfg.datapath+'/'+cfg.mode+'.txt', 'r') as lines:
+        with open(cfg.datapath + '/' + cfg.mode + '.txt', 'r') as lines:
             self.samples = []
             for line in lines:
                 self.samples.append(line.strip())
@@ -43,8 +43,10 @@ class Data(Dataset):
     def __getitem__(self, idx):
         name = self.samples[idx]
         # 读取图片
-        image = cv2.imread(self.cfg.datapath+'/image/'+name+'.JPEG')[:,:,::-1].astype(np.float32)
-        mask = cv2.imread(self.cfg.datapath + '/mask/' + name + '.png')[:, :, ::-1].astype(np.float32)
+        image = cv2.imread(self.cfg.datapath + '/image/' + name +
+                           '.JPEG')[:, :, ::-1].astype(np.float32)
+        mask = cv2.imread(self.cfg.datapath + '/mask/' + name +
+                          '.png')[:, :, ::-1].astype(np.float32)
         H, W, C = image.shape
         # 训练的时候的数据增强
         if self.cfg.mode == 'train':

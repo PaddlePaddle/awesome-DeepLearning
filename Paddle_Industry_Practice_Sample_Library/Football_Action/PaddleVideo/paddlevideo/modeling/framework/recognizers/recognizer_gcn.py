@@ -21,6 +21,7 @@ logger = get_logger("paddlevideo")
 class RecognizerGCN(BaseRecognizer):
     """GCN Recognizer model framework.
     """
+
     def forward_net(self, data):
         """Define how the model is going to run, from input to output.
         """

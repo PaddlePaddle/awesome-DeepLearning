@@ -17,8 +17,8 @@ hw_ratios = []
 area_ratios = []
 label_count = defaultdict(int)
 for anno in data['annotations']:
-    hw_ratios.append(anno['bbox'][3]/anno['bbox'][2])
-    area_ratios.append(anno['area']/imgs[anno['image_id']]['area'])
+    hw_ratios.append(anno['bbox'][3] / anno['bbox'][2])
+    area_ratios.append(anno['area'] / imgs[anno['image_id']]['area'])
     label_count[anno['category_id']] += 1
 
 print(label_count, len(data['annotations']) / len(data['images']))

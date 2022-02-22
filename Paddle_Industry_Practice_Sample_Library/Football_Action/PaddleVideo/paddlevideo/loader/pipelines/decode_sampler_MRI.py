@@ -36,6 +36,7 @@ class SFMRI_DecodeSampler(object):
     Returns:
         frames_idx: the index of sampled #frames.
     """
+
     def __init__(self,
                  num_seg,
                  seg_len,
@@ -116,10 +117,8 @@ class SFMRI_DecodeSampler(object):
                     sample_pos = max(1, 1 + frames_len - 64)
                     t_stride1 = 64 // self.num_seg[0]
                     t_stride2 = 64 // self.num_seg[1]
-                    start_list = np.linspace(0,
-                                             sample_pos - 1,
-                                             num=10,
-                                             dtype=int)
+                    start_list = np.linspace(
+                        0, sample_pos - 1, num=10, dtype=int)
                     offsets_s = []
                     offsets_f = []
                     for start_idx in start_list.tolist():
@@ -139,7 +138,8 @@ class SFMRI_DecodeSampler(object):
                     idx = 0
                     if not self.valid_mode:
                         if average_dur1 >= self.seg_len:
-                            idx = random.randint(0, average_dur1 - self.seg_len)
+                            idx = random.randint(0,
+                                                 average_dur1 - self.seg_len)
                             idx += i * average_dur1
                         elif average_dur1 >= 1:
                             idx += i * average_dur1
@@ -160,7 +160,8 @@ class SFMRI_DecodeSampler(object):
                     idx = 0
                     if not self.valid_mode:
                         if average_dur2 >= self.seg_len:
-                            idx = random.randint(0, average_dur2 - self.seg_len)
+                            idx = random.randint(0,
+                                                 average_dur2 - self.seg_len)
                             idx += i * average_dur2
                         elif average_dur2 >= 1:
                             idx += i * average_dur2
@@ -182,18 +183,22 @@ class SFMRI_DecodeSampler(object):
         else:  # for TSM
             if not self.valid_mode:
                 if average_dur2 > 0:
-                    offsets_s = np.multiply(list(range(
-                        self.num_seg[0])), average_dur1) + np.random.randint(
+                    offsets_s = np.multiply(
+                        list(range(self.num_seg[0])),
+                        average_dur1) + np.random.randint(
                             average_dur1, size=self.num_seg[0])
 
-                    offsets_f = np.multiply(list(range(
-                        self.num_seg[1])), average_dur2) + np.random.randint(
+                    offsets_f = np.multiply(
+                        list(range(self.num_seg[1])),
+                        average_dur2) + np.random.randint(
                             average_dur2, size=self.num_seg[1])
                 elif frames_len > self.num_seg[1]:
                     offsets_s = np.sort(
-                        np.random.randint(frames_len, size=self.num_seg[0]))
+                        np.random.randint(
+                            frames_len, size=self.num_seg[0]))
                     offsets_f = np.sort(
-                        np.random.randint(frames_len, size=self.num_seg[1]))
+                        np.random.randint(
+                            frames_len, size=self.num_seg[1]))
                 else:
                     offsets_s = np.zeros(shape=(self.num_seg[0], ))
                     offsets_f = np.zeros(shape=(self.num_seg[1], ))
@@ -201,13 +206,13 @@ class SFMRI_DecodeSampler(object):
                 if frames_len > self.num_seg[1]:
                     average_dur_float_s = frames_len / self.num_seg[0]
                     offsets_s = np.array([
-                        int(average_dur_float_s / 2.0 + average_dur_float_s * x)
-                        for x in range(self.num_seg[0])
+                        int(average_dur_float_s / 2.0 + average_dur_float_s *
+                            x) for x in range(self.num_seg[0])
                     ])
                     average_dur_float_f = frames_len / self.num_seg[1]
                     offsets_f = np.array([
-                        int(average_dur_float_f / 2.0 + average_dur_float_f * x)
-                        for x in range(self.num_seg[1])
+                        int(average_dur_float_f / 2.0 + average_dur_float_f *
+                            x) for x in range(self.num_seg[1])
                     ])
                 else:
                     offsets_s = np.zeros(shape=(self.num_seg[0], ))

@@ -16,10 +16,12 @@ import functools
 import paddle
 import paddle.distributed as dist
 
+
 def get_dist_info():
     world_size = dist.get_world_size()
     rank = dist.get_rank()
     return rank, world_size
+
 
 def main_only(func):
     @functools.wraps(func)
@@ -27,4 +29,5 @@ def main_only(func):
         rank, _ = get_dist_info()
         if rank == 0:
             return func(*args, **kwargs)
+
     return wrapper

@@ -43,6 +43,7 @@ class Sampler(object):
     Returns:
         frames_idx: the index of sampled #frames.
     """
+
     def __init__(self,
                  num_seg,
                  seg_len,
@@ -69,8 +70,8 @@ class Sampler(object):
             imgs = []
             for idx in frames_idx:
                 img = Image.open(
-                    os.path.join(frame_dir,
-                                 results['suffix'].format(idx))).convert('RGB')
+                    os.path.join(frame_dir, results['suffix'].format(
+                        idx))).convert('RGB')
                 imgs.append(img)
 
         elif data_format == "MRI":
@@ -128,12 +129,12 @@ class Sampler(object):
 
         if avg_interval > 0:
             base_offsets = np.arange(self.num_seg) * avg_interval
-            clip_offsets = base_offsets + np.random.randint(avg_interval,
-                                                            size=self.num_seg)
+            clip_offsets = base_offsets + np.random.randint(
+                avg_interval, size=self.num_seg)
         elif num_frames > max(self.num_seg, ori_seg_len):
             clip_offsets = np.sort(
-                np.random.randint(num_frames - ori_seg_len + 1,
-                                  size=self.num_seg))
+                np.random.randint(
+                    num_frames - ori_seg_len + 1, size=self.num_seg))
         elif avg_interval == 0:
             ratio = (num_frames - ori_seg_len + 1.0) / self.num_seg
             clip_offsets = np.around(np.arange(self.num_seg) * ratio)
@@ -167,8 +168,8 @@ class Sampler(object):
             else:
                 offsets = self._get_test_clips(frames_len)
 
-            offsets = offsets[:, None] + np.arange(
-                self.seg_len)[None, :] * self.frame_interval
+            offsets = offsets[:, None] + np.arange(self.seg_len)[
+                None, :] * self.frame_interval
             offsets = np.concatenate(offsets)
 
             offsets = offsets.reshape((-1, self.seg_len))
@@ -218,10 +219,8 @@ class Sampler(object):
                 else:
                     sample_pos = max(1, 1 + frames_len - 64)
                     t_stride = 64 // self.num_seg
-                    start_list = np.linspace(0,
-                                             sample_pos - 1,
-                                             num=10,
-                                             dtype=int)
+                    start_list = np.linspace(
+                        0, sample_pos - 1, num=10, dtype=int)
                     offsets = []
                     for start_idx in start_list.tolist():
                         offsets += [
@@ -263,12 +262,14 @@ class Sampler(object):
         else:  # for TSM
             if not self.valid_mode:
                 if average_dur > 0:
-                    offsets = np.multiply(list(range(self.num_seg)),
-                                          average_dur) + np.random.randint(
-                                              average_dur, size=self.num_seg)
+                    offsets = np.multiply(
+                        list(range(self.num_seg)),
+                        average_dur) + np.random.randint(
+                            average_dur, size=self.num_seg)
                 elif frames_len > self.num_seg:
                     offsets = np.sort(
-                        np.random.randint(frames_len, size=self.num_seg))
+                        np.random.randint(
+                            frames_len, size=self.num_seg))
                 else:
                     offsets = np.zeros(shape=(self.num_seg, ))
             else:
@@ -308,6 +309,7 @@ class SamplerPkl(object):
     Returns:
         frames_idx: the index of sampled #frames.
     """
+
     def __init__(self, num_seg, seg_len, backend='pillow', valid_mode=False):
         self.num_seg = num_seg
         self.seg_len = seg_len
@@ -339,7 +341,8 @@ class SamplerPkl(object):
         elif len(label) == 1:
             results['labels'] = int(label[0])
         else:
-            results['labels'] = int(label[0]) if random.random() < 0.5 else int(label[1])
+            results['labels'] = int(label[0]) if random.random(
+            ) < 0.5 else int(label[1])
         results['frames_len'] = len(frames)
         #results['labels'] = label
         frames_len = results['frames_len']

@@ -1,6 +1,7 @@
 import paddle.nn as nn
 import paddle.optimizer as optimizer
 
+
 class PiecewiseDecay(object):
     """
     Multi step learning rate decay
@@ -50,6 +51,7 @@ class PiecewiseDecay(object):
 
         return optimizer.lr.PiecewiseDecay(boundary, value)
 
+
 class LearningRate(object):
     """
     Learning Rate configuration
@@ -58,16 +60,16 @@ class LearningRate(object):
         base_lr (float): base learning rate
         schedulers (list): learning rate schedulers
     """
-    def __init__(self,
-                 base_lr=0.01,
-                 schedulers=[PiecewiseDecay()]):
+
+    def __init__(self, base_lr=0.01, schedulers=[PiecewiseDecay()]):
         super(LearningRate, self).__init__()
         self.base_lr = base_lr
         self.schedulers = schedulers
-        
+
     def __call__(self, step_per_epoch):
-        return self.schedulers(base_lr=self.base_lr,
-                                    step_per_epoch=step_per_epoch)
+        return self.schedulers(
+            base_lr=self.base_lr, step_per_epoch=step_per_epoch)
+
 
 class OptimizerBuilder():
     """
@@ -83,7 +85,7 @@ class OptimizerBuilder():
                  regularizer={'type': 'L2',
                               'factor': .0001},
                  optimizers={'type': 'Momentum',
-                            'momentum': .9}):
+                             'momentum': .9}):
         self.clip_grad_by_norm = clip_grad_by_norm
         self.regularizer = regularizer
         self.optimizers = optimizers

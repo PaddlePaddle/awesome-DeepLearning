@@ -3,6 +3,8 @@ import datetime
 import paddle.distributed as dist
 
 from .save_model import save_model
+
+
 class Callback(object):
     def __init__(self, model):
         self.model = model
@@ -18,6 +20,8 @@ class Callback(object):
 
     def on_epoch_end(self, status):
         pass
+
+
 class ComposeCallback(object):
     def __init__(self, callbacks):
         callbacks = [c for c in list(callbacks) if c is not None]
@@ -44,7 +48,7 @@ class ComposeCallback(object):
 
 
 class LogPrinter(Callback):
-    def __init__(self,model, batch_size=2):
+    def __init__(self, model, batch_size=2):
         super(LogPrinter, self).__init__(model)
         self.batch_size = batch_size
 
@@ -60,12 +64,13 @@ class LogPrinter(Callback):
                 data_time = status['data_time']
 
                 epoches = 500
-                batch_size = self.batch_size             
+                batch_size = self.batch_size
 
                 logs = training_staus.log()
                 space_fmt = ':' + str(len(str(steps_per_epoch))) + 'd'
                 if step_id % 20 == 0:
-                    eta_steps = (epoches - epoch_id) * steps_per_epoch - step_id
+                    eta_steps = (epoches - epoch_id
+                                 ) * steps_per_epoch - step_id
                     eta_sec = eta_steps * batch_time.global_avg
                     eta_str = str(datetime.timedelta(seconds=int(eta_sec)))
                     ips = float(batch_size) / batch_time.avg
@@ -126,14 +131,13 @@ class Checkpointer(Callback):
             print
             if mode == 'train':
                 end_epoch = 500
-                
-                if (
-                        epoch_id + 1
-                ) % 1 == 0 or epoch_id == end_epoch - 1:
-                    
+
+                if (epoch_id + 1) % 1 == 0 or epoch_id == end_epoch - 1:
+
                     save_name = str(
-                        epoch_id) if epoch_id != end_epoch - 1 else "model_final"
+                        epoch_id
+                    ) if epoch_id != end_epoch - 1 else "model_final"
                     weight = self.weight
             if weight:
-                save_model(weight, self.optimizers, self.save_dir,
-                           save_name, epoch_id + 1)
+                save_model(weight, self.optimizers, self.save_dir, save_name,
+                           epoch_id + 1)

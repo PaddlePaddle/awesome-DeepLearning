@@ -55,9 +55,8 @@ def train_dali(cfg, weights=None, parallel=True):
 
     # 3. Construct solver.
     lr = build_lr(cfg.OPTIMIZER.learning_rate, None)
-    optimizer = build_optimizer(cfg.OPTIMIZER,
-                                lr,
-                                parameter_list=model.parameters())
+    optimizer = build_optimizer(
+        cfg.OPTIMIZER, lr, parameter_list=model.parameters())
 
     # Resume
     resume_epoch = cfg.get("resume_epoch", 0)
@@ -125,21 +124,20 @@ def train_dali(cfg, weights=None, parallel=True):
         log_epoch(record_list, epoch + 1, "train", ips)
 
         # use precise bn to improve acc
-        if cfg.get("PRECISEBN") and (epoch % cfg.PRECISEBN.preciseBN_interval
-                                     == 0 or epoch == cfg.epochs - 1):
+        if cfg.get("PRECISEBN") and (
+                epoch % cfg.PRECISEBN.preciseBN_interval == 0 or
+                epoch == cfg.epochs - 1):
             do_preciseBN(
                 model, train_loader, parallel,
                 min(cfg.PRECISEBN.num_iters_preciseBN, len(train_loader)))
 
         # 5. Save model and optimizer
         if epoch % cfg.get("save_interval", 1) == 0 or epoch == cfg.epochs - 1:
-            save(
-                optimizer.state_dict(),
-                osp.join(output_dir,
-                         model_name + f"_epoch_{epoch+1:05d}.pdopt"))
-            save(
-                model.state_dict(),
-                osp.join(output_dir,
-                         model_name + f"_epoch_{epoch+1:05d}.pdparams"))
+            save(optimizer.state_dict(),
+                 osp.join(output_dir,
+                          model_name + f"_epoch_{epoch+1:05d}.pdopt"))
+            save(model.state_dict(),
+                 osp.join(output_dir,
+                          model_name + f"_epoch_{epoch+1:05d}.pdparams"))
 
     logger.info(f'training {model_name} finished')

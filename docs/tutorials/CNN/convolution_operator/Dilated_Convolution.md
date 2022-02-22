@@ -75,4 +75,3 @@ $$F = k + (k-1)(r-1)$$
 [7 ] [Receptive Field Block Net for Accurate and Fast Object Detection](https://arxiv.org/pdf/1711.07767.pdf)
 
 [8] [WaveNet: a generative model for raw audio](https://arxiv.org/pdf/1609.03499.pdf)
-

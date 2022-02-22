@@ -38,31 +38,30 @@ def evaluate(model, loss_fct, metric, data_loader):
     print("eval loss: %f, acc: %s" % (np.average(losses), res))
     model.train()
 
+
 def train(args):
 
     # 加载数据
-    trainset=IMDBDataset(is_training=True)
+    trainset = IMDBDataset(is_training=True)
     testset = IMDBDataset(is_training=False)
 
     # 封装成MapDataSet的形式
-    train_ds = MapDataset(trainset, label_list=[0,1])
-    test_ds = MapDataset(testset, label_list=[0,1])
-    
+    train_ds = MapDataset(trainset, label_list=[0, 1])
+    test_ds = MapDataset(testset, label_list=[0, 1])
+
     # 定义XLNet的Tokenizer
     tokenizer = XLNetTokenizer.from_pretrained(args.model_name_or_path)
 
     trans_func = partial(
         convert_example,
-        tokenizer = tokenizer,
-        label_list = train_ds.label_list,
-         max_seq_length= args.max_seq_length
-    )
+        tokenizer=tokenizer,
+        label_list=train_ds.label_list,
+        max_seq_length=args.max_seq_length)
 
     # 构造train_data_loader 和 dev_data_loader
     train_ds = train_ds.map(trans_func, lazy=True)
     train_batch_sampler = paddle.io.DistributedBatchSampler(
-        train_ds, batch_size = args.batch_size, shuffle=True
-    )
+        train_ds, batch_size=args.batch_size, shuffle=True)
 
     batchify_fn = lambda samples, fn=Tuple(
         Pad(axis=0, pad_val=tokenizer.pad_token_id, pad_right=False),  # input
@@ -80,7 +79,8 @@ def train(args):
 
     dev_ds = MapDataset(testset)
     dev_ds = dev_ds.map(trans_func, lazy=True)
-    dev_batch_sampler = paddle.io.BatchSampler(dev_ds, batch_size=args.batch_size, shuffle=False)
+    dev_batch_sampler = paddle.io.BatchSampler(
+        dev_ds, batch_size=args.batch_size, shuffle=False)
 
     dev_data_loader = DataLoader(
         dataset=dev_ds,
@@ -99,7 +99,8 @@ def train(args):
         paddle.set_device('gpu:0')
 
     num_classes = len(train_ds.label_list)
-    model = XLNetForSequenceClassification.from_pretrained(args.model_name_or_path, num_classes=num_classes)
+    model = XLNetForSequenceClassification.from_pretrained(
+        args.model_name_or_path, num_classes=num_classes)
 
     #paddle.set_device(args.device)
     if paddle.distributed.get_world_size() > 1:
@@ -184,26 +185,85 @@ def train(args):
                 tic_train += time.time() - tic_eval
 
 
-if __name__=="__main__":
-    parser = argparse.ArgumentParser(description="Reading Comprehension based on ERNIE.")
-    parser.add_argument("--model_name_or_path", type=str, default="xlnet-base-cased", help="the model you want to load.")
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description="Reading Comprehension based on ERNIE.")
+    parser.add_argument(
+        "--model_name_or_path",
+        type=str,
+        default="xlnet-base-cased",
+        help="the model you want to load.")
     parser.add_argument("--task_name", type=str, default="sst-2")
-    parser.add_argument("--num_train_epochs", type=int, default=2, help="the epochs of model training.")
-    parser.add_argument("--max_seq_length", type=int, default=128, help="the max_seq_length of input sequence.")
-    parser.add_argument("--doc_stride", type=int, default=128, help="doc_stride when processing data.")
-    parser.add_argument("--batch_size", type=int, default=32, help="batch_size when model training.")
-    parser.add_argument("--adam_epsilon", type=float, default=1e-8, help="adam epsilon setting.")
-    parser.add_argument("--learning_rate", type=float, default=2e-5, help="learning_rate for model training.")
-    parser.add_argument("--max_grad_norm", type=float, default=1.0, help="max_grad_norm applying adjusting gradient.")
-    parser.add_argument("--max_steps", type=int, default=-1, help="the max steps you want to train.")
-    parser.add_argument("--logging_steps", type=int, default=100, help="how many steps to log info.")
-    parser.add_argument("--save_steps", type=int, default=500, help="how many steps to save model.")
+    parser.add_argument(
+        "--num_train_epochs",
+        type=int,
+        default=2,
+        help="the epochs of model training.")
+    parser.add_argument(
+        "--max_seq_length",
+        type=int,
+        default=128,
+        help="the max_seq_length of input sequence.")
+    parser.add_argument(
+        "--doc_stride",
+        type=int,
+        default=128,
+        help="doc_stride when processing data.")
+    parser.add_argument(
+        "--batch_size",
+        type=int,
+        default=32,
+        help="batch_size when model training.")
+    parser.add_argument(
+        "--adam_epsilon",
+        type=float,
+        default=1e-8,
+        help="adam epsilon setting.")
+    parser.add_argument(
+        "--learning_rate",
+        type=float,
+        default=2e-5,
+        help="learning_rate for model training.")
+    parser.add_argument(
+        "--max_grad_norm",
+        type=float,
+        default=1.0,
+        help="max_grad_norm applying adjusting gradient.")
+    parser.add_argument(
+        "--max_steps",
+        type=int,
+        default=-1,
+        help="the max steps you want to train.")
+    parser.add_argument(
+        "--logging_steps",
+        type=int,
+        default=100,
+        help="how many steps to log info.")
+    parser.add_argument(
+        "--save_steps",
+        type=int,
+        default=500,
+        help="how many steps to save model.")
     parser.add_argument("--seed", type=int, default=43, help="random seed.")
-    parser.add_argument("--device", type=str, default="gpu", help="cpu or gpu selection.")
-    parser.add_argument("--warmup_steps", type=int, default=0, help="warmup steps.")
-    parser.add_argument("--warmup_proportion", type=float, default=0.1, help="the proportion of performing warmup in all training steps.")
-    parser.add_argument("--weight_decay", type=float, default=0.0, help="the weight_decay of model parameters.")   
-    parser.add_argument("--output_dir", type=str, default="./tmp", help="the path of saving model.") 
+    parser.add_argument(
+        "--device", type=str, default="gpu", help="cpu or gpu selection.")
+    parser.add_argument(
+        "--warmup_steps", type=int, default=0, help="warmup steps.")
+    parser.add_argument(
+        "--warmup_proportion",
+        type=float,
+        default=0.1,
+        help="the proportion of performing warmup in all training steps.")
+    parser.add_argument(
+        "--weight_decay",
+        type=float,
+        default=0.0,
+        help="the weight_decay of model parameters.")
+    parser.add_argument(
+        "--output_dir",
+        type=str,
+        default="./tmp",
+        help="the path of saving model.")
 
     args = parser.parse_args()
 

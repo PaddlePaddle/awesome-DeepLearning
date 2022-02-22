@@ -201,7 +201,7 @@ $$\lambda f(b) + (1-\lambda)f(a) \geq f((1-\lambda)a + \lambda b),$$
 $f: \mathbb{R}^n \rightarrow \mathbb{R}$
 是凸的当且仅当对于所有$\mathbf{x}, \mathbf{y} \in \mathbb{R}^n$
 
-$$g(z) \stackrel{\mathrm{def}}{=} f(z \mathbf{x} + (1-z)  \mathbf{y}) \text{ where } z \in [0,1]$$ 
+$$g(z) \stackrel{\mathrm{def}}{=} f(z \mathbf{x} + (1-z)  \mathbf{y}) \text{ where } z \in [0,1]$$
 
 是凸的。
 
@@ -317,7 +317,7 @@ $$\mathrm{Proj}_\mathcal{X}(\mathbf{x}) = \mathop{\mathrm{argmin}}_{\mathbf{x}' 
 * 凸约束可以通过拉格朗日函数来添加。在实践中，只需在目标函数中加上一个惩罚就可以了。
 * 投影映射到凸集中最接近原始点的点。
 
-## 练习 
+## 练习
 
 1. 假设我们想要通过绘制集合内点之间的所有直线并检查这些直线是否包含来验证集合的凸性。
 i.证明只检查边界上的点是充分的。
@@ -339,4 +339,3 @@ i.作为中间步骤，写出惩罚目标$|\mathbf{w} - \mathbf{w}'|_2^2 + \lamb
 ii.你能无须反复试错就找到$\lambda$的“正确”值吗？
 
 9. 给定一个凸集$\mathcal{X}$和两个向量$\mathbf{X}$和$\mathbf{y}$证明了投影不会增加距离，即$\|\mathbf{x} - \mathbf{y}\| \geq \|\mathrm{Proj}_\mathcal{X}(\mathbf{x}) - \mathrm{Proj}_\mathcal{X}(\mathbf{y})\|$。
-

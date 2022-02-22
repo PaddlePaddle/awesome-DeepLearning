@@ -83,9 +83,8 @@ class MultiRestrictSize(object):
                         continue
                     else:
                         flagval = cv2.INTER_CUBIC
-                        tmp = cv2.resize(tmp,
-                                         dsize=(new_w, new_h),
-                                         interpolation=flagval)
+                        tmp = cv2.resize(
+                            tmp, dsize=(new_w, new_h), interpolation=flagval)
                         new_sample[elem] = tmp
                 samples.append(new_sample)
 

@@ -49,4 +49,3 @@
 | PP-YOLOv2+ResNet50(Baseline)                  | 95.1         | 23.22        |
 | PP-YOLOv2+ResNet50+aug+COCO预训练+SPP+背景图  | 93.9         | 1.1          |
 | PP-YOLOv2+ResNet101+aug+COCO预训练+SPP+背景图 | **96**       | **2.2**      |
-

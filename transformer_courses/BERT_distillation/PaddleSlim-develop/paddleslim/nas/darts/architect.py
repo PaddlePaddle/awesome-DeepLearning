@@ -38,9 +38,9 @@ class Architect(object):
             self.unrolled_model = self.model.new()
             self.unrolled_model_params = [
                 p for p in self.unrolled_model.parameters()
-                if p.name not in
-                [a.name
-                 for a in self.unrolled_model.arch_parameters()] and p.trainable
+                if p.name not in [
+                    a.name for a in self.unrolled_model.arch_parameters()
+                ] and p.trainable
             ]
             self.unrolled_optimizer = fluid.optimizer.MomentumOptimizer(
                 self.eta,

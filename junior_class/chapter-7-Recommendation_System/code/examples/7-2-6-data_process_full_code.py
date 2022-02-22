@@ -1,4 +1,3 @@
-
 # copyright (c) 2021 PaddlePaddle Authors. All Rights Reserve.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,6 +16,7 @@ import random
 import numpy as np
 from PIL import Image
 
+
 class MovieLen(object):
     def __init__(self, use_poster):
         self.use_poster = use_poster
@@ -30,10 +30,12 @@ class MovieLen(object):
         movie_info_path = "./work/ml-1m/movies.dat"
         self.poster_path = "./work/ml-1m/posters/"
         # 得到电影数据
-        self.movie_info, self.movie_cat, self.movie_title = self.get_movie_info(movie_info_path)
+        self.movie_info, self.movie_cat, self.movie_title = self.get_movie_info(
+            movie_info_path)
         # 记录电影的最大ID
         self.max_mov_cat = np.max([self.movie_cat[k] for k in self.movie_cat])
-        self.max_mov_tit = np.max([self.movie_title[k] for k in self.movie_title])
+        self.max_mov_tit = np.max(
+            [self.movie_title[k] for k in self.movie_title])
         self.max_mov_id = np.max(list(map(int, self.movie_info.keys())))
         # 记录用户数据的最大ID
         self.max_usr_id = 0
@@ -44,15 +46,18 @@ class MovieLen(object):
         # 得到评分数据
         self.rating_info = self.get_rating_info(rating_path)
         # 构建数据集 
-        self.dataset = self.get_dataset(usr_info=self.usr_info,
-                                        rating_info=self.rating_info,
-                                        movie_info=self.movie_info)
+        self.dataset = self.get_dataset(
+            usr_info=self.usr_info,
+            rating_info=self.rating_info,
+            movie_info=self.movie_info)
         # 划分数据集，获得数据加载器
-        self.train_dataset = self.dataset[:int(len(self.dataset)*0.9)]
-        self.valid_dataset = self.dataset[int(len(self.dataset)*0.9):]
+        self.train_dataset = self.dataset[:int(len(self.dataset) * 0.9)]
+        self.valid_dataset = self.dataset[int(len(self.dataset) * 0.9):]
         print("##Total dataset instances: ", len(self.dataset))
         print("##MovieLens dataset information: \nusr num: {}\n"
-              "movies num: {}".format(len(self.usr_info),len(self.movie_info)))
+              "movies num: {}".format(
+                  len(self.usr_info), len(self.movie_info)))
+
     # 得到电影数据
     def get_movie_info(self, path):
         # 打开文件，编码方式选择ISO-8859-1，读取所有数据到data中 
@@ -85,17 +90,19 @@ class MovieLen(object):
                     c_count += 1
             # 补0使电影名称对应的列表长度为15
             v_tit = [movie_titles[k] for k in titles]
-            while len(v_tit)<15:
+            while len(v_tit) < 15:
                 v_tit.append(0)
             # 补0使电影种类对应的列表长度为6
             v_cat = [movie_cat[k] for k in cats]
-            while len(v_cat)<6:
+            while len(v_cat) < 6:
                 v_cat.append(0)
             # 保存电影数据到movie_info中
-            movie_info[v_id] = {'mov_id': int(v_id),
-                                'title': v_tit,
-                                'category': v_cat,
-                                'years': int(v_year)}
+            movie_info[v_id] = {
+                'mov_id': int(v_id),
+                'title': v_tit,
+                'category': v_cat,
+                'years': int(v_year)
+            }
         return movie_info, movie_cat, movie_titles
 
     def get_usr_info(self, path):
@@ -116,14 +123,17 @@ class MovieLen(object):
             item = item.strip().split("::")
             usr_id = item[0]
             # 将字符数据转成数字并保存在字典中
-            use_info[usr_id] = {'usr_id': int(usr_id),
-                                'gender': gender2num(item[1]),
-                                'age': int(item[2]),
-                                'job': int(item[3])}
+            use_info[usr_id] = {
+                'usr_id': int(usr_id),
+                'gender': gender2num(item[1]),
+                'age': int(item[2]),
+                'job': int(item[3])
+            }
             self.max_usr_id = max(self.max_usr_id, int(usr_id))
             self.max_usr_age = max(self.max_usr_age, int(item[2]))
             self.max_usr_job = max(self.max_usr_job, int(item[3]))
         return use_info
+
     # 得到评分数据
     def get_rating_info(self, path):
         # 读取文件里的数据
@@ -133,23 +143,26 @@ class MovieLen(object):
         rating_info = {}
         for item in data:
             item = item.strip().split("::")
-            usr_id,movie_id,score = item[0],item[1],item[2]
+            usr_id, movie_id, score = item[0], item[1], item[2]
             if usr_id not in rating_info.keys():
-                rating_info[usr_id] = {movie_id:float(score)}
+                rating_info[usr_id] = {movie_id: float(score)}
             else:
                 rating_info[usr_id][movie_id] = float(score)
         return rating_info
+
     # 构建数据集
     def get_dataset(self, usr_info, rating_info, movie_info):
         trainset = []
         for usr_id in rating_info.keys():
             usr_ratings = rating_info[usr_id]
             for movie_id in usr_ratings:
-                trainset.append({'usr_info': usr_info[usr_id],
-                                 'mov_info': movie_info[movie_id],
-                                 'scores': usr_ratings[movie_id]})
+                trainset.append({
+                    'usr_info': usr_info[usr_id],
+                    'mov_info': movie_info[movie_id],
+                    'scores': usr_ratings[movie_id]
+                })
         return trainset
-    
+
     def load_data(self, dataset=None, mode='train'):
         use_poster = False
 
@@ -158,6 +171,7 @@ class MovieLen(object):
 
         data_length = len(dataset)
         index_list = list(range(data_length))
+
         # 定义数据迭代加载器
         def data_generator():
             # 训练模式下，打乱训练数据
@@ -182,7 +196,8 @@ class MovieLen(object):
 
                 if use_poster:
                     # 不使用图像特征时，不读取图像数据，加快数据读取速度
-                    poster = Image.open(self.poster_path+'mov_id{}.jpg'.format(str(mov_id[0])))
+                    poster = Image.open(self.poster_path +
+                                        'mov_id{}.jpg'.format(str(mov_id[0])))
                     poster = poster.resize([64, 64])
                     if len(poster.size) <= 2:
                         poster = poster.convert("RGB")
@@ -191,7 +206,7 @@ class MovieLen(object):
 
                 score_list.append(int(dataset[i]['scores']))
                 # 如果读取的数据量达到当前的batch大小，就返回当前批次
-                if len(usr_id_list)==BATCHSIZE:
+                if len(usr_id_list) == BATCHSIZE:
                     # 转换列表数据为数组形式，reshape到固定形状
                     usr_id_arr = np.array(usr_id_list)
                     usr_gender_arr = np.array(usr_gender_list)
@@ -199,15 +214,22 @@ class MovieLen(object):
                     usr_job_arr = np.array(usr_job_list)
 
                     mov_id_arr = np.array(mov_id_list)
-                    mov_cat_arr = np.reshape(np.array(mov_cat_list), [BATCHSIZE, 6]).astype(np.int64)
-                    mov_tit_arr = np.reshape(np.array(mov_tit_list), [BATCHSIZE, 1, 15]).astype(np.int64)
+                    mov_cat_arr = np.reshape(
+                        np.array(mov_cat_list),
+                        [BATCHSIZE, 6]).astype(np.int64)
+                    mov_tit_arr = np.reshape(
+                        np.array(mov_tit_list),
+                        [BATCHSIZE, 1, 15]).astype(np.int64)
 
                     if use_poster:
-                        mov_poster_arr = np.reshape(np.array(mov_poster_list)/127.5 - 1, [BATCHSIZE, 3, 64, 64]).astype(np.float32)
+                        mov_poster_arr = np.reshape(
+                            np.array(mov_poster_list) / 127.5 - 1,
+                            [BATCHSIZE, 3, 64, 64]).astype(np.float32)
                     else:
                         mov_poster_arr = np.array([0.])
 
-                    scores_arr = np.reshape(np.array(score_list), [-1, 1]).astype(np.float32)
+                    scores_arr = np.reshape(np.array(score_list),
+                                            [-1, 1]).astype(np.float32)
 
                     # 放回当前批次数据
                     yield [usr_id_arr, usr_gender_arr, usr_age_arr, usr_job_arr], \
@@ -217,7 +239,9 @@ class MovieLen(object):
                     usr_id_list, usr_gender_list, usr_age_list, usr_job_list = [], [], [], []
                     mov_id_list, mov_tit_list, mov_cat_list, score_list = [], [], [], []
                     mov_poster_list = []
+
         return data_generator
+
 
 # 声明数据读取类
 dataset = MovieLen(False)
@@ -232,5 +256,5 @@ for idx, data in enumerate(train_loader()):
     print("打印电影ID，名字，类别数据的维度：")
     for v in mov:
         print(v.shape)
-    
+
     break

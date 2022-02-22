@@ -41,6 +41,7 @@ class VideoDecoder(object):
     Args:
         filepath: the file path of mp4 file
     """
+
     def __init__(self,
                  backend='cv2',
                  mode='train',
@@ -112,9 +113,8 @@ class VideoDecoder(object):
             else:
                 decode_all_video = False
                 start_idx, end_idx = get_start_end_idx(
-                    frames_length,
-                    self.sampling_rate * self.num_seg / self.target_fps * fps,
-                    clip_idx, num_clips)
+                    frames_length, self.sampling_rate * self.num_seg /
+                    self.target_fps * fps, clip_idx, num_clips)
                 timebase = duration / frames_length
                 video_start_pts = int(start_idx * timebase)
                 video_end_pts = int(end_idx * timebase)
@@ -125,10 +125,11 @@ class VideoDecoder(object):
                 margin = 1024
                 seek_offset = max(video_start_pts - margin, 0)
 
-                container.seek(seek_offset,
-                               any_frame=False,
-                               backward=True,
-                               stream=container.streams.video[0])
+                container.seek(
+                    seek_offset,
+                    any_frame=False,
+                    backward=True,
+                    stream=container.streams.video[0])
                 tmp_frames = {}
                 buffer_count = 0
                 max_pts = 0
@@ -170,6 +171,7 @@ class VideoDecoder(object):
 class FrameDecoder(object):
     """just parse results
     """
+
     def __init__(self):
         pass
 
@@ -182,6 +184,7 @@ class FrameDecoder(object):
 class MRIDecoder(object):
     """just parse results
     """
+
     def __init__(self):
         pass
 
@@ -195,6 +198,7 @@ class FeatureDecoder(object):
     """
         Perform feature decode operations.e.g.youtube8m
     """
+
     def __init__(self, num_classes, max_len=512, has_label=True):
         self.max_len = max_len
         self.num_classes = num_classes
@@ -218,8 +222,8 @@ class FeatureDecoder(object):
             b'nframes']
         rgb = record['feature'].astype(
             float) if 'feature' in record else record[b'feature'].astype(float)
-        audio = record['audio'].astype(
-            float) if 'audio' in record else record[b'audio'].astype(float)
+        audio = record['audio'].astype(float) if 'audio' in record else record[
+            b'audio'].astype(float)
         if self.has_label:
             label = record['label'] if 'label' in record else record[b'label']
             one_hot_label = self.make_one_hot(label, self.num_classes)
@@ -227,12 +231,10 @@ class FeatureDecoder(object):
         rgb = rgb[0:nframes, :]
         audio = audio[0:nframes, :]
 
-        rgb = self.dequantize(rgb,
-                              max_quantized_value=2.,
-                              min_quantized_value=-2.)
-        audio = self.dequantize(audio,
-                                max_quantized_value=2,
-                                min_quantized_value=-2)
+        rgb = self.dequantize(
+            rgb, max_quantized_value=2., min_quantized_value=-2.)
+        audio = self.dequantize(
+            audio, max_quantized_value=2, min_quantized_value=-2)
 
         if self.has_label:
             results['labels'] = one_hot_label.astype("float32")
@@ -249,15 +251,15 @@ class FeatureDecoder(object):
             feat = vitem[vi]
             results[prefix + 'len'] = feat.shape[0]
             #feat pad step 1. padding
-            feat_add = np.zeros((self.max_len - feat.shape[0], feat.shape[1]),
-                                dtype=np.float32)
+            feat_add = np.zeros(
+                (self.max_len - feat.shape[0], feat.shape[1]), dtype=np.float32)
             feat_pad = np.concatenate((feat, feat_add), axis=0)
             results[prefix + 'data'] = feat_pad.astype("float32")
             #feat pad step 2. mask
             feat_mask_origin = np.ones(feat.shape, dtype=np.float32)
             feat_mask_add = feat_add
-            feat_mask = np.concatenate((feat_mask_origin, feat_mask_add),
-                                       axis=0)
+            feat_mask = np.concatenate(
+                (feat_mask_origin, feat_mask_add), axis=0)
             results[prefix + 'mask'] = feat_mask.astype("float32")
 
         return results

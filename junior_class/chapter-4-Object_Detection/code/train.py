@@ -19,8 +19,7 @@ from dataset import TrainDataset
 from net import YOLOv3
 
 ANCHORS = [
-    10, 13, 16, 30, 33, 23, 30, 61, 62, 45, 59, 119, 116, 90, 156, 198, 373,
-    326
+    10, 13, 16, 30, 33, 23, 30, 61, 62, 45, 59, 119, 116, 90, 156, 198, 373, 326
 ]
 
 ANCHOR_MASKS = [[6, 7, 8], [3, 4, 5], [0, 1, 2]]
@@ -32,8 +31,7 @@ NUM_CLASSES = 7
 def get_lr(base_lr=0.0001, lr_decay=0.1):
     bd = [10000, 20000]
     lr = [base_lr, base_lr * lr_decay, base_lr * lr_decay * lr_decay]
-    learning_rate = paddle.optimizer.lr.PiecewiseDecay(
-        boundaries=bd, values=lr)
+    learning_rate = paddle.optimizer.lr.PiecewiseDecay(boundaries=bd, values=lr)
     return learning_rate
 
 

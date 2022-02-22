@@ -10,9 +10,9 @@
 
 ## **Structure**
 
-```buildoutcfg 
-|-work: Store the Boston housing price prediction dataset 
-|-1-2-build_neural_network_using_numpy.py: Script for building neural network model using Python language and Numpy library 
+```buildoutcfg
+|-work: Store the Boston housing price prediction dataset
+|-1-2-build_neural_network_using_numpy.py: Script for building neural network model using Python language and Numpy library
 |-1-4-build_neural_network_using_paddle.py: Script for realizing housing price prediction model using PaddlePaddle
 ```
 

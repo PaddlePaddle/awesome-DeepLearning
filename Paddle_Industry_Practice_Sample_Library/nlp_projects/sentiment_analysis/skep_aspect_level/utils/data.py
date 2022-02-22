@@ -12,14 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 import numpy as np
 
-def convert_example_to_feature(example, tokenizer, max_seq_len=512, is_test=False):
-    encoded_inputs = tokenizer(text=example["text"], text_pair=example["text_pair"], max_seq_len=max_seq_len)
+
+def convert_example_to_feature(example,
+                               tokenizer,
+                               max_seq_len=512,
+                               is_test=False):
+    encoded_inputs = tokenizer(
+        text=example["text"],
+        text_pair=example["text_pair"],
+        max_seq_len=max_seq_len)
 
     if not is_test:
         labels = np.array(example["label"], dtype="int64")
-        return encoded_inputs["input_ids"], encoded_inputs["token_type_ids"], labels
+        return encoded_inputs["input_ids"], encoded_inputs[
+            "token_type_ids"], labels
     else:
         return encoded_inputs["input_ids"], encoded_inputs["token_type_ids"]

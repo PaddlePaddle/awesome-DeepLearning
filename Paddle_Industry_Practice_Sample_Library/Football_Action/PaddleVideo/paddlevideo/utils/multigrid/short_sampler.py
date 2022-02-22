@@ -35,6 +35,7 @@ class DistributedShortSampler(BatchSampler):
         drop_last(bool): whether drop the last incomplete batch dataset size
             is not divisible by the batch size. Default False
     """
+
     def __init__(self,
                  dataset,
                  batch_sizes,
@@ -72,14 +73,15 @@ class DistributedShortSampler(BatchSampler):
 
         self.drop_last = drop_last
         self.epoch = 0
-        self.num_samples = int(math.ceil(len(self.dataset) * 1.0 / self.nranks))
+        self.num_samples = int(
+            math.ceil(len(self.dataset) * 1.0 / self.nranks))
         self.total_size = self.num_samples * self.nranks
 
     def __iter__(self):
         num_samples = len(self.dataset)
         indices = np.arange(num_samples).tolist()
-        indices += indices[:(self.total_size -
-                             len(indices))]  #completion last iter
+        indices += indices[:(self.total_size - len(indices)
+                             )]  #completion last iter
         assert len(indices) == self.total_size
         if self.shuffle:
             np.random.RandomState(self.epoch).shuffle(indices)
@@ -100,10 +102,9 @@ class DistributedShortSampler(BatchSampler):
                 subsampled_indices.extend(indices[i:i + total_batch_size])
 
             indices = indices[len(indices) - last_batch_size:]
-            subsampled_indices.extend(
-                indices[self.local_rank *
-                        last_local_batch_size:(self.local_rank + 1) *
-                        last_local_batch_size])
+            subsampled_indices.extend(indices[
+                self.local_rank * last_local_batch_size:(
+                    self.local_rank + 1) * last_local_batch_size])
             return subsampled_indices
 
         if self.nranks > 1:

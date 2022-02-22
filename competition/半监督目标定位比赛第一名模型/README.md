@@ -53,8 +53,8 @@ SE模块通过压缩与激励两个操作实现特征通道的选择，为不同
 ``` python
 
  from paddle import nn
-  
-  
+
+
   class SEModule(nn.Layer):
       def __init__(self, channels, reduction=16):
 
@@ -144,11 +144,11 @@ class CFFModel(nn.Layer):
 
  ##### 2.4.1.4 SR
   <img src="images/SR.jpg" style="zoom:20%" />
-  
+
  SR模块是参考的2020年CVPR顶会《Global Context-Aware Progressive Aggregation Network for Salient Object Detection》里面提出的SR模块，可以起到填补CFF模块中不同层直接相乘导致的预测图中出现孔洞的作用。Paddle代码如下。
  ``` python
  class SRModel(nn.Layer):
- 
+
     def __init__(self, in_channel):
         super(SRModel, self).__init__()
         self.conv1 = nn.Conv2D(in_channel, 256, kernel_size=3, stride=1, padding=1)
@@ -161,7 +161,7 @@ class CFFModel(nn.Layer):
         w, b = out2[:, :256, :, :], out2[:, 256:, :, :]
         return F.relu(w * out1 + b)
  ```
- 
+
 #### 2.4.2 FMFNet
   <img src="images/FMFNet.jpg" style="zoom:20%" />
 
@@ -173,7 +173,7 @@ SSM模块使用了空洞卷积，空洞卷积图如下
 
 空洞卷积通过在卷积核之间填充0的方式增大卷积核的感受野，从而使相同大小的卷积核拥有更大的视野，可以获取更加全面的视觉信息。不同的空洞率有着不同的感受野，越大的空洞率拥有越大的视野。以空洞卷积为主的ASPP模块通过有着多种空洞率的卷积核的堆叠获得不同尺度的特征信息，经卷积压缩后输出，从而补充经池化操作损失的信息，这里我们只用了一种空洞率为3的卷积核。Paddle代码如下
 ``` python
-class SSM(nn.Layer): 
+class SSM(nn.Layer):
 
     def __init__(self):
         super(SSM, self).__init__()
@@ -192,7 +192,7 @@ class SSM(nn.Layer):
 ##### 2..4.2.2 FIM
 FIM模块通过高低层特征分别与邻层特征交互，再通过残差连接的方式细化特征，最终实现多层特征的优化。高层特征通过上采样，低层特征通过下采样，分别于低高层特征融合，实现交互。Paddle代码如下。
 ``` python
-class FIM(nn.Layer): 
+class FIM(nn.Layer):
 
     def __init__(self):
         super(FIM, self).__init__()
@@ -205,7 +205,7 @@ class FIM(nn.Layer):
         self.bn3 = nn.BatchNorm2D(64)
         self.cv4 = nn.Conv2D(64, 64, 3, 1, 1)
         self.bn4 = nn.BatchNorm2D(64)
-        
+
     def forward(self, l, h):
         h_l = F.interpolate(h, size=l.shape[2:], mode='bilinear', align_corners=True)
         l_h = F.interpolate(l, size=h.shape[2:], mode='bilinear', align_corners=True)
@@ -279,6 +279,3 @@ class PFM(nn.Layer):
 
 #### 2.4.3总结
 我们通过使用PaddleClas中提供的三个骨干网络(Res2Net200、ResNeXt101、SwinT384)和两种解码网络(ACFFNet、FMFNet)构建了四个模型，即Res2Net200+ACFFNet、ResNeXt101+ACFFNet、SwinT384+ACFFNet、Res2Net200+FMFNet。四个模型的加权融合得到了比赛的最高分。
-
-
-

@@ -22,6 +22,7 @@ from .base import BaseWeightedLoss
 @LOSSES.register()
 class CrossEntropyLoss(BaseWeightedLoss):
     """Cross Entropy Loss."""
+
     def _forward(self, score, labels, **kwargs):
         """Forward function.
         Args:

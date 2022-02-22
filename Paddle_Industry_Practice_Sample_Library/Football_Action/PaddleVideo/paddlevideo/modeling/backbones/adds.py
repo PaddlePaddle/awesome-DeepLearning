@@ -63,13 +63,14 @@ def convt_bn_relu(in_channels,
     bias = not bn
     layers = []
     layers.append(
-        nn.Conv2DTranspose(in_channels,
-                           out_channels,
-                           kernel_size,
-                           stride,
-                           padding,
-                           output_padding,
-                           bias_attr=bias))
+        nn.Conv2DTranspose(
+            in_channels,
+            out_channels,
+            kernel_size,
+            stride,
+            padding,
+            output_padding,
+            bias_attr=bias))
     if bn:
         layers.append(nn.BatchNorm2D(out_channels))
 
@@ -114,15 +115,14 @@ def get_translation_matrix(translation_vector):
     """
     t = translation_vector.reshape([-1, 3, 1])
     gather_object = paddle.stack([
-        paddle.zeros([
-            translation_vector.shape[0],
-        ], paddle.float32),
-        paddle.ones([
-            translation_vector.shape[0],
-        ], paddle.float32),
-        paddle.squeeze(t[:, 0], axis=-1),
-        paddle.squeeze(t[:, 1], axis=-1),
-        paddle.squeeze(t[:, 2], axis=-1),
+        paddle.zeros([translation_vector.shape[0], ], paddle.float32),
+        paddle.ones([translation_vector.shape[0], ], paddle.float32),
+        paddle.squeeze(
+            t[:, 0], axis=-1),
+        paddle.squeeze(
+            t[:, 1], axis=-1),
+        paddle.squeeze(
+            t[:, 2], axis=-1),
     ])
     gather_index = paddle.to_tensor([
         [1],
@@ -174,21 +174,19 @@ def rot_from_axisangle(vec):
     zxC = z * xC
 
     gather_object = paddle.stack([
-        paddle.squeeze(x * xC + ca, axis=(-1, -2)),
-        paddle.squeeze(xyC - zs, axis=(-1, -2)),
-        paddle.squeeze(zxC + ys, axis=(-1, -2)),
-        paddle.squeeze(xyC + zs, axis=(-1, -2)),
-        paddle.squeeze(y * yC + ca, axis=(-1, -2)),
-        paddle.squeeze(yzC - xs, axis=(-1, -2)),
-        paddle.squeeze(zxC - ys, axis=(-1, -2)),
-        paddle.squeeze(yzC + xs, axis=(-1, -2)),
-        paddle.squeeze(z * zC + ca, axis=(-1, -2)),
-        paddle.ones([
-            vec.shape[0],
-        ], dtype=paddle.float32),
-        paddle.zeros([
-            vec.shape[0],
-        ], dtype=paddle.float32)
+        paddle.squeeze(
+            x * xC + ca, axis=(-1, -2)), paddle.squeeze(
+                xyC - zs, axis=(-1, -2)), paddle.squeeze(
+                    zxC + ys, axis=(-1, -2)), paddle.squeeze(
+                        xyC + zs, axis=(-1, -2)), paddle.squeeze(
+                            y * yC + ca, axis=(-1, -2)), paddle.squeeze(
+                                yzC - xs, axis=(-1, -2)), paddle.squeeze(
+                                    zxC - ys, axis=(-1, -2)), paddle.squeeze(
+                                        yzC + xs, axis=(-1, -2)),
+        paddle.squeeze(
+            z * zC + ca, axis=(-1, -2)), paddle.ones(
+                [vec.shape[0], ], dtype=paddle.float32), paddle.zeros(
+                    [vec.shape[0], ], dtype=paddle.float32)
     ])
     gather_index = paddle.to_tensor([
         [0],
@@ -226,12 +224,10 @@ def get_smooth_loss(disp, img):
     grad_disp_x = paddle.abs(disp[:, :, :, :-1] - disp[:, :, :, 1:])
     grad_disp_y = paddle.abs(disp[:, :, :-1, :] - disp[:, :, 1:, :])
 
-    grad_img_x = paddle.mean(paddle.abs(img[:, :, :, :-1] - img[:, :, :, 1:]),
-                             1,
-                             keepdim=True)
-    grad_img_y = paddle.mean(paddle.abs(img[:, :, :-1, :] - img[:, :, 1:, :]),
-                             1,
-                             keepdim=True)
+    grad_img_x = paddle.mean(
+        paddle.abs(img[:, :, :, :-1] - img[:, :, :, 1:]), 1, keepdim=True)
+    grad_img_y = paddle.mean(
+        paddle.abs(img[:, :, :-1, :] - img[:, :, 1:, :]), 1, keepdim=True)
 
     grad_disp_x *= paddle.exp(-grad_img_x)
     grad_disp_y *= paddle.exp(-grad_img_y)
@@ -241,23 +237,21 @@ def get_smooth_loss(disp, img):
 
 def conv3x3(in_planes, out_planes, stride=1, groups=1, dilation=1):
     """3x3 convolution with padding"""
-    return nn.Conv2D(in_planes,
-                     out_planes,
-                     kernel_size=3,
-                     stride=stride,
-                     padding=dilation,
-                     groups=groups,
-                     bias_attr=False,
-                     dilation=dilation)
+    return nn.Conv2D(
+        in_planes,
+        out_planes,
+        kernel_size=3,
+        stride=stride,
+        padding=dilation,
+        groups=groups,
+        bias_attr=False,
+        dilation=dilation)
 
 
 def conv1x1(in_planes, out_planes, stride=1):
     """1x1 convolution"""
-    return nn.Conv2D(in_planes,
-                     out_planes,
-                     kernel_size=1,
-                     stride=stride,
-                     bias_attr=False)
+    return nn.Conv2D(
+        in_planes, out_planes, kernel_size=1, stride=stride, bias_attr=False)
 
 
 def resnet_multiimage_input(num_layers, num_input_images=1):
@@ -272,10 +266,8 @@ def resnet_multiimage_input(num_layers, num_input_images=1):
 
     block_type = {18: BasicBlock, 50: Bottleneck}[num_layers]
 
-    model = ResNetMultiImageInput(block_type,
-                                  num_layers,
-                                  blocks,
-                                  num_input_images=num_input_images)
+    model = ResNetMultiImageInput(
+        block_type, num_layers, blocks, num_input_images=num_input_images)
     model.init_weights()
     return model
 
@@ -283,6 +275,7 @@ def resnet_multiimage_input(num_layers, num_input_images=1):
 class ConvBlock(nn.Layer):
     """Layer to perform a convolution followed by ELU
     """
+
     def __init__(self, in_channels, out_channels):
         super(ConvBlock, self).__init__()
 
@@ -298,6 +291,7 @@ class ConvBlock(nn.Layer):
 class Conv3x3(nn.Layer):
     """Layer to pad and convolve input
     """
+
     def __init__(self, in_channels, out_channels, use_refl=True):
         super(Conv3x3, self).__init__()
 
@@ -316,6 +310,7 @@ class Conv3x3(nn.Layer):
 class BackprojectDepth(nn.Layer):
     """Layer to transform a depth image into a point cloud
     """
+
     def __init__(self, batch_size, height, width):
         super(BackprojectDepth, self).__init__()
 
@@ -323,12 +318,11 @@ class BackprojectDepth(nn.Layer):
         self.height = height
         self.width = width
 
-        meshgrid = np.meshgrid(range(self.width),
-                               range(self.height),
-                               indexing='xy')
+        meshgrid = np.meshgrid(
+            range(self.width), range(self.height), indexing='xy')
         id_coords = np.stack(meshgrid, axis=0).astype(np.float32)
-        self.id_coords = self.create_parameter(shape=list(id_coords.shape),
-                                               dtype=paddle.float32)
+        self.id_coords = self.create_parameter(
+            shape=list(id_coords.shape), dtype=paddle.float32)
         self.id_coords.set_value(id_coords)
         self.add_parameter("id_coords", self.id_coords)
         self.id_coords.stop_gradient = True
@@ -341,9 +335,7 @@ class BackprojectDepth(nn.Layer):
 
         pix_coords = paddle.unsqueeze(
             paddle.stack([
-                self.id_coords[0].reshape([
-                    -1,
-                ]), self.id_coords[1].reshape([
+                self.id_coords[0].reshape([-1, ]), self.id_coords[1].reshape([
                     -1,
                 ])
             ], 0), 0)
@@ -365,6 +357,7 @@ class BackprojectDepth(nn.Layer):
 class Project3D(nn.Layer):
     """Layer which projects 3D points into a camera with intrinsics K and at position T
     """
+
     def __init__(self, batch_size, height, width, eps=1e-7):
         super(Project3D, self).__init__()
 
@@ -378,8 +371,8 @@ class Project3D(nn.Layer):
 
         cam_points = paddle.matmul(P, points)
 
-        pix_coords = cam_points[:, :2, :] / (cam_points[:, 2, :].unsqueeze(1) +
-                                             self.eps)
+        pix_coords = cam_points[:, :2, :] / (
+            cam_points[:, 2, :].unsqueeze(1) + self.eps)
         pix_coords = pix_coords.reshape(
             [self.batch_size, 2, self.height, self.width])
         pix_coords = pix_coords.transpose([0, 2, 3, 1])
@@ -392,6 +385,7 @@ class Project3D(nn.Layer):
 class SSIM(nn.Layer):
     """Layer to compute the SSIM loss between a pair of images
     """
+
     def __init__(self):
         super(SSIM, self).__init__()
         self.mu_x_pool = nn.AvgPool2D(3, 1, exclusive=False)
@@ -426,15 +420,17 @@ class ResNetMultiImageInput(ResNet):
     """Constructs a resnet model with varying number of input images.
     Adapted from https://github.com/pypaddle/vision/blob/master/paddlevision/models/resnet.py
     """
+
     def __init__(self, block, depth, layers, num_input_images=1):
         super(ResNetMultiImageInput, self).__init__(block, depth)
         self.inplanes = 64
-        self.conv1 = nn.Conv2D(num_input_images * 3,
-                               64,
-                               kernel_size=7,
-                               stride=2,
-                               padding=3,
-                               bias_attr=False)
+        self.conv1 = nn.Conv2D(
+            num_input_images * 3,
+            64,
+            kernel_size=7,
+            stride=2,
+            padding=3,
+            bias_attr=False)
         self.bn1 = nn.BatchNorm2D(64)
         self.relu = nn.ReLU()
         self.maxpool = nn.MaxPool2D(kernel_size=3, stride=2, padding=1)
@@ -446,9 +442,8 @@ class ResNetMultiImageInput(ResNet):
     def init_weights(self):
         for layer in self.sublayers(include_self=True):
             if isinstance(layer, nn.Conv2D):
-                kaiming_normal_(layer.weight,
-                                mode='fan_out',
-                                nonlinearity='relu')
+                kaiming_normal_(
+                    layer.weight, mode='fan_out', nonlinearity='relu')
             elif isinstance(layer, nn.BatchNorm2D):
                 ones_(layer.weight)
                 zeros_(layer.bias)
@@ -471,6 +466,7 @@ class ConvBNLayer(nn.Layer):
     are explicit declared in the ```init_weights``` method.
 
     """
+
     def __init__(self,
                  in_channels,
                  out_channels,
@@ -480,13 +476,14 @@ class ConvBNLayer(nn.Layer):
                  act=None,
                  name=None):
         super(ConvBNLayer, self).__init__()
-        self._conv = Conv2D(in_channels=in_channels,
-                            out_channels=out_channels,
-                            kernel_size=kernel_size,
-                            stride=stride,
-                            padding=(kernel_size - 1) // 2,
-                            groups=groups,
-                            bias_attr=False)
+        self._conv = Conv2D(
+            in_channels=in_channels,
+            out_channels=out_channels,
+            kernel_size=kernel_size,
+            stride=stride,
+            padding=(kernel_size - 1) // 2,
+            groups=groups,
+            bias_attr=False)
 
         self._act = act
 
@@ -657,8 +654,8 @@ class DepthDecoder(nn.Layer):
             x = paddle.concat(x, 1)
             x = self.convs[("upconv", i, 1)](x)
             if i in self.scales:
-                outputs[("disp", i)] = self.sigmoid(self.convs[("dispconv",
-                                                                i)](x))
+                outputs[("disp",
+                         i)] = self.sigmoid(self.convs[("dispconv", i)](x))
         return outputs
 
 
@@ -716,6 +713,7 @@ class PoseDecoder(nn.Layer):
 class ResnetEncoder(nn.Layer):
     """Pypaddle module for a resnet encoder
     """
+
     def __init__(self, num_layers, pretrained=False, num_input_images=1):
         super(ResnetEncoder, self).__init__()
 
@@ -730,8 +728,8 @@ class ResnetEncoder(nn.Layer):
         }
 
         if num_layers not in resnets:
-            raise ValueError(
-                "{} is not a valid number of resnet layers".format(num_layers))
+            raise ValueError("{} is not a valid number of resnet layers".format(
+                num_layers))
 
         if num_input_images > 1:
             self.encoder = resnet_multiimage_input(num_layers, pretrained,
@@ -745,12 +743,8 @@ class ResnetEncoder(nn.Layer):
         ######################################
         # night public first conv
         ######################################
-        self.conv1 = nn.Conv2D(3,
-                               64,
-                               kernel_size=7,
-                               stride=2,
-                               padding=3,
-                               bias_attr=False)
+        self.conv1 = nn.Conv2D(
+            3, 64, kernel_size=7, stride=2, padding=3, bias_attr=False)
         self.bn1 = nn.BatchNorm2D(64)
         self.relu = nn.ReLU()  # NOTE
 
@@ -772,36 +766,41 @@ class ResnetEncoder(nn.Layer):
         ######################################
         # shared decoder (small decoder), use a simple de-conv to upsample the features with no skip connection
         ######################################
-        self.convt5 = convt_bn_relu(in_channels=512,
-                                    out_channels=256,
-                                    kernel_size=3,
-                                    stride=2,
-                                    padding=1,
-                                    output_padding=1)
-        self.convt4 = convt_bn_relu(in_channels=256,
-                                    out_channels=128,
-                                    kernel_size=3,
-                                    stride=2,
-                                    padding=1,
-                                    output_padding=1)
-        self.convt3 = convt_bn_relu(in_channels=128,
-                                    out_channels=64,
-                                    kernel_size=3,
-                                    stride=2,
-                                    padding=1,
-                                    output_padding=1)
-        self.convt2 = convt_bn_relu(in_channels=64,
-                                    out_channels=64,
-                                    kernel_size=3,
-                                    stride=2,
-                                    padding=1,
-                                    output_padding=1)
-        self.convt1 = convt_bn_relu(in_channels=64,
-                                    out_channels=64,
-                                    kernel_size=3,
-                                    stride=2,
-                                    padding=1,
-                                    output_padding=1)
+        self.convt5 = convt_bn_relu(
+            in_channels=512,
+            out_channels=256,
+            kernel_size=3,
+            stride=2,
+            padding=1,
+            output_padding=1)
+        self.convt4 = convt_bn_relu(
+            in_channels=256,
+            out_channels=128,
+            kernel_size=3,
+            stride=2,
+            padding=1,
+            output_padding=1)
+        self.convt3 = convt_bn_relu(
+            in_channels=128,
+            out_channels=64,
+            kernel_size=3,
+            stride=2,
+            padding=1,
+            output_padding=1)
+        self.convt2 = convt_bn_relu(
+            in_channels=64,
+            out_channels=64,
+            kernel_size=3,
+            stride=2,
+            padding=1,
+            output_padding=1)
+        self.convt1 = convt_bn_relu(
+            in_channels=64,
+            out_channels=64,
+            kernel_size=3,
+            stride=2,
+            padding=1,
+            output_padding=1)
         self.convtf = nn.Conv2D(64, 3, kernel_size=1, stride=1, padding=0)
 
     def forward(self, input_image, is_night):
@@ -882,6 +881,7 @@ class ResnetEncoder(nn.Layer):
 class ResnetEncoder_pose(nn.Layer):
     """Pypaddle module for a resnet encoder
     """
+
     def __init__(self, num_layers, pretrained=False, num_input_images=1):
         super(ResnetEncoder_pose, self).__init__()
 
@@ -895,8 +895,8 @@ class ResnetEncoder_pose(nn.Layer):
         }
 
         if num_layers not in resnets:
-            raise ValueError(
-                "{} is not a valid number of resnet layers".format(num_layers))
+            raise ValueError("{} is not a valid number of resnet layers".format(
+                num_layers))
 
         if num_input_images > 1:
             self.encoder = resnet_multiimage_input(num_layers, num_input_images)
@@ -971,9 +971,10 @@ class ADDS_DepthNet(nn.Layer):
             if self.pose_model_type == "separate_resnet":
                 self.pose_encoder = ResnetEncoder_pose(
                     self.num_layers, num_input_images=self.num_pose_frames)
-                self.pose = PoseDecoder(self.pose_encoder.num_ch_enc,
-                                        num_input_features=1,
-                                        num_frames_to_predict_for=2)
+                self.pose = PoseDecoder(
+                    self.pose_encoder.num_ch_enc,
+                    num_input_features=1,
+                    num_frames_to_predict_for=2)
 
         self.backproject_depth = {}
         self.project_3d = {}
@@ -981,8 +982,8 @@ class ADDS_DepthNet(nn.Layer):
             h = self.height // (2**scale)
             w = self.width // (2**scale)
 
-            self.backproject_depth[scale] = BackprojectDepth(
-                self.batch_size, h, w)
+            self.backproject_depth[scale] = BackprojectDepth(self.batch_size, h,
+                                                             w)
             self.project_3d[scale] = Project3D(batch_size, h, w)
 
     def init_weights(self):
@@ -1072,8 +1073,9 @@ class ADDS_DepthNet(nn.Layer):
 
                     if self.pose_model_type == "separate_resnet":
                         pose_inputs = [
-                            self.pose_encoder(paddle.concat(pose_inputs,
-                                                            axis=1))
+                            self.pose_encoder(
+                                paddle.concat(
+                                    pose_inputs, axis=1))
                         ]
 
                     axisangle, translation = self.pose(pose_inputs)
@@ -1098,9 +1100,8 @@ class ADDS_DepthNet(nn.Layer):
             if self.v1_multiscale:
                 source_scale = scale
             else:
-                disp = F.interpolate(disp, [height, width],
-                                     mode="bilinear",
-                                     align_corners=False)
+                disp = F.interpolate(
+                    disp, [height, width], mode="bilinear", align_corners=False)
                 source_scale = 0
 
             _, depth = disp_to_depth(disp, self.min_depth, self.max_depth)

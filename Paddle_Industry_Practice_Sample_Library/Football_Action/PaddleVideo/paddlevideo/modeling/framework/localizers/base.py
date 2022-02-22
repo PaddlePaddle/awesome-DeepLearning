@@ -25,6 +25,7 @@ class BaseLocalizer(nn.Layer):
     - Methods:``valid_step``, define your valid step, always the same as train_step.
     - Methods:``test_step``, define your test step.
     """
+
     def __init__(self, backbone, loss):
         super().__init__()
         self.backbone = builder.build_backbone(backbone)

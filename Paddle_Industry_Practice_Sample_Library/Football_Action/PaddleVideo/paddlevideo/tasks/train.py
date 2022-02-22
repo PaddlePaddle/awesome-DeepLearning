@@ -57,8 +57,8 @@ def train_model(cfg,
 
     use_gradient_accumulation = cfg.get('GRADIENT_ACCUMULATION', None)
     if use_gradient_accumulation and dist.get_world_size() >= 1:
-        global_batch_size = cfg.GRADIENT_ACCUMULATION.get(
-            'global_batch_size', None)
+        global_batch_size = cfg.GRADIENT_ACCUMULATION.get('global_batch_size',
+                                                          None)
         num_gpus = dist.get_world_size()
 
         assert isinstance(
@@ -102,10 +102,11 @@ def train_model(cfg,
 
     # 2. Construct dataset and dataloader
     train_dataset = build_dataset((cfg.DATASET.train, cfg.PIPELINE.train))
-    train_dataloader_setting = dict(batch_size=batch_size,
-                                    num_workers=num_workers,
-                                    collate_fn_cfg=cfg.get('MIX', None),
-                                    places=places)
+    train_dataloader_setting = dict(
+        batch_size=batch_size,
+        num_workers=num_workers,
+        collate_fn_cfg=cfg.get('MIX', None),
+        places=places)
 
     train_loader = build_dataloader(train_dataset, **train_dataloader_setting)
 
@@ -147,9 +148,10 @@ def train_model(cfg,
     # 4. Train Model
     ###AMP###
     if amp:
-        scaler = paddle.amp.GradScaler(init_loss_scaling=2.0**16,
-                                       incr_every_n_steps=2000,
-                                       decr_every_n_nan_or_inf=1)
+        scaler = paddle.amp.GradScaler(
+            init_loss_scaling=2.0**16,
+            incr_every_n_steps=2000,
+            decr_every_n_nan_or_inf=1)
 
     best = 0.0
     for epoch in range(0, cfg.epochs):
@@ -275,7 +277,8 @@ def train_model(cfg,
                 if i % cfg.get("log_interval", 10) == 0:
                     ips = "ips: {:.5f} instance/sec.".format(
                         valid_batch_size / record_list["batch_time"].val)
-                    log_batch(record_list, i, epoch + 1, cfg.epochs, "val", ips)
+                    log_batch(record_list, i, epoch + 1, cfg.epochs, "val",
+                              ips)
 
             if cfg.MODEL.framework == "FastRCNN":
                 if parallel:
@@ -291,8 +294,8 @@ def train_model(cfg,
             log_epoch(record_list, epoch + 1, "val", ips)
 
             best_flag = False
-            if cfg.MODEL.framework == "FastRCNN" and (not parallel or
-                                                      (parallel and rank == 0)):
+            if cfg.MODEL.framework == "FastRCNN" and (
+                    not parallel or (parallel and rank == 0)):
                 if record_list["mAP@0.5IOU"].val > best:
                     best = record_list["mAP@0.5IOU"].val
                     best_flag = True
@@ -312,15 +315,16 @@ def train_model(cfg,
             return best, best_flag
 
         # use precise bn to improve acc
-        if cfg.get("PRECISEBN") and (epoch % cfg.PRECISEBN.preciseBN_interval
-                                     == 0 or epoch == cfg.epochs - 1):
+        if cfg.get("PRECISEBN") and (
+                epoch % cfg.PRECISEBN.preciseBN_interval == 0 or
+                epoch == cfg.epochs - 1):
             do_preciseBN(
                 model, train_loader, parallel,
                 min(cfg.PRECISEBN.num_iters_preciseBN, len(train_loader)))
 
         # 5. Validation
-        if validate and (epoch % cfg.get("val_interval", 1) == 0
-                         or epoch == cfg.epochs - 1):
+        if validate and (epoch % cfg.get("val_interval", 1) == 0 or
+                         epoch == cfg.epochs - 1):
             with paddle.no_grad():
                 best, save_best_flag = evaluate(best)
             # save best
@@ -347,13 +351,11 @@ def train_model(cfg,
 
         # 6. Save model and optimizer
         if epoch % cfg.get("save_interval", 1) == 0 or epoch == cfg.epochs - 1:
-            save(
-                optimizer.state_dict(),
-                osp.join(output_dir,
-                         model_name + f"_epoch_{epoch+1:05d}.pdopt"))
-            save(
-                model.state_dict(),
-                osp.join(output_dir,
-                         model_name + f"_epoch_{epoch+1:05d}.pdparams"))
+            save(optimizer.state_dict(),
+                 osp.join(output_dir,
+                          model_name + f"_epoch_{epoch+1:05d}.pdopt"))
+            save(model.state_dict(),
+                 osp.join(output_dir,
+                          model_name + f"_epoch_{epoch+1:05d}.pdparams"))
 
     logger.info(f'training {model_name} finished')

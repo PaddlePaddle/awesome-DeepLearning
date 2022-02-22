@@ -3,19 +3,19 @@
 ## 依赖模块
 
 - python3
-- paddlenlp==2.0.0rc22 
+- paddlenlp==2.0.0rc22
 - paddlepaddle==2.1.1
 - pandas
 - attrdict==2.0.1
 - ujson
 - tqdm
-- paddlepaddle-gpu 
+- paddlepaddle-gpu
 
 ## 项目介绍
 
 ```
 |-data_transfer.py: 将测试集和训练集数据从xml格式提取成txt形式
-|-data_process.py: 数据集预处理，并且分别构建训练，验证以及测试数据集 
+|-data_process.py: 数据集预处理，并且分别构建训练，验证以及测试数据集
 |-dataloader.py: 包含构建dataloader的方法
 |-train.py: 构建dataloader，加载预训练模型，设置AdamW优化器，cross entropy损失函数以及评估方式，并且开始ELECTRA的训练，并且在验证集上评估
 |-predict.py: 启动模型预测的脚本，并且储存预测结果于txt文件
@@ -55,7 +55,7 @@ ELECTRA 是由 Kevin Clark 等人（Standfold 和 Google 团队）在 ICLR 2020 
 - 请按照如下格式组织数据集
 
   ```
-  data 
+  data
   |_ IWSLT12.TED.MT.tst2011.en-fr.en.xml
   |_ IWSLT12.TED.SLT.tst2011.en-fr.en.system0.comma.xml
   |_ IWSLT12.TALK.dev2010.en-fr.en.xml
@@ -68,7 +68,7 @@ ELECTRA 是由 Kevin Clark 等人（Standfold 和 Google 团队）在 ICLR 2020 
   ```bash
   python data_transfer.py  
   python data_process.py  
-  ``` 
+  ```
 
 ## 模型训练与评估
 

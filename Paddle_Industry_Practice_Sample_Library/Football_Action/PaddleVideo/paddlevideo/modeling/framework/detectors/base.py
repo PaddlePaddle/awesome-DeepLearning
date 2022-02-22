@@ -3,16 +3,18 @@ from ... import builder
 import paddle.nn as nn
 from ...registry import DETECTORS
 
+
 @DETECTORS.register()
 class BaseDetector(nn.Layer):
     """Base class for detectors.  """
+
     def __init__(self, backbone=None, head=None):
 
         super().__init__()
 
     def init_weights(self):
         """Initialize the model network weights. """
-        self.backbone.init_weights()  
+        self.backbone.init_weights()
         self.head.init_weights()
 
     def extract_feature(self, imgs, iter_num):
@@ -20,7 +22,7 @@ class BaseDetector(nn.Layer):
         feature = self.backbone(imgs)
         return feature
 
-    def forward(self,  data_batch, mode='infer'):
+    def forward(self, data_batch, mode='infer'):
         if mode == 'train':
             return self.train_step(data_batch)
         elif mode == 'valid':

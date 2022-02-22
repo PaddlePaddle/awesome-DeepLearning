@@ -21,6 +21,7 @@ logger = get_logger("paddlevideo")
 class Recognizer3D(BaseRecognizer):
     """3D Recognizer model framework.
     """
+
     def forward_net(self, imgs):
         """Define how the model is going to run, from input to output.
         """

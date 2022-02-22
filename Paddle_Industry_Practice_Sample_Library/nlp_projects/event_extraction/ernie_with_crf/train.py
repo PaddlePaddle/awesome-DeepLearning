@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 import os
 import ast
 import argparse
@@ -54,7 +53,6 @@ args = parser.parse_args()
 # yapf: enable
 
 
-
 def train():
     # set running envir
     paddle.set_device(args.device)
@@ -68,74 +66,101 @@ def train():
     if not os.path.exists(args.checkpoint):
         os.mkdir(args.checkpoint)
 
-
     model_name = "ernie-1.0"
-    
+
     # load and process data
     tag2id, id2tag = load_dict(args.tag_path)
     train_ds = load_dataset(read, data_path=args.train_path, lazy=False)
     dev_ds = load_dataset(read, data_path=args.dev_path, lazy=False)
 
     tokenizer = ErnieTokenizer.from_pretrained(model_name)
-    trans_func = partial(convert_example_to_features, tokenizer=tokenizer, tag2id=tag2id, max_seq_length=args.max_seq_len, pad_default_tag="O", is_test=False)
+    trans_func = partial(
+        convert_example_to_features,
+        tokenizer=tokenizer,
+        tag2id=tag2id,
+        max_seq_length=args.max_seq_len,
+        pad_default_tag="O",
+        is_test=False)
 
     train_ds = train_ds.map(trans_func, lazy=False)
     dev_ds = dev_ds.map(trans_func, lazy=False)
 
     batchify_fn = lambda samples, fn=Tuple(
-        Pad(axis=0, pad_val=tokenizer.pad_token_id), # input_ids
-        Pad(axis=0, pad_val=tokenizer.pad_token_type_id), # token_type
-        Stack(), # seq len
-        Pad(axis=0, pad_val=-1) # tag_ids
+        Pad(axis=0, pad_val=tokenizer.pad_token_id),  # input_ids
+        Pad(axis=0, pad_val=tokenizer.pad_token_type_id),  # token_type
+        Stack(),  # seq len
+        Pad(axis=0, pad_val=-1)  # tag_ids
     ): fn(samples)
-    
-    train_batch_sampler = paddle.io.DistributedBatchSampler(train_ds, batch_size=args.batch_size, shuffle=True)
-    dev_batch_sampler = paddle.io.DistributedBatchSampler(dev_ds, batch_size=args.batch_size, shuffle=False)
-    train_loader = paddle.io.DataLoader(train_ds, batch_sampler=train_batch_sampler, collate_fn=batchify_fn)
-    dev_loader = paddle.io.DataLoader(dev_ds, batch_sampler=dev_batch_sampler, collate_fn=batchify_fn)
+
+    train_batch_sampler = paddle.io.DistributedBatchSampler(
+        train_ds, batch_size=args.batch_size, shuffle=True)
+    dev_batch_sampler = paddle.io.DistributedBatchSampler(
+        dev_ds, batch_size=args.batch_size, shuffle=False)
+    train_loader = paddle.io.DataLoader(
+        train_ds, batch_sampler=train_batch_sampler, collate_fn=batchify_fn)
+    dev_loader = paddle.io.DataLoader(
+        dev_ds, batch_sampler=dev_batch_sampler, collate_fn=batchify_fn)
 
     # configure model training     
     ernie = ErnieModel.from_pretrained(model_name)
     event_model = EventExtractionModel(ernie, num_classes=len(tag2id))
 
-    set_seed(args.seed)    
+    set_seed(args.seed)
 
     num_training_steps = len(train_loader) * args.num_epoch
-    lr_scheduler = LinearDecayWithWarmup(args.learning_rate, num_training_steps, args.warmup_proportion)
-    decay_params = [p.name for n, p in event_model.named_parameters() if not any(nd in n for nd in ["bias", "norm"])]
-    optimizer = paddle.optimizer.AdamW(learning_rate=lr_scheduler, parameters=event_model.parameters(), weight_decay=args.weight_decay, apply_decay_param_fun=lambda x: x in decay_params)
- 
+    lr_scheduler = LinearDecayWithWarmup(
+        args.learning_rate, num_training_steps, args.warmup_proportion)
+    decay_params = [
+        p.name for n, p in event_model.named_parameters()
+        if not any(nd in n for nd in ["bias", "norm"])
+    ]
+    optimizer = paddle.optimizer.AdamW(
+        learning_rate=lr_scheduler,
+        parameters=event_model.parameters(),
+        weight_decay=args.weight_decay,
+        apply_decay_param_fun=lambda x: x in decay_params)
+
     metric = ChunkEvaluator(label_list=tag2id.keys(), suffix=False)
-   
+
     # start to train event_model
-    global_step, best_f1 = 0,  0.
+    global_step, best_f1 = 0, 0.
     event_model.train()
-    for epoch in range(1, args.num_epoch+1):
+    for epoch in range(1, args.num_epoch + 1):
         for batch_data in train_loader:
             input_ids, token_type_ids, seq_lens, tag_ids = batch_data
             logits = event_model(input_ids, token_type_ids)
-            loss = event_model.get_crf_loss(logits, seq_lens, tag_ids)            
+            loss = event_model.get_crf_loss(logits, seq_lens, tag_ids)
 
             loss.backward()
             lr_scheduler.step()
             optimizer.step()
             optimizer.clear_grad()
- 
+
             if global_step > 0 and global_step % args.log_step == 0 and rank == 0:
-                print(f"{args.model_name} - epoch: {epoch} - global_step: {global_step}/{num_training_steps} - loss:{loss.numpy().item():.6f}") 
-            if global_step > 0 and global_step % args.eval_step == 0 and rank == 0: 
-                precision, recall, f1_score = evaluate(event_model, dev_loader, metric)
+                print(
+                    f"{args.model_name} - epoch: {epoch} - global_step: {global_step}/{num_training_steps} - loss:{loss.numpy().item():.6f}"
+                )
+            if global_step > 0 and global_step % args.eval_step == 0 and rank == 0:
+                precision, recall, f1_score = evaluate(event_model, dev_loader,
+                                                       metric)
                 event_model.train()
                 if f1_score > best_f1:
-                    print(f"best F1 performence has been updated: {best_f1:.5f} --> {f1_score:.5f}")
+                    print(
+                        f"best F1 performence has been updated: {best_f1:.5f} --> {f1_score:.5f}"
+                    )
                     best_f1 = f1_score
-                    paddle.save(event_model.state_dict(), f"{args.checkpoint}/{args.model_name}_best.pdparams")
-                print(f'{args.model_name} evalution result: precision: {precision:.5f}, recall: {recall:.5f},  F1: {f1_score:.5f} current best {best_f1:.5f}')
+                    paddle.save(
+                        event_model.state_dict(),
+                        f"{args.checkpoint}/{args.model_name}_best.pdparams")
+                print(
+                    f'{args.model_name} evalution result: precision: {precision:.5f}, recall: {recall:.5f},  F1: {f1_score:.5f} current best {best_f1:.5f}'
+                )
             global_step += 1
 
     if rank == 0:
-        paddle.save(event_model.state_dict(), f"{args.checkpoint}/{args.model_name}_final.pdparams")   
-       
+        paddle.save(event_model.state_dict(),
+                    f"{args.checkpoint}/{args.model_name}_final.pdparams")
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     train()

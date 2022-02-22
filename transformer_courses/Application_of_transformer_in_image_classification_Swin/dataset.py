@@ -14,7 +14,8 @@
 
 import os
 from paddle.io import Dataset
-from transform import  transform
+from transform import transform
+
 
 # 读取数据，如果是训练数据，随即打乱数据顺序
 def get_file_list(file_list):

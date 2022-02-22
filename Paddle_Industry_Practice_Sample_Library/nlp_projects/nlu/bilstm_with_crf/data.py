@@ -12,12 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 import paddle
 import json
 from collections import OrderedDict
 from paddle.io import Dataset
 import numpy as np
+
 
 class ATISDataset(Dataset):
     def __init__(self, path, vocab_path, intent_path, slot_path):
@@ -26,11 +26,10 @@ class ATISDataset(Dataset):
         self.intent2id, self.id2intent = self.load_dict(intent_path)
         self.slot2id, self.id2slot = self.load_dict(slot_path)
 
-
     def __getitem__(self, idx):
         example = self.examples[idx]
         tokens, tags, intent = self.convert_example_to_id(example)
-        
+
         return np.array(tokens), np.array(tags), intent, len(tokens)
 
     def __len__(self):
@@ -48,7 +47,6 @@ class ATISDataset(Dataset):
     def num_slots(self):
         return len(self.slot2id)
 
-
     def convert_example_to_id(self, example):
         tokens = example["text"].split()
         tags = example["tag"].split()
@@ -64,11 +62,9 @@ class ATISDataset(Dataset):
         with open(dict_path, "r", encoding="utf-8") as f:
             words = [word.strip() for word in f.readlines()]
             dict2id = dict(zip(words, range(len(words))))
-            id2dict = {v:k for k,v in dict2id.items()}
+            id2dict = {v: k for k, v in dict2id.items()}
 
         return dict2id, id2dict
-
-
 
     def _split_with_id(self, text, start=0):
         word2sid = OrderedDict()
@@ -80,9 +76,11 @@ class ATISDataset(Dataset):
             else:
                 word += text[i]
 
-            if (i < len(text) - 1 and text[i + 1] == " ") or i == len(text) - 1:
+            if (i < len(text) - 1 and
+                    text[i + 1] == " ") or i == len(text) - 1:
                 # get whole word
-                key = str(i - len(word) + 1 + start) + "_" + str(i + start) + "_" + word
+                key = str(i - len(word) + 1 + start) + "_" + str(
+                    i + start) + "_" + word
                 word2sid[key] = count
                 count += 1
                 word = ""
@@ -103,7 +101,8 @@ class ATISDataset(Dataset):
             tags = ['O'] * len(splited_text)
             word2sid = self._split_with_id(raw_example["text"])
             for entity in raw_example["entities"]:
-                start, end, value, entity_name = entity["start"], entity["end"] - 1, entity["value"], entity["entity"]
+                start, end, value, entity_name = entity["start"], entity[
+                    "end"] - 1, entity["value"], entity["entity"]
                 entity2sid = self._split_with_id(value, start=start)
                 for i, word in enumerate(entity2sid.keys()):
                     if i == 0:

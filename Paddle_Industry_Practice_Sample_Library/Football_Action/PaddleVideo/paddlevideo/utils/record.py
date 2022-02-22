@@ -26,7 +26,8 @@ __all__ = ['AverageMeter', 'build_record', 'log_batch', 'log_epoch']
 def build_record(cfg):
     record_list = [
         ("loss", AverageMeter('loss', '7.5f')),
-        ("lr", AverageMeter('lr', 'f', need_avg=False)),
+        ("lr", AverageMeter(
+            'lr', 'f', need_avg=False)),
     ]
     if 'Recognizer1D' in cfg.framework:  #TODO: required specify str in framework
         record_list.append(("hit_at_one", AverageMeter("hit_at_one", '.5f')))
@@ -67,6 +68,7 @@ class AverageMeter(object):
     """
     Computes and stores the average and current value
     """
+
     def __init__(self, name='', fmt='f', need_avg=True):
         self.name = name
         self.fmt = fmt
@@ -95,8 +97,8 @@ class AverageMeter(object):
 
     @property
     def total_minute(self):
-        return '{self.name}_sum: {s:{self.fmt}} min'.format(s=self.sum / 60,
-                                                            self=self)
+        return '{self.name}_sum: {s:{self.fmt}} min'.format(
+            s=self.sum / 60, self=self)
 
     @property
     def mean(self):
@@ -122,8 +124,10 @@ def log_batch(metric_list, batch_id, epoch_id, total_epoch, mode, ips):
 
     logger.info("{:s} {:s} {:s} {:s} {:s} {}".format(
         coloring(epoch_str, "HEADER") if batch_id == 0 else epoch_str,
-        coloring(step_str, "PURPLE"), coloring(metric_str, 'OKGREEN'),
-        coloring(batch_cost, "OKGREEN"), coloring(reader_cost, 'OKGREEN'), ips))
+        coloring(step_str, "PURPLE"),
+        coloring(metric_str, 'OKGREEN'),
+        coloring(batch_cost, "OKGREEN"), coloring(reader_cost, 'OKGREEN'),
+        ips))
 
 
 def log_epoch(metric_list, epoch, mode, ips):
@@ -140,6 +144,8 @@ def log_epoch(metric_list, epoch, mode, ips):
     end_epoch_str = "END epoch:{:<3d}".format(epoch)
 
     logger.info("{:s} {:s} {:s} {:s} {:s} {:s} {}".format(
-        coloring(end_epoch_str, "RED"), coloring(mode, "PURPLE"),
-        coloring(metric_str, "OKGREEN"), coloring(batch_cost, "OKGREEN"),
+        coloring(end_epoch_str, "RED"),
+        coloring(mode, "PURPLE"),
+        coloring(metric_str, "OKGREEN"),
+        coloring(batch_cost, "OKGREEN"),
         coloring(reader_cost, "OKGREEN"), coloring(batch_sum, "OKGREEN"), ips))

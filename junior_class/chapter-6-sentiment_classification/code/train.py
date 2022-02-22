@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 import os
 import paddle
 from model import sentiment_classifier
@@ -32,6 +31,7 @@ def get_dataset(data_path, is_training=True):
 
     return corpus, word2id_dict
 
+
 def train(model, train_loader):
     model.train()
 
@@ -41,7 +41,11 @@ def train(model, train_loader):
         paddle.set_device('gpu:0')
 
     # 创建优化器Optimizer，用于更新这个网络的参数
-    optimizer = paddle.optimizer.Adam(learning_rate=0.01, beta1=0.9, beta2=0.999, parameters= model.parameters())
+    optimizer = paddle.optimizer.Adam(
+        learning_rate=0.01,
+        beta1=0.9,
+        beta2=0.999,
+        parameters=model.parameters())
 
     # 开始训练
     for step, (sentences, labels) in enumerate(train_loader):
@@ -74,16 +78,19 @@ if __name__ == '__main__':
     dataset_save_path = "./data/aclImdb_v1.tar.gz"
     dataset_download_path = "https://dataset.bj.bcebos.com/imdb%2FaclImdb_v1.tar.gz"
     if not os.path.exists(dataset_save_path):
-        data_processor.download(save_path=dataset_save_path, corpus_url=dataset_download_path)
+        data_processor.download(
+            save_path=dataset_save_path, corpus_url=dataset_download_path)
 
     # 加载数据集
     dataset, word2id_dict = get_dataset(dataset_save_path, is_training=True)
 
-    data_loader = data_processor.build_batch(word2id_dict, dataset, batch_size, epoch_num, max_seq_len)
+    data_loader = data_processor.build_batch(word2id_dict, dataset, batch_size,
+                                             epoch_num, max_seq_len)
 
     # 初始化要训练的模型
     vocab_size = len(word2id_dict.keys())
-    sentiment_classifier = sentiment_classifier.SentimentClassifier(embedding_size, vocab_size, num_steps=max_seq_len, num_layers=1)
+    sentiment_classifier = sentiment_classifier.SentimentClassifier(
+        embedding_size, vocab_size, num_steps=max_seq_len, num_layers=1)
 
     # 训练模型
     train(sentiment_classifier, data_loader)
@@ -91,6 +98,6 @@ if __name__ == '__main__':
     # 保存词典和模型
     with open(dict_save_path, "w") as f:
         for word_id, word in enumerate(word2id_dict.keys()):
-            f.write(word+"\t"+str(word_id)+"\n")
+            f.write(word + "\t" + str(word_id) + "\n")
 
     paddle.save(sentiment_classifier.state_dict(), model_save_path)

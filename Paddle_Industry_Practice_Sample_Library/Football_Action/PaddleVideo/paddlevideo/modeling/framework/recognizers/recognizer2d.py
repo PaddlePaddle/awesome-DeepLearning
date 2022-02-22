@@ -21,9 +21,11 @@ logger = get_logger("paddlevideo")
 @RECOGNIZERS.register()
 class Recognizer2D(BaseRecognizer):
     """2D recognizer model framework."""
+
     def __init__(self, backbone=None, head=None):
         super().__init__(backbone=backbone, head=head)
-        self.avgpool2d = paddle.nn.AdaptiveAvgPool2D((1, 1), data_format='NCHW')
+        self.avgpool2d = paddle.nn.AdaptiveAvgPool2D(
+            (1, 1), data_format='NCHW')
 
     def forward_net(self, imgs):
         # NOTE: As the num_segs is an attribute of dataset phase, and didn't pass to build_head phase, should obtain it from imgs(paddle.Tensor) now, then call self.head method.
@@ -78,4 +80,4 @@ class Recognizer2D(BaseRecognizer):
         imgs = paddle.reshape_(imgs, [-1] + list(imgs.shape[2:]))
         feature = self.backbone(imgs)
         feat = self.avgpool2d(feature)
-        return feat    
+        return feat

@@ -26,6 +26,7 @@ logger = logging.getLogger('LSTM')
 
 class MetricsCalculator():
     """MetricsCalculator"""
+
     def __init__(self, name, mode, metrics_args):
         """init"""
         self.name = name

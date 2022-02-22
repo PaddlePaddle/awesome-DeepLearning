@@ -81,4 +81,3 @@ Sigmoid 函数的导数 $\sigma^{'}(x)$ 如 **图3** 所示：
 [1] [Visualizing and Understanding Convolutional Networks](https://arxiv.org/pdf/1311.2901.pdf)
 
 [2] [Deep Residual Learning for Image Recognition](https://arxiv.org/pdf/1512.03385.pdf)
-

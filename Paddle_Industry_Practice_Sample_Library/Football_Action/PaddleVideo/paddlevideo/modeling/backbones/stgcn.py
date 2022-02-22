@@ -77,9 +77,8 @@ class Graph():
         self.dilation = dilation
 
         self.get_edge(layout)
-        self.hop_dis = get_hop_distance(self.num_node,
-                                        self.edge,
-                                        max_hop=max_hop)
+        self.hop_dis = get_hop_distance(
+            self.num_node, self.edge, max_hop=max_hop)
         self.get_adjacency(strategy)
 
     def __str__(self):
@@ -159,12 +158,13 @@ class ConvTemporalGraphical(nn.Layer):
         super().__init__()
 
         self.kernel_size = kernel_size
-        self.conv = nn.Conv2D(in_channels,
-                              out_channels * kernel_size,
-                              kernel_size=(t_kernel_size, 1),
-                              padding=(t_padding, 0),
-                              stride=(t_stride, 1),
-                              dilation=(t_dilation, 1))
+        self.conv = nn.Conv2D(
+            in_channels,
+            out_channels * kernel_size,
+            kernel_size=(t_kernel_size, 1),
+            padding=(t_padding, 0),
+            stride=(t_stride, 1),
+            dilation=(t_dilation, 1))
 
     def forward(self, x, A):
         assert A.shape[0] == self.kernel_size
@@ -202,11 +202,9 @@ class st_gcn_block(nn.Layer):
                 out_channels,
                 (kernel_size[0], 1),
                 (stride, 1),
-                padding,
-            ),
+                padding, ),
             nn.BatchNorm2D(out_channels),
-            nn.Dropout(dropout),
-        )
+            nn.Dropout(dropout), )
 
         if not residual:
             self.residual = zero
@@ -216,12 +214,12 @@ class st_gcn_block(nn.Layer):
 
         else:
             self.residual = nn.Sequential(
-                nn.Conv2D(in_channels,
-                          out_channels,
-                          kernel_size=1,
-                          stride=(stride, 1)),
-                nn.BatchNorm2D(out_channels),
-            )
+                nn.Conv2D(
+                    in_channels,
+                    out_channels,
+                    kernel_size=1,
+                    stride=(stride, 1)),
+                nn.BatchNorm2D(out_channels), )
 
         self.relu = nn.ReLU()
 
@@ -242,6 +240,7 @@ class STGCN(nn.Layer):
         edge_importance_weighting: bool, whether to use edge attention. Default True.
         data_bn: bool, whether to use data BatchNorm. Default True.
     """
+
     def __init__(self,
                  in_channels=2,
                  edge_importance_weighting=True,
@@ -254,8 +253,7 @@ class STGCN(nn.Layer):
         # load graph
         self.graph = Graph(
             layout=layout,
-            strategy=strategy,
-        )
+            strategy=strategy, )
         A = paddle.to_tensor(self.graph.A, dtype='float32')
         self.register_buffer('A', A)
 
@@ -267,12 +265,8 @@ class STGCN(nn.Layer):
                                       A.shape[1]) if self.data_bn else iden
         kwargs0 = {k: v for k, v in kwargs.items() if k != 'dropout'}
         self.st_gcn_networks = nn.LayerList((
-            st_gcn_block(in_channels,
-                         64,
-                         kernel_size,
-                         1,
-                         residual=False,
-                         **kwargs0),
+            st_gcn_block(
+                in_channels, 64, kernel_size, 1, residual=False, **kwargs0),
             st_gcn_block(64, 64, kernel_size, 1, **kwargs),
             st_gcn_block(64, 64, kernel_size, 1, **kwargs),
             st_gcn_block(64, 64, kernel_size, 1, **kwargs),
@@ -281,8 +275,7 @@ class STGCN(nn.Layer):
             st_gcn_block(128, 128, kernel_size, 1, **kwargs),
             st_gcn_block(128, 256, kernel_size, 2, **kwargs),
             st_gcn_block(256, 256, kernel_size, 1, **kwargs),
-            st_gcn_block(256, 256, kernel_size, 1, **kwargs),
-        ))
+            st_gcn_block(256, 256, kernel_size, 1, **kwargs), ))
 
         # initialize parameters for edge importance weighting
         if edge_importance_weighting:

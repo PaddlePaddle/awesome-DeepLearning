@@ -24,6 +24,7 @@ logger = get_logger("paddlevideo")
 class DepthEstimator(BaseEstimator):
     """DepthEstimator
     """
+
     def forward_net(self, inputs, day_or_night='day_and_night'):
         if self.backbone is not None:
             outputs = self.backbone(inputs, day_or_night)

@@ -3,7 +3,7 @@ import paddle.nn as nn
 import paddle.nn.functional as F
 
 
-class SSM(nn.Layer): # 语义补充模块
+class SSM(nn.Layer):  # 语义补充模块
     def __init__(self):
         super(SSM, self).__init__()
         self.cv1 = nn.Conv2D(64, 64, 3, 1, 1)
@@ -14,11 +14,11 @@ class SSM(nn.Layer): # 语义补充模块
     def forward(self, x):
         d1 = self.bn1(self.cv1(x))
         d2 = self.bn2(self.cv2(x))
-        out = F.relu(d1+d2+x)
+        out = F.relu(d1 + d2 + x)
         return out
 
 
-class Feature_mutual_feedback_module(nn.Layer): # 特征互反馈模块 FMF
+class Feature_mutual_feedback_module(nn.Layer):  # 特征互反馈模块 FMF
     def __init__(self):
         super(Feature_mutual_feedback_module, self).__init__()
         self.cv1 = nn.Conv2D(64, 64, 3, 1, 1)
@@ -32,8 +32,10 @@ class Feature_mutual_feedback_module(nn.Layer): # 特征互反馈模块 FMF
         self.bn4 = nn.BatchNorm2D(64)
 
     def forward(self, l, h):
-        h_l = F.interpolate(h, size=l.shape[2:], mode='bilinear', align_corners=True)
-        l_h = F.interpolate(l, size=h.shape[2:], mode='bilinear', align_corners=True)
+        h_l = F.interpolate(
+            h, size=l.shape[2:], mode='bilinear', align_corners=True)
+        l_h = F.interpolate(
+            l, size=h.shape[2:], mode='bilinear', align_corners=True)
 
         h_l = F.relu(self.bn1(self.cv1(h_l)))
         l_h = F.relu(self.bn2(self.cv2(l_h)))
@@ -46,7 +48,8 @@ class Feature_mutual_feedback_module(nn.Layer): # 特征互反馈模块 FMF
         return l, h
 
 
-class Progressive_fusion_module(nn.Layer): # Progressive_fusion_module 渐进融合模块 PFM
+class Progressive_fusion_module(
+        nn.Layer):  # Progressive_fusion_module 渐进融合模块 PFM
     def __init__(self):
         super(Progressive_fusion_module, self).__init__()
         self.cv1 = nn.Conv2D(64, 64, 3, 1, 1)
@@ -74,22 +77,26 @@ class Progressive_fusion_module(nn.Layer): # Progressive_fusion_module 渐进融
         self.bn8 = nn.BatchNorm2D(64)
 
     def forward(self, out1, out2, out3, out4, out5):
-        out5 = F.interpolate(out5, size=out4.shape[2:], mode='bilinear', align_corners=True)
+        out5 = F.interpolate(
+            out5, size=out4.shape[2:], mode='bilinear', align_corners=True)
         out5 = F.relu(self.bn1(self.cv1(out5)))
 
         out4 = paddle.concat([out4, out5], axis=1)
         out4 = F.relu(self.bn2(self.cv2(out4)))
-        out4 = F.interpolate(out4, size=out3.shape[2:], mode='bilinear', align_corners=True)
+        out4 = F.interpolate(
+            out4, size=out3.shape[2:], mode='bilinear', align_corners=True)
         out4 = F.relu(self.bn3(self.cv3(out4)))
 
         out3 = paddle.concat([out3, out4], axis=1)
         out3 = F.relu(self.bn4(self.cv4(out3)))
-        out3 = F.interpolate(out3, size=out2.shape[2:], mode='bilinear', align_corners=True)
+        out3 = F.interpolate(
+            out3, size=out2.shape[2:], mode='bilinear', align_corners=True)
         out3 = F.relu(self.bn5(self.cv5(out3)))
 
         out2 = paddle.concat([out2, out3], axis=1)
         out2 = F.relu(self.bn6(self.cv6(out2)))
-        out2 = F.interpolate(out1, size=out2.shape[2:], mode='bilinear', align_corners=True)
+        out2 = F.interpolate(
+            out1, size=out2.shape[2:], mode='bilinear', align_corners=True)
         out2 = F.relu(self.bn7(self.cv7(out2)))
 
         out1 = paddle.concat([out1, out2], axis=1)
@@ -117,9 +124,11 @@ class SEModule(nn.Layer):
     def __init__(self, channels, reduction=16):
         super(SEModule, self).__init__()
         self.avg_pool = nn.AdaptiveAvgPool2D(1)
-        self.fc1 = nn.Conv2D(channels, channels // reduction, kernel_size=1, padding=0)
+        self.fc1 = nn.Conv2D(
+            channels, channels // reduction, kernel_size=1, padding=0)
         self.relu = nn.ReLU()
-        self.fc2 = nn.Conv2D(channels // reduction, channels, kernel_size=1, padding=0)
+        self.fc2 = nn.Conv2D(
+            channels // reduction, channels, kernel_size=1, padding=0)
         self.sigmoid = nn.Sigmoid()
 
     def forward(self, inputs):
@@ -135,12 +144,18 @@ class FMFModel(nn.Layer):
     def __init__(self, backbone):
         super(FMFModel, self).__init__()
         self.backbone = backbone
-        self.se1, self.se2,self.se3,self.se4,self.se5 = SEModule(64), SEModule(64), SEModule(64), SEModule(64), SEModule(64)
-        self.squeeze5 = nn.Sequential(nn.Conv2D(2048, 64, 3, 1, 1), nn.BatchNorm2D(64), nn.ReLU())
-        self.squeeze4 = nn.Sequential(nn.Conv2D(1024, 64, 3, 1, 1), nn.BatchNorm2D(64), nn.ReLU())
-        self.squeeze3 = nn.Sequential(nn.Conv2D(512, 64, 3, 1, 1), nn.BatchNorm2D(64), nn.ReLU())
-        self.squeeze2 = nn.Sequential(nn.Conv2D(256, 64, 3, 1, 1), nn.BatchNorm2D(64), nn.ReLU())
-        self.squeeze1 = nn.Sequential(nn.Conv2D(64, 64, 3, 1, 1), nn.BatchNorm2D(64), nn.ReLU())
+        self.se1, self.se2, self.se3, self.se4, self.se5 = SEModule(
+            64), SEModule(64), SEModule(64), SEModule(64), SEModule(64)
+        self.squeeze5 = nn.Sequential(
+            nn.Conv2D(2048, 64, 3, 1, 1), nn.BatchNorm2D(64), nn.ReLU())
+        self.squeeze4 = nn.Sequential(
+            nn.Conv2D(1024, 64, 3, 1, 1), nn.BatchNorm2D(64), nn.ReLU())
+        self.squeeze3 = nn.Sequential(
+            nn.Conv2D(512, 64, 3, 1, 1), nn.BatchNorm2D(64), nn.ReLU())
+        self.squeeze2 = nn.Sequential(
+            nn.Conv2D(256, 64, 3, 1, 1), nn.BatchNorm2D(64), nn.ReLU())
+        self.squeeze1 = nn.Sequential(
+            nn.Conv2D(64, 64, 3, 1, 1), nn.BatchNorm2D(64), nn.ReLU())
         self.fa1, self.fa2, self.fa3, self.fa4, self.fa5 = SSM(), \
                                                            SSM(), \
                                                            SSM(), \
@@ -168,5 +183,9 @@ class FMFModel(nn.Layer):
         out1, out2, out3, out4, out5 = self.FMF2(out1, out2, out3, out4, out5)
         out1, out2, out3, out4, out5 = self.FMF3(out1, out2, out3, out4, out5)
         out = self.mso(out1, out2, out3, out4, out5)
-        out = F.interpolate(self.linear(out), size=x.shape[2:], mode='bilinear', align_corners=True)
+        out = F.interpolate(
+            self.linear(out),
+            size=x.shape[2:],
+            mode='bilinear',
+            align_corners=True)
         return [out]

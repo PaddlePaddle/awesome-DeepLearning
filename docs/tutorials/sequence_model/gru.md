@@ -75,4 +75,3 @@ $z_t$ 为更新门的激活结果，它同样以门控的形式控制了信息�
 Chung, J., Gulcehre, C., Cho, K., & Bengio, Y. (2014). Empirical evaluation of gated recurrent neural networks on sequence modeling. arXiv preprint arXiv:1412.3555.[链接](https://arxiv.org/pdf/1412.3555.pdf)
 
 [经典必读：门控循环单元（GRU）的基本概念与原理](https://www.jiqizhixin.com/articles/2017-12-24)
-

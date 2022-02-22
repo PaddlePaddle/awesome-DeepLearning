@@ -14,18 +14,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import yaml 
-import argparse 
+import yaml
+import argparse
 from pprint import pprint
 from attrdict import AttrDict
 
-import xml.etree.ElementTree as ET 
+import xml.etree.ElementTree as ET
 from collections import Counter
 import re
 
 # 将测试集和训练集数据从xml格式提取成txt形式
 
-if __name__ == '__main__': 
+if __name__ == '__main__':
     # 读入参数
     yaml_file = './electra.base.yaml'
     with open(yaml_file, 'rt') as f:
@@ -37,21 +37,21 @@ if __name__ == '__main__':
     file_path = data_path + args.dev_path
     xmlp = ET.XMLParser(encoding="utf-8")
     tree = ET.parse(file_path, parser=xmlp)
-    root = tree.getroot() 
+    root = tree.getroot()
 
     docs = []
     for doc_id in range(len(root[0])):
         doc_segs = []
         doc = root[0][doc_id]
-        for seg in doc.iter('seg'): 
+        for seg in doc.iter('seg'):
             doc_segs.append(seg.text)
         docs.extend(doc_segs)
-    
+
     dev_texts = [re.sub(r'\s+', ' ', ''.join(d)).strip() for d in docs]
     with open(data_path + args.output_dev_path, 'w', encoding='utf-8') as f:
         for text in dev_texts:
             f.write(text + '\n')
-    
+
     file_path = data_path + args.test_path
 
     xmlp = ET.XMLParser(encoding="utf-8")
@@ -72,24 +72,23 @@ if __name__ == '__main__':
     with open(data_path + args.output_test_path, 'w', encoding='utf-8') as f:
         for text in test_texts_2012:
             f.write(text + '\n')
-    
+
     file_path = data_path + args.train_path
     with open(file_path) as f:
         xml = f.read()
-    tree = ET.fromstring("<root>"+ xml + "</root>")
-    
+    tree = ET.fromstring("<root>" + xml + "</root>")
+
     docs = []
     for doc in tree.iter('transcript'):
-        text_arr=doc.text.split('\n')
-        text_arr=[item.strip() for item in text_arr if(len(item.strip())>2)]
+        text_arr = doc.text.split('\n')
+        text_arr = [
+            item.strip() for item in text_arr if (len(item.strip()) > 2)
+        ]
         # print(text_arr)
         docs.extend(text_arr)
         # break
 
-    train_texts=docs
+    train_texts = docs
     with open(data_path + args.output_train_path, 'w', encoding='utf-8') as f:
         for text in train_texts:
             f.write(text + '\n')
-
-
-

@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 # 解压数据集
 # unzip -o -q -d ~/work/ ~/data/data19736/ml-1m.zip
 
@@ -22,16 +21,17 @@ usr_file = "./work/ml-1m/users.dat"
 with open(usr_file, 'r') as f:
     data = f.readlines()
 # 打印data的数据长度、第一条数据、数据类型
-print("data 数据长度是：",len(data))
+print("data 数据长度是：", len(data))
 print("第一条数据是：", data[0])
 print("数据类型：", type(data[0]))
 
 
 def gender2num(gender):
     return 1 if gender == 'F' else 0
+
+
 print("性别M用数字 {} 表示".format(gender2num('M')))
 print("性别F用数字 {} 表示".format(gender2num('F')))
-
 
 usr_info = {}
 max_usr_id = 0
@@ -41,26 +41,30 @@ for item in data:
     item = item.strip().split("::")
     usr_id = item[0]
     # 将字符数据转成数字并保存在字典中
-    usr_info[usr_id] = {'usr_id': int(usr_id),
-                        'gender': gender2num(item[1]),
-                        'age': int(item[2]),
-                        'job': int(item[3])}
+    usr_info[usr_id] = {
+        'usr_id': int(usr_id),
+        'gender': gender2num(item[1]),
+        'age': int(item[2]),
+        'job': int(item[3])
+    }
     max_usr_id = max(max_usr_id, int(usr_id))
 
 print("用户ID为3的用户数据是：", usr_info['3'])
 
 import numpy as np
+
+
 def get_usr_info(path):
     # 性别转换函数，M-0， F-1
     def gender2num(gender):
         return 1 if gender == 'F' else 0
-    
+
     # 打开文件，读取所有行到data中
     with open(path, 'r') as f:
         data = f.readlines()
     # 建立用户信息的字典
     use_info = {}
-    
+
     max_usr_id = 0
     #按行索引数据
     for item in data:
@@ -68,18 +72,19 @@ def get_usr_info(path):
         item = item.strip().split("::")
         usr_id = item[0]
         # 将字符数据转成数字并保存在字典中
-        use_info[usr_id] = {'usr_id': int(usr_id),
-                            'gender': gender2num(item[1]),
-                            'age': int(item[2]),
-                            'job': int(item[3])}
+        use_info[usr_id] = {
+            'usr_id': int(usr_id),
+            'gender': gender2num(item[1]),
+            'age': int(item[2]),
+            'job': int(item[3])
+        }
         max_usr_id = max(max_usr_id, int(usr_id))
-    
+
     return use_info, max_usr_id
+
 
 usr_file = "./work/ml-1m/users.dat"
 usr_info, max_usr_id = get_usr_info(usr_file)
 print("用户数量:", len(usr_info))
 print("最大用户ID:", max_usr_id)
 print("第1个用户的信息是：", usr_info['1'])
-
-

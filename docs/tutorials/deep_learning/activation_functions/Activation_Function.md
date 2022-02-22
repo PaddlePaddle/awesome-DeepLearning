@@ -387,4 +387,3 @@ $$s^{'}\left( x \right) =s\left( x \right) \left( 1-s\left( x \right) \right) \i
 2. $softmax$ 是 $sigmoid$ 的扩展，因为，当类别数 $k=2$ 时，$softmax$ 回归退化为 $logistic$ 回归。
 3. $softmax$ 建模使用的分布是多项式分布，而 $logistic$ 则基于伯努利分布。
 4. 多个 $logistic$ 回归通过叠加也同样可以实现多分类的效果，但是 $softmax$ 回归进行的多分类，类与类之间是互斥的，即一个输入只能被归为一类；多 $logistic$ 回归进行多分类，输出的类别并不是互斥的，即"苹果"这个词语既属于"水果"类也属于"$3C$"类别。
-

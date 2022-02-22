@@ -68,15 +68,16 @@ def soft_nms(df, alpha, t1, t2):
 
     while len(tscore) > 1 and len(rscore) < 101:
         max_index = tscore.index(max(tscore))
-        tmp_iou_list = iou_with_anchors(np.array(tstart), np.array(tend),
-                                        tstart[max_index], tend[max_index])
+        tmp_iou_list = iou_with_anchors(
+            np.array(tstart),
+            np.array(tend), tstart[max_index], tend[max_index])
         for idx in range(0, len(tscore)):
             if idx != max_index:
                 tmp_iou = tmp_iou_list[idx]
                 tmp_width = tend[max_index] - tstart[max_index]
                 if tmp_iou > t1 + (t2 - t1) * tmp_width:
-                    tscore[idx] = tscore[idx] * np.exp(
-                        -np.square(tmp_iou) / alpha)
+                    tscore[idx] = tscore[idx] * np.exp(-np.square(tmp_iou) /
+                                                       alpha)
 
         rstart.append(tstart[max_index])
         rend.append(tend[max_index])
@@ -187,8 +188,8 @@ class BMNMetric(BaseMetric):
 
         score_vector_list = np.stack(score_vector_list)
         video_df = pd.DataFrame(score_vector_list, columns=cols)
-        video_df.to_csv(os.path.join(self.output_path, "%s.csv" % video_name),
-                        index=False)
+        video_df.to_csv(
+            os.path.join(self.output_path, "%s.csv" % video_name), index=False)
 
         if batch_id % self.log_interval == 0:
             logger.info("Processing................ batch {}".format(batch_id))
@@ -198,8 +199,8 @@ class BMNMetric(BaseMetric):
         """
         # check clip index of each video
         #Stage1
-        self.bmn_post_processing(self.video_dict, self.subset, self.output_path,
-                                 self.result_path)
+        self.bmn_post_processing(self.video_dict, self.subset,
+                                 self.output_path, self.result_path)
         if self.get_metrics:
             logger.info("[TEST] calculate metrics...")
             #Stage2
@@ -216,7 +217,8 @@ class BMNMetric(BaseMetric):
                          100 * np.mean(uniform_recall_valid[:, 9]),
                          100 * np.mean(uniform_recall_valid[:, -1])))
 
-    def bmn_post_processing(self, video_dict, subset, output_path, result_path):
+    def bmn_post_processing(self, video_dict, subset, output_path,
+                            result_path):
         video_list = list(video_dict.keys())
         global result_dict
         result_dict = mp.Manager().dict()
@@ -228,15 +230,15 @@ class BMNMetric(BaseMetric):
         for tid in range(pp_num - 1):
             tmp_video_list = video_list[tid * num_videos_per_thread:(tid + 1) *
                                         num_videos_per_thread]
-            p = mp.Process(target=self.video_process,
-                           args=(tmp_video_list, video_dict, output_path,
-                                 result_dict))
+            p = mp.Process(
+                target=self.video_process,
+                args=(tmp_video_list, video_dict, output_path, result_dict))
             p.start()
             processes.append(p)
         tmp_video_list = video_list[(pp_num - 1) * num_videos_per_thread:]
-        p = mp.Process(target=self.video_process,
-                       args=(tmp_video_list, video_dict, output_path,
-                             result_dict))
+        p = mp.Process(
+            target=self.video_process,
+            args=(tmp_video_list, video_dict, output_path, result_dict))
         p.start()
         processes.append(p)
         for p in processes:
@@ -279,7 +281,8 @@ class BMNMetric(BaseMetric):
                                      min(1,df.xmax.values[idx])*video_duration]}
                 proposal_list.append(tmp_prop)
 
-            video_name = video_name[2:] if video_name[:2] == 'v_' else video_name
+            video_name = video_name[
+                2:] if video_name[:2] == 'v_' else video_name
             result_dict[video_name] = proposal_list
 
     def cal_metrics(self,
@@ -289,13 +292,14 @@ class BMNMetric(BaseMetric):
                     tiou_thresholds=np.linspace(0.5, 0.95, 10),
                     subset='validation'):
 
-        anet_proposal = ANETproposal(ground_truth_filename,
-                                     proposal_filename,
-                                     tiou_thresholds=tiou_thresholds,
-                                     max_avg_nr_proposals=max_avg_nr_proposals,
-                                     subset=subset,
-                                     verbose=True,
-                                     check_status=False)
+        anet_proposal = ANETproposal(
+            ground_truth_filename,
+            proposal_filename,
+            tiou_thresholds=tiou_thresholds,
+            max_avg_nr_proposals=max_avg_nr_proposals,
+            subset=subset,
+            verbose=True,
+            check_status=False)
         anet_proposal.evaluate()
         recall = anet_proposal.recall
         average_recall = anet_proposal.avg_recall

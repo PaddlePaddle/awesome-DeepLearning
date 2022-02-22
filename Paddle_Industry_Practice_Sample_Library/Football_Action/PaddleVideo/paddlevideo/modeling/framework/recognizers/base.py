@@ -18,6 +18,7 @@ class BaseRecognizer(nn.Layer):
         head (dict): Classification head to process feature.
 
     """
+
     def __init__(self, backbone=None, head=None, runtime_cfg=None):
 
         super().__init__()

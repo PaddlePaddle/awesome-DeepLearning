@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 import os
 import paddle
 from model import word2vec
@@ -39,6 +38,7 @@ def get_dataset(data_path, corpus_rate=1.0, subsampling=True):
 
     return dataset, word2id_dict, id2word_dict
 
+
 def train(model, data_loader):
     # 开始训练，定义一些训练过程中需要使用的超参数
     batch_size = 128
@@ -56,7 +56,8 @@ def train(model, data_loader):
     model.train()
 
     # 构造训练这个网络的优化器
-    adam = paddle.optimizer.Adam(learning_rate=learning_rate, parameters=model.parameters())
+    adam = paddle.optimizer.Adam(
+        learning_rate=learning_rate, parameters=model.parameters())
 
     # 使用build_batch函数，以mini-batch为单位，遍历训练数据，并训练网络
     for center_words, target_words, label in data_loader:
@@ -82,9 +83,12 @@ def train(model, data_loader):
 
         # 每隔10000步，打印一次模型对以下查询词的相似词，这里我们使用词和词之间的向量点积作为衡量相似度的方法，只打印了5个最相似的词
         if step % 10000 == 0:
-            utils.get_similar_tokens('movie', 5, model.embedding.weight, word2id_dict, id2word_dict)
-            utils.get_similar_tokens('one', 5, model.embedding.weight, word2id_dict, id2word_dict)
-            utils.get_similar_tokens('chip', 5, model.embedding.weight, word2id_dict, id2word_dict)
+            utils.get_similar_tokens('movie', 5, model.embedding.weight,
+                                     word2id_dict, id2word_dict)
+            utils.get_similar_tokens('one', 5, model.embedding.weight,
+                                     word2id_dict, id2word_dict)
+            utils.get_similar_tokens('chip', 5, model.embedding.weight,
+                                     word2id_dict, id2word_dict)
 
 
 if __name__ == '__main__':
@@ -99,9 +103,11 @@ if __name__ == '__main__':
     dataset_save_path = "./data/text8.txt"
     if not os.path.exists(dataset_save_path):
         dataset_download_path = "https://dataset.bj.bcebos.com/word2vec/text8.txt"
-        data_processor.download(save_path=dataset_save_path, corpus_url=dataset_download_path)
+        data_processor.download(
+            save_path=dataset_save_path, corpus_url=dataset_download_path)
     # 获得数据集
-    dataset, word2id_dict, id2word_dict = get_dataset(dataset_save_path, corpus_rate=0.2)
+    dataset, word2id_dict, id2word_dict = get_dataset(
+        dataset_save_path, corpus_rate=0.2)
     data_loader = data_processor.build_batch(dataset, batch_size, epoch_num)
     # 初始化word2vec实例
     vocab_size = len(word2id_dict.keys())

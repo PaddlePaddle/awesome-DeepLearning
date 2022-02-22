@@ -8,6 +8,7 @@ from data import COCODataSet, BaseDataLoader
 from data.operators import *
 from models import ComposeCallback, LogPrinter
 
+
 def get_categories(metric_type, anno_file=None, arch=None):
     """
     Get class id to category id map and category id
@@ -30,6 +31,7 @@ def get_categories(metric_type, anno_file=None, arch=None):
     # anno file not exist, load default categories of COCO17
     else:
         return _coco17_category()
+
 
 def _coco17_category():
     """
@@ -209,6 +211,7 @@ def _coco17_category():
 
     return clsid2catid, catid2name
 
+
 def get_infer_results(outs, catid, bias=0):
     """
     Get result at the stage of inference.
@@ -234,6 +237,8 @@ def get_infer_results(outs, catid, bias=0):
                 outs['bbox'], outs['bbox_num'], im_id, catid, bias=bias)
 
     return infer_res
+
+
 def get_det_res(bboxes, bbox_nums, image_id, label_to_cat_id_map, bias=0):
     det_res = []
     k = 0
@@ -258,6 +263,7 @@ def get_det_res(bboxes, bbox_nums, image_id, label_to_cat_id_map, bias=0):
             }
             det_res.append(dt_res)
     return det_res
+
 
 def cocoapi_eval(jsonfile,
                  style,
@@ -298,6 +304,7 @@ def cocoapi_eval(jsonfile,
     sys.stdout.flush()
     return coco_eval.stats
 
+
 class COCOMetric(paddle.metric.Metric):
     def __init__(self, anno_file, **kwargs):
         assert os.path.isfile(anno_file), \
@@ -313,7 +320,7 @@ class COCOMetric(paddle.metric.Metric):
         self.save_prediction_only = kwargs.get('save_prediction_only', False)
         self.iou_type = kwargs.get('IouType', 'bbox')
         self.reset()
-    
+
     def name(self):
         return self.__class__.__name__
 
@@ -360,10 +367,11 @@ class COCOMetric(paddle.metric.Metric):
     def get_results(self):
         return self.eval_results
 
+
 def _init_metrics(dataset):
     # pass clsid2catid info to metric instance to avoid multiple loading
     # annotation file
-    clsid2catid = {v: k for k, v in dataset.catid2clsid.items()} 
+    clsid2catid = {v: k for k, v in dataset.catid2clsid.items()}
 
     # when do validation in train, annotation file should be get from
     # EvalReader instead of self.dataset(which is TrainReader)
@@ -381,23 +389,50 @@ def _init_metrics(dataset):
     ]
     return _metrics
 
+
 def _reset_metrics(_metrics):
     for metric in _metrics:
         metric.reset()
 
 
-def _eval_with_loader(model,dataset_dir,image_dir,anno_path):
+def _eval_with_loader(model, dataset_dir, image_dir, anno_path):
     status = {}
     _callbacks = [LogPrinter(model)]
-    _compose_callback = ComposeCallback(_callbacks)    
+    _compose_callback = ComposeCallback(_callbacks)
 
-    dataset = COCODataSet(dataset_dir=dataset_dir, image_dir=image_dir,anno_path=anno_path)
+    dataset = COCODataSet(
+        dataset_dir=dataset_dir, image_dir=image_dir, anno_path=anno_path)
     _eval_batch_sampler = paddle.io.BatchSampler(dataset, batch_size=1)
-    
-    sample_transforms = [{Decode: {}}, {Resize: {'target_size': [800, 1333], 'keep_ratio': True}}, {NormalizeImage: {'is_scale': True, 'mean': [0.485, 0.456, 0.406], 'std': [0.229, 0.224, 0.225]}}, {Permute: {}}]
-    batch_transforms = [{PadMaskBatch:{'pad_to_stride': -1, 'return_pad_mask': True}}]
-    loader = BaseDataLoader(sample_transforms, batch_transforms, batch_size=1, shuffle=False, drop_last=False, drop_empty=False)(dataset, 4, _eval_batch_sampler)
 
+    sample_transforms = [{
+        Decode: {}
+    }, {
+        Resize: {
+            'target_size': [800, 1333],
+            'keep_ratio': True
+        }
+    }, {
+        NormalizeImage: {
+            'is_scale': True,
+            'mean': [0.485, 0.456, 0.406],
+            'std': [0.229, 0.224, 0.225]
+        }
+    }, {
+        Permute: {}
+    }]
+    batch_transforms = [{
+        PadMaskBatch: {
+            'pad_to_stride': -1,
+            'return_pad_mask': True
+        }
+    }]
+    loader = BaseDataLoader(
+        sample_transforms,
+        batch_transforms,
+        batch_size=1,
+        shuffle=False,
+        drop_last=False,
+        drop_empty=False)(dataset, 4, _eval_batch_sampler)
 
     _metrics = _init_metrics(dataset=dataset)
 
@@ -430,6 +465,7 @@ def _eval_with_loader(model,dataset_dir,image_dir,anno_path):
     # reset metric states for metric may performed multiple times
     _reset_metrics(_metrics)
 
-def evaluate(model,dataset_dir,image_dir,anno_path):
+
+def evaluate(model, dataset_dir, image_dir, anno_path):
     with paddle.no_grad():
-        _eval_with_loader(model,dataset_dir,image_dir,anno_path)
+        _eval_with_loader(model, dataset_dir, image_dir, anno_path)

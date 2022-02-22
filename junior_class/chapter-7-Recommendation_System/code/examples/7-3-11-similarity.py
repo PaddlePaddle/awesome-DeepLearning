@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 import paddle
 from paddle.nn import Linear, Embedding, Conv2D
 import numpy as np
@@ -24,9 +23,7 @@ print("输入的用户ID是:", usr_id_data)
 
 USR_ID_NUM = 6040 + 1
 # 定义用户ID的embedding层和fc层
-usr_emb = Embedding(num_embeddings=USR_ID_NUM,
-                embedding_dim=32,
-                sparse=False)
+usr_emb = Embedding(num_embeddings=USR_ID_NUM, embedding_dim=32, sparse=False)
 usr_fc = Linear(in_features=32, out_features=32)
 
 usr_id_var = paddle.to_tensor(usr_id_data)
@@ -41,7 +38,7 @@ print("输入的用户职业是:", usr_job_data)
 # 对用户职业信息做映射，并紧接着一个Linear层
 # 用户职业的最大ID是20，所以Embedding层size的第一个参数设置为20 + 1 = 21
 USR_JOB_DICT_SIZE = 20 + 1
-usr_job_emb = Embedding(num_embeddings=USR_JOB_DICT_SIZE,embedding_dim=16)
+usr_job_emb = Embedding(num_embeddings=USR_JOB_DICT_SIZE, embedding_dim=16)
 usr_job_fc = Linear(in_features=16, out_features=16)
 
 usr_job = paddle.to_tensor(usr_job_data)
@@ -57,8 +54,7 @@ print("输入的用户年龄是:", usr_age_data)
 # 年龄的最大ID是56，所以Embedding层size的第一个参数设置为56 + 1 = 57
 USR_AGE_DICT_SIZE = 56 + 1
 
-usr_age_emb = Embedding(num_embeddings=USR_AGE_DICT_SIZE,
-                            embedding_dim=16)
+usr_age_emb = Embedding(num_embeddings=USR_AGE_DICT_SIZE, embedding_dim=16)
 usr_age_fc = Linear(in_features=16, out_features=16)
 
 usr_age = paddle.to_tensor(usr_age_data)
@@ -75,8 +71,8 @@ print("输入的用户性别是:", usr_gender_data)
 USR_ID_NUM = 2
 # 对用户性别信息做映射，并紧接着一个FC层
 USR_GENDER_DICT_SIZE = 2
-usr_gender_emb = Embedding(num_embeddings=USR_GENDER_DICT_SIZE,
-                            embedding_dim=16)
+usr_gender_emb = Embedding(
+    num_embeddings=USR_GENDER_DICT_SIZE, embedding_dim=16)
 
 usr_gender_fc = Linear(in_features=16, out_features=16)
 
@@ -98,7 +94,6 @@ _features = [paddle.to_tensor(k) for k in _features]
 usr_feat = paddle.concat(_features, axis=1)
 usr_feat = F.tanh(usr_combined(usr_feat))
 
-
 # 自定义一个电影ID数据
 mov_id_data = np.array((1, 2)).reshape(-1).astype('int64')
 # 对电影ID信息做映射，并紧接着一个FC层
@@ -106,14 +101,14 @@ MOV_DICT_SIZE = 3952 + 1
 mov_emb = Embedding(num_embeddings=MOV_DICT_SIZE, embedding_dim=32)
 mov_fc = Linear(32, 32)
 
-
 print("输入的电影ID是:", mov_id_data)
 mov_id_data = paddle.to_tensor(mov_id_data)
 mov_id_feat = mov_fc(mov_emb(mov_id_data))
 mov_id_feat = F.relu(mov_id_feat)
 
 # 自定义一个电影类别数据
-mov_cat_data = np.array(((1, 2, 3, 0, 0, 0), (2, 3, 4, 0, 0, 0))).reshape(2, -1).astype('int64')
+mov_cat_data = np.array(((1, 2, 3, 0, 0, 0),
+                         (2, 3, 4, 0, 0, 0))).reshape(2, -1).astype('int64')
 # 对电影ID信息做映射，并紧接着一个Linear层
 MOV_DICT_SIZE = 6 + 1
 mov_emb = Embedding(num_embeddings=MOV_DICT_SIZE, embedding_dim=32)
@@ -131,14 +126,17 @@ mov_cat_feat = mov_fc(mov_cat_feat)
 mov_cat_feat = F.relu(mov_cat_feat)
 
 # 自定义两个电影名称数据
-mov_title_data = np.array(((1, 2, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), 
-                            (2, 3, 4, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0))).reshape(2, 1, 15).astype('int64')
+mov_title_data = np.array(((1, 2, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+                           (2, 3, 4, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                            0))).reshape(2, 1, 15).astype('int64')
 # 对电影名称做映射，紧接着FC和pool层
 MOV_TITLE_DICT_SIZE = 1000 + 1
 mov_title_emb = Embedding(num_embeddings=MOV_TITLE_DICT_SIZE, embedding_dim=32)
-mov_title_conv = Conv2D(in_channels=1, out_channels=1, kernel_size=(3, 1), stride=(2, 1), padding=0)
+mov_title_conv = Conv2D(
+    in_channels=1, out_channels=1, kernel_size=(3, 1), stride=(2, 1), padding=0)
 # 使用 3 * 3卷积层代替全连接层
-mov_title_conv2 = Conv2D(in_channels=1, out_channels=1, kernel_size=(3, 1), stride=1, padding=0)
+mov_title_conv2 = Conv2D(
+    in_channels=1, out_channels=1, kernel_size=(3, 1), stride=1, padding=0)
 
 mov_title_data = paddle.to_tensor(mov_title_data)
 print("电影名称数据的输入形状: ", mov_title_data.shape)
@@ -170,10 +168,12 @@ mov_feat = paddle.concat(_features, axis=1)
 mov_feat = mov_combined(mov_feat)
 mov_feat = F.tanh(mov_feat)
 
+
 def similarty(usr_feature, mov_feature):
     res = F.common.cosine_similarity(usr_feature, mov_feature)
     res = paddle.scale(res, scale=5)
     return usr_feat, mov_feat, res
+
 
 # 使用上文计算得到的用户特征和电影特征计算相似度
 _sim = similarty(usr_feat, mov_feat)

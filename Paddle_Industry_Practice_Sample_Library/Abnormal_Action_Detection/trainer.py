@@ -413,10 +413,10 @@ class Trainer(object):
             self._eval_with_loader(self.loader)
 
     def predict_batch(self,
-                images,
-                draw_threshold=0.5,
-                output_dir='output',
-                save_txt=False):
+                      images,
+                      draw_threshold=0.5,
+                      output_dir='output',
+                      save_txt=False):
         self.dataset.set_images(images)
         print("** finish set images **")
         loader = create('TestReader')(self.dataset, 0)
@@ -446,7 +446,7 @@ class Trainer(object):
                 if hasattr(value, 'numpy'):
                     outs[key] = value.numpy()
             results.append(outs)
-        
+
         for outs in results:
             batch_res = get_infer_results(outs, clsid2catid)
             bbox_num = outs['bbox_num']
@@ -474,17 +474,17 @@ class Trainer(object):
                 if self._compose_callback:
                     self._compose_callback.on_step_end(self.status)
                 # save image with detection
-                
+
                 path_list = image_path.split("/")
                 image_name = path_list[-1]
                 video_name = path_list[-2]
-                
+
                 # 检测结果存放目录
-                save_dir = os.path.join(output_dir,video_name)
+                save_dir = os.path.join(output_dir, video_name)
                 if not os.path.exists(save_dir):
                     os.makedirs(save_dir)
 
-                save_name = os.path.join(save_dir,image_name)
+                save_name = os.path.join(save_dir, image_name)
                 #print("save_name:",save_name)
                 logger.info("Detection bbox results save in {}".format(
                     save_name))
@@ -493,7 +493,6 @@ class Trainer(object):
                     save_path = os.path.splitext(save_name)[0] + '.txt'
                     save_result(save_path, bbox_res, catid2name, draw_threshold)
                 start = end
-
 
     def predict(self,
                 images,
@@ -526,7 +525,7 @@ class Trainer(object):
                 if hasattr(value, 'numpy'):
                     outs[key] = value.numpy()
             results.append(outs)
-       
+
         for outs in results:
             batch_res = get_infer_results(outs, clsid2catid)
             bbox_num = outs['bbox_num']
@@ -618,7 +617,7 @@ class Trainer(object):
                 "crops": InputSpec(
                     shape=[None, 3, 192, 64], name='crops')
             })
-        
+
         static_model = None
         pruned_input_spec = input_spec
 

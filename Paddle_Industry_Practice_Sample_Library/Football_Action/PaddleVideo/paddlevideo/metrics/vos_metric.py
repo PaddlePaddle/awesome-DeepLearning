@@ -54,11 +54,12 @@ class VOSMetric(BaseMetric):
 
         logger.info('Prcessing Seq {} [{}/{}]:'.format(seq_name, self.video_num,
                                                        self.total_video_num))
-        seq_dataloader = DataLoader(seq_dataset,
-                                    return_list=True,
-                                    batch_size=1,
-                                    shuffle=False,
-                                    num_workers=0)
+        seq_dataloader = DataLoader(
+            seq_dataset,
+            return_list=True,
+            batch_size=1,
+            shuffle=False,
+            num_workers=0)
         seq_total_time = 0
         seq_total_frame = 0
         ref_embeddings = []
@@ -106,9 +107,8 @@ class VOSMetric(BaseMetric):
 
                     if frame_idx == 0:
                         if current_label is None:
-                            logger.info(
-                                "No first frame label in Seq {}.".format(
-                                    seq_name))
+                            logger.info("No first frame label in Seq {}.".
+                                        format(seq_name))
                         ref_embeddings[aug_idx].append(current_embedding)
                         ref_masks[aug_idx].append(current_label)
 
@@ -121,8 +121,8 @@ class VOSMetric(BaseMetric):
                         #  have to introduce new labels for new objects, if necessary.
                         if not sample['meta']['flip'] and not (
                                 current_label is None) and join_label is None:
-                            join_label = paddle.cast(current_label,
-                                                     dtype='int64')
+                            join_label = paddle.cast(
+                                current_label, dtype='int64')
                         all_preds.append(all_pred)
                         if current_label is not None:
                             ref_embeddings[aug_idx].append(current_embedding)
@@ -134,9 +134,9 @@ class VOSMetric(BaseMetric):
                         all_preds, axis=0)  #average results if augmentation
                     pred_label = paddle.argmax(all_preds, axis=0)
                     if join_label is not None:
-                        join_label = paddle.squeeze(paddle.squeeze(join_label,
-                                                                   axis=0),
-                                                    axis=0)
+                        join_label = paddle.squeeze(
+                            paddle.squeeze(
+                                join_label, axis=0), axis=0)
                         keep = paddle.cast((join_label == 0), dtype="int64")
                         pred_label = pred_label * keep + join_label * (1 - keep)
                         pred_label = pred_label
@@ -171,8 +171,8 @@ class VOSMetric(BaseMetric):
                 else:
                     one_frametime = time.time() - time_start
                     seq_total_time += one_frametime
-                    logger.info('Ref Frame: {}, Time: {}'.format(
-                        imgname[0], one_frametime))
+                    logger.info('Ref Frame: {}, Time: {}'.format(imgname[0],
+                                                                 one_frametime))
 
             del (ref_embeddings)
             del (ref_masks)
@@ -188,12 +188,12 @@ class VOSMetric(BaseMetric):
         self.total_sfps += seq_avg_time_per_frame
         avg_sfps = self.total_sfps / (batch_id + 1)
         logger.info("Seq {} FPS: {}, Total FPS: {}, FPS per Seq: {}".format(
-            seq_name, 1. / seq_avg_time_per_frame,
-            1. / total_avg_time_per_frame, 1. / avg_sfps))
+            seq_name, 1. / seq_avg_time_per_frame, 1. /
+            total_avg_time_per_frame, 1. / avg_sfps))
 
     def flip_tensor(self, tensor, dim=0):
-        inv_idx = paddle.cast(paddle.arange(tensor.shape[dim] - 1, -1, -1),
-                              dtype="int64")
+        inv_idx = paddle.cast(
+            paddle.arange(tensor.shape[dim] - 1, -1, -1), dtype="int64")
         tensor = paddle.index_select(x=tensor, index=inv_idx, axis=dim)
         return tensor
 

@@ -159,55 +159,56 @@ def frame_extraction(video_path, target_dir):
 
 
 def parse_args():
-
     def str2bool(v):
         return v.lower() in ("true", "t", "1")
 
     # general params
     parser = argparse.ArgumentParser("PaddleVideo Inference model script")
-    parser.add_argument('-c',
-                        '--config',
-                        type=str,
-                        default='configs/example.yaml',
-                        help='config file path')
+    parser.add_argument(
+        '-c',
+        '--config',
+        type=str,
+        default='configs/example.yaml',
+        help='config file path')
 
     parser.add_argument('--video_path', help='video file/url')
 
-    parser.add_argument('-o',
-                        '--override',
-                        action='append',
-                        default=[],
-                        help='config options to be overridden')
-    parser.add_argument('-w',
-                        '--weights',
-                        type=str,
-                        help='weights for finetuning or testing')
+    parser.add_argument(
+        '-o',
+        '--override',
+        action='append',
+        default=[],
+        help='config options to be overridden')
+    parser.add_argument(
+        '-w', '--weights', type=str, help='weights for finetuning or testing')
 
     #detection_model_name
-    parser.add_argument('--detection_model_name',
-                        help='the name of detection model ')
+    parser.add_argument(
+        '--detection_model_name', help='the name of detection model ')
     # detection_model_weights
-    parser.add_argument('--detection_model_weights',
-                        help='the weights path of detection model ')
+    parser.add_argument(
+        '--detection_model_weights',
+        help='the weights path of detection model ')
 
     # params for predict
-    parser.add_argument('--out-filename',
-                        default='ava_det_demo.mp4',
-                        help='output filename')
-    parser.add_argument('--predict-stepsize',
-                        default=8,
-                        type=int,
-                        help='give out a prediction per n frames')
+    parser.add_argument(
+        '--out-filename', default='ava_det_demo.mp4', help='output filename')
+    parser.add_argument(
+        '--predict-stepsize',
+        default=8,
+        type=int,
+        help='give out a prediction per n frames')
     parser.add_argument(
         '--output-stepsize',
         default=4,
         type=int,
         help=('show one frame per n frames in the demo, we should have: '
               'predict_stepsize % output_stepsize == 0'))
-    parser.add_argument('--output-fps',
-                        default=6,
-                        type=int,
-                        help='the fps of demo video output')
+    parser.add_argument(
+        '--output-fps',
+        default=6,
+        type=int,
+        help='the fps of demo video output')
 
     return parser.parse_args()
 
@@ -389,10 +390,9 @@ def main(args):
     detection_result_dir = 'tmp_detection'
     detection_model_name = args.detection_model_name
     detection_model_weights = args.detection_model_weights
-    detection_txt_list = detection_inference(selected_frame_list,
-                                             detection_result_dir,
-                                             detection_model_name,
-                                             detection_model_weights)
+    detection_txt_list = detection_inference(
+        selected_frame_list, detection_result_dir, detection_model_name,
+        detection_model_weights)
     assert len(detection_txt_list) == len(timestamps)
 
     print('Performing SpatioTemporal Action Detection for each clip')
@@ -411,11 +411,8 @@ def main(args):
 
         human_detections.append(proposals)
 
-        result = get_timestep_result(frame_dir,
-                                     timestamp,
-                                     clip_len,
-                                     frame_interval,
-                                     FPS=FPS)
+        result = get_timestep_result(
+            frame_dir, timestamp, clip_len, frame_interval, FPS=FPS)
         result["proposals"] = proposals
         result["scores"] = scores
 
@@ -435,10 +432,11 @@ def main(args):
         img_shape = img_shape[np.newaxis, :]
 
         data = [
-            paddle.to_tensor(img_slow, dtype='float32'),
-            paddle.to_tensor(img_fast, dtype='float32'),
-            paddle.to_tensor(proposals, dtype='float32'), scores,
-            paddle.to_tensor(img_shape, dtype='int32')
+            paddle.to_tensor(
+                img_slow, dtype='float32'), paddle.to_tensor(
+                    img_fast, dtype='float32'), paddle.to_tensor(
+                        proposals, dtype='float32'), scores, paddle.to_tensor(
+                            img_shape, dtype='int32')
         ]
 
         with paddle.no_grad():
@@ -458,8 +456,8 @@ def main(args):
                     continue
                 for j in range(person_num):
                     if result[i][j, 4] > config.MODEL.head['action_thr']:
-                        prediction[j].append((label_map[i + 1], result[i][j,
-                                                                          4]))
+                        prediction[j].append((label_map[i + 1],
+                                              result[i][j, 4]))
             predictions.append(prediction)
 
         index = index + 1
@@ -474,8 +472,8 @@ def main(args):
         """Make it nx frames."""
         old_frame_interval = (timestamps[1] - timestamps[0])
         start = timestamps[0] - old_frame_interval / n * (n - 1) / 2
-        new_frame_inds = np.arange(
-            len(timestamps) * n) * old_frame_interval / n + start
+        new_frame_inds = np.arange(len(timestamps) *
+                                   n) * old_frame_interval / n + start
         return new_frame_inds.astype(np.int)
 
     dense_n = int(args.predict_stepsize / args.output_stepsize)  #30
@@ -491,8 +489,8 @@ def main(args):
     except ImportError:
         raise ImportError('Please install moviepy to enable output file')
 
-    vid = mpy.ImageSequenceClip([x[:, :, ::-1] for x in vis_frames],
-                                fps=args.output_fps)
+    vid = mpy.ImageSequenceClip(
+        [x[:, :, ::-1] for x in vis_frames], fps=args.output_fps)
     vid.write_videofile(args.out_filename)
     print("finish write !")
 

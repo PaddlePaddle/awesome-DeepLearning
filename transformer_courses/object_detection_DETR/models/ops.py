@@ -693,12 +693,13 @@ def yolo_box(
     if not isinstance(class_num, int):
         raise TypeError("Attr class_num of yolo_box must be an integer")
     if not isinstance(conf_thresh, float):
-        raise TypeError("Attr ignore_thresh of yolo_box must be a float number")
+        raise TypeError(
+            "Attr ignore_thresh of yolo_box must be a float number")
 
     if in_dygraph_mode():
         attrs = ('anchors', anchors, 'class_num', class_num, 'conf_thresh',
-                 conf_thresh, 'downsample_ratio', downsample_ratio, 'clip_bbox',
-                 clip_bbox, 'scale_x_y', scale_x_y)
+                 conf_thresh, 'downsample_ratio', downsample_ratio,
+                 'clip_bbox', clip_bbox, 'scale_x_y', scale_x_y)
         boxes, scores = core.ops.yolo_box(x, origin_shape, *attrs)
         return boxes, scores
     else:
@@ -980,8 +981,8 @@ def multiclass_nms(bboxes,
                  score_threshold, 'nms_top_k', nms_top_k, 'nms_threshold',
                  nms_threshold, 'keep_top_k', keep_top_k, 'nms_eta', nms_eta,
                  'normalized', normalized)
-        output, index, nms_rois_num = core.ops.multiclass_nms3(bboxes, scores,
-                                                               rois_num, *attrs)
+        output, index, nms_rois_num = core.ops.multiclass_nms3(
+            bboxes, scores, rois_num, *attrs)
         if not return_index:
             index = None
         return output, nms_rois_num, index
@@ -1118,10 +1119,10 @@ def matrix_nms(bboxes,
 
     if in_dygraph_mode():
         attrs = ('background_label', background_label, 'score_threshold',
-                 score_threshold, 'post_threshold', post_threshold, 'nms_top_k',
-                 nms_top_k, 'gaussian_sigma', gaussian_sigma, 'use_gaussian',
-                 use_gaussian, 'keep_top_k', keep_top_k, 'normalized',
-                 normalized)
+                 score_threshold, 'post_threshold', post_threshold,
+                 'nms_top_k', nms_top_k, 'gaussian_sigma', gaussian_sigma,
+                 'use_gaussian', use_gaussian, 'keep_top_k', keep_top_k,
+                 'normalized', normalized)
         out, index, rois_num = core.ops.matrix_nms(bboxes, scores, *attrs)
         if not return_index:
             index = None
@@ -1505,9 +1506,9 @@ def generate_proposals(scores,
     """
     if in_dygraph_mode():
         assert return_rois_num, "return_rois_num should be True in dygraph mode."
-        attrs = ('pre_nms_topN', pre_nms_top_n, 'post_nms_topN', post_nms_top_n,
-                 'nms_thresh', nms_thresh, 'min_size', min_size, 'eta', eta,
-                 'pixel_offset', pixel_offset)
+        attrs = ('pre_nms_topN', pre_nms_top_n, 'post_nms_topN',
+                 post_nms_top_n, 'nms_thresh', nms_thresh, 'min_size',
+                 min_size, 'eta', eta, 'pixel_offset', pixel_offset)
         rpn_rois, rpn_roi_probs, rpn_rois_num = core.ops.generate_proposals_v2(
             scores, bbox_deltas, im_shape, anchors, variances, *attrs)
         return rpn_rois, rpn_roi_probs, rpn_rois_num
@@ -1577,7 +1578,10 @@ def sigmoid_cross_entropy_with_logits(input,
     return output
 
 
-def smooth_l1(input, label, inside_weight=None, outside_weight=None,
+def smooth_l1(input,
+              label,
+              inside_weight=None,
+              outside_weight=None,
               sigma=None):
     input_new = paddle.multiply(input, inside_weight)
     label_new = paddle.multiply(label, inside_weight)

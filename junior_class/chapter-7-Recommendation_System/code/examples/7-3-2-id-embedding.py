@@ -1,4 +1,3 @@
-
 # copyright (c) 2021 PaddlePaddle Authors. All Rights Reserve.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,8 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-
 import paddle
 from paddle.nn import Linear, Embedding, Conv2D
 import numpy as np
@@ -26,9 +23,7 @@ print("输入的用户ID是:", usr_id_data)
 
 USR_ID_NUM = 6040 + 1
 # 定义用户ID的embedding层和fc层
-usr_emb = Embedding(num_embeddings=USR_ID_NUM,
-                embedding_dim=32,
-                sparse=False)
+usr_emb = Embedding(num_embeddings=USR_ID_NUM, embedding_dim=32, sparse=False)
 usr_fc = Linear(in_features=32, out_features=32)
 
 usr_id_var = paddle.to_tensor(usr_id_data)

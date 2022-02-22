@@ -86,6 +86,7 @@ def parse_args():
     args = parser.parse_args()
     return args
 
+
 # 两级目录
 def get_test_images(infer_dir):
     """
@@ -102,16 +103,15 @@ def get_test_images(infer_dir):
 
     sub_dir_list = os.listdir(infer_dir)
 
-    print("*********sub_dir_list:",sub_dir_list)
+    print("*********sub_dir_list:", sub_dir_list)
 
-    
     # 返回结果
     images = set()
     for sub_dir in sub_dir_list:
-        video_dir = os.path.join(infer_dir,sub_dir)
+        video_dir = os.path.join(infer_dir, sub_dir)
         for ext in exts:
             images.update(glob.glob('{}/*.{}'.format(video_dir, ext)))
-    
+
     images = list(images)
 
     assert len(images) > 0, "no image found in {}".format(infer_dir)
@@ -130,8 +130,8 @@ def run(FLAGS, cfg):
     # get inference images
     images = get_test_images(FLAGS.infer_dir)
 
-    print("the number of images:",len(images)) #the number of images: 31631
-    
+    print("the number of images:", len(images))  #the number of images: 31631
+
     # inference
     trainer.predict_batch(
         images,

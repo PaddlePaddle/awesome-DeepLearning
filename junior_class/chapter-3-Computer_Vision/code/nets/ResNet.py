@@ -146,11 +146,7 @@ class ResNet(paddle.nn.Layer):
 
         # ResNet的第一个模块，包含1个7x7卷积，后面跟着1个最大池化层
         self.conv = ConvBNLayer(
-            num_channels=3,
-            num_filters=64,
-            filter_size=7,
-            stride=2,
-            act='relu')
+            num_channels=3, num_filters=64, filter_size=7, stride=2, act='relu')
         self.pool2d_max = nn.MaxPool2D(kernel_size=3, stride=2, padding=1)
 
         # ResNet的第二到第五个模块c2、c3、c4、c5

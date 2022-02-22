@@ -36,6 +36,7 @@ class TSMHead(TSNHead):
         std(float): Std(Scale) value in normal initilizar. Default: 0.001.
         kwargs (dict, optional): Any keyword argument to initialize.
     """
+
     def __init__(self,
                  num_classes,
                  in_channels,
@@ -43,23 +44,25 @@ class TSMHead(TSNHead):
                  std=0.001,
                  data_format="NCHW",
                  **kwargs):
-        super().__init__(num_classes,
-                         in_channels,
-                         drop_ratio=drop_ratio,
-                         std=std,
-                         data_format=data_format,
-                         **kwargs)
+        super().__init__(
+            num_classes,
+            in_channels,
+            drop_ratio=drop_ratio,
+            std=std,
+            data_format=data_format,
+            **kwargs)
 
-        self.fc = Linear(self.in_channels,
-                         self.num_classes,
-                         weight_attr=ParamAttr(learning_rate=5.0,
-                                               regularizer=L2Decay(1e-4)),
-                         bias_attr=ParamAttr(learning_rate=10.0,
-                                             regularizer=L2Decay(0.0)))
+        self.fc = Linear(
+            self.in_channels,
+            self.num_classes,
+            weight_attr=ParamAttr(
+                learning_rate=5.0, regularizer=L2Decay(1e-4)),
+            bias_attr=ParamAttr(
+                learning_rate=10.0, regularizer=L2Decay(0.0)))
 
-        assert (data_format in [
-            'NCHW', 'NHWC'
-        ]), f"data_format must be 'NCHW' or 'NHWC', but got {data_format}"
+        assert (
+            data_format in ['NCHW', 'NHWC']
+        ), f"data_format must be 'NCHW' or 'NHWC', but got {data_format}"
 
         self.data_format = data_format
 
@@ -93,7 +96,7 @@ class TSMHead(TSNHead):
         score = paddle.reshape(
             score, [-1, num_seg, score.shape[1]])  # [N, num_seg, num_class]
         score = paddle.mean(score, axis=1)  # [N, num_class]
-        score = paddle.reshape(score,
-                               shape=[-1, self.num_classes])  # [N, num_class]
+        score = paddle.reshape(
+            score, shape=[-1, self.num_classes])  # [N, num_class]
         # score = F.softmax(score)  #NOTE remove
         return score

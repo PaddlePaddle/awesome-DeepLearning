@@ -244,10 +244,13 @@ def roi_align(input,
     if in_dygraph_mode():
         assert rois_num is not None, "rois_num should not be None in dygraph mode."
         if chaj_debug:
-            print("chajchaj, ops.py, bf core.ops.roi_align, type(rois):",type(rois))
-            print("chajchaj, ops.py, bf core.ops.roi_align, rois.shape:",rois.shape)
-            if rois.shape[0]>0:
-                print("chajchaj, ops.py, bf core.ops.roi_align, (rois):",(rois))
+            print("chajchaj, ops.py, bf core.ops.roi_align, type(rois):",
+                  type(rois))
+            print("chajchaj, ops.py, bf core.ops.roi_align, rois.shape:",
+                  rois.shape)
+            if rois.shape[0] > 0:
+                print("chajchaj, ops.py, bf core.ops.roi_align, (rois):",
+                      (rois))
         align_out = core.ops.roi_align(
             input, rois, rois_num, "pooled_height", pooled_height,
             "pooled_width", pooled_width, "spatial_scale", spatial_scale,

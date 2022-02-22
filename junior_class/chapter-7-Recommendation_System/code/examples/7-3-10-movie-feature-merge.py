@@ -24,14 +24,14 @@ MOV_DICT_SIZE = 3952 + 1
 mov_emb = Embedding(num_embeddings=MOV_DICT_SIZE, embedding_dim=32)
 mov_fc = Linear(32, 32)
 
-
 print("输入的电影ID是:", mov_id_data)
 mov_id_data = paddle.to_tensor(mov_id_data)
 mov_id_feat = mov_fc(mov_emb(mov_id_data))
 mov_id_feat = F.relu(mov_id_feat)
 
 # 自定义一个电影类别数据
-mov_cat_data = np.array(((1, 2, 3, 0, 0, 0), (2, 3, 4, 0, 0, 0))).reshape(2, -1).astype('int64')
+mov_cat_data = np.array(((1, 2, 3, 0, 0, 0),
+                         (2, 3, 4, 0, 0, 0))).reshape(2, -1).astype('int64')
 # 对电影ID信息做映射，并紧接着一个Linear层
 MOV_DICT_SIZE = 6 + 1
 mov_emb = Embedding(num_embeddings=MOV_DICT_SIZE, embedding_dim=32)
@@ -49,14 +49,17 @@ mov_cat_feat = mov_fc(mov_cat_feat)
 mov_cat_feat = F.relu(mov_cat_feat)
 
 # 自定义两个电影名称数据
-mov_title_data = np.array(((1, 2, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), 
-                            (2, 3, 4, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0))).reshape(2, 1, 15).astype('int64')
+mov_title_data = np.array(((1, 2, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+                           (2, 3, 4, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                            0))).reshape(2, 1, 15).astype('int64')
 # 对电影名称做映射，紧接着FC和pool层
 MOV_TITLE_DICT_SIZE = 1000 + 1
 mov_title_emb = Embedding(num_embeddings=MOV_TITLE_DICT_SIZE, embedding_dim=32)
-mov_title_conv = Conv2D(in_channels=1, out_channels=1, kernel_size=(3, 1), stride=(2, 1), padding=0)
+mov_title_conv = Conv2D(
+    in_channels=1, out_channels=1, kernel_size=(3, 1), stride=(2, 1), padding=0)
 # 使用 3 * 3卷积层代替全连接层
-mov_title_conv2 = Conv2D(in_channels=1, out_channels=1, kernel_size=(3, 1), stride=1, padding=0)
+mov_title_conv2 = Conv2D(
+    in_channels=1, out_channels=1, kernel_size=(3, 1), stride=1, padding=0)
 
 mov_title_data = paddle.to_tensor(mov_title_data)
 print("电影名称数据的输入形状: ", mov_title_data.shape)
@@ -76,7 +79,6 @@ print("reduce_sum降采样后的特征输出形状: ", mov_title_feat.shape)
 
 mov_title_feat = F.relu(mov_title_feat)
 mov_title_feat = paddle.reshape(mov_title_feat, [batch_size, -1])
-
 
 mov_combined = Linear(in_features=96, out_features=200)
 # 收集所有的电影特征

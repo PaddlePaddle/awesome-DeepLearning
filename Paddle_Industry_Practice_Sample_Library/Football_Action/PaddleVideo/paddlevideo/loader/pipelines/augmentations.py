@@ -35,6 +35,7 @@ class Scale(object):
         do_round(bool): Whether to round up when calculating the zoom ratio. default: False
         backend(str): Choose pillow or cv2 as the graphics processing backend. default: 'pillow'
     """
+
     def __init__(self,
                  short_size,
                  fixed_ratio=True,
@@ -82,11 +83,11 @@ class Scale(object):
                 else:
                     scale_factor = self.short_size / w
                     oh = int(h * float(scale_factor) +
-                             0.5) if self.do_round else int(h *
-                                                            self.short_size / w)
+                             0.5) if self.do_round else int(
+                                 h * self.short_size / w)
                     ow = int(w * float(scale_factor) +
-                             0.5) if self.do_round else int(w *
-                                                            self.short_size / h)
+                             0.5) if self.do_round else int(
+                                 w * self.short_size / h)
             else:
                 oh = self.short_size
                 if self.fixed_ratio:
@@ -96,21 +97,23 @@ class Scale(object):
                 else:
                     scale_factor = self.short_size / h
                     oh = int(h * float(scale_factor) +
-                             0.5) if self.do_round else int(h *
-                                                            self.short_size / w)
+                             0.5) if self.do_round else int(
+                                 h * self.short_size / w)
                     ow = int(w * float(scale_factor) +
-                             0.5) if self.do_round else int(w *
-                                                            self.short_size / h)
+                             0.5) if self.do_round else int(
+                                 w * self.short_size / h)
             if self.backend == 'pillow':
                 resized_imgs.append(img.resize((ow, oh), Image.BILINEAR))
             elif self.backend == 'cv2' and (self.keep_ratio is not None):
                 resized_imgs.append(
-                    cv2.resize(img, (ow, oh), interpolation=cv2.INTER_LINEAR))
+                    cv2.resize(
+                        img, (ow, oh), interpolation=cv2.INTER_LINEAR))
             else:
                 resized_imgs.append(
                     Image.fromarray(
-                        cv2.resize(np.asarray(img), (ow, oh),
-                                   interpolation=cv2.INTER_LINEAR)))
+                        cv2.resize(
+                            np.asarray(img), (ow, oh),
+                            interpolation=cv2.INTER_LINEAR)))
         results['imgs'] = resized_imgs
         return results
 
@@ -122,6 +125,7 @@ class RandomCrop(object):
     Args:
         target_size(int): Random crop a square with the target_size from an image.
     """
+
     def __init__(self, target_size):
         self.target_size = target_size
 
@@ -189,8 +193,8 @@ class RandomResizedCrop(RandomCrop):
 
         min_ar, max_ar = aspect_ratio_range
         aspect_ratios = np.exp(
-            np.random.uniform(np.log(min_ar), np.log(max_ar),
-                              size=max_attempts))
+            np.random.uniform(
+                np.log(min_ar), np.log(max_ar), size=max_attempts))
         target_areas = np.random.uniform(*area_range, size=max_attempts) * area
         candidate_crop_w = np.round(np.sqrt(target_areas *
                                             aspect_ratios)).astype(np.int32)
@@ -248,6 +252,7 @@ class CenterCrop(object):
         target_size(int): Center crop a square with the target_size from an image.
         do_round(bool): Whether to round up the coordinates of the upper left corner of the cropping area. default: True
     """
+
     def __init__(self, target_size, do_round=True, backend='pillow'):
         self.target_size = target_size
         self.do_round = do_round
@@ -281,10 +286,10 @@ class CenterCrop(object):
                 assert (w >= self.target_size) and (h >= self.target_size), \
                     "image width({}) and height({}) should be larger than crop size".format(
                         w, h, self.target_size)
-                x1 = int(round(
-                    (w - tw) / 2.0)) if self.do_round else (w - tw) // 2
-                y1 = int(round(
-                    (h - th) / 2.0)) if self.do_round else (h - th) // 2
+                x1 = int(round((w - tw) / 2.0)) if self.do_round else (
+                    w - tw) // 2
+                y1 = int(round((h - th) / 2.0)) if self.do_round else (
+                    h - th) // 2
                 if self.backend == 'cv2':
                     ccrop_imgs.append(img[y1:y1 + th, x1:x1 + tw])
                 elif self.backend == 'pillow':
@@ -305,6 +310,7 @@ class MultiScaleCrop(object):
         allow_duplication(int): Whether to allow duplicate candidate crop starting points.
         more_fix_crop(int): Whether to allow more cutting starting points.
     """
+
     def __init__(
             self,
             target_size,  # NOTE: named target size now, but still pass short size in it!
@@ -397,7 +403,8 @@ class MultiScaleCrop(object):
 
         crop_w, crop_h, offset_w, offset_h = _sample_crop_size(im_size)
         crop_img_group = [
-            img.crop((offset_w, offset_h, offset_w + crop_w, offset_h + crop_h))
+            img.crop(
+                (offset_w, offset_h, offset_w + crop_w, offset_h + crop_h))
             for img in imgs
         ]
         if self.backend == 'pillow':
@@ -408,9 +415,10 @@ class MultiScaleCrop(object):
         else:
             ret_img_group = [
                 Image.fromarray(
-                    cv2.resize(np.asarray(img),
-                               dsize=(input_size[0], input_size[1]),
-                               interpolation=cv2.INTER_LINEAR))
+                    cv2.resize(
+                        np.asarray(img),
+                        dsize=(input_size[0], input_size[1]),
+                        interpolation=cv2.INTER_LINEAR))
                 for img in crop_img_group
             ]
         results['imgs'] = ret_img_group
@@ -424,6 +432,7 @@ class RandomFlip(object):
     Args:
         p(float): Random flip images with the probability p.
     """
+
     def __init__(self, p=0.5):
         self.p = p
 
@@ -460,6 +469,7 @@ class Image2Array(object):
     Args:
         transpose: whether to transpose or not, default True, False for slowfast.
     """
+
     def __init__(self, transpose=True, data_format='tchw'):
         assert data_format in [
             'tchw', 'cthw'
@@ -505,6 +515,7 @@ class Normalization(object):
         std(Sequence[float]): std values of different channels.
         tensor_shape(list): size of mean, default [3,1,1]. For slowfast, [1,1,1,3]
     """
+
     def __init__(self, mean, std, tensor_shape=[3, 1, 1], inplace=False):
         if not isinstance(mean, Sequence):
             raise TypeError(
@@ -560,6 +571,7 @@ class JitterScale(object):
         min_size: Lower bound for random sampler.
         max_size: Higher bound for random sampler.
     """
+
     def __init__(self,
                  min_size,
                  max_size,
@@ -596,8 +608,8 @@ class JitterScale(object):
             height, width = imgs.shape[2:]
         else:
             width, height = imgs[0].size
-        if (width <= height and width == size) or (height <= width
-                                                   and height == size):
+        if (width <= height and width == size) or (height <= width and
+                                                   height == size):
             return results
 
         new_width = size
@@ -608,10 +620,11 @@ class JitterScale(object):
             new_width = int(math.floor((float(width) / height) * size))
 
         if 'backend' in results and results['backend'] == 'pyav':
-            frames_resize = F.interpolate(imgs,
-                                          size=(new_height, new_width),
-                                          mode="bilinear",
-                                          align_corners=False)  # [c,t,h,w]
+            frames_resize = F.interpolate(
+                imgs,
+                size=(new_height, new_width),
+                mode="bilinear",
+                align_corners=False)  # [c,t,h,w]
         else:
             frames_resize = []
             for j in range(len(imgs)):
@@ -631,6 +644,7 @@ class MultiCrop(object):
     Args:
         target_size(int): Random crop a square with the target_size from an image.
     """
+
     def __init__(self,
                  target_size,
                  default_crop_size=224,
@@ -710,6 +724,7 @@ class PackOutput(object):
     Args:
         alpha(int): temporal length of fast/slow
     """
+
     def __init__(self, alpha):
         self.alpha = alpha
 
@@ -782,6 +797,7 @@ class TenCrop:
     Args:
         target_size(int | tuple[int]): (w, h) of target size for crop.
     """
+
     def __init__(self, target_size):
         self.target_size = (target_size, target_size)
 
@@ -823,6 +839,7 @@ class UniformCrop:
     Args:
         target_size(int | tuple[int]): (w, h) of target size for crop.
     """
+
     def __init__(self, target_size, backend='cv2'):
         if isinstance(target_size, tuple):
             self.target_size = target_size
@@ -866,8 +883,8 @@ class UniformCrop:
         img_crops = []
         if 'backend' in results and results['backend'] == 'pyav':  # [c,t,h,w]
             for x_offset, y_offset in offsets:
-                crop = imgs[:, :, y_offset:y_offset + crop_h,
-                            x_offset:x_offset + crop_w]
+                crop = imgs[:, :, y_offset:y_offset + crop_h, x_offset:x_offset
+                            + crop_w]
                 img_crops.append(crop)
             img_crops = paddle.concat(img_crops, axis=1)
         else:
@@ -881,8 +898,8 @@ class UniformCrop:
             else:
                 for x_offset, y_offset in offsets:
                     crop = [
-                        img[y_offset:y_offset + crop_h,
-                            x_offset:x_offset + crop_w] for img in imgs
+                        img[y_offset:y_offset + crop_h, x_offset:x_offset +
+                            crop_w] for img in imgs
                     ]
                     img_crops.extend(crop)
         results['imgs'] = img_crops
@@ -937,6 +954,7 @@ class GroupResize(object):
 class ColorJitter(object):
     """Randomly change the brightness, contrast, saturation and hue of an image.
     """
+
     def __init__(self,
                  brightness=0,
                  contrast=0,
@@ -998,9 +1016,8 @@ class GroupRandomFlip(object):
             for k in list(imgs):
                 if "color" in k or "color_n" in k:
                     n, im, i = k
-                    imgs[(n, im,
-                          i)] = imgs[(n, im,
-                                      i)].transpose(Image.FLIP_LEFT_RIGHT)
+                    imgs[(n, im, i)] = imgs[(
+                        n, im, i)].transpose(Image.FLIP_LEFT_RIGHT)
             if "depth_gt" in imgs:
                 imgs['depth_gt'] = np.array(np.fliplr(imgs['depth_gt']))
 
@@ -1018,8 +1035,9 @@ class ToArray(object):
         for k in list(imgs):
             if "color" in k or "color_n" in k or "color_aug" in k or "color_n_aug" in k:
                 n, im, i = k
-                imgs[(n, im,
-                      i)] = np.array(imgs[(n, im, i)]).astype('float32') / 255.0
+                imgs[(
+                    n, im,
+                    i)] = np.array(imgs[(n, im, i)]).astype('float32') / 255.0
                 imgs[(n, im, i)] = imgs[(n, im, i)].transpose((2, 0, 1))
         if "depth_gt" in imgs:
             imgs['depth_gt'] = np.array(imgs['depth_gt']).astype('float32')

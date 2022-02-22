@@ -450,7 +450,7 @@ class MCMOTMetric(Metric):
         self.cls_summary_list = []
         for row in range(self.num_classes):
             # 如果不是车相关的4个类别，则跳过不参与计算
-            if self.num_classes == 10 and row not in [3,4,5,8]:
+            if self.num_classes == 10 and row not in [3, 4, 5, 8]:
                 continue
             seqs_cls_df = pd.concat(self.seqs_overall[row])
             seqs_cls_summary = seqs_overall_metrics(seqs_cls_df)

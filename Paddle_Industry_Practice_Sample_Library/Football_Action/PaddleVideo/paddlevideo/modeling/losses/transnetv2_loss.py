@@ -22,19 +22,25 @@ from .base import BaseWeightedLoss
 class TransNetV2Loss(BaseWeightedLoss):
     """Loss for TransNetV2 model
     """
+
     def __init__(self, transition_weight=5.0, many_hot_loss_weight=0.1):
         self.transition_weight = transition_weight
         self.many_hot_loss_weight = many_hot_loss_weight
         super().__init__()
 
-    def _forward(self, one_hot_pred, one_hot_gt,
-                many_hot_pred=None, many_hot_gt=None, reg_losses=None):
+    def _forward(self,
+                 one_hot_pred,
+                 one_hot_gt,
+                 many_hot_pred=None,
+                 many_hot_gt=None,
+                 reg_losses=None):
         assert transition_weight != 1
 
         one_hot_pred = one_hot_pred[:, :, 0]
 
         one_hot_gt = one_hot_gt.astype('float32')
-        one_hot_loss = F.binary_cross_entropy_with_logits(logit=one_hot_pred, label=one_hot_gt, reduction='none')
+        one_hot_loss = F.binary_cross_entropy_with_logits(
+            logit=one_hot_pred, label=one_hot_gt, reduction='none')
 
         one_hot_loss *= 1 + one_hot_gt * (transition_weight - 1)
 
@@ -43,8 +49,10 @@ class TransNetV2Loss(BaseWeightedLoss):
         many_hot_loss = 0.
         if many_hot_loss_weight != 0. and many_hot_pred is not None:
             many_hot_loss = many_hot_loss_weight * paddle.mean(
-                F.binary_cross_entropy_with_logits(logit=many_hot_pred[:, :, 0],
-                                                   label=many_hot_gt.astype('float32'), reduction='none'))
+                F.binary_cross_entropy_with_logits(
+                    logit=many_hot_pred[:, :, 0],
+                    label=many_hot_gt.astype('float32'),
+                    reduction='none'))
 
         total_loss = one_hot_loss + many_hot_loss
 

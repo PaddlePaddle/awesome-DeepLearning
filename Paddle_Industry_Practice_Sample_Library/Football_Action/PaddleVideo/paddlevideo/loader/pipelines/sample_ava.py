@@ -96,8 +96,8 @@ class SampleFrames:
         """Perform the SampleFrames loading. """
         total_frames = results['total_frames']
         clip_offsets = self._sample_clips(total_frames)
-        frame_inds = clip_offsets[:, None] + np.arange(
-            self.clip_len)[None, :] * self.frame_interval
+        frame_inds = clip_offsets[:, None] + np.arange(self.clip_len)[
+            None, :] * self.frame_interval
         frame_inds = np.concatenate(frame_inds)
         if self.temporal_jitter:
             perframe_offsets = np.random.randint(
@@ -133,6 +133,7 @@ class SampleFrames:
                     f'test_mode={self.test_mode})')
         return repr_str
 
+
 class BaseStorageBackend(metaclass=ABCMeta):
     """Abstract class of storage backends. """
 
@@ -143,6 +144,7 @@ class BaseStorageBackend(metaclass=ABCMeta):
     @abstractmethod
     def get_text(self, filepath):
         pass
+
 
 class HardDiskBackend(BaseStorageBackend):
     """Raw hard disks storage backend."""
@@ -159,12 +161,11 @@ class HardDiskBackend(BaseStorageBackend):
             value_buf = f.read()
         return value_buf
 
+
 class FileClient:
     """A general file client to access files in different backend. """
 
-    _backends = {
-        'disk': HardDiskBackend,
-    }
+    _backends = {'disk': HardDiskBackend, }
 
     def __init__(self, backend='disk', **kwargs):
         if backend not in self._backends:
@@ -212,6 +213,7 @@ class FileClient:
     def get_text(self, filepath):
         return self.client.get_text(filepath)
 
+
 @PIPELINES.register()
 class RawFrameDecode:
     """Load and decode frames with given indices. """
@@ -222,7 +224,7 @@ class RawFrameDecode:
         self.kwargs = kwargs
         self.file_client = None
 
-    def _pillow2array(self,img, flag='color', channel_order='bgr'):
+    def _pillow2array(self, img, flag='color', channel_order='bgr'):
         """Convert a pillow image to numpy array. """
 
         channel_order = channel_order.lower()
@@ -261,7 +263,8 @@ class RawFrameDecode:
                     f'but got {flag}')
         return array
 
-    def _imfrombytes(self,content, flag='color', channel_order='bgr'):#, backend=None):
+    def _imfrombytes(self, content, flag='color',
+                     channel_order='bgr'):  #, backend=None):
         """Read an image from bytes. """
 
         img_np = np.frombuffer(content, np.uint8)
@@ -297,7 +300,7 @@ class RawFrameDecode:
         for frame_idx in results['frame_inds']:
             frame_idx += offset
             filepath = osp.join(directory, suffix.format(frame_idx))
-            img_bytes = self.file_client.get(filepath) #以二进制方式读取图片
+            img_bytes = self.file_client.get(filepath)  #以二进制方式读取图片
             # Get frame with channel order RGB directly.
 
             cur_frame = self._imfrombytes(img_bytes, channel_order='rgb')
@@ -326,9 +329,9 @@ class RawFrameDecode:
                     f'decoding_backend={self.decoding_backend})')
         return repr_str
 
+
 @PIPELINES.register()
 class SampleAVAFrames(SampleFrames):
-
     def __init__(self, clip_len, frame_interval=2, test_mode=False):
 
         super().__init__(clip_len, frame_interval, test_mode=test_mode)
@@ -372,4 +375,3 @@ class SampleAVAFrames(SampleFrames):
                     f'frame_interval={self.frame_interval}, '
                     f'test_mode={self.test_mode})')
         return repr_str
-

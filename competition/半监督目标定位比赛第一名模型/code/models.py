@@ -19,4 +19,5 @@ def ResNeXtandACFFNet():
 
 
 def SwinTandACFFNet():
-    return ACFFViTModel(backbone=SwinTransformer_large_patch4_window12_384(pretrained=False))
+    return ACFFViTModel(backbone=SwinTransformer_large_patch4_window12_384(
+        pretrained=False))

@@ -38,14 +38,16 @@ logger.setLevel(logging.INFO)
 def parse_args():
     """parse_args"""
     parser = argparse.ArgumentParser("Paddle Video train script")
-    parser.add_argument('--model_name',
-                        type=str,
-                        default='BaiduNet',
-                        help='name of model to train.')
-    parser.add_argument('--config',
-                        type=str,
-                        default='configs/conf.txt',
-                        help='path to config file of model')
+    parser.add_argument(
+        '--model_name',
+        type=str,
+        default='BaiduNet',
+        help='name of model to train.')
+    parser.add_argument(
+        '--config',
+        type=str,
+        default='configs/conf.txt',
+        help='path to config file of model')
     parser.add_argument(
         '--batch_size',
         type=int,
@@ -60,8 +62,7 @@ def parse_args():
         '--pretrain',
         type=str,
         default=None,
-        help=
-        'path to pretrain weights. None to use default weights path in  ~/.paddle/weights.'
+        help='path to pretrain weights. None to use default weights path in  ~/.paddle/weights.'
     )
     parser.add_argument(
         '--resume',
@@ -69,30 +70,36 @@ def parse_args():
         default=None,
         help='path to resume training based on previous checkpoints. '
         'None for not resuming any checkpoints.')
-    parser.add_argument('--use_gpu',
-                        type=ast.literal_eval,
-                        default=True,
-                        help='default use gpu.')
-    parser.add_argument('--no_memory_optimize',
-                        action='store_true',
-                        default=False,
-                        help='whether to use memory optimize in train')
-    parser.add_argument('--epoch_num',
-                        type=int,
-                        default=0,
-                        help='epoch number, 0 for read from config file')
-    parser.add_argument('--valid_interval',
-                        type=int,
-                        default=1,
-                        help='validation epoch interval, 0 for no validation.')
-    parser.add_argument('--save_dir',
-                        type=str,
-                        default='checkpoints',
-                        help='directory name to save train snapshoot')
-    parser.add_argument('--log_interval',
-                        type=int,
-                        default=10,
-                        help='mini-batch interval to log.')
+    parser.add_argument(
+        '--use_gpu',
+        type=ast.literal_eval,
+        default=True,
+        help='default use gpu.')
+    parser.add_argument(
+        '--no_memory_optimize',
+        action='store_true',
+        default=False,
+        help='whether to use memory optimize in train')
+    parser.add_argument(
+        '--epoch_num',
+        type=int,
+        default=0,
+        help='epoch number, 0 for read from config file')
+    parser.add_argument(
+        '--valid_interval',
+        type=int,
+        default=1,
+        help='validation epoch interval, 0 for no validation.')
+    parser.add_argument(
+        '--save_dir',
+        type=str,
+        default='checkpoints',
+        help='directory name to save train snapshoot')
+    parser.add_argument(
+        '--log_interval',
+        type=int,
+        default=10,
+        help='mini-batch interval to log.')
     args = parser.parse_args()
     return args
 
@@ -140,8 +147,8 @@ def train(args):
     #  train_learning_rate_in = train_config.TRAIN.learning_rate
     train_config.TRAIN.batch_size = min(
         int(train_config.TRAIN.num_samples / 10), train_batch_size_in)
-    train_config.TRAIN.batch_size = int(
-        train_config.TRAIN.batch_size / bs_denominator) * bs_denominator
+    train_config.TRAIN.batch_size = int(train_config.TRAIN.batch_size /
+                                        bs_denominator) * bs_denominator
     train_config.TRAIN.batch_size = max(train_config.TRAIN.batch_size,
                                         bs_denominator)
     # train_config.TRAIN.learning_rate = float(train_learning_rate_in) / float(train_batch_size_in) \
@@ -150,8 +157,8 @@ def train(args):
     val_batch_size_in = valid_config.VALID.batch_size
     valid_config.VALID.batch_size = min(
         int(valid_config.VALID.num_samples / 10), val_batch_size_in)
-    valid_config.VALID.batch_size = int(
-        valid_config.VALID.batch_size / bs_denominator) * bs_denominator
+    valid_config.VALID.batch_size = int(valid_config.VALID.batch_size /
+                                        bs_denominator) * bs_denominator
     valid_config.VALID.batch_size = max(valid_config.VALID.batch_size,
                                         bs_denominator)
 
@@ -165,12 +172,10 @@ def train(args):
         valid_config.MODEL.with_bn = True
 
     config.print_configs(train_config, 'Train')
-    train_model = action_net.ActionNet(args.model_name,
-                                       train_config,
-                                       mode='train')
-    valid_model = action_net.ActionNet(args.model_name,
-                                       valid_config,
-                                       mode='valid')
+    train_model = action_net.ActionNet(
+        args.model_name, train_config, mode='train')
+    valid_model = action_net.ActionNet(
+        args.model_name, valid_config, mode='valid')
 
     # build model
     startup = fluid.Program()
@@ -216,10 +221,8 @@ def train(args):
         def if_exist(var):
             return os.path.exists(os.path.join(args.resume, var.name))
 
-        fluid.io.load_vars(exe,
-                           args.resume,
-                           predicate=if_exist,
-                           main_program=train_prog)
+        fluid.io.load_vars(
+            exe, args.resume, predicate=if_exist, main_program=train_prog)
     else:
         # if not in resume mode, load pretrain weights
         if args.pretrain:
@@ -234,25 +237,23 @@ def train(args):
     build_strategy.enable_inplace = True
 
     compiled_train_prog = fluid.compiler.CompiledProgram(
-        train_prog).with_data_parallel(loss_name=train_loss.name,
-                                       build_strategy=build_strategy)
+        train_prog).with_data_parallel(
+            loss_name=train_loss.name, build_strategy=build_strategy)
     compiled_valid_prog = fluid.compiler.CompiledProgram(
-        valid_prog).with_data_parallel(share_vars_from=compiled_train_prog,
-                                       build_strategy=build_strategy)
+        valid_prog).with_data_parallel(
+            share_vars_from=compiled_train_prog, build_strategy=build_strategy)
     # get reader
     train_config.TRAIN.batch_size = int(train_config.TRAIN.batch_size /
                                         bs_denominator)
     valid_config.VALID.batch_size = int(valid_config.VALID.batch_size /
                                         bs_denominator)
     print("config setting")
-    train_dataload = feature_reader.FeatureReader(args.model_name.upper(),
-                                                  'train', train_config,
-                                                  bs_denominator)
+    train_dataload = feature_reader.FeatureReader(
+        args.model_name.upper(), 'train', train_config, bs_denominator)
     train_reader = train_dataload.create_reader()
     print("train reader")
-    valid_dataload = feature_reader.FeatureReader(args.model_name.upper(),
-                                                  'valid', valid_config,
-                                                  bs_denominator)
+    valid_dataload = feature_reader.FeatureReader(
+        args.model_name.upper(), 'valid', valid_config, bs_denominator)
     valid_reader = valid_dataload.create_reader()
 
     # get metrics
@@ -265,10 +266,10 @@ def train(args):
     print("epoch is ", epochs)
 
     exe_places = fluid.cuda_places() if args.use_gpu else fluid.cpu_places()
-    train_pyreader.decorate_sample_list_generator(train_reader,
-                                                  places=exe_places)
-    valid_pyreader.decorate_sample_list_generator(valid_reader,
-                                                  places=exe_places)
+    train_pyreader.decorate_sample_list_generator(
+        train_reader, places=exe_places)
+    valid_pyreader.decorate_sample_list_generator(
+        valid_reader, places=exe_places)
 
     utils.train_with_pyreader(
         exe,

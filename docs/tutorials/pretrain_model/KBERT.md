@@ -72,4 +72,3 @@ $$
 
 1. [KBERT: Enabling Language Representation with Knowledge Graph](https://arxiv.org/pdf/1909.07606v1.pdf)
 2. [KBERT Github](https://github.com/autoliuweijie/K-BERT)
-

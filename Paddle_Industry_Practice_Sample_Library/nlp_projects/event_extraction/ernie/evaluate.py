@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 import argparse
 import paddle
 from functools import partial
@@ -25,9 +24,7 @@ from data import read, load_dict, convert_example_to_features
 from paddlenlp.data import Stack, Pad, Tuple
 
 
-
 def evaluate(model, data_loader, metric):
-    
 
     model.eval()
     metric.reset()
@@ -36,16 +33,13 @@ def evaluate(model, data_loader, metric):
         logits = model(input_ids, token_type_ids)
         preds = paddle.argmax(logits, axis=-1)
         n_infer, n_label, n_correct = metric.compute(seq_lens, preds, tag_ids)
-        metric.update(n_infer.numpy(), n_label.numpy(), n_correct.numpy())  
+        metric.update(n_infer.numpy(), n_label.numpy(), n_correct.numpy())
         precision, recall, f1_score = metric.accumulate()
-    
-    return precision, recall, f1_score      
+
+    return precision, recall, f1_score
 
 
-
-
-
-if __name__=="__main__":
+if __name__ == "__main__":
     # yapf: disable
     parser = argparse.ArgumentParser()
     parser.add_argument("--model_name", type=str, default="trigger", help="The trigger or role model which you wanna evaluate")
@@ -61,7 +55,7 @@ if __name__=="__main__":
     model_name = "ernie-1.0"
     tag2id, id2tag = load_dict(args.tag_path)
     dev_ds = load_dataset(read, data_path=args.dev_path, lazy=False)
-    
+
     tokenizer = ErnieTokenizer.from_pretrained(model_name)
     trans_func = partial(convert_example_to_features, tokenizer=tokenizer, tag2id=tag2id,  max_seq_length=256, pad_default_tag="O", is_test=False)
     dev_ds = dev_ds.map(trans_func, lazy=False)
@@ -84,11 +78,7 @@ if __name__=="__main__":
     event_model.load_dict(loaded_state_dict)
 
     metric = ChunkEvaluator(label_list=tag2id.keys(), suffix=False)
-    
+
     # evalute on dev data
     precision, recall, f1_score = evaluate(event_model, dev_loader, metric)
     print(f'{args.model_name} evalution result:  precision: {precision:.5f}, recall: {recall:.5f},  F1: {f1_score:.5f}')
-
-    
-
-

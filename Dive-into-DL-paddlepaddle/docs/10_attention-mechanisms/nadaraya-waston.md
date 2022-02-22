@@ -321,4 +321,3 @@ d2l.show_heatmaps(net.attention_weight.unsqueeze(0).unsqueeze(0),
 
 
 [Discussions](https://discuss.d2l.ai/t/5760)
-

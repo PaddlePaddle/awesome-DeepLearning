@@ -1,4 +1,3 @@
-
 # Copyright (c) 2020 PaddlePaddle Authors. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -41,9 +40,11 @@ def read(src_path, tgt_path, is_predict=False):
                 src_line = src_line.strip()
                 if not src_line:
                     continue
-                yield {'src':src_line, 'tgt':''}
+                yield {'src': src_line, 'tgt': ''}
     else:
-        with open(src_path, 'r', encoding='utf8') as src_f, open(tgt_path, 'r', encoding='utf8') as tgt_f:
+        with open(
+                src_path, 'r', encoding='utf8') as src_f, open(
+                    tgt_path, 'r', encoding='utf8') as tgt_f:
             for src_line, tgt_line in zip(src_f.readlines(), tgt_f.readlines()):
                 src_line = src_line.strip()
                 if not src_line:
@@ -51,11 +52,17 @@ def read(src_path, tgt_path, is_predict=False):
                 tgt_line = tgt_line.strip()
                 if not tgt_line:
                     continue
-                yield {'src':src_line, 'tgt':tgt_line}
+                yield {'src': src_line, 'tgt': tgt_line}
+
 
 # 创建测试集的dataloader
 def create_infer_loader(args):
-    dataset = load_dataset(read, src_path=args.predict_file, tgt_path=None, is_predict=True, lazy=False)
+    dataset = load_dataset(
+        read,
+        src_path=args.predict_file,
+        tgt_path=None,
+        is_predict=True,
+        lazy=False)
 
     src_vocab = Vocab.load_vocabulary(
         args.src_vocab_fpath,
@@ -110,6 +117,7 @@ def prepare_infer_input(insts, bos_idx, eos_idx, pad_idx):
 
     return [src_word, ]
 
+
 def post_process_seq(seq, bos_idx, eos_idx, output_bos=False, output_eos=False):
     """
     Post-process the decoded sequence.
@@ -156,7 +164,7 @@ def do_predict(args):
     # Load the trained model
     # assert args.init_from_params, (
     #     "Please set init_from_params to load the infer model.")
-    init_from_params='trained_models/step_final'
+    init_from_params = 'trained_models/step_final'
     model_dict = paddle.load(
         os.path.join(init_from_params, "transformer.pdparams"))
 
@@ -185,6 +193,7 @@ def do_predict(args):
                     sequence = " ".join(word_list) + "\n"
                     f.write(sequence)
     f.close()
+
 
 if __name__ == '__main__':
     # 读入参数

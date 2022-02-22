@@ -16,6 +16,7 @@ import numpy as np
 from ..registry import BBOX_ASSIGNERS
 from ..bbox_utils import bbox_overlaps
 
+
 class AssignResult():
     def __init__(self, num_gts, gt_inds, max_overlaps, labels=None):
         self.num_gts = num_gts
@@ -34,9 +35,11 @@ class AssignResult():
         if self.labels is not None:
             self.labels = paddle.concat([gt_labels, self.labels])
 
+
 @BBOX_ASSIGNERS.register()
 class MaxIoUAssignerAVA():
     """Assign a corresponding gt bbox or background to each bbox.  """
+
     def __init__(self,
                  pos_iou_thr,
                  neg_iou_thr,
@@ -56,10 +59,7 @@ class MaxIoUAssignerAVA():
         self.gpu_assign_thr = gpu_assign_thr
         self.match_low_quality = match_low_quality
 
-    def assign(self, 
-               bboxes, 
-               gt_bboxes, 
-               gt_labels=None):
+    def assign(self, bboxes, gt_bboxes, gt_labels=None):
         """Assign gt to bboxes.  """
         overlaps = bbox_overlaps(gt_bboxes, bboxes)
         assign_result = self.assign_wrt_overlaps(overlaps, gt_labels)
@@ -76,17 +76,18 @@ class MaxIoUAssignerAVA():
         max_overlaps, argmax_overlaps = paddle.topk(overlaps, k=1, axis=0)
         # for each gt, which anchor best overlaps with it
         # for each gt, the max iou of all proposals
-        gt_max_overlaps, gt_argmax_overlaps = paddle.topk(overlaps, k=1, axis=1) 
+        gt_max_overlaps, gt_argmax_overlaps = paddle.topk(overlaps, k=1, axis=1)
 
         # 2. assign negative: below the negative inds are set to be 0
         match_labels = paddle.full(argmax_overlaps.shape, -1, dtype='int32')
         match_labels = paddle.where(max_overlaps < self.neg_iou_thr,
-                            paddle.zeros_like(match_labels), match_labels)
+                                    paddle.zeros_like(match_labels),
+                                    match_labels)
 
         # 3. assign positive: above positive IoU threshold
         argmax_overlaps_int32 = paddle.cast(argmax_overlaps, 'int32')
         match_labels = paddle.where(max_overlaps >= self.pos_iou_thr,
-                                argmax_overlaps_int32 + 1, match_labels)
+                                    argmax_overlaps_int32 + 1, match_labels)
         assigned_gt_inds = match_labels
         if self.match_low_quality:
             # Low-quality matching will overwirte the assigned_gt_inds
@@ -104,9 +105,12 @@ class MaxIoUAssignerAVA():
                         equal_y_np = gt_max_overlaps[i].numpy()
                         max_iou_inds = np.equal(equal_x_np, equal_y_np)
                         max_iou_inds = paddle.to_tensor(max_iou_inds)
-                        max_iou_inds = paddle.reshape( max_iou_inds, [1,max_iou_inds.shape[0]] )
-                        match_labels_gts = paddle.full(max_iou_inds.shape, i+1, dtype='int32')
-                        match_labels = paddle.where(max_iou_inds, match_labels_gts, match_labels)
+                        max_iou_inds = paddle.reshape(
+                            max_iou_inds, [1, max_iou_inds.shape[0]])
+                        match_labels_gts = paddle.full(
+                            max_iou_inds.shape, i + 1, dtype='int32')
+                        match_labels = paddle.where(
+                            max_iou_inds, match_labels_gts, match_labels)
                         assigned_gt_inds = match_labels
                     else:
                         assigned_gt_inds[gt_argmax_overlaps[i]] = i + 1
@@ -114,35 +118,37 @@ class MaxIoUAssignerAVA():
         if gt_labels is not None:
             # consider multi-class case (AVA)
             assert len(gt_labels[0]) > 1
-            assigned_labels = paddle.full([num_bboxes, len(gt_labels[0])], 0, dtype='float32')
-            assigned_gt_inds_reshape = assigned_gt_inds.reshape([assigned_gt_inds.shape[1]])
-            pos_inds = paddle.nonzero( assigned_gt_inds_reshape , as_tuple=False)
+            assigned_labels = paddle.full(
+                [num_bboxes, len(gt_labels[0])], 0, dtype='float32')
+            assigned_gt_inds_reshape = assigned_gt_inds.reshape(
+                [assigned_gt_inds.shape[1]])
+            pos_inds = paddle.nonzero(assigned_gt_inds_reshape, as_tuple=False)
             pos_inds_num = paddle.numel(pos_inds).numpy()[0]
             if pos_inds_num > 0:
-                pos_inds = paddle.squeeze(pos_inds, axis = 1 )
-                assigned_gt_inds_squeeze = paddle.squeeze(assigned_gt_inds, axis=0)
-                assigned_gt_inds_select = paddle.index_select(assigned_gt_inds_squeeze, pos_inds) - 1
-                gt_labels_select = paddle.index_select(gt_labels, assigned_gt_inds_select)
+                pos_inds = paddle.squeeze(pos_inds, axis=1)
+                assigned_gt_inds_squeeze = paddle.squeeze(
+                    assigned_gt_inds, axis=0)
+                assigned_gt_inds_select = paddle.index_select(
+                    assigned_gt_inds_squeeze, pos_inds) - 1
+                gt_labels_select = paddle.index_select(gt_labels,
+                                                       assigned_gt_inds_select)
                 A = assigned_gt_inds_squeeze
                 X = assigned_gt_inds_squeeze - 1
                 Y = paddle.zeros_like(X)
-                if A.shape[0]==1:
-                    if A.numpy()[0]>0:
-                        T=X
+                if A.shape[0] == 1:
+                    if A.numpy()[0] > 0:
+                        T = X
                     else:
-                        T=Y
+                        T = Y
                 else:
-                    T = paddle.where(A>0, X, Y)
+                    T = paddle.where(A > 0, X, Y)
                 S = paddle.index_select(gt_labels, T)
-                AE = paddle.expand(A, [S.shape[1], A.shape[0]]) 
+                AE = paddle.expand(A, [S.shape[1], A.shape[0]])
                 AET = paddle.transpose(AE, perm=[1, 0])
-                R = paddle.where(AET>0, S, assigned_labels) 
+                R = paddle.where(AET > 0, S, assigned_labels)
                 assigned_labels = R
         else:
             assigned_labels = None
         ret = AssignResult(
-            num_gts,
-            assigned_gt_inds,
-            max_overlaps,
-            labels=assigned_labels)
+            num_gts, assigned_gt_inds, max_overlaps, labels=assigned_labels)
         return ret

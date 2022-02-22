@@ -1,6 +1,6 @@
 # Matching Network
 
-Matching Network (MN) 
+Matching Network (MN)
 结合了度量学习 (Metric Learning) 与记忆增强神经网络 (Memory Augment Neural Networks)，
 并利用注意力机制与记忆机制加速学习，同时提出了 set-to-set 框架，
 使得 MN 能够为新类产生合理的测试标签，且不用网络做任何改变。
@@ -8,7 +8,7 @@ Matching Network (MN)
 
 ## 1 MN
 
-将支持集 $S=\left\{\left(x_{i}, y_{i}\right)\right\}_{i=1}^{k}$ 
+将支持集 $S=\left\{\left(x_{i}, y_{i}\right)\right\}_{i=1}^{k}$
 映射到一个分类器 $c_{S}(\hat{x})$ ，
 给定一个测试样本 $\hat{x}$ ，$c_{S}(\hat{x})$ 定义一个关于输出 $\hat{y}$ 的概率分布，即
 
@@ -32,7 +32,7 @@ $$
 
 上式本质是将一个输入的新类描述为支持集中所有类的一个线性组合，
 结合了核密度估计KDE（ $a$ 可以看做是一种核密度估计）和 KNN 。
-其中, $k$ 表示支持集中样本类别数, 
+其中, $k$ 表示支持集中样本类别数,
 $a\left(\hat{x}, x_{i}\right)$ 是注意力机制，
 类似 attention 模型中的核函数，
 用来度量 $\hat{x}$ 和训练样本 $x_{i}$ 的匹配度。
@@ -43,7 +43,7 @@ $$
 a\left(\hat{x}, x_{i}\right)=\frac{e^{c\left(f(\hat{x}), g\left(x_{i}\right)\right)}}{\sum_{j=1}^{k} e^{c\left(f(\hat{x}), g\left(x_{j}\right)\right)}}
 $$
 
-其中， $c(\cdot)$ 表示余弦相似度， 
+其中， $c(\cdot)$ 表示余弦相似度，
 $f$ 与 $g$ 表示施加在测试样本与训练样本上的嵌入函数 (Embedding Function)。
 
 如果注意力机制是 $X \times X$ 上的核，
@@ -56,7 +56,7 @@ $f$ 与 $g$ 表示施加在测试样本与训练样本上的嵌入函数 (Embedd
 
 ![MN](../../../images/meta_learning/metric_based_meta_learning/MN/MN.png)
 <center>
-图1	MN 示意图。
+图1    MN 示意图。
 </center>
 
 
@@ -123,14 +123,14 @@ $$
 - 将（ $K+1$ 个）浅层变量全部输入到 BiLSTM 中，获得 $K+1$ 个输出，
 然后使用余弦距离判断前 $K$ 个输出中每个输出与最后一个输出之间的相似度。
 
-- 根据计算出来的相似度，按照任务 $S$ 中的标签信息 $y_1, y_2, \ldots, y_K$ 
+- 根据计算出来的相似度，按照任务 $S$ 中的标签信息 $y_1, y_2, \ldots, y_K$
 求解目标图片 $\hat{x}$ 的类别标签 $\hat{y}$。
 
 
 ## 5 MN 分类结果
 
 <center>
-表1	MN 在 Omniglot 上的分类结果。
+表1    MN 在 Omniglot 上的分类结果。
 </center>
 
 | Model | Matching Fn | Fine Tune | 5-way 1-shot | 5-way 5-shot | 20-way 1-shot | 20-way 5-shot |  
@@ -147,10 +147,10 @@ $$
 
 
 <center>
-表1	MN 在 miniImageNet 上的分类结果。
+表1    MN 在 miniImageNet 上的分类结果。
 </center>
 
-| Model | Matching Fn | Fine Tune | 5-way 1-shot | 5-way 5-shot | 
+| Model | Matching Fn | Fine Tune | 5-way 1-shot | 5-way 5-shot |
 | :----: | :----: | :----: | :----: | :----: |
 | PIXELS | Cosine | N | 23.0 $\%$ | 26.6 $\%$ |
 | BASELINE CLASSIFIER | Cosine | N | 36.6 $\%$ | 46.0 $\%$ |
@@ -162,7 +162,7 @@ $$
 | MATCHING NETS | Cosine (FCE) | Y | **46.6** $\%$ | **60.0** $\%$ |
 
 
-## 6 创新点 
+## 6 创新点
 
 - 采用匹配的形式实现小样本分类任务，
 引入最近邻算法的思想解决了深度学习算法在小样本的条件下无法充分优化参数而导致的过拟合问题，

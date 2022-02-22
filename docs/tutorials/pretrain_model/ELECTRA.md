@@ -104,10 +104,3 @@ ELECTRA的RTD任务比MLM的预训练任务好，推出了一种十分适用于N
 ## 7. 参考文献
 
 [Electra: Pre-training text encoders as discriminators rather than generators](https://arxiv.org/abs/2003.10555)
-
-
-
-
-
-
-

@@ -28,8 +28,8 @@ def IoU(e1, e2):
     x1 = np.maximum(e1["start"], e2["start"])
     x2 = np.minimum(e1["end"], e2["end"])
     inter = np.maximum(0.0, x2 - x1)
-    iou = 0.0 if (area1 + area2 -
-                  inter) == 0 else inter * 1.0 / (area1 + area2 - inter)
+    iou = 0.0 if (area1 + area2 - inter) == 0 else inter * 1.0 / (
+        area1 + area2 - inter)
     ioa = 0.0 if area2 == 0 else inter * 1.0 / area2
     return iou, ioa
 
@@ -125,13 +125,15 @@ def save_feature(label_info, out_dir):
             end_id = proposal['proposal']['end']
             # get hit feature
             image_feature_hit = image_feature[start_id * fps:end_id * fps]
-            audio_feature_hit = audio_feature[min(start_id, max_len_audio
-                                                  ):min(end_id, max_len_audio)]
+            audio_feature_hit = audio_feature[min(start_id, max_len_audio):min(
+                end_id, max_len_audio)]
 
             # save
             anno_info = {
-                'image_feature': np.array(image_feature_hit, dtype=np.float32),
-                'audio_feature': np.array(audio_feature_hit, dtype=np.float32),
+                'image_feature': np.array(
+                    image_feature_hit, dtype=np.float32),
+                'audio_feature': np.array(
+                    audio_feature_hit, dtype=np.float32),
                 'feature_fps': fps,
                 'label_info': proposal,
                 'video_name': basename
@@ -153,8 +155,8 @@ if __name__ == "__main__":
     prop_data = json.load(open(prop_file, 'rb'))
     proposal_data = {}
     for item in prop_data:
-        proposal_data[os.path.basename(
-            item['video_name'])] = item['bmn_results']
+        proposal_data[os.path.basename(item['video_name'])] = item[
+            'bmn_results']
 
     # get label info
     res_bmn = {'fps': 0, 'results': []}

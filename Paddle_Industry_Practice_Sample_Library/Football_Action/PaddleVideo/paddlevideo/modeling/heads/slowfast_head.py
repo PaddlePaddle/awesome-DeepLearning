@@ -30,6 +30,7 @@ class SlowFastHead(BaseHead):
     when the input size is larger than 1x1x1. If the inputs are from multiple
     different pathways, the inputs will be concatenated after pooling.
     """
+
     def __init__(self,
                  width_per_group,
                  alpha,
@@ -84,39 +85,37 @@ class SlowFastHead(BaseHead):
             ],
         ]
 
-        assert (len({len(self.pool_size), len(self.dim_in)
-                     }) == 1), "pathway dimensions are not consistent."
+        assert (len({len(self.pool_size), len(self.dim_in)}) == 1
+                ), "pathway dimensions are not consistent."
         self.num_pathways = len(self.pool_size)
 
         self.dropout = paddle.nn.Dropout(p=self.dropout_rate)
 
         self.projection = paddle.nn.Linear(
             in_features=sum(self.dim_in),
-            out_features=self.num_classes,
-        )
+            out_features=self.num_classes, )
 
     def init_weights(self):
-        weight_init_(self.projection,
-                     "Normal",
-                     bias_value=0.0,
-                     mean=0.0,
-                     std=0.01)
+        weight_init_(
+            self.projection, "Normal", bias_value=0.0, mean=0.0, std=0.01)
 
     def forward(self, inputs):
-        assert (len(inputs) == self.num_pathways
-                ), "Input tensor does not contain {} pathway".format(
-                    self.num_pathways)
+        assert (
+            len(inputs) == self.num_pathways
+        ), "Input tensor does not contain {} pathway".format(self.num_pathways)
         pool_out = []
         for pathway in range(self.num_pathways):
             if self.pool_size[pathway] is None:
-                tmp_out = F.adaptive_avg_pool3d(x=inputs[pathway],
-                                                output_size=(1, 1, 1),
-                                                data_format="NCDHW")
+                tmp_out = F.adaptive_avg_pool3d(
+                    x=inputs[pathway],
+                    output_size=(1, 1, 1),
+                    data_format="NCDHW")
             else:
-                tmp_out = F.avg_pool3d(x=inputs[pathway],
-                                       kernel_size=self.pool_size[pathway],
-                                       stride=1,
-                                       data_format="NCDHW")
+                tmp_out = F.avg_pool3d(
+                    x=inputs[pathway],
+                    kernel_size=self.pool_size[pathway],
+                    stride=1,
+                    data_format="NCDHW")
             pool_out.append(tmp_out)
 
         x = paddle.concat(x=pool_out, axis=1)

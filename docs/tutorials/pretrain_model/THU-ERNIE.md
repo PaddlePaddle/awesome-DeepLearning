@@ -34,7 +34,7 @@
 
 $$
 \{\tilde{w}_{1}^{(i-1)},\tilde{w}_{2}^{(i-1)},...,\tilde{w}_{n}^{(i-1)}\} = \text{MH-ATT}(\{w_{1}^{(i-1)},w_{2}^{(i-1)},...,w_{n}^{(i-1)}\}) \\
-\{\tilde{e}_{1}^{(i-1)},\tilde{e}_{2}^{(i-1)},...,\tilde{e}_{m}^{(i-1)}\} = \text{MH-ATT}(\{e_{1}^{(i-1)},e_{2}^{(i-1)},...,e_{m}^{(i-1)}\}) 
+\{\tilde{e}_{1}^{(i-1)},\tilde{e}_{2}^{(i-1)},...,\tilde{e}_{m}^{(i-1)}\} = \text{MH-ATT}(\{e_{1}^{(i-1)},e_{2}^{(i-1)},...,e_{m}^{(i-1)}\})
 $$
 
 然后Entity序列的输出将被对齐到token序列的第一个token上，例如实体"bob dylan"将被对齐到第一个单词"bob"上。接下里将这些MH-ATT的输入到Fusion层，在这里将进行文本信息和KG知识的信息融合。因为有些token没有对应的entity，有些token有对应的entity，所以这里需要分两种情况讨论。
@@ -43,7 +43,7 @@ $$
 
 $$
 h_j = \sigma(\tilde{W}_t^{(i)}\tilde{w}_j^{(i)}+\tilde{W}_e^{(i)}\tilde{e}_k^{(i)}+\tilde{b}^{(i)}) \\
-w_j^{(i)} = \sigma({W}_t^{(i)}{h}_j+b_t^{(i)}) \\ 
+w_j^{(i)} = \sigma({W}_t^{(i)}{h}_j+b_t^{(i)}) \\
 e_k^{(i)} = \sigma({W}_e^{(i)}{h}_j+b_e^{(i)})
 $$
 
@@ -52,7 +52,7 @@ $$
 
 $$
 h_j = \sigma(\tilde{W}_t^{(i)}\tilde{w}_j^{(i)}+\tilde{b}^{(i)}) \\
-w_j^{(i)} = \sigma({W}_t^{(i)}{h}_j+b_t^{(i)}) 
+w_j^{(i)} = \sigma({W}_t^{(i)}{h}_j+b_t^{(i)})
 $$
 
 其中这里的$\sigma(\cdot)$是个非线性的激活函数，通常可以使用GELU函数。最后一层的输出将被视作融合文本信息和KG知识的最终向量。
@@ -81,4 +81,3 @@ $$
 
 1. [ERNIE：Enhanced Language Representation with Informative Entities](https://arxiv.org/pdf/1905.07129.pdf)
 2. [ERNIE Githut](https://github.com/thunlp/ERNIE)
-

@@ -8,6 +8,7 @@ from paddle.io import Dataset
 from data.operators import *
 from eval_model import get_categories, get_infer_results
 
+
 class ImageFolder(Dataset):
     def __init__(self,
                  dataset_dir=None,
@@ -74,7 +75,6 @@ class ImageFolder(Dataset):
     def set_epoch(self, epoch_id):
         self._epoch = epoch_id
 
-
     def parse_dataset(self, ):
         if not self.roidbs:
             self.roidbs = self._load_images()
@@ -119,6 +119,8 @@ class ImageFolder(Dataset):
     def set_images(self, images):
         self.image_dir = images
         self.roidbs = self._load_images()
+
+
 def _is_valid_file(f, extensions=('.jpg', '.jpeg', '.png', '.bmp')):
     return f.lower().endswith(extensions)
 
@@ -134,6 +136,7 @@ def _make_dataset(dir):
             if _is_valid_file(path):
                 images.append(path)
     return images
+
 
 def draw_bbox(image, bbox_res, im_id, catid2name, threshold=0.5):
     """
@@ -160,10 +163,9 @@ def draw_bbox(image, bbox_res, im_id, catid2name, threshold=0.5):
         ymax = ymin + h
         draw.line(
             [(xmin, ymin), (xmin, ymax), (xmax, ymax), (xmax, ymin),
-                (xmin, ymin)],
+             (xmin, ymin)],
             width=2,
             fill=color)
-
 
         # draw label
         text = "{} {:.2f}".format(catid2name[catid], score)
@@ -173,6 +175,8 @@ def draw_bbox(image, bbox_res, im_id, catid2name, threshold=0.5):
         draw.text((xmin + 1, ymin - th), text, fill=(255, 255, 255))
 
     return image
+
+
 def colormap(rgb=False):
     """
     Get colormap
@@ -208,19 +212,45 @@ def colormap(rgb=False):
         color_list = color_list[:, ::-1]
     return color_list
 
+
 def predict(images,
             model,
             draw_threshold=0.5,
             output_dir='output',
-            anno_path=None): 
-    status = {}        
-    dataset = ImageFolder(anno_path=anno_path)      
+            anno_path=None):
+    status = {}
+    dataset = ImageFolder(anno_path=anno_path)
     dataset.set_images(images)
 
-    sample_transforms = [{Decode: {}}, {Resize: {'target_size': [800, 1333], 'keep_ratio': True}}, {NormalizeImage: {'is_scale': True, 'mean': [0.485, 0.456, 0.406], 'std': [0.229, 0.224, 0.225]}}, {Permute: {}}]
-    batch_transforms = [{PadMaskBatch: {'pad_to_stride': -1, 'return_pad_mask': True}}]
-    loader = BaseDataLoader(sample_transforms, batch_transforms, batch_size=1, shuffle=False, drop_last=False)(dataset, 0)
-    
+    sample_transforms = [{
+        Decode: {}
+    }, {
+        Resize: {
+            'target_size': [800, 1333],
+            'keep_ratio': True
+        }
+    }, {
+        NormalizeImage: {
+            'is_scale': True,
+            'mean': [0.485, 0.456, 0.406],
+            'std': [0.229, 0.224, 0.225]
+        }
+    }, {
+        Permute: {}
+    }]
+    batch_transforms = [{
+        PadMaskBatch: {
+            'pad_to_stride': -1,
+            'return_pad_mask': True
+        }
+    }]
+    loader = BaseDataLoader(
+        sample_transforms,
+        batch_transforms,
+        batch_size=1,
+        shuffle=False,
+        drop_last=False)(dataset, 0)
+
     imid2path = dataset.get_imid2path()
 
     anno_file = dataset.get_anno()
@@ -252,9 +282,11 @@ def predict(images,
             status['original_image'] = np.array(image.copy())
 
             end = start + bbox_num[i]
-            bbox_res = batch_res['bbox'][start:end] if 'bbox' in batch_res else None
+            bbox_res = batch_res['bbox'][start:
+                                         end] if 'bbox' in batch_res else None
             if bbox_res is not None:
-                image = draw_bbox(image, bbox_res,int(im_id), catid2name, draw_threshold)
+                image = draw_bbox(image, bbox_res,
+                                  int(im_id), catid2name, draw_threshold)
             status['result_image'] = np.array(image.copy())
 
             # save image with detection
@@ -266,7 +298,9 @@ def predict(images,
             print("Detection bbox results save in {}".format(save_name))
             image.save(save_name, quality=95)
             start = end
-def get_test_images(infer_img,infer_dir=None):
+
+
+def get_test_images(infer_img, infer_dir=None):
     """
     Get image path list in TEST mode
     """
@@ -294,4 +328,4 @@ def get_test_images(infer_img,infer_dir=None):
     assert len(images) > 0, "no image found in {}".format(infer_dir)
     print("Found {} inference images in total.".format(len(images)))
 
-    return images 
+    return images

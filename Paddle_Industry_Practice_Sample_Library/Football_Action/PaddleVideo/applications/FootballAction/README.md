@@ -215,7 +215,7 @@ cd datasets/script && python get_instance_for_bmn.py
 ```
    |--  datasets                   # 训练数据集和处理脚本
         |--  EuroCup2016            # xx数据集
-            |--  input_for_bmn     # bmn训练的proposal         
+            |--  input_for_bmn     # bmn训练的proposal  
 ```
 
 #### step2.2  BMN模型训练
@@ -334,7 +334,7 @@ cd datasets/script && python get_instance_for_lstm.py
 
 #### step3.2  LSTM训练
 ```
-sh run.sh	# LSTM 模块
+sh run.sh    # LSTM 模块
 ```
 
 #### step3.3 LSTM模型转为预测模式

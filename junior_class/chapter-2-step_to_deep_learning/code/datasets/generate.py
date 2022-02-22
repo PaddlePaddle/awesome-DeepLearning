@@ -99,7 +99,8 @@ class MnistDataset(paddle.io.Dataset):
             # 获得测试数据集
             imgs, labels = test_set[0], test_set[1]
         else:
-            raise Exception("mode can only be one of ['train', 'valid', 'eval']")
+            raise Exception(
+                "mode can only be one of ['train', 'valid', 'eval']")
 
         # 校验数据
         assert len(imgs) == len(labels), \

@@ -21,11 +21,11 @@ from ppdet.modeling.layers import ConvNormLayer
 from ..shape_spec import ShapeSpec
 
 DLA_cfg = {
-            34: ([1, 1, 1, 2, 2, 1], [16, 32, 64, 128, 256, 512]),
-            46: ([1, 1, 1, 2, 2, 1], [16, 32, 64, 64, 128, 256]),
-            60: ([1, 1, 1, 2, 3, 1], [16, 32, 128, 256, 512, 1024]),
-            102: ([1, 1, 1, 3, 4, 1], [16, 32, 128, 256, 512, 1024])
-          }
+    34: ([1, 1, 1, 2, 2, 1], [16, 32, 64, 128, 256, 512]),
+    46: ([1, 1, 1, 2, 2, 1], [16, 32, 64, 64, 128, 256]),
+    60: ([1, 1, 1, 2, 3, 1], [16, 32, 128, 256, 512, 1024]),
+    102: ([1, 1, 1, 3, 4, 1], [16, 32, 128, 256, 512, 1024])
+}
 
 
 class BasicBlock(nn.Layer):
@@ -48,25 +48,24 @@ class BasicBlock(nn.Layer):
 
     def forward(self, inputs, residual=None):
         if residual is None:
-            residual = inputs 
+            residual = inputs
 
-        out = self.conv1(inputs) 
+        out = self.conv1(inputs)
         out = F.relu(out)
-        out = self.conv2(out) 
+        out = self.conv2(out)
         out = paddle.add(x=out, y=residual)
         out = F.relu(out)
 
         return out
 
+
 class Bottleneck(nn.Layer):
     expansion = 2
-    
+
     def __init__(self, ch_in, ch_out, stride=1, base_width=64, cardinality=1):
         super(Bottleneck, self).__init__()
         self.stride = stride
-        mid_planes = int(
-            math.floor(ch_out * (base_width / 64)) * cardinality
-        )
+        mid_planes = int(math.floor(ch_out * (base_width / 64)) * cardinality)
         mid_planes = mid_planes // self.expansion
 
         self.conv1 = ConvNormLayer(
@@ -90,17 +89,17 @@ class Bottleneck(nn.Layer):
             stride=1,
             bias_on=False,
             norm_decay=None)
-    
+
     def forward(self, inputs, residual=True):
         if residual is None:
-            residual = inputs 
-        out = self.conv1(inputs) 
+            residual = inputs
+        out = self.conv1(inputs)
         out = F.relu(out)
         out = self.conv2(out)
         out = F.relu(out)
-        out = self.conv3(out) 
+        out = self.conv3(out)
         out += residual
-        out = F.relu(out) 
+        out = F.relu(out)
 
         return out
 

@@ -43,6 +43,7 @@ class ProfilerOptions(object):
                          which can be used to generate a timeline.
       exit_on_finished - a boolean.
     """
+
     def __init__(self, options_str):
         assert isinstance(options_str, str)
 

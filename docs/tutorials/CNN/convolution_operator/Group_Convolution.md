@@ -46,4 +46,3 @@ $$
 ## 参考文献
 
 [1] [ImageNet Classification with Deep Convolutional Neural Networks](http://stanford.edu/class/cs231m/references/alexnet.pdf)
-

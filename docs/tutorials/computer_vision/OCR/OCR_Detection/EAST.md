@@ -92,4 +92,3 @@ $$N_{Q^*} = \min\limits_{i=1}^{4} D(p_i, p_{(i mode 4)+1})$$
 ## 参考文献
 
 [1] [EAST: An Efficient and Accurate Scene Text Detector](https://arxiv.org/pdf/1704.03155.pdf)
-

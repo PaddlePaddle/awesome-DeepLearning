@@ -36,7 +36,7 @@ Swin Transformer is a new Transformer model of computer vision, from the paper "
   tar -xvf ILSVRC2012_val.tar
   cd ../
   ```
-  
+
 - Please organize data dir as below
 
   ```
@@ -60,7 +60,7 @@ Swin Transformer is a new Transformer model of computer vision, from the paper "
 The model evaluation process can be started as follows
 
 ```bash
-python3 eval.py 
+python3 eval.py
     --model SwinTransformer  \
     --data data/ILSVRC2012_val
 ```

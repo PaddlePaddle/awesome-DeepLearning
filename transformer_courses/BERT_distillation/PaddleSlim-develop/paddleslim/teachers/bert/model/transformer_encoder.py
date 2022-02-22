@@ -37,7 +37,8 @@ class PrePostProcessLayer(Layer):
 
         for cmd in self.process_cmd:
             if cmd == "a":  # add residual connection
-                self.functors.append(lambda x, y: x + y if y is not None else x)
+                self.functors.append(
+                    lambda x, y: x + y if y is not None else x)
                 self.exec_order += "a"
             elif cmd == "n":  # add layer normalization
                 self.functors.append(

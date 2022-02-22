@@ -12,12 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 import copy
 import paddle
 import random
 import numpy as np
 from collections import defaultdict
+
 
 def set_seed(seed):
     paddle.seed(seed)

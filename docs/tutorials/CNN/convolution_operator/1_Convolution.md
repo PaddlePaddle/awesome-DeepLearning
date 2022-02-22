@@ -60,11 +60,11 @@ class Inception(paddle.nn.Layer):
     def __init__(self, c0, c1, c2, c3, c4, **kwargs):
         '''
         Inception模块的实现代码，
-        
+
         c1,图(b)中第一条支路1x1卷积的输出通道数，数据类型是整数
-        c2,图(b)中第二条支路卷积的输出通道数，数据类型是tuple或list, 
+        c2,图(b)中第二条支路卷积的输出通道数，数据类型是tuple或list,
                其中c2[0]是1x1卷积的输出通道数，c2[1]是3x3
-        c3,图(b)中第三条支路卷积的输出通道数，数据类型是tuple或list, 
+        c3,图(b)中第三条支路卷积的输出通道数，数据类型是tuple或list,
                其中c3[0]是1x1卷积的输出通道数，c3[1]是3x3
         c4,图(b)中第一条支路1x1卷积的输出通道数，数据类型是整数
         '''
@@ -134,7 +134,7 @@ class ConvBNLayer(paddle.nn.Layer):
                  stride=1,
                  groups=1,
                  act=None):
-       
+
         """
         num_channels, 卷积层的输入通道数
         num_filters, 卷积层的输出通道数
@@ -155,7 +155,7 @@ class ConvBNLayer(paddle.nn.Layer):
 
         # 创建BatchNorm层
         self._batch_norm = paddle.nn.BatchNorm2D(num_filters)
-        
+
         self.act = act
 
     def forward(self, inputs):
@@ -232,4 +232,3 @@ class BottleneckBlock(paddle.nn.Layer):
 [1] [Going deeper with convolutions](https://arxiv.org/pdf/1409.4842.pdf)
 
 [2] [Deep Residual Learning for Image Recognition](https://arxiv.org/pdf/1512.03385.pdf)
-

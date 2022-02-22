@@ -27,6 +27,7 @@ class BaseEstimator(nn.Layer):
     """BaseEstimator
 
     """
+
     def __init__(self, backbone=None, head=None):
         super().__init__()
         if backbone is not None:

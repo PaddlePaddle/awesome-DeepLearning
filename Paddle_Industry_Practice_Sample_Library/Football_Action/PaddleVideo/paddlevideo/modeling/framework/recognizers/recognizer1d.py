@@ -17,6 +17,7 @@ from .base import BaseRecognizer
 @RECOGNIZERS.register()
 class Recognizer1D(BaseRecognizer):
     """1D recognizer model framework."""
+
     def forward_net(self, imgs):
         """Define how the model is going to train, from input to output.
         """

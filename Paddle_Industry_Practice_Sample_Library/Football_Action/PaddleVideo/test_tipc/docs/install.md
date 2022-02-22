@@ -124,4 +124,3 @@ source /etc/profile
 export LD_LIBRARY_PATH=/xx/xx/TensorRT-7.0.0.11/lib:$LD_LIBRARY_PATH
 ```
 或者问题是下载的TensorRT版本和当前paddle中编译的TRT版本不匹配，需要下载版本相符的TensorRT重新安装。
-

@@ -52,7 +52,8 @@ class MobileNetV1Space(SearchSpaceBase):
             [128, 144, 160, 192, 224, 256, 320, 384, 512, 576, 640, 704,
              768])  #13
         self.filter_num9 = np.array(
-            [160, 192, 224, 256, 320, 384, 512, 640, 768, 832, 1024, 1048])  #12
+            [160, 192, 224, 256, 320, 384, 512, 640, 768, 832, 1024,
+             1048])  #12
         # self.k_size means kernel size
         self.k_size = np.array([3, 5])  #2
         # self.repeat means repeat_num in forth downsample 

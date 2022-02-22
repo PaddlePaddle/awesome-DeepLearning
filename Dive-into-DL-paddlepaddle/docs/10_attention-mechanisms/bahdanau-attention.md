@@ -224,4 +224,3 @@ d2l.show_heatmaps(
 
 
 [Discussions](https://discuss.d2l.ai/t/5754)
-

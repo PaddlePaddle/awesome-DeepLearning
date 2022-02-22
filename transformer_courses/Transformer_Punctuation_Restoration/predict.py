@@ -1,4 +1,3 @@
-
 # Copyright (c) 2020 PaddlePaddle Authors. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import yaml 
-import argparse 
+import yaml
+import argparse
 from pprint import pprint
 from attrdict import AttrDict
 
@@ -22,8 +21,9 @@ import os
 import paddle
 from paddlenlp.transformers import ElectraForTokenClassification, ElectraTokenizer
 
-from dataloader import create_test_dataloader,load_dataset
+from dataloader import create_test_dataloader, load_dataset
 from utils import evaluate, write2txt
+
 
 def parse_decodes(input_words, id2label, decodes, lens):
     decodes = [x for batch in decodes for x in batch]
@@ -36,15 +36,16 @@ def parse_decodes(input_words, id2label, decodes, lens):
         sent_out = []
         tags_out = []
         for s, t in zip(sent, tags):
-            if(t=='0'):
+            if (t == '0'):
                 sent_out.append(s)
             else:
                 # sent_out.append(s)
-                sent_out.append(s+punctuation_dec[t])
-        sent=' '.join(sent_out)
-        sent=sent.replace(' ##','')
+                sent_out.append(s + punctuation_dec[t])
+        sent = ' '.join(sent_out)
+        sent = sent.replace(' ##', '')
         outputs.append(sent)
     return outputs
+
 
 def do_predict(test_data_loader):
     for step, batch in enumerate(test_data_loader):
@@ -56,6 +57,7 @@ def do_predict(test_data_loader):
     preds = parse_decodes(raw_data, id2label, pred_list, len_list)
     return preds
 
+
 if __name__ == '__main__':
     # 读入参数
     yaml_file = './electra.base.yaml'
@@ -65,7 +67,7 @@ if __name__ == '__main__':
 
     # 加载模型参数
     best_model = args.best_model
-    init_checkpoint_path=os.path.join(args.output_dir, best_model)
+    init_checkpoint_path = os.path.join(args.output_dir, best_model)
     model_dict = paddle.load(init_checkpoint_path)
 
     # 加载dataset
@@ -75,26 +77,27 @@ if __name__ == '__main__':
     label_num = len(label_list)
 
     # 加载模型与模型参数
-    model = ElectraForTokenClassification.from_pretrained(args.model_name_or_path, num_classes=label_num)    
-    model.set_dict(model_dict) 
-     
+    model = ElectraForTokenClassification.from_pretrained(
+        args.model_name_or_path, num_classes=label_num)
+    model.set_dict(model_dict)
+
     # 构建符号解码字典
     punctuation_dec = {
-            '0': 'O',
-            '1': ',',
-            '2': '.',
-            '3': '?',
-        }
- 
+        '0': 'O',
+        '1': ',',
+        '2': '.',
+        '3': '?',
+    }
+
     id2label = dict(enumerate(label_list))
     raw_data = test_ds.data
- 
+
     model.eval()
     pred_list = []
     len_list = []
 
     # 加载测试集data loader
-    test_data_loader  = create_test_dataloader(args)
+    test_data_loader = create_test_dataloader(args)
 
     # 设置损失函数 - Cross Entropy  
     loss_fct = paddle.nn.loss.CrossEntropyLoss(ignore_index=args.ignore_label)
@@ -107,4 +110,4 @@ if __name__ == '__main__':
 
     # 将预测结果解码成真实句子，写入到txt文件
     if args.isSavingPreds == 1:
-        write2txt(args, preds)  
+        write2txt(args, preds)

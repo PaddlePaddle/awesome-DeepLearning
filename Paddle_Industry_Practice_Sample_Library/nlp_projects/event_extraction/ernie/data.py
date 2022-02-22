@@ -121,8 +121,8 @@ def data_prepare(path):
     train_trigger, train_role = data_process(
         os.path.join(path, "duee_train.json"))
     dev_trigger, dev_role = data_process(os.path.join(path, "duee_dev.json"))
-    test_trigger, test_role = data_process(os.path.join(
-        path, "duee_test.json"))
+    test_trigger, test_role = data_process(
+        os.path.join(path, "duee_test.json"))
     write_by_lines(os.path.join(trigger_path, "duee_train.tsv"), train_trigger)
     write_by_lines(os.path.join(trigger_path, "duee_dev.tsv"), dev_trigger)
     write_by_lines(os.path.join(trigger_path, "duee_test.tsv"), test_trigger)
@@ -135,21 +135,24 @@ def data_prepare(path):
 def load_dict(dict_path):
     tag2id, id2tag = {}, {}
     with open(dict_path, "r", encoding="utf-8") as f:
-       for idx, line in enumerate(f.readlines()):
-           word = line.strip()
-           id2tag[idx] = word
-           tag2id[word] = idx
-    
+        for idx, line in enumerate(f.readlines()):
+            word = line.strip()
+            id2tag[idx] = word
+            tag2id[word] = idx
+
     return tag2id, id2tag
+
 
 # load schema file
 def load_schema(schema_path):
     schema = {}
     with open(schema_path, "r", encoding="utf-8") as f:
         for line in f.readlines():
-           event_des = json.loads(line)
-           schema[event_des["event_type"]] = [r["role"] for r in event_des["role_list"]]
+            event_des = json.loads(line)
+            schema[event_des[
+                "event_type"]] = [r["role"] for r in event_des["role_list"]]
     return schema
+
 
 # load data from local file, which will be used for loading data with paddlenlp
 def read(data_path):
@@ -159,17 +162,28 @@ def read(data_path):
             words, labels = line.strip().split("\t")
             words = words.split("\002")
             labels = labels.split("\002")
-            yield {"tokens": words, "labels":labels}
+            yield {"tokens": words, "labels": labels}
 
 
-def convert_example_to_features(example, tokenizer, tag2id, max_seq_length=512, pad_default_tag="O",  is_test=False):
-   
-    features = tokenizer(example["tokens"], is_split_into_words=True,  max_seq_len=max_seq_length, return_length=True)
+def convert_example_to_features(example,
+                                tokenizer,
+                                tag2id,
+                                max_seq_length=512,
+                                pad_default_tag="O",
+                                is_test=False):
+
+    features = tokenizer(
+        example["tokens"],
+        is_split_into_words=True,
+        max_seq_len=max_seq_length,
+        return_length=True)
     if is_test:
-        return features["input_ids"], features["token_type_ids"], features["seq_len"]
+        return features["input_ids"], features["token_type_ids"], features[
+            "seq_len"]
 
-    tag_ids = [tag2id[tag] for tag in example["labels"][:(max_seq_length-2)]]
+    tag_ids = [tag2id[tag] for tag in example["labels"][:(max_seq_length - 2)]]
     tag_ids = [tag2id[pad_default_tag]] + tag_ids + [tag2id[pad_default_tag]]
     assert len(features["input_ids"]) == len(tag_ids)
-    
-    return features["input_ids"], features["token_type_ids"],  features["seq_len"], tag_ids  
+
+    return features["input_ids"], features["token_type_ids"], features[
+        "seq_len"], tag_ids

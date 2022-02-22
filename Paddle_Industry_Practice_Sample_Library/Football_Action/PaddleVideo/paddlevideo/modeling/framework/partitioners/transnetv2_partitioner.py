@@ -20,6 +20,7 @@ import paddle
 class TransNetV2Partitioner(BasePartitioner):
     """TransNetV2 Partitioner framework
     """
+
     def forward_net(self, imgs):
         one_hot_pred = self.backbone(imgs)
         return one_hot_pred
@@ -35,9 +36,12 @@ class TransNetV2Partitioner(BasePartitioner):
             one_hot_pred, dict_ = one_hot_pred
         many_hot_pred = dict_.get("many_hot", None)
         comb_reg_loss = dict_.get("comb_reg_loss", None)
-        loss_metrics = self.head.loss(one_hot_pred, one_hot_gt,
-                                    many_hot_pred, many_hot_gt,
-                                    reg_losses={"comb_reg": comb_reg_loss})
+        loss_metrics = self.head.loss(
+            one_hot_pred,
+            one_hot_gt,
+            many_hot_pred,
+            many_hot_gt,
+            reg_losses={"comb_reg": comb_reg_loss})
         return loss_metrics
 
     def val_step(self, data_batch):
@@ -49,9 +53,12 @@ class TransNetV2Partitioner(BasePartitioner):
             one_hot_pred, dict_ = one_hot_pred
         many_hot_pred = dict_.get("many_hot", None)
         comb_reg_loss = dict_.get("comb_reg_loss", None)
-        loss_metrics = self.head.loss(one_hot_pred, one_hot_gt,
-                                      many_hot_pred, many_hot_gt,
-                                      reg_losses={"comb_reg": comb_reg_loss})
+        loss_metrics = self.head.loss(
+            one_hot_pred,
+            one_hot_gt,
+            many_hot_pred,
+            many_hot_gt,
+            reg_losses={"comb_reg": comb_reg_loss})
         return loss_metrics
 
     def test_step(self, data_batch):

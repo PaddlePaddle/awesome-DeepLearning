@@ -29,10 +29,12 @@ CONFIG_SECS = [
     'infer',
 ]
 
+
 class AttrDict(dict):
     """
     AttrDict
     """
+
     def __getattr__(self, key):
         return self[key]
 

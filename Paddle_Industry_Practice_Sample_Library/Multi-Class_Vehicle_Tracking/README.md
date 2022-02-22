@@ -143,15 +143,15 @@ python -m paddle.distributed.launch --log_dir=./mcfairmot_dla34_30e_1088x608_vis
 
 ## 6 模型评估
 
-考虑到本案例的场景中希望视频里车辆大部分时间ID都是准确的，从而更好地进行针对性地管控。因此使用IFD1作为评估指标。IDF1衡量了整个视频的跟踪连贯性，评估的是整体的目标被正确识别的概率。 
+考虑到本案例的场景中希望视频里车辆大部分时间ID都是准确的，从而更好地进行针对性地管控。因此使用IFD1作为评估指标。IDF1衡量了整个视频的跟踪连贯性，评估的是整体的目标被正确识别的概率。
 
-$$ IFD1 = \frac{2IDTP}{2IDTP+IDFP+IDFN} $$ 
+$$ IFD1 = \frac{2IDTP}{2IDTP+IDFP+IDFN} $$
 
 其中，
 
-$$IDFN=\sum_{\tau \in AT}{\sum_{t\in T_{\tau}}{m(\tau , \lambda _m(\tau), t, \Delta)}}$$ 
+$$IDFN=\sum_{\tau \in AT}{\sum_{t\in T_{\tau}}{m(\tau , \lambda _m(\tau), t, \Delta)}}$$
 
-$$IDFP=\sum_{\Delta \in AC}{\sum_{t\in T_{\Delta}}{m(\tau _m(\lambda), \lambda , t, \Delta)}}$$ 
+$$IDFP=\sum_{\Delta \in AC}{\sum_{t\in T_{\Delta}}{m(\tau _m(\lambda), \lambda , t, \Delta)}}$$
 
 $$IDTP=\sum_{\tau \in AT}{len(\tau)-IDFN}$$
 
@@ -305,13 +305,13 @@ mot_jde_infer.predict_naive(model_dir, video_file, image_dir, device, threshold,
 * 设备1:
 ```
 CPU：80  Intel(R) Xeon(R) Gold 6271C CPU @ 2.60GHz
-GPU：NVIDIA Tesla V100 
+GPU：NVIDIA Tesla V100
 ```
 
-* 设备2: 
+* 设备2:
 ```
 CPU：96  Intel(R) Xeon(R) Gold 6271C CPU @ 2.60GHz
-GPU：NVIDIA TESLA T4 
+GPU：NVIDIA TESLA T4
 ```
 
 
@@ -461,7 +461,7 @@ CenterNetPostProcess:
 本案例中，基于 HardNet 作为 backbone，使用 GIoU Loss 进行优化实验，实验结果如下：
 
 | 模型 | IDF1 |
-| -------- | -------- | 
+| -------- | -------- |
 | MCFairMOT+HardNet+ByteTracker| 57.2|
 | MCFairMOT+HardNet+GIoU Loss+ByteTracker| 57.6|
 

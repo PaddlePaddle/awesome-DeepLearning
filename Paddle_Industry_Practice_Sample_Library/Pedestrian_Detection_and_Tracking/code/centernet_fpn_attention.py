@@ -21,17 +21,41 @@ from ppdet.core.workspace import register, serializable
 from ppdet.modeling.layers import ConvNormLayer
 from ..shape_spec import ShapeSpec
 
-
 import paddle.nn.functional as F
+
 # attention
+
 
 # SGE attention
 class BasicConv(nn.Layer):
-    def __init__(self, in_planes, out_planes, kernel_size, stride=1, padding=0, dilation=1, groups=1, relu=True, bn=True, bias_attr=False):
+    def __init__(self,
+                 in_planes,
+                 out_planes,
+                 kernel_size,
+                 stride=1,
+                 padding=0,
+                 dilation=1,
+                 groups=1,
+                 relu=True,
+                 bn=True,
+                 bias_attr=False):
         super(BasicConv, self).__init__()
         self.out_channels = out_planes
-        self.conv = nn.Conv2D(in_planes, out_planes, kernel_size=kernel_size, stride=stride, padding=padding, dilation=dilation, groups=groups, bias_attr=bias_attr)
-        self.bn = nn.BatchNorm2D(out_planes, epsilon=1e-5, momentum=0.01, weight_attr=False, bias_attr=False) if bn else None
+        self.conv = nn.Conv2D(
+            in_planes,
+            out_planes,
+            kernel_size=kernel_size,
+            stride=stride,
+            padding=padding,
+            dilation=dilation,
+            groups=groups,
+            bias_attr=bias_attr)
+        self.bn = nn.BatchNorm2D(
+            out_planes,
+            epsilon=1e-5,
+            momentum=0.01,
+            weight_attr=False,
+            bias_attr=False) if bn else None
         self.relu = nn.ReLU() if relu else None
 
     def forward(self, x):
@@ -45,7 +69,9 @@ class BasicConv(nn.Layer):
 
 class ChannelPool(nn.Layer):
     def forward(self, x):
-        return paddle.concat((paddle.max(x,1).unsqueeze(1), paddle.mean(x,1).unsqueeze(1)), axis=1)
+        return paddle.concat(
+            (paddle.max(x, 1).unsqueeze(1), paddle.mean(x, 1).unsqueeze(1)),
+            axis=1)
 
 
 class SpatialGate(nn.Layer):
@@ -53,13 +79,21 @@ class SpatialGate(nn.Layer):
         super(SpatialGate, self).__init__()
         kernel_size = 7
         self.compress = ChannelPool()
-        self.spatial = BasicConv(2, 1, kernel_size, stride=1, padding=(kernel_size-1) // 2, relu=False)
-        print(f'************************************ use SpatialGate ************************************')
+        self.spatial = BasicConv(
+            2,
+            1,
+            kernel_size,
+            stride=1,
+            padding=(kernel_size - 1) // 2,
+            relu=False)
+        print(
+            f'************************************ use SpatialGate ************************************'
+        )
 
     def forward(self, x):
         x_compress = self.compress(x)
         x_out = self.spatial(x_compress)
-        scale = F.sigmoid(x_out) # broadcasting
+        scale = F.sigmoid(x_out)  # broadcasting
         return x * scale
 
 
@@ -73,9 +107,11 @@ def autopad(k, p=None):  # kernel, padding
 
 class Conv(nn.Layer):
     # Standard convolution
-    def __init__(self, c1, c2, k=1, s=1, p=None, g=1, act=True):  # ch_in, ch_out, kernel, stride, padding, groups
+    def __init__(self, c1, c2, k=1, s=1, p=None, g=1,
+                 act=True):  # ch_in, ch_out, kernel, stride, padding, groups
         super(Conv, self).__init__()
-        self.conv = nn.Conv2D(c1, c2, k, s, autopad(k, p), groups=g, bias_attr=False)
+        self.conv = nn.Conv2D(
+            c1, c2, k, s, autopad(k, p), groups=g, bias_attr=False)
         self.bn = nn.BatchNorm2D(c2)
         self.act = nn.LeakyReLU(0.1) if act else nn.Identity()
 
@@ -87,9 +123,11 @@ class Conv(nn.Layer):
 
 
 class SANN_Attention(nn.Layer):
-    def __init__(self, k_size = 3, ch = 64, s_state = False, c_state = False):
+    def __init__(self, k_size=3, ch=64, s_state=False, c_state=False):
         super(SANN_Attention, self).__init__()
-        print(f'************************************use SANN_Attention s_state => {s_state} -- c_state => {c_state}')
+        print(
+            f'************************************use SANN_Attention s_state => {s_state} -- c_state => {c_state}'
+        )
         self.avg_pool = nn.AdaptiveAvgPool2D(1)
         self.max_pool = nn.AdaptiveAvgPool2D(1)
         self.sigmoid = nn.Sigmoid()
@@ -97,10 +135,17 @@ class SANN_Attention(nn.Layer):
         self.c_state = c_state
 
         if c_state:
-            self.c_attention = nn.Sequential(nn.Conv1D(1, 1, kernel_size=k_size, padding=(k_size - 1) // 2, bias_attr=False),
-                                                  nn.LayerNorm([1, ch]),
-                                                  nn.LeakyReLU(0.3),
-                                                  nn.Linear(ch, ch, bias_attr=False))
+            self.c_attention = nn.Sequential(
+                nn.Conv1D(
+                    1,
+                    1,
+                    kernel_size=k_size,
+                    padding=(k_size - 1) // 2,
+                    bias_attr=False),
+                nn.LayerNorm([1, ch]),
+                nn.LeakyReLU(0.3),
+                nn.Linear(
+                    ch, ch, bias_attr=False))
 
         if s_state:
             self.conv_s = nn.Sequential(Conv(ch, ch // 4, k=1))

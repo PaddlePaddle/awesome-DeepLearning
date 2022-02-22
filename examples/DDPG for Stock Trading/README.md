@@ -342,12 +342,12 @@ class StockTradingEnv(gym.Env):
         self.observation_space = spaces.Box(
             low=0, high=1, shape=(19,), dtype=np.float32)
 
-    
+
     def seed(self, seed):
         random.seed(seed)
         np.random.seed(seed)
 
-    
+
     # 处理状态
     def _next_observation(self):
         # 有些股票数据缺失一些数据，处理一下
@@ -507,7 +507,7 @@ class ReplayBuffer(object):
 
         self.device = paddle.get_device()
 
-    
+
     # 存入数据
     def add(self, state, action, next_state, reward, done):
         self.states[self.cur] = state
@@ -520,7 +520,7 @@ class ReplayBuffer(object):
         self.cur = (self.cur + 1) % self.max_size
         self.size = min(self.size + 1, self.max_size)
 
-    
+
     # 采样
     def sample(self, batch):
         ids = np.random.randint(0, self.size, size=batch)
@@ -594,7 +594,7 @@ class Actor(nn.Layer):
 class Critic(nn.Layer):
     def __init__(self, state_dim, action_dim):
         super(Critic, self).__init__()
-        
+
         self.l1 = nn.Linear(state_dim + action_dim, 400)
         self.l2 = nn.Linear(400, 300)
         self.l3 = nn.Linear(300, 1)
@@ -605,7 +605,7 @@ class Critic(nn.Layer):
         return self.l3(q)
 
 
-# DDPG算法模型    
+# DDPG算法模型  
 class DDPGModel(object):
     def __init__(self, state_dim, action_dim, max_action, gamma = 0.99, tau = 0.001):
         # 动作网络与目标动作网络
@@ -627,7 +627,7 @@ class DDPGModel(object):
         state = paddle.to_tensor(state.reshape(1, -1), dtype='float32', place=device)
         return self.actor(state).numpy().flatten()
 
-    
+
     # 训练函数
     def train(self, replay_buffer, batch=64):
         # 从缓存容器中采样
@@ -713,7 +713,7 @@ def eval_policy(policy, df, seed, eval_episodes=10):
     for _ in range(eval_episodes):
         # 初始化环境
         state, done = eval_env.reset(), False
-        
+
         # 与环境交互
         while not done:
             action = policy.select_action(state)
@@ -721,7 +721,7 @@ def eval_policy(policy, df, seed, eval_episodes=10):
             action[0] *= 3
             state, reward, done, _ = eval_env.step(action)
             avg_reward += reward
-    
+
     # 计算平均奖励
     avg_reward /= eval_episodes
 
@@ -793,7 +793,7 @@ if __name__ == '__main__':
     if args.load_model != "":
         policy_file = file_name if args.load_model == "default" else args.load_model
         policy.load(f'./models/{policy_file}')
-    
+
     # 设置缓存容器
     replay_buffer = ReplayBuffer.ReplayBuffer(state_dim, action_dim)
 ```
@@ -897,7 +897,7 @@ def eval_policy(policy, df, seed, eval_episodes=10):
     for _ in range(eval_episodes):
         # 初始化环境
         state, done = eval_env.reset(), False
-        
+
         # 与环境交互
         while not done:
             action = policy.select_action(state)
@@ -905,7 +905,7 @@ def eval_policy(policy, df, seed, eval_episodes=10):
             action[0] *= 3
             state, reward, done, _ = eval_env.step(action)
             avg_reward += reward
-    
+
     # 计算平均奖励
     avg_reward /= eval_episodes
 

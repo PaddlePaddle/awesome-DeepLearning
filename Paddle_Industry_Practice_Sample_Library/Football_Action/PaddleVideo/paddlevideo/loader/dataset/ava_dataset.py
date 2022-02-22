@@ -66,8 +66,7 @@ class AVADataset(BaseDataset):
             file_path,
             pipeline,
             data_prefix,
-            test_mode,
-        )
+            test_mode, )
         if self.proposal_file is not None:
             self.proposals = self._load(self.proposal_file)
         else:
@@ -89,18 +88,19 @@ class AVADataset(BaseDataset):
             num_img_records = len(img_records)
             selected_records = list(
                 filter(
-                    lambda x: np.array_equal(x['entity_box'], img_record[
-                        'entity_box']), img_records))
+                    lambda x: np.array_equal(x['entity_box'], img_record['entity_box']),
+                    img_records))
             num_selected_records = len(selected_records)
             img_records = list(
                 filter(
-                    lambda x: not np.array_equal(x['entity_box'], img_record[
-                        'entity_box']), img_records))
+                    lambda x: not np.array_equal(x['entity_box'], img_record['entity_box']),
+                    img_records))
             assert len(img_records) + num_selected_records == num_img_records
 
             bboxes.append(img_record['entity_box'])
             valid_labels = np.array([
-                selected_record['label'] for selected_record in selected_records
+                selected_record['label']
+                for selected_record in selected_records
             ])
 
             label = np.zeros(self.num_classes, dtype=np.float32)
@@ -125,8 +125,8 @@ class AVADataset(BaseDataset):
             for i, video_info in enumerate(self.info):
                 valid_indexes.append(i)
                 for video_id, timestamp in exclude_video_infos:
-                    if (video_info['video_id'] == video_id
-                            and video_info['timestamp'] == int(timestamp)):
+                    if (video_info['video_id'] == video_id and
+                            video_info['timestamp'] == int(timestamp)):
                         valid_indexes.pop()
                         break
         return valid_indexes
@@ -149,31 +149,32 @@ class AVADataset(BaseDataset):
                 shot_info = (0, (self.timestamp_end - self.timestamp_start) *
                              self._FPS)
 
-                video_info = dict(video_id=video_id,
-                                  timestamp=timestamp,
-                                  entity_box=entity_box,
-                                  label=label,
-                                  entity_id=entity_id,
-                                  shot_info=shot_info)
+                video_info = dict(
+                    video_id=video_id,
+                    timestamp=timestamp,
+                    entity_box=entity_box,
+                    label=label,
+                    entity_id=entity_id,
+                    shot_info=shot_info)
                 records_dict_by_img[img_key].append(video_info)
 
         for img_key in records_dict_by_img:
             video_id, timestamp = img_key.split(',')
             bboxes, labels, entity_ids = self.parse_img_record(
                 records_dict_by_img[img_key])
-            ann = dict(gt_bboxes=bboxes,
-                       gt_labels=labels,
-                       entity_ids=entity_ids)
+            ann = dict(
+                gt_bboxes=bboxes, gt_labels=labels, entity_ids=entity_ids)
             frame_dir = video_id
             if self.data_prefix is not None:
                 frame_dir = osp.join(self.data_prefix, frame_dir)
-            video_info = dict(frame_dir=frame_dir,
-                              video_id=video_id,
-                              timestamp=int(timestamp),
-                              img_key=img_key,
-                              shot_info=shot_info,
-                              fps=self._FPS,
-                              ann=ann)
+            video_info = dict(
+                frame_dir=frame_dir,
+                video_id=video_id,
+                timestamp=int(timestamp),
+                img_key=img_key,
+                shot_info=shot_info,
+                fps=self._FPS,
+                ann=ann)
             info.append(video_info)
 
         return info
@@ -230,8 +231,8 @@ class AVADataset(BaseDataset):
                 ), idx, len_proposals, len_gt_bboxes, len_gt_labels, len_scores, len_entity_ids
 
     def my_padding_2d(self, feat, max_len):
-        feat_add = np.zeros((max_len - feat.shape[0], feat.shape[1]),
-                            dtype=np.float32)
+        feat_add = np.zeros(
+            (max_len - feat.shape[0], feat.shape[1]), dtype=np.float32)
         feat_pad = np.concatenate((feat, feat_add), axis=0)
         return feat_pad
 
@@ -244,6 +245,7 @@ class AVADataset(BaseDataset):
         return self.prepare_train(idx)
 
     def evaluate(self, results):
-        return ava_evaluate_results(self.info, len(self), results,
-                                    self.custom_classes, self.label_file,
-                                    self.file_path, self.exclude_file)
+        return ava_evaluate_results(self.info,
+                                    len(self), results, self.custom_classes,
+                                    self.label_file, self.file_path,
+                                    self.exclude_file)

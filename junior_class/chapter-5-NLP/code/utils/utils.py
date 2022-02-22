@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 import numpy as np
+
 
 # 定义一个使用word-embedding查询同义词的函数
 # 这个函数query_token是要查询的词，k表示要返回多少个最相似的词，embed是我们学习到的word-embedding参数
@@ -28,4 +28,5 @@ def get_similar_tokens(query_token, k, embed, word2id_dict, id2word_dict):
     indices = np.argpartition(flat, -k)[-k:]
     indices = indices[np.argsort(-flat[indices])]
     for i in indices:
-        print('for word %s, the similar word is %s' % (query_token, str(id2word_dict[i])))
+        print('for word %s, the similar word is %s' %
+              (query_token, str(id2word_dict[i])))

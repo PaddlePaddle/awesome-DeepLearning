@@ -59,5 +59,5 @@ export CUDA_VISIBLE_DEVICES=0
 
 python ./evaluate.py --model_path ./ernie_rc.pdparams \
                              --max_seq_length 512     \
-                             --batch_size 12 
+                             --batch_size 12
 ```

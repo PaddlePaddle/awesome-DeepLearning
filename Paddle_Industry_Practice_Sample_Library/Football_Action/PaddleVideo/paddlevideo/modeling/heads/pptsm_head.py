@@ -33,6 +33,7 @@ class ppTSMHead(TSNHead):
         std(float): Std(Scale) value in normal initilizar. Default: 0.001.
         kwargs (dict, optional): Any keyword argument to initialize.
     """
+
     def __init__(self,
                  num_classes,
                  in_channels,
@@ -41,19 +42,21 @@ class ppTSMHead(TSNHead):
                  data_format="NCHW",
                  **kwargs):
 
-        super().__init__(num_classes,
-                         in_channels,
-                         drop_ratio=drop_ratio,
-                         std=std,
-                         data_format=data_format,
-                         **kwargs)
+        super().__init__(
+            num_classes,
+            in_channels,
+            drop_ratio=drop_ratio,
+            std=std,
+            data_format=data_format,
+            **kwargs)
 
-        self.fc = Linear(self.in_channels,
-                         self.num_classes,
-                         weight_attr=ParamAttr(learning_rate=5.0,
-                                               regularizer=L2Decay(1e-4)),
-                         bias_attr=ParamAttr(learning_rate=10.0,
-                                             regularizer=L2Decay(0.0)))
+        self.fc = Linear(
+            self.in_channels,
+            self.num_classes,
+            weight_attr=ParamAttr(
+                learning_rate=5.0, regularizer=L2Decay(1e-4)),
+            bias_attr=ParamAttr(
+                learning_rate=10.0, regularizer=L2Decay(0.0)))
         self.stdv = std
 
     def init_weights(self):

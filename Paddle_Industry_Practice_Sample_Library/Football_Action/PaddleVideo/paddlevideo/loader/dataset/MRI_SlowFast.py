@@ -46,6 +46,7 @@ class SFMRIDataset(BaseDataset):
         suffix (str): suffix of file. Default: 'img_{:05}.jpg'.
 
     """
+
     def __init__(self,
                  file_path,
                  pipeline,
@@ -89,8 +90,8 @@ class SFMRIDataset(BaseDataset):
                         format(results['frame_dir'], ir))
                 idx = random.randint(0, len(self.info) - 1)
                 continue
-            return np.array(results['imgs'][0]), np.array(
-                results['imgs'][1]), np.array([results['labels']])
+            return np.array(results['imgs'][0]), np.array(results['imgs'][
+                1]), np.array([results['labels']])
 
     def prepare_test(self, idx):
         """Prepare the frames for test given index. """
@@ -107,5 +108,5 @@ class SFMRIDataset(BaseDataset):
                         format(results['frame_dir'], ir))
                 idx = random.randint(0, len(self.info) - 1)
                 continue
-            return np.array(results['imgs'][0]), np.array(
-                results['imgs'][1]), np.array([results['labels']])
+            return np.array(results['imgs'][0]), np.array(results['imgs'][
+                1]), np.array([results['labels']])

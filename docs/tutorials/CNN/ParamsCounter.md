@@ -40,13 +40,13 @@ class TestNet(nn.Layer):
     def forward(self, x):
         x = self.conv2d(x)
         return x
-        
+
 
 if __name__ == "__main__":
     net = TestNet()
     paddle.flops(net, input_size=[1, 2, 320, 320])
-    
-    
+
+
 Total GFlops: 0.00778     Total Params: 76.00
 ```
 API得出的参数量为76，GFLOPs为0.00778，这里的GFLOPs就是FLOPs的10$^9$倍，我们的参数量求得的也是76，那么FLOPs呢？我们来算一下，输入的尺寸为320 * 320， 卷积核为3 * 3， 且padding为1，那么图片输入的大小和输出的大小一致，即输出也是320 * 320， 那么根据我们的公式可得: $76 * 320 * 320 = 7782400$, 与API的一致！因此大家计算卷积层的参数和FLOPs的时候就可以用上面的公式。
@@ -138,7 +138,7 @@ features[1] 参数量和FLOPs均为0
 
 features[2] 参数量和FLOPs均为0， 输出尺寸变为14 * 14
 
-features[3] 参数量：$ 16 * 6 * 5 * 5  + 16 = 2416$, FLOPs : $ 2416 * 10 * 10 = 241600$, 需要注意的是，这个卷积没有padding，所以输出特征图大小变为 10 * 10 
+features[3] 参数量：$ 16 * 6 * 5 * 5  + 16 = 2416$, FLOPs : $ 2416 * 10 * 10 = 241600$, 需要注意的是，这个卷积没有padding，所以输出特征图大小变为 10 * 10
 
 features[4] 参数量和FLOPs均为0
 

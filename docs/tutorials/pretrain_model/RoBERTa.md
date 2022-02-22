@@ -35,7 +35,7 @@ FULL-SENTENCES表示从一篇文章或者多篇文章中连续抽取句子，填
 
 ## 3. Larger Batch Size
 
-RoBERTa通过增加训练过程中Batch Size的大小，来观看模型的在预训练任务和down-stream任务上的表现。发现增加Batch Size有利于降低保留的训练数据的Perplexity，提高down-stream的指标。 
+RoBERTa通过增加训练过程中Batch Size的大小，来观看模型的在预训练任务和down-stream任务上的表现。发现增加Batch Size有利于降低保留的训练数据的Perplexity，提高down-stream的指标。
 
 ![image-20210610193518741](https://raw.githubusercontent.com/1649759610/images_for_blog/master/image-20210610193518741.png)
 

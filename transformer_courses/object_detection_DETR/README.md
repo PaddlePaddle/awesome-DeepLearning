@@ -33,34 +33,34 @@ python -c "import paddle; print(paddle.__version__)"
 
 #  # 目录结构
 
-	｜-- data：数据处理
-		|-- dataset.py：COCO格式数据解析
-		|-- operators.py：包含各种预处理方法
-	｜-- models：模型
-		|-- backbone.py：backbone模型
-	  |-- positional_encoding.py：位置编码器	
-		|-- transformer.py：transormer模型
-		|-- hungarian_matcher.py：双边匹配方法
-		|-- loss.py：计算损失函数
-		|-- detr_head.py：DETR的head模型
-		|-- post_process.py：DETR结果后处理
-		|-- detr.py：DETR的整体结构
-	  |-- layers.py、ops.py：定义网络层
-	  |-- initializer.py：初始化方法
-	  |-- callbacks.py：callbacks方法，LogPrinter等
-	  |-- optimizer.py：优化器、学习率衰减等方法
-	  |-- save_model.py：保存模型
-	｜-- utils：
-		|-- bbox_utils.py：框bbox的处理
-		|-- load_model.py：加载预训练模型
-		|-- util.py：定义GIoULoss等函数
-	｜-- imgs：README图片
-	｜-- test_imgs：测试图片
-	｜-- output：测试结果图片
-	｜-- main.py：主函数
-	｜-- train_model.py：训练代码
-	｜-- eval_model.py：验证代码
-	｜-- test_model.py：测试代码
+    ｜-- data：数据处理
+        |-- dataset.py：COCO格式数据解析
+        |-- operators.py：包含各种预处理方法
+    ｜-- models：模型
+        |-- backbone.py：backbone模型
+      |-- positional_encoding.py：位置编码器
+        |-- transformer.py：transormer模型
+        |-- hungarian_matcher.py：双边匹配方法
+        |-- loss.py：计算损失函数
+        |-- detr_head.py：DETR的head模型
+        |-- post_process.py：DETR结果后处理
+        |-- detr.py：DETR的整体结构
+      |-- layers.py、ops.py：定义网络层
+      |-- initializer.py：初始化方法
+      |-- callbacks.py：callbacks方法，LogPrinter等
+      |-- optimizer.py：优化器、学习率衰减等方法
+      |-- save_model.py：保存模型
+    ｜-- utils：
+        |-- bbox_utils.py：框bbox的处理
+        |-- load_model.py：加载预训练模型
+        |-- util.py：定义GIoULoss等函数
+    ｜-- imgs：README图片
+    ｜-- test_imgs：测试图片
+    ｜-- output：测试结果图片
+    ｜-- main.py：主函数
+    ｜-- train_model.py：训练代码
+    ｜-- eval_model.py：验证代码
+    ｜-- test_model.py：测试代码
 
 # 准备数据集
 
@@ -75,16 +75,16 @@ unzip -q -o annotations_trainval2017.zip -d dataset
 
 解压之后，完整COCO数据存储结构：
 ```bash
-	｜-- annotations：标注文件
-		|-- person_keypoints_train2017.json：关键点检测
-		|-- person_keypoints_val2017.json
-		|-- captions_train2017.json：看图说话
-		|-- captions_val2017.json
-		|-- instances_train2017.json：目标实例
-		|-- instances_val2017.json
-	｜-- images：图片
-		|-- train2017
-		|-- val2017
+    ｜-- annotations：标注文件
+        |-- person_keypoints_train2017.json：关键点检测
+        |-- person_keypoints_val2017.json
+        |-- captions_train2017.json：看图说话
+        |-- captions_val2017.json
+        |-- instances_train2017.json：目标实例
+        |-- instances_val2017.json
+    ｜-- images：图片
+        |-- train2017
+        |-- val2017
 ```
 
 # 训练
@@ -122,4 +122,3 @@ python main.py --mode='test' --infer_img='test_imgs/000000014439.jpg'  --anno_pa
 **效果展示**：
 
 ![检测效果](imgs/000000014439.jpg)
-

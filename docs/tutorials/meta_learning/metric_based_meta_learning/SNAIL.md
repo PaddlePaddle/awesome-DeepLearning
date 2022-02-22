@@ -4,7 +4,7 @@
 在现存的方法中，元学习器的瓶颈是如何去吸收同化利用过去的经验。
 注意力机制可以允许在历史中精准摘取某段具体的信息。
 
-Simple Neural Attentive Learner (SNAIL) 
+Simple Neural Attentive Learner (SNAIL)
 组合时序卷积和 soft-attention，
 前者从过去的经验整合信息，后者精确查找到某些特殊的信息。
 
@@ -67,7 +67,7 @@ SNAIL 接收标注样本 $\left(x_{1}, y_{1}\right), \ldots,\left(x_{t-1}, y_{t-
 
 ![SNAIL](../../../images/meta_learning/metric_based_meta_learning/SNAIL/SNAIL.png)
 <center>
-图1	SNAIL 基础结构示意图。
+图1    SNAIL 基础结构示意图。
 </center>
 
 ### 2.2 Modular Building Blocks
@@ -77,10 +77,10 @@ Dense Block 和 Attention Block。
 
 ![SNAIL Building Blocks](../../../images/meta_learning/metric_based_meta_learning/SNAIL/SNAILBuildingBlocks.png)
 <center>
-图1	SNAIL 中的 Dense Block 和 Attention Block。(a) Dense Block 应用因果一维卷积，然后将输出连接到输入。TC Block 应用一系列膨胀率呈指数增长的 Dense Block。(b) Attention Block 执行(因果)键值查找，并将输出连接到输入。
+图1    SNAIL 中的 Dense Block 和 Attention Block。(a) Dense Block 应用因果一维卷积，然后将输出连接到输入。TC Block 应用一系列膨胀率呈指数增长的 Dense Block。(b) Attention Block 执行(因果)键值查找，并将输出连接到输入。
 </center>
 
-**Densen Block** 
+**Densen Block**
 用了一个简单的因果一维卷积（空洞卷积），
 其中膨胀率 (dilation)为 $R$ 和卷积核数量 $D$ （[1] 对于所有的实验中设置卷积核的大小为2)，
 最后合并结果和输入。
@@ -120,7 +120,7 @@ $$
 ## 3 SNAIL 分类结果
 
 <center>
-表1	SNAIL 在 Omniglot 上的分类结果。
+表1    SNAIL 在 Omniglot 上的分类结果。
 </center>
 
 | Method | 5-way 1-shot | 5-way 5-shot | 20-way 1-shot | 20-way 5-shot |  
@@ -134,7 +134,7 @@ $$
 | SNAIL | **99.07 $\pm$ 0.16** $\%$ | **99.78 $\pm$ 0.09** $\%$ | **97.64 $\pm$ 0.30** $\%$ | **99.36 $\pm$ 0.18** $\%$ |
 
 <center>
-表1	SNAIL 在 miniImageNet 上的分类结果。
+表1    SNAIL 在 miniImageNet 上的分类结果。
 </center>
 
 | Method | 5-way 1-shot | 5-way 5-shot |

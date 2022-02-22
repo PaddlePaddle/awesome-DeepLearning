@@ -3,6 +3,7 @@ import paddle.nn.functional as F
 
 from utils.util import bbox_cxcywh_to_xyxy
 
+
 class DETRBBoxPostProcess(object):
     def __init__(self,
                  num_classes=80,

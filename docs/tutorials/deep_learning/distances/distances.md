@@ -80,4 +80,3 @@ $$
 $$
 Jaccard(X,Y)=\frac{X\cup Y}{X\cap Y}
 $$
-

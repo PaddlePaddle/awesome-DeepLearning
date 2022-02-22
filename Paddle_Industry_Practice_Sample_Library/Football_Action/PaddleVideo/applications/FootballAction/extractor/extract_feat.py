@@ -64,17 +64,20 @@ def video_classify(video_name):
     np_pcm_features = np.array(pcm_features, dtype=np.float32)
     t1 = time.time()
 
-    logger.info('{} {} {}'.format(np_image_features.shape, 
-                                  np_audio_features.shape,
-                                  np_pcm_features.shape))
-    logger.info("step1: feature extract time: {} min".format((t1 - t0) * 1.0 / 60))
-    video_features = {'image_feature': np_image_features,
-                      'audio_feature': np_audio_features,
-                      'pcm_feature': np_pcm_features}
-    
+    logger.info('{} {} {}'.format(np_image_features.shape, np_audio_features.
+                                  shape, np_pcm_features.shape))
+    logger.info("step1: feature extract time: {} min".format((t1 - t0) * 1.0 /
+                                                             60))
+    video_features = {
+        'image_feature': np_image_features,
+        'audio_feature': np_audio_features,
+        'pcm_feature': np_pcm_features
+    }
+
     # save feature
     feature_path = video_name.replace(".mp4", ".pkl").replace("mp4", "features")
-    feat_pkl_str = pickle.dumps(video_features, protocol=pickle.HIGHEST_PROTOCOL)
+    feat_pkl_str = pickle.dumps(
+        video_features, protocol=pickle.HIGHEST_PROTOCOL)
     with open(feature_path, 'wb') as fout:
         fout.write(feat_pkl_str)
 

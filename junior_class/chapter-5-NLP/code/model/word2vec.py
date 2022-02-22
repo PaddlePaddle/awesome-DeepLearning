@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 import paddle
 from paddle.nn import Embedding
 import paddle.nn.functional as F
@@ -46,7 +45,8 @@ class SkipGram(paddle.nn.Layer):
             num_embeddings=self.vocab_size,
             embedding_dim=self.embedding_size,
             weight_attr=paddle.ParamAttr(
-                initializer=paddle.nn.initializer.Uniform(low=-init_scale, high=init_scale)))
+                initializer=paddle.nn.initializer.Uniform(
+                    low=-init_scale, high=init_scale)))
 
     # 定义网络的前向计算逻辑
     # center_words是一个tensor（mini-batch），表示中心词

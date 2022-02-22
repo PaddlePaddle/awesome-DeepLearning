@@ -45,12 +45,12 @@ DCNN应用在语义分割任务上存在两个缺陷：
 DCNNs中语义分割存在三个挑战：
 
 - 连续下采样和池化操作，导致最后特征图分辨率低。
-- 图像中存在多尺度的物体（**相比V1而言提出的新的挑战**） 
+- 图像中存在多尺度的物体（**相比V1而言提出的新的挑战**）
 - 空间不变性导致细节信息丢失
 
 #### 1.2.3. 应对策略：
 
-- 移除部分池化操作，使用空洞卷积。 
+- 移除部分池化操作，使用空洞卷积。
 - 利用不同膨胀因子的空洞卷积融合多尺度信息—atrous spatial pyramid pooling(ASPP)（**新的创新点**）
 - 全连接CRF。
 
@@ -437,7 +437,7 @@ class DeepLabV3(nn.Layer):
 		#定义头模块
         self.head = DeepLabV3Head(num_classes, backbone_indices,
                                   backbone_channels, aspp_ratios,
-                                  aspp_out_channels, align_corners) 
+                                  aspp_out_channels, align_corners)
         self.align_corners = align_corners
         self.pretrained = pretrained
         self.init_weight() # 初始化权重
@@ -583,4 +583,3 @@ DeepLab V3的ASPP模块与DeepLab V2的主要区别在于，增加了BN层，增
 ## **参考文献**
 
 [1] [Rethinking Atrous Convolution for Semantic Image Segmentation](https://arxiv.org/abs/1706.05587)
-

@@ -115,22 +115,22 @@ Meta-Learner 使用 Learner 提供的信息，更新 Learner 中的参数和自�
 
 **Meta-Learner LSTM 算法流程**
 
-> 1. $\Theta_{0}$ $\leftarrow$ random initialization 
+> 1. $\Theta_{0}$ $\leftarrow$ random initialization
 >
-> 2. for $d=1,...,n$ do: 
->       1. $D_{\mathrm{train}}$, $D_{\mathrm{test}}$ $\leftarrow$ random dataset from ${D}_{\mathrm{meta-train}}$ 
->       2. intialize learner parameters: $\theta_{0} \leftarrow c_{0}$ 
+> 2. for $d=1,...,n$ do:
+>       1. $D_{\mathrm{train}}$, $D_{\mathrm{test}}$ $\leftarrow$ random dataset from ${D}_{\mathrm{meta-train}}$
+>       2. intialize learner parameters: $\theta_{0} \leftarrow c_{0}$
 >
 >       3. for $t=1,...,T$ do:
->           1. $\mathbf{X}_{t}$, $\mathbf{Y}_{t}$ $\leftarrow$ random batch from $D_{\mathrm{train}}$ 
->           2. get loss of learner on train batch: $\mathcal{L}_{t} \leftarrow \mathcal{L}\left(M\left(\mathbf{X}_{t} ; \theta_{t-1}\right), \mathbf{Y}_{t}\right)$ 
->           3. get output of meta-learner using Eq. (2): $c_{t} \leftarrow R\left(\left(\nabla_{\theta_{t-1}} \mathcal{L}_{t}, \mathcal{L}_{t}\right) ; \Theta_{d-1}\right)$ 
->           4. update learner parameters: $\theta_{t} \leftarrow c_{t}$ 
->       4. end for 
+>           1. $\mathbf{X}_{t}$, $\mathbf{Y}_{t}$ $\leftarrow$ random batch from $D_{\mathrm{train}}$
+>           2. get loss of learner on train batch: $\mathcal{L}_{t} \leftarrow \mathcal{L}\left(M\left(\mathbf{X}_{t} ; \theta_{t-1}\right), \mathbf{Y}_{t}\right)$
+>           3. get output of meta-learner using Eq. (2): $c_{t} \leftarrow R\left(\left(\nabla_{\theta_{t-1}} \mathcal{L}_{t}, \mathcal{L}_{t}\right) ; \Theta_{d-1}\right)$
+>           4. update learner parameters: $\theta_{t} \leftarrow c_{t}$
+>       4. end for
 >
->       5. $\mathbf{X}, \mathbf{Y} \leftarrow D_{\mathrm{test}}$ 
->       6. get loss of learner on test batch: ${L}_\mathrm{test} \leftarrow {L}\left(M\left(\mathbf{X} ; \theta_{T}\right), \mathbf{Y}\right)$ 
->       7. update $\Theta_{d}$ using $\nabla_{\Theta_{d-1}} {L}_{\mathrm{test}}$ 
+>       5. $\mathbf{X}, \mathbf{Y} \leftarrow D_{\mathrm{test}}$
+>       6. get loss of learner on test batch: ${L}_\mathrm{test} \leftarrow {L}\left(M\left(\mathbf{X} ; \theta_{T}\right), \mathbf{Y}\right)$
+>       7. update $\Theta_{d}$ using $\nabla_{\Theta_{d-1}} {L}_{\mathrm{test}}$
 > 3. end for
 
 
@@ -159,7 +159,7 @@ Meta-Learner LSTM 是一个两层的 LSTM 网络，第一层是正常的 LSTM �
 - 在 MAML 中，元学习器使用 SGD 更新参数初始值，使得损失函数中存在高阶导数；
 在 Meta-Learner LSTM 中，元学习器给基学习器提供修改的 LSTM 更新参数，元学习器自身的参数并不是基学习器中的参数初始值，元学习器自身的参数使用 SGD 进行更新，并不会出现损失函数高阶导数的计算。
 
-- 在 MAML 中，元学习器和基学习器只在每个任务训练完成后才进行信息交流； 
+- 在 MAML 中，元学习器和基学习器只在每个任务训练完成后才进行信息交流；
 在 Meta-Learner LSTM 中，元学习器和基学习器在每个任务的每个批次训练数据完成后就进行信息交流。
 
 - MAML 适用于任意模型结构；

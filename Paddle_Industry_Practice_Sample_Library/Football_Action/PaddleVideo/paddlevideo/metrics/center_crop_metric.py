@@ -48,8 +48,8 @@ class CenterCropMetric(BaseMetric):
         # preds ensemble
         if batch_id % self.log_interval == 0:
             logger.info("[TEST] Processing batch {}/{} ...".format(
-                batch_id,
-                self.data_size // (self.batch_size * self.world_size)))
+                batch_id, self.data_size // (self.batch_size * self.world_size
+                                             )))
 
     def accumulate(self):
         """accumulate metrics when finished all iters.

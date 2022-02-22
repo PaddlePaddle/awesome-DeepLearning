@@ -11,6 +11,7 @@ from utils import load_dict, evaluate, predict, parse_decodes1, parse_decodes2
 from paddlenlp.transformers import ErnieGramTokenizer, ErnieGramForTokenClassification
 from utils import convert_example
 
+
 def load_dataset(datafiles):
     def read(data_path):
         with open(data_path, 'r', encoding='utf-8') as fp:
@@ -26,10 +27,10 @@ def load_dataset(datafiles):
     elif isinstance(datafiles, list) or isinstance(datafiles, tuple):
         return [MapDataset(list(read(datafile))) for datafile in datafiles]
 
-train_ds, dev_ds, test_ds = load_dataset(datafiles=(
-        './waybill_data/train.txt', './waybill_data/dev.txt', './waybill_data/test.txt'))
 
-
+train_ds, dev_ds, test_ds = load_dataset(datafiles=('./waybill_data/train.txt',
+                                                    './waybill_data/dev.txt',
+                                                    './waybill_data/test.txt'))
 
 label_vocab = load_dict('./conf/tag.dic')
 
@@ -37,7 +38,8 @@ label_vocab = load_dict('./conf/tag.dic')
 MODEL_NAME = "ernie-gram-zh"
 tokenizer = ErnieGramTokenizer.from_pretrained(MODEL_NAME)
 
-trans_func = partial(convert_example, tokenizer=tokenizer, label_vocab=label_vocab)
+trans_func = partial(
+    convert_example, tokenizer=tokenizer, label_vocab=label_vocab)
 
 train_ds.map(trans_func)
 dev_ds.map(trans_func)
@@ -51,34 +53,27 @@ batchify_fn = lambda samples, fn=Tuple(
 ): fn(samples)
 
 train_loader = paddle.io.DataLoader(
-    dataset=train_ds,
-    batch_size=200,
-    return_list=True,
-    collate_fn=batchify_fn)
+    dataset=train_ds, batch_size=200, return_list=True, collate_fn=batchify_fn)
 dev_loader = paddle.io.DataLoader(
-    dataset=dev_ds,
-    batch_size=200,
-    return_list=True,
-    collate_fn=batchify_fn)
+    dataset=dev_ds, batch_size=200, return_list=True, collate_fn=batchify_fn)
 test_loader = paddle.io.DataLoader(
-    dataset=test_ds,
-    batch_size=200,
-    return_list=True,
-    collate_fn=batchify_fn)
-
+    dataset=test_ds, batch_size=200, return_list=True, collate_fn=batchify_fn)
 
 # Define the model netword and its loss
-model = ErnieGramForTokenClassification.from_pretrained("ernie-gram-zh", num_classes=len(label_vocab))
+model = ErnieGramForTokenClassification.from_pretrained(
+    "ernie-gram-zh", num_classes=len(label_vocab))
 
 metric = ChunkEvaluator(label_list=label_vocab.keys(), suffix=True)
 loss_fn = paddle.nn.loss.CrossEntropyLoss(ignore_index=ignore_label)
-optimizer = paddle.optimizer.AdamW(learning_rate=2e-5, parameters=model.parameters())
+optimizer = paddle.optimizer.AdamW(
+    learning_rate=2e-5, parameters=model.parameters())
 
 step = 0
 for epoch in range(10):
     # Switch the model to training mode
     model.train()
-    for idx, (input_ids, token_type_ids, length, labels) in enumerate(train_loader):
+    for idx, (input_ids, token_type_ids, length,
+              labels) in enumerate(train_loader):
         logits = model(input_ids, token_type_ids)
         loss = paddle.mean(loss_fn(logits, labels))
         loss.backward()
@@ -102,7 +97,3 @@ print(
     "The results have been saved in the file: %s, some examples are shown below: "
     % file_path)
 print("\n".join(preds[:10]))
-
-
-
-

@@ -69,8 +69,9 @@ if __name__ == '__main__':
     paddle.set_device('gpu')
 
     # Create dataset, tokenizer and dataloader.
-    train_ds, dev_ds, test_ds = load_dataset(datafiles=(
-        './waybill_data/train.txt', './waybill_data/dev.txt', './waybill_data/test.txt'))
+    train_ds, dev_ds, test_ds = load_dataset(
+        datafiles=('./waybill_data/train.txt', './waybill_data/dev.txt',
+                   './waybill_data/test.txt'))
 
     label_vocab = load_dict('./conf/tag.dic')
     tokenizer = ErnieGramTokenizer.from_pretrained('ernie-gram-zh')
@@ -129,7 +130,7 @@ if __name__ == '__main__':
         evaluate(model, metric, dev_loader)
 
         paddle.save(model.state_dict(),
-                './erniegram_crf_result/model_%d.pdparams' % step)
+                    './erniegram_crf_result/model_%d.pdparams' % step)
 
     preds = predict(model, test_loader, test_ds, label_vocab)
     file_path = "ernie_crf_results.txt"

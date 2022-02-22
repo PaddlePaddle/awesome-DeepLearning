@@ -44,7 +44,7 @@ $$
 2. 控制梯度爆炸和防止梯度消失
    我们常用的梯度传递的方式是由深层神经元往浅层传播，如果用$f_{i}^\prime$和$O_i^\prime$分别表示第$i$层对应的激活层导数和输出导数，那么对于$H$层的神经网络，第一层的导数$F_1^\prime=\prod_{i=1}^{H}f_i^\prime*O_i^\prime$，那么对于$f_i^\prime*O_i^\prime$恒大于1的情况，如$f_i^\prime*O_i^\prime\equiv2$的情况，使得结果指数上升，发生梯度爆炸，对于$f_i^\prime*O_i^\prime$恒小于1，如$f_i^\prime*O_i^\prime\equiv0.25$导致结果指数下降，发生梯度消失的现象，底层神经元梯度几乎为0。采用归一化算法后，可以使得$f_i^\prime*O_i^\prime$的结果不会太大也不会太小，有利于控制梯度的传播。
 
-## **paddle中的API** 
+## **paddle中的API**
 
 `paddle.nn.LayerNorm(normalized_shape, epsilon=1e-05, weight_attr=None, bias_attr=None, name=None);`
 

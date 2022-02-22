@@ -19,4 +19,3 @@ Decoder对缩小后的特征图像向量进行上采样，然后对上采样后�
 以人脸编码、解码为例，Encoder对人脸进行编码之后，再用解码器Decoder学习人脸的特性，即由短向量恢复到人脸图像，如下图所示：
 
 ![](../../../images/generative_adversarial_network/encoder_decoder/face-decoder.png)
-

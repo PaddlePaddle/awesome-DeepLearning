@@ -751,4 +751,3 @@ Canny边缘检测器 :cite:`Canny.1987` 和SIFT特征提取器 :cite:`Lowe.2004`
 1. 你还可以在哪里应用端到端的训练方法，比如 :numref:`fig_ml_loop` 、物理、工程和计量经济学？
 
 [Discussions](https://discuss.d2l.ai/t/2088)
-

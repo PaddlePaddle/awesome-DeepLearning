@@ -5,6 +5,7 @@ import paddle.nn.functional as F
 from utils.util import bbox_cxcywh_to_xyxy
 from utils.util import GIoULoss
 
+
 class DETRLoss(nn.Layer):
     def __init__(self,
                  num_classes=80,
@@ -137,7 +138,8 @@ class DETRLoss(nn.Layer):
 
     def _get_index_updates(self, num_query_objects, target, match_indices):
         batch_idx = paddle.concat([
-            paddle.full_like(src, i) for i, (src, _) in enumerate(match_indices)
+            paddle.full_like(src, i)
+            for i, (src, _) in enumerate(match_indices)
         ])
         src_idx = paddle.concat([src for (src, _) in match_indices])
         src_idx += (batch_idx * num_query_objects)
@@ -150,12 +152,14 @@ class DETRLoss(nn.Layer):
     def _get_src_target_assign(self, src, target, match_indices):
         src_assign = paddle.concat([
             paddle.gather(
-                t, I, axis=0) if len(I) > 0 else paddle.zeros([0, t.shape[-1]])
+                t, I, axis=0)
+            if len(I) > 0 else paddle.zeros([0, t.shape[-1]])
             for t, (I, _) in zip(src, match_indices)
         ])
         target_assign = paddle.concat([
             paddle.gather(
-                t, J, axis=0) if len(J) > 0 else paddle.zeros([0, t.shape[-1]])
+                t, J, axis=0)
+            if len(J) > 0 else paddle.zeros([0, t.shape[-1]])
             for t, (_, J) in zip(target, match_indices)
         ])
         return src_assign, target_assign

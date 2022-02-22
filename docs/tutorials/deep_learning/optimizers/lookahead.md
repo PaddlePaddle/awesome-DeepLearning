@@ -7,13 +7,13 @@ Lookahead的算法描述如下：
 
 1. 初始化参数$\phi_{0}$和目标函数L
 2. 同步周期k,slow权重步长$alpha$和优化器A
-	3. for t=1,2,...
-	4. 同步参数$\theta_{t,0}=\phi_{t-1}$
-	5. for i=1,2,...,k
-		6. 采样一个minibatch的数据:$d \sim D$  
-		7. $\theta_{t,i}=\theta_{t,i-1}+A(L,\theta_{t,i-1},d)$
-	8. 外部更新$\phi_{t}=\phi_{t-1}+\alpha(\theta_{t,k}-\phi_{t-1})$
-	返回参数
+    3. for t=1,2,...
+    4. 同步参数$\theta_{t,0}=\phi_{t-1}$
+    5. for i=1,2,...,k
+        6. 采样一个minibatch的数据:$d \sim D$  
+        7. $\theta_{t,i}=\theta_{t,i-1}+A(L,\theta_{t,i-1},d)$
+    8. 外部更新$\phi_{t}=\phi_{t-1}+\alpha(\theta_{t,k}-\phi_{t-1})$
+    返回参数
 
 + Fast weights
 

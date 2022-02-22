@@ -52,31 +52,18 @@ class FM(nn.Layer):
 
         # 一阶稀疏特征
         self.sparse_feature_oneOrderWeight = paddle.nn.Embedding(
-            sparse_feature_number,
-            1,
-            padding_idx=0,
-            sparse=True
-        )
+            sparse_feature_number, 1, padding_idx=0, sparse=True)
         ## 一阶连续特征
         self.dense_feature_oneOrderWeight = paddle.create_parameter(
-            [dense_feature_dim],
-            "float32"
-        )
+            [dense_feature_dim], "float32")
         # 二阶特征
         self.sparse_latent_vecs = paddle.nn.Embedding(
-            sparse_feature_number,
-            embedding_dim,
-            padding_idx=0,
-            sparse=True
-        )
+            sparse_feature_number, embedding_dim, padding_idx=0, sparse=True)
         self.dense_latent_vecs = paddle.create_parameter(
-            [1, dense_feature_dim, embedding_dim],
-            "float32"
-        )
+            [1, dense_feature_dim, embedding_dim], "float32")
 
     def forward(self, sparse_feature, dense_feature):
         # 一阶特征
-
         '''
         计算一阶特征: y_1order = 0 + w*x
         input [batchsize,field_num]
@@ -84,13 +71,18 @@ class FM(nn.Layer):
         sum out axis=1:[batchsize,embedDim]
         '''
         # 稀疏特征查表获得w*x  <- w*1 <- w <- lookup Embedding Table
-        sparse_wx = self.sparse_feature_oneOrderWeight(sparse_feature)  # [batchsize,sparse_field_num,1]
+        sparse_wx = self.sparse_feature_oneOrderWeight(
+            sparse_feature)  # [batchsize,sparse_field_num,1]
         # 连续特征向量内积w*x
-        dense_wx = paddle.multiply(dense_feature, self.dense_feature_oneOrderWeight)  # [batchsize,dense_feature_dim]
-        dense_wx = paddle.unsqueeze(dense_wx, axis=2)  # [batchsize,dense_feature_dim,1]
+        dense_wx = paddle.multiply(
+            dense_feature,
+            self.dense_feature_oneOrderWeight)  # [batchsize,dense_feature_dim]
+        dense_wx = paddle.unsqueeze(
+            dense_wx, axis=2)  # [batchsize,dense_feature_dim,1]
 
-        y_pred_first_order = paddle.sum(sparse_wx, axis=1) + paddle.sum(dense_wx,
-                                                                        axis=1)  # [batchsize,dense_feature_dim,1]---> [batchsize,1]
+        y_pred_first_order = paddle.sum(sparse_wx, axis=1) + paddle.sum(
+            dense_wx,
+            axis=1)  # [batchsize,dense_feature_dim,1]---> [batchsize,1]
 
         # 二阶特征交叉
         '''
@@ -99,7 +91,8 @@ class FM(nn.Layer):
         vi,j * xi的平方和 减去 vi,j * vi 的和的平方，再取1/2   
         '''
         # 稀疏特征查表: vij*xi<-vij *1
-        sparse_vx = self.sparse_latent_vecs(sparse_feature)  # [batchsize,sparse_field_num,embed_dim]
+        sparse_vx = self.sparse_latent_vecs(
+            sparse_feature)  # [batchsize,sparse_field_num,embed_dim]
         '''
         连续特征矩阵乘法：
 
@@ -107,19 +100,28 @@ class FM(nn.Layer):
         dense_latent_vecs:[1,dense_fea_dim,embed_dim]
         vij*xi <-  广播逐元素乘法（dense_fea，dense_latent_vecs）  #[batchsize,dense_fea_dim,embed_dim]
         '''
-        dense_x = paddle.unsqueeze(dense_feature, axis=2)  # [batchsize,dense_fea_dim]->[batchsize,dense_fea_dim,1]
-        dense_vx = paddle.multiply(dense_x, self.dense_latent_vecs)  # [batchsize,dense_fea_dim,embed_dim]
+        dense_x = paddle.unsqueeze(
+            dense_feature,
+            axis=2)  # [batchsize,dense_fea_dim]->[batchsize,dense_fea_dim,1]
+        dense_vx = paddle.multiply(
+            dense_x,
+            self.dense_latent_vecs)  # [batchsize,dense_fea_dim,embed_dim]
 
-        concat_vx = paddle.concat([sparse_vx, dense_vx], axis=1)  # [batchsize,sparse_field_num+dense_fea_dim,embed_dim]
+        concat_vx = paddle.concat(
+            [sparse_vx, dense_vx],
+            axis=1)  # [batchsize,sparse_field_num+dense_fea_dim,embed_dim]
         embedding = concat_vx
         # 平方的和
-        concat_vx_square = paddle.square(concat_vx)  # [batchsize,sparse_field_num+dense_fea_dim,embed_dim]
-        square_sum = paddle.sum(concat_vx_square, axis=1)  # [batchsize,embed_dim]
+        concat_vx_square = paddle.square(
+            concat_vx)  # [batchsize,sparse_field_num+dense_fea_dim,embed_dim]
+        square_sum = paddle.sum(concat_vx_square,
+                                axis=1)  # [batchsize,embed_dim]
         # 和的平方
         concat_vx_sum = paddle.sum(concat_vx, axis=1)  # [batchsize,embed_dim]
         sum_square = paddle.square(concat_vx_sum)  # [batchsize,embed_dim]
 
-        y_pred_second_order = 0.5 * (paddle.sum(sum_square - square_sum, axis=1))  # [batchsize,1]
+        y_pred_second_order = 0.5 * (
+            paddle.sum(sum_square - square_sum, axis=1))  # [batchsize,1]
         y_pred_second_order = paddle.unsqueeze(y_pred_second_order, axis=1)
         return y_pred_first_order, y_pred_second_order, embedding
 

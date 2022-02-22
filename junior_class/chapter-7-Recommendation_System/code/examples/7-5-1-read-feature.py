@@ -12,10 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 # unzip -o data/save_feature_v1.zip -d /home/aistudio/
 
-import pickle 
+import pickle
 import numpy as np
 
 mov_feat_dir = 'mov_feat.pkl'
@@ -51,11 +50,10 @@ with open(usr_file, 'r') as f:
         usr_info[str(item[0])] = item
 
 print("当前的用户是：")
-print("usr_id:", usr_id, usr_info[str(usr_id)])   
+print("usr_id:", usr_id, usr_info[str(usr_id)])
 print("对应的特征是：", usr_feats[str(usr_id)])
 
 print("\n当前电影是：")
 print("mov_id:", mov_id, mov_info[str(mov_id)])
 print("对应的特征是：")
 print(mov_feat)
-

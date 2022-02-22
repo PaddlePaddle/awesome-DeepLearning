@@ -32,17 +32,17 @@ from paddlevideo.utils import get_config
 def parse_args():
 
     parser = argparse.ArgumentParser("PaddleVideo Summary")
-    parser.add_argument('-c',
-                        '--config',
-                        type=str,
-                        default='configs/example.yaml',
-                        help='config file path')
+    parser.add_argument(
+        '-c',
+        '--config',
+        type=str,
+        default='configs/example.yaml',
+        help='config file path')
 
     parser.add_argument("--img_size", type=int, default=224)
     parser.add_argument("--num_seg", type=int, default=8)
-    parser.add_argument("--FLOPs",
-                        action="store_true",
-                        help="whether to print FLOPs")
+    parser.add_argument(
+        "--FLOPs", action="store_true", help="whether to print FLOPs")
 
     return parser.parse_args()
 
@@ -73,7 +73,8 @@ def main():
     print(params_info)
 
     if args.FLOPs:
-        flops_info = paddleslim.analysis.flops(model, [1, 1, num_seg, 3, img_size, img_size])
+        flops_info = paddleslim.analysis.flops(
+            model, [1, 1, num_seg, 3, img_size, img_size])
         print(flops_info)
 
 

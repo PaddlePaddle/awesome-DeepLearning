@@ -112,7 +112,7 @@
 
 * [TinyBERT是如何对BERT进行蒸馏的？](https://paddlepedia.readthedocs.io/en/latest/tutorials/model_compress/model_distill/TinyBERT.html)
 
-  
+
 
 # 强化学习
 
@@ -121,6 +121,3 @@
 * [什么是马尔可夫决策过程？](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/basic_information.html)
 * [什么是SARSA？](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/Sarsa.html#id1)
 * [什么是Q-Learning？](https://paddlepedia.readthedocs.io/en/latest/tutorials/reinforcement_learning/Q-learning.html#id1)
-
-  
-

@@ -58,21 +58,21 @@ $$L=\sum log\pi_{\theta}(s_{t},a_{t})(E(G_{t}-V_{s_{t}}))$$
 因为$E(G_{t}|s_{t},a_{t})=Q(s_{t},a_{t})$,故进一步变成：
 
  $$L=\sum log \pi_{\theta}(s_{t},a_{t})(Q(s_{t},a_{t}),V(s_{t}))$$
- 
+
  照上面的式子看来，我们需要两个网络去估计$Q(s_{t},a_{t})$和$V(s_{t})$，但是考虑到贝尔曼方程：
- 
+
  $$Q(s_{t},a_{t})=E(r+\gamma V(s_{t+1}))$$
- 
+
  弃掉期望:
- 
+
  $$Q(s_{t},a_{t})=r+\gamma V(s_{t+1})$$
- 
+
  在原始的A3C论文中试了各种方法，最后做出来就是直接把期望值拿掉最好，这是根据实验得出来的。
 最终的式子为：
- 
+
  $$L=\sum log\pi_{\theta}(s_{t},a_{t})(r+\gamma V(s_{t+1})-V(s_{t}))$$
  这样只需要一个网络就可以估算出V值了，而估算V的网络正是我们在 Q-learning 中做的，所以我们就把这个网络叫做 Critic。这样就在 Policy Gradient 算法的基础上引进了 Q-learning 算法了
- 
+
  ![](https://raw.githubusercontent.com/w5688414/paddleImage/main/actor_critic_img/Actor_Critic.png)
 
 ## Actor-Critic算法流程
@@ -92,7 +92,7 @@ $$L=\sum log\pi_{\theta}(s_{t},a_{t})(E(G_{t}-V_{s_{t}}))$$
 	5. 使用均方差损失函数$\sum (R+\gamma V(S')-V(S,w))^2$作Critic网络参数w的梯度更新;
 	6. 更新Actor网络参数$\theta$：
 		$$\theta=\theta+\alpha \nabla_{\theta} log \pi_{\theta}(S_{t},A)\delta  $$
-		
+
 对于Actor的分值函数$\nabla_{\theta} log \pi_{\theta}(S_{t},A)$，可以选择softmax或者高斯分值函数。
 
 ## Actor-Critic优缺点
@@ -111,7 +111,3 @@ $$L=\sum log\pi_{\theta}(s_{t},a_{t})(E(G_{t}-V_{s_{t}}))$$
 
 + DDPG算法，使用了双Actor神经网络和双Critic神经网络的方法来改善收敛性。
 + A3C算法，使用了多线程的方式，一个主线程负责更新Actor和Critic的参数，多个辅线程负责分别和环境交互，得到梯度更新值，汇总更新主线程的参数。而所有的辅线程会定期从主线程更新网络参数。这些辅线程起到了类似DQN中经验回放的作用，但是效果更好。
-
- 	
-
-

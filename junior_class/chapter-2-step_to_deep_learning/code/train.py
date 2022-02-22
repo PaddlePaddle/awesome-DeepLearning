@@ -42,7 +42,8 @@ class Trainer(object):
             pass
         else:
             for name in kwargs:
-                self.summary_writer.add_scalar(tag=name, step=self.global_step, value=kwargs[name])
+                self.summary_writer.add_scalar(
+                    tag=name, step=self.global_step, value=kwargs[name])
 
     def save(self):
         paddle.save(self.model.state_dict(), self.model_path)
@@ -84,7 +85,8 @@ class Trainer(object):
             self.global_step += 1
             # 每训练了1000批次的数据，打印下当前Loss的情况
             if batch_id % 100 == 0:
-                print("epoch_id: {}, batch_id: {}, loss is: {}".format(epoch, batch_id, loss.numpy()))
+                print("epoch_id: {}, batch_id: {}, loss is: {}".format(
+                    epoch, batch_id, loss.numpy()))
 
     def train(self, train_datasets, val_datasets, epochs):
         for i in range(epochs):
@@ -92,7 +94,8 @@ class Trainer(object):
             train_acc = self.val_epoch(train_datasets)
             val_acc = self.val_epoch(val_datasets)
             self.update_summary(train_acc=train_acc, val_acc=val_acc)
-            print("epoch_id: {}, train acc is: {}, val acc is {}".format(i, train_acc, val_acc))
+            print("epoch_id: {}, train acc is: {}, val acc is {}".format(
+                i, train_acc, val_acc))
         self.save()
 
 
@@ -102,10 +105,8 @@ def main():
     model_path = './mnist.pdparams'
 
     train_dataset = MnistDataset(mode='train')
-    train_loader = paddle.io.DataLoader(train_dataset,
-                                        batch_size=32,
-                                        shuffle=True,
-                                        num_workers=4)
+    train_loader = paddle.io.DataLoader(
+        train_dataset, batch_size=32, shuffle=True, num_workers=4)
 
     val_dataset = MnistDataset(mode='val')
     val_loader = paddle.io.DataLoader(val_dataset, batch_size=128)
@@ -113,17 +114,15 @@ def main():
     # model = fnn.MNIST()
     model = logistic.MNIST()
     # opt = paddle.optimizer.SGD(learning_rate=lr, parameters=model.parameters())
-    opt = paddle.optimizer.SGD(learning_rate=lr,
-                               weight_decay=paddle.regularizer.L2Decay(coeff=5e-4),
-                               parameters=model.parameters())
+    opt = paddle.optimizer.SGD(
+        learning_rate=lr,
+        weight_decay=paddle.regularizer.L2Decay(coeff=5e-4),
+        parameters=model.parameters())
 
-    trainer = Trainer(
-        model_path=model_path,
-        model=model,
-        optimizer=opt
-    )
+    trainer = Trainer(model_path=model_path, model=model, optimizer=opt)
 
-    trainer.train(train_datasets=train_loader, val_datasets=val_loader, epochs=epochs)
+    trainer.train(
+        train_datasets=train_loader, val_datasets=val_loader, epochs=epochs)
 
 
 if __name__ == '__main__':

@@ -13,7 +13,7 @@ NMS（非极大值抑制）方法是目标检测任务中常用的后处理方�
 
 $$
 s_i = \{\begin{matrix}
- s_i,iou(M,b_i)<N_t\\ 
+ s_i,iou(M,b_i)<N_t\\
  0,iou(M,b_i)\ge N_t
 \end{matrix}
 $$
@@ -23,8 +23,8 @@ $$
 
 
 $$
-s_i = \{\begin{matrix} 
- s_i,iou(M,b_i)<N_t\\ 
+s_i = \{\begin{matrix}
+ s_i,iou(M,b_i)<N_t\\
  s_i(1-iou(M,b_i)),iou(M,b_i)\ge N_t
  \end{matrix}
 $$

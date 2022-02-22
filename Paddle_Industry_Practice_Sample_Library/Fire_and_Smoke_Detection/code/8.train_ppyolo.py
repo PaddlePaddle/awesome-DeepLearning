@@ -6,7 +6,6 @@ os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 import paddlex as pdx
 from paddlex import transforms as T
 
-
 # 定义训练和验证时的transforms
 train_transforms = T.Compose([
     T.MixupImage(mixup_epoch=-1), T.RandomDistort(),
@@ -58,4 +57,3 @@ model.train(
     lr_decay_epochs=[85, 135],
     save_interval_epochs=5,
     save_dir='output/ppyolo_r50vd_dcn_coco_aug')
-

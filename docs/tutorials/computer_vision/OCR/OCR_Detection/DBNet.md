@@ -62,7 +62,7 @@ $$\hat{B} = \frac{1}{1 + e^{-k(P_{i,j}-T_{i,j})}}$$
 
 标准二值化和可微二值化的对比图如 **图3(a)** 所示。
 
-之所以DB方法会改善算法性能，我们可以在反向传播时梯度的计算上进行观察。当使用交叉熵损失时，正负样本的loss分别为 $l_+$ 和 $l_-$ 
+之所以DB方法会改善算法性能，我们可以在反向传播时梯度的计算上进行观察。当使用交叉熵损失时，正负样本的loss分别为 $l_+$ 和 $l_-$
 
 $$ l_+ = -log(\frac{1}{1 + e^{-k(P_{i,j}-T_{i,j})}})$$
 
@@ -111,4 +111,3 @@ $dice\_loss = 1 - \frac{2 \times intersection\_area}{total\_area}$
 ## 参考文献
 
 [1] [Real-time Scene Text Detection with Differentiable Binarization](https://arxiv.org/pdf/1911.08947.pdf)
-

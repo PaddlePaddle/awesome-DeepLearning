@@ -36,6 +36,7 @@ class AddsHead(nn.Layer):
         kwargs (dict, optional): Any keyword argument to initialize.
 
     """
+
     def __init__(self,
                  avg_reprojection,
                  disparity_smoothness,

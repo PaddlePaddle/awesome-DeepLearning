@@ -113,14 +113,13 @@ class BMNINFReader(DataReader):
         self.anchor_xmin = [self.tgap * i for i in range(self.tscale)]
         self.anchor_xmax = [self.tgap * i for i in range(1, self.tscale + 1)]
 
-    
     def load_file(self, video_wind):
         """
         load_file
         """
         start_feat_id = video_wind[0]
         end_feat_id = video_wind[1]
-        video_feat = self.features[video_wind[0]: video_wind[1]]
+        video_feat = self.features[video_wind[0]:video_wind[1]]
         video_feat = video_feat.T
         video_feat = video_feat.astype("float32")
         return video_feat
@@ -135,6 +134,7 @@ class BMNINFReader(DataReader):
         """
         reader for inference
         """
+
         def reader():
             """
             reader
@@ -144,7 +144,8 @@ class BMNINFReader(DataReader):
             for video_wind in self.video_list:
                 video_idx = self.video_list.index(video_wind)
                 video_feat = self.load_file(video_wind)
-                batch_out.append((video_feat, video_wind, [self.duration, self.dscale]))
+                batch_out.append(
+                    (video_feat, video_wind, [self.duration, self.dscale]))
 
                 if len(batch_out) == self.batch_size:
                     yield batch_out

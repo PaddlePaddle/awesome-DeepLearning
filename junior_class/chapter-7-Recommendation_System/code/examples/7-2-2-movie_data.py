@@ -26,12 +26,11 @@ print("movie title:", item[1][:-7])
 print("movie year:", item[1][-5:-1])
 print("movie genre:", item[2].split('|'))
 
-
 movie_info_path = "./work/ml-1m/movies.dat"
 # 打开文件，编码方式选择ISO-8859-1，读取所有数据到data中
 with open(movie_info_path, 'r', encoding="ISO-8859-1") as f:
     data = f.readlines()
-    
+
 movie_info = {}
 for item in data:
     item = item.strip().split("::")
@@ -52,25 +51,27 @@ for item in data:
     item = item.strip().split("::")
     # 1. 获得电影的ID信息
     v_id = item[0]
-    v_title = item[1][:-7] # 去掉title中年份数据
+    v_title = item[1][:-7]  # 去掉title中年份数据
     v_year = item[1][-5:-1]
     titles = v_title.split()
     # 获得title最大长度
     max_title_length = max((max_title_length, len(titles)))
-    
+
     # 2. 统计电影名字的单词，并给每个单词一个序号，放在movie_titles中
     for t in titles:
         if t not in movie_titles:
             movie_titles[t] = t_count
             t_count += 1
-            
+
     v_tit = [movie_titles[k] for k in titles]
     # 保存电影ID数据和title数据到字典中
-    movie_info[v_id] = {'mov_id': int(v_id),
-                        'title': v_tit,
-                        'years': int(v_year)}
-    
-print("最大电影title长度是：",  max_title_length)
+    movie_info[v_id] = {
+        'mov_id': int(v_id),
+        'title': v_tit,
+        'years': int(v_year)
+    }
+
+print("最大电影title长度是：", max_title_length)
 ID = 1
 # 读取第一条数据，并打印
 item = data[0]
@@ -78,7 +79,6 @@ item = item.strip().split("::")
 print("电影 ID:", item[0])
 print("电影 title:", item[1][:-7])
 print("ID为1 的电影数据是：", movie_info['1'])
-
 
 # 用于记录电影类别每个单词对应哪个序号
 movie_titles, movie_cat = {}, {}
@@ -95,7 +95,7 @@ for item in data:
 
     # 获得电影类别数量的最大长度
     max_cat_length = max((max_cat_length, len(cats)))
-            
+
     v_cat = item[2].split('|')
     # 3. 统计电影类别单词，并给每个单词一个序号，放在movie_cat中
     for cat in cats:
@@ -103,12 +103,11 @@ for item in data:
             movie_cat[cat] = c_count
             c_count += 1
     v_cat = [movie_cat[k] for k in v_cat]
-    
+
     # 保存电影ID数据和title数据到字典中
-    movie_info[v_id] = {'mov_id': int(v_id),
-                        'category': v_cat}
-    
-print("电影类别数量最多是：",  max_cat_length)
+    movie_info[v_id] = {'mov_id': int(v_id), 'category': v_cat}
+
+print("电影类别数量最多是：", max_cat_length)
 ID = 1
 # 读取第一条数据，并打印
 item = data[0]
@@ -128,7 +127,7 @@ for item in data:
     item = item.strip().split("::")
     # 1. 获得电影的ID信息
     v_id = item[0]
-    v_title = item[1][:-7] # 去掉title中年份数据
+    v_title = item[1][:-7]  # 去掉title中年份数据
     cats = item[2].split('|')
     v_year = item[1][-5:-1]
 
@@ -145,22 +144,25 @@ for item in data:
             c_count += 1
     # 补0使电影名称对应的列表长度为15
     v_tit = [movie_titles[k] for k in titles]
-    while len(v_tit)<15:
+    while len(v_tit) < 15:
         v_tit.append(0)
     # 补0使电影种类对应的列表长度为6
     v_cat = [movie_cat[k] for k in cats]
-    while len(v_cat)<6:
+    while len(v_cat) < 6:
         v_cat.append(0)
     # 4. 保存电影数据到movie_info中
-    movie_info[v_id] = {'mov_id': int(v_id),
-                        'title': v_tit,
-                        'category': v_cat,
-                        'years': int(v_year)}
-    
+    movie_info[v_id] = {
+        'mov_id': int(v_id),
+        'title': v_tit,
+        'category': v_cat,
+        'years': int(v_year)
+    }
+
 print("电影数据数量：", len(movie_info))
 ID = 2
-print("原始的电影ID为 {} 的数据是：".format(ID), data[ID-1])
+print("原始的电影ID为 {} 的数据是：".format(ID), data[ID - 1])
 print("电影ID为 {} 的转换后数据是：".format(ID), movie_info[str(ID)])
+
 
 def get_movie_info(path):
     # 打开文件，编码方式选择ISO-8859-1，读取所有数据到data中 
@@ -195,17 +197,19 @@ def get_movie_info(path):
                 c_count += 1
         # 补0使电影名称对应的列表长度为15
         v_tit = [movie_titles[k] for k in titles]
-        while len(v_tit)<15:
+        while len(v_tit) < 15:
             v_tit.append(0)
         # 补0使电影种类对应的列表长度为6
         v_cat = [movie_cat[k] for k in cats]
-        while len(v_cat)<6:
+        while len(v_cat) < 6:
             v_cat.append(0)
         # 保存电影数据到movie_info中
-        movie_info[v_id] = {'mov_id': int(v_id),
-                            'title': v_tit,
-                            'category': v_cat,
-                            'years': int(v_year)}
+        movie_info[v_id] = {
+            'mov_id': int(v_id),
+            'title': v_tit,
+            'category': v_cat,
+            'years': int(v_year)
+        }
     return movie_info, movie_cat, movie_titles
 
 
@@ -213,11 +217,10 @@ movie_info_path = "./work/ml-1m/movies.dat"
 movie_info, movie_cat, movie_titles = get_movie_info(movie_info_path)
 print("电影数量：", len(movie_info))
 ID = 1
-print("原始的电影ID为 {} 的数据是：".format(ID), data[ID-1])
+print("原始的电影ID为 {} 的数据是：".format(ID), data[ID - 1])
 print("电影ID为 {} 的转换后数据是：".format(ID), movie_info[str(ID)])
 
-print("电影种类对应序号：'Animation':{} 'Children's':{} 'Comedy':{}".format(movie_cat['Animation'], 
-                                                                   movie_cat["Children's"], 
-                                                                   movie_cat['Comedy']))
-print("电影名称对应序号：'The':{} 'Story':{} ".format(movie_titles['The'], movie_titles['Story']))
-
+print("电影种类对应序号：'Animation':{} 'Children's':{} 'Comedy':{}".format(movie_cat[
+    'Animation'], movie_cat["Children's"], movie_cat['Comedy']))
+print("电影名称对应序号：'The':{} 'Story':{} ".format(movie_titles['The'], movie_titles[
+    'Story']))

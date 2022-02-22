@@ -90,7 +90,8 @@ class ControllerClient(object):
                     (self.server_ip, self.server_port))
                 if errno != 0:
                     retry_cnt += 1
-                    _logger.info("Server is NOT ready, wait 10 second to retry")
+                    _logger.info(
+                        "Server is NOT ready, wait 10 second to retry")
                     time.sleep(10)
                 else:
                     break
@@ -103,7 +104,8 @@ class ControllerClient(object):
 
         else:
             socket_client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            errno = socket_client.connect_ex((self.server_ip, self.server_port))
+            errno = socket_client.connect_ex(
+                (self.server_ip, self.server_port))
             if errno != 0:
                 _logger.info("Server is closed")
                 os._exit(0)

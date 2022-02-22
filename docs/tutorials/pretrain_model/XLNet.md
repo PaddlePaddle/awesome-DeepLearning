@@ -169,7 +169,7 @@ $$
 
 $$
 \begin{align}
-\mathop{max}_{\theta} \quad \mathbb{E}_{\text{z}∼\mathbb{Z}} log \, p_{\theta}(\text{x}_{z_{>c}}|\text{x}_{\leq c}) = \mathop{max}_{\theta}\quad \mathbb{E}_{\text{z}∼\mathbb{Z}} \left[ \sum_{t=c+1}^n log\;p_{\theta}(x_{z_t}|\text{x}_{\text{z}_{<t}}) \right] 
+\mathop{max}_{\theta} \quad \mathbb{E}_{\text{z}∼\mathbb{Z}} log \, p_{\theta}(\text{x}_{z_{>c}}|\text{x}_{\leq c}) = \mathop{max}_{\theta}\quad \mathbb{E}_{\text{z}∼\mathbb{Z}} \left[ \sum_{t=c+1}^n log\;p_{\theta}(x_{z_t}|\text{x}_{\text{z}_{<t}}) \right]
 \end{align}
 $$
 
@@ -202,4 +202,3 @@ $$
 
 1. [XLNet：Generalized Autoregressive Pretraining for Language Understanding](https://arxiv.org/pdf/1906.08237.pdf)
 2. [XLNet Github](https://github.com/zihangdai/xlnet)
-

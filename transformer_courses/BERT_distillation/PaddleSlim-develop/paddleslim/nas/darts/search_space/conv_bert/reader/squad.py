@@ -93,7 +93,8 @@ class InputFeatures(object):
         self.is_impossible = is_impossible
 
 
-def read_squad_examples(input_file, is_training, version_2_with_negative=False):
+def read_squad_examples(input_file, is_training,
+                        version_2_with_negative=False):
     """Read a SQuAD json file into a list of SquadExample."""
     with open(input_file, "r") as reader:
         input_data = json.load(reader)["data"]
@@ -218,8 +219,8 @@ def convert_examples_to_features(
             else:
                 tok_end_position = len(all_doc_tokens) - 1
             (tok_start_position, tok_end_position) = _improve_answer_span(
-                all_doc_tokens, tok_start_position, tok_end_position, tokenizer,
-                example.orig_answer_text)
+                all_doc_tokens, tok_start_position, tok_end_position,
+                tokenizer, example.orig_answer_text)
 
         # The -3 accounts for [CLS], [SEP] and [SEP]
         max_tokens_for_doc = max_seq_length - len(query_tokens) - 3
@@ -618,8 +619,8 @@ def write_predictions(all_examples, all_features, all_results, n_best_size,
             end_indexes = _get_best_indexes(result.end_logits, n_best_size)
             # if we could have irrelevant answers, get the min score of irrelevant
             if version_2_with_negative:
-                feature_null_score = result.start_logits[0] + result.end_logits[
-                    0]
+                feature_null_score = result.start_logits[
+                    0] + result.end_logits[0]
                 if feature_null_score < score_null:
                     score_null = feature_null_score
                     min_null_feature_index = feature_index
@@ -638,7 +639,8 @@ def write_predictions(all_examples, all_features, all_results, n_best_size,
                         continue
                     if end_index not in feature.token_to_orig_map:
                         continue
-                    if not feature.token_is_max_context.get(start_index, False):
+                    if not feature.token_is_max_context.get(start_index,
+                                                            False):
                         continue
                     if end_index < start_index:
                         continue
@@ -676,8 +678,8 @@ def write_predictions(all_examples, all_features, all_results, n_best_size,
                 break
             feature = features[pred.feature_index]
             if pred.start_index > 0:  # this is a non-null prediction
-                tok_tokens = feature.tokens[pred.start_index:(pred.end_index + 1
-                                                              )]
+                tok_tokens = feature.tokens[pred.start_index:(pred.end_index +
+                                                              1)]
                 orig_doc_start = feature.token_to_orig_map[pred.start_index]
                 orig_doc_end = feature.token_to_orig_map[pred.end_index]
                 orig_tokens = example.doc_tokens[orig_doc_start:(orig_doc_end +

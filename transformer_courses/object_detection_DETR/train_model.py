@@ -85,48 +85,110 @@ class TrainingStats(object):
             strs.append("{}: {}".format(k, str(v)))
         return self.delimiter.join(strs)
 
-def train(model, start_epoch, epoch,dataset_dir,image_dir,anno_path):
+
+def train(model, start_epoch, epoch, dataset_dir, image_dir, anno_path):
     status = {}
     batch_size = 16
     _nranks = dist.get_world_size()
     _local_rank = dist.get_rank()
 
     # 读取训练集
-    dataset = COCODataSet(dataset_dir=dataset_dir, image_dir=image_dir,anno_path=anno_path,data_fields=['image', 'gt_bbox', 'gt_class', 'is_crowd'])
-    sample_transforms = [{Decode: {}}, {RandomFlip: {'prob': 0.5}}, {RandomSelect: {'transforms1': [{RandomShortSideResize: {'short_side_sizes': [480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800], 'max_size': 1333}}], 'transforms2': [{RandomShortSideResize: {'short_side_sizes': [400, 500, 600]}}, {RandomSizeCrop: {'min_size': 384, 'max_size': 600}}, {RandomShortSideResize: {'short_side_sizes': [480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800], 'max_size': 1333}}]}}, {NormalizeImage: {'is_scale': True, 'mean': [0.485, 0.456, 0.406], 'std': [0.229, 0.224, 0.225]}}, {NormalizeBox: {}}, {BboxXYXY2XYWH: {}}, {Permute: {}}]
-    batch_transforms = [{PadMaskBatch: {'pad_to_stride': -1, 'return_pad_mask': True}}]    
-    loader = BaseDataLoader(sample_transforms, batch_transforms, batch_size=2, shuffle=True, drop_last=True,collate_batch=False, use_shared_memory=False)(
-        dataset, 0)
+    dataset = COCODataSet(
+        dataset_dir=dataset_dir,
+        image_dir=image_dir,
+        anno_path=anno_path,
+        data_fields=['image', 'gt_bbox', 'gt_class', 'is_crowd'])
+    sample_transforms = [{
+        Decode: {}
+    }, {
+        RandomFlip: {
+            'prob': 0.5
+        }
+    }, {
+        RandomSelect: {
+            'transforms1': [{
+                RandomShortSideResize: {
+                    'short_side_sizes':
+                    [480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800],
+                    'max_size': 1333
+                }
+            }],
+            'transforms2': [{
+                RandomShortSideResize: {
+                    'short_side_sizes': [400, 500, 600]
+                }
+            }, {
+                RandomSizeCrop: {
+                    'min_size': 384,
+                    'max_size': 600
+                }
+            }, {
+                RandomShortSideResize: {
+                    'short_side_sizes':
+                    [480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800],
+                    'max_size': 1333
+                }
+            }]
+        }
+    }, {
+        NormalizeImage: {
+            'is_scale': True,
+            'mean': [0.485, 0.456, 0.406],
+            'std': [0.229, 0.224, 0.225]
+        }
+    }, {
+        NormalizeBox: {}
+    }, {
+        BboxXYXY2XYWH: {}
+    }, {
+        Permute: {}
+    }]
+    batch_transforms = [{
+        PadMaskBatch: {
+            'pad_to_stride': -1,
+            'return_pad_mask': True
+        }
+    }]
+    loader = BaseDataLoader(
+        sample_transforms,
+        batch_transforms,
+        batch_size=2,
+        shuffle=True,
+        drop_last=True,
+        collate_batch=False,
+        use_shared_memory=False)(dataset, 0)
     # build optimizer in train mode
     steps_per_epoch = len(loader)
 
-
     # 设置学习率、优化器
-    schedulers = PiecewiseDecay(gamma=0.1,milestones=[400],use_warmup=False)
+    schedulers = PiecewiseDecay(gamma=0.1, milestones=[400], use_warmup=False)
     lr_ = LearningRate(base_lr=0.0001, schedulers=schedulers)
-    optimizer_ = OptimizerBuilder(clip_grad_by_norm=0.1, regularizer=False, optimizers={'type': 'AdamW', 'weight_decay': 0.0001})
+    optimizer_ = OptimizerBuilder(
+        clip_grad_by_norm=0.1,
+        regularizer=False,
+        optimizers={'type': 'AdamW',
+                    'weight_decay': 0.0001})
     lr = lr_(steps_per_epoch)
-    optimizers = optimizer_(lr,model.parameters())
+    optimizers = optimizer_(lr, model.parameters())
 
     # initial default callbacks
-    _callbacks = [LogPrinter(model,batch_size), Checkpointer(model,optimizers)]
+    _callbacks = [
+        LogPrinter(model, batch_size), Checkpointer(model, optimizers)
+    ]
     _compose_callback = ComposeCallback(_callbacks)
-
 
     if _nranks > 1:
         model = paddle.DataParallel(model, find_unused_parameters=False)
-
 
     status.update({
         'epoch_id': start_epoch,
         'step_id': 0,
         'steps_per_epoch': len(loader)
     })
-    
+
     status['batch_time'] = SmoothedValue(20, fmt='{avg:.4f}')
     status['data_time'] = SmoothedValue(20, fmt='{avg:.4f}')
     status['training_staus'] = TrainingStats(20)
-
 
     for epoch_id in range(start_epoch, epoch):
         status['mode'] = 'train'

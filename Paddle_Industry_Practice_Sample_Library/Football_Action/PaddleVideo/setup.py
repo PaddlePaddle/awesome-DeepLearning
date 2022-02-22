@@ -17,6 +17,7 @@ from io import open
 with open('requirements.txt', encoding="utf-8-sig") as f:
     requirements = f.readlines()
 
+
 def readme():
     with open('docs/en/whl_en.md', encoding="utf-8-sig") as f:
         README = f.read()
@@ -24,12 +25,14 @@ def readme():
 
 
 setup(
-    name='paddlevideo', #name of .whl file
-    packages=['ppvideo'], #install package name
+    name='paddlevideo',  #name of .whl file
+    packages=['ppvideo'],  #install package name
     package_dir={'ppvideo': ''},
-    include_package_data=True, #Accept all data files and directories matched by MANIFEST.in
+    include_package_data=True,  #Accept all data files and directories matched by MANIFEST.in
     install_requires=requirements,
-    entry_points={"console_scripts": ["ppvideo= ppvideo.tools.paddlevideo_clas:main"]},
+    entry_points={
+        "console_scripts": ["ppvideo= ppvideo.tools.paddlevideo_clas:main"]
+    },
     version='0.0.1',
     license='Apache License 2.0',
     description='Awesome Video toolkits based on PaddlePaddle ',
@@ -38,10 +41,11 @@ setup(
     url='https://github.com/PaddlePaddle/PaddleVideo',
     download_url='https://github.com/PaddlePaddle/PaddleVideo.git',
     keywords=[
-    'A treasure chest for video understanding powered by PaddlePaddle.'
+        'A treasure chest for video understanding powered by PaddlePaddle.'
     ],
     classifiers=[
-        'Intended Audience :: Developers', 'Operating System :: OS Independent',
+        'Intended Audience :: Developers',
+        'Operating System :: OS Independent',
         'Natural Language :: Chinese (Simplified)',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.2',
@@ -50,4 +54,4 @@ setup(
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7', 'Topic :: Utilities'
-    ],)
+    ], )

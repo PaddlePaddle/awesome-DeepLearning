@@ -28,6 +28,7 @@ class FeaturePadding(object):
     """
     Padding feature to target shape.
     """
+
     def __init__(self, max_region_num=36, max_action_num=5):
         self.max_region_num = max_region_num
         self.max_action_num = max_action_num
@@ -46,7 +47,8 @@ class FeaturePadding(object):
         image_target = np.zeros((self.max_region_num, 1601), dtype=np.float32)
         image_location = np.zeros((self.max_region_num, 5), dtype=np.float32)
 
-        action_feature = np.zeros((self.max_action_num, 2048), dtype=np.float32)
+        action_feature = np.zeros(
+            (self.max_action_num, 2048), dtype=np.float32)
         action_target = np.zeros((self.max_action_num, ), dtype=np.int64)
 
         num_boxes = int(num_boxes)
@@ -54,9 +56,10 @@ class FeaturePadding(object):
         image_target[:num_boxes] = image_target_wp
         image_location[:num_boxes, :4] = image_location_wp
 
-        image_location[:, 4] = (image_location[:, 3] - image_location[:, 1]) * (
-            image_location[:, 2] - image_location[:, 0]) / (float(image_w) *
-                                                            float(image_h))
+        image_location[:, 4] = (
+            image_location[:, 3] - image_location[:, 1]) * (
+                image_location[:, 2] - image_location[:, 0]) / (
+                    float(image_w) * float(image_h))
 
         image_location[:, 0] = image_location[:, 0] / float(image_w)
         image_location[:, 1] = image_location[:, 1] / float(image_h)
@@ -72,15 +75,16 @@ class FeaturePadding(object):
         action_feature = copy.deepcopy(action_feature)
         action_target = copy.deepcopy(action_target)
 
-        results = dict(image_feat=image_feature,
-                       image_target=image_target,
-                       caption=caption,
-                       image_loc=image_location,
-                       num_boxes=int(num_boxes),
-                       action_feat=action_feature,
-                       action_target=action_target,
-                       num_actions=int(num_actions),
-                       tokenizer=tokenizer)
+        results = dict(
+            image_feat=image_feature,
+            image_target=image_target,
+            caption=caption,
+            image_loc=image_location,
+            num_boxes=int(num_boxes),
+            action_feat=action_feature,
+            action_target=action_target,
+            num_actions=int(num_actions),
+            tokenizer=tokenizer)
         return results
 
 
@@ -150,15 +154,17 @@ class RandomMask(object):
         self.max_region_length = max_region_length
 
     def get_image_global_feature(self, image_feat, image_loc, image_mask):
-        g_image_feat = np.sum(image_feat, axis=0) / np.sum(
-            image_mask, axis=0, keepdims=True)
+        g_image_feat = np.sum(image_feat, axis=0) / np.sum(image_mask,
+                                                           axis=0,
+                                                           keepdims=True)
         image_feat = np.concatenate(
-            [np.expand_dims(g_image_feat, axis=0), image_feat],
-            axis=0).astype("float32")
+            [np.expand_dims(
+                g_image_feat, axis=0), image_feat], axis=0).astype("float32")
 
         g_image_loc = np.array([0, 0, 1, 1, 1]).astype("float32")
         image_loc = np.concatenate(
-            [np.expand_dims(g_image_loc, axis=0), image_loc], axis=0)
+            [np.expand_dims(
+                g_image_loc, axis=0), image_loc], axis=0)
 
         g_image_mask = np.array([1])
         image_mask = np.concatenate([g_image_mask, image_mask], axis=0)
@@ -205,8 +211,7 @@ class RandomMask(object):
                     #tok = random.choice(list(tokenizer.vocab.items()))[0]
                     tok = tokenizer.vocab.idx_to_token[random.randint(
                         0,
-                        tokenizer.vocab_size,
-                    )]
+                        tokenizer.vocab_size, )]
                     tokens[i] = tok
 
                 # rest 10% randomly keep current token
@@ -286,9 +291,8 @@ class RandomMask(object):
 
         image_feat, image_loc, image_label = self.random_region(
             image_feat, image_loc, num_boxes)
-        action_feat, action_label = self.random_action(action_feat,
-                                                       action_target,
-                                                       num_actions)
+        action_feat, action_label = self.random_action(
+            action_feat, action_target, num_actions)
 
         # concatenate lm labels and account for CLS, SEP, SEP
         lm_label_ids = [-1] + caption_label + [-1]

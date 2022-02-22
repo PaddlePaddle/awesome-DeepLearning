@@ -6,7 +6,6 @@ os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 import paddlex as pdx
 from paddlex import transforms as T
 
-
 # 定义训练和验证时的transforms
 train_transforms = T.Compose([
     T.MixupImage(mixup_epoch=-1), T.RandomDistort(),

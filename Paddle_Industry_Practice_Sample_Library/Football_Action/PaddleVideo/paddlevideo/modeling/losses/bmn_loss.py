@@ -27,6 +27,7 @@ class BMNLoss(BaseWeightedLoss):
         tscale (int): sequence length, default 100.
         dscale (int): max duration length, default 100.
     """
+
     def __init__(self, dscale, tscale, datatype='float32'):
         super().__init__()
         self.dscale = dscale
@@ -59,8 +60,8 @@ class BMNLoss(BaseWeightedLoss):
             temp = paddle.log(pred_score + epsilon)
             loss_pos = paddle.multiply(paddle.log(pred_score + epsilon), pmask)
             loss_pos = coef_1 * paddle.mean(loss_pos)
-            loss_neg = paddle.multiply(paddle.log(1.0 - pred_score + epsilon),
-                                       (1.0 - pmask))
+            loss_neg = paddle.multiply(
+                paddle.log(1.0 - pred_score + epsilon), (1.0 - pmask))
             loss_neg = coef_0 * paddle.mean(loss_neg)
             loss = -1 * (loss_pos + loss_neg)
             return loss
@@ -126,24 +127,20 @@ class BMNLoss(BaseWeightedLoss):
         epsilon = 0.000001
         loss_pos = paddle.multiply(paddle.log(pred_score + epsilon), pmask)
         loss_pos = coef_1 * paddle.sum(loss_pos)
-        loss_neg = paddle.multiply(paddle.log(1.0 - pred_score + epsilon),
-                                   nmask)
+        loss_neg = paddle.multiply(
+            paddle.log(1.0 - pred_score + epsilon), nmask)
         loss_neg = coef_0 * paddle.sum(loss_neg)
         loss = -1 * (loss_pos + loss_neg) / num_entries
         return loss
 
     def forward(self, pred_bm, pred_start, pred_end, gt_iou_map, gt_start,
                 gt_end):
-        pred_bm_reg = paddle.squeeze(paddle.slice(pred_bm,
-                                                  axes=[1],
-                                                  starts=[0],
-                                                  ends=[1]),
-                                     axis=[1])
-        pred_bm_cls = paddle.squeeze(paddle.slice(pred_bm,
-                                                  axes=[1],
-                                                  starts=[1],
-                                                  ends=[2]),
-                                     axis=[1])
+        pred_bm_reg = paddle.squeeze(
+            paddle.slice(
+                pred_bm, axes=[1], starts=[0], ends=[1]), axis=[1])
+        pred_bm_cls = paddle.squeeze(
+            paddle.slice(
+                pred_bm, axes=[1], starts=[1], ends=[2]), axis=[1])
 
         bm_mask = self._get_mask(self.dscale, self.tscale)
 

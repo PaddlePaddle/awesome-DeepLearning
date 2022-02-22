@@ -15,4 +15,3 @@ $$\hat v_{t}=max(\hat v_{t-1},v_{t})$$
 $$\theta_{t+1}=\theta_{t}-\frac{\eta}{\sqrt{\hat v_{t}}+\epsilon}m_{t}$$
 
 从上面的公式可以看出，参数更新公式与Adam没有啥区别，但是求$\hat v_{t}$有区别。AMSGRAD不增加步长，避免了ADAM和RMSPROP算法的缺陷。
-

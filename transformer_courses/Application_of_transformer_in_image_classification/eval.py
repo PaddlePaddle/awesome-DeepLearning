@@ -30,25 +30,25 @@ def eval(args):
     # 实例化模型
     if args.model == 'ViT':
         model = VisionTransformer(
-                patch_size=16,
-                class_dim=1000,
-                embed_dim=768,
-                depth=12,
-                num_heads=12,
-                mlp_ratio=4,
-                qkv_bias=True,
-                epsilon=1e-6)
+            patch_size=16,
+            class_dim=1000,
+            embed_dim=768,
+            depth=12,
+            num_heads=12,
+            mlp_ratio=4,
+            qkv_bias=True,
+            epsilon=1e-6)
         params_file_path = "model_file/ViT_base_patch16_384_pretrained.pdparams"
     else:
         model = DistilledVisionTransformer(
-                patch_size=16,
-                embed_dim=768,
-                depth=12,
-                num_heads=12,
-                mlp_ratio=4,
-                qkv_bias=True,
-                epsilon=1e-6)
-        params_file_path="model_file/DeiT_base_distilled_patch16_384_pretrained.pdparams"
+            patch_size=16,
+            embed_dim=768,
+            depth=12,
+            num_heads=12,
+            mlp_ratio=4,
+            qkv_bias=True,
+            epsilon=1e-6)
+        params_file_path = "model_file/DeiT_base_distilled_patch16_384_pretrained.pdparams"
 
     # 加载模型参数
     model_state_dict = paddle.load(params_file_path)
@@ -62,7 +62,8 @@ def eval(args):
     val_dataset = ImageNetDataset(args.data, VAL_FILE_LIST)
 
     # 使用paddle.io.DataLoader创建数据读取器，并设置batchsize，进程数量num_workers等参数
-    val_loader = paddle.io.DataLoader(val_dataset, batch_size=2, num_workers=1, drop_last=True)
+    val_loader = paddle.io.DataLoader(
+        val_dataset, batch_size=2, num_workers=1, drop_last=True)
 
     acc_set = []
     avg_loss_set = []
@@ -83,11 +84,16 @@ def eval(args):
 
         acc_set.append(acc.numpy())
         avg_loss_set.append(loss.numpy())
-    print("[validation] accuracy/loss: {}/{}".format(np.mean(acc_set), np.mean(avg_loss_set)))
+    print("[validation] accuracy/loss: {}/{}".format(
+        np.mean(acc_set), np.mean(avg_loss_set)))
+
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Evaluation of Transformer based on ImageNet')
-    parser.add_argument('--model', type=str, default='ViT', help='Transformer model')
-    parser.add_argument('--data', type=str, default='data/ILSVRC2012_val', help='Data dir')
+    parser = argparse.ArgumentParser(
+        description='Evaluation of Transformer based on ImageNet')
+    parser.add_argument(
+        '--model', type=str, default='ViT', help='Transformer model')
+    parser.add_argument(
+        '--data', type=str, default='data/ILSVRC2012_val', help='Data dir')
     args = parser.parse_args()
     eval(args)

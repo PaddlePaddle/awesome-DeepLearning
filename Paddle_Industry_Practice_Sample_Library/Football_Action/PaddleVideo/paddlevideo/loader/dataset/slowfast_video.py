@@ -23,6 +23,7 @@ from ...utils import get_logger
 
 logger = get_logger("paddlevideo")
 
+
 @DATASETS.register()
 class SFVideoDataset(BaseDataset):
     """Video dataset for action recognition
@@ -47,16 +48,16 @@ class SFVideoDataset(BaseDataset):
            **kwargs: Keyword arguments for ```BaseDataset```.
 
     """
+
     def __init__(
-        self,
-        file_path,
-        pipeline,
-        num_ensemble_views=1,
-        num_spatial_crops=1,
-        num_retries=5,
-        num_samples_precise_bn=None,
-        **kwargs,
-    ):
+            self,
+            file_path,
+            pipeline,
+            num_ensemble_views=1,
+            num_spatial_crops=1,
+            num_retries=5,
+            num_samples_precise_bn=None,
+            **kwargs, ):
         self.num_ensemble_views = num_ensemble_views
         self.num_spatial_crops = num_spatial_crops
         self.num_retries = num_retries
@@ -84,8 +85,7 @@ class SFVideoDataset(BaseDataset):
                                 temporal_sample_index=tidx,
                                 spatial_sample_index=sidx,
                                 temporal_num_clips=self.num_ensemble_views,
-                                spatial_num_clips=self.num_spatial_crops,
-                            ))
+                                spatial_num_clips=self.num_spatial_crops, ))
         return info
 
     def prepare_train(self, idx):

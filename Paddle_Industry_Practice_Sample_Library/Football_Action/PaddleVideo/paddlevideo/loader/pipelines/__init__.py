@@ -13,11 +13,10 @@
 # limitations under the License.
 
 from .anet_pipeline import GetMatchMap, GetVideoLabel, LoadFeat
-from .augmentations import (CenterCrop, ColorJitter, GroupRandomFlip,
-                            GroupResize, Image2Array, JitterScale, MultiCrop,
-                            Normalization, PackOutput, RandomCrop, RandomFlip,
-                            RandomResizedCrop, Scale, TenCrop, ToArray,
-                            UniformCrop)
+from .augmentations import (
+    CenterCrop, ColorJitter, GroupRandomFlip, GroupResize, Image2Array,
+    JitterScale, MultiCrop, Normalization, PackOutput, RandomCrop, RandomFlip,
+    RandomResizedCrop, Scale, TenCrop, ToArray, UniformCrop)
 from .augmentations_ava import *
 from .compose import Compose
 from .decode import FeatureDecoder, FrameDecoder, VideoDecoder

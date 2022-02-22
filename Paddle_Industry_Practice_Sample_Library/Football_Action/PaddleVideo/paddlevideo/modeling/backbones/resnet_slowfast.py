@@ -45,6 +45,7 @@ class BottleneckTransform(paddle.nn.Layer):
     Bottleneck transformation: Tx1x1, 1x3x3, 1x1x1, where T is the size of
         temporal kernel.
     """
+
     def __init__(self,
                  dim_in,
                  dim_out,
@@ -99,10 +100,11 @@ class BottleneckTransform(paddle.nn.Layer):
             padding=[int(self.temp_kernel_size // 2), 0, 0],
             weight_attr=paddle.ParamAttr(initializer=initializer_tmp),
             bias_attr=False)
-        self.a_bn = self.norm_module(num_features=dim_inner,
-                                     epsilon=self._eps,
-                                     weight_attr=get_bn_param_attr(),
-                                     bias_attr=get_bn_param_attr(bn_weight=0.0))
+        self.a_bn = self.norm_module(
+            num_features=dim_inner,
+            epsilon=self._eps,
+            weight_attr=get_bn_param_attr(),
+            bias_attr=get_bn_param_attr(bn_weight=0.0))
 
         # 1x3x3, BN, ReLU.
         fan = (dim_inner) * (1 * 3 * 3)
@@ -118,10 +120,11 @@ class BottleneckTransform(paddle.nn.Layer):
             dilation=[1, dilation, dilation],
             weight_attr=paddle.ParamAttr(initializer=initializer_tmp),
             bias_attr=False)
-        self.b_bn = self.norm_module(num_features=dim_inner,
-                                     epsilon=self._eps,
-                                     weight_attr=get_bn_param_attr(),
-                                     bias_attr=get_bn_param_attr(bn_weight=0.0))
+        self.b_bn = self.norm_module(
+            num_features=dim_inner,
+            epsilon=self._eps,
+            weight_attr=get_bn_param_attr(),
+            bias_attr=get_bn_param_attr(bn_weight=0.0))
 
         # 1x1x1, BN.
         fan = (dim_out) * (1 * 1 * 1)
@@ -162,6 +165,7 @@ class ResBlock(paddle.nn.Layer):
     """
     Residual block.
     """
+
     def __init__(self,
                  dim_in,
                  dim_out,
@@ -211,21 +215,19 @@ class ResBlock(paddle.nn.Layer):
             num_groups,
             stride_1x1,
             inplace_relu,
-            dilation,
-        )
+            dilation, )
 
     def _construct(
-        self,
-        dim_in,
-        dim_out,
-        temp_kernel_size,
-        stride,
-        dim_inner,
-        num_groups,
-        stride_1x1,
-        inplace_relu,
-        dilation,
-    ):
+            self,
+            dim_in,
+            dim_out,
+            temp_kernel_size,
+            stride,
+            dim_inner,
+            num_groups,
+            stride_1x1,
+            inplace_relu,
+            dilation, ):
         # Use skip connection with projection if dim or res change.
         if (dim_in != dim_out) or (stride != 1):
             fan = (dim_out) * (1 * 1 * 1)
@@ -245,16 +247,17 @@ class ResBlock(paddle.nn.Layer):
                 weight_attr=get_bn_param_attr(),
                 bias_attr=get_bn_param_attr(bn_weight=0.0))
 
-        self.branch2 = BottleneckTransform(dim_in,
-                                           dim_out,
-                                           temp_kernel_size,
-                                           stride,
-                                           dim_inner,
-                                           num_groups,
-                                           stride_1x1=stride_1x1,
-                                           inplace_relu=inplace_relu,
-                                           dilation=dilation,
-                                           norm_module=self.norm_module)
+        self.branch2 = BottleneckTransform(
+            dim_in,
+            dim_out,
+            temp_kernel_size,
+            stride,
+            dim_inner,
+            num_groups,
+            stride_1x1=stride_1x1,
+            inplace_relu=inplace_relu,
+            dilation=dilation,
+            norm_module=self.norm_module)
 
     def forward(self, x):
         if hasattr(self, "branch1"):
@@ -279,6 +282,7 @@ class ResStage(paddle.nn.Layer):
         "Slowfast networks for video recognition."
         https://arxiv.org/pdf/1812.03982.pdf
     """
+
     def __init__(self,
                  dim_in,
                  dim_out,
@@ -324,11 +328,10 @@ class ResStage(paddle.nn.Layer):
         assert all((num_block_temp_kernel[i] <= num_blocks[i]
                     for i in range(len(temp_kernel_sizes))))
         self.num_blocks = num_blocks
-        self.temp_kernel_sizes = [
-            (temp_kernel_sizes[i] * num_blocks[i])[:num_block_temp_kernel[i]] +
-            [1] * (num_blocks[i] - num_block_temp_kernel[i])
-            for i in range(len(temp_kernel_sizes))
-        ]
+        self.temp_kernel_sizes = [(temp_kernel_sizes[i] * num_blocks[i]
+                                   )[:num_block_temp_kernel[i]] + [1] *
+                                  (num_blocks[i] - num_block_temp_kernel[i])
+                                  for i in range(len(temp_kernel_sizes))]
         assert (len({
             len(dim_in),
             len(dim_out),
@@ -349,20 +352,18 @@ class ResStage(paddle.nn.Layer):
             num_groups,
             stride_1x1,
             inplace_relu,
-            dilation,
-        )
+            dilation, )
 
     def _construct(
-        self,
-        dim_in,
-        dim_out,
-        stride,
-        dim_inner,
-        num_groups,
-        stride_1x1,
-        inplace_relu,
-        dilation,
-    ):
+            self,
+            dim_in,
+            dim_out,
+            stride,
+            dim_inner,
+            num_groups,
+            stride_1x1,
+            inplace_relu,
+            dilation, ):
 
         for pathway in range(self.num_pathways):
             for i in range(self.num_blocks[pathway]):
@@ -399,6 +400,7 @@ class ResNetBasicStem(paddle.nn.Layer):
     Performs spatiotemporal Convolution, BN, and Relu following by a
         spatiotemporal pooling.
     """
+
     def __init__(self,
                  dim_in,
                  dim_out,
@@ -427,21 +429,23 @@ class ResNetBasicStem(paddle.nn.Layer):
             padding=self.padding,
             weight_attr=paddle.ParamAttr(initializer=initializer_tmp),
             bias_attr=False)
-        self._bn = self.norm_module(num_features=dim_out,
-                                    epsilon=self.eps,
-                                    weight_attr=get_bn_param_attr(),
-                                    bias_attr=get_bn_param_attr(bn_weight=0.0))
+        self._bn = self.norm_module(
+            num_features=dim_out,
+            epsilon=self.eps,
+            weight_attr=get_bn_param_attr(),
+            bias_attr=get_bn_param_attr(bn_weight=0.0))
 
     def forward(self, x):
         x = self._conv(x)
         x = self._bn(x)
         x = F.relu(x)
 
-        x = F.max_pool3d(x=x,
-                         kernel_size=[1, 3, 3],
-                         stride=[1, 2, 2],
-                         padding=[0, 1, 1],
-                         data_format="NCDHW")
+        x = F.max_pool3d(
+            x=x,
+            kernel_size=[1, 3, 3],
+            stride=[1, 2, 2],
+            padding=[0, 1, 1],
+            data_format="NCDHW")
         return x
 
 
@@ -450,6 +454,7 @@ class VideoModelStem(paddle.nn.Layer):
     Video 3D stem module. Provides stem operations of Conv, BN, ReLU, MaxPool
     on input data tensor for slow and fast pathways.
     """
+
     def __init__(self,
                  dim_in,
                  dim_out,
@@ -500,9 +505,9 @@ class VideoModelStem(paddle.nn.Layer):
             self.add_sublayer("pathway{}_stem".format(pathway), stem)
 
     def forward(self, x):
-        assert (len(x) == self.num_pathways
-                ), "Input tensor does not contain {} pathway".format(
-                    self.num_pathways)
+        assert (
+            len(x) == self.num_pathways
+        ), "Input tensor does not contain {} pathway".format(self.num_pathways)
 
         for pathway in range(len(x)):
             m = getattr(self, "pathway{}_stem".format(pathway))
@@ -517,6 +522,7 @@ class FuseFastToSlow(paddle.nn.Layer):
     tensors from Slow pathway and Fast pathway, fuse information from Fast to
     Slow, then return the fused tensors from Slow and Fast pathway in order.
     """
+
     def __init__(self,
                  dim_in,
                  fusion_conv_channel_ratio,
@@ -548,10 +554,11 @@ class FuseFastToSlow(paddle.nn.Layer):
             padding=[fusion_kernel // 2, 0, 0],
             weight_attr=paddle.ParamAttr(initializer=initializer_tmp),
             bias_attr=False)
-        self._bn = norm_module(num_features=dim_in * fusion_conv_channel_ratio,
-                               epsilon=eps,
-                               weight_attr=get_bn_param_attr(),
-                               bias_attr=get_bn_param_attr(bn_weight=0.0))
+        self._bn = norm_module(
+            num_features=dim_in * fusion_conv_channel_ratio,
+            epsilon=eps,
+            weight_attr=get_bn_param_attr(),
+            bias_attr=get_bn_param_attr(bn_weight=0.0))
 
     def forward(self, x):
         x_s = x[0]
@@ -575,24 +582,24 @@ class ResNetSlowFast(paddle.nn.Layer):
     "Slowfast networks for video recognition."
     https://arxiv.org/pdf/1812.03982.pdf
     """
+
     def __init__(
-        self,
-        alpha,
-        beta,
-        bn_norm_type="batchnorm",
-        bn_num_splits=1,
-        num_pathways=2,
-        depth=50,
-        num_groups=1,
-        input_channel_num=[3, 3],
-        width_per_group=64,
-        fusion_conv_channel_ratio=2,
-        fusion_kernel_sz=7,  #5?
-        pool_size_ratio=[[1, 1, 1], [1, 1, 1]],
-        fuse_bn_relu = 1,
-        spatial_strides = [[1, 1], [2, 2], [2, 2], [2, 2]],
-        use_pool_af_s2 = 1,
-    ):
+            self,
+            alpha,
+            beta,
+            bn_norm_type="batchnorm",
+            bn_num_splits=1,
+            num_pathways=2,
+            depth=50,
+            num_groups=1,
+            input_channel_num=[3, 3],
+            width_per_group=64,
+            fusion_conv_channel_ratio=2,
+            fusion_kernel_sz=7,  #5?
+            pool_size_ratio=[[1, 1, 1], [1, 1, 1]],
+            fuse_bn_relu=1,
+            spatial_strides=[[1, 1], [2, 2], [2, 2], [2, 2]],
+            use_pool_af_s2=1, ):
         """
         Args:
             cfg (CfgNode): model building configs, details are in the
@@ -665,22 +672,23 @@ class ResNetSlowFast(paddle.nn.Layer):
         out_dim_ratio = self.beta // self.fusion_conv_channel_ratio  #4
         dim_inner = self.width_per_group * self.num_groups  #64
 
-        self.s2 = ResStage(dim_in=[
-            self.width_per_group + self.width_per_group // out_dim_ratio,
-            self.width_per_group // self.beta,
-        ],
-                           dim_out=[
-                               self.width_per_group * 4,
-                               self.width_per_group * 4 // self.beta,
-                           ],
-                           dim_inner=[dim_inner, dim_inner // self.beta],
-                           temp_kernel_sizes=temp_kernel[1],
-                           stride=spatial_strides[0],
-                           num_blocks=[d2] * 2,
-                           num_groups=[self.num_groups] * 2,
-                           num_block_temp_kernel=num_block_temp_kernel[0],
-                           dilation=spatial_dilations[0],
-                           norm_module=self.norm_module)
+        self.s2 = ResStage(
+            dim_in=[
+                self.width_per_group + self.width_per_group // out_dim_ratio,
+                self.width_per_group // self.beta,
+            ],
+            dim_out=[
+                self.width_per_group * 4,
+                self.width_per_group * 4 // self.beta,
+            ],
+            dim_inner=[dim_inner, dim_inner // self.beta],
+            temp_kernel_sizes=temp_kernel[1],
+            stride=spatial_strides[0],
+            num_blocks=[d2] * 2,
+            num_groups=[self.num_groups] * 2,
+            num_block_temp_kernel=num_block_temp_kernel[0],
+            dilation=spatial_dilations[0],
+            norm_module=self.norm_module)
 
         self.s2_fuse = FuseFastToSlow(
             dim_in=self.width_per_group * 4 // self.beta,
@@ -688,13 +696,12 @@ class ResNetSlowFast(paddle.nn.Layer):
             fusion_kernel=self.fusion_kernel_sz,
             alpha=self.alpha,
             norm_module=self.norm_module,
-            fuse_bn_relu=self.fuse_bn_relu,
-        )
+            fuse_bn_relu=self.fuse_bn_relu, )
 
         self.s3 = ResStage(
             dim_in=[
-                self.width_per_group * 4 +
-                self.width_per_group * 4 // out_dim_ratio,
+                self.width_per_group * 4 + self.width_per_group * 4 //
+                out_dim_ratio,
                 self.width_per_group * 4 // self.beta,
             ],
             dim_out=[
@@ -708,8 +715,7 @@ class ResNetSlowFast(paddle.nn.Layer):
             num_groups=[self.num_groups] * 2,
             num_block_temp_kernel=num_block_temp_kernel[1],
             dilation=spatial_dilations[1],
-            norm_module=self.norm_module,
-        )
+            norm_module=self.norm_module, )
 
         self.s3_fuse = FuseFastToSlow(
             dim_in=self.width_per_group * 8 // self.beta,
@@ -717,13 +723,12 @@ class ResNetSlowFast(paddle.nn.Layer):
             fusion_kernel=self.fusion_kernel_sz,
             alpha=self.alpha,
             norm_module=self.norm_module,
-            fuse_bn_relu=self.fuse_bn_relu,
-        )
+            fuse_bn_relu=self.fuse_bn_relu, )
 
         self.s4 = ResStage(
             dim_in=[
-                self.width_per_group * 8 +
-                self.width_per_group * 8 // out_dim_ratio,
+                self.width_per_group * 8 + self.width_per_group * 8 //
+                out_dim_ratio,
                 self.width_per_group * 8 // self.beta,
             ],
             dim_out=[
@@ -737,8 +742,7 @@ class ResNetSlowFast(paddle.nn.Layer):
             num_groups=[self.num_groups] * 2,
             num_block_temp_kernel=num_block_temp_kernel[2],
             dilation=spatial_dilations[2],
-            norm_module=self.norm_module,
-        )
+            norm_module=self.norm_module, )
 
         self.s4_fuse = FuseFastToSlow(
             dim_in=self.width_per_group * 16 // self.beta,
@@ -746,13 +750,12 @@ class ResNetSlowFast(paddle.nn.Layer):
             fusion_kernel=self.fusion_kernel_sz,
             alpha=self.alpha,
             norm_module=self.norm_module,
-            fuse_bn_relu=self.fuse_bn_relu,
-        )
+            fuse_bn_relu=self.fuse_bn_relu, )
 
         self.s5 = ResStage(
             dim_in=[
-                self.width_per_group * 16 +
-                self.width_per_group * 16 // out_dim_ratio,
+                self.width_per_group * 16 + self.width_per_group * 16 //
+                out_dim_ratio,
                 self.width_per_group * 16 // self.beta,
             ],
             dim_out=[
@@ -766,8 +769,7 @@ class ResNetSlowFast(paddle.nn.Layer):
             num_groups=[self.num_groups] * 2,
             num_block_temp_kernel=num_block_temp_kernel[3],
             dilation=spatial_dilations[3],
-            norm_module=self.norm_module,
-        )
+            norm_module=self.norm_module, )
 
     def init_weights(self):
         pass
@@ -781,11 +783,12 @@ class ResNetSlowFast(paddle.nn.Layer):
         #  TODO: For AVA, set use_pool_af_s2=1, check mAP's improve.
         if self.use_pool_af_s2:
             for pathway in range(self.num_pathways):
-                x[pathway] = F.max_pool3d(x=x[pathway],
-                                          kernel_size=self.pool_size_ratio[pathway],
-                                          stride=self.pool_size_ratio[pathway],
-                                          padding=[0, 0, 0],
-                                          data_format="NCDHW")
+                x[pathway] = F.max_pool3d(
+                    x=x[pathway],
+                    kernel_size=self.pool_size_ratio[pathway],
+                    stride=self.pool_size_ratio[pathway],
+                    padding=[0, 0, 0],
+                    data_format="NCDHW")
 
         x = self.s3(x)
         x = self.s3_fuse(x)

@@ -19,7 +19,7 @@ import matplotlib.patches as patches
 from matplotlib.image import imread
 import math
 
-# 定义画矩形框的程序    
+# 定义画矩形框的程序  
 def draw_rectangle(currentAxis, bbox, edgecolor = 'k', facecolor = 'y', fill=False, linestyle='-'):
     # currentAxis，坐标轴，通过plt.gca()获取
     # bbox，边界框，包含四个数值的list， [x1, y1, x2, y2]
@@ -27,14 +27,14 @@ def draw_rectangle(currentAxis, bbox, edgecolor = 'k', facecolor = 'y', fill=Fal
     # facecolor，填充颜色
     # fill, 是否填充
     # linestype，边框线型
-    
+
     # patches.Rectangle(xy, width, height,linewidth,edgecolor,facecolor,fill, linestyle)
     # xy:左下角坐标; width:矩形框的宽; height:矩形框的高; linewidth:线宽; edgecolor:边界颜色; facecolor:填充颜色; fill:是否填充; linestyle:线断类型
     rect=patches.Rectangle((bbox[0], bbox[1]), bbox[2]-bbox[0]+1, bbox[3]-bbox[1]+1, linewidth=1,
                            edgecolor=edgecolor,facecolor=facecolor,fill=fill, linestyle=linestyle)
     currentAxis.add_patch(rect)
 
-    
+
 plt.figure(figsize=(10, 10))
 # 传入图片路径
 filename = '/home/aistudio/work/images/section3/000000086956.jpg'
@@ -74,7 +74,7 @@ for box in boxes:
 比如在上面的程序中，boxes里面一共对应11个预测框，scores给出了它们预测"人"这一类别的得分，NMS的具体做法如下。
 
 - Step0：创建选中列表，keep_list = []
-- Step1：对得分进行排序，remain_list = [ 3,  5, 10,  2,  9,  0,  1,  6,  4,  7,  8]， 
+- Step1：对得分进行排序，remain_list = [ 3,  5, 10,  2,  9,  0,  1,  6,  4,  7,  8]，
 - Step2：选出boxes[3]，此时keep_list为空，不需要计算IoU，直接将其放入keep_list，keep_list = [3]， remain_list=[5, 10,  2,  9,  0,  1,  6,  4,  7,  8]
 - Step3：选出boxes[5]，此时keep_list中已经存在boxes[3]，计算出IoU(boxes[3], boxes[5]) = 0.0，显然小于阈值，则keep_list=[3, 5], remain_list = [10,  2,  9,  0,  1,  6,  4,  7,  8]
 - Step4：选出boxes[10]，此时keep_list=[3, 5]，计算IoU(boxes[3], boxes[10])=0.0268，IoU(boxes[5], boxes[10])=0.0268 = 0.24，都小于阈值，则keep_list = [3, 5, 10]，remain_list=[2,  9,  0,  1,  6,  4,  7,  8]
@@ -133,7 +133,7 @@ import matplotlib.patches as patches
 from matplotlib.image import imread
 import math
 
-# 定义画矩形框的程序    
+# 定义画矩形框的程序  
 def draw_rectangle(currentAxis, bbox, edgecolor = 'k', facecolor = 'y', fill=False, linestyle='-'):
     # currentAxis，坐标轴，通过plt.gca()获取
     # bbox，边界框，包含四个数值的list， [x1, y1, x2, y2]
@@ -146,7 +146,7 @@ def draw_rectangle(currentAxis, bbox, edgecolor = 'k', facecolor = 'y', fill=Fal
                            edgecolor=edgecolor,facecolor=facecolor,fill=fill, linestyle=linestyle)
     currentAxis.add_patch(rect)
 
-    
+
 plt.figure(figsize=(10, 10))
 
 filename = '/home/aistudio/work/images/section3/000000086956.jpg'
@@ -166,7 +166,7 @@ boxes = np.array([[4.21716537e+01, 1.28230896e+02, 2.26547668e+02, 6.00434631e+0
        [2.17988785e+02, 3.02472412e+02, 4.06062927e+02, 6.29106628e+02],
        [2.00241089e+02, 3.23755096e+02, 3.96929321e+02, 6.36386108e+02],
        [2.14310303e+02, 3.23443665e+02, 4.06732849e+02, 6.35775269e+02]])
- 
+
 scores = np.array([0.5247661 , 0.51759845, 0.86075854, 0.9910175 , 0.39170712,
        0.9297706 , 0.5115228 , 0.270992  , 0.19087596, 0.64201415, 0.879036])
 

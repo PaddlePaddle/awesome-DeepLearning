@@ -36,6 +36,7 @@ class SkeletonDataset(BaseDataset):
         data_prefix (str): directory path of the data. Default: None.
         test_mode (bool): Whether to bulid the test dataset. Default: False.
     """
+
     def __init__(self, file_path, pipeline, label_path=None, test_mode=False):
         self.label_path = label_path
         super().__init__(file_path, pipeline, test_mode=test_mode)

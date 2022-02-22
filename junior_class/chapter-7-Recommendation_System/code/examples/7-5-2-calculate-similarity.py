@@ -12,10 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 # unzip -o data/save_feature_v1.zip -d /home/aistudio/
 import paddle
-import pickle 
+import pickle
 import numpy as np
 
 usr_file = "./ml-1m/users.dat"
@@ -60,12 +59,13 @@ for idx, key in enumerate(mov_feats.keys()):
     mov_feat = mov_feats[key]
     usr_feat = paddle.to_tensor(usr_ID_feat)
     mov_feat = paddle.to_tensor(mov_feat)
-    
+
     # 计算余弦相似度
     sim = paddle.nn.functional.common.cosine_similarity(usr_feat, mov_feat)
     # 打印特征和相似度的形状
-    if idx==0:
-        print("电影特征形状：{}, 用户特征形状：{}, 相似度结果形状：{}，相似度结果：{}".format(mov_feat.shape, usr_feat.shape, sim.numpy().shape, sim.numpy()))
+    if idx == 0:
+        print("电影特征形状：{}, 用户特征形状：{}, 相似度结果形状：{}，相似度结果：{}".format(
+            mov_feat.shape, usr_feat.shape, sim.numpy().shape, sim.numpy()))
     # 从形状为（1，1）的相似度sim中获得相似度值sim.numpy()[0]，并添加到相似度列表cos_sims中
     cos_sims.append(sim.numpy()[0])
 
@@ -73,13 +73,10 @@ for idx, key in enumerate(mov_feats.keys()):
 index = np.argsort(cos_sims)
 # 打印相似度最大的前topk个位置
 topk = 5
-print("相似度最大的前{}个索引是{}\n对应的相似度是：{}\n".format(topk, index[-topk:], [cos_sims[k] for k in index[-topk:]]))
+print("相似度最大的前{}个索引是{}\n对应的相似度是：{}\n".format(topk, index[
+    -topk:], [cos_sims[k] for k in index[-topk:]]))
 for i in index[-topk:]:
     print("对应的电影分别是：movie:{}".format(mov_info[list(mov_feats.keys())[i]]))
-
-
-
-
 
 top_k, pick_num = 10, 6
 # 对相似度排序，获得最大相似度在cos_sims中的位置
@@ -87,7 +84,7 @@ index = np.argsort(cos_sims)[-top_k:]
 
 print("当前的用户是：")
 # usr_id, usr_info 是前面定义、读取的用户ID、用户信息
-print("usr_id:", usr_id, usr_info[str(usr_id)])   
+print("usr_id:", usr_id, usr_info[str(usr_id)])
 print("推荐可能喜欢的电影是：")
 res = []
 

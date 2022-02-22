@@ -77,8 +77,8 @@ def get_prune_params_config(graph, origin_model_config):
                             else:
                                 if len(next_inp._var.
                                        shape) > 1 and precedor != None:
-                                    param_config[
-                                        next_inp._var.name] = [precedor, None]
+                                    param_config[next_inp._var.
+                                                 name] = [precedor, None]
                         else:
                             param_config[next_inp._var.name] = [precedor]
 
@@ -106,7 +106,8 @@ def prune_params(model, param_config, super_model_sd=None):
     for l_name, sublayer in model.named_sublayers():
         if isinstance(sublayer, BaseBlock):
             continue
-        for p_name, param in sublayer.named_parameters(include_sublayers=False):
+        for p_name, param in sublayer.named_parameters(
+                include_sublayers=False):
             t_value = param.value().get_tensor()
             value = np.array(t_value).astype("float32")
 
@@ -167,7 +168,8 @@ def _is_depthwise(op):
         for inp in op.all_inputs():
             if inp._var.persistable and (
                     op.attr('groups') == inp._var.shape[0] and
-                    op.attr('groups') * inp._var.shape[1] == inp._var.shape[0]):
+                    op.attr('groups') * inp._var.shape[1] == inp._var.shape[0]
+            ):
                 return True
     return False
 

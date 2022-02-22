@@ -15,4 +15,3 @@ Encoder一般是卷积神经网络，主要由卷积层，池化层和BatchNorma
 以人脸编码为例，Encoder将人脸图像压缩到短向量，这样短向量就包含了人脸图像的主要信息，例如该向量的元素可能表示人脸肤色、眉毛位置、眼睛大小等等。编码器学习不同人脸，那么它就能学习到人脸的共性：
 
 ![](../../../images/generative_adversarial_network/encoder_decoder/face-encoder.png)
-

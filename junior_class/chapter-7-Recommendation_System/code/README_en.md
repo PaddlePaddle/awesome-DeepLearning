@@ -32,4 +32,3 @@ unzip -q ml-1m.zip
 '''
 python3 train.py
 '''
-

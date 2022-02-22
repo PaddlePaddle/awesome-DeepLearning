@@ -28,6 +28,7 @@ class AutoPadding(object):
         window_size: int, temporal size of skeleton feature.
         random_pad: bool, whether do random padding when frame length < window size. Default: False.
     """
+
     def __init__(self, window_size, random_pad=False):
         self.window_size = window_size
         self.random_pad = random_pad
@@ -49,14 +50,14 @@ class AutoPadding(object):
         if T == self.window_size:
             data_pad = data[:, :self.window_size, :, :]
         elif T < self.window_size:
-            begin = random.randint(0, self.window_size -
-                                   T) if self.random_pad else 0
+            begin = random.randint(
+                0, self.window_size - T) if self.random_pad else 0
             data_pad = np.zeros((C, self.window_size, V, M))
             data_pad[:, begin:begin + T, :, :] = data[:, :T, :, :]
         else:
             if self.random_pad:
-                index = np.random.choice(T, self.window_size,
-                                         replace=False).astype('int64')
+                index = np.random.choice(
+                    T, self.window_size, replace=False).astype('int64')
             else:
                 index = np.linspace(0, T, self.window_size).astype("int64")
             data_pad = data[:, index, :, :]
@@ -72,6 +73,7 @@ class SkeletonNorm(object):
     Args:
         aixs: dimensions of vertex coordinate. 2 for (x,y), 3 for (x,y,z). Default: 2.
     """
+
     def __init__(self, axis=2, squeeze=False):
         self.axis = axis
         self.squeeze = squeeze
@@ -98,6 +100,7 @@ class Iden(object):
     """
     Wrapper Pipeline
     """
+
     def __init__(self, label_expand=True):
         self.label_expand = label_expand
 

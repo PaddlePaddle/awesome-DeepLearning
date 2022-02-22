@@ -32,7 +32,6 @@ import sys
 __dir__ = os.path.dirname(__file__)
 sys.path.append(os.path.join(__dir__, ''))
 
-
 import numpy as np
 import tarfile
 import requests
@@ -48,7 +47,7 @@ BASE_DIR = os.path.expanduser("~/.paddlevideo_inference/")
 BASE_INFERENCE_MODEL_DIR = os.path.join(BASE_DIR, 'inference_model')
 BASE_VIDEOS_DIR = os.path.join(BASE_DIR, 'videos')
 
-model_names = {'ppTSM','TSM','TSN'}
+model_names = {'ppTSM', 'TSM', 'TSN'}
 
 
 def create_paddle_predictor(args):
@@ -78,6 +77,7 @@ def create_paddle_predictor(args):
 
     return predictor
 
+
 def download_with_progressbar(url, save_path):
     response = requests.get(url, stream=True)
     total_size_in_bytes = int(response.headers.get('content-length', 0))
@@ -91,6 +91,7 @@ def download_with_progressbar(url, save_path):
     if total_size_in_bytes == 0 or progress_bar.n != total_size_in_bytes:
         raise Exception("Something went wrong while downloading models")
 
+
 def maybe_download(model_storage_directory, url):
     # using custom model
     tar_file_name_list = [
@@ -99,11 +100,11 @@ def maybe_download(model_storage_directory, url):
     if not os.path.exists(
             os.path.join(model_storage_directory, 'inference.pdiparams')
     ) or not os.path.exists(
-        os.path.join(model_storage_directory, 'inference.pdmodel')):
+            os.path.join(model_storage_directory, 'inference.pdmodel')):
         tmp_path = os.path.join(model_storage_directory, url.split('/')[-1])
         print('download {} to {}'.format(url, tmp_path))
         os.makedirs(model_storage_directory, exist_ok=True)
-        download_with_progressbar(url, tmp_path) #download
+        download_with_progressbar(url, tmp_path)  #download
 
         #save to directory
         with tarfile.open(tmp_path, 'r') as tarObj:
@@ -121,6 +122,7 @@ def maybe_download(model_storage_directory, url):
                     f.write(file.read())
         os.remove(tmp_path)
 
+
 def load_label_name_dict(path):
     result = {}
     if not os.path.exists(path):
@@ -137,6 +139,7 @@ def load_label_name_dict(path):
                 break
     return result
 
+
 def parse_args(mMain=True, add_help=True):
     import argparse
 
@@ -147,8 +150,8 @@ def parse_args(mMain=True, add_help=True):
 
         # general params
         parser = argparse.ArgumentParser(add_help=add_help)
-        parser.add_argument("--model_name", type=str,default='')
-        parser.add_argument("-v", "--video_file", type=str,default='')
+        parser.add_argument("--model_name", type=str, default='')
+        parser.add_argument("-v", "--video_file", type=str, default='')
         parser.add_argument("--use_gpu", type=str2bool, default=True)
 
         # params for decode and sample
@@ -161,7 +164,7 @@ def parse_args(mMain=True, add_help=True):
         parser.add_argument("--normalize", type=str2bool, default=True)
 
         # params for predict
-        parser.add_argument("--model_file", type=str,default='')
+        parser.add_argument("--model_file", type=str, default='')
         parser.add_argument("--params_file", type=str)
         parser.add_argument("-b", "--batch_size", type=int, default=1)
         parser.add_argument("--use_fp16", type=str2bool, default=False)
@@ -170,7 +173,7 @@ def parse_args(mMain=True, add_help=True):
         parser.add_argument("--gpu_mem", type=int, default=8000)
         parser.add_argument("--top_k", type=int, default=1)
         parser.add_argument("--enable_mkldnn", type=bool, default=False)
-        parser.add_argument("--label_name_path",type=str,default='')
+        parser.add_argument("--label_name_path", type=str, default='')
 
         return parser.parse_args()
 
@@ -195,12 +198,13 @@ def parse_args(mMain=True, add_help=True):
             enable_mkldnn=False,
             label_name_path='')
 
+
 def get_video_list(video_file):
     videos_lists = []
     if video_file is None or not os.path.exists(video_file):
         raise Exception("not found any video file in {}".format(video_file))
 
-    video_end = ['mp4','avi']
+    video_end = ['mp4', 'avi']
     if os.path.isfile(video_file) and video_file.split('.')[-1] in video_end:
         videos_lists.append(video_file)
     elif os.path.isdir(video_file):
@@ -211,12 +215,13 @@ def get_video_list(video_file):
         raise Exception("not found any video file in {}".format(video_file))
     return videos_lists
 
+
 class PaddleVideo(object):
     print('Inference models that Paddle provides are listed as follows:\n\n{}'.
           format(model_names), '\n')
 
     def __init__(self, **kwargs):
-        process_params = parse_args(mMain=False,add_help=False)
+        process_params = parse_args(mMain=False, add_help=False)
         process_params.__dict__.update(**kwargs)
 
         if not os.path.exists(process_params.model_file):
@@ -224,7 +229,8 @@ class PaddleVideo(object):
                 raise Exception(
                     'Please input model name that you want to use!')
             if process_params.model_name in model_names:
-                url = 'https://videotag.bj.bcebos.com/PaddleVideo/InferenceModel/{}_infer.tar'.format(process_params.model_name)
+                url = 'https://videotag.bj.bcebos.com/PaddleVideo/InferenceModel/{}_infer.tar'.format(
+                    process_params.model_name)
                 if not os.path.exists(
                         os.path.join(BASE_INFERENCE_MODEL_DIR,
                                      process_params.model_name)):
@@ -254,7 +260,7 @@ class PaddleVideo(object):
         self.args = process_params
         self.predictor = create_paddle_predictor(process_params)
 
-    def predict(self,video):
+    def predict(self, video):
         """
         predict label of video with paddlevideo_clas
         Args:
@@ -291,13 +297,13 @@ class PaddleVideo(object):
         total_result = []
         for filename in video_list:
             if isinstance(filename, str):
-                v = utils.decode(filename, self.args)  
+                v = utils.decode(filename, self.args)
                 assert v is not None, "Error in loading video: {}".format(
                     filename)
                 inputs = utils.preprocess(v, self.args)
                 inputs = np.expand_dims(
                     inputs, axis=0).repeat(
-                    1, axis=0).copy()
+                        1, axis=0).copy()
             else:
                 inputs = filename
 
@@ -311,13 +317,15 @@ class PaddleVideo(object):
             if len(self.label_name_dict) != 0:
                 label_names = [self.label_name_dict[c] for c in classes]
             result = {
-                "videoname": filename if isinstance(filename, str) else 'video',
+                "videoname": filename
+                if isinstance(filename, str) else 'video',
                 "class_ids": classes.tolist(),
                 "scores": scores.tolist(),
                 "label_names": label_names,
             }
             total_result.append(result)
         return total_result
+
 
 def main():
     # for cmd

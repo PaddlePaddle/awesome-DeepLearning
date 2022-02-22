@@ -126,7 +126,7 @@ print('result:', 'shape of x:', x.shape, 'shape of result:', y.shape)
 result: shape of x: [1, 1, 6, 6] shape of result: [1, 1, 6, 6]
  ```
  这个呢，就和我们上面说的一致。下面来看看VALID填充方式吧。
-```python 
+```python
 import paddle # Padding VALID
 x = paddle.rand((1, 1, 6, 6))
 avgpool = paddle.nn.AvgPool2D(kernel_size=2, padding='VALID')

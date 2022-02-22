@@ -30,6 +30,7 @@ class DecodeSampler(object):
         target_fps(int): desired fps, default 30
         test_mode(bool): whether test or train/valid. In slowfast, we use multicrop when test.
     """
+
     def __init__(self,
                  num_frames,
                  sampling_rate,
@@ -75,10 +76,10 @@ class DecodeSampler(object):
         fps = vr.get_avg_fps()
         clip_size = self.num_frames * self.sampling_rate * fps / self.target_fps
 
-        start_idx, end_idx = self.get_start_end_idx(videolen, clip_size,
-                                                    temporal_sample_index,
-                                                    temporal_num_clips)
-        index = np.linspace(start_idx, end_idx, self.num_frames).astype("int64")
+        start_idx, end_idx = self.get_start_end_idx(
+            videolen, clip_size, temporal_sample_index, temporal_num_clips)
+        index = np.linspace(start_idx, end_idx,
+                            self.num_frames).astype("int64")
         index = np.clip(index, 0, videolen)
 
         frames_select = vr.get_batch(index)  #1 for buffer

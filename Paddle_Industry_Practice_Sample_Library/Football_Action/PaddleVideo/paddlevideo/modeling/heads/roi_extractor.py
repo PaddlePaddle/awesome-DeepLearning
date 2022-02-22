@@ -18,7 +18,6 @@ from . import ops
 
 #@register
 class RoIAlign(object):
-
     def __init__(self,
                  resolution=14,
                  spatial_scale=0.0625,
@@ -35,21 +34,23 @@ class RoIAlign(object):
         rois_num = paddle.to_tensor(rois_num, dtype='int32')
         rois_num = paddle.cast(rois_num, dtype='int32')
         if len(feats) == 1:
-            roi_feat = ops.roi_align(feats,
-                                     roi,
-                                     self.resolution,
-                                     self.spatial_scale,
-                                     sampling_ratio=self.sampling_ratio,
-                                     rois_num=rois_num,
-                                     aligned=self.aligned)
+            roi_feat = ops.roi_align(
+                feats,
+                roi,
+                self.resolution,
+                self.spatial_scale,
+                sampling_ratio=self.sampling_ratio,
+                rois_num=rois_num,
+                aligned=self.aligned)
         else:
             rois_feat_list = []
-            roi_feat = ops.roi_align(feats,
-                                     roi,
-                                     self.resolution,
-                                     self.spatial_scale,
-                                     sampling_ratio=self.sampling_ratio,
-                                     rois_num=rois_num,
-                                     aligned=self.aligned)
+            roi_feat = ops.roi_align(
+                feats,
+                roi,
+                self.resolution,
+                self.spatial_scale,
+                sampling_ratio=self.sampling_ratio,
+                rois_num=rois_num,
+                aligned=self.aligned)
 
         return roi_feat

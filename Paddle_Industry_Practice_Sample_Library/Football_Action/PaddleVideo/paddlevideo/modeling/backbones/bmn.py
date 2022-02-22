@@ -77,9 +77,9 @@ def get_interp1d_mask(tscale, dscale, prop_boundary_ratio, num_sample,
 def init_params(name, in_channels, kernel_size):
     fan_in = in_channels * kernel_size * 1
     k = 1. / math.sqrt(fan_in)
-    param_attr = ParamAttr(name=name,
-                           initializer=paddle.nn.initializer.Uniform(low=-k,
-                                                                     high=k))
+    param_attr = ParamAttr(
+        name=name, initializer=paddle.nn.initializer.Uniform(
+            low=-k, high=k))
     return param_attr
 
 
@@ -96,14 +96,13 @@ class BMN(paddle.nn.Layer):
     """
 
     def __init__(
-        self,
-        tscale,
-        dscale,
-        prop_boundary_ratio,
-        num_sample,
-        num_sample_perbin,
-        feat_dim=400,
-    ):
+            self,
+            tscale,
+            dscale,
+            prop_boundary_ratio,
+            num_sample,
+            num_sample_perbin,
+            feat_dim=400, ):
         super(BMN, self).__init__()
 
         #init config
@@ -191,9 +190,9 @@ class BMN(paddle.nn.Layer):
         self.p_conv1_act = paddle.nn.ReLU()
 
         # init to speed up
-        sample_mask = get_interp1d_mask(self.tscale, self.dscale,
-                                        self.prop_boundary_ratio,
-                                        self.num_sample, self.num_sample_perbin)
+        sample_mask = get_interp1d_mask(
+            self.tscale, self.dscale, self.prop_boundary_ratio,
+            self.num_sample, self.num_sample_perbin)
         self.sample_mask = paddle.to_tensor(sample_mask)
         self.sample_mask.stop_gradient = True
 

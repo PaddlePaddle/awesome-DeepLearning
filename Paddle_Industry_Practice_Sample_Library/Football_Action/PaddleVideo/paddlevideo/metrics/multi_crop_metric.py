@@ -81,8 +81,8 @@ class MultiCropMetric(BaseMetric):
                 self.video_labels[vid_id] = labels[ind]
         if batch_id % self.log_interval == 0:
             logger.info("[TEST] Processing batch {}/{} ...".format(
-                batch_id,
-                self.data_size // (self.batch_size * self.world_size)))
+                batch_id, self.data_size // (self.batch_size * self.world_size
+                                             )))
 
     def accumulate(self):
         """accumulate metrics when finished all iters.
@@ -90,19 +90,17 @@ class MultiCropMetric(BaseMetric):
         # check clip index of each video
         for key in self.clip_count.keys():
             if len(self.clip_count[key]) != self.num_clips or sum(
-                    self.clip_count[key]) != self.num_clips * (self.num_clips -
-                                                               1) / 2:
+                    self.clip_count[key]) != self.num_clips * (
+                        self.num_clips - 1) / 2:
                 logger.info(
                     "[TEST] Count Error!! video [{}] clip count [{}] not match number clips {}"
                     .format(key, self.clip_count[key], self.num_clips))
 
         video_preds = paddle.to_tensor(self.video_preds)
         video_labels = paddle.to_tensor(self.video_labels)
-        acc_top1 = paddle.metric.accuracy(input=video_preds,
-                                          label=video_labels,
-                                          k=1)
-        acc_top5 = paddle.metric.accuracy(input=video_preds,
-                                          label=video_labels,
-                                          k=5)
+        acc_top1 = paddle.metric.accuracy(
+            input=video_preds, label=video_labels, k=1)
+        acc_top5 = paddle.metric.accuracy(
+            input=video_preds, label=video_labels, k=5)
         logger.info('[TEST] finished, avg_acc1= {}, avg_acc5= {} '.format(
             acc_top1.numpy(), acc_top5.numpy()))

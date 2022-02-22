@@ -14,9 +14,11 @@ class MFR(nn.Layer):
         self.conv2 = nn.Conv2D(256, 256, kernel_size=3, stride=1, padding=1)
         self.bn2 = nn.BatchNorm2D(256)
 
-        self.conv13 = nn.Conv2D(256, 256, kernel_size=(1, 3), stride=1, padding=(0, 1))
+        self.conv13 = nn.Conv2D(
+            256, 256, kernel_size=(1, 3), stride=1, padding=(0, 1))
         self.bn13 = nn.BatchNorm2D(256)
-        self.conv31 = nn.Conv2D(256, 256, kernel_size=(3, 1), stride=1, padding=(1, 0))
+        self.conv31 = nn.Conv2D(
+            256, 256, kernel_size=(3, 1), stride=1, padding=(1, 0))
         self.bn31 = nn.BatchNorm2D(256)
 
     def forward(self, left, down):
@@ -51,15 +53,19 @@ class ChannelAttention(nn.Layer):
 class CFF(nn.Layer):
     def __init__(self, in_channel_left, in_channel_down, in_channel_right):
         super(CFF, self).__init__()
-        self.conv0 = nn.Conv2D(in_channel_left, 256, kernel_size=3, stride=1, padding=1)
+        self.conv0 = nn.Conv2D(
+            in_channel_left, 256, kernel_size=3, stride=1, padding=1)
         self.bn0 = nn.BatchNorm2D(256)
 
-        self.conv1 = nn.Conv2D(in_channel_down, 256, kernel_size=3, stride=1, padding=1)
+        self.conv1 = nn.Conv2D(
+            in_channel_down, 256, kernel_size=3, stride=1, padding=1)
         self.bn1 = nn.BatchNorm2D(256)
-        self.conv2 = nn.Conv2D(in_channel_right, 256, kernel_size=3, stride=1, padding=1)
+        self.conv2 = nn.Conv2D(
+            in_channel_right, 256, kernel_size=3, stride=1, padding=1)
         self.bn2 = nn.BatchNorm2D(256)
 
-        self.conv3 = nn.Conv2D(256 * 3, 256, kernel_size=3, stride=1, padding=1)
+        self.conv3 = nn.Conv2D(
+            256 * 3, 256, kernel_size=3, stride=1, padding=1)
         self.bn3 = nn.BatchNorm2D(256)
 
     def forward(self, left, down, right):
@@ -81,7 +87,8 @@ class CFF(nn.Layer):
 class SR(nn.Layer):
     def __init__(self, in_channel):
         super(SR, self).__init__()
-        self.conv1 = nn.Conv2D(in_channel, 256, kernel_size=3, stride=1, padding=1)
+        self.conv1 = nn.Conv2D(
+            in_channel, 256, kernel_size=3, stride=1, padding=1)
         self.bn1 = nn.BatchNorm2D(256)
         self.conv2 = nn.Conv2D(256, 512, kernel_size=3, stride=1, padding=1)
 
@@ -119,5 +126,9 @@ class ACFFModel(nn.Layer):
         x3 = self.srm3(self.cff3(x3, x4, x5))
         x2 = self.srm2(self.cff2(x2, x3, x5))
 
-        x2 = F.interpolate(self.linear2(x2), mode='bilinear', size=x.shape[2:], align_corners=True)
+        x2 = F.interpolate(
+            self.linear2(x2),
+            mode='bilinear',
+            size=x.shape[2:],
+            align_corners=True)
         return [x2]

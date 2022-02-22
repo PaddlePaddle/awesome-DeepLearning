@@ -20,20 +20,20 @@ RN 结构如图1所示。
 查询集中的样本记为 $\boldsymbol{x}_{j}$。
 
 - 将 $\boldsymbol{x}_{i}$ 和 $\boldsymbol{x}_{j}$ 输入 $f_{\varphi}$ ，
-产生特征映射 $f_{\varphi}\left(\boldsymbol{x}_{i}\right)$ 
+产生特征映射 $f_{\varphi}\left(\boldsymbol{x}_{i}\right)$
 和 $f_{\varphi}\left(\boldsymbol{x}_{j}\right)$ 。
 
-- 通过运算器 $C(.,.)$ 将 $f_{\varphi}\left(\boldsymbol{x}_{i}\right)$ 
+- 通过运算器 $C(.,.)$ 将 $f_{\varphi}\left(\boldsymbol{x}_{i}\right)$
 和 $f_{\varphi}\left(\boldsymbol{x}_{j}\right)$ 结合，
 得到 $C(f_{\varphi}\left(\boldsymbol{x}_{i}\right),f_{\varphi}\left(\boldsymbol{x}_{j}\right))$ 。
 
 - 将 $C(f_{\varphi}\left(\boldsymbol{x}_{i}\right),f_{\varphi}\left(\boldsymbol{x}_{j}\right))$ 输入 $g_{\phi}$，
 得到 $[0, 1]$ 范围内的标量，
-表示 $\boldsymbol{x}_{i}$ 和 $\boldsymbol{x}_{j}$ 之间的相似性，记为关系得分 $r_{i, j}$ 。 
+表示 $\boldsymbol{x}_{i}$ 和 $\boldsymbol{x}_{j}$ 之间的相似性，记为关系得分 $r_{i, j}$ 。
 $\boldsymbol{x}_{i}$ 和 $\boldsymbol{x}_{j}$ 相似度越高，$r_{i, j}$ 越大。
 
 $$
-r_{i, j}=g_{\phi}\left(C\left(f_{\varphi}\left(\boldsymbol{x}_{i}\right), f_{\varphi}\left(\boldsymbol{x}_{j}\right)\right)\right), \ 
+r_{i, j}=g_{\phi}\left(C\left(f_{\varphi}\left(\boldsymbol{x}_{i}\right), f_{\varphi}\left(\boldsymbol{x}_{j}\right)\right)\right), \
 i = 1, 2, ..., C
 $$
 
@@ -65,7 +65,7 @@ $$
 - 总共有四个卷积块，前两个卷积块包含 2 $\times$ 2 的最大池化层，后边两个卷积块没有池化层。
 
 
-### 3.2 关系模块结构 
+### 3.2 关系模块结构
 
 - 有两个卷积块，每个卷积模块中都包含 2 $\times$ 2 的最大池化层。
 
@@ -96,7 +96,7 @@ $$
 表1	RN 在 miniImageNet 上的分类结果。
 </center>
 
-| Model | FT | 5-way 1-shot | 5-way 5-shot | 
+| Model | FT | 5-way 1-shot | 5-way 5-shot |
 | :----: | :----: | :----: | :----: |
 | MATCHING NETS | N | 43.56 $\pm$ 0.84 $\%$ | 55.31 $\pm$ 0.73 $\%$ |
 | META NETS | N | 49.21 $\pm$ 0.96 $\%$ | -- |

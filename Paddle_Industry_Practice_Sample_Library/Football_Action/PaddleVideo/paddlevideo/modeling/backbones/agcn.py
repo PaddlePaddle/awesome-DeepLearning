@@ -21,13 +21,15 @@ from ..registry import BACKBONES
 class GCN(nn.Layer):
     def __init__(self, in_channels, out_channels, vertex_nums=25, stride=1):
         super(GCN, self).__init__()
-        self.conv1 = nn.Conv2D(in_channels=in_channels,
-                               out_channels=3 * out_channels,
-                               kernel_size=1,
-                               stride=1)
-        self.conv2 = nn.Conv2D(in_channels=vertex_nums * 3,
-                               out_channels=vertex_nums,
-                               kernel_size=1)
+        self.conv1 = nn.Conv2D(
+            in_channels=in_channels,
+            out_channels=3 * out_channels,
+            kernel_size=1,
+            stride=1)
+        self.conv2 = nn.Conv2D(
+            in_channels=vertex_nums * 3,
+            out_channels=vertex_nums,
+            kernel_size=1)
 
     def forward(self, x):
         # x --- N,C,T,V
@@ -55,23 +57,24 @@ class Block(paddle.nn.Layer):
         self.out_channels = out_channels
 
         self.bn_res = nn.BatchNorm2D(out_channels)
-        self.conv_res = nn.Conv2D(in_channels=in_channels,
-                                  out_channels=out_channels,
-                                  kernel_size=1,
-                                  stride=(stride, 1))
+        self.conv_res = nn.Conv2D(
+            in_channels=in_channels,
+            out_channels=out_channels,
+            kernel_size=1,
+            stride=(stride, 1))
         self.gcn = GCN(in_channels=in_channels,
                        out_channels=out_channels,
                        vertex_nums=vertex_nums)
         self.tcn = nn.Sequential(
             nn.BatchNorm2D(out_channels),
             nn.ReLU(),
-            nn.Conv2D(in_channels=out_channels,
-                      out_channels=out_channels,
-                      kernel_size=(temporal_size, 1),
-                      padding=((temporal_size - 1) // 2, 0),
-                      stride=(stride, 1)),
-            nn.BatchNorm2D(out_channels),
-        )
+            nn.Conv2D(
+                in_channels=out_channels,
+                out_channels=out_channels,
+                kernel_size=(temporal_size, 1),
+                padding=((temporal_size - 1) // 2, 0),
+                stride=(stride, 1)),
+            nn.BatchNorm2D(out_channels), )
 
     def forward(self, x):
         if self.residual:
@@ -92,23 +95,35 @@ class AGCN(nn.Layer):
     Args:
         in_channels: int, channels of vertex coordinate. 2 for (x,y), 3 for (x,y,z). Default 2.
     """
+
     def __init__(self, in_channels=2, **kwargs):
         super(AGCN, self).__init__()
 
         self.data_bn = nn.BatchNorm1D(25 * 2)
         self.agcn = nn.Sequential(
-            Block(in_channels=in_channels,
-                  out_channels=64,
-                  residual=False,
-                  **kwargs), Block(in_channels=64, out_channels=64, **kwargs),
-            Block(in_channels=64, out_channels=64, **kwargs),
-            Block(in_channels=64, out_channels=64, **kwargs),
-            Block(in_channels=64, out_channels=128, stride=2, **kwargs),
-            Block(in_channels=128, out_channels=128, **kwargs),
-            Block(in_channels=128, out_channels=128, **kwargs),
-            Block(in_channels=128, out_channels=256, stride=2, **kwargs),
-            Block(in_channels=256, out_channels=256, **kwargs),
-            Block(in_channels=256, out_channels=256, **kwargs))
+            Block(
+                in_channels=in_channels,
+                out_channels=64,
+                residual=False,
+                **kwargs),
+            Block(
+                in_channels=64, out_channels=64, **kwargs),
+            Block(
+                in_channels=64, out_channels=64, **kwargs),
+            Block(
+                in_channels=64, out_channels=64, **kwargs),
+            Block(
+                in_channels=64, out_channels=128, stride=2, **kwargs),
+            Block(
+                in_channels=128, out_channels=128, **kwargs),
+            Block(
+                in_channels=128, out_channels=128, **kwargs),
+            Block(
+                in_channels=128, out_channels=256, stride=2, **kwargs),
+            Block(
+                in_channels=256, out_channels=256, **kwargs),
+            Block(
+                in_channels=256, out_channels=256, **kwargs))
 
         self.pool = nn.AdaptiveAvgPool2D(output_size=(1, 1))
 

@@ -97,7 +97,7 @@ $$
 
 $$
 \begin{equation}
-L_{layer} = 
+L_{layer} =
 \left\{
 			\begin{array}{lr}
 			L_{embd}, & m=0 \\
@@ -116,4 +116,3 @@ $$
 <center>图3: Results evaluated on GLUE benchmark</center><br></br>
 
 作者在GLUE基准上评估了TinyBERT的性能，模型大小、推理时间速度和准确率如图3所示。实验结果表明，TinyBERT在所有GLUE任务上都优于 $BERT_{TINY}$，并在平均性能上获得6.8%的提升。这表明论文中提出的知识整理学习框架可以有效的提升小模型在下游任务中的性能。同时，$TinyBERT_4$ 以~4%的幅度显著的提升了KD SOTA基准线（比如，BERT-PKD和DistilBERT），参数缩小至~28%，推理速度提升3.1倍。与teacher $BERT_{base}$ 相比，TinyBERT在保持良好性能的同时，模型缩小7.5倍，速度提升9.4倍。
-

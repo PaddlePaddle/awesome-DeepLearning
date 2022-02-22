@@ -15,7 +15,7 @@
 
 元学习的含义有两层，
 第一层是让机器学会学习，使其具备分析和解决问题的能力，
-机器通过完成任务获取经验，提高完成任务的能力; 
+机器通过完成任务获取经验，提高完成任务的能力;
 第二层是让机器学习模型可以更好地泛化到新领域中，
 从而完成差异很大的新任务。
 
@@ -37,7 +37,7 @@ Few-Shot Learning 是 Meta-Learning 在监督学习领域的应用。
 遇到的新任务称为元测试任务 (meta-test task)。
 每个任务都有自己的训练集和测试集，
 内部的训练集和测试集一般称为支持集 (Support Set) 和查询集 (Query Set)。
-支持集又是一个 N-Way K-Shot 问题，即有 N 个类别，每个类有 K 个样例。 
+支持集又是一个 N-Way K-Shot 问题，即有 N 个类别，每个类有 K 个样例。
 
 ![Task](../../images/meta_learning/preliminaries/Task.png)
 <center>
@@ -66,7 +66,7 @@ Few-Shot Learning 是 Meta-Learning 在监督学习领域的应用。
 
 ![MetaBaseLearner](../../images/meta_learning/preliminaries/MetaBaseLearner.png)
 <center>
-图3 基学习器和元学习器。元学习器总结任务经验进行任务之间的共性学习，同时指导基学习器对新任务进行特性学习。 
+图3 基学习器和元学习器。元学习器总结任务经验进行任务之间的共性学习，同时指导基学习器对新任务进行特性学习。
 </center>
 
 ### 4.1 基学习器
@@ -101,14 +101,14 @@ Few-Shot Learning 是 Meta-Learning 在监督学习领域的应用。
 
 ## 5 元学习工作原理
 
-元学习的主要目的是寻找元学习器 $F$, 
+元学习的主要目的是寻找元学习器 $F$,
 在 $F$ 的指导下基学习器 $f$ 在支持集 (support set) $D^{\mathrm{tr}}$ 的作用下经过几步微调就可以得到适应当前新任务的最优状态 $f^{*}$。而 $F$ 的优化需要当前所有任务损失的累计和，
 即 $\nabla\sum_{n=1}^{N} l \left( f_{n}^{*}, D_{n}^{\mathrm{te}} \right)$。
 元学习工作原理如图4所示。
 
 ![MetaLearningWorkingPrinciple](../../images/meta_learning/preliminaries/MetaLearningWorkingPrinciple.png)
 <center>
-图4 元学习工作原理。 
+图4 元学习工作原理。
 </center>
 
 ### 5.1 元学习训练过程

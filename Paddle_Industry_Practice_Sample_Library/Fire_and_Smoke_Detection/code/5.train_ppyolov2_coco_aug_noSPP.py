@@ -6,7 +6,6 @@ os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 import paddlex as pdx
 from paddlex import transforms as T
 
-
 # 定义训练和验证时的transforms
 train_transforms = T.Compose([
     T.MixupImage(mixup_epoch=-1), T.RandomDistort(),
@@ -43,7 +42,8 @@ eval_dataset = pdx.datasets.VOCDetection(
 # 初始化模型，并进行训练
 # API说明: https://paddlex.readthedocs.io/zh_CN/develop/apis/models/detection.html#paddlex-det-yolov3
 num_classes = len(train_dataset.labels)
-model = pdx.det.PPYOLOv2(num_classes=num_classes, use_spp=False, backbone='ResNet50_vd_dcn')
+model = pdx.det.PPYOLOv2(
+    num_classes=num_classes, use_spp=False, backbone='ResNet50_vd_dcn')
 model.train(
     num_epochs=270,
     train_dataset=train_dataset,

@@ -23,6 +23,7 @@ logger = get_logger("paddlevideo")
 @RECOGNIZERS.register()
 class RecognizerTransformer_MRI(BaseRecognizer):
     """Transformer's recognizer model framework."""
+
     def forward_net(self, imgs):
         # imgs.shape=[N,C,T,H,W], for transformer case
 
@@ -56,10 +57,8 @@ class RecognizerTransformer_MRI(BaseRecognizer):
         labels = data_batch[1:]
         cls_score = self.forward_net(imgs)
         cls_score = paddle.nn.functional.sigmoid(cls_score)
-        loss_metrics = self.head.loss(cls_score,
-                                      labels,
-                                      valid_mode=True,
-                                      if_top5=False)
+        loss_metrics = self.head.loss(
+            cls_score, labels, valid_mode=True, if_top5=False)
         return loss_metrics
 
     def test_step(self, data_batch):

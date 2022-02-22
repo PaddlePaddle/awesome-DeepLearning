@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 import os
 import math
 import random
@@ -21,7 +20,8 @@ import numpy as np
 
 
 # 下载语料用来训练word2vec
-def download(save_path, corpus_url="https://dataset.bj.bcebos.com/word2vec/text8.txt"):
+def download(save_path,
+             corpus_url="https://dataset.bj.bcebos.com/word2vec/text8.txt"):
     # 可以从百度云服务器下载一些开源数据集（dataset.bj.bcebos.com）,使用python的requests包下载数据集到本地
     web_request = requests.get(corpus_url)
     corpus = web_request.content
@@ -63,7 +63,8 @@ def build_dict(corpus):
 
     # 将这个词典中的词，按照出现次数排序，出现次数越高，排序越靠前
     # 一般来说，出现频率高的高频词往往是：I，the，you这种代词，而出现频率低的词，往往是一些名词，如：nlp
-    word_freq_dict = sorted(word_freq_dict.items(), key=lambda x: x[1], reverse=True)
+    word_freq_dict = sorted(
+        word_freq_dict.items(), key=lambda x: x[1], reverse=True)
 
     # 构造3个不同的词典，分别存储，
     # 每个词到id的映射关系：word2id_dict
@@ -95,8 +96,8 @@ def subsampling(corpus, word2id_freq):
     # 这个discard函数决定了一个词会不会被替换，这个函数是具有随机性的，每次调用结果不同
     # 如果一个词的频率很大，那么它被遗弃的概率就很大
     def discard(word_id):
-        return random.uniform(0, 1) < 1 - math.sqrt(
-            1e-4 / word2id_freq[word_id] * len(corpus))
+        return random.uniform(
+            0, 1) < 1 - math.sqrt(1e-4 / word2id_freq[word_id] * len(corpus))
 
     corpus = [word for word in corpus if not discard(word)]
     return corpus
@@ -120,9 +121,13 @@ def build_data(corpus, word2id_dict, max_window_size=3, negative_sample_num=4):
 
         # 以当前中心词为中心，左右两侧在window_size内的词都可以看成是正样本
         positive_word_range = (
-        max(0, center_word_idx - window_size), min(len(corpus) - 1, center_word_idx + window_size))
-        positive_word_candidates = [corpus[idx] for idx in range(positive_word_range[0], positive_word_range[1] + 1) if
-                                    idx != center_word_idx]
+            max(0, center_word_idx - window_size),
+            min(len(corpus) - 1, center_word_idx + window_size))
+        positive_word_candidates = [
+            corpus[idx]
+            for idx in range(positive_word_range[0], positive_word_range[1] + 1)
+            if idx != center_word_idx
+        ]
 
         # 对于每个正样本来说，随机采样negative_sample_num个负样本，用于训练
         for positive_word in positive_word_candidates:
@@ -169,11 +174,14 @@ def build_batch(dataset, batch_size, epoch_num):
             # 并使用python的迭代器机制，将数据yield出来
             # 使用迭代器的好处是可以节省内存
             if len(center_word_batch) == batch_size:
-                yield np.array(center_word_batch).astype("int64"), np.array(target_word_batch).astype("int64"), np.array(label_batch).astype("float32")
+                yield np.array(center_word_batch).astype("int64"), np.array(
+                    target_word_batch).astype("int64"), np.array(
+                        label_batch).astype("float32")
                 center_word_batch = []
                 target_word_batch = []
                 label_batch = []
 
     if len(center_word_batch) > 0:
-        yield np.array(center_word_batch).astype("int64"), np.array(target_word_batch).astype("int64"), np.array(
-            label_batch).astype("float32")
+        yield np.array(center_word_batch).astype("int64"), np.array(
+            target_word_batch).astype("int64"), np.array(label_batch).astype(
+                "float32")

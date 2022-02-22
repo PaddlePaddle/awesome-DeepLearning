@@ -12,27 +12,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-special_token=['<s>','<e>','<unk>']
-cn_vocab=[]
+special_token = ['<s>', '<e>', '<unk>']
+cn_vocab = []
 with open('zh-en/temp1') as f:
     for item in f.readlines():
-        words=item.strip().split()
+        words = item.strip().split()
         cn_vocab.append(words[0])
 
-with open('zh-en/vocab.ch.src','w') as f:
+with open('zh-en/vocab.ch.src', 'w') as f:
     for item in special_token:
-        f.write(item+'\n')
+        f.write(item + '\n')
     for item in cn_vocab:
-        f.write(item+'\n')
+        f.write(item + '\n')
 
-eng_vocab=[]
+eng_vocab = []
 with open('zh-en/temp2') as f:
     for item in f.readlines():
-        words=item.strip().split()
+        words = item.strip().split()
         eng_vocab.append(words[0])
 
-with open('zh-en/vocab.en.tgt','w') as f:
+with open('zh-en/vocab.en.tgt', 'w') as f:
     for item in special_token:
-        f.write(item+'\n')
+        f.write(item + '\n')
     for item in eng_vocab:
-        f.write(item+'\n')
+        f.write(item + '\n')

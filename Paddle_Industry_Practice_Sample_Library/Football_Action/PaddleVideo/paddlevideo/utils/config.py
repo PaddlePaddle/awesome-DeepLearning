@@ -63,8 +63,8 @@ def print_dict(d, delimiter=0):
     placeholder = "-" * 60
     for k, v in sorted(d.items()):
         if isinstance(v, dict):
-            logger.info("{}{} : ".format(delimiter * " ", coloring(k,
-                                                                   "HEADER")))
+            logger.info("{}{} : ".format(delimiter * " ",
+                                         coloring(k, "HEADER")))
             print_dict(v, delimiter + 4)
         elif isinstance(v, list) and len(v) >= 1 and isinstance(v[0], dict):
             logger.info("{}{} : ".format(delimiter * " ",
@@ -104,6 +104,7 @@ def override(dl, ks, v):
         ks(list): list of keys
         v(str): value to be replaced
     """
+
     def str2num(v):
         try:
             return eval(v)
@@ -127,8 +128,8 @@ def override(dl, ks, v):
             dl[ks[0]] = str2num(v)
         else:
             assert ks[0] in dl, (
-                '({}) doesn\'t exist in {}, a new dict field is invalid'.format(
-                    ks[0], dl))
+                '({}) doesn\'t exist in {}, a new dict field is invalid'.
+                format(ks[0], dl))
             override(dl[ks[0]], ks[1:], v)
 
 
@@ -165,7 +166,8 @@ def get_config(fname, overrides=None, show=True):
     """
     Read config from file
     """
-    assert os.path.exists(fname), ('config file({}) is not exist'.format(fname))
+    assert os.path.exists(fname), (
+        'config file({}) is not exist'.format(fname))
     config = parse_config(fname)
     override_config(config, overrides)
     if show:

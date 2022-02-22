@@ -76,15 +76,14 @@ def build_dataloader(dataset,
         shuffle(bool): whether to shuffle the data at every epoch.
     """
     if multigrid:
-        sampler = DistributedShortSampler(dataset,
-                                          batch_sizes=batch_size,
-                                          shuffle=True,
-                                          drop_last=True)
+        sampler = DistributedShortSampler(
+            dataset, batch_sizes=batch_size, shuffle=True, drop_last=True)
     else:
-        sampler = DistributedBatchSampler(dataset,
-                                          batch_size=batch_size,
-                                          shuffle=shuffle,
-                                          drop_last=drop_last)
+        sampler = DistributedBatchSampler(
+            dataset,
+            batch_size=batch_size,
+            shuffle=shuffle,
+            drop_last=drop_last)
 
     #NOTE(shipping): when switch the mix operator on, such as: mixup, cutmix.
     # batch like: [[img, label, attibute, ...], [imgs, label, attribute, ...], ...] will recollate to:
@@ -123,7 +122,8 @@ def term_mp(sig_num, frame):
     """
     pid = os.getpid()
     pgid = os.getpgid(os.getpid())
-    logger.info("main proc {} exit, kill process group " "{}".format(pid, pgid))
+    logger.info("main proc {} exit, kill process group "
+                "{}".format(pid, pgid))
     os.killpg(pgid, signal.SIGKILL)
     return
 

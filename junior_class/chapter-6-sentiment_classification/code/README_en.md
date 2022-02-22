@@ -15,9 +15,9 @@
 ## Structure
 ```buildoutcfg
 |-data: The dir of saving dataset or trained model
-|-model: 
+|-model:
     |-sentiment_classifier: The implement of sentiment classification
-|-utils: 
+|-utils:
     |-data_processor.py: the operations related data processing
 |-train.py: the script of training model
 |-evaluate.py: the script of evaluating model

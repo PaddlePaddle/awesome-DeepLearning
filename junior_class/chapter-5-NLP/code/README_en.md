@@ -9,13 +9,13 @@
 
 **note**: please install paddle with version 2.0. if you have not installed it, please refer to
   [ the quick install](https://www.paddlepaddle.org.cn/install/quick?docurl=/documentation/docs/zh/2.0/install/pip/windows-pip.html) 。
-    
+
 ## Structure
 ```buildoutcfg
 |-data: the dir of saving dataset
-|-model: 
+|-model:
     |-word2vec: the implement of skip gram
-|-utils: 
+|-utils:
     |-data_processor.py: the operations related data processing
     |-utils: some tool methods
 |-train.py: the script of training model

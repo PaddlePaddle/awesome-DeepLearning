@@ -236,7 +236,8 @@ class Teacher(object):
                 self._manager.get_knowledge_queue(i)
                 for i in range(num_postprocess_threads)
             ]
-            print("Num of knowledge queues: {}".format(num_postprocess_threads))
+            print("Num of knowledge queues: {}".format(
+                num_postprocess_threads))
             self._s2t_queue = self._manager.get_s2t_queue()
             self._t2s_queue = self._manager.get_t2s_queue()
             self._cmd_queue = self._manager.get_cmd_queue()
@@ -300,8 +301,9 @@ class Teacher(object):
             raise ValueError("The method start() should be called first!")
 
         if not self._s2t_queue:
-            raise ValueError("Cannot receive data from stuent for this teacher "
-                             "is in offline mode!")
+            raise ValueError(
+                "Cannot receive data from stuent for this teacher "
+                "is in offline mode!")
         data = self._s2t_queue.get()
         self._s2t_queue.task_done()
         return data
@@ -337,9 +339,10 @@ class Teacher(object):
             self._out_file.write(pickle.dumps(self._knowledge_desc))
         else:
             if self._knowledge_desc != knowledge_desc:
-                raise ValueError("Current knowledge desc {} is not the same as "
-                                 "historic desc {}!".format(
-                                     knowledge_desc, self._knowledge_desc))
+                raise ValueError(
+                    "Current knowledge desc {} is not the same as "
+                    "historic desc {}!".format(knowledge_desc,
+                                               self._knowledge_desc))
 
         self._out_file.write(pickle.dumps(knowledge))
 
@@ -416,10 +419,12 @@ class Teacher(object):
                     self._feed_list.append(self._program.global_block().var(
                         feed))
                 else:
-                    raise ValueError("Input 'feed_list' should consist of feed "
-                                     "Variables or their names!")
+                    raise ValueError(
+                        "Input 'feed_list' should consist of feed "
+                        "Variables or their names!")
 
-        if not isinstance(schema, dict) and not isinstance(schema, OrderedDict):
+        if not isinstance(schema, dict) and not isinstance(schema,
+                                                           OrderedDict):
             raise ValueError(
                 "Input argument 'schema' should be a dict or OrderedDict!")
         self._schema = schema
@@ -447,7 +452,8 @@ class Teacher(object):
         desc = {}
         for name, var in list(schema.items()):
             if not isinstance(var, fluid.framework.Variable):
-                raise ValueError("The member of schema must be fluid Variable.")
+                raise ValueError(
+                    "The member of schema must be fluid Variable.")
             desc[name] = {
                 "shape": var.shape,
                 "dtype": convert_dtype(var.dtype),
@@ -517,8 +523,8 @@ class Teacher(object):
                 schema_in_feed[k] = v
             else:
                 schema_in_fetch[k] = v
-        schema_in_fetch_keys, schema_in_fetch_vars = zip(
-            *list(schema_in_fetch.items()))
+        schema_in_fetch_keys, schema_in_fetch_vars = zip(*list(
+            schema_in_fetch.items()))
 
         def know_maker(in_queue, out_queue, use_fp16):
             while True:
@@ -599,8 +605,8 @@ class Teacher(object):
 
             print("No.{} time serving ... ".format(repeated))
             num_batches_sent = 0
-            for index, dev_batches in enumerate(data_reader.multi_dev_generator(
-            )):
+            for index, dev_batches in enumerate(
+                    data_reader.multi_dev_generator()):
                 if self._sync_required:
                     break
                 outputs = self._exe.run(compiled_program,
@@ -610,7 +616,8 @@ class Teacher(object):
 
                 num_batches_sent += dev_count
                 if num_batches_sent % (100 * dev_count) == 0:
-                    log = "Processed {} batch samples.".format(num_batches_sent)
+                    log = "Processed {} batch samples.".format(
+                        num_batches_sent)
                     if self._knowledge_queues:
                         qsize = 0
                         for q in self._knowledge_queues:

@@ -10,6 +10,7 @@ class ModelAudio(object):
     """
     modelAudio
     """
+
     def __init__(self, configs, use_gpu=1):
         self.use_gpu = use_gpu
 
@@ -21,8 +22,8 @@ class ModelAudio(object):
         """
         audio predict
         """
-        examples_batch = feature_extractor.wav_to_example(
-            wav_data, sample_rate)[0]
+        examples_batch = feature_extractor.wav_to_example(wav_data,
+                                                          sample_rate)[0]
         return examples_batch
 
     def predict_audio(self, audio_file):

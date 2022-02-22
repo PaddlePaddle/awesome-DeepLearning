@@ -41,6 +41,7 @@ class Compose(object):
         A compose object which is callable, __call__ for this Compose
         object will call each given :attr:`transforms` sequencely.
     """
+
     def __init__(self, pipelines):
         #assert isinstance(pipelines, Sequence)
         self.pipelines = []
@@ -54,8 +55,8 @@ class Compose(object):
                     temp_dict = dict(name=list(t.keys())[0])
                     for all_sub_t in t.values():
                         if all_sub_t is not None:
-                            temp_dict.update(all_sub_t) 
-      
+                            temp_dict.update(all_sub_t)
+
                     t = build(temp_dict, PIPELINES)
                     self.pipelines.append(t)
             elif callable(p):
@@ -63,6 +64,7 @@ class Compose(object):
             else:
                 raise TypeError(f'pipelines must be callable or a dict,'
                                 f'but got {type(p)}')
+
     def __call__(self, data):
         for p in self.pipelines:
             try:
@@ -71,6 +73,6 @@ class Compose(object):
                 stack_info = traceback.format_exc()
                 logger = get_logger("paddlevideo")
                 logger.info("fail to perform transform [{}] with error: "
-                      "{} and stack:\n{}".format(p, e, str(stack_info)))
+                            "{} and stack:\n{}".format(p, e, str(stack_info)))
                 raise e
         return data

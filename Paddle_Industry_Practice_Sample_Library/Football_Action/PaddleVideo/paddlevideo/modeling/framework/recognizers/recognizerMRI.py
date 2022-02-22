@@ -21,6 +21,7 @@ logger = get_logger("paddlevideo")
 @RECOGNIZERS.register()
 class RecognizerMRI(BaseRecognizer):
     """2D recognizer model framework."""
+
     def forward_net(self, imgs):
         # NOTE: As the num_segs is an attribute of dataset phase, and didn't pass to build_head phase, should obtain it from imgs(paddle.Tensor) now, then call self.head method.
         num_segs = imgs.shape[
@@ -56,10 +57,8 @@ class RecognizerMRI(BaseRecognizer):
         labels = data_batch[1:]
         cls_score = self.forward_net(imgs)
         cls_score = paddle.nn.functional.sigmoid(cls_score)
-        loss_metrics = self.head.loss(cls_score,
-                                      labels,
-                                      valid_mode=True,
-                                      if_top5=False)
+        loss_metrics = self.head.loss(
+            cls_score, labels, valid_mode=True, if_top5=False)
         return loss_metrics
 
     def test_step(self, data_batch):

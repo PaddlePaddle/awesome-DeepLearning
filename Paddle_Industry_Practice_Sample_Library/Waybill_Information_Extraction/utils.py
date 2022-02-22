@@ -3,6 +3,7 @@ import paddle
 import paddle.nn.functional as F
 from paddlenlp.data import Stack, Tuple, Pad
 
+
 def load_dict(dict_path):
     vocab = {}
     i = 0
@@ -12,6 +13,7 @@ def load_dict(dict_path):
         i += 1
     return vocab
 
+
 def convert_example(example, tokenizer, label_vocab):
     tokens, labels = example
     tokenized_input = tokenizer(
@@ -20,7 +22,9 @@ def convert_example(example, tokenizer, label_vocab):
     labels = ['O'] + labels + ['O']
     tokenized_input['labels'] = [label_vocab[x] for x in labels]
     return tokenized_input['input_ids'], tokenized_input[
-        'token_type_ids'], tokenized_input['seq_len'], tokenized_input['labels']
+        'token_type_ids'], tokenized_input['seq_len'], tokenized_input[
+            'labels']
+
 
 @paddle.no_grad()
 def evaluate(model, metric, data_loader):
@@ -35,6 +39,7 @@ def evaluate(model, metric, data_loader):
     print("eval precision: %f - recall: %f - f1: %f" %
           (precision, recall, f1_score))
 
+
 def predict(model, data_loader, ds, label_vocab):
     pred_list = []
     len_list = []
@@ -45,6 +50,7 @@ def predict(model, data_loader, ds, label_vocab):
         len_list.append(lens.numpy())
     preds = parse_decodes2(ds, pred_list, len_list, label_vocab)
     return preds
+
 
 def parse_decodes1(ds, decodes, lens, label_vocab):
     decodes = [x for batch in decodes for x in batch]
@@ -71,6 +77,7 @@ def parse_decodes1(ds, decodes, lens, label_vocab):
         outputs.append(''.join(
             [str((s, t)) for s, t in zip(sent_out, tags_out)]))
     return outputs
+
 
 def parse_decodes2(ds, decodes, lens, label_vocab):
     decodes = [x for batch in decodes for x in batch]

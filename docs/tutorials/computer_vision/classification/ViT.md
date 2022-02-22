@@ -388,7 +388,7 @@ class VisionTransformer(nn.Layer):
         elif isinstance(m, nn.LayerNorm):
             zeros_(m.bias)
             ones_(m.weight)
-    
+
     def forward_features(self, x):
         B = paddle.shape(x)[0]
         # 将图片分块，并调整每个块向量的维度

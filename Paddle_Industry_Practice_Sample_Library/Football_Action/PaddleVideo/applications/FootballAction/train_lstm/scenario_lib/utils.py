@@ -142,9 +142,8 @@ def train_with_pyreader(exe, train_prog, compiled_train_prog, train_pyreader, \
                 'No iteration was executed, please check the data reader')
             sys.exit(1)
 
-        logger.info(
-            '[TRAIN] Epoch {} training finished, average time: {}'.format(
-                epoch, np.mean(epoch_periods)))
+        logger.info('[TRAIN] Epoch {} training finished, average time: {}'.
+                    format(epoch, np.mean(epoch_periods)))
         train_metrics.finalize_and_log_out( \
             info='[TRAIN] Finished ... Epoch {} all iters average: '.format(epoch))
 
@@ -159,9 +158,8 @@ def train_with_pyreader(exe, train_prog, compiled_train_prog, train_pyreader, \
                 test_metrics, epoch, log_interval, save_model_name)
             global best_test_acc1
             global min_test_loss
-            if test_status and (test_acc1 > best_test_acc1 or
-                                (test_acc1 == best_test_acc1
-                                 and test_loss < min_test_loss)):
+            if test_status and (test_acc1 > best_test_acc1 or (
+                    test_acc1 == best_test_acc1 and test_loss < min_test_loss)):
                 best_test_acc1 = test_acc1
                 min_test_loss = test_loss
                 save_postfix = "_epoch{}_acc{}".format(epoch, best_test_acc1)

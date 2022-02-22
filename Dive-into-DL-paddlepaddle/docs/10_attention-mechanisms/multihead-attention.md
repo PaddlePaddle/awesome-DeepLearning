@@ -179,4 +179,3 @@ attention(X, Y, Y, valid_lens).shape
 
 
 [Discussions](https://discuss.d2l.ai/t/5758)
-

@@ -26,9 +26,7 @@ FC_GENDER = Linear(in_features=16, out_features=200)
 usr_id_data = np.random.randint(0, 6040, (2)).reshape((-1)).astype('int64')
 USR_ID_NUM = 6040 + 1
 # 定义用户ID的embedding层和fc层
-usr_emb = Embedding(num_embeddings=USR_ID_NUM,
-                embedding_dim=32,
-                sparse=False)
+usr_emb = Embedding(num_embeddings=USR_ID_NUM, embedding_dim=32, sparse=False)
 usr_fc = Linear(in_features=32, out_features=32)
 
 usr_id_var = paddle.to_tensor(usr_id_data)
@@ -41,8 +39,7 @@ usr_age_data = np.array((1, 18)).reshape(-1).astype('int64')
 # 年龄的最大ID是56，所以Embedding层size的第一个参数设置为56 + 1 = 57
 USR_AGE_DICT_SIZE = 56 + 1
 
-usr_age_emb = Embedding(num_embeddings=USR_AGE_DICT_SIZE,
-                            embedding_dim=16)
+usr_age_emb = Embedding(num_embeddings=USR_AGE_DICT_SIZE, embedding_dim=16)
 usr_age_fc = Linear(in_features=16, out_features=16)
 
 usr_age = paddle.to_tensor(usr_age_data)
@@ -56,8 +53,8 @@ usr_gender_data = np.array((0, 1)).reshape(-1).astype('int64')
 USR_ID_NUM = 2
 # 对用户性别信息做映射，并紧接着一个FC层
 USR_GENDER_DICT_SIZE = 2
-usr_gender_emb = Embedding(num_embeddings=USR_GENDER_DICT_SIZE,
-                            embedding_dim=16)
+usr_gender_emb = Embedding(
+    num_embeddings=USR_GENDER_DICT_SIZE, embedding_dim=16)
 
 usr_gender_fc = Linear(in_features=16, out_features=16)
 
@@ -65,12 +62,11 @@ usr_gender_var = paddle.to_tensor(usr_gender_data)
 usr_gender_feat = usr_gender_fc(usr_gender_emb(usr_gender_var))
 usr_gender_feat = F.relu(usr_gender_feat)
 
-
 # 自定义一个用户职业数据
 usr_job_data = np.array((0, 20)).reshape(-1).astype('int64')
 # 用户职业的最大ID是20，所以Embedding层size的第一个参数设置为20 + 1 = 21
 USR_JOB_DICT_SIZE = 20 + 1
-usr_job_emb = Embedding(num_embeddings=USR_JOB_DICT_SIZE,embedding_dim=16)
+usr_job_emb = Embedding(num_embeddings=USR_JOB_DICT_SIZE, embedding_dim=16)
 usr_job_fc = Linear(in_features=16, out_features=16)
 
 usr_job = paddle.to_tensor(usr_job_data)

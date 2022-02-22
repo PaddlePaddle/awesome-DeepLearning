@@ -2,10 +2,12 @@ import paddle
 import random
 import numpy as np
 
+
 def set_seed(args):
     random.seed(args.seed)
     np.random.seed(args.seed)
     paddle.seed(args.seed)
+
 
 class Config():
     def __init__(self):
@@ -21,8 +23,8 @@ class Config():
         self.num_train_epochs = 3
         self.max_steps = -1
         self.logging_steps = 100
-        self.save_steps=500
-        self.seed=43
-        self.device="gpu"
+        self.save_steps = 500
+        self.seed = 43
+        self.device = "gpu"
         self.warmup_steps = 0
         self.warmup_proportion = 0.1
