@@ -11,3 +11,4 @@
    激活函数 <activation_functions/index>
    损失函数 <loss_functions/index>
    模型调优 <model_tuning/index>
+   归一化算法 <normalization/index>
