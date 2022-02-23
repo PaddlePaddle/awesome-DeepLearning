@@ -4,17 +4,10 @@
 
 国内众多行业都在基于人工智能技术推进行业变革与创新，积极探寻有效、有价值的应用场景进行商业化落地。百度飞桨结合实际经验，选取了几个经典的场景，提供了从数据准备、模型训练优化，到模型部署的全流程可复用方案，降低产业落地门槛,让大家在真实数据环境下深入地了解这些案例，获取产业实现方案。
 
-2月17日晚8点，飞桨官方将推出**冬奥背后的黑科技**3个经典范例首播：
-
-* 冬奥背后的黑科技
-* [花样滑冰](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Figure_Skating)
-  * [多模态视频打标签](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/MultimodalVideoTag)
-* [视频精彩时刻剪辑](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Football_Action)
-
-## 2月24日晚8点，飞桨官方将推出**智慧城市**产业实践范例直播：
+**2月24日晚8点，飞桨官方将推出 智慧城市 产业实践范例直播：**
 
 * 智慧城市
-  * [电瓶车进电梯检测]()
+  * [电瓶车进电梯检测](https://github.com/ruoclio/awesome-DeepLearning/tree/my_branch/Paddle_Industry_Practice_Sample_Library/Electromobile_In_Elevator_Detection)
   
   * [异常行为识别](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Abnormal_Action_Detection) 
   
@@ -26,9 +19,19 @@
 
 欢迎报名直播课加入交流群，如需更多技术交流与合作可点击以下链接：
 
-[https://paddleqiyeban.wjx.cn/vj/Qlb0uS3.aspx?udsid=531417](https://paddleqiyeban.wjx.cn/vj/Qlb0uS3.aspx?udsid=531417)
+[https://paddleqiyeban.wjx.cn/vj/YP1ixS1.aspx?udsid=971981](https://paddleqiyeban.wjx.cn/vj/YP1ixS1.aspx?udsid=971981)
 
+-----
 
+**往期案例直播回放：**
+
+* 冬奥背后的黑科技
+
+  | 案例                                                         | 直播回放                                                     |
+  | ------------------------------------------------------------ | ------------------------------------------------------------ |
+  | [花样滑冰](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Figure_Skating) | https://aistudio.baidu.com/aistudio/education/lessonvideo/2251581 |
+  | [多模态视频打标签](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/MultimodalVideoTag) | https://aistudio.baidu.com/aistudio/education/lessonvideo/2251583 |
+  | [视频精彩时刻剪辑](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Football_Action) | https://aistudio.baidu.com/aistudio/education/lessonvideo/2257667 |
 
 # 一、项目简介
 
