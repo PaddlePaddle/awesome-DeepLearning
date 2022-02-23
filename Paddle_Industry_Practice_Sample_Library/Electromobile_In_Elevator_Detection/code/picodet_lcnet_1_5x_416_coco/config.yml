@@ -1,0 +1,25 @@
+dag:
+  is_thread_op: false
+  tracer:
+    interval_s: 30
+http_port: 2009
+op:
+  ppyolo_mbv3:
+    concurrency: 1
+
+    local_service_conf:
+      client_type: local_predictor
+      device_type: 2
+      devices: '0'
+      fetch_list:
+      - save_infer_model/scale_0.tmp_1
+      - save_infer_model/scale_1.tmp_1
+      - save_infer_model/scale_2.tmp_1
+      - save_infer_model/scale_3.tmp_1
+      - save_infer_model/scale_4.tmp_1
+      - save_infer_model/scale_5.tmp_1
+      - save_infer_model/scale_6.tmp_1
+      - save_infer_model/scale_7.tmp_1
+      model_config: serving_server/
+rpc_port: 9999
+worker_num: 20

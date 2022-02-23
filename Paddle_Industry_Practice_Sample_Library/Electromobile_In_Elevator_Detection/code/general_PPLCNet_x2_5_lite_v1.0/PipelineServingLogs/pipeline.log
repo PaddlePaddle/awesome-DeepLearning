@@ -1,0 +1,2252 @@
+WARNING 2022-02-17 11:39:15,975 [pipeline_server.py:509] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-17 11:39:15,976 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 11:39:15,976 [pipeline_server.py:509] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-17 11:39:15,976 [pipeline_server.py:509] [CONF] use_profile not set, use default: False
+WARNING 2022-02-17 11:39:15,976 [pipeline_server.py:509] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-17 11:39:15,976 [pipeline_server.py:509] [CONF] tracer not set, use default: {}
+WARNING 2022-02-17 11:39:15,976 [pipeline_server.py:509] [CONF] channel_recv_frist_arrive not set, use default: False
+WARNING 2022-02-17 11:39:15,976 [pipeline_server.py:509] [CONF] interval_s not set, use default: -1
+WARNING 2022-02-17 11:39:15,976 [pipeline_server.py:509] [CONF] timeout not set, use default: -1
+WARNING 2022-02-17 11:39:15,977 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 11:39:15,977 [pipeline_server.py:509] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-17 11:39:15,977 [pipeline_server.py:509] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-17 11:39:15,977 [pipeline_server.py:509] [CONF] workdir not set, use default: 
+WARNING 2022-02-17 11:39:15,977 [pipeline_server.py:509] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-17 11:39:15,977 [pipeline_server.py:509] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-17 11:39:15,977 [pipeline_server.py:509] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-17 11:39:15,977 [pipeline_server.py:509] [CONF] precision not set, use default: fp32
+WARNING 2022-02-17 11:39:15,977 [pipeline_server.py:509] [CONF] use_calib not set, use default: False
+WARNING 2022-02-17 11:39:15,977 [pipeline_server.py:509] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-17 11:39:15,977 [pipeline_server.py:509] [CONF] mkldnn_cache_capacity not set, use default: 0
+INFO 2022-02-17 11:39:15,995 [operator.py:181] local_service_conf: {'model_config': './general_PPLCNet_x2_5_lite_v1.0_serving', 'device_type': 2, 'devices': '0', 'client_type': 'local_predictor', 'fetch_list': ['feature'], 'workdir': '', 'thread_num': 2, 'mem_optim': True, 'ir_optim': False, 'precision': 'fp32', 'use_calib': False, 'use_mkldnn': False, 'mkldnn_cache_capacity': 0}
+INFO 2022-02-17 11:39:15,995 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:['feature'], precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 11:39:15,995 [operator.py:285] rec 
+	input_ops: @DAGExecutor,
+	server_endpoints: None
+	fetch_list: ['feature']
+	client_config: ./general_PPLCNet_x2_5_lite_v1.0_serving/serving_server_conf.prototxt
+	concurrency: 1,
+	timeout(s): -1,
+	retry: 1,
+	batch_size: 1,
+	auto_batching_timeout(s): None
+INFO 2022-02-17 11:39:15,995 [pipeline_server.py:215] ============= PIPELINE SERVER =============
+INFO 2022-02-17 11:39:15,995 [pipeline_server.py:218] 
+{
+    "worker_num":1,
+    "http_port":9315,
+    "rpc_port":9314,
+    "dag":{
+        "is_thread_op":false,
+        "retry":1,
+        "client_type":"brpc",
+        "use_profile":false,
+        "channel_size":0,
+        "tracer":{
+            "interval_s":-1
+        },
+        "channel_recv_frist_arrive":false
+    },
+    "op":{
+        "rec":{
+            "concurrency":1,
+            "local_service_conf":{
+                "model_config":"./general_PPLCNet_x2_5_lite_v1.0_serving",
+                "device_type":2,
+                "devices":"0",
+                "client_type":"local_predictor",
+                "fetch_list":[
+                    "feature"
+                ],
+                "workdir":"",
+                "thread_num":2,
+                "mem_optim":true,
+                "ir_optim":false,
+                "precision":"fp32",
+                "use_calib":false,
+                "use_mkldnn":false,
+                "mkldnn_cache_capacity":0
+            },
+            "timeout":-1,
+            "retry":1,
+            "batch_size":1,
+            "auto_batching_timeout":-1
+        }
+    },
+    "build_dag_each_worker":false
+}
+INFO 2022-02-17 11:39:15,995 [pipeline_server.py:223] -------------------------------------------
+INFO 2022-02-17 11:39:15,995 [operator.py:308] Op(rec) use local rpc service at port: []
+INFO 2022-02-17 11:39:16,008 [dag.py:496] [DAG] Succ init
+INFO 2022-02-17 11:39:16,009 [dag.py:659] ================= USED OP =================
+INFO 2022-02-17 11:39:16,009 [dag.py:662] rec
+INFO 2022-02-17 11:39:16,009 [dag.py:663] -------------------------------------------
+INFO 2022-02-17 11:39:16,009 [dag.py:680] ================== DAG ====================
+INFO 2022-02-17 11:39:16,009 [dag.py:682] (VIEW 0)
+INFO 2022-02-17 11:39:16,009 [dag.py:684]   [@DAGExecutor]
+INFO 2022-02-17 11:39:16,009 [dag.py:686]     - rec
+INFO 2022-02-17 11:39:16,009 [dag.py:682] (VIEW 1)
+INFO 2022-02-17 11:39:16,009 [dag.py:684]   [rec]
+INFO 2022-02-17 11:39:16,009 [dag.py:687] -------------------------------------------
+INFO 2022-02-17 11:39:16,075 [dag.py:730] op:rec add input channel.
+INFO 2022-02-17 11:39:16,084 [dag.py:759] last op:rec add output channel
+INFO 2022-02-17 11:39:16,085 [dag.py:800] [DAG] Succ build DAG
+INFO 2022-02-17 11:39:16,089 [dag.py:832] [DAG] start
+INFO 2022-02-17 11:39:16,090 [dag.py:182] [DAG] set in channel succ, name [@DAGExecutor]
+INFO 2022-02-17 11:39:16,092 [pipeline_server.py:51] [PipelineServicer] succ init
+INFO 2022-02-17 11:39:16,099 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:None, precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 11:39:16,099 [operator.py:1306] Init cuda env in process 0
+INFO 2022-02-17 11:39:16,099 [local_service_handler.py:208] GET_CLIENT : concurrency_idx=0, device_num=1
+INFO 2022-02-17 11:39:17,129 [local_predict.py:153] LocalPredictor load_model_config params: model_path:./general_PPLCNet_x2_5_lite_v1.0_serving, use_gpu:True, gpu_id:0, use_profile:False, thread_num:2, mem_optim:True, ir_optim:False, use_trt:True, use_lite:False, use_xpu:False, precision:fp32, use_calib:False, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None, use_feed_fetch_ops:False, 
+INFO 2022-02-17 11:39:19,011 [operator.py:1317] [rec|0] Succ init
+INFO 2022-02-17 11:39:25,739 [pipeline_server.py:56] (log_id=0) inference request name:recognition self.name:recognition time:1645069165.7397573
+INFO 2022-02-17 11:39:25,740 [operator.py:1723] RequestOp unpack one request. log_id:0, clientip:             name:recognition, method:prediction, time:1645069165.7409468
+INFO 2022-02-17 11:39:25,741 [dag.py:369] (data_id=0 log_id=0) Succ Generate ID 
+ERROR 2022-02-17 11:39:28,512 [operator.py:1109] (data_id=0 log_id=0) [rec|0] Failed to postprocess: postprocess() takes 4 positional arguments but 5 were given
+Traceback (most recent call last):
+  File "/opt/conda/envs/python35-paddle120-env/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 1105, in _run_postprocess
+    logid_dict.get(data_id))
+TypeError: postprocess() takes 4 positional arguments but 5 were given
+ERROR 2022-02-17 11:39:28,515 [dag.py:410] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [rec|0] Failed to postprocess: postprocess() takes 4 positional arguments but 5 were given
+WARNING 2022-02-17 11:40:11,389 [pipeline_server.py:509] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-17 11:40:11,389 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 11:40:11,389 [pipeline_server.py:509] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-17 11:40:11,389 [pipeline_server.py:509] [CONF] use_profile not set, use default: False
+WARNING 2022-02-17 11:40:11,389 [pipeline_server.py:509] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-17 11:40:11,389 [pipeline_server.py:509] [CONF] tracer not set, use default: {}
+WARNING 2022-02-17 11:40:11,389 [pipeline_server.py:509] [CONF] channel_recv_frist_arrive not set, use default: False
+WARNING 2022-02-17 11:40:11,389 [pipeline_server.py:509] [CONF] interval_s not set, use default: -1
+WARNING 2022-02-17 11:40:11,389 [pipeline_server.py:509] [CONF] timeout not set, use default: -1
+WARNING 2022-02-17 11:40:11,389 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 11:40:11,390 [pipeline_server.py:509] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-17 11:40:11,390 [pipeline_server.py:509] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-17 11:40:11,390 [pipeline_server.py:509] [CONF] workdir not set, use default: 
+WARNING 2022-02-17 11:40:11,390 [pipeline_server.py:509] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-17 11:40:11,390 [pipeline_server.py:509] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-17 11:40:11,390 [pipeline_server.py:509] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-17 11:40:11,390 [pipeline_server.py:509] [CONF] precision not set, use default: fp32
+WARNING 2022-02-17 11:40:11,390 [pipeline_server.py:509] [CONF] use_calib not set, use default: False
+WARNING 2022-02-17 11:40:11,390 [pipeline_server.py:509] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-17 11:40:11,390 [pipeline_server.py:509] [CONF] mkldnn_cache_capacity not set, use default: 0
+INFO 2022-02-17 11:40:11,401 [operator.py:181] local_service_conf: {'model_config': './general_PPLCNet_x2_5_lite_v1.0_serving', 'device_type': 2, 'devices': '0', 'client_type': 'local_predictor', 'fetch_list': ['feature'], 'workdir': '', 'thread_num': 2, 'mem_optim': True, 'ir_optim': False, 'precision': 'fp32', 'use_calib': False, 'use_mkldnn': False, 'mkldnn_cache_capacity': 0}
+INFO 2022-02-17 11:40:11,401 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:['feature'], precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 11:40:11,401 [operator.py:285] rec 
+	input_ops: @DAGExecutor,
+	server_endpoints: None
+	fetch_list: ['feature']
+	client_config: ./general_PPLCNet_x2_5_lite_v1.0_serving/serving_server_conf.prototxt
+	concurrency: 1,
+	timeout(s): -1,
+	retry: 1,
+	batch_size: 1,
+	auto_batching_timeout(s): None
+INFO 2022-02-17 11:40:11,401 [pipeline_server.py:215] ============= PIPELINE SERVER =============
+INFO 2022-02-17 11:40:11,402 [pipeline_server.py:218] 
+{
+    "worker_num":1,
+    "http_port":9315,
+    "rpc_port":9314,
+    "dag":{
+        "is_thread_op":false,
+        "retry":1,
+        "client_type":"brpc",
+        "use_profile":false,
+        "channel_size":0,
+        "tracer":{
+            "interval_s":-1
+        },
+        "channel_recv_frist_arrive":false
+    },
+    "op":{
+        "rec":{
+            "concurrency":1,
+            "local_service_conf":{
+                "model_config":"./general_PPLCNet_x2_5_lite_v1.0_serving",
+                "device_type":2,
+                "devices":"0",
+                "client_type":"local_predictor",
+                "fetch_list":[
+                    "feature"
+                ],
+                "workdir":"",
+                "thread_num":2,
+                "mem_optim":true,
+                "ir_optim":false,
+                "precision":"fp32",
+                "use_calib":false,
+                "use_mkldnn":false,
+                "mkldnn_cache_capacity":0
+            },
+            "timeout":-1,
+            "retry":1,
+            "batch_size":1,
+            "auto_batching_timeout":-1
+        }
+    },
+    "build_dag_each_worker":false
+}
+INFO 2022-02-17 11:40:11,402 [pipeline_server.py:223] -------------------------------------------
+INFO 2022-02-17 11:40:11,402 [operator.py:308] Op(rec) use local rpc service at port: []
+INFO 2022-02-17 11:40:11,414 [dag.py:496] [DAG] Succ init
+INFO 2022-02-17 11:40:11,414 [dag.py:659] ================= USED OP =================
+INFO 2022-02-17 11:40:11,415 [dag.py:662] rec
+INFO 2022-02-17 11:40:11,415 [dag.py:663] -------------------------------------------
+INFO 2022-02-17 11:40:11,415 [dag.py:680] ================== DAG ====================
+INFO 2022-02-17 11:40:11,415 [dag.py:682] (VIEW 0)
+INFO 2022-02-17 11:40:11,415 [dag.py:684]   [@DAGExecutor]
+INFO 2022-02-17 11:40:11,415 [dag.py:686]     - rec
+INFO 2022-02-17 11:40:11,415 [dag.py:682] (VIEW 1)
+INFO 2022-02-17 11:40:11,415 [dag.py:684]   [rec]
+INFO 2022-02-17 11:40:11,415 [dag.py:687] -------------------------------------------
+INFO 2022-02-17 11:40:11,430 [dag.py:730] op:rec add input channel.
+INFO 2022-02-17 11:40:11,439 [dag.py:759] last op:rec add output channel
+INFO 2022-02-17 11:40:11,440 [dag.py:800] [DAG] Succ build DAG
+INFO 2022-02-17 11:40:11,468 [dag.py:832] [DAG] start
+INFO 2022-02-17 11:40:11,469 [dag.py:182] [DAG] set in channel succ, name [@DAGExecutor]
+INFO 2022-02-17 11:40:11,471 [pipeline_server.py:51] [PipelineServicer] succ init
+INFO 2022-02-17 11:40:11,479 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:None, precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 11:40:11,480 [operator.py:1306] Init cuda env in process 0
+INFO 2022-02-17 11:40:11,480 [local_service_handler.py:208] GET_CLIENT : concurrency_idx=0, device_num=1
+INFO 2022-02-17 11:40:12,540 [local_predict.py:153] LocalPredictor load_model_config params: model_path:./general_PPLCNet_x2_5_lite_v1.0_serving, use_gpu:True, gpu_id:0, use_profile:False, thread_num:2, mem_optim:True, ir_optim:False, use_trt:True, use_lite:False, use_xpu:False, precision:fp32, use_calib:False, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None, use_feed_fetch_ops:False, 
+INFO 2022-02-17 11:40:14,355 [operator.py:1317] [rec|0] Succ init
+INFO 2022-02-17 11:40:26,642 [pipeline_server.py:56] (log_id=0) inference request name:recognition self.name:recognition time:1645069226.6426268
+INFO 2022-02-17 11:40:26,643 [operator.py:1723] RequestOp unpack one request. log_id:0, clientip:             name:recognition, method:prediction, time:1645069226.643837
+INFO 2022-02-17 11:40:26,644 [dag.py:369] (data_id=0 log_id=0) Succ Generate ID 
+INFO 2022-02-17 11:40:29,377 [dag.py:405] (data_id=0 log_id=0) Succ predict
+INFO 2022-02-17 11:41:41,337 [pipeline_server.py:56] (log_id=0) inference request name:recognition self.name:recognition time:1645069301.3372242
+INFO 2022-02-17 11:41:41,337 [operator.py:1723] RequestOp unpack one request. log_id:0, clientip:             name:recognition, method:prediction, time:1645069301.3376215
+INFO 2022-02-17 11:41:41,337 [dag.py:369] (data_id=1 log_id=0) Succ Generate ID 
+INFO 2022-02-17 11:41:41,351 [dag.py:405] (data_id=1 log_id=0) Succ predict
+WARNING 2022-02-17 11:43:51,478 [pipeline_server.py:509] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-17 11:43:51,478 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 11:43:51,478 [pipeline_server.py:509] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-17 11:43:51,479 [pipeline_server.py:509] [CONF] use_profile not set, use default: False
+WARNING 2022-02-17 11:43:51,479 [pipeline_server.py:509] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-17 11:43:51,479 [pipeline_server.py:509] [CONF] tracer not set, use default: {}
+WARNING 2022-02-17 11:43:51,479 [pipeline_server.py:509] [CONF] channel_recv_frist_arrive not set, use default: False
+WARNING 2022-02-17 11:43:51,479 [pipeline_server.py:509] [CONF] interval_s not set, use default: -1
+WARNING 2022-02-17 11:43:51,479 [pipeline_server.py:509] [CONF] timeout not set, use default: -1
+WARNING 2022-02-17 11:43:51,479 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 11:43:51,479 [pipeline_server.py:509] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-17 11:43:51,479 [pipeline_server.py:509] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-17 11:43:51,479 [pipeline_server.py:509] [CONF] workdir not set, use default: 
+WARNING 2022-02-17 11:43:51,479 [pipeline_server.py:509] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-17 11:43:51,479 [pipeline_server.py:509] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-17 11:43:51,479 [pipeline_server.py:509] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-17 11:43:51,479 [pipeline_server.py:509] [CONF] precision not set, use default: fp32
+WARNING 2022-02-17 11:43:51,479 [pipeline_server.py:509] [CONF] use_calib not set, use default: False
+WARNING 2022-02-17 11:43:51,479 [pipeline_server.py:509] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-17 11:43:51,479 [pipeline_server.py:509] [CONF] mkldnn_cache_capacity not set, use default: 0
+INFO 2022-02-17 11:43:51,578 [operator.py:181] local_service_conf: {'model_config': './general_PPLCNet_x2_5_lite_v1.0_serving', 'device_type': 2, 'devices': '0', 'client_type': 'local_predictor', 'fetch_list': ['feature'], 'workdir': '', 'thread_num': 2, 'mem_optim': True, 'ir_optim': False, 'precision': 'fp32', 'use_calib': False, 'use_mkldnn': False, 'mkldnn_cache_capacity': 0}
+INFO 2022-02-17 11:43:51,579 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:['feature'], precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 11:43:51,579 [operator.py:285] rec 
+	input_ops: @DAGExecutor,
+	server_endpoints: None
+	fetch_list: ['feature']
+	client_config: ./general_PPLCNet_x2_5_lite_v1.0_serving/serving_server_conf.prototxt
+	concurrency: 1,
+	timeout(s): -1,
+	retry: 1,
+	batch_size: 1,
+	auto_batching_timeout(s): None
+INFO 2022-02-17 11:43:51,579 [pipeline_server.py:215] ============= PIPELINE SERVER =============
+INFO 2022-02-17 11:43:51,579 [pipeline_server.py:218] 
+{
+    "worker_num":1,
+    "http_port":9315,
+    "rpc_port":9314,
+    "dag":{
+        "is_thread_op":false,
+        "retry":1,
+        "client_type":"brpc",
+        "use_profile":false,
+        "channel_size":0,
+        "tracer":{
+            "interval_s":-1
+        },
+        "channel_recv_frist_arrive":false
+    },
+    "op":{
+        "rec":{
+            "concurrency":1,
+            "local_service_conf":{
+                "model_config":"./general_PPLCNet_x2_5_lite_v1.0_serving",
+                "device_type":2,
+                "devices":"0",
+                "client_type":"local_predictor",
+                "fetch_list":[
+                    "feature"
+                ],
+                "workdir":"",
+                "thread_num":2,
+                "mem_optim":true,
+                "ir_optim":false,
+                "precision":"fp32",
+                "use_calib":false,
+                "use_mkldnn":false,
+                "mkldnn_cache_capacity":0
+            },
+            "timeout":-1,
+            "retry":1,
+            "batch_size":1,
+            "auto_batching_timeout":-1
+        }
+    },
+    "build_dag_each_worker":false
+}
+INFO 2022-02-17 11:43:51,579 [pipeline_server.py:223] -------------------------------------------
+INFO 2022-02-17 11:43:51,579 [operator.py:308] Op(rec) use local rpc service at port: []
+INFO 2022-02-17 11:43:51,591 [dag.py:496] [DAG] Succ init
+INFO 2022-02-17 11:43:51,592 [dag.py:659] ================= USED OP =================
+INFO 2022-02-17 11:43:51,592 [dag.py:662] rec
+INFO 2022-02-17 11:43:51,592 [dag.py:663] -------------------------------------------
+INFO 2022-02-17 11:43:51,592 [dag.py:680] ================== DAG ====================
+INFO 2022-02-17 11:43:51,592 [dag.py:682] (VIEW 0)
+INFO 2022-02-17 11:43:51,592 [dag.py:684]   [@DAGExecutor]
+INFO 2022-02-17 11:43:51,593 [dag.py:686]     - rec
+INFO 2022-02-17 11:43:51,593 [dag.py:682] (VIEW 1)
+INFO 2022-02-17 11:43:51,593 [dag.py:684]   [rec]
+INFO 2022-02-17 11:43:51,593 [dag.py:687] -------------------------------------------
+INFO 2022-02-17 11:43:51,608 [dag.py:730] op:rec add input channel.
+INFO 2022-02-17 11:43:51,617 [dag.py:759] last op:rec add output channel
+INFO 2022-02-17 11:43:51,618 [dag.py:800] [DAG] Succ build DAG
+INFO 2022-02-17 11:43:51,622 [dag.py:832] [DAG] start
+INFO 2022-02-17 11:43:51,623 [dag.py:182] [DAG] set in channel succ, name [@DAGExecutor]
+INFO 2022-02-17 11:43:51,625 [pipeline_server.py:51] [PipelineServicer] succ init
+INFO 2022-02-17 11:43:51,632 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:None, precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 11:43:51,632 [operator.py:1306] Init cuda env in process 0
+INFO 2022-02-17 11:43:51,632 [local_service_handler.py:208] GET_CLIENT : concurrency_idx=0, device_num=1
+INFO 2022-02-17 11:43:52,682 [local_predict.py:153] LocalPredictor load_model_config params: model_path:./general_PPLCNet_x2_5_lite_v1.0_serving, use_gpu:True, gpu_id:0, use_profile:False, thread_num:2, mem_optim:True, ir_optim:False, use_trt:True, use_lite:False, use_xpu:False, precision:fp32, use_calib:False, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None, use_feed_fetch_ops:False, 
+INFO 2022-02-17 11:43:54,499 [operator.py:1317] [rec|0] Succ init
+INFO 2022-02-17 11:44:01,419 [pipeline_server.py:56] (log_id=0) inference request name:recognition self.name:recognition time:1645069441.419735
+INFO 2022-02-17 11:44:01,421 [operator.py:1723] RequestOp unpack one request. log_id:0, clientip:             name:recognition, method:prediction, time:1645069441.4209738
+INFO 2022-02-17 11:44:01,421 [dag.py:369] (data_id=0 log_id=0) Succ Generate ID 
+INFO 2022-02-17 11:44:04,142 [dag.py:405] (data_id=0 log_id=0) Succ predict
+WARNING 2022-02-17 11:45:00,971 [pipeline_server.py:509] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-17 11:45:00,971 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 11:45:00,971 [pipeline_server.py:509] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-17 11:45:00,971 [pipeline_server.py:509] [CONF] use_profile not set, use default: False
+WARNING 2022-02-17 11:45:00,971 [pipeline_server.py:509] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-17 11:45:00,971 [pipeline_server.py:509] [CONF] tracer not set, use default: {}
+WARNING 2022-02-17 11:45:00,972 [pipeline_server.py:509] [CONF] channel_recv_frist_arrive not set, use default: False
+WARNING 2022-02-17 11:45:00,972 [pipeline_server.py:509] [CONF] interval_s not set, use default: -1
+WARNING 2022-02-17 11:45:00,972 [pipeline_server.py:509] [CONF] timeout not set, use default: -1
+WARNING 2022-02-17 11:45:00,972 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 11:45:00,972 [pipeline_server.py:509] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-17 11:45:00,972 [pipeline_server.py:509] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-17 11:45:00,972 [pipeline_server.py:509] [CONF] workdir not set, use default: 
+WARNING 2022-02-17 11:45:00,972 [pipeline_server.py:509] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-17 11:45:00,972 [pipeline_server.py:509] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-17 11:45:00,972 [pipeline_server.py:509] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-17 11:45:00,972 [pipeline_server.py:509] [CONF] precision not set, use default: fp32
+WARNING 2022-02-17 11:45:00,972 [pipeline_server.py:509] [CONF] use_calib not set, use default: False
+WARNING 2022-02-17 11:45:00,972 [pipeline_server.py:509] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-17 11:45:00,972 [pipeline_server.py:509] [CONF] mkldnn_cache_capacity not set, use default: 0
+INFO 2022-02-17 11:45:00,983 [operator.py:181] local_service_conf: {'model_config': './general_PPLCNet_x2_5_lite_v1.0_serving', 'device_type': 2, 'devices': '0', 'client_type': 'local_predictor', 'fetch_list': ['feature'], 'workdir': '', 'thread_num': 2, 'mem_optim': True, 'ir_optim': False, 'precision': 'fp32', 'use_calib': False, 'use_mkldnn': False, 'mkldnn_cache_capacity': 0}
+INFO 2022-02-17 11:45:00,983 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:['feature'], precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 11:45:00,984 [operator.py:285] rec 
+	input_ops: @DAGExecutor,
+	server_endpoints: None
+	fetch_list: ['feature']
+	client_config: ./general_PPLCNet_x2_5_lite_v1.0_serving/serving_server_conf.prototxt
+	concurrency: 1,
+	timeout(s): -1,
+	retry: 1,
+	batch_size: 1,
+	auto_batching_timeout(s): None
+INFO 2022-02-17 11:45:00,984 [pipeline_server.py:215] ============= PIPELINE SERVER =============
+INFO 2022-02-17 11:45:00,984 [pipeline_server.py:218] 
+{
+    "worker_num":1,
+    "http_port":9315,
+    "rpc_port":9314,
+    "dag":{
+        "is_thread_op":false,
+        "retry":1,
+        "client_type":"brpc",
+        "use_profile":false,
+        "channel_size":0,
+        "tracer":{
+            "interval_s":-1
+        },
+        "channel_recv_frist_arrive":false
+    },
+    "op":{
+        "rec":{
+            "concurrency":1,
+            "local_service_conf":{
+                "model_config":"./general_PPLCNet_x2_5_lite_v1.0_serving",
+                "device_type":2,
+                "devices":"0",
+                "client_type":"local_predictor",
+                "fetch_list":[
+                    "feature"
+                ],
+                "workdir":"",
+                "thread_num":2,
+                "mem_optim":true,
+                "ir_optim":false,
+                "precision":"fp32",
+                "use_calib":false,
+                "use_mkldnn":false,
+                "mkldnn_cache_capacity":0
+            },
+            "timeout":-1,
+            "retry":1,
+            "batch_size":1,
+            "auto_batching_timeout":-1
+        }
+    },
+    "build_dag_each_worker":false
+}
+INFO 2022-02-17 11:45:00,984 [pipeline_server.py:223] -------------------------------------------
+INFO 2022-02-17 11:45:00,984 [operator.py:308] Op(rec) use local rpc service at port: []
+INFO 2022-02-17 11:45:00,996 [dag.py:496] [DAG] Succ init
+INFO 2022-02-17 11:45:00,997 [dag.py:659] ================= USED OP =================
+INFO 2022-02-17 11:45:00,997 [dag.py:662] rec
+INFO 2022-02-17 11:45:00,997 [dag.py:663] -------------------------------------------
+INFO 2022-02-17 11:45:00,997 [dag.py:680] ================== DAG ====================
+INFO 2022-02-17 11:45:00,997 [dag.py:682] (VIEW 0)
+INFO 2022-02-17 11:45:00,997 [dag.py:684]   [@DAGExecutor]
+INFO 2022-02-17 11:45:00,997 [dag.py:686]     - rec
+INFO 2022-02-17 11:45:00,997 [dag.py:682] (VIEW 1)
+INFO 2022-02-17 11:45:00,997 [dag.py:684]   [rec]
+INFO 2022-02-17 11:45:00,997 [dag.py:687] -------------------------------------------
+INFO 2022-02-17 11:45:01,012 [dag.py:730] op:rec add input channel.
+INFO 2022-02-17 11:45:01,022 [dag.py:759] last op:rec add output channel
+INFO 2022-02-17 11:45:01,022 [dag.py:800] [DAG] Succ build DAG
+INFO 2022-02-17 11:45:01,026 [dag.py:832] [DAG] start
+INFO 2022-02-17 11:45:01,027 [dag.py:182] [DAG] set in channel succ, name [@DAGExecutor]
+INFO 2022-02-17 11:45:01,029 [pipeline_server.py:51] [PipelineServicer] succ init
+INFO 2022-02-17 11:45:01,036 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:None, precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 11:45:01,037 [operator.py:1306] Init cuda env in process 0
+INFO 2022-02-17 11:45:01,037 [local_service_handler.py:208] GET_CLIENT : concurrency_idx=0, device_num=1
+INFO 2022-02-17 11:45:02,091 [local_predict.py:153] LocalPredictor load_model_config params: model_path:./general_PPLCNet_x2_5_lite_v1.0_serving, use_gpu:True, gpu_id:0, use_profile:False, thread_num:2, mem_optim:True, ir_optim:False, use_trt:True, use_lite:False, use_xpu:False, precision:fp32, use_calib:False, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None, use_feed_fetch_ops:False, 
+INFO 2022-02-17 11:45:03,902 [operator.py:1317] [rec|0] Succ init
+INFO 2022-02-17 11:45:06,447 [pipeline_server.py:56] (log_id=0) inference request name:recognition self.name:recognition time:1645069506.4474986
+INFO 2022-02-17 11:45:06,448 [operator.py:1723] RequestOp unpack one request. log_id:0, clientip:             name:recognition, method:prediction, time:1645069506.4486632
+INFO 2022-02-17 11:45:06,449 [dag.py:369] (data_id=0 log_id=0) Succ Generate ID 
+INFO 2022-02-17 11:45:09,237 [dag.py:405] (data_id=0 log_id=0) Succ predict
+WARNING 2022-02-17 11:49:47,902 [pipeline_server.py:509] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-17 11:49:47,902 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 11:49:47,902 [pipeline_server.py:509] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-17 11:49:47,902 [pipeline_server.py:509] [CONF] use_profile not set, use default: False
+WARNING 2022-02-17 11:49:47,902 [pipeline_server.py:509] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-17 11:49:47,902 [pipeline_server.py:509] [CONF] tracer not set, use default: {}
+WARNING 2022-02-17 11:49:47,903 [pipeline_server.py:509] [CONF] channel_recv_frist_arrive not set, use default: False
+WARNING 2022-02-17 11:49:47,903 [pipeline_server.py:509] [CONF] interval_s not set, use default: -1
+WARNING 2022-02-17 11:49:47,903 [pipeline_server.py:509] [CONF] timeout not set, use default: -1
+WARNING 2022-02-17 11:49:47,903 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 11:49:47,903 [pipeline_server.py:509] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-17 11:49:47,903 [pipeline_server.py:509] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-17 11:49:47,903 [pipeline_server.py:509] [CONF] workdir not set, use default: 
+WARNING 2022-02-17 11:49:47,903 [pipeline_server.py:509] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-17 11:49:47,903 [pipeline_server.py:509] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-17 11:49:47,903 [pipeline_server.py:509] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-17 11:49:47,903 [pipeline_server.py:509] [CONF] precision not set, use default: fp32
+WARNING 2022-02-17 11:49:47,903 [pipeline_server.py:509] [CONF] use_calib not set, use default: False
+WARNING 2022-02-17 11:49:47,903 [pipeline_server.py:509] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-17 11:49:47,903 [pipeline_server.py:509] [CONF] mkldnn_cache_capacity not set, use default: 0
+INFO 2022-02-17 11:49:47,978 [operator.py:181] local_service_conf: {'model_config': './general_PPLCNet_x2_5_lite_v1.0_serving', 'device_type': 2, 'devices': '0', 'client_type': 'local_predictor', 'fetch_list': ['feature'], 'workdir': '', 'thread_num': 2, 'mem_optim': True, 'ir_optim': False, 'precision': 'fp32', 'use_calib': False, 'use_mkldnn': False, 'mkldnn_cache_capacity': 0}
+INFO 2022-02-17 11:49:47,979 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:['feature'], precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 11:49:47,979 [operator.py:285] rec 
+	input_ops: @DAGExecutor,
+	server_endpoints: None
+	fetch_list: ['feature']
+	client_config: ./general_PPLCNet_x2_5_lite_v1.0_serving/serving_server_conf.prototxt
+	concurrency: 1,
+	timeout(s): -1,
+	retry: 1,
+	batch_size: 1,
+	auto_batching_timeout(s): None
+INFO 2022-02-17 11:49:47,979 [pipeline_server.py:215] ============= PIPELINE SERVER =============
+INFO 2022-02-17 11:49:47,979 [pipeline_server.py:218] 
+{
+    "worker_num":1,
+    "http_port":9315,
+    "rpc_port":9314,
+    "dag":{
+        "is_thread_op":false,
+        "retry":1,
+        "client_type":"brpc",
+        "use_profile":false,
+        "channel_size":0,
+        "tracer":{
+            "interval_s":-1
+        },
+        "channel_recv_frist_arrive":false
+    },
+    "op":{
+        "rec":{
+            "concurrency":1,
+            "local_service_conf":{
+                "model_config":"./general_PPLCNet_x2_5_lite_v1.0_serving",
+                "device_type":2,
+                "devices":"0",
+                "client_type":"local_predictor",
+                "fetch_list":[
+                    "feature"
+                ],
+                "workdir":"",
+                "thread_num":2,
+                "mem_optim":true,
+                "ir_optim":false,
+                "precision":"fp32",
+                "use_calib":false,
+                "use_mkldnn":false,
+                "mkldnn_cache_capacity":0
+            },
+            "timeout":-1,
+            "retry":1,
+            "batch_size":1,
+            "auto_batching_timeout":-1
+        }
+    },
+    "build_dag_each_worker":false
+}
+INFO 2022-02-17 11:49:47,979 [pipeline_server.py:223] -------------------------------------------
+INFO 2022-02-17 11:49:47,979 [operator.py:308] Op(rec) use local rpc service at port: []
+INFO 2022-02-17 11:49:47,991 [dag.py:496] [DAG] Succ init
+INFO 2022-02-17 11:49:47,992 [dag.py:659] ================= USED OP =================
+INFO 2022-02-17 11:49:47,992 [dag.py:662] rec
+INFO 2022-02-17 11:49:47,992 [dag.py:663] -------------------------------------------
+INFO 2022-02-17 11:49:47,992 [dag.py:680] ================== DAG ====================
+INFO 2022-02-17 11:49:47,992 [dag.py:682] (VIEW 0)
+INFO 2022-02-17 11:49:47,992 [dag.py:684]   [@DAGExecutor]
+INFO 2022-02-17 11:49:47,992 [dag.py:686]     - rec
+INFO 2022-02-17 11:49:47,992 [dag.py:682] (VIEW 1)
+INFO 2022-02-17 11:49:47,992 [dag.py:684]   [rec]
+INFO 2022-02-17 11:49:47,992 [dag.py:687] -------------------------------------------
+INFO 2022-02-17 11:49:48,007 [dag.py:730] op:rec add input channel.
+INFO 2022-02-17 11:49:48,017 [dag.py:759] last op:rec add output channel
+INFO 2022-02-17 11:49:48,017 [dag.py:800] [DAG] Succ build DAG
+INFO 2022-02-17 11:49:48,021 [dag.py:832] [DAG] start
+INFO 2022-02-17 11:49:48,022 [dag.py:182] [DAG] set in channel succ, name [@DAGExecutor]
+INFO 2022-02-17 11:49:48,024 [pipeline_server.py:51] [PipelineServicer] succ init
+INFO 2022-02-17 11:49:48,030 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:None, precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 11:49:48,030 [operator.py:1306] Init cuda env in process 0
+INFO 2022-02-17 11:49:48,030 [local_service_handler.py:208] GET_CLIENT : concurrency_idx=0, device_num=1
+INFO 2022-02-17 11:49:49,065 [local_predict.py:153] LocalPredictor load_model_config params: model_path:./general_PPLCNet_x2_5_lite_v1.0_serving, use_gpu:True, gpu_id:0, use_profile:False, thread_num:2, mem_optim:True, ir_optim:False, use_trt:True, use_lite:False, use_xpu:False, precision:fp32, use_calib:False, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None, use_feed_fetch_ops:False, 
+INFO 2022-02-17 11:49:50,923 [operator.py:1317] [rec|0] Succ init
+INFO 2022-02-17 11:49:51,725 [pipeline_server.py:56] (log_id=0) inference request name:recognition self.name:recognition time:1645069791.7250278
+INFO 2022-02-17 11:49:51,726 [operator.py:1723] RequestOp unpack one request. log_id:0, clientip:             name:recognition, method:prediction, time:1645069791.7262204
+INFO 2022-02-17 11:49:51,726 [dag.py:369] (data_id=0 log_id=0) Succ Generate ID 
+WARNING 2022-02-17 11:50:16,675 [pipeline_server.py:509] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-17 11:50:16,676 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 11:50:16,676 [pipeline_server.py:509] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-17 11:50:16,676 [pipeline_server.py:509] [CONF] use_profile not set, use default: False
+WARNING 2022-02-17 11:50:16,676 [pipeline_server.py:509] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-17 11:50:16,676 [pipeline_server.py:509] [CONF] tracer not set, use default: {}
+WARNING 2022-02-17 11:50:16,676 [pipeline_server.py:509] [CONF] channel_recv_frist_arrive not set, use default: False
+WARNING 2022-02-17 11:50:16,676 [pipeline_server.py:509] [CONF] interval_s not set, use default: -1
+WARNING 2022-02-17 11:50:16,676 [pipeline_server.py:509] [CONF] timeout not set, use default: -1
+WARNING 2022-02-17 11:50:16,676 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 11:50:16,677 [pipeline_server.py:509] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-17 11:50:16,677 [pipeline_server.py:509] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-17 11:50:16,677 [pipeline_server.py:509] [CONF] workdir not set, use default: 
+WARNING 2022-02-17 11:50:16,677 [pipeline_server.py:509] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-17 11:50:16,677 [pipeline_server.py:509] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-17 11:50:16,677 [pipeline_server.py:509] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-17 11:50:16,677 [pipeline_server.py:509] [CONF] precision not set, use default: fp32
+WARNING 2022-02-17 11:50:16,677 [pipeline_server.py:509] [CONF] use_calib not set, use default: False
+WARNING 2022-02-17 11:50:16,677 [pipeline_server.py:509] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-17 11:50:16,677 [pipeline_server.py:509] [CONF] mkldnn_cache_capacity not set, use default: 0
+INFO 2022-02-17 11:50:16,693 [operator.py:181] local_service_conf: {'model_config': './general_PPLCNet_x2_5_lite_v1.0_serving', 'device_type': 2, 'devices': '0', 'client_type': 'local_predictor', 'fetch_list': ['feature'], 'workdir': '', 'thread_num': 2, 'mem_optim': True, 'ir_optim': False, 'precision': 'fp32', 'use_calib': False, 'use_mkldnn': False, 'mkldnn_cache_capacity': 0}
+INFO 2022-02-17 11:50:16,694 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:['feature'], precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 11:50:16,694 [operator.py:285] rec 
+	input_ops: @DAGExecutor,
+	server_endpoints: None
+	fetch_list: ['feature']
+	client_config: ./general_PPLCNet_x2_5_lite_v1.0_serving/serving_server_conf.prototxt
+	concurrency: 1,
+	timeout(s): -1,
+	retry: 1,
+	batch_size: 1,
+	auto_batching_timeout(s): None
+INFO 2022-02-17 11:50:16,694 [pipeline_server.py:215] ============= PIPELINE SERVER =============
+INFO 2022-02-17 11:50:16,694 [pipeline_server.py:218] 
+{
+    "worker_num":1,
+    "http_port":9315,
+    "rpc_port":9314,
+    "dag":{
+        "is_thread_op":false,
+        "retry":1,
+        "client_type":"brpc",
+        "use_profile":false,
+        "channel_size":0,
+        "tracer":{
+            "interval_s":-1
+        },
+        "channel_recv_frist_arrive":false
+    },
+    "op":{
+        "rec":{
+            "concurrency":1,
+            "local_service_conf":{
+                "model_config":"./general_PPLCNet_x2_5_lite_v1.0_serving",
+                "device_type":2,
+                "devices":"0",
+                "client_type":"local_predictor",
+                "fetch_list":[
+                    "feature"
+                ],
+                "workdir":"",
+                "thread_num":2,
+                "mem_optim":true,
+                "ir_optim":false,
+                "precision":"fp32",
+                "use_calib":false,
+                "use_mkldnn":false,
+                "mkldnn_cache_capacity":0
+            },
+            "timeout":-1,
+            "retry":1,
+            "batch_size":1,
+            "auto_batching_timeout":-1
+        }
+    },
+    "build_dag_each_worker":false
+}
+INFO 2022-02-17 11:50:16,694 [pipeline_server.py:223] -------------------------------------------
+INFO 2022-02-17 11:50:16,694 [operator.py:308] Op(rec) use local rpc service at port: []
+INFO 2022-02-17 11:50:16,706 [dag.py:496] [DAG] Succ init
+INFO 2022-02-17 11:50:16,707 [dag.py:659] ================= USED OP =================
+INFO 2022-02-17 11:50:16,707 [dag.py:662] rec
+INFO 2022-02-17 11:50:16,707 [dag.py:663] -------------------------------------------
+INFO 2022-02-17 11:50:16,707 [dag.py:680] ================== DAG ====================
+INFO 2022-02-17 11:50:16,707 [dag.py:682] (VIEW 0)
+INFO 2022-02-17 11:50:16,707 [dag.py:684]   [@DAGExecutor]
+INFO 2022-02-17 11:50:16,707 [dag.py:686]     - rec
+INFO 2022-02-17 11:50:16,707 [dag.py:682] (VIEW 1)
+INFO 2022-02-17 11:50:16,707 [dag.py:684]   [rec]
+INFO 2022-02-17 11:50:16,707 [dag.py:687] -------------------------------------------
+INFO 2022-02-17 11:50:16,783 [dag.py:730] op:rec add input channel.
+INFO 2022-02-17 11:50:16,792 [dag.py:759] last op:rec add output channel
+INFO 2022-02-17 11:50:16,793 [dag.py:800] [DAG] Succ build DAG
+INFO 2022-02-17 11:50:16,797 [dag.py:832] [DAG] start
+INFO 2022-02-17 11:50:16,798 [dag.py:182] [DAG] set in channel succ, name [@DAGExecutor]
+INFO 2022-02-17 11:50:16,800 [pipeline_server.py:51] [PipelineServicer] succ init
+INFO 2022-02-17 11:50:16,807 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:None, precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 11:50:16,807 [operator.py:1306] Init cuda env in process 0
+INFO 2022-02-17 11:50:16,807 [local_service_handler.py:208] GET_CLIENT : concurrency_idx=0, device_num=1
+INFO 2022-02-17 11:50:17,851 [local_predict.py:153] LocalPredictor load_model_config params: model_path:./general_PPLCNet_x2_5_lite_v1.0_serving, use_gpu:True, gpu_id:0, use_profile:False, thread_num:2, mem_optim:True, ir_optim:False, use_trt:True, use_lite:False, use_xpu:False, precision:fp32, use_calib:False, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None, use_feed_fetch_ops:False, 
+INFO 2022-02-17 11:50:19,691 [operator.py:1317] [rec|0] Succ init
+INFO 2022-02-17 11:50:25,635 [pipeline_server.py:56] (log_id=0) inference request name:recognition self.name:recognition time:1645069825.635539
+INFO 2022-02-17 11:50:25,636 [operator.py:1723] RequestOp unpack one request. log_id:0, clientip:             name:recognition, method:prediction, time:1645069825.6367557
+INFO 2022-02-17 11:50:25,637 [dag.py:369] (data_id=0 log_id=0) Succ Generate ID 
+WARNING 2022-02-17 11:51:34,991 [pipeline_server.py:509] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-17 11:51:34,991 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 11:51:34,991 [pipeline_server.py:509] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-17 11:51:34,991 [pipeline_server.py:509] [CONF] use_profile not set, use default: False
+WARNING 2022-02-17 11:51:34,991 [pipeline_server.py:509] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-17 11:51:34,991 [pipeline_server.py:509] [CONF] tracer not set, use default: {}
+WARNING 2022-02-17 11:51:34,991 [pipeline_server.py:509] [CONF] channel_recv_frist_arrive not set, use default: False
+WARNING 2022-02-17 11:51:34,991 [pipeline_server.py:509] [CONF] interval_s not set, use default: -1
+WARNING 2022-02-17 11:51:34,991 [pipeline_server.py:509] [CONF] timeout not set, use default: -1
+WARNING 2022-02-17 11:51:34,991 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 11:51:34,991 [pipeline_server.py:509] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-17 11:51:34,991 [pipeline_server.py:509] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-17 11:51:34,991 [pipeline_server.py:509] [CONF] workdir not set, use default: 
+WARNING 2022-02-17 11:51:34,992 [pipeline_server.py:509] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-17 11:51:34,992 [pipeline_server.py:509] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-17 11:51:34,992 [pipeline_server.py:509] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-17 11:51:34,992 [pipeline_server.py:509] [CONF] precision not set, use default: fp32
+WARNING 2022-02-17 11:51:34,992 [pipeline_server.py:509] [CONF] use_calib not set, use default: False
+WARNING 2022-02-17 11:51:34,992 [pipeline_server.py:509] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-17 11:51:34,992 [pipeline_server.py:509] [CONF] mkldnn_cache_capacity not set, use default: 0
+INFO 2022-02-17 11:51:35,002 [operator.py:181] local_service_conf: {'model_config': './general_PPLCNet_x2_5_lite_v1.0_serving', 'device_type': 2, 'devices': '0', 'client_type': 'local_predictor', 'fetch_list': ['feature'], 'workdir': '', 'thread_num': 2, 'mem_optim': True, 'ir_optim': False, 'precision': 'fp32', 'use_calib': False, 'use_mkldnn': False, 'mkldnn_cache_capacity': 0}
+INFO 2022-02-17 11:51:35,003 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:['feature'], precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 11:51:35,003 [operator.py:285] rec 
+	input_ops: @DAGExecutor,
+	server_endpoints: None
+	fetch_list: ['feature']
+	client_config: ./general_PPLCNet_x2_5_lite_v1.0_serving/serving_server_conf.prototxt
+	concurrency: 1,
+	timeout(s): -1,
+	retry: 1,
+	batch_size: 1,
+	auto_batching_timeout(s): None
+INFO 2022-02-17 11:51:35,003 [pipeline_server.py:215] ============= PIPELINE SERVER =============
+INFO 2022-02-17 11:51:35,003 [pipeline_server.py:218] 
+{
+    "worker_num":1,
+    "http_port":9315,
+    "rpc_port":9314,
+    "dag":{
+        "is_thread_op":false,
+        "retry":1,
+        "client_type":"brpc",
+        "use_profile":false,
+        "channel_size":0,
+        "tracer":{
+            "interval_s":-1
+        },
+        "channel_recv_frist_arrive":false
+    },
+    "op":{
+        "rec":{
+            "concurrency":1,
+            "local_service_conf":{
+                "model_config":"./general_PPLCNet_x2_5_lite_v1.0_serving",
+                "device_type":2,
+                "devices":"0",
+                "client_type":"local_predictor",
+                "fetch_list":[
+                    "feature"
+                ],
+                "workdir":"",
+                "thread_num":2,
+                "mem_optim":true,
+                "ir_optim":false,
+                "precision":"fp32",
+                "use_calib":false,
+                "use_mkldnn":false,
+                "mkldnn_cache_capacity":0
+            },
+            "timeout":-1,
+            "retry":1,
+            "batch_size":1,
+            "auto_batching_timeout":-1
+        }
+    },
+    "build_dag_each_worker":false
+}
+INFO 2022-02-17 11:51:35,003 [pipeline_server.py:223] -------------------------------------------
+INFO 2022-02-17 11:51:35,003 [operator.py:308] Op(rec) use local rpc service at port: []
+INFO 2022-02-17 11:51:35,014 [dag.py:496] [DAG] Succ init
+INFO 2022-02-17 11:51:35,015 [dag.py:659] ================= USED OP =================
+INFO 2022-02-17 11:51:35,015 [dag.py:662] rec
+INFO 2022-02-17 11:51:35,015 [dag.py:663] -------------------------------------------
+INFO 2022-02-17 11:51:35,015 [dag.py:680] ================== DAG ====================
+INFO 2022-02-17 11:51:35,015 [dag.py:682] (VIEW 0)
+INFO 2022-02-17 11:51:35,015 [dag.py:684]   [@DAGExecutor]
+INFO 2022-02-17 11:51:35,015 [dag.py:686]     - rec
+INFO 2022-02-17 11:51:35,015 [dag.py:682] (VIEW 1)
+INFO 2022-02-17 11:51:35,015 [dag.py:684]   [rec]
+INFO 2022-02-17 11:51:35,015 [dag.py:687] -------------------------------------------
+INFO 2022-02-17 11:51:35,030 [dag.py:730] op:rec add input channel.
+INFO 2022-02-17 11:51:35,040 [dag.py:759] last op:rec add output channel
+INFO 2022-02-17 11:51:35,040 [dag.py:800] [DAG] Succ build DAG
+INFO 2022-02-17 11:51:35,043 [dag.py:832] [DAG] start
+INFO 2022-02-17 11:51:35,044 [dag.py:182] [DAG] set in channel succ, name [@DAGExecutor]
+INFO 2022-02-17 11:51:35,046 [pipeline_server.py:51] [PipelineServicer] succ init
+INFO 2022-02-17 11:51:35,052 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:None, precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 11:51:35,053 [operator.py:1306] Init cuda env in process 0
+INFO 2022-02-17 11:51:35,053 [local_service_handler.py:208] GET_CLIENT : concurrency_idx=0, device_num=1
+INFO 2022-02-17 11:51:36,063 [local_predict.py:153] LocalPredictor load_model_config params: model_path:./general_PPLCNet_x2_5_lite_v1.0_serving, use_gpu:True, gpu_id:0, use_profile:False, thread_num:2, mem_optim:True, ir_optim:False, use_trt:True, use_lite:False, use_xpu:False, precision:fp32, use_calib:False, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None, use_feed_fetch_ops:False, 
+INFO 2022-02-17 11:51:37,907 [operator.py:1317] [rec|0] Succ init
+INFO 2022-02-17 11:51:40,088 [pipeline_server.py:56] (log_id=0) inference request name:recognition self.name:recognition time:1645069900.0879674
+INFO 2022-02-17 11:51:40,089 [operator.py:1723] RequestOp unpack one request. log_id:0, clientip:             name:recognition, method:prediction, time:1645069900.0891907
+INFO 2022-02-17 11:51:40,089 [dag.py:369] (data_id=0 log_id=0) Succ Generate ID 
+INFO 2022-02-17 11:51:42,801 [dag.py:405] (data_id=0 log_id=0) Succ predict
+WARNING 2022-02-17 13:15:00,101 [pipeline_server.py:509] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-17 13:15:00,101 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 13:15:00,101 [pipeline_server.py:509] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-17 13:15:00,101 [pipeline_server.py:509] [CONF] use_profile not set, use default: False
+WARNING 2022-02-17 13:15:00,101 [pipeline_server.py:509] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-17 13:15:00,101 [pipeline_server.py:509] [CONF] tracer not set, use default: {}
+WARNING 2022-02-17 13:15:00,101 [pipeline_server.py:509] [CONF] channel_recv_frist_arrive not set, use default: False
+WARNING 2022-02-17 13:15:00,101 [pipeline_server.py:509] [CONF] interval_s not set, use default: -1
+WARNING 2022-02-17 13:15:00,101 [pipeline_server.py:509] [CONF] timeout not set, use default: -1
+WARNING 2022-02-17 13:15:00,101 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 13:15:00,101 [pipeline_server.py:509] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-17 13:15:00,101 [pipeline_server.py:509] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-17 13:15:00,101 [pipeline_server.py:509] [CONF] workdir not set, use default: 
+WARNING 2022-02-17 13:15:00,101 [pipeline_server.py:509] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-17 13:15:00,102 [pipeline_server.py:509] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-17 13:15:00,102 [pipeline_server.py:509] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-17 13:15:00,102 [pipeline_server.py:509] [CONF] precision not set, use default: fp32
+WARNING 2022-02-17 13:15:00,102 [pipeline_server.py:509] [CONF] use_calib not set, use default: False
+WARNING 2022-02-17 13:15:00,102 [pipeline_server.py:509] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-17 13:15:00,102 [pipeline_server.py:509] [CONF] mkldnn_cache_capacity not set, use default: 0
+WARNING 2022-02-17 13:15:19,771 [pipeline_server.py:509] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-17 13:15:19,771 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 13:15:19,771 [pipeline_server.py:509] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-17 13:15:19,771 [pipeline_server.py:509] [CONF] use_profile not set, use default: False
+WARNING 2022-02-17 13:15:19,771 [pipeline_server.py:509] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-17 13:15:19,771 [pipeline_server.py:509] [CONF] tracer not set, use default: {}
+WARNING 2022-02-17 13:15:19,771 [pipeline_server.py:509] [CONF] channel_recv_frist_arrive not set, use default: False
+WARNING 2022-02-17 13:15:19,771 [pipeline_server.py:509] [CONF] interval_s not set, use default: -1
+WARNING 2022-02-17 13:15:19,771 [pipeline_server.py:509] [CONF] timeout not set, use default: -1
+WARNING 2022-02-17 13:15:19,771 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 13:15:19,771 [pipeline_server.py:509] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-17 13:15:19,771 [pipeline_server.py:509] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-17 13:15:19,772 [pipeline_server.py:509] [CONF] workdir not set, use default: 
+WARNING 2022-02-17 13:15:19,772 [pipeline_server.py:509] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-17 13:15:19,772 [pipeline_server.py:509] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-17 13:15:19,772 [pipeline_server.py:509] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-17 13:15:19,772 [pipeline_server.py:509] [CONF] precision not set, use default: fp32
+WARNING 2022-02-17 13:15:19,772 [pipeline_server.py:509] [CONF] use_calib not set, use default: False
+WARNING 2022-02-17 13:15:19,772 [pipeline_server.py:509] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-17 13:15:19,772 [pipeline_server.py:509] [CONF] mkldnn_cache_capacity not set, use default: 0
+INFO 2022-02-17 13:15:19,783 [operator.py:181] local_service_conf: {'model_config': './general_PPLCNet_x2_5_lite_v1.0_serving', 'device_type': 2, 'devices': '0', 'client_type': 'local_predictor', 'fetch_list': ['feature'], 'workdir': '', 'thread_num': 2, 'mem_optim': True, 'ir_optim': False, 'precision': 'fp32', 'use_calib': False, 'use_mkldnn': False, 'mkldnn_cache_capacity': 0}
+INFO 2022-02-17 13:15:19,783 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:['feature'], precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 13:15:19,783 [operator.py:285] rec 
+	input_ops: @DAGExecutor,
+	server_endpoints: None
+	fetch_list: ['feature']
+	client_config: ./general_PPLCNet_x2_5_lite_v1.0_serving/serving_server_conf.prototxt
+	concurrency: 1,
+	timeout(s): -1,
+	retry: 1,
+	batch_size: 1,
+	auto_batching_timeout(s): None
+INFO 2022-02-17 13:15:19,784 [pipeline_server.py:215] ============= PIPELINE SERVER =============
+INFO 2022-02-17 13:15:19,784 [pipeline_server.py:218] 
+{
+    "worker_num":1,
+    "http_port":9315,
+    "rpc_port":9314,
+    "dag":{
+        "is_thread_op":false,
+        "retry":1,
+        "client_type":"brpc",
+        "use_profile":false,
+        "channel_size":0,
+        "tracer":{
+            "interval_s":-1
+        },
+        "channel_recv_frist_arrive":false
+    },
+    "op":{
+        "rec":{
+            "concurrency":1,
+            "local_service_conf":{
+                "model_config":"./general_PPLCNet_x2_5_lite_v1.0_serving",
+                "device_type":2,
+                "devices":"0",
+                "client_type":"local_predictor",
+                "fetch_list":[
+                    "feature"
+                ],
+                "workdir":"",
+                "thread_num":2,
+                "mem_optim":true,
+                "ir_optim":false,
+                "precision":"fp32",
+                "use_calib":false,
+                "use_mkldnn":false,
+                "mkldnn_cache_capacity":0
+            },
+            "timeout":-1,
+            "retry":1,
+            "batch_size":1,
+            "auto_batching_timeout":-1
+        }
+    },
+    "build_dag_each_worker":false
+}
+INFO 2022-02-17 13:15:19,784 [pipeline_server.py:223] -------------------------------------------
+INFO 2022-02-17 13:15:19,784 [operator.py:308] Op(rec) use local rpc service at port: []
+INFO 2022-02-17 13:15:19,796 [dag.py:496] [DAG] Succ init
+INFO 2022-02-17 13:15:19,797 [dag.py:659] ================= USED OP =================
+INFO 2022-02-17 13:15:19,797 [dag.py:662] rec
+INFO 2022-02-17 13:15:19,797 [dag.py:663] -------------------------------------------
+INFO 2022-02-17 13:15:19,797 [dag.py:680] ================== DAG ====================
+INFO 2022-02-17 13:15:19,797 [dag.py:682] (VIEW 0)
+INFO 2022-02-17 13:15:19,797 [dag.py:684]   [@DAGExecutor]
+INFO 2022-02-17 13:15:19,797 [dag.py:686]     - rec
+INFO 2022-02-17 13:15:19,797 [dag.py:682] (VIEW 1)
+INFO 2022-02-17 13:15:19,797 [dag.py:684]   [rec]
+INFO 2022-02-17 13:15:19,797 [dag.py:687] -------------------------------------------
+INFO 2022-02-17 13:15:19,813 [dag.py:730] op:rec add input channel.
+INFO 2022-02-17 13:15:19,822 [dag.py:759] last op:rec add output channel
+INFO 2022-02-17 13:15:19,823 [dag.py:800] [DAG] Succ build DAG
+INFO 2022-02-17 13:15:19,827 [dag.py:832] [DAG] start
+INFO 2022-02-17 13:15:19,828 [dag.py:182] [DAG] set in channel succ, name [@DAGExecutor]
+INFO 2022-02-17 13:15:19,830 [pipeline_server.py:51] [PipelineServicer] succ init
+INFO 2022-02-17 13:15:19,837 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:None, precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 13:15:19,837 [operator.py:1306] Init cuda env in process 0
+INFO 2022-02-17 13:15:19,838 [local_service_handler.py:208] GET_CLIENT : concurrency_idx=0, device_num=1
+INFO 2022-02-17 13:15:20,885 [local_predict.py:153] LocalPredictor load_model_config params: model_path:./general_PPLCNet_x2_5_lite_v1.0_serving, use_gpu:True, gpu_id:0, use_profile:False, thread_num:2, mem_optim:True, ir_optim:False, use_trt:True, use_lite:False, use_xpu:False, precision:fp32, use_calib:False, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None, use_feed_fetch_ops:False, 
+INFO 2022-02-17 13:15:22,721 [operator.py:1317] [rec|0] Succ init
+INFO 2022-02-17 13:15:27,334 [pipeline_server.py:56] (log_id=0) inference request name:recognition self.name:recognition time:1645074927.3338962
+INFO 2022-02-17 13:15:27,335 [operator.py:1723] RequestOp unpack one request. log_id:0, clientip:             name:recognition, method:prediction, time:1645074927.3350475
+INFO 2022-02-17 13:15:27,335 [dag.py:369] (data_id=0 log_id=0) Succ Generate ID 
+INFO 2022-02-17 13:15:30,083 [dag.py:405] (data_id=0 log_id=0) Succ predict
+WARNING 2022-02-17 13:24:47,291 [pipeline_server.py:509] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-17 13:24:47,292 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 13:24:47,292 [pipeline_server.py:509] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-17 13:24:47,292 [pipeline_server.py:509] [CONF] use_profile not set, use default: False
+WARNING 2022-02-17 13:24:47,292 [pipeline_server.py:509] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-17 13:24:47,292 [pipeline_server.py:509] [CONF] tracer not set, use default: {}
+WARNING 2022-02-17 13:24:47,292 [pipeline_server.py:509] [CONF] channel_recv_frist_arrive not set, use default: False
+WARNING 2022-02-17 13:24:47,292 [pipeline_server.py:509] [CONF] interval_s not set, use default: -1
+WARNING 2022-02-17 13:24:47,292 [pipeline_server.py:509] [CONF] timeout not set, use default: -1
+WARNING 2022-02-17 13:24:47,292 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 13:24:47,292 [pipeline_server.py:509] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-17 13:24:47,292 [pipeline_server.py:509] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-17 13:24:47,292 [pipeline_server.py:509] [CONF] workdir not set, use default: 
+WARNING 2022-02-17 13:24:47,292 [pipeline_server.py:509] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-17 13:24:47,292 [pipeline_server.py:509] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-17 13:24:47,292 [pipeline_server.py:509] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-17 13:24:47,292 [pipeline_server.py:509] [CONF] precision not set, use default: fp32
+WARNING 2022-02-17 13:24:47,292 [pipeline_server.py:509] [CONF] use_calib not set, use default: False
+WARNING 2022-02-17 13:24:47,292 [pipeline_server.py:509] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-17 13:24:47,292 [pipeline_server.py:509] [CONF] mkldnn_cache_capacity not set, use default: 0
+INFO 2022-02-17 13:24:47,303 [operator.py:181] local_service_conf: {'model_config': './general_PPLCNet_x2_5_lite_v1.0_serving', 'device_type': 2, 'devices': '0', 'client_type': 'local_predictor', 'fetch_list': ['feature'], 'workdir': '', 'thread_num': 2, 'mem_optim': True, 'ir_optim': False, 'precision': 'fp32', 'use_calib': False, 'use_mkldnn': False, 'mkldnn_cache_capacity': 0}
+INFO 2022-02-17 13:24:47,303 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:['feature'], precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 13:24:47,303 [operator.py:285] rec 
+	input_ops: @DAGExecutor,
+	server_endpoints: None
+	fetch_list: ['feature']
+	client_config: ./general_PPLCNet_x2_5_lite_v1.0_serving/serving_server_conf.prototxt
+	concurrency: 1,
+	timeout(s): -1,
+	retry: 1,
+	batch_size: 1,
+	auto_batching_timeout(s): None
+INFO 2022-02-17 13:24:47,303 [pipeline_server.py:215] ============= PIPELINE SERVER =============
+INFO 2022-02-17 13:24:47,303 [pipeline_server.py:218] 
+{
+    "worker_num":1,
+    "http_port":9315,
+    "rpc_port":9314,
+    "dag":{
+        "is_thread_op":false,
+        "retry":1,
+        "client_type":"brpc",
+        "use_profile":false,
+        "channel_size":0,
+        "tracer":{
+            "interval_s":-1
+        },
+        "channel_recv_frist_arrive":false
+    },
+    "op":{
+        "rec":{
+            "concurrency":1,
+            "local_service_conf":{
+                "model_config":"./general_PPLCNet_x2_5_lite_v1.0_serving",
+                "device_type":2,
+                "devices":"0",
+                "client_type":"local_predictor",
+                "fetch_list":[
+                    "feature"
+                ],
+                "workdir":"",
+                "thread_num":2,
+                "mem_optim":true,
+                "ir_optim":false,
+                "precision":"fp32",
+                "use_calib":false,
+                "use_mkldnn":false,
+                "mkldnn_cache_capacity":0
+            },
+            "timeout":-1,
+            "retry":1,
+            "batch_size":1,
+            "auto_batching_timeout":-1
+        }
+    },
+    "build_dag_each_worker":false
+}
+INFO 2022-02-17 13:24:47,303 [pipeline_server.py:223] -------------------------------------------
+INFO 2022-02-17 13:24:47,303 [operator.py:308] Op(rec) use local rpc service at port: []
+INFO 2022-02-17 13:24:47,314 [dag.py:496] [DAG] Succ init
+INFO 2022-02-17 13:24:47,315 [dag.py:659] ================= USED OP =================
+INFO 2022-02-17 13:24:47,315 [dag.py:662] rec
+INFO 2022-02-17 13:24:47,315 [dag.py:663] -------------------------------------------
+INFO 2022-02-17 13:24:47,315 [dag.py:680] ================== DAG ====================
+INFO 2022-02-17 13:24:47,315 [dag.py:682] (VIEW 0)
+INFO 2022-02-17 13:24:47,315 [dag.py:684]   [@DAGExecutor]
+INFO 2022-02-17 13:24:47,315 [dag.py:686]     - rec
+INFO 2022-02-17 13:24:47,315 [dag.py:682] (VIEW 1)
+INFO 2022-02-17 13:24:47,315 [dag.py:684]   [rec]
+INFO 2022-02-17 13:24:47,315 [dag.py:687] -------------------------------------------
+INFO 2022-02-17 13:24:47,330 [dag.py:730] op:rec add input channel.
+INFO 2022-02-17 13:24:47,340 [dag.py:759] last op:rec add output channel
+INFO 2022-02-17 13:24:47,340 [dag.py:800] [DAG] Succ build DAG
+INFO 2022-02-17 13:24:47,344 [dag.py:832] [DAG] start
+INFO 2022-02-17 13:24:47,345 [dag.py:182] [DAG] set in channel succ, name [@DAGExecutor]
+INFO 2022-02-17 13:24:47,347 [pipeline_server.py:51] [PipelineServicer] succ init
+INFO 2022-02-17 13:24:47,354 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:None, precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 13:24:47,354 [operator.py:1306] Init cuda env in process 0
+INFO 2022-02-17 13:24:47,354 [local_service_handler.py:208] GET_CLIENT : concurrency_idx=0, device_num=1
+INFO 2022-02-17 13:24:48,445 [local_predict.py:153] LocalPredictor load_model_config params: model_path:./general_PPLCNet_x2_5_lite_v1.0_serving, use_gpu:True, gpu_id:0, use_profile:False, thread_num:2, mem_optim:True, ir_optim:False, use_trt:True, use_lite:False, use_xpu:False, precision:fp32, use_calib:False, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None, use_feed_fetch_ops:False, 
+INFO 2022-02-17 13:24:50,308 [operator.py:1317] [rec|0] Succ init
+INFO 2022-02-17 13:24:52,415 [pipeline_server.py:56] (log_id=0) inference request name:recognition self.name:recognition time:1645075492.4151294
+INFO 2022-02-17 13:24:52,416 [operator.py:1723] RequestOp unpack one request. log_id:0, clientip:             name:recognition, method:prediction, time:1645075492.416351
+INFO 2022-02-17 13:24:52,416 [dag.py:369] (data_id=0 log_id=0) Succ Generate ID 
+INFO 2022-02-17 13:24:55,206 [dag.py:405] (data_id=0 log_id=0) Succ predict
+WARNING 2022-02-17 13:25:34,907 [pipeline_server.py:509] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-17 13:25:34,968 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 13:25:34,968 [pipeline_server.py:509] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-17 13:25:34,968 [pipeline_server.py:509] [CONF] use_profile not set, use default: False
+WARNING 2022-02-17 13:25:34,968 [pipeline_server.py:509] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-17 13:25:34,968 [pipeline_server.py:509] [CONF] tracer not set, use default: {}
+WARNING 2022-02-17 13:25:34,968 [pipeline_server.py:509] [CONF] channel_recv_frist_arrive not set, use default: False
+WARNING 2022-02-17 13:25:34,968 [pipeline_server.py:509] [CONF] interval_s not set, use default: -1
+WARNING 2022-02-17 13:25:34,968 [pipeline_server.py:509] [CONF] timeout not set, use default: -1
+WARNING 2022-02-17 13:25:34,969 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 13:25:34,969 [pipeline_server.py:509] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-17 13:25:34,969 [pipeline_server.py:509] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-17 13:25:34,969 [pipeline_server.py:509] [CONF] workdir not set, use default: 
+WARNING 2022-02-17 13:25:34,969 [pipeline_server.py:509] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-17 13:25:34,969 [pipeline_server.py:509] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-17 13:25:34,969 [pipeline_server.py:509] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-17 13:25:34,969 [pipeline_server.py:509] [CONF] precision not set, use default: fp32
+WARNING 2022-02-17 13:25:34,969 [pipeline_server.py:509] [CONF] use_calib not set, use default: False
+WARNING 2022-02-17 13:25:34,969 [pipeline_server.py:509] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-17 13:25:34,969 [pipeline_server.py:509] [CONF] mkldnn_cache_capacity not set, use default: 0
+INFO 2022-02-17 13:25:34,980 [operator.py:181] local_service_conf: {'model_config': './general_PPLCNet_x2_5_lite_v1.0_serving', 'device_type': 2, 'devices': '0', 'client_type': 'local_predictor', 'fetch_list': ['feature'], 'workdir': '', 'thread_num': 2, 'mem_optim': True, 'ir_optim': False, 'precision': 'fp32', 'use_calib': False, 'use_mkldnn': False, 'mkldnn_cache_capacity': 0}
+INFO 2022-02-17 13:25:34,980 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:['feature'], precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 13:25:34,980 [operator.py:285] rec 
+	input_ops: @DAGExecutor,
+	server_endpoints: None
+	fetch_list: ['feature']
+	client_config: ./general_PPLCNet_x2_5_lite_v1.0_serving/serving_server_conf.prototxt
+	concurrency: 1,
+	timeout(s): -1,
+	retry: 1,
+	batch_size: 1,
+	auto_batching_timeout(s): None
+INFO 2022-02-17 13:25:34,981 [pipeline_server.py:215] ============= PIPELINE SERVER =============
+INFO 2022-02-17 13:25:34,981 [pipeline_server.py:218] 
+{
+    "worker_num":1,
+    "http_port":9315,
+    "rpc_port":9314,
+    "dag":{
+        "is_thread_op":false,
+        "retry":1,
+        "client_type":"brpc",
+        "use_profile":false,
+        "channel_size":0,
+        "tracer":{
+            "interval_s":-1
+        },
+        "channel_recv_frist_arrive":false
+    },
+    "op":{
+        "rec":{
+            "concurrency":1,
+            "local_service_conf":{
+                "model_config":"./general_PPLCNet_x2_5_lite_v1.0_serving",
+                "device_type":2,
+                "devices":"0",
+                "client_type":"local_predictor",
+                "fetch_list":[
+                    "feature"
+                ],
+                "workdir":"",
+                "thread_num":2,
+                "mem_optim":true,
+                "ir_optim":false,
+                "precision":"fp32",
+                "use_calib":false,
+                "use_mkldnn":false,
+                "mkldnn_cache_capacity":0
+            },
+            "timeout":-1,
+            "retry":1,
+            "batch_size":1,
+            "auto_batching_timeout":-1
+        }
+    },
+    "build_dag_each_worker":false
+}
+INFO 2022-02-17 13:25:34,981 [pipeline_server.py:223] -------------------------------------------
+INFO 2022-02-17 13:25:34,981 [operator.py:308] Op(rec) use local rpc service at port: []
+INFO 2022-02-17 13:25:34,993 [dag.py:496] [DAG] Succ init
+INFO 2022-02-17 13:25:34,994 [dag.py:659] ================= USED OP =================
+INFO 2022-02-17 13:25:34,994 [dag.py:662] rec
+INFO 2022-02-17 13:25:34,994 [dag.py:663] -------------------------------------------
+INFO 2022-02-17 13:25:34,994 [dag.py:680] ================== DAG ====================
+INFO 2022-02-17 13:25:34,994 [dag.py:682] (VIEW 0)
+INFO 2022-02-17 13:25:34,994 [dag.py:684]   [@DAGExecutor]
+INFO 2022-02-17 13:25:34,994 [dag.py:686]     - rec
+INFO 2022-02-17 13:25:34,994 [dag.py:682] (VIEW 1)
+INFO 2022-02-17 13:25:34,994 [dag.py:684]   [rec]
+INFO 2022-02-17 13:25:34,994 [dag.py:687] -------------------------------------------
+INFO 2022-02-17 13:25:35,010 [dag.py:730] op:rec add input channel.
+INFO 2022-02-17 13:25:35,019 [dag.py:759] last op:rec add output channel
+INFO 2022-02-17 13:25:35,020 [dag.py:800] [DAG] Succ build DAG
+INFO 2022-02-17 13:25:35,024 [dag.py:832] [DAG] start
+INFO 2022-02-17 13:25:35,024 [dag.py:182] [DAG] set in channel succ, name [@DAGExecutor]
+INFO 2022-02-17 13:25:35,026 [pipeline_server.py:51] [PipelineServicer] succ init
+INFO 2022-02-17 13:25:35,033 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:None, precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 13:25:35,034 [operator.py:1306] Init cuda env in process 0
+INFO 2022-02-17 13:25:35,034 [local_service_handler.py:208] GET_CLIENT : concurrency_idx=0, device_num=1
+INFO 2022-02-17 13:25:36,103 [local_predict.py:153] LocalPredictor load_model_config params: model_path:./general_PPLCNet_x2_5_lite_v1.0_serving, use_gpu:True, gpu_id:0, use_profile:False, thread_num:2, mem_optim:True, ir_optim:False, use_trt:True, use_lite:False, use_xpu:False, precision:fp32, use_calib:False, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None, use_feed_fetch_ops:False, 
+INFO 2022-02-17 13:25:37,964 [operator.py:1317] [rec|0] Succ init
+INFO 2022-02-17 13:25:39,558 [pipeline_server.py:56] (log_id=0) inference request name:recognition self.name:recognition time:1645075539.5582185
+INFO 2022-02-17 13:25:39,559 [operator.py:1723] RequestOp unpack one request. log_id:0, clientip:             name:recognition, method:prediction, time:1645075539.5594082
+INFO 2022-02-17 13:25:39,559 [dag.py:369] (data_id=0 log_id=0) Succ Generate ID 
+WARNING 2022-02-17 13:28:35,990 [pipeline_server.py:509] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-17 13:28:35,990 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 13:28:35,990 [pipeline_server.py:509] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-17 13:28:35,990 [pipeline_server.py:509] [CONF] use_profile not set, use default: False
+WARNING 2022-02-17 13:28:35,990 [pipeline_server.py:509] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-17 13:28:35,990 [pipeline_server.py:509] [CONF] tracer not set, use default: {}
+WARNING 2022-02-17 13:28:35,990 [pipeline_server.py:509] [CONF] channel_recv_frist_arrive not set, use default: False
+WARNING 2022-02-17 13:28:35,990 [pipeline_server.py:509] [CONF] interval_s not set, use default: -1
+WARNING 2022-02-17 13:28:35,990 [pipeline_server.py:509] [CONF] timeout not set, use default: -1
+WARNING 2022-02-17 13:28:35,990 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 13:28:35,990 [pipeline_server.py:509] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-17 13:28:35,990 [pipeline_server.py:509] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-17 13:28:35,991 [pipeline_server.py:509] [CONF] workdir not set, use default: 
+WARNING 2022-02-17 13:28:35,991 [pipeline_server.py:509] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-17 13:28:35,991 [pipeline_server.py:509] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-17 13:28:35,991 [pipeline_server.py:509] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-17 13:28:35,991 [pipeline_server.py:509] [CONF] precision not set, use default: fp32
+WARNING 2022-02-17 13:28:35,991 [pipeline_server.py:509] [CONF] use_calib not set, use default: False
+WARNING 2022-02-17 13:28:35,991 [pipeline_server.py:509] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-17 13:28:35,991 [pipeline_server.py:509] [CONF] mkldnn_cache_capacity not set, use default: 0
+INFO 2022-02-17 13:28:36,002 [operator.py:181] local_service_conf: {'model_config': './general_PPLCNet_x2_5_lite_v1.0_serving', 'device_type': 2, 'devices': '0', 'client_type': 'local_predictor', 'fetch_list': ['feature'], 'workdir': '', 'thread_num': 2, 'mem_optim': True, 'ir_optim': False, 'precision': 'fp32', 'use_calib': False, 'use_mkldnn': False, 'mkldnn_cache_capacity': 0}
+INFO 2022-02-17 13:28:36,002 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:['feature'], precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 13:28:36,002 [operator.py:285] rec 
+	input_ops: @DAGExecutor,
+	server_endpoints: None
+	fetch_list: ['feature']
+	client_config: ./general_PPLCNet_x2_5_lite_v1.0_serving/serving_server_conf.prototxt
+	concurrency: 1,
+	timeout(s): -1,
+	retry: 1,
+	batch_size: 1,
+	auto_batching_timeout(s): None
+INFO 2022-02-17 13:28:36,002 [pipeline_server.py:215] ============= PIPELINE SERVER =============
+INFO 2022-02-17 13:28:36,002 [pipeline_server.py:218] 
+{
+    "worker_num":1,
+    "http_port":9315,
+    "rpc_port":9314,
+    "dag":{
+        "is_thread_op":false,
+        "retry":1,
+        "client_type":"brpc",
+        "use_profile":false,
+        "channel_size":0,
+        "tracer":{
+            "interval_s":-1
+        },
+        "channel_recv_frist_arrive":false
+    },
+    "op":{
+        "rec":{
+            "concurrency":1,
+            "local_service_conf":{
+                "model_config":"./general_PPLCNet_x2_5_lite_v1.0_serving",
+                "device_type":2,
+                "devices":"0",
+                "client_type":"local_predictor",
+                "fetch_list":[
+                    "feature"
+                ],
+                "workdir":"",
+                "thread_num":2,
+                "mem_optim":true,
+                "ir_optim":false,
+                "precision":"fp32",
+                "use_calib":false,
+                "use_mkldnn":false,
+                "mkldnn_cache_capacity":0
+            },
+            "timeout":-1,
+            "retry":1,
+            "batch_size":1,
+            "auto_batching_timeout":-1
+        }
+    },
+    "build_dag_each_worker":false
+}
+INFO 2022-02-17 13:28:36,002 [pipeline_server.py:223] -------------------------------------------
+INFO 2022-02-17 13:28:36,002 [operator.py:308] Op(rec) use local rpc service at port: []
+INFO 2022-02-17 13:28:36,014 [dag.py:496] [DAG] Succ init
+INFO 2022-02-17 13:28:36,014 [dag.py:659] ================= USED OP =================
+INFO 2022-02-17 13:28:36,015 [dag.py:662] rec
+INFO 2022-02-17 13:28:36,015 [dag.py:663] -------------------------------------------
+INFO 2022-02-17 13:28:36,015 [dag.py:680] ================== DAG ====================
+INFO 2022-02-17 13:28:36,015 [dag.py:682] (VIEW 0)
+INFO 2022-02-17 13:28:36,015 [dag.py:684]   [@DAGExecutor]
+INFO 2022-02-17 13:28:36,015 [dag.py:686]     - rec
+INFO 2022-02-17 13:28:36,015 [dag.py:682] (VIEW 1)
+INFO 2022-02-17 13:28:36,015 [dag.py:684]   [rec]
+INFO 2022-02-17 13:28:36,015 [dag.py:687] -------------------------------------------
+INFO 2022-02-17 13:28:36,030 [dag.py:730] op:rec add input channel.
+INFO 2022-02-17 13:28:36,039 [dag.py:759] last op:rec add output channel
+INFO 2022-02-17 13:28:36,039 [dag.py:800] [DAG] Succ build DAG
+INFO 2022-02-17 13:28:36,043 [dag.py:832] [DAG] start
+INFO 2022-02-17 13:28:36,044 [dag.py:182] [DAG] set in channel succ, name [@DAGExecutor]
+INFO 2022-02-17 13:28:36,046 [pipeline_server.py:51] [PipelineServicer] succ init
+INFO 2022-02-17 13:28:36,053 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:None, precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 13:28:36,053 [operator.py:1306] Init cuda env in process 0
+INFO 2022-02-17 13:28:36,053 [local_service_handler.py:208] GET_CLIENT : concurrency_idx=0, device_num=1
+INFO 2022-02-17 13:28:37,113 [local_predict.py:153] LocalPredictor load_model_config params: model_path:./general_PPLCNet_x2_5_lite_v1.0_serving, use_gpu:True, gpu_id:0, use_profile:False, thread_num:2, mem_optim:True, ir_optim:False, use_trt:True, use_lite:False, use_xpu:False, precision:fp32, use_calib:False, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None, use_feed_fetch_ops:False, 
+INFO 2022-02-17 13:28:38,927 [operator.py:1317] [rec|0] Succ init
+INFO 2022-02-17 13:28:44,185 [pipeline_server.py:56] (log_id=0) inference request name:recognition self.name:recognition time:1645075724.1851497
+INFO 2022-02-17 13:28:44,186 [operator.py:1723] RequestOp unpack one request. log_id:0, clientip:             name:recognition, method:prediction, time:1645075724.186309
+INFO 2022-02-17 13:28:44,186 [dag.py:369] (data_id=0 log_id=0) Succ Generate ID 
+INFO 2022-02-17 13:28:46,924 [dag.py:405] (data_id=0 log_id=0) Succ predict
+WARNING 2022-02-17 13:33:50,873 [pipeline_server.py:509] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-17 13:33:50,873 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 13:33:50,873 [pipeline_server.py:509] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-17 13:33:50,873 [pipeline_server.py:509] [CONF] use_profile not set, use default: False
+WARNING 2022-02-17 13:33:50,873 [pipeline_server.py:509] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-17 13:33:50,874 [pipeline_server.py:509] [CONF] tracer not set, use default: {}
+WARNING 2022-02-17 13:33:50,874 [pipeline_server.py:509] [CONF] channel_recv_frist_arrive not set, use default: False
+WARNING 2022-02-17 13:33:50,874 [pipeline_server.py:509] [CONF] interval_s not set, use default: -1
+WARNING 2022-02-17 13:33:50,874 [pipeline_server.py:509] [CONF] timeout not set, use default: -1
+WARNING 2022-02-17 13:33:50,874 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 13:33:50,874 [pipeline_server.py:509] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-17 13:33:50,874 [pipeline_server.py:509] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-17 13:33:50,874 [pipeline_server.py:509] [CONF] workdir not set, use default: 
+WARNING 2022-02-17 13:33:50,874 [pipeline_server.py:509] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-17 13:33:50,874 [pipeline_server.py:509] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-17 13:33:50,874 [pipeline_server.py:509] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-17 13:33:50,874 [pipeline_server.py:509] [CONF] precision not set, use default: fp32
+WARNING 2022-02-17 13:33:50,874 [pipeline_server.py:509] [CONF] use_calib not set, use default: False
+WARNING 2022-02-17 13:33:50,875 [pipeline_server.py:509] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-17 13:33:50,875 [pipeline_server.py:509] [CONF] mkldnn_cache_capacity not set, use default: 0
+INFO 2022-02-17 13:33:50,887 [operator.py:181] local_service_conf: {'model_config': './general_PPLCNet_x2_5_lite_v1.0_serving', 'device_type': 2, 'devices': '0', 'client_type': 'local_predictor', 'fetch_list': ['feature'], 'workdir': '', 'thread_num': 2, 'mem_optim': True, 'ir_optim': False, 'precision': 'fp32', 'use_calib': False, 'use_mkldnn': False, 'mkldnn_cache_capacity': 0}
+INFO 2022-02-17 13:33:50,887 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:['feature'], precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 13:33:50,887 [operator.py:285] rec 
+	input_ops: @DAGExecutor,
+	server_endpoints: None
+	fetch_list: ['feature']
+	client_config: ./general_PPLCNet_x2_5_lite_v1.0_serving/serving_server_conf.prototxt
+	concurrency: 1,
+	timeout(s): -1,
+	retry: 1,
+	batch_size: 1,
+	auto_batching_timeout(s): None
+INFO 2022-02-17 13:33:50,887 [pipeline_server.py:215] ============= PIPELINE SERVER =============
+INFO 2022-02-17 13:33:50,887 [pipeline_server.py:218] 
+{
+    "worker_num":1,
+    "http_port":9315,
+    "rpc_port":9314,
+    "dag":{
+        "is_thread_op":false,
+        "retry":1,
+        "client_type":"brpc",
+        "use_profile":false,
+        "channel_size":0,
+        "tracer":{
+            "interval_s":-1
+        },
+        "channel_recv_frist_arrive":false
+    },
+    "op":{
+        "rec":{
+            "concurrency":1,
+            "local_service_conf":{
+                "model_config":"./general_PPLCNet_x2_5_lite_v1.0_serving",
+                "device_type":2,
+                "devices":"0",
+                "client_type":"local_predictor",
+                "fetch_list":[
+                    "feature"
+                ],
+                "workdir":"",
+                "thread_num":2,
+                "mem_optim":true,
+                "ir_optim":false,
+                "precision":"fp32",
+                "use_calib":false,
+                "use_mkldnn":false,
+                "mkldnn_cache_capacity":0
+            },
+            "timeout":-1,
+            "retry":1,
+            "batch_size":1,
+            "auto_batching_timeout":-1
+        }
+    },
+    "build_dag_each_worker":false
+}
+INFO 2022-02-17 13:33:50,887 [pipeline_server.py:223] -------------------------------------------
+INFO 2022-02-17 13:33:50,887 [operator.py:308] Op(rec) use local rpc service at port: []
+INFO 2022-02-17 13:33:50,901 [dag.py:496] [DAG] Succ init
+INFO 2022-02-17 13:33:50,902 [dag.py:659] ================= USED OP =================
+INFO 2022-02-17 13:33:50,902 [dag.py:662] rec
+INFO 2022-02-17 13:33:50,902 [dag.py:663] -------------------------------------------
+INFO 2022-02-17 13:33:50,902 [dag.py:680] ================== DAG ====================
+INFO 2022-02-17 13:33:50,902 [dag.py:682] (VIEW 0)
+INFO 2022-02-17 13:33:50,902 [dag.py:684]   [@DAGExecutor]
+INFO 2022-02-17 13:33:50,902 [dag.py:686]     - rec
+INFO 2022-02-17 13:33:50,902 [dag.py:682] (VIEW 1)
+INFO 2022-02-17 13:33:50,902 [dag.py:684]   [rec]
+INFO 2022-02-17 13:33:50,902 [dag.py:687] -------------------------------------------
+INFO 2022-02-17 13:33:50,918 [dag.py:730] op:rec add input channel.
+INFO 2022-02-17 13:33:50,977 [dag.py:759] last op:rec add output channel
+INFO 2022-02-17 13:33:50,977 [dag.py:800] [DAG] Succ build DAG
+INFO 2022-02-17 13:33:50,982 [dag.py:832] [DAG] start
+INFO 2022-02-17 13:33:50,983 [dag.py:182] [DAG] set in channel succ, name [@DAGExecutor]
+INFO 2022-02-17 13:33:50,985 [pipeline_server.py:51] [PipelineServicer] succ init
+INFO 2022-02-17 13:33:50,991 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:None, precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 13:33:50,992 [operator.py:1306] Init cuda env in process 0
+INFO 2022-02-17 13:33:50,992 [local_service_handler.py:208] GET_CLIENT : concurrency_idx=0, device_num=1
+INFO 2022-02-17 13:33:52,067 [local_predict.py:153] LocalPredictor load_model_config params: model_path:./general_PPLCNet_x2_5_lite_v1.0_serving, use_gpu:True, gpu_id:0, use_profile:False, thread_num:2, mem_optim:True, ir_optim:False, use_trt:True, use_lite:False, use_xpu:False, precision:fp32, use_calib:False, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None, use_feed_fetch_ops:False, 
+INFO 2022-02-17 13:33:53,924 [operator.py:1317] [rec|0] Succ init
+INFO 2022-02-17 13:34:04,445 [pipeline_server.py:56] (log_id=0) inference request name:recognition self.name:recognition time:1645076044.4450066
+INFO 2022-02-17 13:34:04,446 [operator.py:1723] RequestOp unpack one request. log_id:0, clientip:             name:recognition, method:prediction, time:1645076044.4461415
+INFO 2022-02-17 13:34:04,446 [dag.py:369] (data_id=0 log_id=0) Succ Generate ID 
+INFO 2022-02-17 13:34:07,203 [dag.py:405] (data_id=0 log_id=0) Succ predict
+WARNING 2022-02-17 13:38:14,874 [pipeline_server.py:509] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-17 13:38:14,874 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 13:38:14,874 [pipeline_server.py:509] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-17 13:38:14,874 [pipeline_server.py:509] [CONF] use_profile not set, use default: False
+WARNING 2022-02-17 13:38:14,874 [pipeline_server.py:509] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-17 13:38:14,874 [pipeline_server.py:509] [CONF] tracer not set, use default: {}
+WARNING 2022-02-17 13:38:14,874 [pipeline_server.py:509] [CONF] channel_recv_frist_arrive not set, use default: False
+WARNING 2022-02-17 13:38:14,875 [pipeline_server.py:509] [CONF] interval_s not set, use default: -1
+WARNING 2022-02-17 13:38:14,875 [pipeline_server.py:509] [CONF] timeout not set, use default: -1
+WARNING 2022-02-17 13:38:14,875 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 13:38:14,875 [pipeline_server.py:509] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-17 13:38:14,875 [pipeline_server.py:509] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-17 13:38:14,875 [pipeline_server.py:509] [CONF] workdir not set, use default: 
+WARNING 2022-02-17 13:38:14,875 [pipeline_server.py:509] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-17 13:38:14,875 [pipeline_server.py:509] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-17 13:38:14,875 [pipeline_server.py:509] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-17 13:38:14,875 [pipeline_server.py:509] [CONF] precision not set, use default: fp32
+WARNING 2022-02-17 13:38:14,875 [pipeline_server.py:509] [CONF] use_calib not set, use default: False
+WARNING 2022-02-17 13:38:14,875 [pipeline_server.py:509] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-17 13:38:14,876 [pipeline_server.py:509] [CONF] mkldnn_cache_capacity not set, use default: 0
+INFO 2022-02-17 13:38:14,971 [operator.py:181] local_service_conf: {'model_config': './general_PPLCNet_x2_5_lite_v1.0_serving', 'device_type': 2, 'devices': '0', 'client_type': 'local_predictor', 'fetch_list': ['feature'], 'workdir': '', 'thread_num': 2, 'mem_optim': True, 'ir_optim': False, 'precision': 'fp32', 'use_calib': False, 'use_mkldnn': False, 'mkldnn_cache_capacity': 0}
+INFO 2022-02-17 13:38:14,971 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:['feature'], precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 13:38:14,971 [operator.py:285] rec 
+	input_ops: @DAGExecutor,
+	server_endpoints: None
+	fetch_list: ['feature']
+	client_config: ./general_PPLCNet_x2_5_lite_v1.0_serving/serving_server_conf.prototxt
+	concurrency: 1,
+	timeout(s): -1,
+	retry: 1,
+	batch_size: 1,
+	auto_batching_timeout(s): None
+INFO 2022-02-17 13:38:14,971 [pipeline_server.py:215] ============= PIPELINE SERVER =============
+INFO 2022-02-17 13:38:14,971 [pipeline_server.py:218] 
+{
+    "worker_num":1,
+    "http_port":9315,
+    "rpc_port":9314,
+    "dag":{
+        "is_thread_op":false,
+        "retry":1,
+        "client_type":"brpc",
+        "use_profile":false,
+        "channel_size":0,
+        "tracer":{
+            "interval_s":-1
+        },
+        "channel_recv_frist_arrive":false
+    },
+    "op":{
+        "rec":{
+            "concurrency":1,
+            "local_service_conf":{
+                "model_config":"./general_PPLCNet_x2_5_lite_v1.0_serving",
+                "device_type":2,
+                "devices":"0",
+                "client_type":"local_predictor",
+                "fetch_list":[
+                    "feature"
+                ],
+                "workdir":"",
+                "thread_num":2,
+                "mem_optim":true,
+                "ir_optim":false,
+                "precision":"fp32",
+                "use_calib":false,
+                "use_mkldnn":false,
+                "mkldnn_cache_capacity":0
+            },
+            "timeout":-1,
+            "retry":1,
+            "batch_size":1,
+            "auto_batching_timeout":-1
+        }
+    },
+    "build_dag_each_worker":false
+}
+INFO 2022-02-17 13:38:14,971 [pipeline_server.py:223] -------------------------------------------
+INFO 2022-02-17 13:38:14,972 [operator.py:308] Op(rec) use local rpc service at port: []
+INFO 2022-02-17 13:38:14,985 [dag.py:496] [DAG] Succ init
+INFO 2022-02-17 13:38:14,986 [dag.py:659] ================= USED OP =================
+INFO 2022-02-17 13:38:14,986 [dag.py:662] rec
+INFO 2022-02-17 13:38:14,986 [dag.py:663] -------------------------------------------
+INFO 2022-02-17 13:38:14,986 [dag.py:680] ================== DAG ====================
+INFO 2022-02-17 13:38:14,986 [dag.py:682] (VIEW 0)
+INFO 2022-02-17 13:38:14,986 [dag.py:684]   [@DAGExecutor]
+INFO 2022-02-17 13:38:14,986 [dag.py:686]     - rec
+INFO 2022-02-17 13:38:14,986 [dag.py:682] (VIEW 1)
+INFO 2022-02-17 13:38:14,986 [dag.py:684]   [rec]
+INFO 2022-02-17 13:38:14,986 [dag.py:687] -------------------------------------------
+INFO 2022-02-17 13:38:15,002 [dag.py:730] op:rec add input channel.
+INFO 2022-02-17 13:38:15,011 [dag.py:759] last op:rec add output channel
+INFO 2022-02-17 13:38:15,012 [dag.py:800] [DAG] Succ build DAG
+INFO 2022-02-17 13:38:15,016 [dag.py:832] [DAG] start
+INFO 2022-02-17 13:38:15,017 [dag.py:182] [DAG] set in channel succ, name [@DAGExecutor]
+INFO 2022-02-17 13:38:15,019 [pipeline_server.py:51] [PipelineServicer] succ init
+INFO 2022-02-17 13:38:15,026 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:None, precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 13:38:15,026 [operator.py:1306] Init cuda env in process 0
+INFO 2022-02-17 13:38:15,026 [local_service_handler.py:208] GET_CLIENT : concurrency_idx=0, device_num=1
+INFO 2022-02-17 13:38:16,054 [local_predict.py:153] LocalPredictor load_model_config params: model_path:./general_PPLCNet_x2_5_lite_v1.0_serving, use_gpu:True, gpu_id:0, use_profile:False, thread_num:2, mem_optim:True, ir_optim:False, use_trt:True, use_lite:False, use_xpu:False, precision:fp32, use_calib:False, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None, use_feed_fetch_ops:False, 
+INFO 2022-02-17 13:38:17,886 [operator.py:1317] [rec|0] Succ init
+INFO 2022-02-17 13:38:25,102 [pipeline_server.py:56] (log_id=0) inference request name:recognition self.name:recognition time:1645076305.1018336
+INFO 2022-02-17 13:38:25,103 [operator.py:1723] RequestOp unpack one request. log_id:0, clientip:             name:recognition, method:prediction, time:1645076305.1030562
+INFO 2022-02-17 13:38:25,103 [dag.py:369] (data_id=0 log_id=0) Succ Generate ID 
+INFO 2022-02-17 13:38:27,823 [dag.py:405] (data_id=0 log_id=0) Succ predict
+WARNING 2022-02-17 13:41:58,835 [pipeline_server.py:509] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-17 13:41:58,836 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 13:41:58,836 [pipeline_server.py:509] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-17 13:41:58,836 [pipeline_server.py:509] [CONF] use_profile not set, use default: False
+WARNING 2022-02-17 13:41:58,836 [pipeline_server.py:509] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-17 13:41:58,836 [pipeline_server.py:509] [CONF] tracer not set, use default: {}
+WARNING 2022-02-17 13:41:58,836 [pipeline_server.py:509] [CONF] channel_recv_frist_arrive not set, use default: False
+WARNING 2022-02-17 13:41:58,836 [pipeline_server.py:509] [CONF] interval_s not set, use default: -1
+WARNING 2022-02-17 13:41:58,836 [pipeline_server.py:509] [CONF] timeout not set, use default: -1
+WARNING 2022-02-17 13:41:58,836 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 13:41:58,836 [pipeline_server.py:509] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-17 13:41:58,836 [pipeline_server.py:509] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-17 13:41:58,836 [pipeline_server.py:509] [CONF] workdir not set, use default: 
+WARNING 2022-02-17 13:41:58,836 [pipeline_server.py:509] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-17 13:41:58,836 [pipeline_server.py:509] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-17 13:41:58,836 [pipeline_server.py:509] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-17 13:41:58,836 [pipeline_server.py:509] [CONF] precision not set, use default: fp32
+WARNING 2022-02-17 13:41:58,836 [pipeline_server.py:509] [CONF] use_calib not set, use default: False
+WARNING 2022-02-17 13:41:58,836 [pipeline_server.py:509] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-17 13:41:58,837 [pipeline_server.py:509] [CONF] mkldnn_cache_capacity not set, use default: 0
+INFO 2022-02-17 13:41:58,878 [operator.py:181] local_service_conf: {'model_config': './general_PPLCNet_x2_5_lite_v1.0_serving', 'device_type': 2, 'devices': '0', 'client_type': 'local_predictor', 'fetch_list': ['feature'], 'workdir': '', 'thread_num': 2, 'mem_optim': True, 'ir_optim': False, 'precision': 'fp32', 'use_calib': False, 'use_mkldnn': False, 'mkldnn_cache_capacity': 0}
+INFO 2022-02-17 13:41:58,879 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:['feature'], precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 13:41:58,879 [operator.py:285] rec 
+	input_ops: @DAGExecutor,
+	server_endpoints: None
+	fetch_list: ['feature']
+	client_config: ./general_PPLCNet_x2_5_lite_v1.0_serving/serving_server_conf.prototxt
+	concurrency: 1,
+	timeout(s): -1,
+	retry: 1,
+	batch_size: 1,
+	auto_batching_timeout(s): None
+INFO 2022-02-17 13:41:58,879 [pipeline_server.py:215] ============= PIPELINE SERVER =============
+INFO 2022-02-17 13:41:58,879 [pipeline_server.py:218] 
+{
+    "worker_num":1,
+    "http_port":9315,
+    "rpc_port":9314,
+    "dag":{
+        "is_thread_op":false,
+        "retry":1,
+        "client_type":"brpc",
+        "use_profile":false,
+        "channel_size":0,
+        "tracer":{
+            "interval_s":-1
+        },
+        "channel_recv_frist_arrive":false
+    },
+    "op":{
+        "rec":{
+            "concurrency":1,
+            "local_service_conf":{
+                "model_config":"./general_PPLCNet_x2_5_lite_v1.0_serving",
+                "device_type":2,
+                "devices":"0",
+                "client_type":"local_predictor",
+                "fetch_list":[
+                    "feature"
+                ],
+                "workdir":"",
+                "thread_num":2,
+                "mem_optim":true,
+                "ir_optim":false,
+                "precision":"fp32",
+                "use_calib":false,
+                "use_mkldnn":false,
+                "mkldnn_cache_capacity":0
+            },
+            "timeout":-1,
+            "retry":1,
+            "batch_size":1,
+            "auto_batching_timeout":-1
+        }
+    },
+    "build_dag_each_worker":false
+}
+INFO 2022-02-17 13:41:58,879 [pipeline_server.py:223] -------------------------------------------
+INFO 2022-02-17 13:41:58,879 [operator.py:308] Op(rec) use local rpc service at port: []
+INFO 2022-02-17 13:41:58,891 [dag.py:496] [DAG] Succ init
+INFO 2022-02-17 13:41:58,892 [dag.py:659] ================= USED OP =================
+INFO 2022-02-17 13:41:58,892 [dag.py:662] rec
+INFO 2022-02-17 13:41:58,892 [dag.py:663] -------------------------------------------
+INFO 2022-02-17 13:41:58,892 [dag.py:680] ================== DAG ====================
+INFO 2022-02-17 13:41:58,892 [dag.py:682] (VIEW 0)
+INFO 2022-02-17 13:41:58,892 [dag.py:684]   [@DAGExecutor]
+INFO 2022-02-17 13:41:58,892 [dag.py:686]     - rec
+INFO 2022-02-17 13:41:58,892 [dag.py:682] (VIEW 1)
+INFO 2022-02-17 13:41:58,892 [dag.py:684]   [rec]
+INFO 2022-02-17 13:41:58,892 [dag.py:687] -------------------------------------------
+INFO 2022-02-17 13:41:58,908 [dag.py:730] op:rec add input channel.
+INFO 2022-02-17 13:41:58,918 [dag.py:759] last op:rec add output channel
+INFO 2022-02-17 13:41:58,918 [dag.py:800] [DAG] Succ build DAG
+INFO 2022-02-17 13:41:58,922 [dag.py:832] [DAG] start
+INFO 2022-02-17 13:41:58,923 [dag.py:182] [DAG] set in channel succ, name [@DAGExecutor]
+INFO 2022-02-17 13:41:58,925 [pipeline_server.py:51] [PipelineServicer] succ init
+INFO 2022-02-17 13:41:58,931 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:None, precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 13:41:58,932 [operator.py:1306] Init cuda env in process 0
+INFO 2022-02-17 13:41:58,932 [local_service_handler.py:208] GET_CLIENT : concurrency_idx=0, device_num=1
+INFO 2022-02-17 13:41:59,935 [local_predict.py:153] LocalPredictor load_model_config params: model_path:./general_PPLCNet_x2_5_lite_v1.0_serving, use_gpu:True, gpu_id:0, use_profile:False, thread_num:2, mem_optim:True, ir_optim:False, use_trt:True, use_lite:False, use_xpu:False, precision:fp32, use_calib:False, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None, use_feed_fetch_ops:False, 
+INFO 2022-02-17 13:42:02,434 [operator.py:1317] [rec|0] Succ init
+INFO 2022-02-17 13:42:28,077 [pipeline_server.py:56] (log_id=0) inference request name:recognition self.name:recognition time:1645076548.076952
+INFO 2022-02-17 13:42:28,078 [operator.py:1723] RequestOp unpack one request. log_id:0, clientip:             name:recognition, method:prediction, time:1645076548.078083
+INFO 2022-02-17 13:42:28,078 [dag.py:369] (data_id=0 log_id=0) Succ Generate ID 
+INFO 2022-02-17 13:42:30,814 [dag.py:405] (data_id=0 log_id=0) Succ predict
+WARNING 2022-02-17 13:45:45,876 [pipeline_server.py:509] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-17 13:45:45,876 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 13:45:45,876 [pipeline_server.py:509] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-17 13:45:45,876 [pipeline_server.py:509] [CONF] use_profile not set, use default: False
+WARNING 2022-02-17 13:45:45,876 [pipeline_server.py:509] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-17 13:45:45,876 [pipeline_server.py:509] [CONF] tracer not set, use default: {}
+WARNING 2022-02-17 13:45:45,876 [pipeline_server.py:509] [CONF] channel_recv_frist_arrive not set, use default: False
+WARNING 2022-02-17 13:45:45,876 [pipeline_server.py:509] [CONF] interval_s not set, use default: -1
+WARNING 2022-02-17 13:45:45,876 [pipeline_server.py:509] [CONF] timeout not set, use default: -1
+WARNING 2022-02-17 13:45:45,876 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 13:45:45,877 [pipeline_server.py:509] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-17 13:45:45,877 [pipeline_server.py:509] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-17 13:45:45,877 [pipeline_server.py:509] [CONF] workdir not set, use default: 
+WARNING 2022-02-17 13:45:45,877 [pipeline_server.py:509] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-17 13:45:45,877 [pipeline_server.py:509] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-17 13:45:45,877 [pipeline_server.py:509] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-17 13:45:45,877 [pipeline_server.py:509] [CONF] precision not set, use default: fp32
+WARNING 2022-02-17 13:45:45,877 [pipeline_server.py:509] [CONF] use_calib not set, use default: False
+WARNING 2022-02-17 13:45:45,877 [pipeline_server.py:509] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-17 13:45:45,877 [pipeline_server.py:509] [CONF] mkldnn_cache_capacity not set, use default: 0
+INFO 2022-02-17 13:45:45,888 [operator.py:181] local_service_conf: {'model_config': './general_PPLCNet_x2_5_lite_v1.0_serving', 'device_type': 2, 'devices': '0', 'client_type': 'local_predictor', 'fetch_list': ['feature'], 'workdir': '', 'thread_num': 2, 'mem_optim': True, 'ir_optim': False, 'precision': 'fp32', 'use_calib': False, 'use_mkldnn': False, 'mkldnn_cache_capacity': 0}
+INFO 2022-02-17 13:45:45,888 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:['feature'], precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 13:45:45,888 [operator.py:285] rec 
+	input_ops: @DAGExecutor,
+	server_endpoints: None
+	fetch_list: ['feature']
+	client_config: ./general_PPLCNet_x2_5_lite_v1.0_serving/serving_server_conf.prototxt
+	concurrency: 1,
+	timeout(s): -1,
+	retry: 1,
+	batch_size: 1,
+	auto_batching_timeout(s): None
+INFO 2022-02-17 13:45:45,888 [pipeline_server.py:215] ============= PIPELINE SERVER =============
+INFO 2022-02-17 13:45:45,888 [pipeline_server.py:218] 
+{
+    "worker_num":1,
+    "http_port":9315,
+    "rpc_port":9314,
+    "dag":{
+        "is_thread_op":false,
+        "retry":1,
+        "client_type":"brpc",
+        "use_profile":false,
+        "channel_size":0,
+        "tracer":{
+            "interval_s":-1
+        },
+        "channel_recv_frist_arrive":false
+    },
+    "op":{
+        "rec":{
+            "concurrency":1,
+            "local_service_conf":{
+                "model_config":"./general_PPLCNet_x2_5_lite_v1.0_serving",
+                "device_type":2,
+                "devices":"0",
+                "client_type":"local_predictor",
+                "fetch_list":[
+                    "feature"
+                ],
+                "workdir":"",
+                "thread_num":2,
+                "mem_optim":true,
+                "ir_optim":false,
+                "precision":"fp32",
+                "use_calib":false,
+                "use_mkldnn":false,
+                "mkldnn_cache_capacity":0
+            },
+            "timeout":-1,
+            "retry":1,
+            "batch_size":1,
+            "auto_batching_timeout":-1
+        }
+    },
+    "build_dag_each_worker":false
+}
+INFO 2022-02-17 13:45:45,889 [pipeline_server.py:223] -------------------------------------------
+INFO 2022-02-17 13:45:45,889 [operator.py:308] Op(rec) use local rpc service at port: []
+INFO 2022-02-17 13:45:45,900 [dag.py:496] [DAG] Succ init
+INFO 2022-02-17 13:45:45,901 [dag.py:659] ================= USED OP =================
+INFO 2022-02-17 13:45:45,901 [dag.py:662] rec
+INFO 2022-02-17 13:45:45,901 [dag.py:663] -------------------------------------------
+INFO 2022-02-17 13:45:45,901 [dag.py:680] ================== DAG ====================
+INFO 2022-02-17 13:45:45,901 [dag.py:682] (VIEW 0)
+INFO 2022-02-17 13:45:45,901 [dag.py:684]   [@DAGExecutor]
+INFO 2022-02-17 13:45:45,901 [dag.py:686]     - rec
+INFO 2022-02-17 13:45:45,901 [dag.py:682] (VIEW 1)
+INFO 2022-02-17 13:45:45,901 [dag.py:684]   [rec]
+INFO 2022-02-17 13:45:45,901 [dag.py:687] -------------------------------------------
+INFO 2022-02-17 13:45:45,916 [dag.py:730] op:rec add input channel.
+INFO 2022-02-17 13:45:45,926 [dag.py:759] last op:rec add output channel
+INFO 2022-02-17 13:45:45,926 [dag.py:800] [DAG] Succ build DAG
+INFO 2022-02-17 13:45:45,930 [dag.py:832] [DAG] start
+INFO 2022-02-17 13:45:45,931 [dag.py:182] [DAG] set in channel succ, name [@DAGExecutor]
+INFO 2022-02-17 13:45:45,933 [pipeline_server.py:51] [PipelineServicer] succ init
+INFO 2022-02-17 13:45:45,939 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:None, precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 13:45:45,940 [operator.py:1306] Init cuda env in process 0
+INFO 2022-02-17 13:45:45,940 [local_service_handler.py:208] GET_CLIENT : concurrency_idx=0, device_num=1
+INFO 2022-02-17 13:45:46,919 [local_predict.py:153] LocalPredictor load_model_config params: model_path:./general_PPLCNet_x2_5_lite_v1.0_serving, use_gpu:True, gpu_id:0, use_profile:False, thread_num:2, mem_optim:True, ir_optim:False, use_trt:True, use_lite:False, use_xpu:False, precision:fp32, use_calib:False, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None, use_feed_fetch_ops:False, 
+INFO 2022-02-17 13:45:49,242 [pipeline_server.py:56] (log_id=0) inference request name:recognition self.name:recognition time:1645076749.2424037
+INFO 2022-02-17 13:45:49,243 [operator.py:1723] RequestOp unpack one request. log_id:0, clientip:             name:recognition, method:prediction, time:1645076749.2436109
+INFO 2022-02-17 13:45:49,244 [dag.py:369] (data_id=0 log_id=0) Succ Generate ID 
+INFO 2022-02-17 13:45:49,645 [operator.py:1317] [rec|0] Succ init
+INFO 2022-02-17 13:45:52,450 [dag.py:405] (data_id=0 log_id=0) Succ predict
+WARNING 2022-02-17 13:48:08,096 [pipeline_server.py:509] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-17 13:48:08,168 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 13:48:08,168 [pipeline_server.py:509] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-17 13:48:08,168 [pipeline_server.py:509] [CONF] use_profile not set, use default: False
+WARNING 2022-02-17 13:48:08,168 [pipeline_server.py:509] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-17 13:48:08,168 [pipeline_server.py:509] [CONF] tracer not set, use default: {}
+WARNING 2022-02-17 13:48:08,169 [pipeline_server.py:509] [CONF] channel_recv_frist_arrive not set, use default: False
+WARNING 2022-02-17 13:48:08,169 [pipeline_server.py:509] [CONF] interval_s not set, use default: -1
+WARNING 2022-02-17 13:48:08,169 [pipeline_server.py:509] [CONF] timeout not set, use default: -1
+WARNING 2022-02-17 13:48:08,169 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 13:48:08,169 [pipeline_server.py:509] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-17 13:48:08,169 [pipeline_server.py:509] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-17 13:48:08,169 [pipeline_server.py:509] [CONF] workdir not set, use default: 
+WARNING 2022-02-17 13:48:08,169 [pipeline_server.py:509] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-17 13:48:08,169 [pipeline_server.py:509] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-17 13:48:08,169 [pipeline_server.py:509] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-17 13:48:08,169 [pipeline_server.py:509] [CONF] precision not set, use default: fp32
+WARNING 2022-02-17 13:48:08,169 [pipeline_server.py:509] [CONF] use_calib not set, use default: False
+WARNING 2022-02-17 13:48:08,170 [pipeline_server.py:509] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-17 13:48:08,170 [pipeline_server.py:509] [CONF] mkldnn_cache_capacity not set, use default: 0
+INFO 2022-02-17 13:48:08,181 [operator.py:181] local_service_conf: {'model_config': './general_PPLCNet_x2_5_lite_v1.0_serving', 'device_type': 2, 'devices': '0', 'client_type': 'local_predictor', 'fetch_list': ['feature'], 'workdir': '', 'thread_num': 2, 'mem_optim': True, 'ir_optim': False, 'precision': 'fp32', 'use_calib': False, 'use_mkldnn': False, 'mkldnn_cache_capacity': 0}
+INFO 2022-02-17 13:48:08,182 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:['feature'], precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 13:48:08,182 [operator.py:285] rec 
+	input_ops: @DAGExecutor,
+	server_endpoints: None
+	fetch_list: ['feature']
+	client_config: ./general_PPLCNet_x2_5_lite_v1.0_serving/serving_server_conf.prototxt
+	concurrency: 1,
+	timeout(s): -1,
+	retry: 1,
+	batch_size: 1,
+	auto_batching_timeout(s): None
+INFO 2022-02-17 13:48:08,182 [pipeline_server.py:215] ============= PIPELINE SERVER =============
+INFO 2022-02-17 13:48:08,182 [pipeline_server.py:218] 
+{
+    "worker_num":1,
+    "http_port":9315,
+    "rpc_port":9314,
+    "dag":{
+        "is_thread_op":false,
+        "retry":1,
+        "client_type":"brpc",
+        "use_profile":false,
+        "channel_size":0,
+        "tracer":{
+            "interval_s":-1
+        },
+        "channel_recv_frist_arrive":false
+    },
+    "op":{
+        "rec":{
+            "concurrency":1,
+            "local_service_conf":{
+                "model_config":"./general_PPLCNet_x2_5_lite_v1.0_serving",
+                "device_type":2,
+                "devices":"0",
+                "client_type":"local_predictor",
+                "fetch_list":[
+                    "feature"
+                ],
+                "workdir":"",
+                "thread_num":2,
+                "mem_optim":true,
+                "ir_optim":false,
+                "precision":"fp32",
+                "use_calib":false,
+                "use_mkldnn":false,
+                "mkldnn_cache_capacity":0
+            },
+            "timeout":-1,
+            "retry":1,
+            "batch_size":1,
+            "auto_batching_timeout":-1
+        }
+    },
+    "build_dag_each_worker":false
+}
+INFO 2022-02-17 13:48:08,182 [pipeline_server.py:223] -------------------------------------------
+INFO 2022-02-17 13:48:08,182 [operator.py:308] Op(rec) use local rpc service at port: []
+INFO 2022-02-17 13:48:08,195 [dag.py:496] [DAG] Succ init
+INFO 2022-02-17 13:48:08,196 [dag.py:659] ================= USED OP =================
+INFO 2022-02-17 13:48:08,196 [dag.py:662] rec
+INFO 2022-02-17 13:48:08,196 [dag.py:663] -------------------------------------------
+INFO 2022-02-17 13:48:08,196 [dag.py:680] ================== DAG ====================
+INFO 2022-02-17 13:48:08,196 [dag.py:682] (VIEW 0)
+INFO 2022-02-17 13:48:08,196 [dag.py:684]   [@DAGExecutor]
+INFO 2022-02-17 13:48:08,196 [dag.py:686]     - rec
+INFO 2022-02-17 13:48:08,196 [dag.py:682] (VIEW 1)
+INFO 2022-02-17 13:48:08,196 [dag.py:684]   [rec]
+INFO 2022-02-17 13:48:08,196 [dag.py:687] -------------------------------------------
+INFO 2022-02-17 13:48:08,213 [dag.py:730] op:rec add input channel.
+INFO 2022-02-17 13:48:08,222 [dag.py:759] last op:rec add output channel
+INFO 2022-02-17 13:48:08,223 [dag.py:800] [DAG] Succ build DAG
+INFO 2022-02-17 13:48:08,227 [dag.py:832] [DAG] start
+INFO 2022-02-17 13:48:08,228 [dag.py:182] [DAG] set in channel succ, name [@DAGExecutor]
+INFO 2022-02-17 13:48:08,230 [pipeline_server.py:51] [PipelineServicer] succ init
+INFO 2022-02-17 13:48:08,275 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:None, precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 13:48:08,276 [operator.py:1306] Init cuda env in process 0
+INFO 2022-02-17 13:48:08,276 [local_service_handler.py:208] GET_CLIENT : concurrency_idx=0, device_num=1
+INFO 2022-02-17 13:48:09,338 [local_predict.py:153] LocalPredictor load_model_config params: model_path:./general_PPLCNet_x2_5_lite_v1.0_serving, use_gpu:True, gpu_id:0, use_profile:False, thread_num:2, mem_optim:True, ir_optim:False, use_trt:True, use_lite:False, use_xpu:False, precision:fp32, use_calib:False, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None, use_feed_fetch_ops:False, 
+INFO 2022-02-17 13:48:11,286 [pipeline_server.py:56] (log_id=0) inference request name:recognition self.name:recognition time:1645076891.2866788
+INFO 2022-02-17 13:48:11,287 [operator.py:1723] RequestOp unpack one request. log_id:0, clientip:             name:recognition, method:prediction, time:1645076891.2878144
+INFO 2022-02-17 13:48:11,288 [dag.py:369] (data_id=0 log_id=0) Succ Generate ID 
+INFO 2022-02-17 13:48:12,468 [operator.py:1317] [rec|0] Succ init
+INFO 2022-02-17 13:48:15,399 [dag.py:405] (data_id=0 log_id=0) Succ predict
+WARNING 2022-02-17 14:00:34,470 [pipeline_server.py:509] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-17 14:00:34,470 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 14:00:34,470 [pipeline_server.py:509] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-17 14:00:34,470 [pipeline_server.py:509] [CONF] use_profile not set, use default: False
+WARNING 2022-02-17 14:00:34,470 [pipeline_server.py:509] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-17 14:00:34,470 [pipeline_server.py:509] [CONF] tracer not set, use default: {}
+WARNING 2022-02-17 14:00:34,470 [pipeline_server.py:509] [CONF] channel_recv_frist_arrive not set, use default: False
+WARNING 2022-02-17 14:00:34,471 [pipeline_server.py:509] [CONF] interval_s not set, use default: -1
+WARNING 2022-02-17 14:00:34,471 [pipeline_server.py:509] [CONF] timeout not set, use default: -1
+WARNING 2022-02-17 14:00:34,471 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 14:00:34,471 [pipeline_server.py:509] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-17 14:00:34,471 [pipeline_server.py:509] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-17 14:00:34,471 [pipeline_server.py:509] [CONF] workdir not set, use default: 
+WARNING 2022-02-17 14:00:34,471 [pipeline_server.py:509] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-17 14:00:34,471 [pipeline_server.py:509] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-17 14:00:34,471 [pipeline_server.py:509] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-17 14:00:34,471 [pipeline_server.py:509] [CONF] precision not set, use default: fp32
+WARNING 2022-02-17 14:00:34,471 [pipeline_server.py:509] [CONF] use_calib not set, use default: False
+WARNING 2022-02-17 14:00:34,471 [pipeline_server.py:509] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-17 14:00:34,472 [pipeline_server.py:509] [CONF] mkldnn_cache_capacity not set, use default: 0
+INFO 2022-02-17 14:00:34,483 [operator.py:181] local_service_conf: {'model_config': './general_PPLCNet_x2_5_lite_v1.0_serving', 'device_type': 2, 'devices': '0', 'client_type': 'local_predictor', 'fetch_list': ['feature'], 'workdir': '', 'thread_num': 2, 'mem_optim': True, 'ir_optim': False, 'precision': 'fp32', 'use_calib': False, 'use_mkldnn': False, 'mkldnn_cache_capacity': 0}
+INFO 2022-02-17 14:00:34,483 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:['feature'], precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 14:00:34,483 [operator.py:285] rec 
+	input_ops: @DAGExecutor,
+	server_endpoints: None
+	fetch_list: ['feature']
+	client_config: ./general_PPLCNet_x2_5_lite_v1.0_serving/serving_server_conf.prototxt
+	concurrency: 1,
+	timeout(s): -1,
+	retry: 1,
+	batch_size: 1,
+	auto_batching_timeout(s): None
+INFO 2022-02-17 14:00:34,483 [pipeline_server.py:215] ============= PIPELINE SERVER =============
+INFO 2022-02-17 14:00:34,483 [pipeline_server.py:218] 
+{
+    "worker_num":1,
+    "http_port":9315,
+    "rpc_port":9314,
+    "dag":{
+        "is_thread_op":false,
+        "retry":1,
+        "client_type":"brpc",
+        "use_profile":false,
+        "channel_size":0,
+        "tracer":{
+            "interval_s":-1
+        },
+        "channel_recv_frist_arrive":false
+    },
+    "op":{
+        "rec":{
+            "concurrency":1,
+            "local_service_conf":{
+                "model_config":"./general_PPLCNet_x2_5_lite_v1.0_serving",
+                "device_type":2,
+                "devices":"0",
+                "client_type":"local_predictor",
+                "fetch_list":[
+                    "feature"
+                ],
+                "workdir":"",
+                "thread_num":2,
+                "mem_optim":true,
+                "ir_optim":false,
+                "precision":"fp32",
+                "use_calib":false,
+                "use_mkldnn":false,
+                "mkldnn_cache_capacity":0
+            },
+            "timeout":-1,
+            "retry":1,
+            "batch_size":1,
+            "auto_batching_timeout":-1
+        }
+    },
+    "build_dag_each_worker":false
+}
+INFO 2022-02-17 14:00:34,483 [pipeline_server.py:223] -------------------------------------------
+INFO 2022-02-17 14:00:34,483 [operator.py:308] Op(rec) use local rpc service at port: []
+INFO 2022-02-17 14:00:34,495 [dag.py:496] [DAG] Succ init
+INFO 2022-02-17 14:00:34,496 [dag.py:659] ================= USED OP =================
+INFO 2022-02-17 14:00:34,496 [dag.py:662] rec
+INFO 2022-02-17 14:00:34,496 [dag.py:663] -------------------------------------------
+INFO 2022-02-17 14:00:34,496 [dag.py:680] ================== DAG ====================
+INFO 2022-02-17 14:00:34,496 [dag.py:682] (VIEW 0)
+INFO 2022-02-17 14:00:34,496 [dag.py:684]   [@DAGExecutor]
+INFO 2022-02-17 14:00:34,497 [dag.py:686]     - rec
+INFO 2022-02-17 14:00:34,497 [dag.py:682] (VIEW 1)
+INFO 2022-02-17 14:00:34,497 [dag.py:684]   [rec]
+INFO 2022-02-17 14:00:34,497 [dag.py:687] -------------------------------------------
+INFO 2022-02-17 14:00:34,512 [dag.py:730] op:rec add input channel.
+INFO 2022-02-17 14:00:34,522 [dag.py:759] last op:rec add output channel
+INFO 2022-02-17 14:00:34,522 [dag.py:800] [DAG] Succ build DAG
+INFO 2022-02-17 14:00:34,526 [dag.py:832] [DAG] start
+INFO 2022-02-17 14:00:34,527 [dag.py:182] [DAG] set in channel succ, name [@DAGExecutor]
+INFO 2022-02-17 14:00:34,529 [pipeline_server.py:51] [PipelineServicer] succ init
+INFO 2022-02-17 14:00:34,536 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:None, precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 14:00:34,536 [operator.py:1306] Init cuda env in process 0
+INFO 2022-02-17 14:00:34,536 [local_service_handler.py:208] GET_CLIENT : concurrency_idx=0, device_num=1
+INFO 2022-02-17 14:00:35,542 [local_predict.py:153] LocalPredictor load_model_config params: model_path:./general_PPLCNet_x2_5_lite_v1.0_serving, use_gpu:True, gpu_id:0, use_profile:False, thread_num:2, mem_optim:True, ir_optim:False, use_trt:True, use_lite:False, use_xpu:False, precision:fp32, use_calib:False, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None, use_feed_fetch_ops:False, 
+INFO 2022-02-17 14:00:38,036 [operator.py:1317] [rec|0] Succ init
+WARNING 2022-02-17 14:00:53,138 [pipeline_server.py:509] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-17 14:00:53,139 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 14:00:53,139 [pipeline_server.py:509] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-17 14:00:53,139 [pipeline_server.py:509] [CONF] use_profile not set, use default: False
+WARNING 2022-02-17 14:00:53,139 [pipeline_server.py:509] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-17 14:00:53,139 [pipeline_server.py:509] [CONF] tracer not set, use default: {}
+WARNING 2022-02-17 14:00:53,139 [pipeline_server.py:509] [CONF] channel_recv_frist_arrive not set, use default: False
+WARNING 2022-02-17 14:00:53,139 [pipeline_server.py:509] [CONF] interval_s not set, use default: -1
+WARNING 2022-02-17 14:00:53,139 [pipeline_server.py:509] [CONF] timeout not set, use default: -1
+WARNING 2022-02-17 14:00:53,139 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 14:00:53,139 [pipeline_server.py:509] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-17 14:00:53,139 [pipeline_server.py:509] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-17 14:00:53,139 [pipeline_server.py:509] [CONF] workdir not set, use default: 
+WARNING 2022-02-17 14:00:53,139 [pipeline_server.py:509] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-17 14:00:53,139 [pipeline_server.py:509] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-17 14:00:53,139 [pipeline_server.py:509] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-17 14:00:53,140 [pipeline_server.py:509] [CONF] precision not set, use default: fp32
+WARNING 2022-02-17 14:00:53,140 [pipeline_server.py:509] [CONF] use_calib not set, use default: False
+WARNING 2022-02-17 14:00:53,140 [pipeline_server.py:509] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-17 14:00:53,140 [pipeline_server.py:509] [CONF] mkldnn_cache_capacity not set, use default: 0
+INFO 2022-02-17 14:00:56,641 [pipeline_server.py:56] (log_id=0) inference request name:recognition self.name:recognition time:1645077656.6412687
+INFO 2022-02-17 14:00:56,642 [operator.py:1723] RequestOp unpack one request. log_id:0, clientip:             name:recognition, method:prediction, time:1645077656.642419
+INFO 2022-02-17 14:00:56,642 [dag.py:369] (data_id=0 log_id=0) Succ Generate ID 
+INFO 2022-02-17 14:00:59,372 [dag.py:405] (data_id=0 log_id=0) Succ predict
+WARNING 2022-02-17 14:09:35,769 [pipeline_server.py:509] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-17 14:09:35,770 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 14:09:35,770 [pipeline_server.py:509] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-17 14:09:35,770 [pipeline_server.py:509] [CONF] use_profile not set, use default: False
+WARNING 2022-02-17 14:09:35,770 [pipeline_server.py:509] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-17 14:09:35,770 [pipeline_server.py:509] [CONF] tracer not set, use default: {}
+WARNING 2022-02-17 14:09:35,770 [pipeline_server.py:509] [CONF] channel_recv_frist_arrive not set, use default: False
+WARNING 2022-02-17 14:09:35,770 [pipeline_server.py:509] [CONF] interval_s not set, use default: -1
+WARNING 2022-02-17 14:09:35,770 [pipeline_server.py:509] [CONF] timeout not set, use default: -1
+WARNING 2022-02-17 14:09:35,770 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 14:09:35,771 [pipeline_server.py:509] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-17 14:09:35,771 [pipeline_server.py:509] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-17 14:09:35,771 [pipeline_server.py:509] [CONF] workdir not set, use default: 
+WARNING 2022-02-17 14:09:35,771 [pipeline_server.py:509] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-17 14:09:35,771 [pipeline_server.py:509] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-17 14:09:35,771 [pipeline_server.py:509] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-17 14:09:35,771 [pipeline_server.py:509] [CONF] precision not set, use default: fp32
+WARNING 2022-02-17 14:09:35,771 [pipeline_server.py:509] [CONF] use_calib not set, use default: False
+WARNING 2022-02-17 14:09:35,771 [pipeline_server.py:509] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-17 14:09:35,771 [pipeline_server.py:509] [CONF] mkldnn_cache_capacity not set, use default: 0
+INFO 2022-02-17 14:09:35,783 [operator.py:181] local_service_conf: {'model_config': './general_PPLCNet_x2_5_lite_v1.0_serving', 'device_type': 2, 'devices': '0', 'client_type': 'local_predictor', 'fetch_list': ['feature'], 'workdir': '', 'thread_num': 2, 'mem_optim': True, 'ir_optim': False, 'precision': 'fp32', 'use_calib': False, 'use_mkldnn': False, 'mkldnn_cache_capacity': 0}
+INFO 2022-02-17 14:09:35,783 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:['feature'], precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 14:09:35,783 [operator.py:285] rec 
+	input_ops: @DAGExecutor,
+	server_endpoints: None
+	fetch_list: ['feature']
+	client_config: ./general_PPLCNet_x2_5_lite_v1.0_serving/serving_server_conf.prototxt
+	concurrency: 1,
+	timeout(s): -1,
+	retry: 1,
+	batch_size: 1,
+	auto_batching_timeout(s): None
+INFO 2022-02-17 14:09:35,783 [pipeline_server.py:215] ============= PIPELINE SERVER =============
+INFO 2022-02-17 14:09:35,783 [pipeline_server.py:218] 
+{
+    "worker_num":1,
+    "http_port":9315,
+    "rpc_port":9314,
+    "dag":{
+        "is_thread_op":false,
+        "retry":1,
+        "client_type":"brpc",
+        "use_profile":false,
+        "channel_size":0,
+        "tracer":{
+            "interval_s":-1
+        },
+        "channel_recv_frist_arrive":false
+    },
+    "op":{
+        "rec":{
+            "concurrency":1,
+            "local_service_conf":{
+                "model_config":"./general_PPLCNet_x2_5_lite_v1.0_serving",
+                "device_type":2,
+                "devices":"0",
+                "client_type":"local_predictor",
+                "fetch_list":[
+                    "feature"
+                ],
+                "workdir":"",
+                "thread_num":2,
+                "mem_optim":true,
+                "ir_optim":false,
+                "precision":"fp32",
+                "use_calib":false,
+                "use_mkldnn":false,
+                "mkldnn_cache_capacity":0
+            },
+            "timeout":-1,
+            "retry":1,
+            "batch_size":1,
+            "auto_batching_timeout":-1
+        }
+    },
+    "build_dag_each_worker":false
+}
+INFO 2022-02-17 14:09:35,783 [pipeline_server.py:223] -------------------------------------------
+INFO 2022-02-17 14:09:35,783 [operator.py:308] Op(rec) use local rpc service at port: []
+INFO 2022-02-17 14:09:35,797 [dag.py:496] [DAG] Succ init
+INFO 2022-02-17 14:09:35,798 [dag.py:659] ================= USED OP =================
+INFO 2022-02-17 14:09:35,798 [dag.py:662] rec
+INFO 2022-02-17 14:09:35,798 [dag.py:663] -------------------------------------------
+INFO 2022-02-17 14:09:35,798 [dag.py:680] ================== DAG ====================
+INFO 2022-02-17 14:09:35,798 [dag.py:682] (VIEW 0)
+INFO 2022-02-17 14:09:35,798 [dag.py:684]   [@DAGExecutor]
+INFO 2022-02-17 14:09:35,798 [dag.py:686]     - rec
+INFO 2022-02-17 14:09:35,798 [dag.py:682] (VIEW 1)
+INFO 2022-02-17 14:09:35,799 [dag.py:684]   [rec]
+INFO 2022-02-17 14:09:35,799 [dag.py:687] -------------------------------------------
+INFO 2022-02-17 14:09:35,816 [dag.py:730] op:rec add input channel.
+INFO 2022-02-17 14:09:35,826 [dag.py:759] last op:rec add output channel
+INFO 2022-02-17 14:09:35,827 [dag.py:800] [DAG] Succ build DAG
+INFO 2022-02-17 14:09:35,832 [dag.py:832] [DAG] start
+INFO 2022-02-17 14:09:35,833 [dag.py:182] [DAG] set in channel succ, name [@DAGExecutor]
+INFO 2022-02-17 14:09:35,870 [pipeline_server.py:51] [PipelineServicer] succ init
+INFO 2022-02-17 14:09:35,876 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:True, use_lite:False, use_xpu:False, device_type:2, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:None, precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 14:09:35,877 [operator.py:1306] Init cuda env in process 0
+INFO 2022-02-17 14:09:35,877 [local_service_handler.py:208] GET_CLIENT : concurrency_idx=0, device_num=1
+INFO 2022-02-17 14:09:36,950 [local_predict.py:153] LocalPredictor load_model_config params: model_path:./general_PPLCNet_x2_5_lite_v1.0_serving, use_gpu:True, gpu_id:0, use_profile:False, thread_num:2, mem_optim:True, ir_optim:False, use_trt:True, use_lite:False, use_xpu:False, precision:fp32, use_calib:False, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None, use_feed_fetch_ops:False, 
+INFO 2022-02-17 14:09:39,525 [operator.py:1317] [rec|0] Succ init
+WARNING 2022-02-17 14:10:28,771 [pipeline_server.py:509] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-17 14:10:28,771 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 14:10:28,771 [pipeline_server.py:509] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-17 14:10:28,771 [pipeline_server.py:509] [CONF] use_profile not set, use default: False
+WARNING 2022-02-17 14:10:28,771 [pipeline_server.py:509] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-17 14:10:28,771 [pipeline_server.py:509] [CONF] tracer not set, use default: {}
+WARNING 2022-02-17 14:10:28,771 [pipeline_server.py:509] [CONF] channel_recv_frist_arrive not set, use default: False
+WARNING 2022-02-17 14:10:28,772 [pipeline_server.py:509] [CONF] interval_s not set, use default: -1
+WARNING 2022-02-17 14:10:28,772 [pipeline_server.py:509] [CONF] timeout not set, use default: -1
+WARNING 2022-02-17 14:10:28,772 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 14:10:28,772 [pipeline_server.py:509] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-17 14:10:28,772 [pipeline_server.py:509] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-17 14:10:28,772 [pipeline_server.py:509] [CONF] workdir not set, use default: 
+WARNING 2022-02-17 14:10:28,772 [pipeline_server.py:509] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-17 14:10:28,772 [pipeline_server.py:509] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-17 14:10:28,772 [pipeline_server.py:509] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-17 14:10:28,772 [pipeline_server.py:509] [CONF] precision not set, use default: fp32
+WARNING 2022-02-17 14:10:28,772 [pipeline_server.py:509] [CONF] use_calib not set, use default: False
+WARNING 2022-02-17 14:10:28,772 [pipeline_server.py:509] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-17 14:10:28,773 [pipeline_server.py:509] [CONF] mkldnn_cache_capacity not set, use default: 0
+INFO 2022-02-17 14:10:28,784 [operator.py:181] local_service_conf: {'model_config': './general_PPLCNet_x2_5_lite_v1.0_serving', 'device_type': 1, 'devices': '0', 'client_type': 'local_predictor', 'fetch_list': ['feature'], 'workdir': '', 'thread_num': 2, 'mem_optim': True, 'ir_optim': False, 'precision': 'fp32', 'use_calib': False, 'use_mkldnn': False, 'mkldnn_cache_capacity': 0}
+INFO 2022-02-17 14:10:28,784 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:False, use_lite:False, use_xpu:False, device_type:1, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:['feature'], precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 14:10:28,784 [operator.py:285] rec 
+	input_ops: @DAGExecutor,
+	server_endpoints: None
+	fetch_list: ['feature']
+	client_config: ./general_PPLCNet_x2_5_lite_v1.0_serving/serving_server_conf.prototxt
+	concurrency: 1,
+	timeout(s): -1,
+	retry: 1,
+	batch_size: 1,
+	auto_batching_timeout(s): None
+INFO 2022-02-17 14:10:28,784 [pipeline_server.py:215] ============= PIPELINE SERVER =============
+INFO 2022-02-17 14:10:28,784 [pipeline_server.py:218] 
+{
+    "worker_num":1,
+    "http_port":9315,
+    "rpc_port":9314,
+    "dag":{
+        "is_thread_op":false,
+        "retry":1,
+        "client_type":"brpc",
+        "use_profile":false,
+        "channel_size":0,
+        "tracer":{
+            "interval_s":-1
+        },
+        "channel_recv_frist_arrive":false
+    },
+    "op":{
+        "rec":{
+            "concurrency":1,
+            "local_service_conf":{
+                "model_config":"./general_PPLCNet_x2_5_lite_v1.0_serving",
+                "device_type":1,
+                "devices":"0",
+                "client_type":"local_predictor",
+                "fetch_list":[
+                    "feature"
+                ],
+                "workdir":"",
+                "thread_num":2,
+                "mem_optim":true,
+                "ir_optim":false,
+                "precision":"fp32",
+                "use_calib":false,
+                "use_mkldnn":false,
+                "mkldnn_cache_capacity":0
+            },
+            "timeout":-1,
+            "retry":1,
+            "batch_size":1,
+            "auto_batching_timeout":-1
+        }
+    },
+    "build_dag_each_worker":false
+}
+INFO 2022-02-17 14:10:28,784 [pipeline_server.py:223] -------------------------------------------
+INFO 2022-02-17 14:10:28,784 [operator.py:308] Op(rec) use local rpc service at port: []
+INFO 2022-02-17 14:10:28,796 [dag.py:496] [DAG] Succ init
+INFO 2022-02-17 14:10:28,797 [dag.py:659] ================= USED OP =================
+INFO 2022-02-17 14:10:28,797 [dag.py:662] rec
+INFO 2022-02-17 14:10:28,797 [dag.py:663] -------------------------------------------
+INFO 2022-02-17 14:10:28,797 [dag.py:680] ================== DAG ====================
+INFO 2022-02-17 14:10:28,797 [dag.py:682] (VIEW 0)
+INFO 2022-02-17 14:10:28,797 [dag.py:684]   [@DAGExecutor]
+INFO 2022-02-17 14:10:28,797 [dag.py:686]     - rec
+INFO 2022-02-17 14:10:28,798 [dag.py:682] (VIEW 1)
+INFO 2022-02-17 14:10:28,798 [dag.py:684]   [rec]
+INFO 2022-02-17 14:10:28,798 [dag.py:687] -------------------------------------------
+INFO 2022-02-17 14:10:28,813 [dag.py:730] op:rec add input channel.
+INFO 2022-02-17 14:10:28,822 [dag.py:759] last op:rec add output channel
+INFO 2022-02-17 14:10:28,823 [dag.py:800] [DAG] Succ build DAG
+INFO 2022-02-17 14:10:28,827 [dag.py:832] [DAG] start
+INFO 2022-02-17 14:10:28,827 [dag.py:182] [DAG] set in channel succ, name [@DAGExecutor]
+INFO 2022-02-17 14:10:28,870 [pipeline_server.py:51] [PipelineServicer] succ init
+INFO 2022-02-17 14:10:28,873 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:False, use_lite:False, use_xpu:False, device_type:1, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:None, precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 14:10:28,873 [operator.py:1306] Init cuda env in process 0
+INFO 2022-02-17 14:10:28,873 [local_service_handler.py:208] GET_CLIENT : concurrency_idx=0, device_num=1
+INFO 2022-02-17 14:10:29,826 [local_predict.py:153] LocalPredictor load_model_config params: model_path:./general_PPLCNet_x2_5_lite_v1.0_serving, use_gpu:True, gpu_id:0, use_profile:False, thread_num:2, mem_optim:True, ir_optim:False, use_trt:False, use_lite:False, use_xpu:False, precision:fp32, use_calib:False, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None, use_feed_fetch_ops:False, 
+INFO 2022-02-17 14:10:32,335 [operator.py:1317] [rec|0] Succ init
+INFO 2022-02-17 14:10:33,070 [pipeline_server.py:56] (log_id=0) inference request name:recognition self.name:recognition time:1645078233.070603
+INFO 2022-02-17 14:10:33,071 [operator.py:1723] RequestOp unpack one request. log_id:0, clientip:             name:recognition, method:prediction, time:1645078233.0718045
+INFO 2022-02-17 14:10:33,072 [dag.py:369] (data_id=0 log_id=0) Succ Generate ID 
+INFO 2022-02-17 14:10:35,794 [dag.py:405] (data_id=0 log_id=0) Succ predict
+WARNING 2022-02-17 14:14:29,769 [pipeline_server.py:509] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-17 14:14:29,770 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 14:14:29,770 [pipeline_server.py:509] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-17 14:14:29,770 [pipeline_server.py:509] [CONF] use_profile not set, use default: False
+WARNING 2022-02-17 14:14:29,770 [pipeline_server.py:509] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-17 14:14:29,770 [pipeline_server.py:509] [CONF] tracer not set, use default: {}
+WARNING 2022-02-17 14:14:29,770 [pipeline_server.py:509] [CONF] channel_recv_frist_arrive not set, use default: False
+WARNING 2022-02-17 14:14:29,770 [pipeline_server.py:509] [CONF] interval_s not set, use default: -1
+WARNING 2022-02-17 14:14:29,770 [pipeline_server.py:509] [CONF] timeout not set, use default: -1
+WARNING 2022-02-17 14:14:29,770 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 14:14:29,771 [pipeline_server.py:509] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-17 14:14:29,771 [pipeline_server.py:509] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-17 14:14:29,771 [pipeline_server.py:509] [CONF] workdir not set, use default: 
+WARNING 2022-02-17 14:14:29,771 [pipeline_server.py:509] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-17 14:14:29,771 [pipeline_server.py:509] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-17 14:14:29,771 [pipeline_server.py:509] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-17 14:14:29,771 [pipeline_server.py:509] [CONF] precision not set, use default: fp32
+WARNING 2022-02-17 14:14:29,771 [pipeline_server.py:509] [CONF] use_calib not set, use default: False
+WARNING 2022-02-17 14:14:29,771 [pipeline_server.py:509] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-17 14:14:29,771 [pipeline_server.py:509] [CONF] mkldnn_cache_capacity not set, use default: 0
+INFO 2022-02-17 14:14:29,783 [operator.py:181] local_service_conf: {'model_config': './general_PPLCNet_x2_5_lite_v1.0_serving', 'device_type': 1, 'devices': '0', 'client_type': 'local_predictor', 'fetch_list': ['feature'], 'workdir': '', 'thread_num': 2, 'mem_optim': True, 'ir_optim': False, 'precision': 'fp32', 'use_calib': False, 'use_mkldnn': False, 'mkldnn_cache_capacity': 0}
+INFO 2022-02-17 14:14:29,783 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:False, use_lite:False, use_xpu:False, device_type:1, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:['feature'], precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 14:14:29,783 [operator.py:285] rec 
+	input_ops: @DAGExecutor,
+	server_endpoints: None
+	fetch_list: ['feature']
+	client_config: ./general_PPLCNet_x2_5_lite_v1.0_serving/serving_server_conf.prototxt
+	concurrency: 1,
+	timeout(s): -1,
+	retry: 1,
+	batch_size: 1,
+	auto_batching_timeout(s): None
+INFO 2022-02-17 14:14:29,783 [pipeline_server.py:215] ============= PIPELINE SERVER =============
+INFO 2022-02-17 14:14:29,783 [pipeline_server.py:218] 
+{
+    "worker_num":1,
+    "http_port":9315,
+    "rpc_port":9314,
+    "dag":{
+        "is_thread_op":false,
+        "retry":1,
+        "client_type":"brpc",
+        "use_profile":false,
+        "channel_size":0,
+        "tracer":{
+            "interval_s":-1
+        },
+        "channel_recv_frist_arrive":false
+    },
+    "op":{
+        "rec":{
+            "concurrency":1,
+            "local_service_conf":{
+                "model_config":"./general_PPLCNet_x2_5_lite_v1.0_serving",
+                "device_type":1,
+                "devices":"0",
+                "client_type":"local_predictor",
+                "fetch_list":[
+                    "feature"
+                ],
+                "workdir":"",
+                "thread_num":2,
+                "mem_optim":true,
+                "ir_optim":false,
+                "precision":"fp32",
+                "use_calib":false,
+                "use_mkldnn":false,
+                "mkldnn_cache_capacity":0
+            },
+            "timeout":-1,
+            "retry":1,
+            "batch_size":1,
+            "auto_batching_timeout":-1
+        }
+    },
+    "build_dag_each_worker":false
+}
+INFO 2022-02-17 14:14:29,783 [pipeline_server.py:223] -------------------------------------------
+INFO 2022-02-17 14:14:29,783 [operator.py:308] Op(rec) use local rpc service at port: []
+INFO 2022-02-17 14:14:29,795 [dag.py:496] [DAG] Succ init
+INFO 2022-02-17 14:14:29,796 [dag.py:659] ================= USED OP =================
+INFO 2022-02-17 14:14:29,796 [dag.py:662] rec
+INFO 2022-02-17 14:14:29,796 [dag.py:663] -------------------------------------------
+INFO 2022-02-17 14:14:29,796 [dag.py:680] ================== DAG ====================
+INFO 2022-02-17 14:14:29,796 [dag.py:682] (VIEW 0)
+INFO 2022-02-17 14:14:29,796 [dag.py:684]   [@DAGExecutor]
+INFO 2022-02-17 14:14:29,796 [dag.py:686]     - rec
+INFO 2022-02-17 14:14:29,796 [dag.py:682] (VIEW 1)
+INFO 2022-02-17 14:14:29,796 [dag.py:684]   [rec]
+INFO 2022-02-17 14:14:29,796 [dag.py:687] -------------------------------------------
+INFO 2022-02-17 14:14:29,812 [dag.py:730] op:rec add input channel.
+INFO 2022-02-17 14:14:29,822 [dag.py:759] last op:rec add output channel
+INFO 2022-02-17 14:14:29,823 [dag.py:800] [DAG] Succ build DAG
+INFO 2022-02-17 14:14:29,827 [dag.py:832] [DAG] start
+INFO 2022-02-17 14:14:29,827 [dag.py:182] [DAG] set in channel succ, name [@DAGExecutor]
+INFO 2022-02-17 14:14:29,829 [pipeline_server.py:51] [PipelineServicer] succ init
+INFO 2022-02-17 14:14:29,837 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:False, use_lite:False, use_xpu:False, device_type:1, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:None, precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 14:14:29,837 [operator.py:1306] Init cuda env in process 0
+INFO 2022-02-17 14:14:29,837 [local_service_handler.py:208] GET_CLIENT : concurrency_idx=0, device_num=1
+INFO 2022-02-17 14:14:30,832 [local_predict.py:153] LocalPredictor load_model_config params: model_path:./general_PPLCNet_x2_5_lite_v1.0_serving, use_gpu:True, gpu_id:0, use_profile:False, thread_num:2, mem_optim:True, ir_optim:False, use_trt:False, use_lite:False, use_xpu:False, precision:fp32, use_calib:False, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None, use_feed_fetch_ops:False, 
+INFO 2022-02-17 14:14:33,327 [operator.py:1317] [rec|0] Succ init
+INFO 2022-02-17 14:14:39,181 [pipeline_server.py:56] (log_id=0) inference request name:recognition self.name:recognition time:1645078479.1810365
+INFO 2022-02-17 14:14:39,182 [operator.py:1723] RequestOp unpack one request. log_id:0, clientip:             name:recognition, method:prediction, time:1645078479.1821644
+INFO 2022-02-17 14:14:39,182 [dag.py:369] (data_id=0 log_id=0) Succ Generate ID 
+INFO 2022-02-17 14:14:41,917 [dag.py:405] (data_id=0 log_id=0) Succ predict
+INFO 2022-02-17 14:26:17,673 [loader.py:54] Loading faiss with AVX2 support.
+INFO 2022-02-17 14:26:17,673 [loader.py:58] Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+INFO 2022-02-17 14:26:17,673 [loader.py:64] Loading faiss.
+INFO 2022-02-17 14:26:17,693 [loader.py:66] Successfully loaded faiss.
+WARNING 2022-02-17 14:26:17,697 [pipeline_server.py:509] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-17 14:26:17,697 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 14:26:17,698 [pipeline_server.py:509] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-17 14:26:17,698 [pipeline_server.py:509] [CONF] use_profile not set, use default: False
+WARNING 2022-02-17 14:26:17,698 [pipeline_server.py:509] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-17 14:26:17,698 [pipeline_server.py:509] [CONF] tracer not set, use default: {}
+WARNING 2022-02-17 14:26:17,698 [pipeline_server.py:509] [CONF] channel_recv_frist_arrive not set, use default: False
+WARNING 2022-02-17 14:26:17,698 [pipeline_server.py:509] [CONF] interval_s not set, use default: -1
+WARNING 2022-02-17 14:26:17,698 [pipeline_server.py:509] [CONF] timeout not set, use default: -1
+WARNING 2022-02-17 14:26:17,698 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-17 14:26:17,698 [pipeline_server.py:509] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-17 14:26:17,698 [pipeline_server.py:509] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-17 14:26:17,698 [pipeline_server.py:509] [CONF] workdir not set, use default: 
+WARNING 2022-02-17 14:26:17,698 [pipeline_server.py:509] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-17 14:26:17,698 [pipeline_server.py:509] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-17 14:26:17,698 [pipeline_server.py:509] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-17 14:26:17,698 [pipeline_server.py:509] [CONF] precision not set, use default: fp32
+WARNING 2022-02-17 14:26:17,698 [pipeline_server.py:509] [CONF] use_calib not set, use default: False
+WARNING 2022-02-17 14:26:17,698 [pipeline_server.py:509] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-17 14:26:17,698 [pipeline_server.py:509] [CONF] mkldnn_cache_capacity not set, use default: 0
+INFO 2022-02-17 14:26:17,711 [operator.py:181] local_service_conf: {'model_config': './general_PPLCNet_x2_5_lite_v1.0_serving', 'device_type': 1, 'devices': '0', 'client_type': 'local_predictor', 'fetch_list': ['feature'], 'workdir': '', 'thread_num': 2, 'mem_optim': True, 'ir_optim': False, 'precision': 'fp32', 'use_calib': False, 'use_mkldnn': False, 'mkldnn_cache_capacity': 0}
+INFO 2022-02-17 14:26:17,711 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:False, use_lite:False, use_xpu:False, device_type:1, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:['feature'], precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 14:26:17,712 [operator.py:285] rec 
+	input_ops: @DAGExecutor,
+	server_endpoints: None
+	fetch_list: ['feature']
+	client_config: ./general_PPLCNet_x2_5_lite_v1.0_serving/serving_server_conf.prototxt
+	concurrency: 1,
+	timeout(s): -1,
+	retry: 1,
+	batch_size: 1,
+	auto_batching_timeout(s): None
+INFO 2022-02-17 14:26:17,712 [pipeline_server.py:215] ============= PIPELINE SERVER =============
+INFO 2022-02-17 14:26:17,712 [pipeline_server.py:218] 
+{
+    "worker_num":1,
+    "http_port":9315,
+    "rpc_port":9314,
+    "dag":{
+        "is_thread_op":false,
+        "retry":1,
+        "client_type":"brpc",
+        "use_profile":false,
+        "channel_size":0,
+        "tracer":{
+            "interval_s":-1
+        },
+        "channel_recv_frist_arrive":false
+    },
+    "op":{
+        "rec":{
+            "concurrency":1,
+            "local_service_conf":{
+                "model_config":"./general_PPLCNet_x2_5_lite_v1.0_serving",
+                "device_type":1,
+                "devices":"0",
+                "client_type":"local_predictor",
+                "fetch_list":[
+                    "feature"
+                ],
+                "workdir":"",
+                "thread_num":2,
+                "mem_optim":true,
+                "ir_optim":false,
+                "precision":"fp32",
+                "use_calib":false,
+                "use_mkldnn":false,
+                "mkldnn_cache_capacity":0
+            },
+            "timeout":-1,
+            "retry":1,
+            "batch_size":1,
+            "auto_batching_timeout":-1
+        }
+    },
+    "build_dag_each_worker":false
+}
+INFO 2022-02-17 14:26:17,712 [pipeline_server.py:223] -------------------------------------------
+INFO 2022-02-17 14:26:17,712 [operator.py:308] Op(rec) use local rpc service at port: []
+INFO 2022-02-17 14:26:17,726 [dag.py:496] [DAG] Succ init
+INFO 2022-02-17 14:26:17,727 [dag.py:659] ================= USED OP =================
+INFO 2022-02-17 14:26:17,727 [dag.py:662] rec
+INFO 2022-02-17 14:26:17,727 [dag.py:663] -------------------------------------------
+INFO 2022-02-17 14:26:17,727 [dag.py:680] ================== DAG ====================
+INFO 2022-02-17 14:26:17,727 [dag.py:682] (VIEW 0)
+INFO 2022-02-17 14:26:17,727 [dag.py:684]   [@DAGExecutor]
+INFO 2022-02-17 14:26:17,727 [dag.py:686]     - rec
+INFO 2022-02-17 14:26:17,727 [dag.py:682] (VIEW 1)
+INFO 2022-02-17 14:26:17,727 [dag.py:684]   [rec]
+INFO 2022-02-17 14:26:17,727 [dag.py:687] -------------------------------------------
+INFO 2022-02-17 14:26:17,743 [dag.py:730] op:rec add input channel.
+INFO 2022-02-17 14:26:17,757 [dag.py:759] last op:rec add output channel
+INFO 2022-02-17 14:26:17,758 [dag.py:800] [DAG] Succ build DAG
+INFO 2022-02-17 14:26:17,764 [dag.py:832] [DAG] start
+INFO 2022-02-17 14:26:17,765 [dag.py:182] [DAG] set in channel succ, name [@DAGExecutor]
+INFO 2022-02-17 14:26:17,767 [pipeline_server.py:51] [PipelineServicer] succ init
+INFO 2022-02-17 14:26:17,777 [local_service_handler.py:172] Models(./general_PPLCNet_x2_5_lite_v1.0_serving) will be launched by device gpu. use_gpu:True, use_trt:False, use_lite:False, use_xpu:False, device_type:1, devices:[0], mem_optim:True, ir_optim:False, use_profile:False, thread_num:2, client_type:local_predictor, fetch_names:None, precision:fp32, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None
+INFO 2022-02-17 14:26:17,777 [operator.py:1306] Init cuda env in process 0
+INFO 2022-02-17 14:26:17,777 [local_service_handler.py:208] GET_CLIENT : concurrency_idx=0, device_num=1
+INFO 2022-02-17 14:26:18,830 [local_predict.py:153] LocalPredictor load_model_config params: model_path:./general_PPLCNet_x2_5_lite_v1.0_serving, use_gpu:True, gpu_id:0, use_profile:False, thread_num:2, mem_optim:True, ir_optim:False, use_trt:False, use_lite:False, use_xpu:False, precision:fp32, use_calib:False, use_mkldnn:False, mkldnn_cache_capacity:0, mkldnn_op_list:None, mkldnn_bf16_op_list:None, use_feed_fetch_ops:False, 
+INFO 2022-02-17 14:26:20,559 [operator.py:1317] [rec|0] Succ init
+INFO 2022-02-17 14:26:37,796 [pipeline_server.py:56] (log_id=0) inference request name:recognition self.name:recognition time:1645079197.7964764
+INFO 2022-02-17 14:26:37,797 [operator.py:1723] RequestOp unpack one request. log_id:0, clientip:             name:recognition, method:prediction, time:1645079197.7977042
+INFO 2022-02-17 14:26:37,798 [dag.py:369] (data_id=0 log_id=0) Succ Generate ID 
+INFO 2022-02-17 14:26:39,784 [dag.py:405] (data_id=0 log_id=0) Succ predict

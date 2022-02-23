@@ -1,0 +1,2000 @@
+WARNING 2021-12-29 02:45:16,604 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 02:45:16,604 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 02:45:16,604 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 02:45:16,604 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 02:45:16,605 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 02:45:16,605 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 02:45:16,605 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 02:45:16,605 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 02:45:16,605 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 02:45:16,605 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 02:45:16,605 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 02:45:16,605 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 02:45:16,606 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 02:45:16,606 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 02:45:16,606 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 02:45:16,606 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 02:45:16,606 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-29 02:45:45,873 [operator.py:969] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_0.tmp_1.lod'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 965, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 76, in postprocess
+    res_dict = {"bbox_result": str(self.img_postprocess(fetch_dict, visualize=False))}
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 429, in __call__
+    self.clsid2catid)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 346, in _get_bbox_result
+    lod = [fetch_map[fetch_name + '.lod']]
+KeyError: 'save_infer_model/scale_0.tmp_1.lod'
+ERROR 2021-12-29 02:45:45,877 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_0.tmp_1.lod'
+WARNING 2021-12-29 03:07:14,510 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 03:07:14,510 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 03:07:14,510 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 03:07:14,511 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 03:07:14,511 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 03:07:14,511 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 03:07:14,511 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 03:07:14,511 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 03:07:14,511 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 03:07:14,511 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 03:07:14,511 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 03:07:14,511 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 03:07:14,512 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 03:07:14,512 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 03:07:14,512 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 03:07:14,512 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 03:07:14,512 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-29 03:07:22,696 [operator.py:969] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_0.tmp_1.lod'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 965, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 77, in postprocess
+    res_dict = {"bbox_result": str(self.img_postprocess(fetch_dict, visualize=False))}
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 429, in __call__
+    self.clsid2catid)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 346, in _get_bbox_result
+    lod = [fetch_map[fetch_name + '.lod']]
+KeyError: 'save_infer_model/scale_0.tmp_1.lod'
+ERROR 2021-12-29 03:07:22,700 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_0.tmp_1.lod'
+WARNING 2021-12-29 03:10:13,372 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 03:10:13,373 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 03:10:13,373 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 03:10:13,373 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 03:10:13,373 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 03:10:13,373 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 03:10:13,373 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 03:10:13,373 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 03:10:13,373 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 03:10:13,373 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 03:10:13,374 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 03:10:13,374 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 03:10:13,374 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 03:10:13,374 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 03:10:13,374 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 03:10:13,374 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 03:10:13,374 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-29 03:10:21,260 [operator.py:969] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_0.tmp_1.lod'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 965, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 78, in postprocess
+    res_dict = {"bbox_result": str(self.img_postprocess(fetch_dict, visualize=False))}
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 429, in __call__
+    self.clsid2catid)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 346, in _get_bbox_result
+    lod = [fetch_map[fetch_name + '.lod']]
+KeyError: 'save_infer_model/scale_0.tmp_1.lod'
+ERROR 2021-12-29 03:10:21,264 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_0.tmp_1.lod'
+WARNING 2021-12-29 03:11:47,323 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 03:11:47,323 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 03:11:47,323 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 03:11:47,323 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 03:11:47,323 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 03:11:47,323 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 03:11:47,323 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 03:11:47,324 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 03:11:47,324 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 03:11:47,324 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 03:11:47,324 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 03:11:47,324 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 03:11:47,324 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 03:11:47,324 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 03:11:47,324 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 03:11:47,324 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 03:11:47,325 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-29 03:11:55,757 [operator.py:969] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_0.tmp_1.lod'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 965, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 78, in postprocess
+    res_dict = {"bbox_result": str(self.img_postprocess(fetch_dict, visualize=False))}
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 429, in __call__
+    self.clsid2catid)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 346, in _get_bbox_result
+    lod = [fetch_map[fetch_name + '.lod']]
+KeyError: 'save_infer_model/scale_0.tmp_1.lod'
+ERROR 2021-12-29 03:11:55,761 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_0.tmp_1.lod'
+WARNING 2021-12-29 05:35:58,321 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 05:35:58,321 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 05:35:58,321 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 05:35:58,321 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 05:35:58,322 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 05:35:58,322 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 05:35:58,322 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 05:35:58,322 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 05:35:58,322 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 05:35:58,322 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 05:35:58,322 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 05:35:58,322 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 05:35:58,322 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 05:35:58,323 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 05:35:58,323 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 05:35:58,323 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 05:35:58,323 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+WARNING 2021-12-29 05:37:04,889 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 05:37:04,889 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 05:37:04,889 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 05:37:04,890 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 05:37:04,890 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 05:37:04,890 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 05:37:04,890 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 05:37:04,890 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 05:37:04,890 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 05:37:04,890 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 05:37:04,890 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 05:37:04,890 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 05:37:04,891 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 05:37:04,891 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 05:37:04,891 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 05:37:04,891 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 05:37:04,891 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-29 05:37:16,537 [operator.py:973] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_0.tmp_1.lod'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 77, in postprocess
+    res_dict = {"bbox_result": str(self.img_postprocess(fetch_dict, visualize=False))}
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 430, in __call__
+    self.clsid2catid)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 346, in _get_bbox_result
+    lod = [fetch_map[fetch_name + '.lod']]
+KeyError: 'save_infer_model/scale_0.tmp_1.lod'
+ERROR 2021-12-29 05:37:16,542 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_0.tmp_1.lod'
+WARNING 2021-12-29 05:40:11,809 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 05:40:11,809 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 05:40:11,809 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 05:40:11,809 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 05:40:11,809 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 05:40:11,810 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 05:40:11,810 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 05:40:11,810 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 05:40:11,810 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 05:40:11,810 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 05:40:11,810 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 05:40:11,810 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 05:40:11,810 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 05:40:11,810 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 05:40:11,810 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 05:40:11,811 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 05:40:11,811 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-29 05:40:18,654 [operator.py:973] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_0.tmp_1.lod'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 77, in postprocess
+    res_dict = {"bbox_result": str(self.img_postprocess(fetch_dict, visualize=False))}
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 430, in __call__
+    self.clsid2catid)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 346, in _get_bbox_result
+    lod = [fetch_map[fetch_name + '.lod']]
+KeyError: 'save_infer_model/scale_0.tmp_1.lod'
+ERROR 2021-12-29 05:40:18,658 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_0.tmp_1.lod'
+WARNING 2021-12-29 05:42:11,543 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 05:42:11,543 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 05:42:11,543 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 05:42:11,544 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 05:42:11,544 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 05:42:11,544 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 05:42:11,544 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 05:42:11,544 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 05:42:11,544 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 05:42:11,544 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 05:42:11,544 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 05:42:11,545 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 05:42:11,545 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 05:42:11,545 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 05:42:11,545 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 05:42:11,545 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 05:42:11,545 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-29 05:42:19,333 [operator.py:973] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_0.tmp_1.lod'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 77, in postprocess
+    res_dict = {"bbox_result": str(self.img_postprocess(fetch_dict, visualize=False))}
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 430, in __call__
+    self.clsid2catid)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 346, in _get_bbox_result
+    lod = [fetch_map[fetch_name + '.lod']]
+KeyError: 'save_infer_model/scale_0.tmp_1.lod'
+ERROR 2021-12-29 05:42:19,340 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_0.tmp_1.lod'
+WARNING 2021-12-29 06:08:54,355 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 06:08:54,355 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:08:54,355 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 06:08:54,356 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 06:08:54,356 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 06:08:54,356 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 06:08:54,356 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:08:54,356 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 06:08:54,356 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 06:08:54,356 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 06:08:54,356 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 06:08:54,357 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 06:08:54,357 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 06:08:54,357 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 06:08:54,357 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 06:08:54,357 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 06:08:54,357 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+CRITICAL 2021-12-29 06:08:56,841 [operator.py:1176] [ppyolo_mbv3|0] failed to init op: name 'yaml' is not defined
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 1171, in _run
+    profiler = self._initialize(is_thread_op, concurrency_idx)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 1360, in _initialize
+    self.init_op()
+  File "web_service.py", line 33, in init_op
+    yml_conf = yaml.safe_load(f)
+NameError: name 'yaml' is not defined
+WARNING 2021-12-29 06:10:19,803 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 06:10:19,803 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:10:19,803 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 06:10:19,803 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 06:10:19,804 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 06:10:19,804 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 06:10:19,804 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:10:19,804 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 06:10:19,804 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 06:10:19,804 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 06:10:19,804 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 06:10:19,804 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 06:10:19,804 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 06:10:19,805 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 06:10:19,805 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 06:10:19,805 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 06:10:19,805 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+CRITICAL 2021-12-29 06:10:22,339 [operator.py:1176] [ppyolo_mbv3|0] failed to init op: name 'yaml' is not defined
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 1171, in _run
+    profiler = self._initialize(is_thread_op, concurrency_idx)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 1360, in _initialize
+    self.init_op()
+  File "web_service.py", line 33, in init_op
+    yml_conf = yaml.safe_load(f)
+NameError: name 'yaml' is not defined
+WARNING 2021-12-29 06:12:08,931 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 06:12:08,931 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:12:08,931 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 06:12:08,932 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 06:12:08,932 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 06:12:08,932 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 06:12:08,932 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:12:08,932 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 06:12:08,932 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 06:12:08,932 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 06:12:08,932 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 06:12:08,932 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 06:12:08,933 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 06:12:08,933 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 06:12:08,933 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 06:12:08,933 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 06:12:08,933 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+CRITICAL 2021-12-29 06:12:11,443 [operator.py:1176] [ppyolo_mbv3|0] failed to init op: __init__() got an unexpected keyword argument 'interp'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 1171, in _run
+    profiler = self._initialize(is_thread_op, concurrency_idx)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 1360, in _initialize
+    self.init_op()
+  File "web_service.py", line 40, in init_op
+    self.preprocess_ops.append(eval(op_type)(**new_op_info))
+TypeError: __init__() got an unexpected keyword argument 'interp'
+WARNING 2021-12-29 06:12:47,188 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 06:12:47,188 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:12:47,189 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 06:12:47,189 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 06:12:47,189 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 06:12:47,189 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 06:12:47,189 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:12:47,189 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 06:12:47,189 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 06:12:47,189 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 06:12:47,190 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 06:12:47,190 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 06:12:47,190 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 06:12:47,190 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 06:12:47,190 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 06:12:47,190 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 06:12:47,190 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+CRITICAL 2021-12-29 06:12:49,708 [operator.py:1176] [ppyolo_mbv3|0] failed to init op: __init__() got an unexpected keyword argument 'interp'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 1171, in _run
+    profiler = self._initialize(is_thread_op, concurrency_idx)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 1360, in _initialize
+    self.init_op()
+  File "web_service.py", line 41, in init_op
+    self.preprocess_ops.append(eval(op_type)(**new_op_info))
+TypeError: __init__() got an unexpected keyword argument 'interp'
+WARNING 2021-12-29 06:15:10,463 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 06:15:10,464 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:15:10,464 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 06:15:10,464 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 06:15:10,464 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 06:15:10,464 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 06:15:10,464 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:15:10,464 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 06:15:10,465 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 06:15:10,465 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 06:15:10,465 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 06:15:10,465 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 06:15:10,465 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 06:15:10,465 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 06:15:10,465 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 06:15:10,465 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 06:15:10,465 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+CRITICAL 2021-12-29 06:15:12,951 [operator.py:1176] [ppyolo_mbv3|0] failed to init op: __init__() got an unexpected keyword argument 'interp'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 1171, in _run
+    profiler = self._initialize(is_thread_op, concurrency_idx)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 1360, in _initialize
+    self.init_op()
+  File "web_service.py", line 43, in init_op
+    self.preprocess_ops.append(eval(op_type)(**new_op_info))
+TypeError: __init__() got an unexpected keyword argument 'interp'
+WARNING 2021-12-29 06:17:36,321 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 06:17:36,321 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:17:36,322 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 06:17:36,322 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 06:17:36,322 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 06:17:36,322 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 06:17:36,322 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:17:36,322 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 06:17:36,322 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 06:17:36,322 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 06:17:36,323 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 06:17:36,323 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 06:17:36,323 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 06:17:36,323 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 06:17:36,323 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 06:17:36,323 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 06:17:36,323 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+CRITICAL 2021-12-29 06:17:38,816 [operator.py:1176] [ppyolo_mbv3|0] failed to init op: __init__() got an unexpected keyword argument 'interp'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 1171, in _run
+    profiler = self._initialize(is_thread_op, concurrency_idx)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 1360, in _initialize
+    self.init_op()
+  File "web_service.py", line 44, in init_op
+    self.preprocess_ops.append(eval(op_type)(**new_op_info))
+TypeError: __init__() got an unexpected keyword argument 'interp'
+WARNING 2021-12-29 06:18:17,409 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 06:18:17,409 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:18:17,409 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 06:18:17,410 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 06:18:17,410 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 06:18:17,410 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 06:18:17,410 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:18:17,410 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 06:18:17,410 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 06:18:17,410 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 06:18:17,410 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 06:18:17,410 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 06:18:17,411 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 06:18:17,411 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 06:18:17,411 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 06:18:17,411 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 06:18:17,411 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+CRITICAL 2021-12-29 06:18:19,908 [operator.py:1176] [ppyolo_mbv3|0] failed to init op: __init__() got an unexpected keyword argument 'interp'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 1171, in _run
+    profiler = self._initialize(is_thread_op, concurrency_idx)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 1360, in _initialize
+    self.init_op()
+  File "web_service.py", line 45, in init_op
+    self.preprocess_ops.append(eval(op_type)(**new_op_info))
+TypeError: __init__() got an unexpected keyword argument 'interp'
+WARNING 2021-12-29 06:19:57,871 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 06:19:57,872 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:19:57,872 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 06:19:57,872 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 06:19:57,872 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 06:19:57,872 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 06:19:57,872 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:19:57,872 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 06:19:57,873 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 06:19:57,873 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 06:19:57,873 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 06:19:57,873 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 06:19:57,873 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 06:19:57,873 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 06:19:57,873 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 06:19:57,873 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 06:19:57,873 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+CRITICAL 2021-12-29 06:20:00,415 [operator.py:1176] [ppyolo_mbv3|0] failed to init op: name 'preprocess_ops' is not defined
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 1171, in _run
+    profiler = self._initialize(is_thread_op, concurrency_idx)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 1360, in _initialize
+    self.init_op()
+  File "web_service.py", line 45, in init_op
+    preprocess_ops.append(eval(op_type)(**new_op_info))
+NameError: name 'preprocess_ops' is not defined
+WARNING 2021-12-29 06:21:28,629 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 06:21:28,629 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:21:28,629 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 06:21:28,630 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 06:21:28,630 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 06:21:28,630 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 06:21:28,630 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:21:28,630 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 06:21:28,630 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 06:21:28,630 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 06:21:28,630 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 06:21:28,631 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 06:21:28,631 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 06:21:28,631 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 06:21:28,631 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 06:21:28,631 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 06:21:28,631 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+CRITICAL 2021-12-29 06:21:31,123 [operator.py:1176] [ppyolo_mbv3|0] failed to init op: name 'preprocess_ops' is not defined
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 1171, in _run
+    profiler = self._initialize(is_thread_op, concurrency_idx)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 1360, in _initialize
+    self.init_op()
+  File "web_service.py", line 46, in init_op
+    preprocess_ops.append(eval(op_type)(**new_op_info))
+NameError: name 'preprocess_ops' is not defined
+WARNING 2021-12-29 06:25:12,051 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 06:25:12,051 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:25:12,052 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 06:25:12,052 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 06:25:12,052 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 06:25:12,052 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 06:25:12,052 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:25:12,052 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 06:25:12,052 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 06:25:12,052 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 06:25:12,053 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 06:25:12,053 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 06:25:12,053 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 06:25:12,053 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 06:25:12,053 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 06:25:12,053 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 06:25:12,053 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+CRITICAL 2021-12-29 06:25:14,695 [operator.py:1176] [ppyolo_mbv3|0] failed to init op: name 'preprocess_ops' is not defined
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 1171, in _run
+    profiler = self._initialize(is_thread_op, concurrency_idx)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 1360, in _initialize
+    self.init_op()
+  File "web_service.py", line 46, in init_op
+    preprocess_ops.append(eval(op_type)(**new_op_info))
+NameError: name 'preprocess_ops' is not defined
+WARNING 2021-12-29 06:25:29,445 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 06:25:29,445 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:25:29,445 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 06:25:29,445 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 06:25:29,445 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 06:25:29,446 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 06:25:29,446 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:25:29,446 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 06:25:29,446 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 06:25:29,446 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 06:25:29,446 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 06:25:29,446 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 06:25:29,446 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 06:25:29,446 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 06:25:29,447 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 06:25:29,447 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 06:25:29,447 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+CRITICAL 2021-12-29 06:25:31,935 [operator.py:1176] [ppyolo_mbv3|0] failed to init op: name 'preprocess_ops' is not defined
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 1171, in _run
+    profiler = self._initialize(is_thread_op, concurrency_idx)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 1360, in _initialize
+    self.init_op()
+  File "web_service.py", line 47, in init_op
+    preprocess_ops.append(eval(op_type)(**new_op_info))
+NameError: name 'preprocess_ops' is not defined
+WARNING 2021-12-29 06:31:43,452 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 06:31:43,453 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:31:43,453 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 06:31:43,453 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 06:31:43,453 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 06:31:43,453 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 06:31:43,453 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:31:43,453 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 06:31:43,454 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 06:31:43,454 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 06:31:43,454 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 06:31:43,454 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 06:31:43,454 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 06:31:43,454 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 06:31:43,454 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 06:31:43,454 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 06:31:43,454 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+CRITICAL 2021-12-29 06:31:45,962 [operator.py:1176] [ppyolo_mbv3|0] failed to init op: name 'preprocess_ops' is not defined
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 1171, in _run
+    profiler = self._initialize(is_thread_op, concurrency_idx)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 1360, in _initialize
+    self.init_op()
+  File "web_service.py", line 49, in init_op
+    preprocess_ops.append(eval(op_type)(**new_op_info))
+NameError: name 'preprocess_ops' is not defined
+WARNING 2021-12-29 06:32:31,020 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 06:32:31,021 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:32:31,021 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 06:32:31,021 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 06:32:31,021 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 06:32:31,021 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 06:32:31,021 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:32:31,021 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 06:32:31,021 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 06:32:31,022 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 06:32:31,022 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 06:32:31,022 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 06:32:31,022 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 06:32:31,022 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 06:32:31,022 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 06:32:31,022 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 06:32:31,022 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+WARNING 2021-12-29 06:33:05,247 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 06:33:05,250 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:33:05,250 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 06:33:05,250 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 06:33:05,250 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 06:33:05,250 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 06:33:05,250 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:33:05,251 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 06:33:05,251 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 06:33:05,251 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 06:33:05,251 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 06:33:05,251 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 06:33:05,251 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 06:33:05,251 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 06:33:05,251 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 06:33:05,251 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 06:33:05,251 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+WARNING 2021-12-29 06:40:19,257 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 06:40:19,257 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:40:19,257 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 06:40:19,257 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 06:40:19,257 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 06:40:19,257 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 06:40:19,257 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:40:19,258 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 06:40:19,258 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 06:40:19,258 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 06:40:19,258 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 06:40:19,258 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 06:40:19,258 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 06:40:19,258 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 06:40:19,258 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 06:40:19,258 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 06:40:19,259 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-29 06:40:25,105 [operator.py:695] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to preprocess: local variable 'im_info' referenced before assignment
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 678, in _run_preprocess
+    parsed_data, data_id, logid_dict.get(data_id))
+  File "web_service.py", line 54, in preprocess
+    im_info['im_shape'] = np.array(im.shape[:2], dtype=np.float32)
+UnboundLocalError: local variable 'im_info' referenced before assignment
+ERROR 2021-12-29 06:40:25,111 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to preprocess: local variable 'im_info' referenced before assignment
+WARNING 2021-12-29 06:42:03,381 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 06:42:03,381 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:42:03,381 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 06:42:03,381 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 06:42:03,381 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 06:42:03,381 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 06:42:03,381 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:42:03,381 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 06:42:03,382 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 06:42:03,382 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 06:42:03,382 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 06:42:03,382 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 06:42:03,382 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 06:42:03,382 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 06:42:03,382 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 06:42:03,382 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 06:42:03,382 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-29 06:42:13,106 [operator.py:695] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to preprocess: local variable 'im_info' referenced before assignment
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 678, in _run_preprocess
+    parsed_data, data_id, logid_dict.get(data_id))
+  File "web_service.py", line 54, in preprocess
+    im_info['im_shape'] = np.array(im.shape[:2], dtype=np.float32)
+UnboundLocalError: local variable 'im_info' referenced before assignment
+ERROR 2021-12-29 06:42:13,112 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to preprocess: local variable 'im_info' referenced before assignment
+WARNING 2021-12-29 06:42:44,174 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 06:42:44,174 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:42:44,174 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 06:42:44,174 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 06:42:44,174 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 06:42:44,175 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 06:42:44,175 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:42:44,175 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 06:42:44,175 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 06:42:44,175 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 06:42:44,175 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 06:42:44,175 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 06:42:44,175 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 06:42:44,175 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 06:42:44,176 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 06:42:44,176 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 06:42:44,176 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-29 06:42:47,195 [operator.py:695] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to preprocess: local variable 'im_info' referenced before assignment
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 678, in _run_preprocess
+    parsed_data, data_id, logid_dict.get(data_id))
+  File "web_service.py", line 55, in preprocess
+    im_info['im_shape'] = np.array(im.shape[:2], dtype=np.float32)
+UnboundLocalError: local variable 'im_info' referenced before assignment
+ERROR 2021-12-29 06:42:47,200 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to preprocess: local variable 'im_info' referenced before assignment
+WARNING 2021-12-29 06:44:34,233 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 06:44:34,233 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:44:34,233 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 06:44:34,233 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 06:44:34,233 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 06:44:34,233 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 06:44:34,233 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:44:34,234 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 06:44:34,234 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 06:44:34,234 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 06:44:34,234 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 06:44:34,234 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 06:44:34,234 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 06:44:34,234 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 06:44:34,234 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 06:44:34,234 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 06:44:34,235 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-29 06:44:43,710 [operator.py:695] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to preprocess: local variable 'im_info' referenced before assignment
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 678, in _run_preprocess
+    parsed_data, data_id, logid_dict.get(data_id))
+  File "web_service.py", line 55, in preprocess
+    im_info['im_shape'] = np.array(im.shape[:2], dtype=np.float32)
+UnboundLocalError: local variable 'im_info' referenced before assignment
+ERROR 2021-12-29 06:44:43,715 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to preprocess: local variable 'im_info' referenced before assignment
+WARNING 2021-12-29 06:46:19,030 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 06:46:19,030 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:46:19,030 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 06:46:19,030 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 06:46:19,031 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 06:46:19,031 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 06:46:19,031 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:46:19,031 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 06:46:19,031 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 06:46:19,031 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 06:46:19,031 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 06:46:19,031 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 06:46:19,031 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 06:46:19,032 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 06:46:19,032 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 06:46:19,032 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 06:46:19,032 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-29 06:46:25,581 [operator.py:695] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to preprocess: operands could not be broadcast together with shapes (3,640,640) (1,1,3) (3,640,640) 
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 678, in _run_preprocess
+    parsed_data, data_id, logid_dict.get(data_id))
+  File "web_service.py", line 71, in preprocess
+    im = self.img_preprocess(im)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 492, in __call__
+    img = t(img)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 642, in __call__
+    return F.normalize(img, self.mean, self.std, self.channel_first)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/functional.py", line 33, in normalize
+    img -= img_mean
+ValueError: operands could not be broadcast together with shapes (3,640,640) (1,1,3) (3,640,640) 
+ERROR 2021-12-29 06:46:25,587 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to preprocess: operands could not be broadcast together with shapes (3,640,640) (1,1,3) (3,640,640) 
+WARNING 2021-12-29 06:51:01,066 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 06:51:01,066 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:51:01,066 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 06:51:01,067 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 06:51:01,067 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 06:51:01,067 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 06:51:01,067 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:51:01,067 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 06:51:01,067 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 06:51:01,067 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 06:51:01,067 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 06:51:01,068 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 06:51:01,068 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 06:51:01,068 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 06:51:01,068 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 06:51:01,068 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 06:51:01,068 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-29 06:51:07,885 [operator.py:973] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_0.tmp_1.lod'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 89, in postprocess
+    res_dict = {"bbox_result": str(self.img_postprocess(fetch_dict, visualize=False))}
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 430, in __call__
+    self.clsid2catid)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 346, in _get_bbox_result
+    lod = [fetch_map[fetch_name + '.lod']]
+KeyError: 'save_infer_model/scale_0.tmp_1.lod'
+ERROR 2021-12-29 06:51:07,889 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_0.tmp_1.lod'
+WARNING 2021-12-29 06:51:56,944 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 06:51:56,945 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:51:56,945 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 06:51:56,945 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 06:51:56,945 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 06:51:56,945 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 06:51:56,945 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:51:56,945 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 06:51:56,945 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 06:51:56,946 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 06:51:56,946 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 06:51:56,946 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 06:51:56,946 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 06:51:56,946 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 06:51:56,946 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 06:51:56,946 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 06:51:56,946 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+WARNING 2021-12-29 06:52:13,864 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 06:52:13,865 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:52:13,865 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 06:52:13,865 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 06:52:13,865 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 06:52:13,865 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 06:52:13,865 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:52:13,865 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 06:52:13,866 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 06:52:13,866 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 06:52:13,866 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 06:52:13,866 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 06:52:13,866 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 06:52:13,866 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 06:52:13,866 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 06:52:13,866 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 06:52:13,866 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-29 06:52:20,309 [operator.py:973] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_0.tmp_1.lod'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 86, in postprocess
+    res_dict = {"bbox_result": str(self.img_postprocess(fetch_dict, visualize=False))}
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 430, in __call__
+    self.clsid2catid)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 346, in _get_bbox_result
+    lod = [fetch_map[fetch_name + '.lod']]
+KeyError: 'save_infer_model/scale_0.tmp_1.lod'
+ERROR 2021-12-29 06:52:20,314 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_0.tmp_1.lod'
+WARNING 2021-12-29 06:54:00,624 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 06:54:00,624 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:54:00,624 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 06:54:00,625 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 06:54:00,625 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 06:54:00,625 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 06:54:00,625 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 06:54:00,625 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 06:54:00,625 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 06:54:00,625 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 06:54:00,625 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 06:54:00,625 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 06:54:00,626 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 06:54:00,626 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 06:54:00,626 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 06:54:00,626 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 06:54:00,626 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-29 06:54:07,453 [operator.py:973] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_0.tmp_1.lod'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 86, in postprocess
+    res_dict = {"bbox_result": str(self.img_postprocess(fetch_dict, visualize=False))}
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 430, in __call__
+    self.clsid2catid)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 346, in _get_bbox_result
+    lod = [fetch_map[fetch_name + '.lod']]
+KeyError: 'save_infer_model/scale_0.tmp_1.lod'
+ERROR 2021-12-29 06:54:07,458 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_0.tmp_1.lod'
+WARNING 2021-12-29 07:13:12,175 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 07:13:12,175 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 07:13:12,176 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 07:13:12,176 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 07:13:12,176 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 07:13:12,176 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 07:13:12,176 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 07:13:12,176 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 07:13:12,176 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 07:13:12,177 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 07:13:12,177 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 07:13:12,177 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 07:13:12,177 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 07:13:12,177 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 07:13:12,177 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 07:13:12,177 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 07:13:12,177 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-29 07:13:20,265 [operator.py:973] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_0.tmp_1.lod'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 87, in postprocess
+    res_dict = {"bbox_result": str(self.img_postprocess(fetch_dict, visualize=False))}
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 430, in __call__
+    self.clsid2catid)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 346, in _get_bbox_result
+    lod = [fetch_map[fetch_name + '.lod']]
+KeyError: 'save_infer_model/scale_0.tmp_1.lod'
+ERROR 2021-12-29 07:13:20,269 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_0.tmp_1.lod'
+WARNING 2021-12-29 07:16:27,832 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 07:16:27,832 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 07:16:27,833 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 07:16:27,833 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 07:16:27,833 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 07:16:27,833 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 07:16:27,833 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 07:16:27,833 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 07:16:27,833 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 07:16:27,833 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 07:16:27,834 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 07:16:27,834 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 07:16:27,834 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 07:16:27,834 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 07:16:27,834 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 07:16:27,834 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 07:16:27,834 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-29 07:16:32,263 [operator.py:695] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to preprocess: name 'im_shape' is not defined
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 678, in _run_preprocess
+    parsed_data, data_id, logid_dict.get(data_id))
+  File "web_service.py", line 68, in preprocess
+    "im_shape": im_info[im_shape],#np.array(list(im.shape[1:])).reshape(-1)[np.newaxis,:],
+NameError: name 'im_shape' is not defined
+ERROR 2021-12-29 07:16:32,267 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to preprocess: name 'im_shape' is not defined
+WARNING 2021-12-29 07:17:33,514 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 07:17:33,514 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 07:17:33,515 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 07:17:33,515 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 07:17:33,515 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 07:17:33,515 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 07:17:33,515 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 07:17:33,515 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 07:17:33,515 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 07:17:33,515 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 07:17:33,516 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 07:17:33,516 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 07:17:33,516 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 07:17:33,516 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 07:17:33,516 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 07:17:33,516 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 07:17:33,516 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-29 07:17:39,797 [operator.py:973] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_0.tmp_1.lod'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 87, in postprocess
+    res_dict = {"bbox_result": str(self.img_postprocess(fetch_dict, visualize=False))}
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 431, in __call__
+    self.clsid2catid)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 346, in _get_bbox_result
+    lod = [fetch_map[fetch_name + '.lod']]
+KeyError: 'save_infer_model/scale_0.tmp_1.lod'
+ERROR 2021-12-29 07:17:39,802 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_0.tmp_1.lod'
+WARNING 2021-12-29 07:19:06,141 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 07:19:06,142 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 07:19:06,142 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 07:19:06,142 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 07:19:06,142 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 07:19:06,142 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 07:19:06,142 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 07:19:06,142 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 07:19:06,142 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 07:19:06,142 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 07:19:06,143 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 07:19:06,143 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 07:19:06,143 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 07:19:06,143 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 07:19:06,143 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 07:19:06,143 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 07:19:06,143 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-29 07:19:12,763 [operator.py:973] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_0.tmp_1.lod'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 87, in postprocess
+    res_dict = {"bbox_result": str(self.img_postprocess(fetch_dict, visualize=False))}
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 431, in __call__
+    self.clsid2catid)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 346, in _get_bbox_result
+    lod = [fetch_map[fetch_name + '.lod']]
+KeyError: 'save_infer_model/scale_0.tmp_1.lod'
+ERROR 2021-12-29 07:19:12,767 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_0.tmp_1.lod'
+WARNING 2021-12-29 07:40:25,237 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 07:40:25,237 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 07:40:25,237 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 07:40:25,237 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 07:40:25,238 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 07:40:25,238 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 07:40:25,238 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 07:40:25,238 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 07:40:25,238 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 07:40:25,238 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 07:40:25,238 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 07:40:25,238 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 07:40:25,238 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 07:40:25,238 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 07:40:25,239 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 07:40:25,239 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 07:40:25,239 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+WARNING 2021-12-29 07:42:11,629 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 07:42:11,629 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 07:42:11,629 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 07:42:11,630 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 07:42:11,630 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 07:42:11,630 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 07:42:11,630 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 07:42:11,630 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 07:42:11,630 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 07:42:11,630 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 07:42:11,630 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 07:42:11,630 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 07:42:11,630 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 07:42:11,631 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 07:42:11,631 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 07:42:11,631 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 07:42:11,631 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-29 07:42:25,683 [operator.py:973] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_0.tmp_1.lod'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 87, in postprocess
+    res_dict = {"bbox_result": str(self.img_postprocess(fetch_dict, visualize=False))}
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 431, in __call__
+    self.clsid2catid)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 346, in _get_bbox_result
+    lod = [fetch_map[fetch_name + '.lod']]
+KeyError: 'save_infer_model/scale_0.tmp_1.lod'
+ERROR 2021-12-29 07:42:25,687 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_0.tmp_1.lod'
+WARNING 2021-12-29 07:49:58,432 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-29 07:49:58,433 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 07:49:58,433 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-29 07:49:58,433 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-29 07:49:58,433 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-29 07:49:58,433 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-29 07:49:58,433 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-29 07:49:58,433 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-29 07:49:58,433 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-29 07:49:58,434 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-29 07:49:58,434 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-29 07:49:58,434 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-29 07:49:58,434 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-29 07:49:58,434 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-29 07:49:58,434 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-29 07:49:58,434 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-29 07:49:58,434 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-29 07:50:05,801 [operator.py:973] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_4.tmp_1.lod'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 87, in postprocess
+    res_dict = {"bbox_result": str(self.img_postprocess(fetch_dict, visualize=False))}
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 431, in __call__
+    self.clsid2catid)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 346, in _get_bbox_result
+    lod = [fetch_map[fetch_name + '.lod']]
+KeyError: 'save_infer_model/scale_4.tmp_1.lod'
+ERROR 2021-12-29 07:50:05,806 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_4.tmp_1.lod'
+WARNING 2021-12-30 06:53:16,236 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-30 06:53:16,237 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 06:53:16,237 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-30 06:53:16,237 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-30 06:53:16,237 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-30 06:53:16,237 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-30 06:53:16,237 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 06:53:16,237 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-30 06:53:16,237 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-30 06:53:16,238 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-30 06:53:16,238 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-30 06:53:16,238 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-30 06:53:16,238 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-30 06:53:16,238 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-30 06:53:16,238 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-30 06:53:16,238 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-30 06:53:16,238 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-30 06:53:28,471 [operator.py:973] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_3.tmp_1.lod'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 81, in postprocess
+    res_dict = {"bbox_result": str(self.img_postprocess(fetch_dict, visualize=False))}
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 431, in __call__
+    self.clsid2catid)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 346, in _get_bbox_result
+    lod = [fetch_map[fetch_name + '.lod']]
+KeyError: 'save_infer_model/scale_3.tmp_1.lod'
+ERROR 2021-12-30 06:53:28,476 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_3.tmp_1.lod'
+WARNING 2021-12-30 07:57:06,805 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-30 07:57:06,805 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 07:57:06,805 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-30 07:57:06,805 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-30 07:57:06,805 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-30 07:57:06,806 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-30 07:57:06,806 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 07:57:06,806 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-30 07:57:06,806 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-30 07:57:06,806 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-30 07:57:06,806 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-30 07:57:06,806 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-30 07:57:06,806 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-30 07:57:06,806 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-30 07:57:06,806 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-30 07:57:06,807 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-30 07:57:06,807 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-30 07:57:15,249 [operator.py:973] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_7.tmp_1.lod'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 81, in postprocess
+    res_dict = {"bbox_result": str(self.img_postprocess(fetch_dict, visualize=False))}
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 431, in __call__
+    self.clsid2catid)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 346, in _get_bbox_result
+    lod = [fetch_map[fetch_name + '.lod']]
+KeyError: 'save_infer_model/scale_7.tmp_1.lod'
+ERROR 2021-12-30 07:57:15,253 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_7.tmp_1.lod'
+WARNING 2021-12-30 08:12:07,133 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-30 08:12:07,133 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 08:12:07,133 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-30 08:12:07,133 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-30 08:12:07,133 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-30 08:12:07,133 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-30 08:12:07,133 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 08:12:07,134 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-30 08:12:07,134 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-30 08:12:07,134 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-30 08:12:07,134 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-30 08:12:07,134 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-30 08:12:07,134 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-30 08:12:07,134 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-30 08:12:07,134 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-30 08:12:07,134 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-30 08:12:07,134 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-30 08:12:14,700 [operator.py:973] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 0
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 82, in postprocess
+    np_score_list.append(fetch_dict[out_idx])
+KeyError: 0
+ERROR 2021-12-30 08:12:14,707 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 0
+WARNING 2021-12-30 08:13:45,672 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-30 08:13:45,673 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 08:13:45,673 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-30 08:13:45,673 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-30 08:13:45,673 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-30 08:13:45,673 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-30 08:13:45,673 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 08:13:45,673 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-30 08:13:45,673 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-30 08:13:45,674 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-30 08:13:45,674 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-30 08:13:45,674 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-30 08:13:45,674 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-30 08:13:45,674 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-30 08:13:45,674 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-30 08:13:45,674 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-30 08:13:45,674 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-30 08:13:52,217 [operator.py:973] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 0
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 83, in postprocess
+    np_score_list.append(fetch_dict[out_idx])
+KeyError: 0
+ERROR 2021-12-30 08:13:52,220 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 0
+WARNING 2021-12-30 08:17:15,481 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-30 08:17:15,481 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 08:17:15,481 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-30 08:17:15,481 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-30 08:17:15,481 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-30 08:17:15,481 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-30 08:17:15,481 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 08:17:15,482 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-30 08:17:15,482 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-30 08:17:15,482 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-30 08:17:15,482 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-30 08:17:15,482 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-30 08:17:15,482 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-30 08:17:15,482 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-30 08:17:15,482 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-30 08:17:15,482 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-30 08:17:15,482 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-30 08:17:22,212 [operator.py:973] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 0
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 83, in postprocess
+    np_score_list.append(fetch_dict[i])
+KeyError: 0
+ERROR 2021-12-30 08:17:22,217 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 0
+WARNING 2021-12-30 08:17:30,895 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-30 08:17:30,898 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 08:17:30,898 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-30 08:17:30,898 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-30 08:17:30,898 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-30 08:17:30,898 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-30 08:17:30,898 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 08:17:30,899 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-30 08:17:30,899 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-30 08:17:30,899 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-30 08:17:30,899 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-30 08:17:30,899 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-30 08:17:30,899 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-30 08:17:30,899 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-30 08:17:30,899 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-30 08:17:30,899 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-30 08:17:30,899 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-30 08:17:39,176 [operator.py:973] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 0
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 83, in postprocess
+    np_score_list.append(fetch_dict[i])
+KeyError: 0
+ERROR 2021-12-30 08:17:39,180 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 0
+WARNING 2021-12-30 08:20:13,195 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-30 08:20:13,196 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 08:20:13,196 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-30 08:20:13,196 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-30 08:20:13,196 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-30 08:20:13,196 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-30 08:20:13,196 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 08:20:13,196 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-30 08:20:13,196 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-30 08:20:13,196 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-30 08:20:13,197 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-30 08:20:13,197 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-30 08:20:13,197 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-30 08:20:13,197 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-30 08:20:13,197 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-30 08:20:13,197 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-30 08:20:13,197 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-30 08:20:20,892 [operator.py:973] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 0
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 84, in postprocess
+    np_score_list.append(fetch_dict[i])
+KeyError: 0
+ERROR 2021-12-30 08:20:20,896 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 0
+WARNING 2021-12-30 08:31:54,772 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-30 08:31:54,772 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 08:31:54,772 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-30 08:31:54,772 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-30 08:31:54,773 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-30 08:31:54,773 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-30 08:31:54,773 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 08:31:54,773 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-30 08:31:54,773 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-30 08:31:54,773 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-30 08:31:54,773 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-30 08:31:54,773 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-30 08:31:54,773 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-30 08:31:54,773 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-30 08:31:54,774 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-30 08:31:54,774 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-30 08:31:54,774 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-30 08:32:01,331 [operator.py:973] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_7.tmp_1.lod'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 91, in postprocess
+    res_dict = {"bbox_result": str(self.img_postprocess(fetch_dict, visualize=False))}
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 431, in __call__
+    self.clsid2catid)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 346, in _get_bbox_result
+    lod = [fetch_map[fetch_name + '.lod']]
+KeyError: 'save_infer_model/scale_7.tmp_1.lod'
+ERROR 2021-12-30 08:32:01,335 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_7.tmp_1.lod'
+WARNING 2021-12-30 08:34:21,409 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-30 08:34:21,409 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 08:34:21,410 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-30 08:34:21,410 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-30 08:34:21,410 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-30 08:34:21,410 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-30 08:34:21,410 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 08:34:21,410 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-30 08:34:21,410 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-30 08:34:21,410 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-30 08:34:21,410 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-30 08:34:21,411 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-30 08:34:21,411 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-30 08:34:21,411 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-30 08:34:21,411 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-30 08:34:21,411 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-30 08:34:21,411 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-30 08:34:28,756 [operator.py:973] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_7.tmp_1.lod'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 96, in postprocess
+    res_dict = {"bbox_result": str(self.img_postprocess(fetch_dict, visualize=False))}
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 431, in __call__
+    self.clsid2catid)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 346, in _get_bbox_result
+    lod = [fetch_map[fetch_name + '.lod']]
+KeyError: 'save_infer_model/scale_7.tmp_1.lod'
+ERROR 2021-12-30 08:34:28,761 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_7.tmp_1.lod'
+WARNING 2021-12-30 08:43:32,266 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-30 08:43:32,266 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 08:43:32,267 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-30 08:43:32,267 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-30 08:43:32,267 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-30 08:43:32,267 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-30 08:43:32,268 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 08:43:32,268 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-30 08:43:32,268 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-30 08:43:32,268 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-30 08:43:32,268 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-30 08:43:32,269 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-30 08:43:32,269 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-30 08:43:32,269 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-30 08:43:32,269 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-30 08:43:32,269 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-30 08:43:32,270 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-30 08:43:46,213 [operator.py:973] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_7.tmp_1.lod'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 111, in postprocess
+    res_dict = {"bbox_result": str(self.img_postprocess(fetch_dict, visualize=False))}
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 431, in __call__
+    self.clsid2catid)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 346, in _get_bbox_result
+    lod = [fetch_map[fetch_name + '.lod']]
+KeyError: 'save_infer_model/scale_7.tmp_1.lod'
+ERROR 2021-12-30 08:43:46,218 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_7.tmp_1.lod'
+WARNING 2021-12-30 08:49:32,281 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-30 08:49:32,281 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 08:49:32,282 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-30 08:49:32,282 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-30 08:49:32,282 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-30 08:49:32,282 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-30 08:49:32,282 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 08:49:32,283 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-30 08:49:32,283 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-30 08:49:32,283 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-30 08:49:32,283 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-30 08:49:32,283 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-30 08:49:32,284 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-30 08:49:32,284 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-30 08:49:32,284 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-30 08:49:32,284 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-30 08:49:32,285 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-30 08:49:39,879 [operator.py:973] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_7.tmp_1.lod'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 113, in postprocess
+    res_dict = {"bbox_result": str(self.img_postprocess(fetch_dict, visualize=False))}
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 431, in __call__
+    self.clsid2catid)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 346, in _get_bbox_result
+    lod = [fetch_map[fetch_name + '.lod']]
+KeyError: 'save_infer_model/scale_7.tmp_1.lod'
+ERROR 2021-12-30 08:49:39,884 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_7.tmp_1.lod'
+WARNING 2021-12-30 08:52:42,378 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-30 08:52:42,379 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 08:52:42,379 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-30 08:52:42,379 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-30 08:52:42,379 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-30 08:52:42,380 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-30 08:52:42,380 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 08:52:42,380 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-30 08:52:42,380 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-30 08:52:42,381 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-30 08:52:42,381 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-30 08:52:42,381 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-30 08:52:42,381 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-30 08:52:42,381 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-30 08:52:42,382 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-30 08:52:42,382 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-30 08:52:42,382 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-30 08:52:50,006 [operator.py:973] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_7.tmp_1.lod'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 110, in postprocess
+    res_dict = {"bbox_result": str(self.img_postprocess(fetch_dict, visualize=False))}
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 431, in __call__
+    self.clsid2catid)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 346, in _get_bbox_result
+    lod = [fetch_map[fetch_name + '.lod']]
+KeyError: 'save_infer_model/scale_7.tmp_1.lod'
+ERROR 2021-12-30 08:52:50,011 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_7.tmp_1.lod'
+WARNING 2021-12-30 08:59:43,422 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-30 08:59:43,422 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 08:59:43,422 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-30 08:59:43,423 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-30 08:59:43,423 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-30 08:59:43,423 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-30 08:59:43,423 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 08:59:43,424 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-30 08:59:43,424 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-30 08:59:43,424 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-30 08:59:43,424 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-30 08:59:43,425 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-30 08:59:43,425 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-30 08:59:43,425 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-30 08:59:43,425 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-30 08:59:43,425 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-30 08:59:43,426 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+WARNING 2021-12-30 09:03:09,956 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-30 09:03:09,956 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 09:03:09,957 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-30 09:03:09,957 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-30 09:03:09,957 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-30 09:03:09,957 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-30 09:03:09,957 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 09:03:09,958 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-30 09:03:09,958 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-30 09:03:09,958 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-30 09:03:09,958 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-30 09:03:09,958 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-30 09:03:09,959 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-30 09:03:09,959 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-30 09:03:09,959 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-30 09:03:09,959 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-30 09:03:09,959 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+WARNING 2021-12-30 09:03:11,902 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-30 09:03:11,902 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 09:03:11,902 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-30 09:03:11,903 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-30 09:03:11,903 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-30 09:03:11,903 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-30 09:03:11,903 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 09:03:11,903 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-30 09:03:11,904 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-30 09:03:11,904 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-30 09:03:11,904 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-30 09:03:11,904 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-30 09:03:11,905 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-30 09:03:11,905 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-30 09:03:11,905 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-30 09:03:11,905 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-30 09:03:11,905 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-30 09:03:22,048 [operator.py:973] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_7.tmp_1.lod'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 102, in postprocess
+    res_dict = {"bbox_result": str(self.img_postprocess(fetch_dict, visualize=False))}
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 431, in __call__
+    self.clsid2catid)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 346, in _get_bbox_result
+    lod = [fetch_map[fetch_name + '.lod']]
+KeyError: 'save_infer_model/scale_7.tmp_1.lod'
+ERROR 2021-12-30 09:03:22,053 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_7.tmp_1.lod'
+WARNING 2021-12-30 09:07:27,378 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-30 09:07:27,379 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 09:07:27,379 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-30 09:07:27,379 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-30 09:07:27,380 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-30 09:07:27,380 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-30 09:07:27,380 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 09:07:27,380 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-30 09:07:27,381 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-30 09:07:27,381 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-30 09:07:27,381 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-30 09:07:27,381 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-30 09:07:27,382 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-30 09:07:27,382 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-30 09:07:27,382 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-30 09:07:27,382 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-30 09:07:27,382 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+WARNING 2021-12-30 09:07:48,750 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-30 09:07:48,751 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 09:07:48,751 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-30 09:07:48,751 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-30 09:07:48,751 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-30 09:07:48,752 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-30 09:07:48,752 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 09:07:48,752 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-30 09:07:48,752 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-30 09:07:48,753 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-30 09:07:48,753 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-30 09:07:48,753 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-30 09:07:48,753 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-30 09:07:48,753 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-30 09:07:48,753 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-30 09:07:48,754 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-30 09:07:48,754 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-30 09:07:53,007 [operator.py:973] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_7.tmp_1.lod'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 102, in postprocess
+    res_dict = {"bbox_result": str(self.img_postprocess(fetch_dict, visualize=False))}
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 431, in __call__
+    self.clsid2catid)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 346, in _get_bbox_result
+    lod = [fetch_map[fetch_name + '.lod']]
+KeyError: 'save_infer_model/scale_7.tmp_1.lod'
+ERROR 2021-12-30 09:07:53,011 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: 'save_infer_model/scale_7.tmp_1.lod'
+WARNING 2021-12-30 09:08:06,502 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-30 09:08:06,503 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 09:08:06,503 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-30 09:08:06,503 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-30 09:08:06,504 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-30 09:08:06,504 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-30 09:08:06,504 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 09:08:06,504 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-30 09:08:06,505 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-30 09:08:06,505 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-30 09:08:06,505 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-30 09:08:06,505 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-30 09:08:06,505 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-30 09:08:06,506 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-30 09:08:06,506 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-30 09:08:06,506 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-30 09:08:06,506 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-30 09:08:11,524 [operator.py:1000] (log_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: output of postprocess funticon must be dict type, but get <class 'numpy.ndarray'>
+ERROR 2021-12-30 09:08:11,527 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (log_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: output of postprocess funticon must be dict type, but get <class 'numpy.ndarray'>
+WARNING 2021-12-30 09:19:39,408 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-30 09:19:39,409 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 09:19:39,409 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-30 09:19:39,409 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-30 09:19:39,409 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-30 09:19:39,410 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-30 09:19:39,410 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 09:19:39,410 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-30 09:19:39,410 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-30 09:19:39,410 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-30 09:19:39,411 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-30 09:19:39,411 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-30 09:19:39,411 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-30 09:19:39,411 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-30 09:19:39,411 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-30 09:19:39,412 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-30 09:19:39,412 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-30 09:19:46,754 [operator.py:973] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: name 'res_dict' is not defined
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 101, in postprocess
+    res_dict[b] = {}
+NameError: name 'res_dict' is not defined
+ERROR 2021-12-30 09:19:46,757 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: name 'res_dict' is not defined
+WARNING 2021-12-30 09:20:11,181 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-30 09:20:11,181 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 09:20:11,181 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-30 09:20:11,182 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-30 09:20:11,182 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-30 09:20:11,182 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-30 09:20:11,182 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 09:20:11,182 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-30 09:20:11,182 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-30 09:20:11,182 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-30 09:20:11,182 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-30 09:20:11,183 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-30 09:20:11,183 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-30 09:20:11,183 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-30 09:20:11,183 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-30 09:20:11,183 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-30 09:20:11,183 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-30 09:20:15,417 [operator.py:973] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: list assignment index out of range
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 102, in postprocess
+    res_dict[b] = {}
+IndexError: list assignment index out of range
+ERROR 2021-12-30 09:20:15,421 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: list assignment index out of range
+WARNING 2021-12-30 09:21:19,542 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-30 09:21:19,543 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 09:21:19,543 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-30 09:21:19,543 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-30 09:21:19,543 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-30 09:21:19,544 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-30 09:21:19,544 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 09:21:19,544 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-30 09:21:19,544 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-30 09:21:19,545 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-30 09:21:19,545 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-30 09:21:19,545 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-30 09:21:19,545 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-30 09:21:19,545 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-30 09:21:19,546 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-30 09:21:19,546 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-30 09:21:19,546 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-30 09:21:24,326 [operator.py:973] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: list assignment index out of range
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 103, in postprocess
+    res_dict[b] = {}
+IndexError: list assignment index out of range
+ERROR 2021-12-30 09:21:24,330 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: list assignment index out of range
+WARNING 2021-12-30 09:23:31,824 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-30 09:23:31,824 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 09:23:31,824 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-30 09:23:31,824 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-30 09:23:31,825 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-30 09:23:31,825 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-30 09:23:31,825 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 09:23:31,825 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-30 09:23:31,826 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-30 09:23:31,826 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-30 09:23:31,826 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-30 09:23:31,826 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-30 09:23:31,826 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-30 09:23:31,827 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-30 09:23:31,827 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-30 09:23:31,827 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-30 09:23:31,827 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-30 09:23:37,722 [operator.py:973] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: name 'a' is not defined
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 101, in postprocess
+    for b in range(a.ndim):
+NameError: name 'a' is not defined
+ERROR 2021-12-30 09:23:37,726 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: name 'a' is not defined
+WARNING 2021-12-30 09:24:02,842 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-30 09:24:02,842 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 09:24:02,843 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-30 09:24:02,843 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-30 09:24:02,843 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-30 09:24:02,843 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-30 09:24:02,844 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 09:24:02,844 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-30 09:24:02,844 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-30 09:24:02,844 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-30 09:24:02,844 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-30 09:24:02,845 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-30 09:24:02,845 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-30 09:24:02,845 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-30 09:24:02,845 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-30 09:24:02,845 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-30 09:24:02,846 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-30 09:24:07,046 [operator.py:1000] (log_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: output of postprocess funticon must be dict type, but get <class 'list'>
+ERROR 2021-12-30 09:24:07,049 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (log_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: output of postprocess funticon must be dict type, but get <class 'list'>
+WARNING 2021-12-30 09:25:54,030 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-30 09:25:54,031 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 09:25:54,031 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-30 09:25:54,031 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-30 09:25:54,031 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-30 09:25:54,032 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-30 09:25:54,032 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 09:25:54,032 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-30 09:25:54,032 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-30 09:25:54,032 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-30 09:25:54,033 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-30 09:25:54,033 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-30 09:25:54,033 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-30 09:25:54,033 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-30 09:25:54,033 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-30 09:25:54,034 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-30 09:25:54,034 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-30 09:25:58,334 [operator.py:1487] (logid=0) Failed to pack RPC response package: 
+WARNING 2021-12-30 09:39:07,135 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-30 09:39:07,136 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 09:39:07,136 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-30 09:39:07,136 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-30 09:39:07,137 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-30 09:39:07,137 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-30 09:39:07,137 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 09:39:07,137 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-30 09:39:07,137 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-30 09:39:07,138 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-30 09:39:07,138 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-30 09:39:07,138 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-30 09:39:07,138 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-30 09:39:07,138 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-30 09:39:07,139 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-30 09:39:07,139 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-30 09:39:07,139 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-30 09:40:00,249 [operator.py:973] (data_id=1 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: __call__() takes 3 positional arguments but 4 were given
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+TypeError: __call__() takes 3 positional arguments but 4 were given
+ERROR 2021-12-30 09:40:00,253 [dag.py:409] (data_id=1 log_id=0) Failed to predict: (data_id=1 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: __call__() takes 3 positional arguments but 4 were given
+ERROR 2021-12-30 09:40:48,711 [operator.py:973] (data_id=2 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: __call__() takes 3 positional arguments but 4 were given
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+TypeError: __call__() takes 3 positional arguments but 4 were given
+ERROR 2021-12-30 09:40:48,714 [dag.py:409] (data_id=2 log_id=0) Failed to predict: (data_id=2 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: __call__() takes 3 positional arguments but 4 were given
+ERROR 2021-12-30 09:40:53,720 [operator.py:973] (data_id=3 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: __call__() takes 3 positional arguments but 4 were given
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+TypeError: __call__() takes 3 positional arguments but 4 were given
+ERROR 2021-12-30 09:40:53,723 [dag.py:409] (data_id=3 log_id=0) Failed to predict: (data_id=3 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: __call__() takes 3 positional arguments but 4 were given
+WARNING 2021-12-30 09:42:01,778 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-30 09:42:01,779 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 09:42:01,779 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-30 09:42:01,779 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-30 09:42:01,779 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-30 09:42:01,780 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-30 09:42:01,780 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 09:42:01,780 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-30 09:42:01,780 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-30 09:42:01,781 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-30 09:42:01,781 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-30 09:42:01,781 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-30 09:42:01,781 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-30 09:42:01,781 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-30 09:42:01,782 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-30 09:42:01,782 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-30 09:42:01,782 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-30 09:42:06,612 [operator.py:973] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: postprocess() missing 1 required positional argument: 'log_id'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+TypeError: postprocess() missing 1 required positional argument: 'log_id'
+ERROR 2021-12-30 09:42:06,616 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: postprocess() missing 1 required positional argument: 'log_id'
+ERROR 2021-12-30 09:42:19,953 [operator.py:973] (data_id=1 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: postprocess() missing 1 required positional argument: 'log_id'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+TypeError: postprocess() missing 1 required positional argument: 'log_id'
+ERROR 2021-12-30 09:42:19,957 [dag.py:409] (data_id=1 log_id=0) Failed to predict: (data_id=1 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: postprocess() missing 1 required positional argument: 'log_id'
+WARNING 2021-12-30 09:42:23,963 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-30 09:42:23,963 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 09:42:23,963 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-30 09:42:23,963 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-30 09:42:23,964 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-30 09:42:23,964 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-30 09:42:23,964 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 09:42:23,964 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-30 09:42:23,965 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-30 09:42:23,965 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-30 09:42:23,965 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-30 09:42:23,965 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-30 09:42:23,966 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-30 09:42:23,966 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-30 09:42:23,966 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-30 09:42:23,966 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-30 09:42:23,967 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-30 09:43:10,985 [operator.py:973] (data_id=1 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: __call__() takes 3 positional arguments but 4 were given
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+TypeError: __call__() takes 3 positional arguments but 4 were given
+ERROR 2021-12-30 09:43:10,988 [dag.py:409] (data_id=1 log_id=0) Failed to predict: (data_id=1 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: __call__() takes 3 positional arguments but 4 were given
+ERROR 2021-12-30 09:43:15,944 [operator.py:973] (data_id=2 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: __call__() takes 3 positional arguments but 4 were given
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+TypeError: __call__() takes 3 positional arguments but 4 were given
+ERROR 2021-12-30 09:43:15,950 [dag.py:409] (data_id=2 log_id=0) Failed to predict: (data_id=2 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: __call__() takes 3 positional arguments but 4 were given
+WARNING 2021-12-30 09:44:54,821 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-30 09:44:54,822 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 09:44:54,822 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-30 09:44:54,822 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-30 09:44:54,822 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-30 09:44:54,823 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-30 09:44:54,823 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 09:44:54,823 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-30 09:44:54,823 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-30 09:44:54,823 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-30 09:44:54,824 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-30 09:44:54,824 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-30 09:44:54,824 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-30 09:44:54,824 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-30 09:44:54,825 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-30 09:44:54,825 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-30 09:44:54,825 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-30 09:45:05,468 [operator.py:973] (data_id=1 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: __call__() takes 3 positional arguments but 4 were given
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+TypeError: __call__() takes 3 positional arguments but 4 were given
+ERROR 2021-12-30 09:45:05,472 [dag.py:409] (data_id=1 log_id=0) Failed to predict: (data_id=1 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: __call__() takes 3 positional arguments but 4 were given
+WARNING 2021-12-30 09:46:17,679 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-30 09:46:17,680 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 09:46:17,680 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-30 09:46:17,680 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-30 09:46:17,680 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-30 09:46:17,680 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-30 09:46:17,681 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 09:46:17,681 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-30 09:46:17,681 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-30 09:46:17,681 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-30 09:46:17,682 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-30 09:46:17,682 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-30 09:46:17,682 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-30 09:46:17,682 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-30 09:46:17,682 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-30 09:46:17,683 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-30 09:46:17,683 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-30 09:46:25,584 [operator.py:973] (data_id=1 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: __call__() takes 3 positional arguments but 4 were given
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+TypeError: __call__() takes 3 positional arguments but 4 were given
+ERROR 2021-12-30 09:46:25,588 [dag.py:409] (data_id=1 log_id=0) Failed to predict: (data_id=1 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: __call__() takes 3 positional arguments but 4 were given
+ERROR 2021-12-30 11:05:40,432 [pipeline_server.py:55] (log_id=0) name dismatch error. request.name:recognition,server.name=ppyolo_mbv3
+ERROR 2021-12-30 11:05:49,271 [operator.py:973] (data_id=2 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: __call__() takes 3 positional arguments but 4 were given
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+TypeError: __call__() takes 3 positional arguments but 4 were given
+ERROR 2021-12-30 11:05:49,274 [dag.py:409] (data_id=2 log_id=0) Failed to predict: (data_id=2 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: __call__() takes 3 positional arguments but 4 were given
+WARNING 2021-12-30 11:05:54,559 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-30 11:05:54,560 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 11:05:54,560 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-30 11:05:54,560 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-30 11:05:54,560 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-30 11:05:54,560 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-30 11:05:54,561 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 11:05:54,561 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-30 11:05:54,561 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-30 11:05:54,561 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-30 11:05:54,562 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-30 11:05:54,562 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-30 11:05:54,562 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-30 11:05:54,562 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-30 11:05:54,563 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-30 11:05:54,563 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-30 11:05:54,563 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-30 11:15:50,225 [operator.py:973] (data_id=1 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: __call__() takes 3 positional arguments but 4 were given
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 969, in _run_postprocess
+    logid_dict.get(data_id))
+TypeError: __call__() takes 3 positional arguments but 4 were given
+ERROR 2021-12-30 11:15:50,229 [dag.py:409] (data_id=1 log_id=0) Failed to predict: (data_id=1 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: __call__() takes 3 positional arguments but 4 were given
+WARNING 2021-12-30 11:24:24,428 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-30 11:24:24,428 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 11:24:24,428 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-30 11:24:24,429 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-30 11:24:24,429 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-30 11:24:24,429 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-30 11:24:24,429 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 11:24:24,429 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-30 11:24:24,430 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-30 11:24:24,430 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-30 11:24:24,430 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-30 11:24:24,430 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-30 11:24:24,430 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-30 11:24:24,431 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-30 11:24:24,431 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-30 11:24:24,431 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-30 11:24:24,431 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-30 11:24:40,005 [operator.py:976] (data_id=1 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: __call__() takes 3 positional arguments but 4 were given
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 972, in _run_postprocess
+    logid_dict.get(data_id))
+TypeError: __call__() takes 3 positional arguments but 4 were given
+ERROR 2021-12-30 11:24:40,009 [dag.py:409] (data_id=1 log_id=0) Failed to predict: (data_id=1 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: __call__() takes 3 positional arguments but 4 were given
+WARNING 2021-12-30 11:37:49,610 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-30 11:37:49,611 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 11:37:49,611 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-30 11:37:49,611 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-30 11:37:49,611 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-30 11:37:49,612 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-30 11:37:49,612 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 11:37:49,612 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-30 11:37:49,612 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-30 11:37:49,613 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-30 11:37:49,613 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-30 11:37:49,613 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-30 11:37:49,613 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-30 11:37:49,613 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-30 11:37:49,614 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-30 11:37:49,614 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-30 11:37:49,614 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-30 11:37:54,033 [operator.py:976] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: postprocess() missing 1 required positional argument: 'log_id'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 972, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 92, in postprocess
+    np_boxes, np_boxes_num = self.postprocess(np_score_list, np_boxes_list)
+TypeError: postprocess() missing 1 required positional argument: 'log_id'
+ERROR 2021-12-30 11:37:54,039 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: postprocess() missing 1 required positional argument: 'log_id'
+ERROR 2021-12-30 11:37:55,960 [operator.py:976] (data_id=1 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: postprocess() missing 1 required positional argument: 'log_id'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 972, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 92, in postprocess
+    np_boxes, np_boxes_num = self.postprocess(np_score_list, np_boxes_list)
+TypeError: postprocess() missing 1 required positional argument: 'log_id'
+ERROR 2021-12-30 11:37:55,963 [dag.py:409] (data_id=1 log_id=0) Failed to predict: (data_id=1 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: postprocess() missing 1 required positional argument: 'log_id'
+WARNING 2021-12-30 11:38:09,257 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-30 11:38:09,258 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 11:38:09,258 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-30 11:38:09,258 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-30 11:38:09,258 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-30 11:38:09,259 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-30 11:38:09,259 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 11:38:09,259 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-30 11:38:09,259 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-30 11:38:09,260 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-30 11:38:09,260 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-30 11:38:09,260 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-30 11:38:09,260 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-30 11:38:09,260 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-30 11:38:09,261 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-30 11:38:09,261 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-30 11:38:09,261 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+ERROR 2021-12-30 11:38:13,407 [operator.py:976] (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: postprocess() missing 1 required positional argument: 'log_id'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 972, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 92, in postprocess
+    np_boxes, np_boxes_num = self.postprocess(np_score_list, np_boxes_list)
+TypeError: postprocess() missing 1 required positional argument: 'log_id'
+ERROR 2021-12-30 11:38:13,411 [dag.py:409] (data_id=0 log_id=0) Failed to predict: (data_id=0 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: postprocess() missing 1 required positional argument: 'log_id'
+ERROR 2021-12-30 11:40:01,379 [operator.py:976] (data_id=1 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: postprocess() missing 1 required positional argument: 'log_id'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 972, in _run_postprocess
+    logid_dict.get(data_id))
+  File "web_service.py", line 92, in postprocess
+    self.post_process = PicoDetPostProcess(
+TypeError: postprocess() missing 1 required positional argument: 'log_id'
+ERROR 2021-12-30 11:40:01,383 [dag.py:409] (data_id=1 log_id=0) Failed to predict: (data_id=1 log_id=0) [ppyolo_mbv3|0] Failed to postprocess: postprocess() missing 1 required positional argument: 'log_id'
+WARNING 2021-12-30 11:40:05,557 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-30 11:40:05,557 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 11:40:05,558 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-30 11:40:05,558 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-30 11:40:05,558 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-30 11:40:05,558 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-30 11:40:05,558 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 11:40:05,559 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-30 11:40:05,559 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-30 11:40:05,559 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-30 11:40:05,559 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-30 11:40:05,559 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-30 11:40:05,560 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-30 11:40:05,560 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-30 11:40:05,560 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-30 11:40:05,560 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-30 11:40:05,560 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+WARNING 2021-12-30 11:41:26,917 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2021-12-30 11:41:26,918 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 11:41:26,918 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2021-12-30 11:41:26,918 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2021-12-30 11:41:26,918 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2021-12-30 11:41:26,918 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2021-12-30 11:41:26,919 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2021-12-30 11:41:26,919 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2021-12-30 11:41:26,919 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2021-12-30 11:41:26,919 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2021-12-30 11:41:26,919 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2021-12-30 11:41:26,920 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2021-12-30 11:41:26,920 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2021-12-30 11:41:26,920 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2021-12-30 11:41:26,920 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2021-12-30 11:41:26,920 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2021-12-30 11:41:26,921 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+WARNING 2022-02-14 09:24:33,065 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-14 09:24:33,072 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2022-02-14 09:24:33,072 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-14 09:24:33,072 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2022-02-14 09:24:33,072 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-14 09:24:33,072 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2022-02-14 09:24:33,073 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2022-02-14 09:24:33,073 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-14 09:24:33,073 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-14 09:24:33,073 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2022-02-14 09:24:33,073 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-14 09:24:33,073 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-14 09:24:33,073 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-14 09:24:33,073 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2022-02-14 09:24:33,074 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2022-02-14 09:24:33,074 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-14 09:24:33,074 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+CRITICAL 2022-02-14 09:24:35,602 [operator.py:1179] [ppyolo_mbv3|0] failed to init op: [Errno 2] No such file or directory: 'label_list.txt'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 1174, in _run
+    profiler = self._initialize(is_thread_op, concurrency_idx)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 1363, in _initialize
+    self.init_op()
+  File "web_service.py", line 30, in init_op
+    self.img_postprocess = RCNNPostprocess("label_list.txt", "output")
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 288, in __init__
+    with open(label_file) as fin:
+FileNotFoundError: [Errno 2] No such file or directory: 'label_list.txt'
+WARNING 2022-02-14 09:24:42,704 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-14 09:24:42,705 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2022-02-14 09:24:42,705 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-14 09:24:42,705 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2022-02-14 09:24:42,705 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-14 09:24:42,706 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2022-02-14 09:24:42,706 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2022-02-14 09:24:42,706 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-14 09:24:42,706 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-14 09:24:42,707 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2022-02-14 09:24:42,707 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-14 09:24:42,707 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-14 09:24:42,707 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-14 09:24:42,708 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2022-02-14 09:24:42,708 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2022-02-14 09:24:42,708 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-14 09:24:42,708 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+CRITICAL 2022-02-14 09:24:45,275 [operator.py:1179] [ppyolo_mbv3|0] failed to init op: [Errno 2] No such file or directory: 'label_list.txt'
+Traceback (most recent call last):
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 1174, in _run
+    profiler = self._initialize(is_thread_op, concurrency_idx)
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_server/pipeline/operator.py", line 1363, in _initialize
+    self.init_op()
+  File "web_service.py", line 30, in init_op
+    self.img_postprocess = RCNNPostprocess("label_list.txt", "output")
+  File "/usr/local/python3.7.0/lib/python3.7/site-packages/paddle_serving_app/reader/image_reader.py", line 288, in __init__
+    with open(label_file) as fin:
+FileNotFoundError: [Errno 2] No such file or directory: 'label_list.txt'
+WARNING 2022-02-14 09:26:03,671 [pipeline_server.py:496] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-14 09:26:03,671 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2022-02-14 09:26:03,671 [pipeline_server.py:496] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-14 09:26:03,672 [pipeline_server.py:496] [CONF] use_profile not set, use default: False
+WARNING 2022-02-14 09:26:03,672 [pipeline_server.py:496] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-14 09:26:03,672 [pipeline_server.py:496] [CONF] timeout not set, use default: -1
+WARNING 2022-02-14 09:26:03,672 [pipeline_server.py:496] [CONF] retry not set, use default: 1
+WARNING 2022-02-14 09:26:03,673 [pipeline_server.py:496] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-14 09:26:03,673 [pipeline_server.py:496] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-14 09:26:03,673 [pipeline_server.py:496] [CONF] workdir not set, use default: 
+WARNING 2022-02-14 09:26:03,673 [pipeline_server.py:496] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-14 09:26:03,674 [pipeline_server.py:496] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-14 09:26:03,674 [pipeline_server.py:496] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-14 09:26:03,674 [pipeline_server.py:496] [CONF] precision not set, use default: fp32
+WARNING 2022-02-14 09:26:03,674 [pipeline_server.py:496] [CONF] use_calib not set, use default: False
+WARNING 2022-02-14 09:26:03,674 [pipeline_server.py:496] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-14 09:26:03,675 [pipeline_server.py:496] [CONF] mkldnn_cache_capacity not set, use default: 0
+WARNING 2022-02-16 16:56:51,836 [pipeline_server.py:509] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-16 16:56:51,836 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-16 16:56:51,836 [pipeline_server.py:509] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-16 16:56:51,836 [pipeline_server.py:509] [CONF] use_profile not set, use default: False
+WARNING 2022-02-16 16:56:51,836 [pipeline_server.py:509] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-16 16:56:51,837 [pipeline_server.py:509] [CONF] channel_recv_frist_arrive not set, use default: False
+WARNING 2022-02-16 16:56:51,837 [pipeline_server.py:509] [CONF] timeout not set, use default: -1
+WARNING 2022-02-16 16:56:51,837 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-16 16:56:51,837 [pipeline_server.py:509] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-16 16:56:51,837 [pipeline_server.py:509] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-16 16:56:51,837 [pipeline_server.py:509] [CONF] workdir not set, use default: 
+WARNING 2022-02-16 16:56:51,837 [pipeline_server.py:509] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-16 16:56:51,837 [pipeline_server.py:509] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-16 16:56:51,837 [pipeline_server.py:509] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-16 16:56:51,837 [pipeline_server.py:509] [CONF] precision not set, use default: fp32
+WARNING 2022-02-16 16:56:51,837 [pipeline_server.py:509] [CONF] use_calib not set, use default: False
+WARNING 2022-02-16 16:56:51,837 [pipeline_server.py:509] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-16 16:56:51,837 [pipeline_server.py:509] [CONF] mkldnn_cache_capacity not set, use default: 0
+WARNING 2022-02-16 17:05:23,144 [pipeline_server.py:509] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-16 17:05:23,144 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-16 17:05:23,144 [pipeline_server.py:509] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-16 17:05:23,144 [pipeline_server.py:509] [CONF] use_profile not set, use default: False
+WARNING 2022-02-16 17:05:23,144 [pipeline_server.py:509] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-16 17:05:23,144 [pipeline_server.py:509] [CONF] channel_recv_frist_arrive not set, use default: False
+WARNING 2022-02-16 17:05:23,144 [pipeline_server.py:509] [CONF] timeout not set, use default: -1
+WARNING 2022-02-16 17:05:23,144 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-16 17:05:23,144 [pipeline_server.py:509] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-16 17:05:23,144 [pipeline_server.py:509] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-16 17:05:23,144 [pipeline_server.py:509] [CONF] workdir not set, use default: 
+WARNING 2022-02-16 17:05:23,144 [pipeline_server.py:509] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-16 17:05:23,145 [pipeline_server.py:509] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-16 17:05:23,145 [pipeline_server.py:509] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-16 17:05:23,145 [pipeline_server.py:509] [CONF] precision not set, use default: fp32
+WARNING 2022-02-16 17:05:23,145 [pipeline_server.py:509] [CONF] use_calib not set, use default: False
+WARNING 2022-02-16 17:05:23,145 [pipeline_server.py:509] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-16 17:05:23,145 [pipeline_server.py:509] [CONF] mkldnn_cache_capacity not set, use default: 0
+WARNING 2022-02-16 17:09:22,047 [pipeline_server.py:509] [CONF] build_dag_each_worker not set, use default: False
+WARNING 2022-02-16 17:09:22,047 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-16 17:09:22,047 [pipeline_server.py:509] [CONF] client_type not set, use default: brpc
+WARNING 2022-02-16 17:09:22,047 [pipeline_server.py:509] [CONF] use_profile not set, use default: False
+WARNING 2022-02-16 17:09:22,047 [pipeline_server.py:509] [CONF] channel_size not set, use default: 0
+WARNING 2022-02-16 17:09:22,047 [pipeline_server.py:509] [CONF] channel_recv_frist_arrive not set, use default: False
+WARNING 2022-02-16 17:09:22,047 [pipeline_server.py:509] [CONF] timeout not set, use default: -1
+WARNING 2022-02-16 17:09:22,048 [pipeline_server.py:509] [CONF] retry not set, use default: 1
+WARNING 2022-02-16 17:09:22,048 [pipeline_server.py:509] [CONF] batch_size not set, use default: 1
+WARNING 2022-02-16 17:09:22,048 [pipeline_server.py:509] [CONF] auto_batching_timeout not set, use default: -1
+WARNING 2022-02-16 17:09:22,048 [pipeline_server.py:509] [CONF] workdir not set, use default: 
+WARNING 2022-02-16 17:09:22,048 [pipeline_server.py:509] [CONF] thread_num not set, use default: 2
+WARNING 2022-02-16 17:09:22,048 [pipeline_server.py:509] [CONF] mem_optim not set, use default: True
+WARNING 2022-02-16 17:09:22,048 [pipeline_server.py:509] [CONF] ir_optim not set, use default: False
+WARNING 2022-02-16 17:09:22,048 [pipeline_server.py:509] [CONF] precision not set, use default: fp32
+WARNING 2022-02-16 17:09:22,048 [pipeline_server.py:509] [CONF] use_calib not set, use default: False
+WARNING 2022-02-16 17:09:22,048 [pipeline_server.py:509] [CONF] use_mkldnn not set, use default: False
+WARNING 2022-02-16 17:09:22,048 [pipeline_server.py:509] [CONF] mkldnn_cache_capacity not set, use default: 0

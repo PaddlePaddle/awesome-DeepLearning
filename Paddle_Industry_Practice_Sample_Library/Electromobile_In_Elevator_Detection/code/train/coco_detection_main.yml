@@ -1,0 +1,19 @@
+metric: COCO
+num_classes: 3
+
+TrainDataset:
+  !COCODataSet
+    image_dir: picodet_motorcycle/JPEGImages/
+    anno_path: voc_train.json
+    dataset_dir: /home/aistudio/data/data128282/
+    data_fields: ['image', 'gt_bbox', 'gt_class', 'is_crowd']
+
+EvalDataset:
+  !COCODataSet
+    image_dir: picodet_motorcycle/JPEGImages/
+    anno_path: voc_test.json
+    dataset_dir: /home/aistudio/data/data128282/
+
+TestDataset:
+  !ImageFolder
+    anno_path: voc_test.json
