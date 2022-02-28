@@ -1,0 +1,123 @@
+MODEL: #MODEL field
+  framework: "FastRCNN" 
+  backbone:
+    name: "ResNetSlowFast"
+    depth: 50 
+    alpha: 4 
+    beta: 8
+    width_per_group: 64
+    fusion_kernel_sz: 5
+    fuse_bn_relu: 0
+    spatial_strides: [[1, 1], [2, 2], [2, 2], [1, 1]]
+    use_pool_af_s2: 0
+  head:
+    name: "AVARoIHead"  
+    bbox_roi_extractor:
+      name: "SingleRoIExtractor3D"
+      roi_layer_type: "RoIAlign"
+      output_size: 8
+      with_temporal_pool: True
+    bbox_head:
+        name: 'BBoxHeadAVA'
+        in_channels : 2304
+        num_classes : 81
+        multilabel: True
+        dropout_ratio: 0.5
+    assigner:
+      name: 'MaxIoUAssignerAVA'
+      pos_iou_thr: 0.9
+      neg_iou_thr: 0.9
+      min_pos_iou: 0.9
+    sampler:
+      name: 'RandomSampler'
+      num: 32
+      pos_fraction: 1
+      neg_pos_ub: -1
+      add_gt_as_proposals: True
+    pos_weight: 1.0
+    action_thr: 0.0
+DATASET: #DATASET field
+  batch_size: 10  #single card bacth size
+  valid_batch_size: 1
+  num_workers: 1 
+  train:
+    format: "AVADataset" #the Class name of the dataset used by youerself
+    data_prefix: 'PATH_TO_AVA_FRAMES_OF_15min_VIDEOS' #Mandatory, train data root path
+    file_path: "./data/ava/annotations/ava_train_v2.1_99320.csv" #Mandatory, train data index file path
+    exclude_file: "./data/ava/annotations/ava_train_excluded_timestamps_v2.1.csv"
+    proposal_file: "./data/ava/annotations/ava_dense_proposals_train.FAIR.recall_93.9.pkl"
+    label_file: "./data/ava/annotations/ava_action_list_v2.1_for_activitynet_2018.pbtxt"
+    person_det_score_thr: 0.9
+    num_max_proposals: 1000
+    timestamp_start: 900
+    timestamp_end: 1800
+  valid:
+    format: "AVADataset"
+    data_prefix: 'PATH_TO_AVA_FRAMES_OF_15min_VIDEOS' #Mandatory, train data root path
+    file_path: "./data/ava/annotations/ava_val_v2.1_head27163.csv"
+    exclude_file: "./data/ava/annotations/ava_val_excluded_timestamps_v2.1.csv"
+    proposal_file: "./data/ava/annotations/ava_dense_proposals_val.FAIR.recall_93.9.pkl"
+    label_file: "./data/ava/annotations/ava_action_list_v2.1_for_activitynet_2018.pbtxt"
+    person_det_score_thr: 0.9
+    num_max_proposals: 1000
+    timestamp_start: 900
+    timestamp_end: 1800
+    test_mode: True
+PIPELINE:
+  train:
+    sampler:
+      name: "SampleAVAFrames"
+      clip_len: 32
+      frame_interval: 2
+    decoder:
+      name: "RawFrameDecode"
+    transform: #Mandotary, image transfrom operator
+      - RandomRescale:
+          scale_range: (256,320)
+      - RandomCrop_v2:
+          size: 256
+      - Flip:
+          flip_ratio: 0.5
+      - Normalize:
+          mean: [123.675, 116.28, 103.53]
+          std: [58.395, 57.12, 57.375]
+          to_bgr: False
+      - PackOutput:
+          alpha: 4 
+  valid:
+    sampler:
+      name: "SampleAVAFrames"
+      clip_len: 32
+      frame_interval: 2
+    decoder:
+      name: "RawFrameDecode"
+    transform: #Mandotary, image transfrom operator
+      - Rescale: 
+          scale_range: (-1, 256)
+      - Normalize:
+          mean: [123.675, 116.28, 103.53]
+          std: [58.395, 57.12, 57.375]
+          to_bgr: False
+      - PackOutput:
+          alpha: 4 
+OPTIMIZER: #OPTIMIZER field
+    name: 'Momentum' #Mandatory, the type of optimizer, associate to the 'paddlevideo/solver/'
+    momentum: 0.9
+    learning_rate: #Mandatory, the type of learning rate scheduler, associate to the 'paddlevideo/solver/'
+        iter_step: True
+        name: 'CustomWarmupPiecewiseDecay'
+        warmup_epochs: 5 
+        warmup_start_lr: 0.0075
+        step_base_lr: 0.075 
+        lrs: [1, 0.1, 0.01, 0.001, 0.0001, 0.00001]
+        gamma: 0.1
+        steps: [0, 10, 15]
+        max_epoch: 20 
+    weight_decay:
+        name: 'L2'
+        value: 1e-5
+model_name: AVA_SlowFast_FastRcnn 
+save_interval: 10
+val_interval: 1 
+epochs: 10  #Mandatory, total epoch
+log_level: "INFO"

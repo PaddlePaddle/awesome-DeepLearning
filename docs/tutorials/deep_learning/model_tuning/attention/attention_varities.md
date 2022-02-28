@@ -46,3 +46,6 @@ context=context_1 \oplus context_2 \oplus context_3 \oplus...\oplus context_m
 $$
 
 公式里的 $\oplus$表示向量拼接操作。
+
+## 4. 引用
+[1] 邱锡鹏. 神经网络与深度学习[M]. 北京：机械工业出版社，2021.

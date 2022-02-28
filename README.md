@@ -1,4 +1,37 @@
+## 🎉全新发布
 
+## **2月24日晚8点**，飞桨产业实践范例直播课程继续开讲！！！
+
+国内众多行业都在基于人工智能技术推进行业变革与创新，积极探寻有效、有价值的应用场景进行商业化落地。百度飞桨结合实际经验，选取了几个经典的场景，提供了从数据准备、模型训练优化，到模型部署的全流程可复用方案，降低产业落地门槛,让大家在真实数据环境下深入地了解这些案例，获取产业实现方案。
+
+**2月24日晚8点，飞桨官方将推出 智慧城市 产业实践范例直播：**
+
+* 智慧城市
+  * [电瓶车进电梯检测](https://github.com/ruoclio/awesome-DeepLearning/tree/my_branch/Paddle_Industry_Practice_Sample_Library/Electromobile_In_Elevator_Detection)
+  
+  * [异常行为识别](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Abnormal_Action_Detection) 
+  
+  * [多类别车辆跟踪](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Multi-Class_Vehicle_Tracking)
+  
+    
+
+**此外，还有交通、能源、金融、通信、互联网、零售及教育等等各个行业的精彩范例，大家拭目以待～**
+
+欢迎报名直播课加入交流群，如需更多技术交流与合作可点击以下链接：
+
+[https://paddleqiyeban.wjx.cn/vj/YP1ixS1.aspx?udsid=971981](https://paddleqiyeban.wjx.cn/vj/YP1ixS1.aspx?udsid=971981)
+
+-----
+
+**往期案例直播回放：**
+
+* 冬奥背后的黑科技
+
+  | 案例                                                         | 直播回放                                                     |
+  | ------------------------------------------------------------ | ------------------------------------------------------------ |
+  | [花样滑冰](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Figure_Skating) | https://aistudio.baidu.com/aistudio/education/lessonvideo/2251581 |
+  | [多模态视频打标签](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/MultimodalVideoTag) | https://aistudio.baidu.com/aistudio/education/lessonvideo/2251583 |
+  | [视频精彩时刻剪辑](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Football_Action) | https://aistudio.baidu.com/aistudio/education/lessonvideo/2257667 |
 
 # 一、项目简介
 
@@ -10,7 +43,7 @@
 
 📒宝典类：[**深度学习百问**](https://paddlepedia.readthedocs.io/en/latest/index.html)、**面试宝典**
 
-📒案例类：**产业实践案例**
+📒案例类：**[飞桨产业实践范例库](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library)**（包含智慧城市：[火灾烟雾检测](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Fire_and_Smoke_Detection)、 [安全帽检测](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Hemtle%20Detection) ；智能制造：[钢材缺陷检测](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/paddlex_steel_defect_seg-master) 、 [机械手抓取](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/robot_grab)；互联网：[财报识别与关键字段抽取](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Report_Recognition_and_Analysis) 等。
 
 从理论到实践，从科研到产业应用，各类学习材料一应俱全，旨在帮助开发者高效地学习和掌握深度学习知识，快速成为AI跨界人才。
 
@@ -31,7 +64,7 @@
 | ------------ | ------------------------------------------------------------ |
 | 入门深度学习 | 零基础实践深度学习[:arrow_heading_down:](#1)、深度学习百问[:arrow_heading_down:](#2)、动手学深度学习paddle版[:arrow_heading_down:](#dive) |
 | 进阶深度学习 | 产业实践深度学习、深度学习百问[:arrow_heading_down:](#2)、面试宝典[:arrow_heading_down:](#6) |
-| 趣味深度学习 | 特色课程[:arrow_heading_down:](#3)、产业实践案例[:arrow_heading_down:](#5) |
+| 趣味深度学习 | 特色课程[:arrow_heading_down:](#3)、[飞桨产业实践范例库](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library) |
 
 ## 👷‍♂️我是企业用户
 
@@ -39,7 +72,7 @@
 | ------------ | ------------------------------------------------------------ |
 | 入门深度学习 | 零基础实践深度学习[:arrow_heading_down:](#1)、深度学习百问[:arrow_heading_down:](#2)、动手学深度学习paddle版[:arrow_heading_down:](#dive) |
 | 进阶深度学习 | 产业实践深度学习、特色课程[:arrow_heading_down:](#3)、面试宝典[:arrow_heading_down:](#6) |
-| 实践深度学习 | 产业实践案例[:arrow_heading_down:](#5)、飞桨各产品课程[:arrow_heading_down:](#fj) |
+| 实践深度学习 | [飞桨产业实践范例库](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library)、飞桨各产品课程[:arrow_heading_down:](#fj) |
 
 ---
 
@@ -61,7 +94,7 @@
 
 ## <span id ='3'>特色课 - Transformer系列</span>
 
-飞桨教育官方出品的Transformer系列课程可以参考以下两个平台。
+飞桨教育官方出品的Transformer系列内容解读可以参考以下两个平台。
 
 * Transformer原理和实践系列课：https://aistudio.baidu.com/aistudio/education/group/info/24683
 
@@ -85,6 +118,7 @@
 | 模型优化 | 预训练模型-蒸馏                             | 预训练模型蒸馏算法：Patient-KD、DistilBERT、TinyBERT、DynaBERT模型详解，以及使用DynaBERT策略对TinyBERT进行模型蒸馏 | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2258091) |
 | CV       | 图像领域的Transformer-Vit,DeiT              | 详细讲解ViT 以及 DeiT原理                                    | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2299267) |
 | CV       | 图像领域的Transformer-Swin Transformer      | 详细讲解Swin Transformer原理                                 | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2292148) |
+| CV | CV领域的Transformer模型DETR在目标检测任务中的应用 | 详细讲解DETR原理及代码解析 | [notebook链接](https://aistudio.baidu.com/aistudio/projectdetail/2290729) |
 
 返回[:arrow_heading_up:](#0)
 
@@ -158,19 +192,6 @@
 
 # 👉案例类
 
-## <span id ='5'>产业级应用案例</span>
-
-* 安防
-  * [车流量计数](Paddle_Enterprise_CaseBook/Vehicle_Detection_and_Tracking/README.md) | [人流量计数](Paddle_Enterprise_CaseBook/Pedestrian_Detection_and_Tracking/README.md) | [安全帽检测](Paddle_Enterprise_CaseBook/) | [火灾烟雾检测](Paddle_Enterprise_CaseBook/Fire_and_Smoke_Detection/README.md)
-* 工业视觉
-  * [铝板缺陷检测]() | [齿轮缺陷检测]() | [表计读数]() | [钢筋计数]() | [视觉辅助定位抓取]()
-* 交通
-  * [车道线检测/车辆/行人检测]()
-* 遥感
-  * [地块检测]() | [变化检测]()
-* 互联网
-  * [快递信息智能提取]() | [文本情感分析]() | [文字识别]() | [文本重建]()
-
 ## <span id ='5'>飞桨应用案例集</span>
 
 | 领域         | 产业案例                                                     | 来源                                                         | 更多内容                                                     |
@@ -214,7 +235,6 @@
 | **其他**     | [中文语音识别](https://aistudio.baidu.com/aistudio/projectdetail/2280562) | 飞桨官方                                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
 | **其他**     | [PaddleHub一键OCR中文识别(超轻量8.1M模型，火爆)](https://aistudio.baidu.com/aistudio/projectdetail/507159?channelType=0&channel=0) | 飞桨官方                                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
 | **其他**     | [老北京城影像修复](https://aistudio.baidu.com/aistudio/projectdetail/1161285?channelType=0&channel=0) | 飞桨PaddleGAN                                                | [更多PaddleGAN案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/52570) |
-| **其他**     | [天下第一AI武道会-Deepfake换脸](https://aistudio.baidu.com/aistudio/projectdetail/1189026?channelType=0&channel=0) | 飞桨官方                                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
 | **其他**     | [飞桨创意之星 宋代诗人念诗的秘密——PaddleGAN实现精准唇形合成](https://aistudio.baidu.com/aistudio/projectdetail/1463208?channelType=0&channel=0) | 飞桨官方                                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
 | **其他**     | [通过OCR实现验证码识别](https://aistudio.baidu.com/aistudio/projectdetail/1100507?channelType=0&channel=0) | 飞桨官方                                                     | [更多飞桨案例](https://www.paddlepaddle.org.cn/customercase) |
 | **其他**     | [PaddleHub一键OCR中文识别（超轻量8.1M模型，火爆）](https://aistudio.baidu.com/aistudio/projectdetail/507159?channelType=0&channel=0) | 飞桨PaddleHub                                                | [更多PaddleHub案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/79927) |
@@ -260,7 +280,7 @@
 | NLP          | [用PaddlePaddle实现BERT](https://aistudio.baidu.com/aistudio/projectdetail/122282?channelType=0&channel=0) | [AIStudio官方](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/7) | [更多飞桨案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/908086) |
 | 多模态       | [【Paddle   CLIP】你写啥他画啥，一个专属于你的小画家](https://aistudio.baidu.com/aistudio/projectdetail/2332016?channelType=0&channel=0) | [PaddleFleet](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/940489) | [更多飞桨案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/908086) |
 | 强化学习     | [从代码到论文理解并复现MADDPG算法(PARL)](https://aistudio.baidu.com/aistudio/projectdetail/637951?channelType=0&channel=0) | [开发者Mr.郑先生_](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/147378) | [更多飞桨案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/908086) |
-| 推荐         | [基于   DeepFM 模型的点击率预估](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/examples/DeepFM for CTR Prediction) | [PaddleEdu](https://github.com/PaddlePaddle/awesome-DeepLearning) | [更多飞桨案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/908086) |
+| 推荐         | [基于DeepFM 模型的点击率预估](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/examples/DeepFM for CTR Prediction) | [PaddleEdu](https://github.com/PaddlePaddle/awesome-DeepLearning) | [更多飞桨案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/908086) |
 | 推荐         | [基于DSSM的电影推荐](https://aistudio.baidu.com/aistudio/projectdetail/2324144) | [AIStudio官方](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/7) | [更多飞桨案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/908086) |
 | 知识蒸馏     | [基于CIFAR100的SSLD蒸馏实验](https://github.com/PaddlePaddle/PaddleClas/blob/release/2.2/docs/zh_CN/advanced_tutorials/distillation/distillation.md) | [PaddleClas](https://github.com/PaddlePaddle/PaddleClas)     | [更多飞桨案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/908086) |
 
@@ -270,17 +290,19 @@
 
 # 👉竞赛类
 
-| 领域     | 竞赛案例                                                     | 介绍                                                         |
-| -------- | ------------------------------------------------------------ | ---- |
-| 机器学习 |                                                              |                                                              |
-| NLP      | [【Paddle打比赛】讯飞赛题—中文问题相似度挑战赛0.9+Baseline](https://aistudio.baidu.com/aistudio/projectdetail/2271498) | 中文问题相似度挑战赛paddle版本Baseline，基于paddlenlp通过预训练模型的微调完成问题相似度评定任务 |
-| NLP      | [基于PaddleHub的疫情期间网民情绪识别](https://aistudio.baidu.com/aistudio/projectdetail/294224?channelType=0&channel=0) | 本项目为疫情期间网民情绪识别比赛的解决方案。使用了PaddleHub和ERNIE实现对疫情期间微博文本的情绪识别。 |
-| 语音     |                                                              |                                                              |
-| CV       | [中文场景文字识别挑战赛baseline](https://aistudio.baidu.com/aistudio/projectdetail/229728?channelType=0&channel=0) | 中文场景文字识别挑战赛的baseline项目, 用于参赛选手借鉴参考   |
-| CV       | [2020 CCF BDCI: 遥感影像地块分割baseline](https://aistudio.baidu.com/aistudio/projectdetail/1090790?channelType=0&channel=0) | 2020 CCF BDCI: 遥感影像地块分割的baseline模型库，包括baseline模型的训练方法和比赛的评测脚本。 |
-| CV       | [第三届中国AI+创新创业大赛：半监督学习目标定位竞赛第1名方案](https://aistudio.baidu.com/aistudio/projectdetail/2210815)| 半监督学习目标定位竞赛第一名方案分享 A榜得分0.81425 B榜得分0.80428 |
-| 推荐     |                                                              |                                                              |
-| 强化学习 |                                                              ||
+| 领域     | 竞赛案例                                                     | 来源                                                         |介绍                                                         |
+| -------- | ---------------| ---- | ---- |
+| 机器学习 |   [【Paddle打比赛】个贷违约预测Baseline+ 0.607](https://aistudio.baidu.com/aistudio/projectdetail/2466206)                                                           |[开发者w5688414](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/169515)|         DataFountain个贷违约预测，参考官方的baseline并用paddle进行改进                                                  |
+| NLP      | [【Paddle打比赛】讯飞赛题—中文问题相似度挑战赛0.9+Baseline](https://aistudio.baidu.com/aistudio/projectdetail/2271498) |[PaddleEdu](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/908086)| 中文问题相似度挑战赛paddle版本Baseline，基于paddlenlp通过预训练模型的微调完成问题相似度评定任务 |
+| NLP      | [基于PaddleHub的疫情期间网民情绪识别](https://aistudio.baidu.com/aistudio/projectdetail/294224?channelType=0&channel=0) | [开发者CChan](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/82456)| 本项目为疫情期间网民情绪识别比赛的解决方案。使用了PaddleHub和ERNIE实现对疫情期间微博文本的情绪识别。 |
+| NLP      | [【Paddle打比赛】产品评论观点提取竞赛baseline](https://aistudio.baidu.com/aistudio/projectdetail/2417709) | [开发者w5688414](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/169515) | DataFountain基于BERT的产品评论观点提取竞赛baseline，增加了优化方法|
+| NLP      | [【Paddle打比赛】剧本角色情感识别baseline-精度0.676](https://aistudio.baidu.com/aistudio/projectdetail/2423977) | [开发者w5688414](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/169515) | 剧本角色情感识别baseline，使用bert模型|
+| 语音     |[【Paddle打比赛】语音合成](https://aistudio.baidu.com/aistudio/projectdetail/2793102?contributionType=1)                                                              | [开发者XYZ_916](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/812202)| 2021 新网银行智能语音大赛baseline。截止2021.11.17，该方案在总分榜第一，作品榜第二                                                              | 
+| CV       | [中文场景文字识别挑战赛baseline](https://aistudio.baidu.com/aistudio/projectdetail/229728?channelType=0&channel=0) | [小度AIStudio](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/7)| 中文场景文字识别挑战赛的baseline项目, 用于参赛选手借鉴参考   |
+|CV|[【Paddle打比赛】手写字体OCR识别竞赛baseline](https://aistudio.baidu.com/aistudio/projectdetail/2606211)| [开发者Pink peach](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/532066)| 2021世界人工智能创新大赛，手写字体OCR识别竞赛baseline|
+| CV       | [2020 CCF BDCI: 遥感影像地块分割baseline](https://aistudio.baidu.com/aistudio/projectdetail/1090790?channelType=0&channel=0) | [开发者lxastro](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/349179)| 2020 CCF BDCI: 遥感影像地块分割的baseline模型库，包括baseline模型的训练方法和比赛的评测脚本。 |
+| CV       | [第三届中国AI+创新创业大赛：半监督学习目标定位竞赛第1名方案](https://aistudio.baidu.com/aistudio/projectdetail/2210815)| [开发者张牙舞爪](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/635490)| 半监督学习目标定位竞赛第一名方案分享 A榜得分0.81425 B榜得分0.80428 |
+|数据挖掘|[【Padddle打比赛】心电图智能诊断竞赛Baseline-0.6765](https://aistudio.baidu.com/aistudio/projectdetail/2712180)|[开发者w5688414](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/169515) | AIWIN 心电图智能诊断竞赛|
 
 返回​[:arrow_heading_up:](#0)
 
@@ -330,5 +352,5 @@
 
 ### 贡献者
 
-以下是awesome-DeepLearning贡献者列表： [yang zhou](https://youngzhou1999.github.io/cv/)，[Niki_173](https://github.com/Niki173)，[Twelveeee](https://github.com/Twelveeee)，[buriedms](https://github.com/buriedms)，[AqourAreA](https://github.com/AqourAreA)，[zhangjin12138](https://github.com/zhangjin12138)，[rerny](https://github.com/rerny)，[LiuCongNLP](https://www.zhihu.com/people/LiuCongNLP)
+以下是awesome-DeepLearning贡献者列表： [yang zhou](https://youngzhou1999.github.io/cv/)，[Niki_173](https://github.com/Niki173)，[Twelveeee](https://github.com/Twelveeee)，[buriedms](https://github.com/buriedms)，[AqourAreA](https://github.com/AqourAreA)，[zhangjin12138](https://github.com/zhangjin12138)，[rerny](https://github.com/rerny)，[LiuCongNLP](https://www.zhihu.com/people/LiuCongNLP)，[LemonCherryFu](https://github.com/LemonCherryFu), [lutianhao](https://github.com/lutianhao)
 

@@ -6,6 +6,8 @@ CTR预估是目前推荐系统的核心技术，其目标是预估用户点击�
 
 注解：Wide&Deep是一种融合浅层（wide）模型和深层（deep）模型进行联合训练的框架，综合利用浅层模型的记忆能力和深层模型的泛化能力，实现单模型对推荐系统准确性和扩展性的兼顾。
 
+该模型的Paddle实现请参考链接：[PaddleRec版本](https://github.com/PaddlePaddle/PaddleRec/tree/master/models/rank/deepfm)
+
 ## 2.DeepFM模型结构
 
 为了同时利用low-order和high-order特征，DeepFM包含FM和DNN两部分，两部分共享输入特征。对于特征i，标量wi是其1阶特征的权重，该特征和其他特征的交互影响用隐向量Vi来表示。Vi输入到FM模型获得特征的2阶表示，输入到DNN模型得到high-order高阶特征。
