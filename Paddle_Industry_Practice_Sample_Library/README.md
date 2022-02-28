@@ -9,16 +9,16 @@
 | 冬奥背后的黑科技 | [花样滑冰](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Figure_Skating) | https://aistudio.baidu.com/aistudio/education/lessonvideo/2265283 |
 | 冬奥背后的黑科技 | [多模态视频打标签](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/MultimodalVideoTag) | https://aistudio.baidu.com/aistudio/education/lessonvideo/2265285 |
 | 冬奥背后的黑科技 | [视频精彩时刻剪辑](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Football_Action) | https://aistudio.baidu.com/aistudio/education/lessonvideo/2257667 |
-| 智慧城市         | [电瓶车进电梯检测](https://github.com/ruoclio/awesome-DeepLearning/tree/my_branch/Paddle_Industry_Practice_Sample_Library/Electromobile_In_Elevator_Detection) |                                                              |
-| 智慧城市         | [异常行为识别](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Abnormal_Action_Detection) |                                                              |
-| 智慧城市         | [多类别车辆跟踪](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Multi-Class_Vehicle_Tracking) |                                                              |
+| 智慧城市         | [电瓶车进电梯检测](https://github.com/ruoclio/awesome-DeepLearning/tree/my_branch/Paddle_Industry_Practice_Sample_Library/Electromobile_In_Elevator_Detection) | https://aistudio.baidu.com/aistudio/education/lessonvideo/2273969 |
+| 智慧城市         | [异常行为识别](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Abnormal_Action_Detection) | https://aistudio.baidu.com/aistudio/education/lessonvideo/2273989 |
+| 智慧城市         | [多类别车辆跟踪](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Multi-Class_Vehicle_Tracking) | https://aistudio.baidu.com/aistudio/education/lessonvideo/2274692 |
 | ......           | ......                                                       |                                                              |
 
 **此外，还有交通、能源、金融、通信、互联网、零售及教育等等各个行业的精彩范例，大家拭目以待～**
 
 欢迎报名直播课加入交流群，如需更多技术交流与合作可点击以下链接:
 
-[https://paddleqiyeban.wjx.cn/vj/YP1ixS1.aspx?udsid=971981](https://paddleqiyeban.wjx.cn/vj/YP1ixS1.aspx?udsid=971981)
+https://paddleqiyeban.wjx.cn/vj/eOyAwDH.aspx?udsid=113637
 
 ## 往期案例详情：
 
