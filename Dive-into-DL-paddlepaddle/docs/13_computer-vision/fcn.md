@@ -185,7 +185,7 @@ d2l.train_ch13(net, train_iter, test_iter, loss, trainer, num_epochs, devices)
 ```{.python .input}
 #@tab paddlepaddle
 def predict(img):
-    X = paddle.to_tensor(test_iter.dataset.normalize_image(img), dtype=paddle.float32).unsqueeze(0)
+    X = test_iter.dataset.normalize_image(img).unsqueeze(0)
     pred = net(X).argmax(axis=1)
     return pred.reshape([pred.shape[1], pred.shape[2]])
 ```
@@ -195,12 +195,10 @@ def predict(img):
 
 ```{.python .input}
 #@tab paddlepaddle
-import numpy as np
-
 def label2image(pred):
-    colormap = np.array(d2l.VOC_COLORMAP)
-    X = pred.astype(paddle.int64).numpy()
-    return colormap[X, :]
+    colormap = paddle.to_tensor(d2l.VOC_COLORMAP)
+    X = pred.astype(paddle.int32)
+    return colormap[X]
 ```
 
 测试数据集中的图像大小和形状各异。
