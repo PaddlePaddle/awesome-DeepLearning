@@ -90,7 +90,7 @@ test_imgs = paddle.vision.datasets.DatasetFolder(os.path.join(data_dir, 'test'))
 ```python
 hotdogs = [train_imgs[i][0] for i in range(8)]
 not_hotdogs = [train_imgs[-i - 1][0] for i in range(8)]
-d2l.show_images(hotdogs + not_hotdogs, 2, 8, scale=1.4)
+d2l.show_images(hotdogs + not_hotdogs, 2, 8, scale=1.4);
 ```
 
 在训练期间，我们首先从图像中裁切随机大小和随机长宽比的区域，然后将该区域缩放为$224 \times 224$输入图像。
@@ -188,7 +188,7 @@ def train_fine_tuning(net, learning_rate, batch_size=128, num_epochs=5,
     else:
         trainer = paddle.optimizer.SGD(learning_rate=learning_rate, parameters=net.parameters(), 
                                   weight_decay=0.001)
-    d2l.train_ch13(net, train_iter, test_iter, loss, trainer, num_epochs,devices)
+    d2l.train_ch13(net, train_iter, test_iter, loss, trainer, num_epochs, devices)
 ```
 
 我们[**使用较小的学习率**]，通过*微调*预训练获得的模型参数。
