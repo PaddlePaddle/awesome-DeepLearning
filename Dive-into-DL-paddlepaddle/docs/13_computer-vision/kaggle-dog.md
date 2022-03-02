@@ -192,28 +192,6 @@ def evaluate_loss(data_iter, net, devices):
         l_sum += l.sum()
         n += labels.numel()
     return l_sum / n
-
-class StepDecay(paddle.optimizer.lr.LRScheduler):
-    def __init__(self,
-                learning_rate,
-                step_size,
-                gamma=0.1,
-                last_epoch=-1,
-                verbose=False):
-        if not isinstance(step_size, int):
-            raise TypeError(
-                "The type of 'step_size' must be 'int', but received %s." %
-                type(step_size))
-        if gamma >= 1.0:
-            raise ValueError('gamma should be < 1.0.')
-
-        self.step_size = step_size
-        self.gamma = gamma
-        super(StepDecay, self).__init__(learning_rate, last_epoch, verbose)
-
-    def get_lr(self):
-        i = self.last_epoch // self.step_size
-        return self.base_lr * (self.gamma**i)
 ```
 
 ## 定义[**训练函数**]
@@ -228,7 +206,7 @@ def train(net, train_iter, valid_iter, num_epochs, lr, wd, devices, lr_period,
           lr_decay):
     # 只训练小型自定义输出网络
     net = paddle.DataParallel(net)
-    scheduler = StepDecay(lr, lr_period, lr_decay)
+    scheduler = paddle.optimizer.lr.StepDecay(lr, lr_period, lr_decay)
     trainer = paddle.optimizer.Momentum(learning_rate=scheduler, 
                             parameters=(param for param in net.parameters()
                                if not param.stop_gradient),
@@ -295,7 +273,7 @@ train(net, train_valid_iter, None, num_epochs, lr, wd, devices, lr_period,
 preds = []
 for data, label in test_iter:
     output = paddle.nn.functional.softmax(net(data), axis=0)
-    preds.extend(output.cpu().detach().numpy())
+    preds.extend(output.detach().numpy())
 ids = sorted(os.listdir(
     os.path.join(data_dir, 'train_valid_test', 'test', 'unknown')))
 with open('submission.csv', 'w') as f:

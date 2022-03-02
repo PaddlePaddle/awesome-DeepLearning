@@ -21,14 +21,14 @@
 ```{.python .input}
 #@tab paddlepaddle
 import collections
-from d2l import paddle as d2l
 import math
+import os
+import shutil
+import pandas as pd
 import paddle
 import paddle.vision as paddlevision
 from paddle import nn
-import os
-import pandas as pd
-import shutil
+from d2l import paddle as d2l
 ```
 
 ## 获取并组织数据集
@@ -214,6 +214,7 @@ transform_test = paddlevision.transforms.Compose([
 train_ds, train_valid_ds = [paddlevision.datasets.DatasetFolder(
     os.path.join(data_dir, 'train_valid_test', folder),
     transform=transform_train) for folder in ['train', 'train_valid']]
+
 valid_ds, test_ds = [paddlevision.datasets.DatasetFolder(
     os.path.join(data_dir, 'train_valid_test', folder),
     transform=transform_test) for folder in ['valid', 'test']]
@@ -250,28 +251,6 @@ def get_net():
     return net
 
 loss = nn.CrossEntropyLoss(reduction="none")
-
-class StepDecay(paddle.optimizer.lr.LRScheduler):
-    def __init__(self,
-                learning_rate,
-                step_size,
-                gamma=0.1,
-                last_epoch=-1,
-                verbose=False):
-        if not isinstance(step_size, int):
-            raise TypeError(
-                "The type of 'step_size' must be 'int', but received %s." %
-                type(step_size))
-        if gamma >= 1.0:
-            raise ValueError('gamma should be < 1.0.')
-
-        self.step_size = step_size
-        self.gamma = gamma
-        super(StepDecay, self).__init__(learning_rate, last_epoch, verbose)
-
-    def get_lr(self):
-        i = self.last_epoch // self.step_size
-        return self.base_lr * (self.gamma**i)
 ```
 
 ## 定义[**训练函数**]
@@ -284,7 +263,7 @@ class StepDecay(paddle.optimizer.lr.LRScheduler):
 #@tab paddlepaddle
 def train(net, train_iter, valid_iter, num_epochs, lr, wd, devices, lr_period,
           lr_decay):
-    scheduler = StepDecay(lr, lr_period, lr_decay)
+    scheduler = paddle.optimizer.lr.StepDecay(lr, lr_period, lr_decay)
     trainer = paddle.optimizer.Momentum(learning_rate=scheduler, momentum=0.9, parameters=net.parameters(),
                               weight_decay=wd)
     num_batches, timer = len(train_iter), d2l.Timer()
