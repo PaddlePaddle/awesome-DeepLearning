@@ -120,7 +120,7 @@ conv_trans.weight.set_value(bilinear_kernel(3, 3, 4));
 
 ```{.python .input}
 #@tab paddlepaddle
-img = paddlevision.transforms.ToTensor()(d2l.Image.open('./img/catdog.jpg'))
+img = paddlevision.transforms.ToTensor()(d2l.Image.open('../img/catdog.jpg'))
 X = img.unsqueeze(0)
 Y = conv_trans(X)
 out_img = Y[0].transpose([1, 2, 0]).detach()

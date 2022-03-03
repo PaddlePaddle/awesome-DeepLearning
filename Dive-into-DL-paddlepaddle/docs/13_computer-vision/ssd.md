@@ -376,7 +376,7 @@ print(f'{len(train_iter.dataset) / timer.stop():.1f} examples/sec on '
 #@tab paddlepaddle
 X = paddle.to_tensor(
             paddlevision.image.image_load(
-                './img/banana.jpg', backend="cv2"
+                '../img/banana.jpg', backend="cv2"
                 )[..., ::-1].transpose([2,0,1])
                 ).unsqueeze(0).astype(paddle.float32)
 img = X.squeeze(0).transpose([1, 2, 0]).astype(paddle.int64)
