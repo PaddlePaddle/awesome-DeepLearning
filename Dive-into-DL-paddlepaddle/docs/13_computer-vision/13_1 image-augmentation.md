@@ -132,6 +132,7 @@ CIFAR-10数据集中的前32个训练图像如下所示。
 
 ```python
 all_images =  paddle.vision.datasets.Cifar10(mode='train' , download=True)
+print(len(all_images))
 d2l.show_images([all_images[i][0] for i in range(32)], 4, 8, scale=0.8);
 ```
 
@@ -156,10 +157,8 @@ test_augs = paddle.vision.transforms.Compose([
 
 ```python
 def load_cifar10(is_train, augs, batch_size):
-    dataset = paddle.vision.datasets.Cifar10(mode="train",transform=augs, download=True)
-
-    dataloader = paddle.io.DataLoader(dataset, batch_size=batch_size, num_workers=2, shuffle=is_train)
-
+    dataset = paddle.vision.datasets.Cifar10(mode="train", transform=augs, download=True)
+    dataloader = paddle.io.DataLoader(dataset, batch_size=batch_size, num_workers=d2l.get_dataloader_workers(), shuffle=is_train)
     return dataloader
 
 ```
@@ -168,6 +167,7 @@ def load_cifar10(is_train, augs, batch_size):
 
 我们在CIFAR-10数据集上训练 :numref:`sec_resnet`中的ResNet-18模型。
 回想一下 :numref:`sec_multi_gpu_concise`中对多GPU训练的介绍。
+AI Studio只提供一个GPU，所以并不是多GPU训练，可以在本地尝试代码进行多GPU训练。
 接下来，我们[**定义一个函数，使用多GPU对模型进行训练和评估**]。
 
 
@@ -232,7 +232,7 @@ def train_ch13(net, train_iter, test_iter, loss, trainer, num_epochs,
 
 ```python
 #如果想尝试可以在本地跑通
-batch_size, devices, net = 256, d2l.try_all_gpus(), paddle.vision.models.resnet18(pretrained=True)
+batch_size, devices, net = 256, d2l.try_all_gpus(), d2l.resnet18(10, 3)
 
 def init_weights(m):
     if type(m) in [nn.Linear, nn.Conv2D]:
@@ -244,7 +244,7 @@ def train_with_data_aug(train_augs, test_augs, net, lr=0.001):
     train_iter = load_cifar10(True, train_augs, batch_size)
     test_iter = load_cifar10(False, test_augs, batch_size)
     loss = nn.CrossEntropyLoss(reduction="none")
-    trainer = paddle.optimizer.Adam(learning_rate=lr,parameters=net.parameters() )
+    trainer = paddle.optimizer.Adam(learning_rate=lr, parameters=net.parameters())
     train_ch13(net, train_iter, test_iter, loss, trainer, 10, devices)
 ```
 
