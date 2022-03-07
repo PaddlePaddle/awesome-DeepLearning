@@ -24,10 +24,6 @@ train_iter, test_iter, vocab = d2l.load_data_imdb(batch_size)
 
 
 ```python
-weight_attr = paddle.ParamAttr(initializer=nn.initializer.XavierUniform())
-weight_ih_attr = paddle.ParamAttr(initializer=nn.initializer.XavierUniform())
-weight_hh_attr = paddle.ParamAttr(initializer=nn.initializer.XavierUniform())
-
 class BiRNN(nn.Layer):
     def __init__(self, vocab_size, embed_size, num_hiddens,
                  num_layers, **kwargs):
@@ -35,8 +31,8 @@ class BiRNN(nn.Layer):
         self.embedding = nn.Embedding(vocab_size, embed_size)
         # 将direction设置为'bidirect'或'bidirectional'以获取双向循环神经网络
         self.encoder = nn.LSTM(embed_size, num_hiddens, num_layers=num_layers,
-                                direction='bidirect',time_major=True, weight_ih_attr=weight_ih_attr, weight_hh_attr=weight_hh_attr)
-        self.decoder = nn.Linear(4 * num_hiddens, 2, weight_attr=weight_attr)
+                                direction='bidirect',time_major=True)
+        self.decoder = nn.Linear(4 * num_hiddens, 2)
 
     def forward(self, inputs):
         # inputs的形状是（批量大小，时间步数）
@@ -63,6 +59,19 @@ class BiRNN(nn.Layer):
 embed_size, num_hiddens, num_layers = 100, 100, 2
 devices = d2l.try_all_gpus()
 net = BiRNN(len(vocab), embed_size, num_hiddens, num_layers)
+```
+
+
+```python
+def init_weights(layer):
+    if isinstance(layer,(nn.Linear, nn.Embedding)):
+        if isinstance(layer.weight, paddle.Tensor):
+            nn.initializer.XavierUniform()(layer.weight)
+    if isinstance(layer, nn.LSTM):
+        for n, p in layer.named_parameters():
+            if "weigth" in n:
+                nn.initializer.XavierUniform()(p)
+net.apply(init_weights)
 ```
 
 ## 加载预训练的词向量
