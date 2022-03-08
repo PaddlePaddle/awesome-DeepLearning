@@ -1,13 +1,13 @@
 ## 🎉全新发布
 
-## **3月3日晚8:30**，飞桨产业实践范例直播课程继续开讲！！！
+## **3月10日晚8:30**，飞桨产业实践范例直播课程继续开讲！！！
 
 国内众多行业都在基于人工智能技术推进行业变革与创新，积极探寻有效、有价值的应用场景进行商业化落地。百度飞桨结合实际经验，选取了几个经典的场景，提供了从数据准备、模型训练优化，到模型部署的全流程可复用方案，降低产业落地门槛,让大家在真实数据环境下深入地了解这些案例，获取产业实现方案。
 
-**3月3日晚8:30，飞桨官方将推出 能源领域 产业实践范例直播：**
+**3月10日晚8:30，飞桨官方将推出 通信领域 产业实践范例直播：**
 
-* 能源领域
-  * [多类别电表读数识别](https://github.com/PaddlePaddle/awesome-DeepLearning/blob/master/Paddle_Industry_Practice_Sample_Library/Electricity_Meter_Recognition/Electricity%20meter%20recognition.md)
+* 通信领域
+  * [多类别通信塔识别](./Paddle_Industry_Practice_Sample_Library/Tower_Recognition/README.md)
   
     
   
