@@ -14,9 +14,7 @@
 
 欢迎报名直播课加入交流群，如需更多技术交流与合作可扫描下面二维码：
 
-![d00657a2b1cf87ffced4d70f730fa8f6](./bmimg/bm.jpg)
-
-
+<center><img src='./bmimg/bm.jpg', width='50%'</center>
 
 -----
 
