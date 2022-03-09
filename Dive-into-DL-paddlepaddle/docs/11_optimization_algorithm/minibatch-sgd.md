@@ -62,9 +62,9 @@ from paddle import nn
 import numpy as np
 
 timer = d2l.Timer()
-A = paddle.zeros((256, 256))
-B = paddle.randn((256, 256))
-C = paddle.randn((256, 256))
+A = d2l.zeros((256, 256))
+B = d2l.randn((256, 256))
+C = d2l.randn((256, 256))
 ```
 
 按元素分配只需遍历分别为$\mathbf{B}$和$\mathbf{C}$的所有行和列，即可将该值分配给$\mathbf{A}$。
@@ -168,7 +168,7 @@ d2l.DATA_HUB['airfoil'] = (d2l.DATA_URL + 'airfoil_self_noise.dat',
 def get_data_ch11(batch_size=10, n=1500):
     data = np.genfromtxt(d2l.download('airfoil'),
                          dtype=np.float32, delimiter='\t')
-    data = paddle.to_tensor((data - data.mean(axis=0)) / data.std(axis=0))
+    data = d2l.tensor((data - data.mean(axis=0)) / data.std(axis=0))
     data_iter = d2l.load_array((data[:n, :-1], data[:n, -1]),
                                batch_size, is_train=True)
     return data_iter, data.shape[1]-1
@@ -204,8 +204,8 @@ def sgd(params, states, hyperparams):
 def train_ch11(trainer_fn, states, hyperparams, data_iter,
                feature_dim, num_epochs=2):
     # 初始化模型
-    w = paddle.to_tensor(paddle.normal(mean=0.0, std=0.01, shape=(feature_dim, 1),),stop_gradient=False)
-    b = paddle.to_tensor(paddle.zeros((1,)), stop_gradient=False)
+    w = d2l.tensor(d2l.normal(mean=0.0, std=0.01, shape=(feature_dim, 1),),stop_gradient=False)
+    b = d2l.tensor(d2l.zeros((1,)), stop_gradient=False)
     net, loss = lambda X: d2l.linreg(X, w, b), d2l.squared_loss
     # 训练模型
     animator = d2l.Animator(xlabel='epoch', ylabel='loss',
@@ -306,11 +306,9 @@ def train_concise_ch11(trainer_fn, hyperparams, data_iter, num_epochs=4):
     net.apply(init_weights)
 
     optimizer = trainer_fn(parameters=net.parameters(), **hyperparams)
-
-    # 注意：MSELoss计算平方误差时不带系数1/2
     loss = nn.MSELoss(reduction='none')
     animator = d2l.Animator(xlabel='epoch', ylabel='loss',
-                            xlim=[0, num_epochs])
+                            xlim=[0, num_epochs], ylim=[0.22, 0.35])
     n, timer = 0, d2l.Timer()
     for _ in range(num_epochs):
         for X, y in data_iter:
@@ -323,8 +321,9 @@ def train_concise_ch11(trainer_fn, hyperparams, data_iter, num_epochs=4):
             n += X.shape[0]
             if n % 200 == 0:
                 timer.stop()
+                # MSELoss计算平方误差时不带系数1/2
                 animator.add(n/X.shape[0]/len(data_iter),
-                             (d2l.evaluate_loss(net, data_iter, loss),))
+                             (d2l.evaluate_loss(net, data_iter, loss) / 2,))
                 timer.start()
     print(f'loss: {animator.Y[0][-1]:.3f}, {timer.avg():.3f} sec/epoch')
 ```

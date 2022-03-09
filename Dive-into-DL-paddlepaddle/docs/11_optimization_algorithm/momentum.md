@@ -151,7 +151,7 @@ d2l.show_trace_2d(f_2d, d2l.train_2d(momentum_2d))
 d2l.set_figsize()
 betas = [0.95, 0.9, 0.6, 0]
 for beta in betas:
-    x = paddle.arange(40).detach().numpy()
+    x = d2l.arange(40).detach().numpy()
     d2l.plt.plot(x, beta ** x, label=f'beta = {beta:.2f}')
 d2l.plt.xlabel('time')
 d2l.plt.legend();
@@ -172,8 +172,8 @@ d2l.plt.legend();
 
 ```python
 def init_momentum_states(feature_dim):
-    v_w = paddle.zeros((feature_dim, 1))
-    v_b = paddle.zeros((1,))
+    v_w = d2l.zeros((feature_dim, 1))
+    v_b = d2l.zeros((1,))
     return (v_w, v_b)
 ```
 
@@ -294,7 +294,7 @@ lambdas = [0.1, 1, 10, 19]
 eta = 0.1
 d2l.set_figsize((6, 4))
 for lam in lambdas:
-    t = paddle.arange(20).detach().numpy()
+    t = d2l.arange(20).detach().numpy()
     d2l.plt.plot(t, (1 - eta * lam) ** t, label=f'lambda = {lam:.2f}')
 d2l.plt.xlabel('time')
 d2l.plt.legend();
