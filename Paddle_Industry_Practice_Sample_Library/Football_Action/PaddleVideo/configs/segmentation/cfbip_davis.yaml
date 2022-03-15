@@ -1,0 +1,29 @@
+MODEL: #MODEL field
+    framework: "CFBI"
+    backbone:
+        name: "CFBI"
+    head:
+        name: "CollaborativeEnsemblerMS"
+
+DATASET: #DATASET field
+    test_batch_size: 1
+    num_workers: 0
+    test:
+        format: "DavisDataset"
+        file_path: "datasets/DAVIS"
+        result_root: "output/CFBI"
+
+PIPELINE: #PIPELINE field
+    test:
+        transform:
+            - MultiRestrictSize:
+                max_size: 1040.0
+                multi_scale: [1.0]
+            - MultiNorm:
+
+METRIC:
+    name: "VOSMetric"
+    result_root: "output/CFBI"
+    zip_dir: "output/CFBI.zip"
+
+model_name: "CFBI"

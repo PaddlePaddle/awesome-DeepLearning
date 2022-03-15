@@ -1,0 +1,23 @@
+MODEL:
+    framework: "ActBert"
+    backbone:
+        name: "BertForMultiModalPreTraining"
+
+
+DATASET: #DATASET field
+    num_workers: 4
+    test_batch_size: 1
+    test:
+        format: "MSRVTTDataset"
+        file_path: "./test_data/MSRVTT_JSFUSION_test.csv"
+        features_path: "./test_data/msrvtt_test.lmdb"
+
+PIPELINE: #PIPELINE field
+    test:
+
+
+METRIC:
+    name: 'MSRVTTMetric'
+
+
+model_name: "ActBert"

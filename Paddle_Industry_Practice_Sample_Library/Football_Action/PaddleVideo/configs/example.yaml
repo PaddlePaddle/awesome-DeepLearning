@@ -1,0 +1,114 @@
+# PaddleVieo Example Configuration, please refer to "docs/en/config.md" for more information.
+MODEL: #MODEL field
+    framework: "Recognizer2D" #Mandatory ["Recognizer1D", "Recognizer2D", "Recognizer3D", "BMNLocalizer"], indicate the type of network, please refer to the 'paddlevideo/modeling/framework/'.
+    backbone:
+        name: "ResNet" #Optional, indicate the type of backbone, please refer to the 'paddlevideo/modeling/backbones/'.
+        pretrained: "data/ResNet50_vd_ssld_v2_pretrained.pdparams" #Optional, pretrained backbone params path. pass "" or " " without loading from files.
+        depth: 50 #Optional, the depth of backbone architecture.
+    head:
+        name: "TSNHead" #Mandatory, indicate the type of head, please refer to the 'paddlevideo/modeling/heads'
+        num_classes: 101 #Optional, the number of classes to be classified.
+        in_channels: 2048 #Optional, input channels of the extracted feature.
+        drop_ratio: 0.4 #Optional, the ratio of dropout.
+        std: 0.01 #Optional, std value in params initialization.
+
+DATASET: #DATASET field
+    batch_size: 4 #Mandatory, batch size per gpu.
+    valid_batch_size: 4 #Optional, valid batch size per gpu.
+    test_batch_size: 4 #Optional, test batch size per gpu.
+    num_workers: 2 #Mandatory, the number of subprocess on each GPU.
+    train:
+        format: "VideoDataset" #Mandatory, indicate the type of train dataset, please refer to the 'paddlevidel/loader/dateset'.
+        data_prefix: "" #Optional, train data root path.
+        file_path: "data/ucf101/ucf101_train_split_1_videos.txt" #Mandatory, train data index file path
+        suffix: ".avi"
+    valid:
+        format: "VideoDataset" #Mandatory, indicate the type of valid dataset, please refer to the 'paddlevidel/loader/dateset'
+        data_prefix: "" #Optional, valid data root path
+        file_path: "data/ucf101/ucf101_val_split_1_videos.txt" #Mandatory, valid data index file path
+        suffix: ".avi"
+    test:
+        format: "VideoDataset" #Mandotary, indicate the type of test dataset, please refer to the 'paddlevideo/loader/dataset'.
+        data_prefix: "" #Optional, test data root path.
+        file_path: "data/ucf101/ucf101_val_split_1_videos.txt" #Mandotary, test data index file path.
+        suffix: ".avi"
+
+PIPELINE: #PIPELINE field
+    train: #Mandotary, indicate the pipeline to deal with the training data, please refer to the 'paddlevideo/loader/pipelines/'
+        decode:
+            name: "VideoDecoder" #Decoder type.
+        sample:
+            name: "Sampler" #Sampler type.
+            num_seg: 8
+            seg_len: 1
+            valid_mode: False
+        transform: #Mandotary, image transform operator
+            - Scale:
+                short_size: 256
+            - RandomCrop:
+                target_size: 224
+            - RandomFlip:
+            - Image2Array:
+            - Normalization:
+                mean: [0.485, 0.456, 0.406]
+                std: [0.229, 0.224, 0.225]
+
+    valid: #Mandatory, indicate the pipeline to deal with the validing data. please refer to the 'paddlevideo/loader/pipelines/'
+        decode:
+            name: "VideoDecoder" #Decoder type.
+        sample:
+            name: "Sampler" #Sampler type.
+            valid_mode: True
+            num_seg: 8
+            seg_len: 1
+        transform: #Mandatory, image transform operator.
+            - Scale:
+                short_size: 256
+            - CenterCrop:
+                target_size: 224
+            - Image2Array:
+            - Normalization:
+                mean: [0.485, 0.456, 0.406]
+                std: [0.229, 0.224, 0.225]
+
+    test: #Mandatory, indicate the pipeline to deal with the validing data. please refer to the 'paddlevideo/loader/pipelines/'
+        decode:
+            name: "VideoDecoder" #Decoder type.
+        sample:
+            name: "Sampler" #Sampler type.
+            valid_mode: True
+            num_seg: 8
+            seg_len: 1
+        transform: #Mandatory, image transform operator.
+            - Scale:
+                short_size: 256
+            - CenterCrop:
+                target_size: 224
+            - Image2Array:
+            - Normalization:
+                mean: [0.485, 0.456, 0.406]
+                std: [0.229, 0.224, 0.225]
+
+OPTIMIZER: #OPTIMIZER field
+    name: 'Momentum' #Mandatory, the type of optimizer, please to the 'paddlevideo/solver/'
+    momentum: 0.9
+    learning_rate: #Mandatory, the type of learning rate scheduler, please refer to the 'paddlevideo/solver/'
+        name: 'PiecewiseDecay'
+        boundaries: [30, 60]
+        values: [0.00025, 0.000025, 0.0000025]
+    weight_decay:
+        name: 'L2'
+        value: 1e-4
+
+METRIC:
+    name: 'CenterCropMetric'
+
+INFERENCE:
+    name: 'ppTSM_Inference_helper'
+    num_seg: 8
+    target_size: 224
+
+model_name: "TSN" #Mandatory, model name.
+log_interval: 20 #Optional, the interval of logger.
+epochs: 5 #Mandatory, total epoch
+log_level: "DEBUG" #Optional, the logger level.

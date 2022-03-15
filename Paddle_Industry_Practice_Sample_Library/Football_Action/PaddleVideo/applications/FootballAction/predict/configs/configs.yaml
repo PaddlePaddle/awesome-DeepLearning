@@ -1,0 +1,62 @@
+COMMON:
+    fps: 5
+    use_gpu: True
+    label_dic: 'PaddleVideo/applications/FootballAction/predict/configs/index_label_football_8.json' 
+    # debug
+    PCM_ONLY: False
+    DEBUG: False
+    BMN_ONLY: False
+    LSTM_ONLY: False
+
+PPTSM:
+    name: "PPTSM"
+    model_file: "PaddleVideo/applications/FootballAction/checkpoints/ppTSM/ppTSM.pdmodel"
+    params_file: "PaddleVideo/applications/FootballAction/checkpoints/ppTSM/ppTSM.pdiparams"
+    gpu_mem: 8000
+    device_id: 0
+    seg_num: 8
+    seglen: 1
+    short_size: 256
+    target_size: 224
+    batch_size: 32
+    image_mean: [0.485, 0.456, 0.406]
+    image_std: [0.229, 0.224, 0.225]
+    reader_threads: 12
+    buf_size: 1024
+
+AUDIO:
+    name: "AUDIO"
+    model_file: "PaddleVideo/applications/FootballAction/checkpoints/AUDIO/__model__"
+    params_file: "PaddleVideo/applications/FootballAction/checkpoints/AUDIO/__param__"
+    gpu_mem: 8000
+    device_id: 0
+    sample_rate: 16000
+    batch_size: 32
+
+BMN:
+    name: "BMN"
+    model_file: "PaddleVideo/applications/FootballAction/checkpoints/BMN/BMN.pdmodel"
+    params_file: "PaddleVideo/applications/FootballAction/checkpoints/BMN/BMN.pdiparams"
+    gpu_mem: 8000
+    device_id: 0
+    window_step: 200        # 200
+    tscale: 200
+    dscale: 200
+    batch_size: 8           # 8
+    nms_thread: 0.7
+    score_thread: 0.03      # 0.05
+
+ACTION:
+    name: "ACTION"
+    model_file: "PaddleVideo/applications/FootballAction/checkpoints/LSTM/__model__"
+    params_file: "PaddleVideo/applications/FootballAction/checkpoints/LSTM/__param__"
+    gpu_mem: 8000
+    device_id: 0
+    batch_size: 32
+    topk: 1
+    nms_thread: 0.01
+    nms_offset: 10
+
+    classify_score_thread: 0.05     # 0.15
+    iou_score_thread: 0.1           # 0.4
+

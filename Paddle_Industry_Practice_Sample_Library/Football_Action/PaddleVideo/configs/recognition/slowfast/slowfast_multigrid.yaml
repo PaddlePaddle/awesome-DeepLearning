@@ -1,0 +1,152 @@
+MODEL: #MODEL field
+  framework: "Recognizer3D"
+  backbone:
+    name: "ResNetSlowFast"
+    depth: 50 # Not Optional, only 50 now.
+    alpha: 4
+    beta: 8
+    width_per_group: 64
+    fusion_kernel_sz: 7
+    bn_norm_type: "batchnorm"
+  head:
+    name: "SlowFastHead"
+    width_per_group: 64
+    alpha: 4
+    beta: 8
+    num_classes: 400
+    num_frames: 32
+    crop_size: 224  #independent to test or train mode
+    dropout_rate: 0.5
+    multigrid_short: True
+
+DATASET: #DATASET field
+  batch_size: 8  #single bacth size
+  num_workers: 4
+  train:
+    format: "SFVideoDataset"
+    file_path: "./data/k400/train.list" #Mandatory, train data index file path
+  valid:
+    format: "SFVideoDataset"
+    file_path: "./data/k400/val.list" #Mandatory, valid data index file path
+  test:
+    format: "SFVideoDataset"
+    file_path: "../data/k400/val.list" #Mandatory, test data index file path
+    test_mode: True
+    num_ensemble_views: 10
+    num_spatial_crops: 3
+
+PIPELINE:
+  train:
+    decode_sampler:
+      name: "DecodeSampler"
+      num_frames: 32
+      sampling_rate: 2
+    transform: #Mandotary, image transfrom operator
+      - JitterScale:
+          min_size: 256
+          max_size: 320
+      - MultiCrop:
+          target_size: 224
+      - RandomFlip:
+      - Image2Array:
+          transpose: False
+      - Normalization:
+          mean: [0.45, 0.45, 0.45]
+          std: [0.225, 0.225, 0.225]
+          tensor_shape: [1, 1, 1, 3]
+      - PackOutput:
+          alpha: 4
+
+  valid:
+    decode_sampler:
+      name: "DecodeSampler"
+      num_frames: 32
+      sampling_rate: 2
+    transform: #Mandotary, image transfrom operator
+      - JitterScale:
+          min_size: 256
+          max_size: 320
+      - MultiCrop:
+          target_size: 224
+      - RandomFlip:
+      - Image2Array:
+          transpose: False
+      - Normalization:
+          mean: [0.45, 0.45, 0.45]
+          std: [0.225, 0.225, 0.225]
+          tensor_shape: [1, 1, 1, 3]
+      - PackOutput:
+          alpha: 4
+
+  test:
+    decode_sampler:
+      name: "DecodeSampler"
+      num_frames: 32
+      sampling_rate: 2
+      test_mode: True
+    transform: #Mandotary, image transfrom operator
+      - JitterScale:
+          min_size: 224
+          max_size: 224
+      - MultiCrop:
+          target_size: 224
+          test_mode: True
+      - Image2Array:
+          transpose: False
+      - Normalization:
+          mean: [0.45, 0.45, 0.45]
+          std: [0.225, 0.225, 0.225]
+          tensor_shape: [1, 1, 1, 3]
+      - PackOutput:
+          alpha: 4
+
+OPTIMIZER: #OPTIMIZER field
+  name: 'Momentum'
+  momentum: 0.9
+  learning_rate:
+    iter_step: True
+    name: 'CustomWarmupPiecewiseDecay'
+    warmup_epochs: 34
+    warmup_start_lr: 0.01
+    step_base_lr: 0.1
+    lrs: [1, 0.1, 0.01, 0.001, 0.0001, 0.00001]
+    gamma: 0.1
+    steps: [0, 94, 154, 196]
+    max_epoch: 239
+  weight_decay:
+    name: 'L2'
+    value: 1e-4
+  use_nesterov: True
+
+METRIC:
+  name: 'MultiCropMetric'
+  num_ensemble_views: 10
+  num_spatial_crops: 3
+  num_classes: 400
+
+MULTIGRID:
+  LONG_CYCLE: True
+  SHORT_CYCLE: True
+  default_batch_size: 0
+  default_temporal_size: 0
+  default_crop_size: 0
+  epoch_factor: 1.5 #1.0
+  bn_base_size: 8
+  long_cycle_sampling_rate: 0
+  long_cycle_factors:
+      - value: [0.25, 0.7071]  # 0.5 ** 0.5
+      - value: [0.5, 0.7071]
+      - value: [0.5, 1]
+      - value: [1, 1]
+  short_cycle_factors: [0.5, 0.7071]
+  EVAL_FREQ: 3
+
+PRECISEBN:
+  preciseBN_interval: 20
+  num_iters_preciseBN: 200  #default
+
+model_name: SlowFast
+val_interval: 20
+log_interval: 20
+epochs: 239 #Mandatory, total epoch
+log_level: "INFO"
