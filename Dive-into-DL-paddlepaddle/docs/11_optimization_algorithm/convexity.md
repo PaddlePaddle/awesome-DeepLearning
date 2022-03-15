@@ -76,10 +76,10 @@ $$\lambda f(x) + (1-\lambda) f(x') \geq f(\lambda x + (1-\lambda) x').$$
 
 ```python
 f = lambda x: 0.5 * x**2  # 凸函数
-g = lambda x: paddle.cos(np.pi * x)  # 非凸函数
-h = lambda x: paddle.exp(0.5 * x)  # 凸函数
+g = lambda x: d2l.cos(np.pi * x)  # 非凸函数
+h = lambda x: d2l.exp(0.5 * x)  # 凸函数
 
-x, segment = paddle.to_tensor(np.arange(-2, 2, 0.01)), paddle.to_tensor([-1.5, 1])
+x, segment = d2l.arange(-2, 2, 0.01, dtype='float32'), d2l.tensor([-1.5, 1])
 d2l.use_svg_display()
 _, axes = d2l.plt.subplots(1, 3, figsize=(9, 3))
 for ax, func in zip(axes, [f, g, h]):
