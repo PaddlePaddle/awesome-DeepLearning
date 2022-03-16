@@ -630,7 +630,7 @@ def load_data_time_machine(batch_size, num_steps,
 """8.5"""
 class RNNModelScratch: #@save
     """从零开始实现的循环神经网络模型"""
-    def __init__(self, vocab_size, num_hiddens, device,
+    def __init__(self, vocab_size, num_hiddens,
                  get_params, init_state, forward_fn):
         self.vocab_size, self.num_hiddens = vocab_size, num_hiddens
         self.params = get_params(vocab_size, num_hiddens)
