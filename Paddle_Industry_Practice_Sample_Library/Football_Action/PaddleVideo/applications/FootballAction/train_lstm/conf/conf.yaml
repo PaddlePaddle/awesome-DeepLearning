@@ -1,0 +1,39 @@
+MODEL: 
+    name: "ActionNet"
+    dataset: "Actiondata"
+    bone_nework: None
+    modelbn_min_everygpu_bs: 10
+    drop_rate: 0.5
+    feature_num: 1
+    feature_names: ['rgb', 'audio']
+    feature_dims: [2048, 1024]
+    embedding_size: 512
+    lstm_size_img: 2048
+    lstm_size_audio: 1024
+    num_classes: 8
+    save_dir: "."
+    with_bn: True
+
+TRAIN:
+    epoch: 20
+    learning_rate: 0.0007
+    decay_gamma: 0.2
+    l2_weight_decay: 8e-4
+    decay_epochs: [5,10,15,20]
+    num_samples: 268592
+    batch_size: 600
+    droplast: False
+    use_gpu: True
+    num_gpus: 2
+    filelist: "PaddleVideo/applications/FootballAction/datasets/EuroCup2016/input_for_lstm/train.txt"
+
+VALID:
+    batch_size: 16
+    num_samples: 34487
+    droplast: True
+    filelist: "PaddleVideo/applications/FootballAction/datasets/EuroCup2016/input_for_lstm/val.txt"
+
+INFER:
+    batch_size: 1
+    droplast: True
+    filelist: "PaddleVideo/applications/FootballAction/datasets/EuroCup2016/input_for_lstm/val.txt"

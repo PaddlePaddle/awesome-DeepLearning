@@ -1,0 +1,71 @@
+MODEL: #MODEL field
+    framework: "Recognizer1D" #Mandatory, indicate the type of network, associate to the 'paddlevideo/modeling/framework/' .
+    head:
+        name: "AttentionLstmHead" #Mandatory, indicate the type of head, associate to the 'paddlevideo/modeling/heads'
+        num_classes: 3862 #Optional, the number of classes to be classified.
+        feature_num: 2
+        feature_dims: [1024, 128]
+        embedding_size: 512
+        lstm_size: 1024
+
+DATASET: #DATASET field
+    batch_size: 128  #Mandatory, bacth size
+    num_workers: 4  #Mandatory, the number of subprocess on each GPU.
+    shuffle_valid: True
+    train:
+        format: "FeatureDataset" #Mandatory, indicate the type of dataset, associate to the 'paddlevidel/loader/dateset'
+        data_prefix: "data/yt8m"
+        file_path: "data/yt8m/train.list" #Mandatory, train data index file path
+    valid:
+        format: "FeatureDataset" #Mandatory, indicate the type of dataset, associate to the 'paddlevidel/loader/dateset'
+        data_prefix: "data/yt8m"
+        file_path: "data/yt8m/val.list" #Mandatory, train data index file path
+    test:
+        format: "FeatureDataset" #Mandatory, indicate the type of dataset, associate to the 'paddlevidel/loader/dateset'
+        data_prefix: "data/yt8m"
+        file_path: "data/yt8m/val.list" #Mandatory, train data index file path
+
+
+PIPELINE: #PIPELINE field
+    train: #Mandotary, indicate the pipeline to deal with the training data, associate to the 'paddlevideo/loader/pipelines/'
+        decode:
+            name: "FeatureDecoder" #"VideoDecoder"
+            num_classes: 3862
+    valid: #Mandatory, indicate the pipeline to deal with the validing data. associate to the 'paddlevideo/loader/pipelines/'
+        decode:
+            name: "FeatureDecoder" #"VideoDecoder"
+            num_classes: 3862
+    test:
+        decode:
+            name: "FeatureDecoder" #"VideoDecoder"
+            num_classes: 3862
+
+OPTIMIZER: #OPTIMIZER field
+    name: 'RMSProp' #Mandatory, the type of optimizer, associate to the 'paddlevideo/solver/'
+    centered: True
+    learning_rate: #Mandatory, the type of learning rate scheduler, associate to the 'paddlevideo/solver/'
+        name: 'PiecewiseDecay'
+        boundaries: [5, 8]
+        values: [0.00025, 0.000025, 0.0000025]
+    weight_decay:
+        name: 'L2'
+        value: 0.0004
+
+METRIC:
+    name: 'HitOneMetric'
+    num_class: 3862
+    top_k: 5
+
+INFERENCE:
+    name: 'AttentionLSTM_Inference_helper'
+    num_classes: 3862 #Optional, the number of classes to be classified.
+    feature_num: 2
+    feature_dims: [1024, 128]
+    embedding_size: 512
+    lstm_size: 1024
+
+model_name: "AttentionLSTM"
+log_interval: 20 #Optional, the interal of logger, default:10
+epochs: 10 #Mandatory, total epoch
+save_interval: 2
+log_level: "INFO"

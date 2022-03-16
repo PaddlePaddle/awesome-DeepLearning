@@ -1,0 +1,8 @@
+include LICENSE
+include README.md
+include tools/__init__.py
+include tools/utils.py
+include tools/paddlevideo_clas.py
+include data/k400/Kinetics-400_label_list.txt
+
+recursive-include paddlevideo/ *.py *.txt
