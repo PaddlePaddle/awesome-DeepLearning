@@ -757,16 +757,16 @@ class RNNModel(nn.Layer):   #@save
     def begin_state(self, batch_size=1):
         if not isinstance(self.rnn, nn.LSTM):
             # nn.GRU以张量作为隐状态
-            return  paddle.to_tensor(paddle.zeros(shape=[self.num_directions * self.rnn.num_layers,
-                                                           batch_size, self.num_hiddens]))
+            return  paddle.zeros(shape=[self.num_directions * self.rnn.num_layers,
+                                                           batch_size, self.num_hiddens])
         else:
             # nn.LSTM以元组作为隐状态
-            return (paddle.to_tensor(paddle.zeros(
+            return (paddle.zeros(
                 shape=[self.num_directions * self.rnn.num_layers,
-                batch_size, self.num_hiddens])),
-                    paddle.to_tensor(paddle.zeros(
+                batch_size, self.num_hiddens]),
+                    paddle.zeros(
                         shape=[self.num_directions * self.rnn.num_layers,
-                        batch_size, self.num_hiddens])))
+                        batch_size, self.num_hiddens]))
 
 """9.5"""
 d2l.DATA_HUB['fra-eng'] = (d2l.DATA_URL + 'fra-eng.zip',
@@ -2552,4 +2552,3 @@ def show_list_len_pair_hist(legend, xlabel, ylabel, xlist, ylist):
 d2l.DATA_HUB['bert_small'] = ('https://paddlenlp.bj.bcebos.com/models/bert.small.paddle.zip', '9fcde07509c7e87ec61c640c1b277509c7e87ec6153d9041758e4')
 
 d2l.DATA_HUB['bert_base'] = ('https://paddlenlp.bj.bcebos.com/models/bert.base.paddle.zip', '9fcde07509c7e87ec61c640c1b27509c7e87ec61753d9041758e4')
-
