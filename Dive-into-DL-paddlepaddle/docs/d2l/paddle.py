@@ -757,16 +757,16 @@ class RNNModel(nn.Layer):   #@save
     def begin_state(self, batch_size=1):
         if not isinstance(self.rnn, nn.LSTM):
             # nn.GRU以张量作为隐状态
-            return  paddle.to_tensor(paddle.zeros(shape=[self.num_directions * self.rnn.num_layers,
-                                                           batch_size, self.num_hiddens]))
+            return  paddle.zeros(shape=[self.num_directions * self.rnn.num_layers,
+                                                           batch_size, self.num_hiddens])
         else:
             # nn.LSTM以元组作为隐状态
-            return (paddle.to_tensor(paddle.zeros(
+            return (paddle.zeros(
                 shape=[self.num_directions * self.rnn.num_layers,
-                batch_size, self.num_hiddens])),
-                    paddle.to_tensor(paddle.zeros(
+                batch_size, self.num_hiddens]),
+                    paddle.zeros(
                         shape=[self.num_directions * self.rnn.num_layers,
-                        batch_size, self.num_hiddens])))
+                        batch_size, self.num_hiddens]))
 
 """9.5"""
 d2l.DATA_HUB['fra-eng'] = (d2l.DATA_URL + 'fra-eng.zip',
