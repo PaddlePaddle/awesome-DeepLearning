@@ -246,7 +246,7 @@ def gru(inputs, state, params):
 ```python
 vocab_size, num_hiddens, device = len(vocab), 256, d2l.try_gpu()
 num_epochs, lr = 500, 1.0
-model = d2l.RNNModelScratch(len(vocab), num_hiddens, device, get_params,
+model = d2l.RNNModelScratch(len(vocab), num_hiddens, get_params,
                             init_gru_state, gru)
 d2l.train_ch8(model, train_iter, vocab, lr, num_epochs, device)
 ```
