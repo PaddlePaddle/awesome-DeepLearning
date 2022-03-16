@@ -1,0 +1,48 @@
+MODEL:
+    framework: "ActBert"
+    backbone:
+        name: "BertForMultiModalPreTraining"
+        pretrained: "./bert_for_actbert.pdparams"
+    loss:
+        name: "ActBertLoss"
+
+
+DATASET: #DATASET field
+    num_workers: 0
+    batch_size: 8
+    train:
+        format: "ActBertDataset"
+        file_path: "data/howto100m/my_data.npy"
+    valid:
+        format: "ActBertDataset"
+        file_path: "data/howto100m/my_data.npy"
+
+PIPELINE: #PIPELINE field
+    train:
+        transform:
+        - FeaturePadding:
+        - RandomCap:
+            caption_path: "data/howto100m/caption_train.json"
+        - Tokenize:
+        - RandomMask:
+    valid:
+        transform:
+        - FeaturePadding:
+        - RandomCap:
+            caption_path: "data/howto100m/caption_val.json"
+        - Tokenize:
+        - RandomMask:
+
+OPTIMIZER: #OPTIMIZER field
+    name: 'Adam'
+    learning_rate:
+        iter_step: True
+        name: 'CustomPiecewiseDecay'
+        boundaries: [4200]
+        values: [0.0002, 0.00002]
+    weight_decay:
+        name: 'L2'
+        value: 1e-4
+
+model_name: "ActBert"
+epochs: 10

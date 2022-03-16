@@ -1,0 +1,51 @@
+===========================train_params===========================
+model_name:TSM
+python:python3.7
+gpu_list:0|0,1
+Global.use_gpu:null|null
+Global.auto_cast:null
+-o epochs:2
+null:null
+-o DATASET.batch_size:2
+-o MODEL.backbone.pretrained:'data/ResNet50_pretrain.pdparams'
+train_model_name:null
+train_infer_video_dir:null
+-o DATASET.train.file_path:'data/k400/train_small_frames.list' -o DATASET.valid.file_path='data/k400/train_small_frames.list' -o DATASET.test.file_path='data/k400/train_small_frames.list'
+##
+trainer:norm_train
+norm_train:main.py --validate -c configs/recognition/tsm/tsm_k400_frames.yaml --seed 1234
+pact_train:null
+fpgm_train:null
+distill_train:null
+null:null
+null:null
+##
+===========================eval_params===========================
+eval:main.py --test -c configs/recognition/tsm/tsm_k400_frames.yaml
+-w:output/TSM/TSM_best.pdparams
+##
+===========================infer_params===========================
+-o:inference/TSM
+-p:null
+norm_export:tools/export_model.py -c configs/recognition/tsm/tsm_k400_frames.yaml
+quant_export:null
+fpgm_export:null
+distill_export:null
+export1:null
+export2:null
+inference_dir:null
+infer_model:./data/TSM_k400.pdparams
+infer_export:tools/export_model.py -c configs/recognition/tsm/tsm_k400_frames.yaml
+infer_quant:False
+inference:tools/predict.py --config configs/recognition/tsm/tsm_k400_frames.yaml
+--use_gpu:True|False
+--enable_mkldnn:True|False
+--cpu_threads:1|6
+--batch_size:1|2
+--use_tensorrt:False|True
+--precision:fp32|fp16
+--model_file:inference/TSM/TSM.pdmodel
+--input_file:./data/example.avi
+null:null
+--enable_benchmark:True
+--params_file:inference/TSM/TSM.pdiparams
