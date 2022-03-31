@@ -1,13 +1,12 @@
 ## 🎉全新发布
 
-## **3月17日晚8:30**，飞桨产业实践范例直播课程继续开讲！！！
+## **3月31日晚8:30**，飞桨产业实践范例直播课程继续开讲！！！
 
 国内众多行业都在基于人工智能技术推进行业变革与创新，积极探寻有效、有价值的应用场景进行商业化落地。百度飞桨结合实际经验，选取了几个经典的场景，提供了从数据准备、模型训练优化，到模型部署的全流程可复用方案，降低产业落地门槛,让大家在真实数据环境下深入地了解这些案例，获取产业实现方案。
 
-**3月17日晚8:30，飞桨官方将推出 交通领域 产业实践范例直播：**
+**3月31日晚8:30，飞桨官方将推出 火灾烟雾检测 产业实践范例直播：**
 
-* 通信领域
-  * [AR导航车道线分割](https://github.com/PaddlePaddle/awesome-DeepLearning/blob/master/Paddle_Industry_Practice_Sample_Library/smart_driving_tasks/3619480.md)
+* [火灾烟雾检测](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Fire_and_Smoke_Detection)
   
 
 **此外，还有交通、能源、金融、通信、互联网、零售及教育等等各个行业的精彩范例，大家拭目以待～**
@@ -29,7 +28,8 @@
 | [异常行为识别](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Abnormal_Action_Detection) | https://aistudio.baidu.com/aistudio/education/lessonvideo/2273989 |
 | [多类别车辆跟踪](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Multi-Class_Vehicle_Tracking) | https://aistudio.baidu.com/aistudio/education/lessonvideo/2274692 |
 | [多类别电表读数识别落地方案](https://github.com/PaddlePaddle/awesome-DeepLearning/blob/master/Paddle_Industry_Practice_Sample_Library/Electricity_Meter_Recognition/Electricity%20meter%20recognition.md) | https://aistudio.baidu.com/aistudio/education/lessonvideo/2309177 |
-| [多类别通信塔识别](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Tower_Recognition) | 待上传                                                       |
+| [多类别通信塔识别](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Tower_Recognition) | https://aistudio.baidu.com/aistudio/education/lessonvideo/2377623 |
+| [基于车载影像的驾驶环境感知](https://github.com/PaddlePaddle/awesome-DeepLearning/blob/master/Paddle_Industry_Practice_Sample_Library/smart_driving_tasks/3619480.md) | https://aistudio.baidu.com/aistudio/education/lessonvideo/2376819 |
 
 # 一、项目简介
 
