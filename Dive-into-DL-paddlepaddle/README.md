@@ -19,9 +19,24 @@
 
 ## Contributors
 
-本项目的主要贡献者如下：
+以下名单不分先后，按照昵称首写字母排序。
 
-
+| 昵称   | 个人主页                         |
+| ------ | -------------------------------- |
+| bnmvv5 | https://github.com/Shelly111111  |
+| 段春华 | https://github.com/skywalk163    |
+| 范致远 | https://github.com/Elvisambition |
+| 范远展 | https://github.com/Ricardosz     |
+| 胡刘俊 | https://github.com/tensorfly-gpu |
+| 姜航顺 | https://github.com/JIANG-HS      |
+| 吕坤   | https://github.com/ctkindle      |
+| 马骏骁 | https://github.com/Junxiao-Ma    |
+| 马飞   | https://github.com/YuBCS-Ma      |
+| 王明杰 | https://github.com/JayJayMing    |
+| 吴未   | https://github.com/nsCosine      |
+| 谢杰航 | https://github.com/JiehangXie    |
+| 郑博培 | https://github.com/zbp-xxxp      |
+| 紫涵   | https://github.com/zihan987      |
 
 ## 目录持续更新中......
 
