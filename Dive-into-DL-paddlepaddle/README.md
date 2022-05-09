@@ -17,26 +17,38 @@
 
 本仓库包含一些latex公式，但github的markdown原生是不支持公式显示的，docs文件夹即将托管在[Read the Docs](https://readthedocs.org/)上。当然如果你还想跑一下运行相关代码的话还是得把本项目clone下来，然后运行code文件夹下相关代码。
 
+
 ## Contributors
+<p align="center">
+<a href="https://github.com/anliyuan"><img src="https://avatars.githubusercontent.com/u/20371209?v=4" width=75 height=75></a>
+<a href="https://github.com/Shelly111111"><img src="https://avatars.githubusercontent.com/u/50294940?v=4" width=75 height=75></a>
+<a href="https://github.com/Elvisambition"><img src="https://avatars.githubusercontent.com/u/75023175?v=4" width=75 height=75></a>
+<a href="https://github.com/JayJayMing"><img src="https://avatars.githubusercontent.com/u/89055539?v=4" width=75 height=75></a>   
+<a href="https://github.com/JiehangXie"><img src="https://avatars.githubusercontent.com/u/51190264?v=4" width=75 height=75></a>
+<a href="https://github.com/YuBCS-Ma"><img src="https://avatars.githubusercontent.com/u/62004245?v=4" width=75 height=75></a>
+<a href="https://github.com/JIANG-HS"><img src="https://avatars.githubusercontent.com/u/64762766?v=4" width=75 height=75></a>  
+<a href="https://github.com/nsCosine"><img src="https://avatars.githubusercontent.com/u/35991857?v=4" width=75 height=75></a>    
+<a href="https://github.com/tensorfly-gpu"><img src="https://avatars.githubusercontent.com/u/83876165?v=4" width=75 height=75></a>   
+<a href="https://github.com/zbp-xxxp"><img src="https://avatars.githubusercontent.com/u/58476312?v=4" width=75 height=75></a>    
+<a href="https://github.com/skywalk163"><img src="https://avatars.githubusercontent.com/u/1298682?v=4" width=75 height=75></a>
+<a href="https://github.com/zihan987"><img src="https://avatars.githubusercontent.com/u/41713096?v=4" width=75 height=75></a>   
+<a href="https://github.com/ctkindle"><img src="https://avatars.githubusercontent.com/u/52576338?v=4" width=75 height=75></a> 
+<a href="https://github.com/Junxiao-Ma"><img src="https://avatars.githubusercontent.com/u/80972842?v=4" width=75 height=75></a>    
+<a href="https://github.com/Ricardosz"><img src="https://avatars.githubusercontent.com/u/16706034?v=4" width=75 height=75></a>
+<a href="https://github.com/an1018"><img src="https://avatars.githubusercontent.com/u/19808900?v=4" width=75 height=75></a>
+<a href="https://github.com/lvjian0706"><img src="https://avatars.githubusercontent.com/u/33191467?v=4" width=75 height=75></a>  
+<a href="https://github.com/tngt"><img src="https://avatars.githubusercontent.com/u/64118875?v=4" width=75 height=75></a>
+<a href="https://github.com/w5688414"><img src="https://avatars.githubusercontent.com/u/12107462?v=4" width=75 height=75></a>
+<a href="https://github.com/1649759610"><img src="https://avatars.githubusercontent.com/u/35913314?v=4" width=75 height=75></a>   
+<a href="https://github.com/XYZ-916"><img src="https://avatars.githubusercontent.com/u/14884056?v=4" width=75 height=75></a> 
+<a href="https://github.com/ZhangHandi"><img src="https://avatars.githubusercontent.com/u/35895648?v=4" width=75 height=75></a>
+<a href="https://github.com/chajchaj"><img src="https://avatars.githubusercontent.com/u/57249073?v=4" width=75 height=75></a> 
+<a href="https://github.com/yolanda314"><img src="https://avatars.githubusercontent.com/u/89308969?v=4" width=75 height=75></a>  
+<a href="https://github.com/wulei123456789"><img src="https://avatars.githubusercontent.com/u/59363068?v=4" width=75 height=75></a>  
+<a href="https://github.com/ychaochaozhang"><img src="https://avatars.githubusercontent.com/u/104123851?v=4" width=75 height=75></a>
+<a href="https://github.com/heruisi"><img src="https://avatars.githubusercontent.com/u/64584635?v=4" width=75 height=75></a>  
+</p>
 
-以下名单不分先后，按照昵称首写字母排序。
-
-| 昵称   | 个人主页                         |
-| ------ | -------------------------------- |
-| bnmvv5 | https://github.com/Shelly111111  |
-| 段春华 | https://github.com/skywalk163    |
-| 范致远 | https://github.com/Elvisambition |
-| 范远展 | https://github.com/Ricardosz     |
-| 胡刘俊 | https://github.com/tensorfly-gpu |
-| 姜航顺 | https://github.com/JIANG-HS      |
-| 吕坤   | https://github.com/ctkindle      |
-| 马骏骁 | https://github.com/Junxiao-Ma    |
-| 马飞   | https://github.com/YuBCS-Ma      |
-| 王明杰 | https://github.com/JayJayMing    |
-| 吴未   | https://github.com/nsCosine      |
-| 谢杰航 | https://github.com/JiehangXie    |
-| 郑博培 | https://github.com/zbp-xxxp      |
-| 紫涵   | https://github.com/zihan987      |
 
 ## 目录持续更新中......
 
