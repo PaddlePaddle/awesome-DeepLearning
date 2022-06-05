@@ -126,7 +126,7 @@
 
 ## <span id ='dive'>《动手学深度学习》paddle版</span>
 
-本项目将《[动手学深度学习](http://zh.d2l.ai/)》原书中MXNet代码实现改为PaddlePaddle实现。原书作者：阿斯顿·张、李沐、扎卡里 C. 立顿、亚历山大 J. 斯莫拉以及其他社区贡献者，GitHub地址：https://github.com/d2l-ai/d2l-zh。
+本项目将《[动手学深度学习](http://zh.d2l.ai/)》原书中MXNet代码实现改为PaddlePaddle实现。原书作者：阿斯顿·张、李沐、扎卡里 C. 立顿、亚历山大 J. 斯莫拉以及其他社区贡献者，GitHub地址：[https://github.com/d2l-ai/d2l-zh](https://github.com/d2l-ai/d2l-zh)。
 
 本项目面向对深度学习感兴趣，尤其是想使用PaddlePaddle进行深度学习的童鞋。本项目并不要求你有任何深度学习或者机器学习的背景知识，你只需了解基础的数学和编程，如基础的线性代数、微分和概率，以及基础的Python编程。
 
