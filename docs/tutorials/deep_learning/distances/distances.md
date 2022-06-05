@@ -38,7 +38,7 @@ $$
 Hamming \; Distance  = \sum_{i=1}^{n} {\text{II}}(x_i=y_i)
 $$
 
-其中$\text{II}$表示指示函数，两者相同为1，否则为0。
+其中$\text{II}$表示指示函数，两者相同为0，否则为1。
 
 ### 1.6 KL散度
 
@@ -78,6 +78,6 @@ $$
 假设有两个集合$X$和$Y$(注意这里的两者不是向量)，则其计算公式为：
 
 $$
-Jaccard(X,Y)=\frac{X\cup Y}{X\cap Y}
+Jaccard(X,Y)=\frac{X\cap Y}{X\cup Y}
 $$
 
