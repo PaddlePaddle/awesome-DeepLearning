@@ -7,7 +7,7 @@
 **3月31日晚8:30，飞桨官方将推出 火灾烟雾检测 产业实践范例直播：**
 
 * [火灾烟雾检测](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/Paddle_Industry_Practice_Sample_Library/Fire_and_Smoke_Detection)
-  
+
 
 **此外，还有交通、能源、金融、通信、互联网、零售及教育等等各个行业的精彩范例，大家拭目以待～**
 
@@ -295,7 +295,8 @@
 | NLP      | [基于PaddleHub的疫情期间网民情绪识别](https://aistudio.baidu.com/aistudio/projectdetail/294224?channelType=0&channel=0) | [开发者CChan](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/82456)| 本项目为疫情期间网民情绪识别比赛的解决方案。使用了PaddleHub和ERNIE实现对疫情期间微博文本的情绪识别。 |
 | NLP      | [【Paddle打比赛】产品评论观点提取竞赛baseline](https://aistudio.baidu.com/aistudio/projectdetail/2417709) | [开发者w5688414](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/169515) | DataFountain基于BERT的产品评论观点提取竞赛baseline，增加了优化方法|
 | NLP      | [【Paddle打比赛】剧本角色情感识别baseline-精度0.676](https://aistudio.baidu.com/aistudio/projectdetail/2423977) | [开发者w5688414](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/169515) | 剧本角色情感识别baseline，使用bert模型|
-| 语音     |[【Paddle打比赛】语音合成](https://aistudio.baidu.com/aistudio/projectdetail/2793102?contributionType=1)                                                              | [开发者XYZ_916](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/812202)| 2021 新网银行智能语音大赛baseline。截止2021.11.17，该方案在总分榜第一，作品榜第二                                                              | 
+| NLP | [飞桨常规赛：中文新闻文本标题分类Baseline(PaddleNLP)](https://aistudio.baidu.com/aistudio/projectdetail/2311230) | [开发者炼丹师233](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/330406) | 飞桨常规赛：中文新闻文本标题分类Baseline，分数0.89+，基于PaddleNLP通过预训练模型的微调完成新闻14分类模型的训练与优化 |
+| 语音     |[【Paddle打比赛】语音合成](https://aistudio.baidu.com/aistudio/projectdetail/2793102?contributionType=1)                                                              | [开发者XYZ_916](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/812202)| 2021 新网银行智能语音大赛baseline。截止2021.11.17，该方案在总分榜第一，作品榜第二                                                              |
 | CV       | [中文场景文字识别挑战赛baseline](https://aistudio.baidu.com/aistudio/projectdetail/229728?channelType=0&channel=0) | [小度AIStudio](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/7)| 中文场景文字识别挑战赛的baseline项目, 用于参赛选手借鉴参考   |
 |CV|[【Paddle打比赛】手写字体OCR识别竞赛baseline](https://aistudio.baidu.com/aistudio/projectdetail/2606211)| [开发者Pink peach](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/532066)| 2021世界人工智能创新大赛，手写字体OCR识别竞赛baseline|
 | CV       | [2020 CCF BDCI: 遥感影像地块分割baseline](https://aistudio.baidu.com/aistudio/projectdetail/1090790?channelType=0&channel=0) | [开发者lxastro](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/349179)| 2020 CCF BDCI: 遥感影像地块分割的baseline模型库，包括baseline模型的训练方法和比赛的评测脚本。 |
