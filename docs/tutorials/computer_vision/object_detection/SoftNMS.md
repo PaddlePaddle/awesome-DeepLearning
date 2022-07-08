@@ -18,6 +18,13 @@ s_i = \begin{cases}
 \end{cases}
  $$
 
+{% math %}
+s_i = \begin{cases} 
+  s_i,iou(M,b_i)<N_t \\
+  s_i(1-iou(M,b_i)),iou(M,b_i)\ge N_t 
+ \end{cases}
+{% endmath %}
+
 其中，$N_t$ 为设定好的IOU阈值。
 
 而 Soft NMS 算法的计算方式可以表示为下式：
