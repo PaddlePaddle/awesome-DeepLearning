@@ -11,12 +11,10 @@ NMS（非极大值抑制）方法是目标检测任务中常用的后处理方�
 假设当前得分最高的检测框为$M$，对于另一个类别得分为 $s_i$ 的检测框 $b_i$，传统的 NMS 算法的计算方式可以表示为下式：
 
 
-$$
-s_i = \begin{cases} 
+$$s_i = \begin{cases} 
   s_i,iou(M,b_i)<N_t\\
   0,iou(M,b_i)\ge N_t 
-\end{cases}
-$$
+\end{cases}$$
 其中，$N_t$ 为设定好的IOU阈值。
 
 而 Soft NMS 算法的计算方式可以表示为下式：
