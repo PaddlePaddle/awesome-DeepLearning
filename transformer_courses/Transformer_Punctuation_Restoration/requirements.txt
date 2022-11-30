@@ -1,5 +1,5 @@
 paddlenlp==2.0.0rc22
-paddlepaddle==2.1.1
+paddlepaddle==2.4.0
 pandas
 attrdict==2.0.1
 ujson
