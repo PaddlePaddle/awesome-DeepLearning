@@ -24,12 +24,18 @@ $$\Delta \theta_{t}=-\frac{\eta}{\sqrt{E[g^2]_{t}+\epsilon}}\cdot g_{t,i}$$
 $$\Delta \theta_{t}=-\frac{\eta}{RMS[g]_{t}}\cdot g_{t}$$
 
 根据作者所说，更新中，定义指数衰减均值，代替梯度平方：
+
 $$E[\Delta \theta^2]_{t}=\gamma E[\Delta \theta^2]_{t-1}+(1-\gamma)\Delta \theta_{t}^2$$
+
 均方根误差变为：
+
 $$RMS[\Delta \theta]_{t}=\sqrt{E[\Delta \theta^2]_{t}+\epsilon}$$
+
 $RMS[\Delta \theta]_{t}$是未知的，我们近似用前一个时间步RMS值来估计：
+
 $$\Delta \theta_{t}=-\frac{RMS[\Delta \theta]_{t-1}}{RMS[g]_{t}}g_{t}$$
 $$\theta_{t+1}=\theta_{t}-\Delta \theta_{t}$$
+
 Adadelta不用设置学习率，因为其更新规则已经把它消除了。
 
 **优点**
