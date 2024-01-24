@@ -1,7 +1,14 @@
 # Transformer
-Transformer改进了RNN被人诟病的训练慢的特点，利用self-attention可以实现快速并行。
 
-## Transformer直观认识
+## 1.介绍
+
+Transformer 网络架构架构由 Ashish Vaswani 等人在 Attention Is All You Need一文中提出，并用于机器翻译任务，和以往网络架构有所区别的是，该网络架构中，编码器和解码器没有采用 RNN 或 CNN 等网络架构，而是采用完全依赖于注意力机制的架构。网络架构如下所示：
+
+![](../../images/pretrain_model/Transformer/transformer.png)
+
+Transformer改进了RNN被人诟病的训练慢的特点，利用self-attention可以实现快速并行。下面的章节会详细介绍Transformer的各个组成部分。
+
+## 2.Transformer直观认识
 Transformer主要由encoder和decoder两部分组成。在Transformer的论文中，encoder和decoder均由6个encoder layer和decoder layer组成，通常我们称之为encoder block。
 
 <center><img src="https://ai-studio-static-online.cdn.bcebos.com/739aa8a15ec043f8920843fa142754276c10b5b082d64b39a7d0f795241ace82"  width="600px" /></center> 
@@ -27,9 +34,66 @@ decoder也包含encoder提到的两层网络，但是在这两层中间还有一
 <center><br>embedding和self-attention </br></center>
 <br></br>
 
+## 3. Transformer的结构
+Transformer的结构解析出来如下图表示，包括Input Embedding, Position Embedding, Encoder, Decoder。
 
-## Self-attention
-- 首先，self-attention会计算出三个新的向量，在论文中，向量的维度是512维，我们把这三个向量分别称为Query、Key、Value，这三个向量是用embedding向量与一个矩阵相乘得到的结果，这个矩阵是随机初始化的，维度为（64，512）注意第二个维度需要和embedding的维度一样，其值在反向传播的过程中会一直进行更新，得到的这三个向量的维度是64低于embedding维度的。
+![](../../images/pretrain_model/Transformer/Transformer_architecture.png)
+
+## 3.1 Embedding
+
+![](../../images/pretrain_model/Transformer/input_embedding.png)
+
+字向量与位置编码的公式表示如下：
+
+$$X=Embedding Lookup(X)+Position Encoding$$
+
+### 3.1.1 Input Embedding
+
+可以将Input Embedding看作是一个 lookup table，对于每个 word，进行 word embedding 就相当于一个lookup操作，查出一个对应结果。
+
+
+### 3.1.2 Position Encoding
+
+Transformer模型中还缺少一种解释输入序列中单词顺序的方法。为了处理这个问题，transformer给encoder层和decoder层的输入添加了一个额外的向量Positional Encoding，维度和embedding的维度一样，这个向量采用了一种很独特的方法来让模型学习到这个值，这个向量能决定当前词的位置，或者说在一个句子中不同的词之间的距离。这个位置向量的具体计算方法有很多种，论文中的计算方法如下
+
+$$PE(pos,2i)=sin(pos/10000^{2i}/d_{model})$$
+$$PE(pos,2i+1)=cos(pos/10000^{2i}/d_{model})$$
+
+其中pos是指当前词在句子中的位置，i是指向量中每个值的index，可以看出，在偶数位置，使用正弦编码，在奇数位置，使用余弦编码.
+
+## 3.2 Encoder
+
+![](../../images/pretrain_model/Transformer/encoder.png)
+
+用公式把一个Transformer Encoder block 的计算过程整理一下
+
++ 自注意力机制
+
+$$Q=XW_{Q}$$
+$$K=XW_{K}$$
+$$V=XW_{V}$$
+
+$$X_{attention}=selfAttention(Q,K,V)$$
+
++ self-attention 残差连接与 Layer Normalization
+
+
+$$X_{attention}=LayerNorm(X_{attention})$$
+
++  FeedForward，其实就是两层线性映射并用激活函数激活，比如说RELU
+
+$$X_{hidden}=Linear(RELU(Linear(X_{attention})))$$
+
++ FeedForward 残差连接与 Layer Normalization
+
+$$X_{hidden}=X_{attention}+X_{hidden}$$
+
+$$X_{hidden}=LayerNorm(X_{hidden})$$
+
+其中：$X_{hidden} \in R^{batch\_size*seq\_len*embed\_dim}$
+
+### 3.2.1 自注意力机制
+- 首先，自注意力机制（self-attention）会计算出三个新的向量，在论文中，向量的维度是512维，我们把这三个向量分别称为Query、Key、Value，这三个向量是用embedding向量与一个矩阵相乘得到的结果，这个矩阵是随机初始化的，维度为（64，512）注意第二个维度需要和embedding的维度一样，其值在反向传播的过程中会一直进行更新，得到的这三个向量的维度是64低于embedding维度的。
 
 <center><img src="https://ai-studio-static-online.cdn.bcebos.com/8f322d81d9c3491d9b714e39986e482926755e9c86dd4266805cceb4add145c7"  width="600px" /></center> 
 <center><br>Query Key Value </br></center>
@@ -60,7 +124,16 @@ decoder也包含encoder提到的两层网络，但是在这两层中间还有一
 
 这种通过 query 和 key 的相似性程度来确定 value 的权重分布的方法被称为scaled dot-product attention。
 
-### Self-Attention 的时间复杂度的计算
+用公式表达如下：
+
+$$Q=XW_{Q}$$
+$$K=XW_{K}$$
+$$V=XW_{V}$$
+
+$$X_{attention}=selfAttention(Q,K,V)$$
+
+
+### 3.2.2  Self-Attention 复杂度
 
 Self-Attention时间复杂度：$O(n^2 \cdot d)$ ，这里，n是序列的长度，d是embedding的维度。
 
@@ -74,7 +147,7 @@ softmax就是直接计算了，时间复杂度为: $O(n^2)$
 
 因此，Self-Attention的时间复杂度是: $O(n^2 \cdot d)$
 
-## Multi-head Attention
+### 3.2.3 Multi-head Attention
 
 不仅仅只初始化一组Q、K、V的矩阵，而是初始化多组，tranformer是使用了8组，所以最后得到的结果是8个矩阵。
 
@@ -87,7 +160,7 @@ multi-head注意力的全过程如下，首先输入句子，“Thinking Machine
 <center><br> multi-head attention总体结构 </br></center>
 <br></br>
 
-###  Multi-Head Attention的时间复杂度计算
+### 3.2.4  Multi-Head Attention复杂度
 
 多头的实现不是循环的计算每个头，而是通过 transposes and reshapes，用矩阵乘法来完成的。
 
@@ -101,26 +174,24 @@ $$O(n^2 \cdot m \cdot a)=O(n^2 \cdot d)$$
 
 
 
-## Position Encoding
-
-Transformer模型中还缺少一种解释输入序列中单词顺序的方法。为了处理这个问题，transformer给encoder层和decoder层的输入添加了一个额外的向量Positional Encoding，维度和embedding的维度一样，这个向量采用了一种很独特的方法来让模型学习到这个值，这个向量能决定当前词的位置，或者说在一个句子中不同的词之间的距离。这个位置向量的具体计算方法有很多种，论文中的计算方法如下
-
-$$PE(pos,2i)=sin(pos/10000^{2i}/d_{model})$$
-$$PE(pos,2i+1)=cos(pos/10000^{2i}/d_{model})$$
-
-其中pos是指当前词在句子中的位置，i是指向量中每个值的index，可以看出，在偶数位置，使用正弦编码，在奇数位置，使用余弦编码.
-
-
-## 残差连接和 Layer Normalization
-
-### 残差连接
+### 3.2.5 残差连接
 经过 self-attention 加权之后输出，也就是Attention(Q,K,V) ，然后把他们加起来做残差连接
 
-$$X_{embedding}+self Attention(Q,K,V)$$
+$$X_{hidden}=X_{embedding}+self Attention(Q,K,V)$$
 
-### Layer Normalization
+除了self-attention这里做残差连接外，feed forward那个地方也需要残差连接，公式类似：
+
+$$X_{hidden}=X_{feed_forward}+X_{hidden}$$
+
+
+### 3.2.6 Layer Normalization
 
 Layer Normalization 的作用是把神经网络中隐藏层归一为标准正态分布，也就是独立同分布，以起到加快训练速度，加速收敛的作用
+$$X_{hidden}=LayerNorm(X_{hidden})$$
+
+其中：$X_{hidden} \in R^{batch\_size*seq\_len*embed\_dim}$
+
+LayerNorm的详细操作如下：
 
 $$\mu_{L}=\dfrac{1}{m}\sum_{i=1}^{m}x_{i}$$
 
@@ -132,57 +203,60 @@ $$\delta^{2}=\dfrac{1}{m}\sum_{i=1}^{m}(x_{i}-\mu)^2$$
 $$ LN(x_{i})=\alpha \dfrac{x_{i}-\mu_{L}}{\sqrt{\delta^{2}+\epsilon}}+\beta $$
 然后用每一列的每一个元素减去这列的均值，再除以这列的标准差，从而得到归一化后的数值，加$\epsilon$是为了防止分母为0.此处一般初始化$\alpha$为全1，而$\beta$为全0.
 
-## Transformer Encoder 整体结构
-了解了 Encoder 的主要构成部分，下面我们用公式把一个 Encoder block 的计算过程整理一下
-1). 字向量与位置编码
+### 3.2.7 Feed Forward
 
-$$X=Embedding Lookup(X)+Position Encoding$$
 
-2). 自注意力机制
+![](../../images/pretrain_model/Transformer/feed_forward.png)
 
-$$Q=XW_{Q}$$
-$$K=XW_{K}$$
-$$V=XW_{V}$$
+将Multi-Head Attention得到的向量再投影到一个更大的空间（论文里将空间放大了4倍）在那个大空间里可以更方便地提取需要的信息（使用Relu激活函数），最后再投影回token向量原来的空间
 
-$$X_{attention}=selfAttention(Q,K,V)$$
+$$FFN(x)=ReLU(W_{1}x+b_{1})W_{2}+b_{2}$$
 
-3). self-attention 残差连接与 Layer Normalization
+借鉴SVM来理解：SVM对于比较复杂的问题通过将特征其投影到更高维的空间使得问题简单到一个超平面就能解决。这里token向量里的信息通过Feed Forward Layer被投影到更高维的空间，在高维空间里向量的各类信息彼此之间更容易区别。
 
-$$X_{attention}=X+X_{attention}$$
-$$X_{attention}=LayerNorm(X_{attention})$$
 
-4). 下面进行 Encoder block 结构图中的第 4 部分，也就是 FeedForward，其实就是两层线性映射并用激活函数激活，比如说RELU
 
-$$X_{hidden}=Linear(RELU(Linear(X_{attention})))$$
+## 3.3 Decoder
 
-5). FeedForward 残差连接与 Layer Normalization
+![](../../images/pretrain_model/Transformer/decoder.png)
 
-$$X_{hidden}=X_{attention}+X_{hidden}$$
-$$X_{hidden}=LayerNorm(X_{hidden})$$
-其中：$X_{hidden} \in R^{batch_size*seq_len*embed_dim}$
-
-## Transformer Decoder 整体结构
-
-和 Encoder 一样，上面三个部分的每一个部分，都有一个残差连接，后接一个 Layer Normalization。Decoder 的中间部件并不复杂，大部分在前面 Encoder 里我们已经介绍过了，但是 Decoder 由于其特殊的功能，因此在训练时会涉及到一些细节
+和 Encoder 一样，上面三个部分的每一个部分，都有一个残差连接，后接一个 Layer Normalization。Decoder 的中间部件并不复杂，大部分在前面 Encoder 里我们已经介绍过了，但是 Decoder 由于其特殊的功能，因此在训练时会涉及到一些细节，下面会介绍Decoder的Masked Self-Attention和Encoder-Decoder Attention两部分，其结构图如下图所示
 
 <center><img src="https://ai-studio-static-online.cdn.bcebos.com/08f1c94cb40f4d76aba52e7d026897177f7b6f5f69804560bbed9e576094679f"  width="600px" /></center> 
 <center><br> decoder self attention </br></center>
 <br></br>
 
-### Masked Self-Attention
+
+### 3.3.1 Masked Self-Attention
+
 
 传统 Seq2Seq 中 Decoder 使用的是 RNN 模型，因此在训练过程中输入因此在训练过程中输入t时刻的词，模型无论如何也看不到未来时刻的词，因为循环神经网络是时间驱动的，只有当t时刻运算结束了，才能看到t+1时刻的词。而 Transformer Decoder 抛弃了 RNN，改为 Self-Attention，由此就产生了一个问题，在训练过程中，整个 ground truth 都暴露在 Decoder 中，这显然是不对的，我们需要对 Decoder 的输入进行一些处理，该处理被称为 Mask。
 
 Mask 非常简单，首先生成一个下三角全 0，上三角全为负无穷的矩阵，然后将其与 Scaled Scores 相加即可，之后再做 softmax，就能将 -inf 变为 0，得到的这个矩阵即为每个字之间的权重。
 
-### Masked Encoder-Decoder Attention
+### 3.3.2 Masked Encoder-Decoder Attention
 其实这一部分的计算流程和前面 Masked Self-Attention 很相似，结构也一摸一样，唯一不同的是这里的K,V为 Encoder 的输出，Q为 Decoder 中 Masked Self-Attention 的输出
 
 <center><img src="https://ai-studio-static-online.cdn.bcebos.com/eeb0db3260814772afdc9c1566a4afaa7133168766f34670bdecb26875edcd3f"  width="600px" /></center> 
 <center><br> Masked Encoder-Decoder Attention </br></center>
 <br></br>
 
-## Transformer的权重共享
+### 3.3.3 Decoder的解码
+
+下图展示了Decoder的解码过程，Decoder中的字符预测完之后，会当成输入预测下一个字符，直到遇见终止符号为止。
+
+![](../../images/pretrain_model/Transformer/transformer_decoding_2.gif)
+
+## 3.4 Transformer的最后一层和Softmax
+
+线性层是一个简单的全连接的神经网络，它将解码器堆栈生成的向量投影到一个更大的向量，称为logits向量。如图linear的输出
+
+softmax层将这些分数转换为概率（全部为正值，总和为1.0）。选择概率最高的单元，并生成与其关联的单词作为此时间步的输出。如图softmax的输出。
+
+![](../../images/pretrain_model/Transformer/linear_softmax.png)
+
+
+## 3.5 Transformer的权重共享
 
 Transformer在两个地方进行了权重共享：
 
@@ -203,6 +277,13 @@ Embedding层可以说是通过onehot去取到对应的embedding向量，FC层可
 因此，Embedding层和FC层权重共享，Embedding层中和向量 x 最接近的那一行对应的词，会获得更大的预测概率。实际上，Decoder中的Embedding层和FC层有点像互为逆过程。
 
 通过这样的权重共享可以减少参数的数量，加快收敛。
+
+## 4 总结
+
+本文详细介绍了Transformer的细节，包括Encoder，Decoder部分，输出解码的部分，Transformer的共享机制等等。
+
+## 5. 参考文献
+[Attention Is All You Need](https://arxiv.org/abs/1706.03762)
 
 
 

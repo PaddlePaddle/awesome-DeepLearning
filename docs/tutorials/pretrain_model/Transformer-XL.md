@@ -3,7 +3,7 @@
 
 ## 1. Transformer-XL的由来
 
-在正式讨论Transformer-XL之前，我们先来看看经典的Transformer（后文称**Vanilla Transformer**）是如何处理数据和训练评估模型的将，如**图1**所示。
+在正式讨论Transformer-XL之前，我们先来看看经典的Transformer（后文称**Vanilla Transformer**）是如何处理数据和训练评估模型的，如**图1**所示。
 
 ![image-20210604171637306](https://raw.githubusercontent.com/1649759610/images_for_blog/master/image-20210604171637306.png)
 
@@ -39,7 +39,7 @@ $$
 \begin{align}
 & \tilde{h}_{\tau+1}^{n-1} = \left[ \text{SG}(h_{\tau}^{n-1}) \; \circ \;h_{\tau+1}^{n-1} \right] \\
 & q_{\tau+1}^{n}, \; k_{\tau+1}^n, \; v_{\tau+1}^n = h_{\tau+1}^{n-1}W_{q}^{\mathrm{ T }}, \; \tilde{h}_{\tau+1}^{n-1}W_{k}^{\mathrm{ T }}, \; \tilde{h}_{\tau+1}^{n-1}W_{v}^{\mathrm{ T }} \\
-& h_{n+1}^n = \text{Transformer-Layer}(q_{\tau+1}^{n}, \; k_{\tau+1}^n, \; v_{\tau+1}^n)
+& h_{\tau+1}^n = \text{Transformer-Layer}(q_{\tau+1}^{n}, \; k_{\tau+1}^n, \; v_{\tau+1}^n)
 \end{align}
 $$
 
@@ -47,7 +47,7 @@ $$
 
 ### 2.2 相对位置编码
 
-**Segment-Level recurrence mechanism**看起来已经做到了长序列建模，但是这里有个问题需要进一步讨论一下。我们知道，在**Vanilla Transformer**使用了绝对位置编码，我们来看看如果将绝对位置编码应用到$Segment-Level recurrence mechanism$中会怎样。
+**Segment-Level recurrence mechanism**看起来已经做到了长序列建模，但是这里有个问题需要进一步讨论一下。我们知道，在**Vanilla Transformer**使用了绝对位置编码，我们来看看如果将绝对位置编码应用到Segment-Level recurrence mechanism中会怎样。
 
 还是假设前后的两个Segment分别为：$\text{s}_{\tau}=[x_{\tau,1},x_{\tau,2},...,x_{\tau,L}]$和$\text{s}_{\tau+1}=[x_{\tau+1,1},x_{\tau+1,2},...,x_{\tau+1,L}]$，其中序列长度为$L$。每个Segment的Position Embedding矩阵为$U_{1:L} \in \mathbb{R}^{L \times d}$,  每个Segment $\text{s}_{\tau}$的词向量矩阵为$E_{\text{s}_{\tau}} \in \mathbb{R}^{L \times d}$，在**Vanilla Transformer**中，两者相加输入模型参与计算，如下式所示：
 

@@ -1,0 +1,89 @@
+MODEL:                                              #MODEL field
+  framework: "BMNLocalizer"
+  backbone:
+    name: "BMN"
+    feat_dim: 2688
+    tscale: 200
+    dscale: 200
+    prop_boundary_ratio: 0.5
+    num_sample: 32
+    num_sample_perbin: 3
+  loss:
+    name: "BMNLoss"
+    tscale: 200
+    dscale: 200
+
+DATASET:                                            #DATASET field
+  batch_size: 4     # 4                                     #single card bacth size
+  test_batch_size: 1
+  num_workers: 0
+  train:
+    format: "BMNDataset"
+    file_path: "PaddleVideo/applications/FootballAction/datasets/EuroCup2016/input_for_bmn/label.json"
+    subset: "train"
+  valid:
+    format: "BMNDataset"
+    file_path: "PaddleVideo/applications/FootballAction/datasets/EuroCup2016/input_for_bmn/label.json"
+    subset: "validation"
+  test:
+    format: "BMNDataset"
+    test_mode: True
+    file_path: "PaddleVideo/applications/FootballAction/datasets/EuroCup2016/input_for_bmn/label.json"
+    subset: "validation"
+
+PIPELINE:                                           #PIPELINE field
+  train:                                            #Mandotary, indicate the pipeline to deal with the training data
+    load_feat:
+      name: "LoadFeat"
+      feat_path: "PaddleVideo/applications/FootballAction/datasets/EuroCup2016/input_for_bmn/feature"
+    transform:                                      #Mandotary, image transfrom operator
+      - GetMatchMap:
+          tscale: 200
+      - GetVideoLabel:
+          tscale: 200
+          dscale: 200
+
+  valid:                                            #Mandotary, indicate the pipeline to deal with the training data
+    load_feat:
+      name: "LoadFeat"
+      feat_path: "PaddleVideo/applications/FootballAction/datasets/EuroCup2016/input_for_bmn/feature"
+    transform:                                      #Mandotary, image transfrom operator
+      - GetMatchMap:
+          tscale: 200
+      - GetVideoLabel:
+          tscale: 200
+          dscale: 200
+
+  test:                                             #Mandatory, indicate the pipeline to deal with the validing data
+    load_feat:
+      name: "LoadFeat"
+      feat_path: "PaddleVideo/applications/FootballAction/datasets/EuroCup2016/input_for_bmn/feature"
+    transform:                                      #Mandotary, image transfrom operator
+      - GetMatchMap:
+          tscale: 200
+      - GetVideoLabel:
+          tscale: 200
+          dscale: 200
+
+OPTIMIZER:                                          #OPTIMIZER field
+  name: 'Adam'
+  learning_rate:
+    iter_step: True
+    name: 'CustomPiecewiseDecay'
+    boundaries: [20]
+    values: [0.001, 0.0001]
+  weight_decay:
+    name: 'L2'
+    value: 1e-4
+
+INFERENCE:
+    name: 'BMN_Inference_helper'
+    feat_dim: 2688
+    dscale: 100
+    tscale: 100
+    result_path: "PaddleVideo/applications/FootballAction/checkpoints/BMN"
+
+model_name: BMN
+epochs: 1                                          #Mandatory, total epoch
+log_level: "INFO"
+resume_from: ""                                     #checkpoint path.
