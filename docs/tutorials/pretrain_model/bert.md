@@ -14,7 +14,7 @@ BERT整体框架包含pre-train和fine-tune两个阶段。pre-train阶段模型�
 <img src="https://ai-studio-static-online.cdn.bcebos.com/7b5e70561695477ea0c1b36f8ed6cbde577000b89d7748b99af4eeec1d1ab83a" width = "700"/> <br />
 </p><br><center>图1 BERT结构</center></br>
 
-BERT是用了Transformer的encoder侧的网络，encoder中的Self-attention机制在编码一个token的时候同时利用了其上下文的token，其中‘同时利用上下文’即为双向的体现，而并非想Bi-LSTM那样把句子倒序输入一遍。
+BERT是用了Transformer的encoder侧的网络，encoder中的Self-attention机制在编码一个token的时候同时利用了其上下文的token，其中‘同时利用上下文’即为双向的体现，而并非像Bi-LSTM那样把句子倒序输入一遍。
 
 在它之前是GPT，GPT使用的是Transformer的decoder侧的网络，GPT是一个单向语言模型的预训练过程，更适用于文本生成，通过前文去预测当前的字。
 
@@ -142,7 +142,7 @@ BERT是一个多任务模型，它的预训练（Pre-training）任务是由两�
 
 ### MLM
 
-+ MLM是指在训练的时候随即从输入语料上mask掉一些单词，然后通过的上下文预测该单词，该任务非常像我们在中学时期经常做的完形填空。正如传统的语言模型算法和RNN匹配那样，MLM的这个性质和Transformer的结构是非常匹配的。在BERT的实验中，15%的WordPiece Token会被随机Mask掉。在训练模型时，一个句子会被多次喂到模型中用于参数学习，但是Google并没有在每次都mask掉这些单词，而是在确定要Mask掉的单词之后，做以下处理。
++ MLM是指在训练的时候随机从输入语料上mask掉一些单词，然后通过上下文预测该单词，该任务非常像我们在中学时期经常做的完形填空。正如传统的语言模型算法和RNN匹配那样，MLM的这个性质和Transformer的结构是非常匹配的。在BERT的实验中，15%的WordPiece Token会被随机Mask掉。在训练模型时，一个句子会被多次喂到模型中用于参数学习，但是Google并没有在每次都mask掉这些单词，而是在确定要Mask掉的单词之后，做以下处理。
 	+ 80%的时候会直接替换为[Mask]，将句子 "my dog is cute" 转换为句子 "my dog is [Mask]"。
     + 10%的时候将其替换为其它任意单词，将单词 "cute" 替换成另一个随机词，例如 "apple"。将句子 "my dog is cute" 转换为句子 "my dog is apple"。
     + 10%的时候会保留原始Token，例如保持句子为 "my dog is cute" 不变。
@@ -153,8 +153,8 @@ BERT是一个多任务模型，它的预训练（Pre-training）任务是由两�
 
 **优点**
 
-+ 1）被随机选择15%的词当中以10%的概率用任意词替换去预测正确的词，相当于文本纠错任务，为BERT模型赋予了一定的文本纠错能力；
-+ 2）被随机选择15%的词当中以10%的概率保持不变，缓解了finetune时候与预训练时候输入不匹配的问题（预训练时候输入句子当中有mask，而finetune时候输入是完整无缺的句子，即为输入不匹配问题）。
++ 1）被随机选择的15%的词当中以10%的概率用任意词替换去预测正确的词，相当于文本纠错任务，为BERT模型赋予了一定的文本纠错能力；
++ 2）被随机选择的15%的词当中以10%的概率保持不变，缓解了finetune时候与预训练时候输入不匹配的问题（预训练时候输入句子当中有mask，而finetune时候输入是完整无缺的句子，即为输入不匹配问题）。
 
 **缺点**
 
@@ -194,7 +194,7 @@ BERT预训练模型最多只能输入512个词，这是因为在BERT中，Token�
     + STS-B：预测两个句子的相似性，包括5个级别。
     + MRPC：也是判断两个句子是否是等价的。
     + RTE：类似于MNLI，但是只是对蕴含关系的二分类判断，而且数据集更小。
-    + SWAG：从四个句子中选择为可能为前句下文的那个。
+    + SWAG：从四个句子中选择为可能前句下文的那个。
 + 基于单个句子的分类任务
 	+ SST-2：电影评价的情感分析。
     + CoLA：句子语义判断，是否是可接受的（Acceptable）。
@@ -207,7 +207,7 @@ BERT预训练模型最多只能输入512个词，这是因为在BERT中，Token�
 <img src="https://ai-studio-static-online.cdn.bcebos.com/46789704fc834558b340e0328253108e66cac3ab7b784e31b01f393652d9ed55" width = "700"/> <br />
 </p><br><center>图3 BERT 用于不同的 NLP 任务</center></br>
 
-## BERT,GPT,ELMO的区别
+## BERT, GPT, ELMO的区别
 
 ![](https://raw.githubusercontent.com/w5688414/paddleImage/main/bert_img/bert_elmo_gpt.png)
 
