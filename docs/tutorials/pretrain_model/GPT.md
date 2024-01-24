@@ -23,7 +23,7 @@ GPT 使用 Transformer 的 Decoder 结构，并对 Transformer Decoder 进行了
 
 GPT 使用句子序列预测下一个单词，因此要采用 Mask Multi-Head Attention 对单词的下文遮挡，防止信息泄露。例如给定一个句子包含4个单词 [A, B, C, D]，GPT 需要利用 A 预测 B，利用 [A, B] 预测 C，利用 [A, B, C] 预测 D。如果利用A 预测B的时候，需要将 [B, C, D] Mask 起来。
 
-Mask 操作是在 Self-Attention 进行 Softmax 之前进行的，具体做法是将要 Mask 的位置用一个无穷小的数替换 -inf，然后再 Softmax，如下图所示。
+Mask 操作是在 Self-Attention 进行 Softmax 之前进行的，具体做法是将要 Mask 的位置用一个无穷小的数 -inf 替换，然后再 Softmax，如下图所示。
 
 ![](https://raw.githubusercontent.com/w5688414/paddleImage/main/bert_family_img/softmax_mask.jpeg)
 
@@ -49,7 +49,7 @@ GPT只使用了 Transformer 的 Decoder 部分，并且每个子层只有一个 
 ### 3.1 无监督的预训练
 
 
-无监督的预训练（Pretraining），具体来说，给定一个未标注的预料库$U=\{u_{1},u_{2},...,u_{n}\}$，我们训练一个语言模型，对参数进行最大（对数）似然估计：
+无监督的预训练（Pretraining），具体来说，给定一个未标注的语料库$U=\{u_{1},u_{2},...,u_{n}\}$，我们训练一个语言模型，对参数进行最大（对数）似然估计：
 
 $$L_{1}(U)=\sum_{i}log P(u_{i}|u_{1},...,u_{k-1};\Theta)$$
 
