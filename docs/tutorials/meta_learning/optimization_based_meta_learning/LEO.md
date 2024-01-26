@@ -8,11 +8,11 @@ Latent Embedding Optimization (LEO) 学习模型参数的低维潜在嵌入，�
 在元学习器中，使用 SGD 最小化任务验证集损失函数，
 使得模型的泛化能力最大化，计算元参数，元学习器将元参数输入基础学习器，
 继而，基础学习器最小化任务训练集损失函数，快速给出任务上的预测结果。
-LEO 结构如图1所示。
+LEO 结构如图 1 所示。
 
 ![LEO Structure](../../../images/meta_learning/optimization_based_meta_learning/LEO/LEOStructure.png)
 
-图1	LEO 结构图。$D^{\mathrm{tr}}$ 是任务 $\varepsilon$ 的 support set，
+图 1	LEO 结构图。$D^{\mathrm{tr}}$ 是任务 $\varepsilon$ 的 support set，
 $D^{\mathrm{val}}$ 是任务 $\varepsilon$ 的 query set，
 $z$ 是通过编码器计算的 $N$ 个类别的类别特征，$f_{\theta}$ 是基学习器， 
 $\theta$ 是基学习器参数， 
@@ -86,9 +86,8 @@ $$
 $g_{\phi_{d}}$ 是从特征向量到基础学习器参数的映射。
 
 ![LEO Schematic](../../../images/meta_learning/optimization_based_meta_learning/LEO/LEOSchematic.png)
-<center>
-图2	LEO 基础学习器工作原理图。
-</center>
+
+图 2	LEO 基础学习器工作原理图
 
 ### 2.3  基础学习器更新过程
 在基础学习器中，任务 $\varepsilon$ 的交叉熵损失函数是：
@@ -195,9 +194,9 @@ $$
 
 ## 5 LEO 模型结构
 
-LEO 是一种与模型无关的元学习，[1] 中给出的各部分模型结构及参数如表1所示。
+LEO 是一种与模型无关的元学习，[1] 中给出的各部分模型结构及参数如表 1 所示。
 <center>
-表1	LEO 各部分模型结构及参数。
+表 1	LEO 各部分模型结构及参数
 </center>
 
 | Part of the model | Architecture | Hiddenlayer | Shape of the output |
@@ -211,7 +210,7 @@ LEO 是一种与模型无关的元学习，[1] 中给出的各部分模型结构
 ## 6 LEO 分类结果
 
 <center>
-表1	LEO 在 miniImageNet 上的分类结果。
+表 2	LEO 在 miniImageNet 上的分类结果
 </center>
 
 | Model | 5-way 1-shot | 5-way 5-shot |
@@ -233,7 +232,7 @@ LEO 是一种与模型无关的元学习，[1] 中给出的各部分模型结构
 | LEO | **61.76 $\pm$ 0.08** $\%$ | **77.59 $\pm$ 0.12** $\%$ |
 
 <center>
-表1	LEO 在 tieredImageNet 上的分类结果。
+表3	LEO 在 tieredImageNet 上的分类结果
 </center>
 
 | Model | 5-way 1-shot | 5-way 5-shot |

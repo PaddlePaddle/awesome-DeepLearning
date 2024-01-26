@@ -42,11 +42,11 @@ optimizer $g$ 的更新则由 $f$, $\nabla f$ 及 $\phi$ 决定。
 
 ### 2.1 学习机制
 
-图1是 Learning to Learn 中 optimizer 和 optimizee 的工作原理。
+图 1 是 Learning to Learn 中 optimizer 和 optimizee 的工作原理。
 
 ![LearningToLearn](../../../images/meta_learning/model_based_meta_learning/Learning_to_Learn/LearningToLearnOptimizerOptimizee.png)
 
-图1	Learning to Learn 中 optimizer 和 optimizee 工作原理。
+图 1	Learning to Learn 中 optimizer 和 optimizee 工作原理。
 optimizer 为 optimizee 提供更新策略，
 optimizee 将损失信息反馈给 optimizer，协助 optimizer 更新。
 
@@ -68,11 +68,11 @@ $$
 $\omega_{t} \in \mathbb{R}_{\geq 0}$ 是各个优化时刻的任意权重，
 $\nabla_{t}=\nabla_{\theta} f\left(\theta_{t}\right)$ 。
 
-图2是 Learning to Learn 计算图。
+图 2 是 Learning to Learn 计算图。
 
 ![LearningToLearn](../../../images/meta_learning/model_based_meta_learning/Learning_to_Learn/LearningToLearnComputationalGraph.png)
 
-图1	Learning to Learn 计算图。
+图 2	Learning to Learn 计算图。
 梯度只沿实线传递，不沿虚线传递（因为 optimizee 的梯度不依赖于 optimizer 的参数，即
 $\partial \nabla_{t} / \partial \phi = 0$ ），这样可以避免计算 $f$ 的二阶导。
 
@@ -97,11 +97,11 @@ optimizer 的参数 $\phi$ 共享，隐层状态 $h_{i}$ 不共享。
 这样设计的 LSTM 变相实现了优化与维度无关，
 这与 RMSprop 和 ADAM 的优化方式类似（为每个维度的参数施行同样的梯度更新规则）。
 
-图3是 LSTM 优化器的一步更新过程。
+图 3 是 LSTM 优化器的一步更新过程。
 
 ![Learning2Learn](../../../images/meta_learning/model_based_meta_learning/Learning_to_Learn/LearningToLearnLSTMOptimizer.png)
 
-图3	LSTM 优化器的一步更新过程。所有 LSTM 的 $\phi$ 共享，$h_{i}$ 不共享。
+图 3	LSTM 优化器的一步更新过程。所有 LSTM 的 $\phi$ 共享，$h_{i}$ 不共享。
 
 ### 2.3 预处理和后处理
 

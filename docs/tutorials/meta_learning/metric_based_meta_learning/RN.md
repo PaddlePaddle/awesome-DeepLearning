@@ -8,12 +8,11 @@ Relation Network (RN) 使用有监督度量学习估计样本点之间的距离�
 RN 包括两个组成部分：嵌入模块和关系模块，且两者都是通过有监督学习得到的。
 嵌入模块从输入数据中提取特征，关系模块根据特征计算任务之间的距离，
 判断任务之间的相似性，找到过去可借鉴的经验进行加权平均。
-RN 结构如图1所示。
+RN 结构如图 1 所示。
 
 ![RN Architecture](../../../images/meta_learning/metric_based_meta_learning/RN/RNArchitecture.png)
-<center>
-图1	RN 结构。
-</center>
+
+图 1	RN 结构
 
 嵌入模块记为 $f_{\varphi}$，关系模块记为 $g_{\phi}$，
 支持集中的样本记为 $\boldsymbol{x}_{i}$，
@@ -51,12 +50,11 @@ $$
 
 嵌入模块和关系模块的选取有很多种，包括卷积网络、残差网络等。
 
-图2给出了 [1] 中使用的 RN 模型结构。
+图 2 给出了 [1] 中使用的 RN 模型结构。
 
 ![RN Model](../../../images/meta_learning/metric_based_meta_learning/RN/RNModel.png)
-<center>
-图2	RN 模型结构。
-</center>
+
+图 2	RN 模型结构
 
 ### 3.1 嵌入模块结构
 
@@ -75,7 +73,7 @@ $$
 ## 4 RN 分类结果
 
 <center>
-表1	RN 在 Omniglot 上的分类结果。
+表 1	RN 在 Omniglot 上的分类结果
 </center>
 
 | Model | Fine Tune | 5-way 1-shot | 5-way 5-shot | 20-way 1-shot | 20-way 5-shot |  
@@ -93,7 +91,7 @@ $$
 | RELATION NET | N | **99.6 $\pm$ 0.2** $\%$ | **99.8 $\pm$ 0.1** $\%$ | **97.6 $\pm$ 0.2** $\%$ | **99.1 $\pm$ 0.1** $\%$ |
 
 <center>
-表1	RN 在 miniImageNet 上的分类结果。
+表 2	RN 在 miniImageNet 上的分类结果
 </center>
 
 | Model | FT | 5-way 1-shot | 5-way 5-shot | 

@@ -60,15 +60,14 @@ $$
 ### 2.1 SNAIL 基础结构
 
 两个时序卷积层（橙色）和一个因果关系层（绿色）的组合是 SNAIL 的基础结构，
-如图1所示。
+如图 1 所示。
 在监督学习设置中，
 SNAIL 接收标注样本 $\left(x_{1}, y_{1}\right), \ldots,\left(x_{t-1}, y_{t-1}\right)$ 和末标注的 $\left(x_{t},-\right)$，
 然后基于标注样本对 $y_{t}$ 进行预测。
 
 ![SNAIL](../../../images/meta_learning/metric_based_meta_learning/SNAIL/SNAIL.png)
-<center>
-图1	SNAIL 基础结构示意图。
-</center>
+
+图 1	SNAIL 基础结构示意图
 
 ### 2.2 Modular Building Blocks
 
@@ -76,9 +75,8 @@ SNAIL 接收标注样本 $\left(x_{1}, y_{1}\right), \ldots,\left(x_{t-1}, y_{t-
 Dense Block 和 Attention Block。
 
 ![SNAIL Building Blocks](../../../images/meta_learning/metric_based_meta_learning/SNAIL/SNAILBuildingBlocks.png)
-<center>
-图1	SNAIL 中的 Dense Block 和 Attention Block。(a) Dense Block 应用因果一维卷积，然后将输出连接到输入。TC Block 应用一系列膨胀率呈指数增长的 Dense Block。(b) Attention Block 执行(因果)键值查找，并将输出连接到输入。
-</center>
+
+图 2	SNAIL 中的 Dense Block 和 Attention Block。(a) Dense Block 应用因果一维卷积，然后将输出连接到输入。TC Block 应用一系列膨胀率呈指数增长的 Dense Block。(b) Attention Block 执行(因果)键值查找，并将输出连接到输入。
 
 **Densen Block** 
 用了一个简单的因果一维卷积（空洞卷积），
@@ -120,7 +118,7 @@ $$
 ## 3 SNAIL 分类结果
 
 <center>
-表1	SNAIL 在 Omniglot 上的分类结果。
+表 1	SNAIL 在 Omniglot 上的分类结果
 </center>
 
 | Method | 5-way 1-shot | 5-way 5-shot | 20-way 1-shot | 20-way 5-shot |  
@@ -134,7 +132,7 @@ $$
 | SNAIL | **99.07 $\pm$ 0.16** $\%$ | **99.78 $\pm$ 0.09** $\%$ | **97.64 $\pm$ 0.30** $\%$ | **99.36 $\pm$ 0.18** $\%$ |
 
 <center>
-表1	SNAIL 在 miniImageNet 上的分类结果。
+表 2	SNAIL 在 miniImageNet 上的分类结果
 </center>
 
 | Method | 5-way 1-shot | 5-way 5-shot |

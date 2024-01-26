@@ -100,18 +100,16 @@ $$
 
 ## 3 Meta-Learner LSTM 算法流程
 
-Meta-Learner LSTM 前向传递计算如图1所示，其中，
+Meta-Learner LSTM 前向传递计算如图 1 所示，其中，
 基学习器 $\mathrm{M}$，包含可训练参数 $\theta$；元学习器 $R$，包含可训练参数 $\Theta$。
 
 ![Meta-Learner LSTM](../../../images/meta_learning/model_based_meta_learning/Meta_Learner_LSTM/MetaLearnerLSTM.png)
 
-<center>
-图1	Meta-Learner LSTM 前向传递计算图。
+图 1	Meta-Learner LSTM 前向传递计算图。
 Learner 计算损失函数值和损失函数梯度值，
 Meta-Learner 使用 Learner 提供的信息，更新 Learner 中的参数和自身参数。
 在任务中，每个批次的训练数据处理完成后，Meta-Learner 为 Learner 更新一次参数，
 任务中所有批次的训练数据处理完成后，Meta-Learner 进行一次更新。
-</center>
 
 **Meta-Learner LSTM 算法流程**
 
@@ -169,7 +167,7 @@ Meta-Learner LSTM 中的元学习器只能是 LSTM 结构，基学习器可以�
 ## 6 Meta-Learner LSTM 分类结果
 
 <center>
-表1	Meta-Learner LSTM 在 miniImageNet 上的分类结果。
+表1	Meta-Learner LSTM 在 miniImageNet 上的分类结果
 </center>
 
 | Method | 5-way 1-shot | 5-way 5-shot |
