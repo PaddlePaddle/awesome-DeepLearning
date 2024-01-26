@@ -22,7 +22,7 @@ from mpl_toolkits.mplot3d import Axes3D
 
 def load_data():
     # 从文件导入数据
-    datafile = './work/housing.data'
+    datafile = 'C:/Users/visualy/awesome-DeepLearning/junior_class/chapter-1-hands_on_deep_learning/code/data/housing.data'
     data = np.fromfile(datafile, sep=' ')
 
     # 每条数据包括14项，其中前面13项是影响因素，第14项是相应的房屋价格中位数
