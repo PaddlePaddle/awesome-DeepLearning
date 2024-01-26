@@ -248,6 +248,7 @@
 | 推荐         | [基于DeepFM 模型的点击率预估](https://github.com/PaddlePaddle/awesome-DeepLearning/tree/master/examples/DeepFM for CTR Prediction) | [PaddleEdu](https://github.com/PaddlePaddle/awesome-DeepLearning) | [更多飞桨案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/908086) |
 | 推荐         | [基于DSSM的电影推荐](https://aistudio.baidu.com/aistudio/projectdetail/2324144) | [AIStudio官方](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/7) | [更多飞桨案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/908086) |
 | 知识蒸馏     | [基于CIFAR100的SSLD蒸馏实验](https://github.com/PaddlePaddle/PaddleClas/blob/release/2.2/docs/zh_CN/advanced_tutorials/distillation/distillation.md) | [PaddleClas](https://github.com/PaddlePaddle/PaddleClas)     | [更多飞桨案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/908086) |
+| 音频分类     | [基于EnterFace‘05数据集和lstm网络的情感分类任务](https://aistudio.baidu.com/aistudio/projectdetail/3281613) |[开发者之雍Jerry](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/530098) | [更多飞桨案例](https://aistudio.baidu.com/aistudio/personalcenter/thirdview/908086) |
 
 返回[:arrow_heading_up:](#0)
 
