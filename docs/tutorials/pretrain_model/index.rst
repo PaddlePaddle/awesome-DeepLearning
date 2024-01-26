@@ -21,6 +21,7 @@
    ERNIE-Gram <ERNIE-Gram>
    ERNIE-Doc <ERNIE-Doc>
    THU-ERNIE <THU-ERNIE>
+   SKEP <skep>
    KBERT <KBERT>
    ALBERT <ALBERT>  
    ELECTRA <ELECTRA>
