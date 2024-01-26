@@ -1,0 +1,88 @@
+【实验目的】
+使用 CIFAR100 数据集，基于 MobileNet 网络实现图像分类
+
+【实验步骤和过程记录】
+数据集
+指定数据集：cifar100，通过高层API调用。 训练数据增强
+可以自己写数据增强和数据预处理功能。
+
+导入相关库
+import paddle 
+import numpy as np
+ import io import os from PIL 
+import Image import paddle 
+import numpy as np 
+import paddle.nn as nn
+import matplotlib.pyplot as plt paddle.__version__
+
+模型结构
+MobileNet的核心思想是将传统卷积分解为深度可分离卷积与1 x 1卷积。深度可分离卷积是指输入特征图的每个channel都对应一个卷积核，这样输出的特征的每个channel只与输入特征图对应的channel相关，具体的例如输入一个K×M×NK\times M\times NK×M×N的特征图，其中K为特征图的通道数，M、N为特征图的宽高，假设传统卷积需要一个大小为C×K×3×3C\times K\times 3\times 3C×K×3×3的卷积核来得到输出大小为C×M′×N′C\times M^{'}\times N^{'}C×M′×N′的新的特征图。而深度可分离卷积则是首先使用K个大小为3×33\times 33×3的卷积核分别对输入的K个channel进行卷积得到K个特征图（DepthWise Conv部分），然后再使用大小为C×K×1×1C\times K \times 1\times 1C×K×1×1的卷积来得到大小为C×M′×N′C\times M^{'}\times N^{'}C×M′×N′的输出（PointWise Conv部分）。这种卷积操作能够显著的降低模型的大小和计算量，而在性能上能够与标准卷积相当，深度可分离卷积具体的结构如下图。
+
+
+假设输入特征图大小为：Cin×Hin×WinC_{in}\times H_{in}\times W_{in}Cin​×Hin​×Win​，使用卷积核为K×KK\times KK×K，输出的特征图大小为Cout×Hout×WoutC_{out}\times H_{out}\times W_{out}Cout​×Hout​×Wout​，对于标准的卷积，其计算量为： K×K×Cint×Cout×Hout×WoutK\times K\times C_{int}\times C_{out}\times H_{out}\times W_{out}K×K×Cint​×Cout​×Hout​×Wout​ 对于分解后的深度可分离卷积，计算量可通过DW部分和PW部分计算量的和得到，公式如下： K×K×Cint×Hout×Wout+Cint×Cout×Hout×WoutK\times K\times C_{int}\times H_{out}\times W_{out} + C_{int}\times C_{out}\times H_{out}\times W_{out}K×K×Cint​×Hout​×Wout​+Cint​×Cout​×Hout​×Wout​ 因此相比于标准卷积，深度可分离卷积的计算量降低了： K×K×Cint×Hout×Wout+Cint×Cout×Hout×WoutK×K×Cint×Cout×Hout×Wout=1Cout+1K2\frac{K\times K\times C_{int}\times H_{out}\times W_{out} + C_{int}\times C_{out}\times H_{out}\times W_{out}}{K\times K\times C_{int}\times C_{out}\times H_{out}\times W_{out}}= \frac{1}{C_{out}} + \frac{1}{K^2}K×K×Cint​×Cout​×Hout​×Wout​K×K×Cint​×Hout​×Wout​+Cint​×Cout​×Hout​×Wout​​=Cout​1​+K21​ 由上式可知，对于一个大小为3×33\times 33×3的卷积核，计算量降低了约7-9倍。 MobileNet-V1的网络结构比较简单直观，采用VGG类似的直筒型结构，具体结构如下表：
+
+数据准备与数据增强
+import paddle.vision.transforms as T
+
+transforms = T.Compose([
+                T.RandomHorizontalFlip(0.5),#水平翻转
+                T.RandomRotation(15),#随机反转角度范围
+                T.RandomVerticalFlip(0.15),
+                T.RandomRotation(15),
+                T.ToTensor()
+])
+
+# 训练数据集
+train_dataset = paddle.vision.datasets.Cifar100(mode='train',transform=transforms)
+
+# 验证数据集
+eval_dataset = paddle.vision.datasets.Cifar100(mode='test',transform=transforms)
+eval1_dataset = paddle.vision.datasets.Cifar100(mode='test',transform=(T.ToTensor()))
+
+print('训练集样本量: {}，验证集样本量: {}'.format(len(train_dataset), len(eval_dataset)))
+训练集样本量: 50000，验证集样本量: 10000
+
+模型选择和开发
+network =paddle.vision.models.mobilenet_v2(pretrained=True,num_classes=100)
+
+模型可视化
+model = paddle.Model(network)
+model.summary((-1, 3, 32, 32))
+
+模型训练和调优
+model.prepare(paddle.optimizer.Adam(learning_rate=0.001,parameters=model.parameters()),
+              paddle.nn.CrossEntropyLoss(),
+              paddle.metric.Accuracy())
+
+callback=paddle.callbacks.VisualDL(log_dir='./log_Res101_sszq')
+
+model.fit(train_dataset,
+          eval_dataset,
+          epochs=50,
+          batch_size=4096,
+          verbose=1,
+          shuffle=True,
+          callbacks=callback)
+评分输出
+result = model.evaluate(eval1_dataset, verbose=1,batch_size=5000)
+
+print(result)
+【实验总结】
+对于大型的网络模型，重头开始训练，是很难收敛的。训练mobilenet时，在迭代10000次以前，loss和准确率几乎不会提高。一开始我以为是训练代码写错了，后来寻思了很久，才发现是模型太复杂了，所以收敛慢的一比，大概20000次迭代后，准确率才开始蹭蹭的往上长,迭代十万次后准确率才70%，若训练过程发现不收敛，要尝试修改。
+改进方法总结：
+准确性提升：30%->60%
+增加了卷积神经网络的深度和增加了卷积核大小，缩小了卷积视野，使得整个模型大小变大，拟合能力增强。
+学习率变化为适度的学习率,使用变化学习率,递归且衰减。
+增加了训练批次10->50。
+修改了训练优化器,改为了sgd。
+调整batch的归一化，权重衰减和适度的dropout来调整防止过拟合。
+使用了别人设计的网络结构，在此基础上进行简化。
+还可以从下面的一些方面进行改进：
+学习率变化为适度的学习率，进行多次实验，找出合适的学习率，也可以使用变化学习率，通过在训练过程中递减学习率，使得模型能够更好的收敛。
+从数据集想办法，利用一些增强图像的方法，翻转图像、切割图像、白化图像等方法增加数据量，由于CIFAR-100的图片分类多，有100类，而图像的数量又少，每张图像只有600张，数据量如果更大肯定会提高准确性，增加模型的拟合能力和泛化能力。
+适度增加迭代次数，例如跑个50 epoch，如果验证集准确性依然在收敛，则可以继续适当增加迭代次数。
+可以改进模型训练方法，例如调整batch的归一化，权重衰减和适度的dropout来调整防止过拟合。
+可以改进模型层数，加深网络层数通过加深模型层数增加模型的拟合能力，残差网络（resnet）技术通过解决梯度衰减问题加强了模型的拟合能力。
+修改使用的优化器为合适的优化器，使用别人的预训练权重基础上继续训练，使用别人设计的网络结构，在此基础上进行优化。
+最后完成这个实训，使我掌握深度学习常用模型基础知识，熟练掌握了一种国产开源深度学习框架，具备独立完成相关深度学习任务的能力，回顾了之前学的人工智能和机器学习课程，能用所学为AI进行工程实践，获益匪浅。
+
