@@ -16,12 +16,16 @@ shape of weight:  (4, 2, 3, 3)
 shape of bias:  (4,)
 ```
 这里解释一下上面的代码，我们先定义了一个卷积层cv2d，然后输出了这个卷积层的参数的形状，参数包含两部分，分别是weight和bias，这两部分相加才是整个卷积的参数量。因此，可以看到，我们定义的cv2d的参数量为：$4*2*3*3+4 = 76$, 4对应的是输出的通道数，2对应的是输入的通道数，两个3是卷积核的尺寸，最后的4就是bias的数量了， 值得注意的是， bias是数量与输出的通道数保持一致。因此，我们可以得出，一个卷积层的参数量的公式，如下：
+
 $$ Param_{conv2d} = C_{in} * C_{out} * K_h * K_w + C_{out} $$
+
 其中，$C_{in}$ 表示输入的通道数，$C_{out}$ 表示输出的通道数, $K_h$, $K_w$ 表示卷积核的大小。当然了，有些卷积会将bias设置为False，那么我们不加最后的$C_{out}$即可。
 
 ### 1.2 卷积层FLOPs计算
 参数量会计算了，那么FLOPs其实也是很简单的，就一个公式：
-$$FLOP_{conv2d} = Param_{conv2d} * M_{outh} * M_{outw}$$
+
+$$ FLOP_{conv2d} = Param_{conv2d} * M_{outh} * M_{outw} $$
+
 这里，$M_{outh}$，$M_{outw}$ 为输出的特征图的高和宽，而不是输入的，这里需要注意一下。
 
 ### 1.3 卷积层参数计算示例
@@ -73,7 +77,9 @@ $\quad\quad\quad y_i\gets\gamma\hat{x}_i+\beta\equiv BN_{\gamma}$,$\beta(x_i)$
 
 ### 2.1 归一化层参数量计算
 由于归一化层较为简单，这里直接写出公式：
-$$Param_{bn2d} = 4 * C_{out} $$
+
+$$ Param_{bn2d} = 4 * C_{out} $$
+
 其中4表示四个参数值，每个特征图对应一组四个元素的参数组合；
 
 beta_initializer $\beta$ 权重的初始值设定项。
@@ -86,14 +92,19 @@ moving_variance_initializer $\sigma^2$ 移动方差的初始值设定项。
 ### 2.2 归一化层FLOPs计算
 因为只有两个可以学习的权重，$\beta$ 和 $\gamma$，所以FLOPs只需要2乘以输出通道数和输入的尺寸即可。
 归一化的FLOPs计算公式则为:
+
 $$ FLOP_{bn2d} = 2 * C_{out} * M_{outh} * M_{outw} $$
+
 与1.3相似，欢迎大家使用上面的代码进行验证。
 
 ## 3. 线性层
 线性层也是常用的分类层了，我们以飞桨的Linear为例来介绍。
 ### 3.1 线性层参数量计算
 其实线性层是比较简单的，它就是相当于卷积核为1的卷积层，线性层的每一个参数与对应的数据进行矩阵相乘，再加上偏置项bias，线性层没有类似于卷积层的“卷”的操作的，所以计算公式如下：
-$$Param_{linear} = C_{in} * C_{out}  + C_{out} $$。我们这里打印一下线性层参数的形状看看。
+
+$$ Param_{linear} = C_{in} * C_{out}  + C_{out} $$
+
+我们这里打印一下线性层参数的形状看看。
 ```python
 import paddle
 import numpy as np
@@ -108,11 +119,12 @@ shape of bias:  (4,)
 可以看到，线性层相较于卷积层还是简单的，这里我们直接计算这个定义的线性层的参数量为 $2 * 4 + 4 = 12$。具体对不对，我们在下面的实例演示中检查。
 ### 3.2 线性层FLOPs计算
 与卷积层不同的是，线性层没有”卷“的过程，所以线性层的FLOPs计算公式为:
-$$ FLOP_{linear} = C_{in} * C_{out}$$
+
+$$ FLOP_{linear} = C_{in} * C_{out} $$
 
 ## 4. 实例演示
 这里我们就以LeNet为例子，计算出LeNet的所有参数量和计算量。LeNet的结构如下。输入的图片大小为28 * 28
-```python
+```
 LeNet(
   (features): Sequential(
     (0): Conv2D(1, 6, kernel_size=[3, 3], padding=1, data_format=NCHW)
