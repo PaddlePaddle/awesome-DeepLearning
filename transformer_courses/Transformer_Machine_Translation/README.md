@@ -68,5 +68,5 @@ Transformer 是 Google 团队在 17 年 6 月提出的 NLP 经典之作，由 As
 可以通过以下方式开始模型评估过程
 
   ```bash
-  python predict.py
+  python predict_py.py
   ```

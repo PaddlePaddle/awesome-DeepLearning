@@ -88,5 +88,5 @@ ELECTRA 是由 Kevin Clark 等人（Standfold 和 Google 团队）在 ICLR 2020 
 - 选择`checkpoint`中的模型参数，在`electra.base.yaml`中配置，我们便可以通过以下方式开始模型对测试集的预测。最终预测出结果可以输出到txt文件中。
 
   ```bash
-  python predict.py
+  python predict_py.py
   ```
