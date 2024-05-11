@@ -30,12 +30,12 @@ $$
 \underset{p \rightarrow \infty}{\text{lim}} (\sum_{i=1}^n {|x_i - y_i|}^{p})^{\frac{1}{p}} = \text{max} \; (|x_i-y_i|)
 $$
 
-### 1.5 海明距离（Hamming Distance）
+### 1.5 汉明距离（Hamming Distance）
 
  在信息论中，两个等长字符串之间的海明距离是两个字符串对应位置的不同字符的个数。假设有两个字符串分别是：$x=[x_1,x_2,...,x_n]$和$y=[y_1,y_2,...,y_n]$，则两者的距离为：
 
 $$
-Hamming \; Distance  = \sum_{i=1}^{n} {\text{II}}(x_i=y_i)
+Hamming \; Distance  = \sum_{i=1}^{n} {\text{II}}(x_i \neq y_i)
 $$
 
 其中$\text{II}$表示指示函数，两者相同为1，否则为0。
