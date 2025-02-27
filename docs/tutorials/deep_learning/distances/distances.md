@@ -78,6 +78,6 @@ $$
 假设有两个集合$X$和$Y$(注意这里的两者不是向量)，则其计算公式为：
 
 $$
-Jaccard(X,Y)=\frac{X\cup Y}{X\cap Y}
+Jaccard(X,Y)=\frac{X\cap Y}{X\cup Y}
 $$
 
