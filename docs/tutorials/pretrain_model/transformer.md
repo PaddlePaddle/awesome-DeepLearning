@@ -56,8 +56,8 @@ $$X=Embedding Lookup(X)+Position Encoding$$
 
 Transformer模型中还缺少一种解释输入序列中单词顺序的方法。为了处理这个问题，transformer给encoder层和decoder层的输入添加了一个额外的向量Positional Encoding，维度和embedding的维度一样，这个向量采用了一种很独特的方法来让模型学习到这个值，这个向量能决定当前词的位置，或者说在一个句子中不同的词之间的距离。这个位置向量的具体计算方法有很多种，论文中的计算方法如下
 
-$$PE(pos,2i)=sin(pos/10000^{2i}/d_{model})$$
-$$PE(pos,2i+1)=cos(pos/10000^{2i}/d_{model})$$
+$$PE_{(pos,2i)}=sin(pos/10000^{2i/d_{model}})$$
+$$PE_{(pos,2i+1)}=cos(pos/10000^{2i/d_{model}})$$
 
 其中pos是指当前词在句子中的位置，i是指向量中每个值的index，可以看出，在偶数位置，使用正弦编码，在奇数位置，使用余弦编码.
 
